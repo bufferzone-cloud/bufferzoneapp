@@ -104,7 +104,6 @@
             font-weight: 700;
             font-size: 16px;
             flex-shrink: 0;
-            cursor: pointer;
         }
         .header-text {
             display: flex;
@@ -537,39 +536,6 @@
             background: #2a2a2a;
         }
 
-        /* --- PROMOTION SECTION --- */
-        .promo-section {
-            padding: 0 0 16px 0;
-        }
-        .promo-card {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 14px 16px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid #f0f0f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .promo-card .left .code {
-            font-weight: 700;
-            font-size: 16px;
-            color: #1c2128;
-        }
-        .promo-card .left .discount {
-            font-size: 13px;
-            color: #16a34a;
-        }
-        .promo-card .left .times {
-            font-size: 11px;
-            color: #888;
-        }
-        .promo-card .actions {
-            display: flex;
-            gap: 6px;
-        }
-
         /* --- ORDER CARD --- */
         .order-card {
             background: #ffffff;
@@ -596,10 +562,12 @@
         .order-details .row {
             display: flex;
             justify-content: space-between;
-            padding: 3px 0;
+            padding: 6px 0;
+            border-bottom: 1px solid #f5f5f5;
             font-size: 12px;
             color: #555;
         }
+        .order-details .row:last-child { border-bottom: none; }
         .order-details .row .label { color: #888; }
         .order-details .row .val { font-weight: 500; color: #1c2128; }
 
@@ -701,6 +669,48 @@
         }
         .customer-item.open .expand-icon {
             transform: rotate(180deg);
+        }
+
+        /* --- BAN CONFIRMATION MODAL --- */
+        .ban-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .ban-modal-overlay.open { display: flex; }
+        .ban-modal-content {
+            background: #ffffff;
+            border-radius: 18px;
+            width: 100%;
+            max-width: 360px;
+            padding: 24px 22px 20px 22px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .ban-modal-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-bottom: 6px;
+        }
+        .ban-modal-content p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 16px;
+        }
+        .ban-modal-content .actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
         }
 
         /* --- TOGGLE SWITCH (iPhone style) --- */
@@ -843,7 +853,7 @@
         .toast.show { opacity: 1; }
         .toast i { margin-right: 8px; color: #f5b83d; }
 
-        /* --- MODAL --- */
+        /* --- MODAL (Service) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -1007,14 +1017,16 @@
             <!-- ===== HEADER ===== -->
             <div class="header">
                 <div class="header-left">
-                    <div class="promo-header-btn" id="promoHeaderBtn"><i class="fa-solid fa-tag"></i></div>
                     <div class="avatar" id="adminAvatar">A</div>
                     <div class="header-text">
                         <span>Admin Panel</span>
                         <span id="adminName">Buffer Zone</span>
                     </div>
                 </div>
-                <div style="font-size:12px; color:#888; font-weight:500;">v2.0</div>
+                <div style="display:flex;gap:10px;align-items:center;">
+                    <div class="promo-header-btn" id="promoHeaderBtn"><i class="fa-solid fa-tag"></i></div>
+                    <button class="btn btn-primary btn-sm" id="addServiceQuick"><i class="fa-solid fa-plus"></i></button>
+                </div>
             </div>
 
             <!-- ===== PAGE: DASHBOARD ===== -->
@@ -1047,7 +1059,6 @@
                 </div>
 
                 <div class="quick-actions">
-                    <button class="quick-action-btn" id="addServiceQuick"><i class="fa-solid fa-plus"></i> New Service</button>
                     <button class="quick-action-btn" id="viewOrdersQuick"><i class="fa-solid fa-truck"></i> Orders</button>
                     <button class="quick-action-btn" id="viewUsersQuick"><i class="fa-solid fa-users"></i> Users</button>
                 </div>
@@ -1110,6 +1121,20 @@
                         <textarea id="policyDesc" rows="3" placeholder="Policy description"></textarea>
                         <input type="text" id="policyTag" placeholder="Policy tag text">
                         <button class="btn-save-policy" id="savePolicyBtn"><i class="fa-solid fa-save"></i> Save Policy</button>
+                    </div>
+                </div>
+
+                <!-- Category Management -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Categories</h3>
+                    </div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;padding:8px 0;">
+                        <input type="text" id="newCategoryInput" placeholder="Category name" style="flex:1;min-width:100px;">
+                        <button class="btn btn-primary btn-sm" id="addCategoryBtn">Add</button>
+                    </div>
+                    <div id="categoryListContainer" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+                        <!-- Rendered by JS -->
                     </div>
                 </div>
 
@@ -1232,7 +1257,7 @@
 
     </div>
 
-    <!-- ===== MODAL (Service) ===== -->
+    <!-- ===== SERVICE MODAL ===== -->
     <div class="modal-overlay" id="serviceModal">
         <div class="modal">
             <button class="close-btn" id="modalCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -1365,6 +1390,18 @@
         </div>
     </div>
 
+    <!-- ===== BAN CONFIRMATION MODAL ===== -->
+    <div class="ban-modal-overlay" id="banModal">
+        <div class="ban-modal-content">
+            <h3>Ban User</h3>
+            <p id="banModalText">Are you sure you want to ban this user?</p>
+            <div class="actions">
+                <button class="btn btn-outline" id="banCancelBtn">Cancel</button>
+                <button class="btn btn-danger" id="banConfirmBtn">Yes, Ban</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
@@ -1399,6 +1436,7 @@
         let allData = null;
         let currentUser = null;
         let currentAdminData = null;
+        let userToBan = null;
 
         // =================================================================
         // DOM REFS
@@ -1462,18 +1500,25 @@
                         hero: { title: 'WE ARE CREATIVE AGENCY', titleSpan: 'CREATIVE', desc: 'We provide the best ideas to grow your business', cta: 'GET STARTED', phone: '+123 456 7890' },
                         policy: { title: 'BUFFER ZONE PAYMENT POLICY', desc: 'To begin your project, we require a 50% down payment. The remaining balance is due upon project completion and delivery. This ensures commitment from both parties.', tag: '50% upfront required' },
                         ourServicesList: ['Graphic Design', 'Web Development', 'Digital Marketing', 'Branding Design'],
+                        categories: ['graphic', 'dev', 'tech', 'it'],
                         services: {},
                         orders: {},
                         customers: {},
                         transactions: {},
                         promotions: {},
-                        disabled: false
+                        disabled: false,
+                        notifications: {}
                     };
                     set(dbRef, allData).then(() => {
                         if (callback) callback(allData);
                     });
                 } else {
                     allData = data;
+                    // Ensure categories exist
+                    if (!allData.categories) {
+                        allData.categories = ['graphic', 'dev', 'tech', 'it'];
+                        saveData();
+                    }
                     if (callback) callback(data);
                 }
             });
@@ -1532,6 +1577,7 @@
             document.getElementById('appStatusLabel').textContent = allData.disabled ? 'Disabled' : 'Active';
 
             renderDashboard();
+            renderCategories();
             renderServices();
             renderPromotions();
             renderOrders();
@@ -1559,6 +1605,38 @@
             document.getElementById('statRevenueDetail').textContent = revenue.toFixed(2);
         }
 
+        function renderCategories() {
+            const container = document.getElementById('categoryListContainer');
+            const categories = allData.categories || [];
+            container.innerHTML = categories.map(cat => `
+                <span style="background:#f0f0f0;padding:4px 12px;border-radius:12px;font-size:11px;display:inline-flex;align-items:center;gap:6px;">
+                    ${cat}
+                    <button class="btn btn-danger btn-sm delete-category" data-cat="${cat}" style="padding:0 4px;font-size:9px;">✕</button>
+                </span>
+            `).join('');
+
+            container.querySelectorAll('.delete-category').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const cat = this.dataset.cat;
+                    if (confirm(`Delete category "${cat}"?`)) {
+                        allData.categories = allData.categories.filter(c => c !== cat);
+                        // Also remove services with this category
+                        if (allData.services) {
+                            Object.keys(allData.services).forEach(key => {
+                                if (allData.services[key].category === cat) {
+                                    delete allData.services[key];
+                                }
+                            });
+                        }
+                        saveData().then(() => {
+                            renderAll();
+                            showToast('Category deleted');
+                        });
+                    }
+                });
+            });
+        }
+
         function renderServices(categoryFilter = 'all') {
             const container = document.getElementById('servicesList');
             const data = allData.services || {};
@@ -1571,7 +1649,7 @@
                 container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No services in this category.</div>`;
                 return;
             }
-            container.innerHTML = filtered.map(([key, s]) => `
+            container.innerHTML = `<div class="service-grid-customer">` + filtered.map(([key, s]) => `
                 <div class="service-card-customer" data-key="${key}">
                     <div class="icon-wrap ${s.category || 'graphic'}">
                         <i class="fa-solid ${s.icon || 'fa-cube'}"></i>
@@ -1580,7 +1658,7 @@
                     <div class="sub">${s.subtitle || ''}</div>
                     <div class="price">ZMW ${(s.price || 0).toFixed(2)}</div>
                 </div>
-            `).join('');
+            `).join('') + `</div>`;
 
             container.querySelectorAll('.service-card-customer').forEach(el => {
                 el.addEventListener('click', function() {
@@ -1661,7 +1739,6 @@
                         <div class="row"><span class="label">Client</span><span class="val">${o.customer || 'N/A'}</span></div>
                         <div class="row"><span class="label">Client Number</span><span class="val">${o.clientNumber || 'N/A'}</span></div>
                         <div class="row"><span class="label">Customization</span><span class="val">${o.customization || 'None'}</span></div>
-                        <div class="row"><span class="label">Discount Applied</span><span class="val">${o.discountApplied ? o.discountApplied + '%' : 'None'}</span></div>
                         <div class="row"><span class="label">Payment Proof</span><span class="val">
                             ${o.paymentProof ? `<button class="btn-view-proof" data-screenshot="${o.paymentProof}"><i class="fa-regular fa-image"></i> View</button>` : 'No proof'}
                         </span></div>
@@ -1772,13 +1849,11 @@
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
                         const uid = this.dataset.uid;
-                        if (confirm(`Ban this user?`)) {
-                            const userRef = ref(db, 'users/' + uid);
-                            set(userRef, null).then(() => {
-                                showToast('User banned');
-                                renderUsers(document.getElementById('userSearchInput').value);
-                            });
-                        }
+                        userToBan = uid;
+                        const user = usersData[uid];
+                        document.getElementById('banModalText').textContent =
+                            `Are you sure you want to ban ${user.firstName || ''} ${user.lastName || ''} (${user.email || 'N/A'})?`;
+                        document.getElementById('banModal').classList.add('open');
                     });
                 });
 
@@ -1998,6 +2073,28 @@
             const service = allData.services[key];
             openModal('Edit Service', 'Update the service details.', service, key);
         }
+
+        // =================================================================
+        // CATEGORY MANAGEMENT
+        // =================================================================
+
+        document.getElementById('addCategoryBtn').addEventListener('click', function() {
+            const name = document.getElementById('newCategoryInput').value.trim().toLowerCase();
+            if (!name) {
+                showToast('Please enter a category name', 'error');
+                return;
+            }
+            if (allData.categories.includes(name)) {
+                showToast('Category already exists', 'error');
+                return;
+            }
+            allData.categories.push(name);
+            saveData().then(() => {
+                renderAll();
+                document.getElementById('newCategoryInput').value = '';
+                showToast('Category added');
+            });
+        });
 
         // =================================================================
         // PROMO
@@ -2240,6 +2337,31 @@
         document.getElementById('screenshotModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('open');
+            }
+        });
+
+        // Ban modal
+        document.getElementById('banCancelBtn').addEventListener('click', function() {
+            document.getElementById('banModal').classList.remove('open');
+            userToBan = null;
+        });
+        document.getElementById('banModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+                userToBan = null;
+            }
+        });
+        document.getElementById('banConfirmBtn').addEventListener('click', function() {
+            if (userToBan) {
+                const userRef = ref(db, 'users/' + userToBan);
+                set(userRef, null).then(() => {
+                    showToast('User banned');
+                    document.getElementById('banModal').classList.remove('open');
+                    userToBan = null;
+                    renderUsers(document.getElementById('userSearchInput').value);
+                }).catch((error) => {
+                    showToast('Error banning user', 'error');
+                });
             }
         });
 
