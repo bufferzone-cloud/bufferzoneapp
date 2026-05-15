@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BUFFER ZONE · login &amp; signup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>BUFFER ZONE · Login &amp; Signup</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,500;14..32,700;14..32,800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
         /* ── reset & base ── */
         * {
@@ -25,7 +24,6 @@
             padding: 24px;
         }
 
-        /* ── main container ── */
         .app-wrap {
             width: 100%;
             max-width: 580px;
@@ -35,22 +33,15 @@
             align-items: center;
         }
 
-        /* ── LOGO (big) ── */
         .hero-logo {
             width: 100%;
-            max-width: 500px;
+            max-width: 400px;
             height: auto;
             display: block;
             margin: 0 auto 12px;
             border-radius: 8px;
-            transition: transform 0.3s ease;
         }
 
-        .hero-logo:hover {
-            transform: scale(1.02);
-        }
-
-        /* ── brand text ── */
         .brand {
             text-align: center;
             margin-bottom: 24px;
@@ -73,7 +64,6 @@
             margin-top: 2px;
         }
 
-        /* ── divider ── */
         .divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), transparent);
@@ -81,13 +71,11 @@
             width: 100%;
         }
 
-        /* ── views ── */
         .view {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
-            transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
         .view--hidden {
@@ -98,7 +86,6 @@
             display: flex;
         }
 
-        /* ── form ── */
         .form-group {
             position: relative;
             margin-bottom: 18px;
@@ -162,12 +149,6 @@
             font-weight: 300;
         }
 
-        .form-group .input-wrap input:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
-            -webkit-text-fill-color: #000000 !important;
-        }
-
-        /* ── row ── */
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -175,7 +156,6 @@
             width: 100%;
         }
 
-        /* ── toggle password ── */
         .toggle-pass {
             position: absolute;
             right: 14px;
@@ -195,7 +175,6 @@
             color: rgba(0, 0, 0, 0.55);
         }
 
-        /* ── button ── */
         .btn-primary {
             width: 100%;
             padding: 16px;
@@ -253,7 +232,6 @@
             }
         }
 
-        /* ── status ── */
         .status-msg {
             text-align: center;
             font-size: 13px;
@@ -272,7 +250,6 @@
             color: #2b8a3e;
         }
 
-        /* ── toggle link ── */
         .toggle-link {
             text-align: center;
             margin-top: 20px;
@@ -299,7 +276,6 @@
             margin-right: 6px;
         }
 
-        /* ── forgot link ── */
         .forgot-link {
             text-align: right;
             margin-top: 6px;
@@ -317,7 +293,6 @@
             color: rgba(0, 0, 0, 0.55);
         }
 
-        /* ── footer ── */
         .footer {
             text-align: center;
             margin-top: 24px;
@@ -337,7 +312,6 @@
             color: rgba(0, 0, 0, 0.50);
         }
 
-        /* ── responsive ── */
         @media (max-width: 600px) {
             .hero-logo {
                 max-width: 90%;
@@ -366,28 +340,14 @@
                 max-width: 95%;
             }
         }
-
-        /* ── scrollbar ── */
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #ffffff;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(0, 0, 0, 0.08);
-            border-radius: 4px;
-        }
     </style>
 </head>
 <body>
 
     <div class="app-wrap">
 
-        <!-- ─── LOGO (big) ─── -->
         <img class="hero-logo" src="bufferzone.png" alt="Buffer Zone logo" />
 
-        <!-- ─── BRAND ─── -->
         <div class="brand">
             <h1>Buffer Zone</h1>
             <div class="sub">where pixels &amp; code create magic</div>
@@ -395,7 +355,7 @@
 
         <div class="divider"></div>
 
-        <!-- ═══════════════ LOGIN VIEW ═══════════════ -->
+        <!-- ═══ LOGIN VIEW ═══ -->
         <div id="loginView" class="view view--active">
             <form id="loginForm" autocomplete="off" style="width:100%;">
                 <div class="form-group">
@@ -434,7 +394,7 @@
             </div>
         </div>
 
-        <!-- ═══════════════ SIGNUP VIEW ═══════════════ -->
+        <!-- ═══ SIGNUP VIEW ═══ -->
         <div id="signupView" class="view view--hidden">
             <form id="signupForm" autocomplete="off" style="width:100%;">
                 <div class="form-row">
@@ -512,7 +472,7 @@
 
     </div>
 
-    <!-- ─── MODULAR FIREBASE SDK ─── -->
+    <!-- ─── FIREBASE MODULE ─── -->
     <script type="module">
         // ─── Import modular SDK ───
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
@@ -693,7 +653,6 @@
 
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
-                // ─── Redirect based on email prefix ───
                 const redirectUrl = email.startsWith('admin@') ? 'admin.html' : 'home.html';
                 window.location.href = redirectUrl;
             } catch (error) {
@@ -763,21 +722,28 @@
             setLoading(signupBtn, true);
 
             try {
+                // 1. Create user in Firebase Auth
                 const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
                 const user = userCredential.user;
 
+                // 2. Write user data to Realtime Database under users/{uid}
                 const userData = {
                     firstName: fName,
                     lastName: lName,
                     email: email,
                     phone: phone,
-                    createdAt: serverTimestamp()
+                    role: 'customer',
+                    createdAt: serverTimestamp(),
+                    banned: false
                 };
 
+                // This is the critical step that writes to the database
                 await set(ref(db, 'users/' + user.uid), userData);
-                // ─── Redirect based on email prefix ───
+
+                // 3. Redirect based on email prefix
                 const redirectUrl = email.startsWith('admin@') ? 'admin.html' : 'home.html';
                 window.location.href = redirectUrl;
+
             } catch (error) {
                 setLoading(signupBtn, false);
                 let msg = '⚠️ ' + error.message;
@@ -791,8 +757,6 @@
         });
 
         // ─── Auth state listener ───
-        // This ensures if a user is already logged in, they are redirected appropriately.
-        // We run this after all other listeners are set up.
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 const email = user.email;
@@ -800,7 +764,6 @@
                     const redirectUrl = email.startsWith('admin@') ? 'admin.html' : 'home.html';
                     window.location.href = redirectUrl;
                 } else {
-                    // Fallback: if no email, just go to home
                     window.location.href = 'home.html';
                 }
             }
@@ -809,7 +772,7 @@
         // ─── Initial focus ───
         loginEmail.focus();
 
-        console.log('🔥 Buffer Zone ready — Firebase modular SDK connected.');
+        console.log('🔥 Buffer Zone login ready — Firebase modular SDK connected.');
     </script>
 
 </body>
