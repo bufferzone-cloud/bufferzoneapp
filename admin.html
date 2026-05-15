@@ -271,7 +271,7 @@
             margin-top: 2px;
         }
 
-        /* --- SERVICE CARD (Customer style) --- */
+        /* --- SERVICE CARD (Customer style - 3x3 Grid, Dark Square) --- */
         .service-grid-customer {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -279,60 +279,52 @@
             margin-top: 4px;
         }
         .service-card-customer {
-            background: #ffffff;
+            background: #1c2128;
             border-radius: 12px;
-            padding: 12px;
-            border: 1px solid #f0f0f0;
-            cursor: pointer;
-            transition: all 0.2s;
+            padding: 16px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+            border: 1px solid #333;
         }
-        .service-card-customer:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            transform: translateY(-2px);
+        .service-card-customer:active {
+            transform: scale(0.95);
         }
         .service-card-customer .icon-wrap {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 22px;
+            margin-bottom: 8px;
             color: #fff;
-            margin-bottom: 6px;
         }
         .service-card-customer .icon-wrap.graphic { background: linear-gradient(135deg, #f093fb, #f5576c); }
         .service-card-customer .icon-wrap.dev { background: linear-gradient(135deg, #4facfe, #00f2fe); }
         .service-card-customer .icon-wrap.tech { background: linear-gradient(135deg, #43e97b, #38f9d7); }
         .service-card-customer .icon-wrap.it { background: linear-gradient(135deg, #fa709a, #fee140); }
         .service-card-customer .title {
+            font-size: 11px;
             font-weight: 600;
-            font-size: 13px;
-            color: #1c2128;
+            color: #fff;
+            margin-bottom: 2px;
             line-height: 1.2;
         }
         .service-card-customer .sub {
-            font-size: 10px;
-            color: #888;
+            font-size: 9px;
+            color: #aaa;
             line-height: 1.2;
         }
         .service-card-customer .price {
+            font-size: 10px;
             font-weight: 700;
-            font-size: 13px;
-            color: #1c2128;
+            color: #f5b83d;
             margin-top: 4px;
-        }
-        .service-card-customer .category-tag {
-            font-size: 9px;
-            background: #f0f0f0;
-            padding: 1px 8px;
-            border-radius: 8px;
-            color: #555;
-            margin-top: 2px;
         }
 
         /* --- HERO EDITOR --- */
@@ -752,6 +744,19 @@
         .btn-warning:hover { background: #d97706; color: #ffffff; }
         .btn-sm { padding: 3px 10px; font-size: 9px; }
 
+        .btn-view-proof {
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-view-proof:active { transform: scale(0.95); }
+        .btn-view-proof i { margin-right: 4px; }
+
         .text-muted { color: #888; }
         .text-center { text-align: center; }
         .mt-8 { margin-top: 8px; }
@@ -890,6 +895,56 @@
         .modal .btn-outline {
             border: 1px solid #ddd;
             background: #f9f9f9;
+        }
+
+        /* --- SCREENSHOT VIEW MODAL --- */
+        .screenshot-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .screenshot-modal-overlay.open { display: flex; }
+        .screenshot-modal-content {
+            background: #fff;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            padding: 24px 24px 20px 24px;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .screenshot-modal-content .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 22px;
+            color: #888;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .screenshot-modal-content .close-btn:hover { color: #1c2128; }
+        .screenshot-modal-content img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .screenshot-modal-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-bottom: 4px;
         }
     </style>
 </head>
@@ -1216,6 +1271,15 @@
         </div>
     </div>
 
+    <!-- ===== SCREENSHOT VIEW MODAL ===== -->
+    <div class="screenshot-modal-overlay" id="screenshotModal">
+        <div class="screenshot-modal-content">
+            <button class="close-btn" id="screenshotCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3>Transaction Screenshot</h3>
+            <img id="screenshotPreview" src="" alt="Screenshot">
+        </div>
+    </div>
+
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
@@ -1421,7 +1485,6 @@
                     <div class="title">${s.title || 'Untitled'}</div>
                     <div class="sub">${s.subtitle || ''}</div>
                     <div class="price">ZMW ${(s.price || 0).toFixed(2)}</div>
-                    <div class="category-tag">${s.category || 'uncategorized'}</div>
                 </div>
             `).join('');
 
@@ -1467,7 +1530,9 @@
                         <div class="row"><span class="label">Client</span><span class="val">${o.customer || 'N/A'}</span></div>
                         <div class="row"><span class="label">Client Number</span><span class="val">${o.clientNumber || 'N/A'}</span></div>
                         <div class="row"><span class="label">Customization</span><span class="val">${o.customization || 'None'}</span></div>
-                        <div class="row"><span class="label">Payment Proof</span><span class="val">${o.paymentProof ? '✅ Available' : 'No proof'}</span></div>
+                        <div class="row"><span class="label">Payment Proof</span><span class="val">
+                            ${o.paymentProof ? `<button class="btn-view-proof" data-screenshot="${o.paymentProof}"><i class="fa-regular fa-image"></i> View</button>` : 'No proof'}
+                        </span></div>
                         <div class="row"><span class="label">Status</span><span class="val">
                             <select class="status-select order-status" data-key="${key}" style="padding:2px 8px; border-radius:6px; border:1px solid #ddd; font-size:11px; font-weight:500; background:#ffffff; cursor:pointer;">
                                 <option value="pending" ${o.status === 'pending' ? 'selected' : ''}>Pending</option>
@@ -1501,6 +1566,18 @@
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
                     if (confirm('Delete this order?')) deleteOrder(key);
+                });
+            });
+
+            // Screenshot view button events
+            container.querySelectorAll('.btn-view-proof').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const url = this.dataset.screenshot;
+                    if (url) {
+                        document.getElementById('screenshotPreview').src = url;
+                        document.getElementById('screenshotModal').classList.add('open');
+                    }
                 });
             });
         }
@@ -1976,6 +2053,16 @@
                 console.error('Logout error:', error);
                 showToast('Error logging out');
             });
+        });
+
+        // Screenshot modal close
+        document.getElementById('screenshotCloseBtn').addEventListener('click', function() {
+            document.getElementById('screenshotModal').classList.remove('open');
+        });
+        document.getElementById('screenshotModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+            }
         });
 
         // =================================================================
