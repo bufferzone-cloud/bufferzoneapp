@@ -18,7 +18,7 @@
         }
 
         body {
-            background-color: #f5f7fa;
+            background-color: #f8f9fc;
             display: block;
             overflow: hidden;
             height: 100%;
@@ -58,7 +58,7 @@
             justify-content: space-between;
             align-items: center;
             z-index: 500;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
             flex-shrink: 0;
             pointer-events: auto;
         }
@@ -135,7 +135,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             color: #1c2128;
             font-size: 15px;
             cursor: pointer;
@@ -191,7 +191,7 @@
         .small-grid-dots div {
             width: 3px;
             height: 3px;
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255,255,255,0.2);
         }
         .hero-content {
             position: relative;
@@ -264,6 +264,37 @@
         .contact-number strong {
             font-size: 10px;
             font-weight: 700;
+        }
+
+        /* --- PROMOTIONS BANNER --- */
+        .promotions-banner {
+            margin: 0 0 16px 0;
+            padding: 10px 14px;
+            background: #fef9e7;
+            border-radius: 12px;
+            border: 1px solid #f5b83d;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+        .promotions-banner .tag {
+            background: #f5b83d;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 9px;
+            font-weight: 700;
+        }
+        .promotions-banner .msg {
+            font-size: 11px;
+            color: #1c2128;
+            flex: 1;
+        }
+        .promotions-banner .code {
+            font-weight: 700;
+            color: #1c2128;
+            font-size: 12px;
         }
 
         .category-row {
@@ -683,7 +714,7 @@
             color: #f5b83d;
         }
 
-        /* --- PAYMENT MODAL --- */
+        /* --- PAYMENT MODAL (with Coupon) --- */
         .payment-modal-overlay {
             position: fixed;
             top: 0;
@@ -705,7 +736,7 @@
             background: #ffffff;
             border-radius: 19px;
             width: 100%;
-            max-width: 320px;
+            max-width: 340px;
             max-height: 90vh;
             overflow-y: auto;
             padding: 22px 19px 19px 19px;
@@ -769,6 +800,77 @@
             font-weight: 800;
             color: #f5b83d;
         }
+
+        /* --- COUPON SECTION IN MODAL --- */
+        .coupon-section {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .coupon-section input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 12px;
+            min-width: 80px;
+        }
+        .coupon-section input:focus {
+            outline: none;
+            border-color: #f5b83d;
+        }
+        .coupon-section .apply-btn {
+            background: #f5b83d;
+            color: #1c2128;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        .coupon-section .apply-btn:disabled {
+            background: #ddd;
+            color: #888;
+            cursor: not-allowed;
+        }
+        .coupon-msg {
+            font-size: 11px;
+            font-weight: 500;
+            margin-top: 2px;
+            display: block;
+        }
+        .coupon-msg.success {
+            color: #00a86b;
+        }
+        .coupon-msg.error {
+            color: #dc2626;
+        }
+        .price-breakdown {
+            background: #f8f9fc;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 12px;
+            font-size: 12px;
+        }
+        .price-breakdown .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+        }
+        .price-breakdown .row .label {
+            color: #888;
+        }
+        .price-breakdown .row .val {
+            font-weight: 600;
+            color: #1c2128;
+        }
+        .price-breakdown .row .val.discounted {
+            color: #00a86b;
+        }
+
         .upload-area {
             border: 2px dashed #ddd;
             border-radius: 10px;
@@ -797,6 +899,7 @@
             color: #1c2128;
             margin-top: 3px;
         }
+
         .btn-primary {
             width: 100%;
             padding: 11px;
@@ -825,7 +928,7 @@
             display: block;
         }
 
-        /* --- ORDERS VIEW (Improved Cards) --- */
+        /* --- ORDERS VIEW --- */
         .orders-header {
             margin-top: 8px;
             margin-bottom: 16px;
@@ -843,182 +946,103 @@
         .order-grid {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 11px;
         }
-        .order-card-customer {
+        .order-card {
             background: #ffffff;
-            border-radius: 16px;
-            padding: 14px 16px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            border-radius: 13px;
+            padding: 13px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
             border: 1px solid #f0f0f0;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        .order-card-customer:active {
-            transform: scale(0.98);
-        }
-        .order-card-customer .order-summary {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: transform 0.1s ease;
         }
-        .order-card-customer .order-summary .left .order-id {
+        .order-card:active {
+            transform: scale(0.99);
+        }
+        .order-card-left {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            flex: 1;
+        }
+        .order-icon {
+            width: 38px;
+            height: 38px;
+            background: #f5f7fa;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1c2128;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .order-details {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .order-id {
             font-weight: 700;
-            font-size: 14px;
+            font-size: 12px;
             color: #1c2128;
         }
-        .order-card-customer .order-summary .left .order-service {
-            font-size: 12px;
+        .order-name {
+            font-size: 10px;
             color: #555;
         }
-        .order-card-customer .order-summary .right {
-            text-align: right;
+        .order-meta {
+            font-size: 9px;
+            color: #999;
+            margin-top: 1px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
         }
-        .order-card-customer .order-summary .right .order-amount {
-            font-weight: 700;
-            font-size: 14px;
-            color: #1c2128;
+        .order-meta span {
+            background: #f5f5f5;
+            padding: 0 5px;
+            border-radius: 3px;
         }
-        .order-card-customer .order-summary .right .order-status {
-            font-size: 10px;
+
+        .order-card-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 3px;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+        .status-badge {
+            font-size: 8px;
             font-weight: 600;
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 16px;
-            display: inline-block;
+            white-space: nowrap;
         }
-        .status-progress {
+        .badge-progress {
             background: #e0f0ff;
             color: #0066cc;
         }
-        .status-completed {
+        .badge-done {
             background: #e6fffa;
             color: #00a86b;
         }
-        .status-pending {
+        .badge-pending {
             background: #fff6e0;
             color: #cc8800;
         }
-        .status-review {
+        .badge-review {
             background: #f0e6ff;
             color: #7700cc;
         }
-        .status-cancelled {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-
-        .order-card-customer .order-details-expand {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
-            padding: 0 4px;
-            border-top: 1px solid transparent;
-        }
-        .order-card-customer.open .order-details-expand {
-            max-height: 400px;
-            padding: 12px 4px 4px 4px;
-            border-top-color: #f0f0f0;
-            margin-top: 10px;
-        }
-        .order-card-customer .order-details-expand .detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 4px 0;
-            font-size: 12px;
-            color: #555;
-        }
-        .order-card-customer .order-details-expand .detail-row .label {
-            color: #888;
-        }
-        .order-card-customer .order-details-expand .detail-row .val {
-            font-weight: 500;
-            color: #1c2128;
-        }
-        .order-card-customer .expand-icon {
-            transition: transform 0.3s ease;
-            font-size: 12px;
-            color: #aaa;
-        }
-        .order-card-customer.open .expand-icon {
-            transform: rotate(180deg);
-        }
-
-        /* --- HISTORY VIEW (Improved Expandable Cards) --- */
-        .history-list {
-            padding: 0 0 16px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .history-card {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 14px 16px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            border: 1px solid #f0f0f0;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .history-card:active {
-            transform: scale(0.98);
-        }
-        .history-card .history-summary {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .history-card .history-summary .left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .order-price {
+            font-weight: 700;
             font-size: 12px;
             color: #1c2128;
-        }
-        .history-card .history-summary .left i {
-            font-size: 14px;
-            color: #667eea;
-        }
-        .history-card .history-summary .right {
-            font-size: 11px;
-            color: #888;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .history-card .history-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
-            padding: 0 4px;
-            border-top: 1px solid transparent;
-        }
-        .history-card.open .history-details {
-            max-height: 250px;
-            padding: 10px 4px 4px 4px;
-            border-top-color: #f0f0f0;
-            margin-top: 8px;
-        }
-        .history-card .history-details .h-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 3px 0;
-            font-size: 12px;
-            color: #555;
-        }
-        .history-card .history-details .h-row .h-label {
-            color: #888;
-        }
-        .history-card .history-details .h-row .h-val {
-            font-weight: 500;
-            color: #1c2128;
-        }
-        .history-card .expand-icon {
-            transition: transform 0.3s ease;
-            font-size: 11px;
-            color: #aaa;
-        }
-        .history-card.open .expand-icon {
-            transform: rotate(180deg);
         }
 
         /* --- PROFILE VIEW --- */
@@ -1111,6 +1135,82 @@
         }
         .logout-btn:active {
             transform: scale(0.95);
+        }
+
+        /* --- HISTORY VIEW --- */
+        .history-list {
+            padding: 0 0 16px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .history-item {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 12px 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .history-item:active {
+            transform: scale(0.98);
+        }
+        .history-item .summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .history-item .summary .left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            color: #1c2128;
+        }
+        .history-item .summary .left i {
+            color: #667eea;
+            font-size: 12px;
+        }
+        .history-item .summary .right {
+            font-size: 10px;
+            color: #888;
+        }
+        .history-item .details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
+            padding: 0 4px;
+            font-size: 10px;
+            color: #555;
+            line-height: 1.5;
+            border-top: 1px solid transparent;
+        }
+        .history-item.open .details {
+            max-height: 200px;
+            padding: 10px 4px 4px 4px;
+            border-top-color: #f0f0f0;
+            margin-top: 8px;
+        }
+        .history-item .details .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+        }
+        .history-item .details .row .label {
+            color: #888;
+        }
+        .history-item .details .row .val {
+            font-weight: 500;
+            color: #1c2128;
+        }
+        .history-item .expand-icon {
+            transition: transform 0.3s ease;
+            font-size: 10px;
+            color: #aaa;
+        }
+        .history-item.open .expand-icon {
+            transform: rotate(180deg);
         }
 
         /* --- NOTIFICATION SIDEBAR --- */
@@ -1226,36 +1326,12 @@
                 font-size: 18px;
             }
         }
-
-        /* --- CLOUDINARY UPLOAD PROGRESS --- */
-        .progress-container {
-            width: 100%;
-            background: #e8ecf1;
-            border-radius: 20px;
-            margin-top: 8px;
-            height: 6px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 6px;
-            border-radius: 20px;
-            background: #f5b83d;
-            width: 0%;
-            transition: width 0.3s;
-        }
-        .upload-percent {
-            font-size: 10px;
-            color: #888;
-            margin-top: 4px;
-            display: block;
-        }
     </style>
 </head>
 <body>
 
     <div class="app-root">
 
-        <!-- ===== SCROLLABLE CONTENT ===== -->
         <div class="app-content" id="appContent">
 
             <!-- Header -->
@@ -1307,6 +1383,11 @@
                     </div>
                 </div>
 
+                <!-- PROMOTIONS BANNER -->
+                <div id="promotionsBanner" class="promotions-banner">
+                    <!-- Rendered by JS -->
+                </div>
+
                 <!-- Category Buttons -->
                 <div class="category-row" id="categoryRow">
                     <button class="cat-btn active" data-cat="all"><i class="fa-solid fa-th-large"></i> All</button>
@@ -1343,7 +1424,7 @@
                 </div>
             </div>
 
-            <!-- ===== VIEW: ORDERS (Improved) ===== -->
+            <!-- ===== VIEW: ORDERS ===== -->
             <div id="ordersView" class="view">
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Your Orders</h3>
@@ -1352,11 +1433,11 @@
                 <div class="order-grid" id="ordersGrid"></div>
             </div>
 
-            <!-- ===== VIEW: HISTORY (Improved) ===== -->
+            <!-- ===== VIEW: HISTORY ===== -->
             <div id="historyView" class="view">
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Transaction History</h3>
-                    <p style="color: #888; font-size: 11px;">Tap a transaction for more details.</p>
+                    <p style="color: #888; font-size: 11px;">Tap a transaction to view more details.</p>
                 </div>
                 <div class="history-list" id="historyList"></div>
             </div>
@@ -1395,7 +1476,7 @@
 
     </div>
 
-    <!-- ===== PAYMENT MODAL ===== -->
+    <!-- ===== PAYMENT MODAL (with Coupon) ===== -->
     <div class="payment-modal-overlay" id="paymentModal">
         <div class="payment-modal">
             <button class="close-btn" id="paymentCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -1417,16 +1498,27 @@
                 </div>
             </div>
 
+            <!-- COUPON SECTION -->
+            <div class="coupon-section">
+                <input type="text" id="couponInput" placeholder="Coupon code">
+                <button class="apply-btn" id="applyCouponBtn">Apply</button>
+            </div>
+            <span class="coupon-msg" id="couponMsg"></span>
+
+            <!-- PRICE BREAKDOWN -->
+            <div class="price-breakdown" id="priceBreakdown" style="display:none;">
+                <div class="row"><span class="label">Original Price</span><span class="val" id="origPriceVal">ZMW 0.00</span></div>
+                <div class="row"><span class="label">Discount</span><span class="val discounted" id="discountVal">- ZMW 0.00</span></div>
+                <div class="row"><span class="label">Final Price</span><span class="val" id="finalPriceVal">ZMW 0.00</span></div>
+                <div class="row"><span class="label" style="font-weight:700;">50% Deposit</span><span class="val" style="font-weight:700;color:#f5b83d;" id="finalDepositVal">ZMW 0.00</span></div>
+            </div>
+
             <div style="margin-bottom:10px;">
                 <label style="font-weight:600; font-size:10px; color:#1c2128; display:block; margin-bottom:3px;">Upload transaction screenshot</label>
                 <div class="upload-area" id="uploadArea">
                     <i class="fa-regular fa-image"></i>
                     <p>Tap to upload receipt or screenshot</p>
                     <div class="file-name" id="fileName">No file chosen</div>
-                    <div id="uploadProgressContainer" style="display:none; margin-top:8px;">
-                        <div class="progress-container"><div class="progress-fill" id="uploadProgressFill" style="width:0%"></div></div>
-                        <span class="upload-percent" id="uploadPercentText">0%</span>
-                    </div>
                     <input type="file" id="fileInput" accept="image/*" style="display:none;">
                     <input type="hidden" id="cloudinaryScreenshotUrl">
                 </div>
@@ -1453,16 +1545,21 @@
         </div>
     </div>
 
+    <!-- ===== CLOUDINARY WIDGET SCRIPT ===== -->
+    <script type="text/javascript">
+        // Cloudinary is loaded via CDN script tag in head
+        // We will initialize the widget inside the module script
+    </script>
+
     <!-- ===== FIREBASE MODULE ===== -->
     <script type="module">
         // =================================================================
         // FIREBASE SDK
         // =================================================================
 
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
-        import { getDatabase, ref, onValue, set, push, update, get, serverTimestamp } from
-        "https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+        import { getDatabase, ref, onValue, set, push, get } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBy8ZAMagjX627gcfe0NuRaC1WfC736en0",
@@ -1489,6 +1586,7 @@
         let allData = null;
         let currentUser = null;
         let currentUserData = null;
+        let currentUserId = null;
         let selectedService = null;
         let currentQuantity = 1;
         let selectedSize = '';
@@ -1499,7 +1597,10 @@
         let selectedDeliverySpeed = '';
         let uploadedFile = null;
         let cloudinaryScreenshotUrl = '';
-        let currentUserId = null;
+        let appliedPromo = null; // Store applied promo code
+        let discountApplied = false;
+        let finalDiscountedPrice = 0;
+        let orderTotalBeforeDiscount = 0;
 
         // =================================================================
         // DOM REFS
@@ -1538,6 +1639,16 @@
 
         const logoutBtn = document.getElementById('logoutBtn');
 
+        const notifIcon = document.getElementById('notifIcon');
+        const notifBadge = document.getElementById('notifBadge');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const notifSidebar = document.getElementById('notifSidebar');
+        const sidebarClose = document.getElementById('sidebarClose');
+        const notifList = document.getElementById('notifList');
+
+        const promotionsBanner = document.getElementById('promotionsBanner');
+
+        // Payment Modal
         const paymentModal = document.getElementById('paymentModal');
         const paymentCloseBtn = document.getElementById('paymentCloseBtn');
         const paymentAmount = document.getElementById('paymentAmount');
@@ -1548,20 +1659,17 @@
         const fileInput = document.getElementById('fileInput');
         const fileName = document.getElementById('fileName');
         const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
-        const uploadProgressContainer = document.getElementById('uploadProgressContainer');
-        const uploadProgressFill = document.getElementById('uploadProgressFill');
-        const uploadPercentText = document.getElementById('uploadPercentText');
         const cloudinaryScreenshotUrlInput = document.getElementById('cloudinaryScreenshotUrl');
 
-        const notifIcon = document.getElementById('notifIcon');
-        const notifBadge = document.getElementById('notifBadge');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const notifSidebar = document.getElementById('notifSidebar');
-        const sidebarClose = document.getElementById('sidebarClose');
-        const notifList = document.getElementById('notifList');
-
-        const toast = document.getElementById('toast');
-        const toastMsg = document.getElementById('toastMessage');
+        // Coupon Elements
+        const couponInput = document.getElementById('couponInput');
+        const applyCouponBtn = document.getElementById('applyCouponBtn');
+        const couponMsg = document.getElementById('couponMsg');
+        const priceBreakdown = document.getElementById('priceBreakdown');
+        const origPriceVal = document.getElementById('origPriceVal');
+        const discountVal = document.getElementById('discountVal');
+        const finalPriceVal = document.getElementById('finalPriceVal');
+        const finalDepositVal = document.getElementById('finalDepositVal');
 
         // =================================================================
         // HELPER FUNCTIONS
@@ -1632,7 +1740,7 @@
         }
 
         // =================================================================
-        // CLOUDINARY UPLOAD WIDGET (from the provided code)
+        // CLOUDINARY UPLOAD WIDGET
         // =================================================================
 
         function setupCloudinaryUpload() {
@@ -1656,12 +1764,6 @@
                         showToast('Upload error: ' + (error.message || 'Unknown'), 'error');
                         return;
                     }
-                    if (result.event === 'progress') {
-                        const progress = Math.round(result.info.progress);
-                        uploadProgressContainer.style.display = 'block';
-                        uploadProgressFill.style.width = progress + '%';
-                        uploadPercentText.textContent = progress + '%';
-                    }
                     if (result.event === 'success') {
                         const info = result.info;
                         cloudinaryScreenshotUrl = info.secure_url;
@@ -1669,9 +1771,6 @@
                         fileName.textContent = info.original_filename + '.' + info.format;
                         uploadArea.style.borderColor = '#f5b83d';
                         uploadArea.style.background = '#fffcf0';
-                        uploadProgressContainer.style.display = 'none';
-                        uploadProgressFill.style.width = '0%';
-                        uploadPercentText.textContent = '0%';
                         showToast('Screenshot uploaded!', 'success');
                     }
                 });
@@ -1683,38 +1782,28 @@
         // LOAD DATA
         // =================================================================
 
-        function loadData() {
+        function loadData(callback) {
             const dbRef = ref(db, 'bufferzoneAppData');
             onValue(dbRef, (snapshot) => {
                 const data = snapshot.val();
                 if (!data) {
                     allData = {
-                        hero: {
-                            title: 'WE ARE CREATIVE AGENCY',
-                            titleSpan: 'CREATIVE',
-                            desc: 'We provide the best ideas to grow your business',
-                            cta: 'GET STARTED',
-                            phone: '+123 456 7890'
-                        },
+                        hero: { title: 'WE ARE CREATIVE AGENCY', titleSpan: 'CREATIVE', desc: 'We provide the best ideas to grow your business', cta: 'GET STARTED', phone: '+123 456 7890' },
+                        policy: { title: 'BUFFER ZONE PAYMENT POLICY', desc: 'To begin your project, we require a 50% down payment. The remaining balance is due upon project completion and delivery. This ensures commitment from both parties.', tag: '50% upfront required' },
                         ourServicesList: ['Graphic Design', 'Web Development', 'Digital Marketing', 'Branding Design'],
-                        policy: {
-                            title: 'BUFFER ZONE PAYMENT POLICY',
-                            desc: 'To begin your project, we require a 50% down payment. The remaining balance is due upon project completion and delivery. This ensures commitment from both parties.',
-                            tag: '50% upfront required',
-                            number: '0976760537',
-                            name: 'Airtel Mobile Number',
-                            accountName: 'Jubel Mobela'
-                        },
                         services: {},
                         orders: {},
                         transactions: {},
-                        disabled: false
+                        promotions: {},
+                        disabled: false,
+                        notifications: {}
                     };
                     set(dbRef, allData);
                 } else {
                     allData = data;
                 }
                 renderAll();
+                if (callback) callback();
             });
         }
 
@@ -1753,6 +1842,9 @@
                 ).join('');
             }
 
+            // Render Promotions Banner
+            renderPromotionsBanner();
+
             // Render Services Grid
             renderServices();
 
@@ -1781,6 +1873,20 @@
 
             // Update notifications
             renderNotifications();
+        }
+
+        function renderPromotionsBanner() {
+            const container = promotionsBanner;
+            const promotions = allData.promotions || {};
+            const entries = Object.entries(promotions);
+            if (entries.length === 0) {
+                container.innerHTML = `<div style="padding:4px 0; font-size:10px; color:#888;">No active promotions at the moment.</div>`;
+                return;
+            }
+            container.innerHTML = entries.map(([key, p]) => `
+                <span class="tag">PROMO</span>
+                <span class="msg">Use code <strong>${p.code}</strong> for <strong>${p.discount}%</strong> off!</span>
+            `).join('');
         }
 
         function renderServices(category = 'all') {
@@ -1818,71 +1924,63 @@
         function renderOrders() {
             const container = ordersGrid;
             const orders = allData.orders || {};
-            const entries = Object.entries(orders);
+            const entries = Object.entries(orders).filter(([key, o]) => o.userId === currentUserId);
             if (entries.length === 0) {
                 container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No orders found.</div>`;
                 return;
             }
             container.innerHTML = entries.map(([key, o]) => `
-                <div class="order-card-customer" data-key="${key}">
-                    <div class="order-summary">
-                        <div class="left">
-                            <div class="order-id">${escapeHtml(o.id || 'N/A')}</div>
-                            <div class="order-service">${escapeHtml(o.service || 'N/A')}</div>
-                        </div>
-                        <div class="right">
-                            <div class="order-amount">ZMW ${(o.amount || 0).toFixed(2)}</div>
-                            <span class="order-status status-${o.status || 'pending'}">${o.status || 'pending'}</span>
-                            <i class="fa-solid fa-chevron-down expand-icon" style="display:block;margin-top:4px;text-align:right;"></i>
+                <div class="order-card">
+                    <div class="order-card-left">
+                        <div class="order-icon"><i class="fa-solid fa-cube"></i></div>
+                        <div class="order-details">
+                            <span class="order-id">${escapeHtml(o.id || 'N/A')}</span>
+                            <span class="order-name">${escapeHtml(o.service || 'N/A')}</span>
+                            <div class="order-meta">
+                                <span>${escapeHtml(o.customer || 'N/A')}</span>
+                                <span>${escapeHtml(o.date || 'N/A')}</span>
+                                ${o.discountApplied ? `<span style="background:#fef9e7;color:#f5b83d;">${o.discountApplied}% OFF</span>` : ''}
+                            </div>
                         </div>
                     </div>
-                    <div class="order-details-expand">
-                        <div class="detail-row"><span class="label">Client</span><span class="val">${escapeHtml(o.customer || 'N/A')}</span></div>
-                        <div class="detail-row"><span class="label">Client Number</span><span class="val">${escapeHtml(o.clientNumber || 'N/A')}</span></div>
-                        <div class="detail-row"><span class="label">Customization</span><span class="val">${escapeHtml(o.customization || 'None')}</span></div>
-                        <div class="detail-row"><span class="label">Payment Proof</span><span class="val">${o.paymentProof ? '✅ Available' : 'No proof'}</span></div>
-                        <div class="detail-row"><span class="label">Date</span><span class="val">${escapeHtml(o.date || 'N/A')}</span></div>
+                    <div class="order-card-right">
+                        <span class="status-badge ${o.status === 'progress' ? 'badge-progress' : o.status === 'completed' ? 'badge-done' : o.status === 'pending' ? 'badge-pending' : 'badge-review'}">${o.status || 'pending'}</span>
+                        <span class="order-price">ZMW ${(o.amount || 0).toFixed(2)}</span>
                     </div>
                 </div>
             `).join('');
-
-            container.querySelectorAll('.order-card-customer').forEach(el => {
-                el.addEventListener('click', function() {
-                    this.classList.toggle('open');
-                });
-            });
         }
 
         function renderHistory() {
             const container = historyList;
             const transactions = allData.transactions || {};
-            const entries = Object.entries(transactions);
+            const entries = Object.entries(transactions).filter(([key, t]) => t.userId === currentUserId);
             if (entries.length === 0) {
                 container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No transactions found.</div>`;
                 return;
             }
             container.innerHTML = entries.map(([key, t]) => `
-                <div class="history-card" data-key="${key}">
-                    <div class="history-summary">
+                <div class="history-item" data-key="${key}">
+                    <div class="summary">
                         <div class="left">
                             <i class="fa-solid ${t.amount && t.amount > 0 ? 'fa-arrow-right' : 'fa-arrow-left'}" style="color:${t.amount && t.amount > 0 ? '#00a86b' : '#cc8800'};"></i>
                             <span>${escapeHtml(t.type || 'Transaction')} ${t.amount ? 'ZMW ' + t.amount.toFixed(2) : ''}</span>
                         </div>
                         <div class="right">
                             <span>${escapeHtml(t.date || 'N/A')}</span>
-                            <i class="fa-solid fa-chevron-down expand-icon" style="margin-left:8px;"></i>
+                            <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                     </div>
-                    <div class="history-details">
-                        <div class="h-row"><span class="h-label">Reference</span><span class="h-val">${escapeHtml(t.ref || 'N/A')}</span></div>
-                        <div class="h-row"><span class="h-label">Method</span><span class="h-val">${escapeHtml(t.method || 'N/A')}</span></div>
-                        <div class="h-row"><span class="h-label">Status</span><span class="h-val">${escapeHtml(t.status || 'N/A')}</span></div>
-                        <div class="h-row"><span class="h-label">Detail</span><span class="h-val">${escapeHtml(t.detail || 'N/A')}</span></div>
+                    <div class="details">
+                        <div class="row"><span class="label">Reference</span><span class="val">${escapeHtml(t.ref || 'N/A')}</span></div>
+                        <div class="row"><span class="label">Method</span><span class="val">${escapeHtml(t.method || 'N/A')}</span></div>
+                        <div class="row"><span class="label">Status</span><span class="val">${escapeHtml(t.status || 'N/A')}</span></div>
+                        <div class="row"><span class="label">Detail</span><span class="val">${escapeHtml(t.detail || 'N/A')}</span></div>
                     </div>
                 </div>
             `).join('');
 
-            container.querySelectorAll('.history-card').forEach(el => {
+            container.querySelectorAll('.history-item').forEach(el => {
                 el.addEventListener('click', function() {
                     this.classList.toggle('open');
                 });
@@ -1908,7 +2006,7 @@
 
         function renderNotifications() {
             const notifications = allData.notifications || {};
-            const entries = Object.entries(notifications);
+            const entries = Object.entries(notifications).sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
             if (entries.length === 0) {
                 notifList.innerHTML =
                     `<div style="text-align:center;padding:30px;color:#888;"><i class="fa-regular fa-bell-slash" style="font-size:32px;color:#ddd;display:block;margin-bottom:8px;"></i>No notifications</div>`;
@@ -1916,9 +2014,12 @@
                 notifBadge.style.display = 'none';
                 return;
             }
-            const sorted = entries.sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
-            notifList.innerHTML = sorted.map(([key, n]) => `
-                <div class="notification-item">
+            const unreadCount = entries.filter(([key, n]) => !n.read).length;
+            notifBadge.textContent = unreadCount > 9 ? '9+' : unreadCount;
+            notifBadge.style.display = unreadCount > 0 ? 'flex' : 'none';
+
+            notifList.innerHTML = entries.slice(0, 10).map(([key, n]) => `
+                <div class="notification-item" data-key="${key}">
                     <div class="notif-dot ${n.read ? 'read' : ''}"></div>
                     <div class="notif-content">
                         <div class="title">${escapeHtml(n.title || 'Notification')}</div>
@@ -1927,9 +2028,19 @@
                     </div>
                 </div>
             `).join('');
-            const unread = entries.filter(([key, n]) => !n.read).length;
-            notifBadge.textContent = unread > 9 ? '9+' : unread;
-            notifBadge.style.display = unread > 0 ? 'flex' : 'none';
+
+            // Mark as read when opened
+            notifList.querySelectorAll('.notification-item').forEach(el => {
+                el.addEventListener('click', function() {
+                    const key = this.dataset.key;
+                    if (allData.notifications && allData.notifications[key]) {
+                        allData.notifications[key].read = true;
+                        saveData().then(() => {
+                            renderNotifications();
+                        });
+                    }
+                });
+            });
         }
 
         // =================================================================
@@ -2106,9 +2217,18 @@
 
             document.getElementById('confirmOrderBtn').addEventListener('click', function() {
                 const total = service.price * currentQuantity;
+                orderTotalBeforeDiscount = total;
                 const amount50 = total * 0.5;
                 paymentAmount.textContent = `ZMW ${amount50.toFixed(2)}`;
-                paymentModal.classList.add('open');
+                // Reset coupon state
+                discountApplied = false;
+                appliedPromo = null;
+                couponInput.value = '';
+                couponMsg.textContent = '';
+                couponMsg.className = 'coupon-msg';
+                priceBreakdown.style.display = 'none';
+                applyCouponBtn.disabled = false;
+                // Store data in modal dataset
                 paymentModal.dataset.orderData = JSON.stringify({
                     service: service.title,
                     serviceId: service.id,
@@ -2122,6 +2242,7 @@
                     deliverySpeed: selectedDeliverySpeed,
                     notes: document.getElementById('orderNotes').value
                 });
+                paymentModal.classList.add('open');
             });
         }
 
@@ -2129,6 +2250,183 @@
             if (!selectedService) return;
             const total = selectedService.price * currentQuantity;
             document.querySelector('.order-footer .total-price').textContent = `ZMW ${total.toFixed(2)}`;
+        }
+
+        // =================================================================
+        // COUPON LOGIC
+        // =================================================================
+
+        function applyCoupon() {
+            const code = couponInput.value.trim().toUpperCase();
+            if (!code) {
+                couponMsg.textContent = 'Please enter a coupon code.';
+                couponMsg.className = 'coupon-msg error';
+                return;
+            }
+
+            // Check if coupon exists in promotions
+            const promotions = allData.promotions || {};
+            let foundPromo = null;
+            let promoKey = null;
+            for (const [key, p] of Object.entries(promotions)) {
+                if (p.code === code) {
+                    foundPromo = p;
+                    promoKey = key;
+                    break;
+                }
+            }
+
+            if (!foundPromo) {
+                couponMsg.textContent = 'Invalid coupon code.';
+                couponMsg.className = 'coupon-msg error';
+                return;
+            }
+
+            // Check if user has already used this coupon
+            const usedCouponsRef = ref(db, `users/${currentUserId}/usedCoupons`);
+            get(usedCouponsRef).then((snapshot) => {
+                const usedCoupons = snapshot.val() || {};
+                if (usedCoupons[promoKey]) {
+                    couponMsg.textContent = 'You have already used this coupon.';
+                    couponMsg.className = 'coupon-msg error';
+                    return;
+                }
+
+                // Apply discount
+                const orderData = JSON.parse(paymentModal.dataset.orderData || '{}');
+                const total = orderData.total || orderTotalBeforeDiscount;
+                const discountAmount = total * (foundPromo.discount / 100);
+                const finalPrice = total - discountAmount;
+                const depositAmount = finalPrice * 0.5;
+
+                // Update price breakdown
+                origPriceVal.textContent = `ZMW ${total.toFixed(2)}`;
+                discountVal.textContent = `- ZMW ${discountAmount.toFixed(2)}`;
+                finalPriceVal.textContent = `ZMW ${finalPrice.toFixed(2)}`;
+                finalDepositVal.textContent = `ZMW ${depositAmount.toFixed(2)}`;
+                priceBreakdown.style.display = 'block';
+
+                // Update payment amount
+                paymentAmount.textContent = `ZMW ${depositAmount.toFixed(2)}`;
+
+                couponMsg.textContent = `✅ Coupon applied! ${foundPromo.discount}% off.`;
+                couponMsg.className = 'coupon-msg success';
+
+                discountApplied = true;
+                appliedPromo = { key: promoKey, code: foundPromo.code, discount: foundPromo.discount };
+                applyCouponBtn.disabled = true;
+                couponInput.disabled = true;
+
+                // Store applied promo in modal dataset for confirmation
+                paymentModal.dataset.appliedPromo = JSON.stringify(appliedPromo);
+
+            }).catch((error) => {
+                console.error('Error checking used coupons:', error);
+                couponMsg.textContent = 'Error validating coupon.';
+                couponMsg.className = 'coupon-msg error';
+            });
+        }
+
+        // =================================================================
+        // PAYMENT CONFIRMATION
+        // =================================================================
+
+        function confirmPayment() {
+            const screenshotUrl = cloudinaryScreenshotUrlInput.value;
+            if (!screenshotUrl) {
+                showToast('Please upload a transaction screenshot before confirming.', 'error');
+                return;
+            }
+
+            const dataStr = paymentModal.dataset.orderData;
+            if (!dataStr) {
+                showToast('Order data missing.', 'error');
+                return;
+            }
+
+            const data = JSON.parse(dataStr);
+            const orderId = 'ORD-' + String(Object.keys(allData.orders || {}).length + 1).padStart(3, '0');
+            const customerName = currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
+                currentUser.email || 'Customer';
+
+            // Calculate final amount
+            let finalAmount = data.total;
+            let discountAppliedVal = 0;
+            let promoCodeUsed = null;
+
+            if (discountApplied && appliedPromo) {
+                discountAppliedVal = appliedPromo.discount;
+                promoCodeUsed = appliedPromo.code;
+                finalAmount = data.total * (1 - discountAppliedVal / 100);
+            }
+
+            // Create order
+            const orderData = {
+                id: orderId,
+                service: data.service,
+                amount: finalAmount,
+                status: 'pending',
+                customer: customerName,
+                clientNumber: currentUserData?.phone || 'N/A',
+                customization: `Size: ${data.size || 'N/A'}, Orientation: ${data.orientation || 'N/A'}, Format: ${data.format || 'N/A'}`,
+                date: new Date().toLocaleDateString(),
+                paymentProof: screenshotUrl,
+                userId: currentUserId,
+                discountApplied: discountAppliedVal,
+                promoCode: promoCodeUsed
+            };
+            const orderRef = push(ref(db, 'bufferzoneAppData/orders'));
+            set(orderRef, orderData);
+
+            // Record coupon usage
+            if (appliedPromo) {
+                const usedCouponRef = ref(db, `users/${currentUserId}/usedCoupons/${appliedPromo.key}`);
+                set(usedCouponRef, true);
+            }
+
+            // Create transaction
+            const txData = {
+                type: 'Payment for ' + data.service,
+                amount: finalAmount * 0.5,
+                method: 'Airtel Money',
+                status: 'pending',
+                date: new Date().toLocaleString(),
+                ref: orderId,
+                detail: '50% down payment for ' + data.service + (discountAppliedVal > 0 ? ` (${discountAppliedVal}% off)` :
+                    ''),
+                screenshot: screenshotUrl,
+                userId: currentUserId,
+                itemId: data.serviceId || 'N/A',
+                itemTitle: data.service,
+                itemType: 'service',
+                userName: customerName,
+                userEmail: currentUser.email || 'N/A',
+                userPhone: currentUserData?.phone || 'N/A'
+            };
+            const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
+            set(txRef, txData);
+
+            // Add notification
+            const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
+            set(notifRef, {
+                title: 'Order Placed',
+                message: `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.`,
+                timestamp: Date.now(),
+                read: false
+            });
+
+            showToast('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.',
+                'success');
+            paymentModal.classList.remove('open');
+            cloudinaryScreenshotUrlInput.value = '';
+            fileName.textContent = 'No file chosen';
+            uploadArea.style.borderColor = '#ddd';
+            uploadArea.style.background = '#fafbfc';
+            switchView('homeView');
+            selectedService = null;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
+            renderServices('all');
         }
 
         // =================================================================
@@ -2209,81 +2507,19 @@
             if (e.target === this) this.classList.remove('open');
         });
 
-        // Confirm payment
-        confirmPaymentBtn.addEventListener('click', function() {
-            const screenshotUrl = cloudinaryScreenshotUrlInput.value;
-            if (!screenshotUrl) {
-                showToast('Please upload a transaction screenshot before confirming.', 'error');
-                return;
-            }
-            const dataStr = paymentModal.dataset.orderData;
-            if (dataStr) {
-                const data = JSON.parse(dataStr);
-                const userId = currentUserId || 'anonymous';
-                const orderId = 'ORD-' + String(Object.keys(allData.orders || {}).length + 1).padStart(3, '0');
-
-                // Create order
-                const orderData = {
-                    id: orderId,
-                    service: data.service,
-                    amount: data.total,
-                    status: 'pending',
-                    customer: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
-                        currentUser.email || 'Customer',
-                    clientNumber: currentUserData?.phone || 'N/A',
-                    customization: `Size: ${data.size || 'N/A'}, Orientation: ${data.orientation || 'N/A'}, Format: ${data.format || 'N/A'}`,
-                    date: new Date().toLocaleDateString(),
-                    paymentProof: screenshotUrl,
-                    userId: userId
-                };
-                const orderRef = push(ref(db, 'bufferzoneAppData/orders'));
-                set(orderRef, orderData);
-
-                // Create transaction
-                const txData = {
-                    type: 'Payment for ' + data.service,
-                    amount: data.total * 0.5,
-                    method: 'Airtel Money',
-                    status: 'pending',
-                    date: new Date().toLocaleString(),
-                    ref: orderId,
-                    detail: '50% down payment for ' + data.service,
-                    screenshot: screenshotUrl,
-                    userId: userId,
-                    itemId: data.serviceId || 'N/A',
-                    itemTitle: data.service,
-                    itemType: 'service',
-                    userName: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
-                        currentUser.email || 'Customer',
-                    userEmail: currentUser.email || 'N/A',
-                    userPhone: currentUserData?.phone || 'N/A'
-                };
-                const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
-                set(txRef, txData);
-
-                // Add notification
-                const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
-                set(notifRef, {
-                    title: 'Order Placed',
-                    message: `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.`,
-                    timestamp: Date.now(),
-                    read: false
-                });
-
-                showToast('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.',
-                    'success');
-                paymentModal.classList.remove('open');
-                cloudinaryScreenshotUrlInput.value = '';
-                fileName.textContent = 'No file chosen';
-                uploadArea.style.borderColor = '#ddd';
-                uploadArea.style.background = '#fafbfc';
-                switchView('homeView');
-                selectedService = null;
-                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-                document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
-                renderServices('all');
+        // Coupon apply
+        applyCouponBtn.addEventListener('click', applyCoupon);
+        couponInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                applyCoupon();
             }
         });
+
+        // Confirm payment
+        confirmPaymentBtn.addEventListener('click', confirmPayment);
+
+        // Cloudinary upload
+        setupCloudinaryUpload();
 
         // =================================================================
         // AUTH & INIT
@@ -2314,9 +2550,6 @@
                 window.location.href = 'login.html';
             }
         });
-
-        // Setup Cloudinary upload
-        setupCloudinaryUpload();
 
         console.log('✅ Customer App ready with Firebase.');
     </script>
