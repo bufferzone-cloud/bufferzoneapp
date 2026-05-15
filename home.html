@@ -6,6 +6,8 @@
     <title>Buffer Zone · Customer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
+    </script>
     <style>
         * {
             margin: 0;
@@ -16,7 +18,7 @@
         }
 
         body {
-            background-color: #f5f5f5;
+            background-color: #f5f7fa;
             display: block;
             overflow: hidden;
             height: 100%;
@@ -56,7 +58,7 @@
             justify-content: space-between;
             align-items: center;
             z-index: 500;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
             flex-shrink: 0;
             pointer-events: auto;
         }
@@ -823,7 +825,7 @@
             display: block;
         }
 
-        /* --- ORDERS VIEW --- */
+        /* --- ORDERS VIEW (Improved Cards) --- */
         .orders-header {
             margin-top: 8px;
             margin-bottom: 16px;
@@ -841,103 +843,182 @@
         .order-grid {
             display: flex;
             flex-direction: column;
-            gap: 11px;
+            gap: 12px;
         }
-        .order-card {
+        .order-card-customer {
             background: #ffffff;
-            border-radius: 13px;
-            padding: 13px;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            padding: 14px 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
             border: 1px solid #f0f0f0;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .order-card-customer:active {
+            transform: scale(0.98);
+        }
+        .order-card-customer .order-summary {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: transform 0.1s ease;
         }
-        .order-card:active {
-            transform: scale(0.99);
-        }
-        .order-card-left {
-            display: flex;
-            align-items: center;
-            gap: 11px;
-            flex: 1;
-        }
-        .order-icon {
-            width: 38px;
-            height: 38px;
-            background: #f5f7fa;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #1c2128;
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-        .order-details {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-        .order-id {
+        .order-card-customer .order-summary .left .order-id {
             font-weight: 700;
-            font-size: 12px;
+            font-size: 14px;
             color: #1c2128;
         }
-        .order-name {
-            font-size: 10px;
+        .order-card-customer .order-summary .left .order-service {
+            font-size: 12px;
             color: #555;
         }
-        .order-meta {
-            font-size: 9px;
-            color: #999;
-            margin-top: 1px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
+        .order-card-customer .order-summary .right {
+            text-align: right;
         }
-        .order-meta span {
-            background: #f5f5f5;
-            padding: 0 5px;
-            border-radius: 3px;
+        .order-card-customer .order-summary .right .order-amount {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1c2128;
         }
-
-        .order-card-right {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 3px;
-            margin-left: 8px;
-            flex-shrink: 0;
-        }
-        .status-badge {
-            font-size: 8px;
+        .order-card-customer .order-summary .right .order-status {
+            font-size: 10px;
             font-weight: 600;
-            padding: 2px 10px;
+            padding: 2px 12px;
             border-radius: 16px;
-            white-space: nowrap;
+            display: inline-block;
         }
-        .badge-progress {
+        .status-progress {
             background: #e0f0ff;
             color: #0066cc;
         }
-        .badge-done {
+        .status-completed {
             background: #e6fffa;
             color: #00a86b;
         }
-        .badge-pending {
+        .status-pending {
             background: #fff6e0;
             color: #cc8800;
         }
-        .badge-review {
+        .status-review {
             background: #f0e6ff;
             color: #7700cc;
         }
-        .order-price {
-            font-weight: 700;
+        .status-cancelled {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .order-card-customer .order-details-expand {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
+            padding: 0 4px;
+            border-top: 1px solid transparent;
+        }
+        .order-card-customer.open .order-details-expand {
+            max-height: 400px;
+            padding: 12px 4px 4px 4px;
+            border-top-color: #f0f0f0;
+            margin-top: 10px;
+        }
+        .order-card-customer .order-details-expand .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 12px;
+            color: #555;
+        }
+        .order-card-customer .order-details-expand .detail-row .label {
+            color: #888;
+        }
+        .order-card-customer .order-details-expand .detail-row .val {
+            font-weight: 500;
+            color: #1c2128;
+        }
+        .order-card-customer .expand-icon {
+            transition: transform 0.3s ease;
+            font-size: 12px;
+            color: #aaa;
+        }
+        .order-card-customer.open .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        /* --- HISTORY VIEW (Improved Expandable Cards) --- */
+        .history-list {
+            padding: 0 0 16px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .history-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 14px 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .history-card:active {
+            transform: scale(0.98);
+        }
+        .history-card .history-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .history-card .history-summary .left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 12px;
             color: #1c2128;
+        }
+        .history-card .history-summary .left i {
+            font-size: 14px;
+            color: #667eea;
+        }
+        .history-card .history-summary .right {
+            font-size: 11px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .history-card .history-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
+            padding: 0 4px;
+            border-top: 1px solid transparent;
+        }
+        .history-card.open .history-details {
+            max-height: 250px;
+            padding: 10px 4px 4px 4px;
+            border-top-color: #f0f0f0;
+            margin-top: 8px;
+        }
+        .history-card .history-details .h-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 12px;
+            color: #555;
+        }
+        .history-card .history-details .h-row .h-label {
+            color: #888;
+        }
+        .history-card .history-details .h-row .h-val {
+            font-weight: 500;
+            color: #1c2128;
+        }
+        .history-card .expand-icon {
+            transition: transform 0.3s ease;
+            font-size: 11px;
+            color: #aaa;
+        }
+        .history-card.open .expand-icon {
+            transform: rotate(180deg);
         }
 
         /* --- PROFILE VIEW --- */
@@ -1030,82 +1111,6 @@
         }
         .logout-btn:active {
             transform: scale(0.95);
-        }
-
-        /* --- HISTORY VIEW (Expandable) --- */
-        .history-list {
-            padding: 0 0 16px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .history-item {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 12px 14px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            border: 1px solid #f0f0f0;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .history-item:active {
-            transform: scale(0.98);
-        }
-        .history-item .summary {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .history-item .summary .left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 10px;
-            color: #1c2128;
-        }
-        .history-item .summary .left i {
-            color: #667eea;
-            font-size: 12px;
-        }
-        .history-item .summary .right {
-            font-size: 10px;
-            color: #888;
-        }
-        .history-item .details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
-            padding: 0 4px;
-            font-size: 10px;
-            color: #555;
-            line-height: 1.5;
-            border-top: 1px solid transparent;
-        }
-        .history-item.open .details {
-            max-height: 200px;
-            padding: 10px 4px 4px 4px;
-            border-top-color: #f0f0f0;
-            margin-top: 8px;
-        }
-        .history-item .details .row {
-            display: flex;
-            justify-content: space-between;
-            padding: 3px 0;
-        }
-        .history-item .details .row .label {
-            color: #888;
-        }
-        .history-item .details .row .val {
-            font-weight: 500;
-            color: #1c2128;
-        }
-        .history-item .expand-icon {
-            transition: transform 0.3s ease;
-            font-size: 10px;
-            color: #aaa;
-        }
-        .history-item.open .expand-icon {
-            transform: rotate(180deg);
         }
 
         /* --- NOTIFICATION SIDEBAR --- */
@@ -1221,6 +1226,29 @@
                 font-size: 18px;
             }
         }
+
+        /* --- CLOUDINARY UPLOAD PROGRESS --- */
+        .progress-container {
+            width: 100%;
+            background: #e8ecf1;
+            border-radius: 20px;
+            margin-top: 8px;
+            height: 6px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 6px;
+            border-radius: 20px;
+            background: #f5b83d;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .upload-percent {
+            font-size: 10px;
+            color: #888;
+            margin-top: 4px;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -1241,7 +1269,7 @@
                 </div>
                 <div class="notif-icon" id="notifIcon">
                     <i class="fa-regular fa-bell"></i>
-                    <span class="notif-badge">3</span>
+                    <span class="notif-badge" id="notifBadge">0</span>
                 </div>
             </div>
 
@@ -1315,7 +1343,7 @@
                 </div>
             </div>
 
-            <!-- ===== VIEW: ORDERS ===== -->
+            <!-- ===== VIEW: ORDERS (Improved) ===== -->
             <div id="ordersView" class="view">
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Your Orders</h3>
@@ -1324,11 +1352,11 @@
                 <div class="order-grid" id="ordersGrid"></div>
             </div>
 
-            <!-- ===== VIEW: HISTORY ===== -->
+            <!-- ===== VIEW: HISTORY (Improved) ===== -->
             <div id="historyView" class="view">
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Transaction History</h3>
-                    <p style="color: #888; font-size: 11px;">Tap a transaction to view more details.</p>
+                    <p style="color: #888; font-size: 11px;">Tap a transaction for more details.</p>
                 </div>
                 <div class="history-list" id="historyList"></div>
             </div>
@@ -1379,7 +1407,7 @@
                     <div>
                         <div class="name" id="paymentName">Airtel Mobile Number</div>
                         <div class="number" id="paymentNumber">0976760537</div>
-                        <div style="font-size:10px; color:#555;">Jubel Mobela</div>
+                        <div style="font-size:10px; color:#555;" id="paymentAccountName">Jubel Mobela</div>
                     </div>
                     <div style="text-align:right;">
                         <div style="font-size:10px; color:#888;">Amount to pay</div>
@@ -1395,7 +1423,12 @@
                     <i class="fa-regular fa-image"></i>
                     <p>Tap to upload receipt or screenshot</p>
                     <div class="file-name" id="fileName">No file chosen</div>
+                    <div id="uploadProgressContainer" style="display:none; margin-top:8px;">
+                        <div class="progress-container"><div class="progress-fill" id="uploadProgressFill" style="width:0%"></div></div>
+                        <span class="upload-percent" id="uploadPercentText">0%</span>
+                    </div>
                     <input type="file" id="fileInput" accept="image/*" style="display:none;">
+                    <input type="hidden" id="cloudinaryScreenshotUrl">
                 </div>
             </div>
 
@@ -1416,46 +1449,7 @@
             <button class="sidebar-close" id="sidebarClose"><i class="fa-solid fa-times"></i></button>
         </div>
         <div id="notifList">
-            <div class="notification-item">
-                <div class="notif-dot"></div>
-                <div class="notif-content">
-                    <div class="title">New Project Assigned</div>
-                    <div class="desc">You've been assigned to Project D-12: Logo Redesign.</div>
-                    <div class="time">10 minutes ago</div>
-                </div>
-            </div>
-            <div class="notification-item">
-                <div class="notif-dot"></div>
-                <div class="notif-content">
-                    <div class="title">Payment Received</div>
-                    <div class="desc">Payment of $1,200 for order #ORD-002 has been confirmed.</div>
-                    <div class="time">1 hour ago</div>
-                </div>
-            </div>
-            <div class="notification-item">
-                <div class="notif-dot read"></div>
-                <div class="notif-content">
-                    <div class="title">Client Review</div>
-                    <div class="desc">New 5-star review from Fashion Hub: "Amazing work!"</div>
-                    <div class="time">3 hours ago</div>
-                </div>
-            </div>
-            <div class="notification-item">
-                <div class="notif-dot read"></div>
-                <div class="notif-content">
-                    <div class="title">Meeting Reminder</div>
-                    <div class="desc">Design review meeting at 3:00 PM with Pixel Studio.</div>
-                    <div class="time">5 hours ago</div>
-                </div>
-            </div>
-            <div class="notification-item">
-                <div class="notif-dot read"></div>
-                <div class="notif-content">
-                    <div class="title">System Update</div>
-                    <div class="desc">Your monthly usage report is ready for download.</div>
-                    <div class="time">Yesterday</div>
-                </div>
-            </div>
+            <!-- Rendered by JS -->
         </div>
     </div>
 
@@ -1465,9 +1459,10 @@
         // FIREBASE SDK
         // =================================================================
 
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-        import { getDatabase, ref, onValue, set, push } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+        import { getDatabase, ref, onValue, set, push, update, get, serverTimestamp } from
+        "https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBy8ZAMagjX627gcfe0NuRaC1WfC736en0",
@@ -1479,6 +1474,9 @@
             appId: "1:137881085889:web:d5ff1ff3bee6d3e0373140",
             measurementId: "G-VRQHT301C4"
         };
+
+        const CLOUD_NAME = 'dd3lcymrk';
+        const UPLOAD_PRESET = 'h3eyhc2o';
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
@@ -1500,6 +1498,8 @@
         let selectedRevisions = '';
         let selectedDeliverySpeed = '';
         let uploadedFile = null;
+        let cloudinaryScreenshotUrl = '';
+        let currentUserId = null;
 
         // =================================================================
         // DOM REFS
@@ -1541,15 +1541,24 @@
         const paymentModal = document.getElementById('paymentModal');
         const paymentCloseBtn = document.getElementById('paymentCloseBtn');
         const paymentAmount = document.getElementById('paymentAmount');
+        const paymentNumber = document.getElementById('paymentNumber');
+        const paymentName = document.getElementById('paymentName');
+        const paymentAccountName = document.getElementById('paymentAccountName');
         const uploadArea = document.getElementById('uploadArea');
         const fileInput = document.getElementById('fileInput');
         const fileName = document.getElementById('fileName');
         const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
+        const uploadProgressContainer = document.getElementById('uploadProgressContainer');
+        const uploadProgressFill = document.getElementById('uploadProgressFill');
+        const uploadPercentText = document.getElementById('uploadPercentText');
+        const cloudinaryScreenshotUrlInput = document.getElementById('cloudinaryScreenshotUrl');
 
         const notifIcon = document.getElementById('notifIcon');
+        const notifBadge = document.getElementById('notifBadge');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
         const notifSidebar = document.getElementById('notifSidebar');
         const sidebarClose = document.getElementById('sidebarClose');
+        const notifList = document.getElementById('notifList');
 
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMessage');
@@ -1558,13 +1567,38 @@
         // HELPER FUNCTIONS
         // =================================================================
 
-        function showToast(msg) {
-            toastMsg.textContent = msg;
-            toast.classList.add('show');
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2200);
+        function showToast(msg, type = 'info') {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 90px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #1c2128;
+                color: #ffffff;
+                padding: 12px 24px;
+                border-radius: 12px;
+                font-size: 13px;
+                font-weight: 500;
+                box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+                z-index: 3000;
+                opacity: 0;
+                transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                pointer-events: none;
+                white-space: nowrap;
+                max-width: 90%;
+            `;
+            const icon = type === 'success' ? 'fa-check-circle' : (type === 'error' ? 'fa-exclamation-circle' :
+                'fa-bell');
+            toast.innerHTML = `<i class="fas ${icon}" style="color: #f5b83d; margin-right: 8px;"></i> ${msg}`;
+            document.body.appendChild(toast);
+            requestAnimationFrame(() => {
+                toast.style.opacity = '1';
+            });
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
         }
 
         function switchView(viewId) {
@@ -1590,6 +1624,61 @@
             notifSidebar.classList.remove('open');
         }
 
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // =================================================================
+        // CLOUDINARY UPLOAD WIDGET (from the provided code)
+        // =================================================================
+
+        function setupCloudinaryUpload() {
+            uploadArea.addEventListener('click', () => {
+                const options = {
+                    cloudName: CLOUD_NAME,
+                    uploadPreset: UPLOAD_PRESET,
+                    sources: ['local', 'url', 'camera'],
+                    maxFileSize: 155000000,
+                    resourceType: 'image',
+                    clientAllowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+                    maxFiles: 1,
+                    multiple: false,
+                    fieldName: 'file',
+                    language: 'en',
+                    defaultSource: 'local'
+                };
+                const widget = cloudinary.openUploadWidget(options, (error, result) => {
+                    if (error) {
+                        console.error('Cloudinary error:', error);
+                        showToast('Upload error: ' + (error.message || 'Unknown'), 'error');
+                        return;
+                    }
+                    if (result.event === 'progress') {
+                        const progress = Math.round(result.info.progress);
+                        uploadProgressContainer.style.display = 'block';
+                        uploadProgressFill.style.width = progress + '%';
+                        uploadPercentText.textContent = progress + '%';
+                    }
+                    if (result.event === 'success') {
+                        const info = result.info;
+                        cloudinaryScreenshotUrl = info.secure_url;
+                        cloudinaryScreenshotUrlInput.value = info.secure_url;
+                        fileName.textContent = info.original_filename + '.' + info.format;
+                        uploadArea.style.borderColor = '#f5b83d';
+                        uploadArea.style.background = '#fffcf0';
+                        uploadProgressContainer.style.display = 'none';
+                        uploadProgressFill.style.width = '0%';
+                        uploadPercentText.textContent = '0%';
+                        showToast('Screenshot uploaded!', 'success');
+                    }
+                });
+                widget.open();
+            });
+        }
+
         // =================================================================
         // LOAD DATA
         // =================================================================
@@ -1599,8 +1688,7 @@
             onValue(dbRef, (snapshot) => {
                 const data = snapshot.val();
                 if (!data) {
-                    // If no data exists, initialize with defaults
-                    const defaultData = {
+                    allData = {
                         hero: {
                             title: 'WE ARE CREATIVE AGENCY',
                             titleSpan: 'CREATIVE',
@@ -1612,20 +1700,20 @@
                         policy: {
                             title: 'BUFFER ZONE PAYMENT POLICY',
                             desc: 'To begin your project, we require a 50% down payment. The remaining balance is due upon project completion and delivery. This ensures commitment from both parties.',
-                            tag: '50% upfront required'
+                            tag: '50% upfront required',
+                            number: '0976760537',
+                            name: 'Airtel Mobile Number',
+                            accountName: 'Jubel Mobela'
                         },
                         services: {},
                         orders: {},
                         transactions: {},
                         disabled: false
                     };
-                    set(dbRef, defaultData).then(() => {
-                        allData = defaultData;
-                        renderAll();
-                    });
-                    return;
+                    set(dbRef, allData);
+                } else {
+                    allData = data;
                 }
-                allData = data;
                 renderAll();
             });
         }
@@ -1637,7 +1725,7 @@
         function renderAll() {
             if (!allData) return;
 
-            // 1. Check if app is disabled
+            // Check if app is disabled
             if (allData.disabled === true) {
                 document.body.innerHTML = `
                     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
@@ -1649,41 +1737,50 @@
                 return;
             }
 
-            // 2. Render Hero
+            // Render Hero
             if (allData.hero) {
                 const h = allData.hero;
-                heroTitle.innerHTML = `${h.title || 'WE ARE'}<br><span>${h.titleSpan || 'CREATIVE'}</span><br><span>${h.agency || 'AGENCY'}</span>`;
+                heroTitle.innerHTML = `${h.title || 'WE ARE'}<br><span>${h.titleSpan || 'CREATIVE'}</span><br><span>AGENCY</span>`;
                 heroDesc.textContent = h.desc || 'We provide the best ideas to grow your business';
                 heroCtaBtn.textContent = h.cta || 'GET STARTED';
                 heroPhone.textContent = h.phone || '+123 456 7890';
             }
 
-            // 3. Render "Our Services" list
+            // Render "Our Services" list
             if (allData.ourServicesList) {
                 ourServicesList.innerHTML = allData.ourServicesList.map(item =>
                     `<li><i class="fa-solid fa-check-circle"></i> ${item}</li>`
                 ).join('');
             }
 
-            // 4. Render Services Grid
+            // Render Services Grid
             renderServices();
 
-            // 5. Render Orders
+            // Render Orders
             renderOrders();
 
-            // 6. Render History
+            // Render History
             renderHistory();
 
-            // 7. Update Profile
+            // Update Profile
             renderProfile();
 
-            // 8. Payment policy
+            // Payment policy
             if (allData.policy) {
                 const p = allData.policy;
-                document.querySelector('.order-policy-content h2').innerHTML = `${p.title || 'BUFFER ZONE PAYMENT POLICY'}<br><span>${p.tag || ''}</span>`;
-                document.querySelector('.order-policy-content p').textContent = p.desc || 'To begin your project, we require a 50% down payment.';
-                document.querySelector('.order-policy-content .policy-tag').innerHTML = `<i class="fa-regular fa-circle-check"></i> ${p.tag || '50% upfront required'}`;
+                document.querySelector('.order-policy-content h2').innerHTML =
+                    `${p.title || 'BUFFER ZONE'}<br><span>${p.tag || ''}</span>`;
+                document.querySelector('.order-policy-content p').textContent =
+                    p.desc || 'To begin your project, we require a 50% down payment.';
+                document.querySelector('.order-policy-content .policy-tag').innerHTML =
+                    `<i class="fa-regular fa-circle-check"></i> ${p.tag || '50% upfront required'}`;
+                paymentNumber.textContent = p.number || '0976760537';
+                paymentName.textContent = p.name || 'Airtel Mobile Number';
+                paymentAccountName.textContent = p.accountName || 'Jubel Mobela';
             }
+
+            // Update notifications
+            renderNotifications();
         }
 
         function renderServices(category = 'all') {
@@ -1704,8 +1801,8 @@
                     <div class="service-thumb ${s.thumb || 'thumb-1'}">
                         <i class="fa-solid ${s.icon || 'fa-cube'}"></i>
                     </div>
-                    <div class="service-title">${s.title || 'Untitled'}</div>
-                    <div class="service-subtitle">${s.subtitle || ''}</div>
+                    <div class="service-title">${escapeHtml(s.title || 'Untitled')}</div>
+                    <div class="service-subtitle">${escapeHtml(s.subtitle || '')}</div>
                 </div>
             `).join('');
 
@@ -1727,24 +1824,33 @@
                 return;
             }
             container.innerHTML = entries.map(([key, o]) => `
-                <div class="order-card">
-                    <div class="order-card-left">
-                        <div class="order-icon"><i class="fa-solid ${o.icon || 'fa-cube'}"></i></div>
-                        <div class="order-details">
-                            <span class="order-id">${o.id || 'N/A'}</span>
-                            <span class="order-name">${o.service || 'N/A'}</span>
-                            <div class="order-meta">
-                                <span>${o.customer || 'N/A'}</span>
-                                <span>${o.date || 'N/A'}</span>
-                            </div>
+                <div class="order-card-customer" data-key="${key}">
+                    <div class="order-summary">
+                        <div class="left">
+                            <div class="order-id">${escapeHtml(o.id || 'N/A')}</div>
+                            <div class="order-service">${escapeHtml(o.service || 'N/A')}</div>
+                        </div>
+                        <div class="right">
+                            <div class="order-amount">ZMW ${(o.amount || 0).toFixed(2)}</div>
+                            <span class="order-status status-${o.status || 'pending'}">${o.status || 'pending'}</span>
+                            <i class="fa-solid fa-chevron-down expand-icon" style="display:block;margin-top:4px;text-align:right;"></i>
                         </div>
                     </div>
-                    <div class="order-card-right">
-                        <span class="status-badge ${o.status || 'pending'}">${o.status || 'pending'}</span>
-                        <span class="order-price">ZMW ${(o.amount || 0).toFixed(2)}</span>
+                    <div class="order-details-expand">
+                        <div class="detail-row"><span class="label">Client</span><span class="val">${escapeHtml(o.customer || 'N/A')}</span></div>
+                        <div class="detail-row"><span class="label">Client Number</span><span class="val">${escapeHtml(o.clientNumber || 'N/A')}</span></div>
+                        <div class="detail-row"><span class="label">Customization</span><span class="val">${escapeHtml(o.customization || 'None')}</span></div>
+                        <div class="detail-row"><span class="label">Payment Proof</span><span class="val">${o.paymentProof ? '✅ Available' : 'No proof'}</span></div>
+                        <div class="detail-row"><span class="label">Date</span><span class="val">${escapeHtml(o.date || 'N/A')}</span></div>
                     </div>
                 </div>
             `).join('');
+
+            container.querySelectorAll('.order-card-customer').forEach(el => {
+                el.addEventListener('click', function() {
+                    this.classList.toggle('open');
+                });
+            });
         }
 
         function renderHistory() {
@@ -1756,27 +1862,27 @@
                 return;
             }
             container.innerHTML = entries.map(([key, t]) => `
-                <div class="history-item" data-key="${key}">
-                    <div class="summary">
+                <div class="history-card" data-key="${key}">
+                    <div class="history-summary">
                         <div class="left">
                             <i class="fa-solid ${t.amount && t.amount > 0 ? 'fa-arrow-right' : 'fa-arrow-left'}" style="color:${t.amount && t.amount > 0 ? '#00a86b' : '#cc8800'};"></i>
-                            <span>${t.type || 'Transaction'} ${t.amount ? 'ZMW ' + t.amount.toFixed(2) : ''}</span>
+                            <span>${escapeHtml(t.type || 'Transaction')} ${t.amount ? 'ZMW ' + t.amount.toFixed(2) : ''}</span>
                         </div>
-                        <div style="display:flex; align-items:center; gap:8px;">
-                            <span class="right">${t.date || 'N/A'}</span>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
+                        <div class="right">
+                            <span>${escapeHtml(t.date || 'N/A')}</span>
+                            <i class="fa-solid fa-chevron-down expand-icon" style="margin-left:8px;"></i>
                         </div>
                     </div>
-                    <div class="details">
-                        <div class="row"><span class="label">Reference</span><span class="val">${t.ref || 'N/A'}</span></div>
-                        <div class="row"><span class="label">Method</span><span class="val">${t.method || 'N/A'}</span></div>
-                        <div class="row"><span class="label">Status</span><span class="val">${t.status || 'N/A'}</span></div>
-                        <div class="row"><span class="label">Detail</span><span class="val">${t.detail || 'N/A'}</span></div>
+                    <div class="history-details">
+                        <div class="h-row"><span class="h-label">Reference</span><span class="h-val">${escapeHtml(t.ref || 'N/A')}</span></div>
+                        <div class="h-row"><span class="h-label">Method</span><span class="h-val">${escapeHtml(t.method || 'N/A')}</span></div>
+                        <div class="h-row"><span class="h-label">Status</span><span class="h-val">${escapeHtml(t.status || 'N/A')}</span></div>
+                        <div class="h-row"><span class="h-label">Detail</span><span class="h-val">${escapeHtml(t.detail || 'N/A')}</span></div>
                     </div>
                 </div>
             `).join('');
 
-            container.querySelectorAll('.history-item').forEach(el => {
+            container.querySelectorAll('.history-card').forEach(el => {
                 el.addEventListener('click', function() {
                     this.classList.toggle('open');
                 });
@@ -1791,12 +1897,39 @@
                 profileFullName.textContent = fullName;
                 profilePhone.textContent = currentUserData.phone || 'Not set';
                 profileEmail.textContent = currentUser.email || 'No email';
-                profileJoined.textContent = currentUserData.createdAt ? new Date(currentUserData.createdAt).toLocaleDateString() : 'N/A';
+                profileJoined.textContent = currentUserData.createdAt ? new Date(currentUserData.createdAt).toLocaleDateString() :
+                    'N/A';
                 profileAvatarLarge.textContent = initial;
                 headerAvatar.textContent = initial;
                 headerName.textContent = fullName;
                 profileRole.textContent = currentUserData.role || 'Customer';
             }
+        }
+
+        function renderNotifications() {
+            const notifications = allData.notifications || {};
+            const entries = Object.entries(notifications);
+            if (entries.length === 0) {
+                notifList.innerHTML =
+                    `<div style="text-align:center;padding:30px;color:#888;"><i class="fa-regular fa-bell-slash" style="font-size:32px;color:#ddd;display:block;margin-bottom:8px;"></i>No notifications</div>`;
+                notifBadge.textContent = '0';
+                notifBadge.style.display = 'none';
+                return;
+            }
+            const sorted = entries.sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
+            notifList.innerHTML = sorted.map(([key, n]) => `
+                <div class="notification-item">
+                    <div class="notif-dot ${n.read ? 'read' : ''}"></div>
+                    <div class="notif-content">
+                        <div class="title">${escapeHtml(n.title || 'Notification')}</div>
+                        <div class="desc">${escapeHtml(n.message || '')}</div>
+                        <div class="time">${n.timestamp ? new Date(n.timestamp).toLocaleString() : 'Just now'}</div>
+                    </div>
+                </div>
+            `).join('');
+            const unread = entries.filter(([key, n]) => !n.read).length;
+            notifBadge.textContent = unread > 9 ? '9+' : unread;
+            notifBadge.style.display = unread > 0 ? 'flex' : 'none';
         }
 
         // =================================================================
@@ -1978,6 +2111,7 @@
                 paymentModal.classList.add('open');
                 paymentModal.dataset.orderData = JSON.stringify({
                     service: service.title,
+                    serviceId: service.id,
                     quantity: currentQuantity,
                     total: total,
                     size: selectedSize,
@@ -2030,7 +2164,8 @@
                     dynamicBack.style.display = 'none';
                     dynamicViewAll.style.display = 'inline';
                 } else {
-                    const names = { graphic: 'GRAPHIC DESIGN', dev: 'DEVELOPER SERVICES', tech: 'TECHNICAL SERVICES', it: 'IT SUPPORT' };
+                    const names = { graphic: 'GRAPHIC DESIGN', dev: 'DEVELOPER SERVICES', tech: 'TECHNICAL SERVICES',
+                        it: 'IT SUPPORT' };
                     dynamicTitle.textContent = names[cat] || 'SERVICES';
                     dynamicBack.style.display = 'inline';
                     dynamicViewAll.style.display = 'none';
@@ -2057,7 +2192,7 @@
                 window.location.href = 'login.html';
             }).catch((error) => {
                 console.error('Logout error:', error);
-                showToast('Error logging out');
+                showToast('Error logging out', 'error');
             });
         });
 
@@ -2074,32 +2209,72 @@
             if (e.target === this) this.classList.remove('open');
         });
 
-        uploadArea.addEventListener('click', function() {
-            fileInput.click();
-        });
-        fileInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                uploadedFile = file;
-                fileName.textContent = file.name;
-                uploadArea.style.borderColor = '#f5b83d';
-                uploadArea.style.background = '#fffcf0';
-            }
-        });
-
+        // Confirm payment
         confirmPaymentBtn.addEventListener('click', function() {
-            if (!uploadedFile) {
-                alert('Please upload a transaction screenshot before confirming.');
+            const screenshotUrl = cloudinaryScreenshotUrlInput.value;
+            if (!screenshotUrl) {
+                showToast('Please upload a transaction screenshot before confirming.', 'error');
                 return;
             }
             const dataStr = paymentModal.dataset.orderData;
             if (dataStr) {
                 const data = JSON.parse(dataStr);
-                alert('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.');
+                const userId = currentUserId || 'anonymous';
+                const orderId = 'ORD-' + String(Object.keys(allData.orders || {}).length + 1).padStart(3, '0');
+
+                // Create order
+                const orderData = {
+                    id: orderId,
+                    service: data.service,
+                    amount: data.total,
+                    status: 'pending',
+                    customer: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
+                        currentUser.email || 'Customer',
+                    clientNumber: currentUserData?.phone || 'N/A',
+                    customization: `Size: ${data.size || 'N/A'}, Orientation: ${data.orientation || 'N/A'}, Format: ${data.format || 'N/A'}`,
+                    date: new Date().toLocaleDateString(),
+                    paymentProof: screenshotUrl,
+                    userId: userId
+                };
+                const orderRef = push(ref(db, 'bufferzoneAppData/orders'));
+                set(orderRef, orderData);
+
+                // Create transaction
+                const txData = {
+                    type: 'Payment for ' + data.service,
+                    amount: data.total * 0.5,
+                    method: 'Airtel Money',
+                    status: 'pending',
+                    date: new Date().toLocaleString(),
+                    ref: orderId,
+                    detail: '50% down payment for ' + data.service,
+                    screenshot: screenshotUrl,
+                    userId: userId,
+                    itemId: data.serviceId || 'N/A',
+                    itemTitle: data.service,
+                    itemType: 'service',
+                    userName: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
+                        currentUser.email || 'Customer',
+                    userEmail: currentUser.email || 'N/A',
+                    userPhone: currentUserData?.phone || 'N/A'
+                };
+                const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
+                set(txRef, txData);
+
+                // Add notification
+                const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
+                set(notifRef, {
+                    title: 'Order Placed',
+                    message: `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.`,
+                    timestamp: Date.now(),
+                    read: false
+                });
+
+                showToast('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.',
+                    'success');
                 paymentModal.classList.remove('open');
-                uploadedFile = null;
+                cloudinaryScreenshotUrlInput.value = '';
                 fileName.textContent = 'No file chosen';
-                fileInput.value = '';
                 uploadArea.style.borderColor = '#ddd';
                 uploadArea.style.background = '#fafbfc';
                 switchView('homeView');
@@ -2117,12 +2292,12 @@
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
+                currentUserId = user.uid;
                 // Check if user is banned
                 const userRef = ref(db, 'users/' + user.uid);
                 onValue(userRef, (snapshot) => {
                     const data = snapshot.val();
                     if (data && data.banned === true) {
-                        // User is banned
                         document.body.innerHTML = `
                             <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
                                 <i class="fa-solid fa-ban" style="font-size:48px; color:#dc2626; margin-bottom:16px;"></i>
@@ -2133,13 +2308,15 @@
                         return;
                     }
                     currentUserData = data || {};
-                    // Load app data
                     loadData();
                 });
             } else {
                 window.location.href = 'login.html';
             }
         });
+
+        // Setup Cloudinary upload
+        setupCloudinaryUpload();
 
         console.log('✅ Customer App ready with Firebase.');
     </script>
