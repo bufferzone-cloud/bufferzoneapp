@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Creative Agency App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            min-height: 100vh;
+            background-color: #ffffff;
+            position: relative;
+            padding: 0 14px 64px 14px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.08);
+            overflow-x: hidden;
+            transform: scale(0.8);
+            transform-origin: top center;
+        }
+
+        /* --- HEADER --- */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0 16px 0;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: #ccc;
+            background-image: url('https://i.pravatar.cc/150?img=11');
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            cursor: pointer;
+            border: 2px solid #f5b83d;
+        }
+        .header-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .header-text span:first-child {
+            font-size: 10px;
+            color: #888;
+        }
+        .header-text span:last-child {
+            font-weight: 700;
+            font-size: 13px;
+            color: #1c2128;
+            letter-spacing: 0.5px;
+        }
+        .notif-icon {
+            width: 34px;
+            height: 34px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            color: #1c2128;
+            font-size: 15px;
+            cursor: pointer;
+            position: relative;
+        }
+        .notif-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #f5b83d;
+            color: #1c2128;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            font-size: 8px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            background-color: #1c2128;
+            border-radius: 16px;
+            padding: 20px 16px;
+            color: white;
+            position: relative;
+            margin-bottom: 16px;
+            overflow: hidden;
+            min-height: 210px;
+        }
+        .hero-bg-decor {
+            position: absolute;
+            top: 0;
+            right: -20px;
+            height: 100%;
+            width: 50%;
+            z-index: 0;
+            background: radial-gradient(circle at 100% 100%, #f5b83d 0%, #f5b83d 45%, transparent 45%);
+            opacity: 0.9;
+            border-top-left-radius: 100%;
+            border-bottom-left-radius: 100%;
+        }
+        .small-grid-dots {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            position: absolute;
+            top: 16px;
+            right: 32px;
+            z-index: 1;
+        }
+        .small-grid-dots div {
+            width: 3px;
+            height: 3px;
+            background-color: rgba(255,255,255,0.2);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-title {
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 6px;
+        }
+        .hero-title span { color: #f5b83d; }
+        .hero-desc {
+            font-size: 10px;
+            color: #ddd;
+            margin-bottom: 12px;
+            max-width: 70%;
+        }
+        .hero-services {
+            margin-bottom: 14px;
+        }
+        .hero-services-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #f5b83d;
+            margin-bottom: 4px;
+        }
+        .service-list {
+            list-style: none;
+            font-size: 10px;
+            color: #f0f0f0;
+        }
+        .service-list li {
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .service-list li i { color: #f5b83d; font-size: 10px; }
+
+        .cta-container {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            text-align: right;
+            z-index: 1;
+        }
+        .btn-get-started {
+            background-color: #1c2128;
+            color: #f5b83d;
+            border: 1px solid #f5b83d;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+        .contact-number {
+            font-size: 8px;
+            color: #fff;
+            margin-top: 4px;
+        }
+        .contact-number strong { font-size: 10px; font-weight: 700; }
+
+        /* --- CATEGORY ROW (Scrollable) --- */
+        .category-row {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+        .category-row::-webkit-scrollbar { display: none; }
+
+        .cat-btn {
+            flex-shrink: 0;
+            background: white;
+            border: 1px solid #f0f0f0;
+            border-radius: 16px;
+            padding: 5px 13px;
+            font-size: 9px;
+            font-weight: 600;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .cat-btn:active { transform: scale(0.95); }
+        .cat-btn.active {
+            background: #1c2128;
+            color: white;
+            border-color: #1c2128;
+        }
+        .cat-btn.active i { color: #f5b83d; }
+
+        /* --- SERVICE GRID --- */
+        .dynamic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 11px;
+        }
+        .dynamic-title {
+            font-weight: 700;
+            font-size: 13px;
+            color: #1c2128;
+        }
+        .dynamic-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .dynamic-back {
+            font-size: 9px;
+            color: #888;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .dynamic-back:hover { color: #1c2128; }
+        .dynamic-view-all {
+            font-size: 10px;
+            color: #f5b83d;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .service-item {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+        .service-item:active { transform: scale(0.95); }
+        .service-thumb {
+            border-radius: 10px;
+            aspect-ratio: 1 / 1.1;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .service-thumb i {
+            color: white;
+            font-size: 20px;
+        }
+        .service-title {
+            font-size: 9px;
+            font-weight: 600;
+            color: #1c2128;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+        .service-subtitle {
+            font-size: 7px;
+            color: #777;
+            line-height: 1.2;
+        }
+
+        .thumb-1 { background: linear-gradient(135deg, #0f0f0f 0%, #3a3a3a 100%); }
+        .thumb-2 { background: linear-gradient(135deg, #004d59 0%, #0d2528 100%); }
+        .thumb-3 { background: linear-gradient(135deg, #e0e0e0 0%, #b3b3b3 100%); }
+        .thumb-4 { background: linear-gradient(135deg, #1a1a1a 0%, #504a4a 100%); }
+        .thumb-5 { background: linear-gradient(135deg, #5b4f46 0%, #24201c 100%); }
+        .thumb-6 { background: linear-gradient(135deg, #3f3f3f 0%, #1f1f1f 100%); }
+        .thumb-7 { background: linear-gradient(135deg, #2a3b4c 0%, #1a252f 100%); }
+        .thumb-8 { background: linear-gradient(135deg, #4a3a2a 0%, #2e241a 100%); }
+        .thumb-9 { background: linear-gradient(135deg, #1e4a3a 0%, #0f2a22 100%); }
+        .thumb-10 { background: linear-gradient(135deg, #4a2a3a 0%, #2e1a24 100%); }
+        .thumb-11 { background: linear-gradient(135deg, #3a4a2a 0%, #1f2a15 100%); }
+        .thumb-12 { background: linear-gradient(135deg, #4a3a4a 0%, #2e1f2e 100%); }
+        .thumb-13 { background: linear-gradient(135deg, #6a4a3a 0%, #3a2a1a 100%); }
+        .thumb-14 { background: linear-gradient(135deg, #2a6a4a 0%, #1a3a2a 100%); }
+        .thumb-15 { background: linear-gradient(135deg, #4a6a3a 0%, #2a3a1a 100%); }
+
+        /* --- ORDER FLOW --- */
+        .order-flow-container {
+            padding: 0 0 16px 0;
+        }
+
+        .order-hero-image {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            height: 160px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            padding: 16px;
+            background-size: cover;
+            background-position: center;
+            background-color: #1c2128;
+        }
+        .order-hero-tag {
+            background: #1c2128;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 16px;
+            font-size: 8px;
+            font-weight: 600;
+        }
+
+        .order-title-section {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            margin-bottom: 16px;
+        }
+        .order-title-section h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1c2128;
+            letter-spacing: -0.5px;
+        }
+        .order-title-section p {
+            font-size: 10px;
+            color: #888;
+            line-height: 1.4;
+        }
+        .order-title-section .price {
+            font-size: 19px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-top: 5px;
+        }
+
+        .order-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .order-tags .tag {
+            border: 1px solid #e0e0e0;
+            border-radius: 16px;
+            padding: 3px 11px;
+            font-size: 9px;
+            color: #555;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .order-tags .tag i { color: #f5b83d; }
+
+        .order-specs {
+            margin-bottom: 16px;
+        }
+        .order-specs h4 {
+            font-size: 11px;
+            font-weight: 600;
+            color: #1c2128;
+            margin-bottom: 8px;
+        }
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #f5f5f5;
+            font-size: 10px;
+        }
+        .spec-row .label { color: #888; }
+        .spec-row .value { color: #1c2128; font-weight: 500; }
+
+        .order-customize {
+            margin-bottom: 16px;
+        }
+        .order-customize h4 {
+            font-size: 11px;
+            font-weight: 600;
+            color: #1c2128;
+            margin-bottom: 8px;
+        }
+        .customize-group {
+            margin-bottom: 11px;
+        }
+        .customize-group .group-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        .customize-options {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .customize-btn {
+            padding: 5px 13px;
+            border: 1px solid #e0e0e0;
+            border-radius: 16px;
+            background: white;
+            font-size: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #555;
+        }
+        .customize-btn:active { transform: scale(0.95); }
+        .customize-btn.active {
+            background: #1c2128;
+            color: white;
+            border-color: #1c2128;
+        }
+        .customize-btn.active i { color: #f5b83d; }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quantity-selector button {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            font-size: 11px;
+            transition: all 0.2s;
+        }
+        .quantity-selector button:active { transform: scale(0.9); }
+        .quantity-selector span { font-weight: 600; font-size: 13px; min-width: 16px; text-align: center; }
+
+        .order-notes textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            font-size: 10px;
+            resize: vertical;
+            min-height: 48px;
+            background: #fafbfc;
+            transition: border 0.2s;
+        }
+        .order-notes textarea:focus {
+            outline: none;
+            border-color: #1c2128;
+        }
+
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 13px;
+            border-top: 1px solid #f0f0f0;
+            margin-top: 8px;
+        }
+        .order-footer .total-label { font-size: 10px; color: #888; }
+        .order-footer .total-price { font-size: 16px; font-weight: 700; color: #1c2128; }
+        .btn-confirm-order {
+            background: #1c2128;
+            color: white;
+            border: none;
+            padding: 10px 19px;
+            border-radius: 24px;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-confirm-order:active { transform: scale(0.95); }
+        .btn-confirm-order i { color: #f5b83d; }
+
+        /* --- PAYMENT MODAL --- */
+        .payment-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            z-index: 500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .payment-modal-overlay.open { display: flex; }
+        .payment-modal {
+            background: #ffffff;
+            border-radius: 19px;
+            width: 100%;
+            max-width: 320px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 22px 19px 19px 19px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+            animation: modalIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .payment-modal .close-btn {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #aaa;
+            cursor: pointer;
+            padding: 3px;
+        }
+        .payment-modal .close-btn:hover { color: #1c2128; }
+        .payment-modal h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 3px;
+            color: #1c2128;
+            clear: both;
+        }
+        .payment-modal .sub {
+            color: #888;
+            font-size: 11px;
+            margin-bottom: 13px;
+        }
+        .payment-details {
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 13px;
+            margin-bottom: 13px;
+            border: 1px solid #eee;
+        }
+        .payment-details .number {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1c2128;
+            margin: 3px 0;
+        }
+        .payment-details .name {
+            font-weight: 600;
+            color: #333;
+            font-size: 13px;
+        }
+        .payment-details .amount-large {
+            font-size: 22px;
+            font-weight: 800;
+            color: #f5b83d;
+        }
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s;
+            background: #fafbfc;
+            margin-bottom: 13px;
+        }
+        .upload-area:hover {
+            border-color: #f5b83d;
+            background: #fffcf0;
+        }
+        .upload-area i {
+            font-size: 22px;
+            color: #aaa;
+            margin-bottom: 3px;
+        }
+        .upload-area p {
+            font-size: 10px;
+            color: #888;
+        }
+        .upload-area .file-name {
+            font-weight: 600;
+            color: #1c2128;
+            margin-top: 3px;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 11px;
+            background: #1c2128;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        .btn-primary:active { transform: scale(0.96); }
+        .btn-primary i { color: #f5b83d; }
+
+        /* --- BOTTOM NAV (Fixed, non-scrollable) --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scale(0.8);
+            transform-origin: bottom center;
+            width: 100%;
+            max-width: 420px;
+            background: #1c2128;
+            border-radius: 24px;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            /* Ensure no scrolling */
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            color: #888;
+            transition: color 0.3s;
+            flex: 1;
+            background: none;
+            border: none;
+            font-size: 7px;
+            gap: 1px;
+            /* Prevent text selection */
+            user-select: none;
+        }
+        .nav-item i { font-size: 16px; margin-bottom: 1px; }
+        .nav-item.active { color: #f5b83d; }
+        .nav-item:active { transform: scale(0.92); }
+
+        /* --- VIEWS --- */
+        .view { display: none; }
+        .view.active { display: block; }
+
+        /* --- ORDERS VIEW --- */
+        .orders-header {
+            margin-top: 8px;
+            margin-bottom: 16px;
+        }
+        .orders-header h3 {
+            font-weight: 700;
+            color: #1c2128;
+            font-size: 18px;
+        }
+        .orders-header p {
+            color: #888;
+            font-size: 11px;
+        }
+
+        .order-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+        .order-card {
+            background: #ffffff;
+            border-radius: 13px;
+            padding: 13px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.1s ease;
+        }
+        .order-card:active { transform: scale(0.99); }
+        .order-card-left {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            flex: 1;
+        }
+        .order-icon {
+            width: 38px;
+            height: 38px;
+            background: #f5f7fa;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1c2128;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .order-details {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .order-id {
+            font-weight: 700;
+            font-size: 12px;
+            color: #1c2128;
+        }
+        .order-name {
+            font-size: 10px;
+            color: #555;
+        }
+        .order-meta {
+            font-size: 9px;
+            color: #999;
+            margin-top: 1px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .order-meta span { background: #f5f5f5; padding: 0 5px; border-radius: 3px; }
+
+        .order-card-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 3px;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+        .status-badge {
+            font-size: 8px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 16px;
+            white-space: nowrap;
+        }
+        .badge-progress { background: #e0f0ff; color: #0066cc; }
+        .badge-done { background: #e6fffa; color: #00a86b; }
+        .badge-pending { background: #fff6e0; color: #cc8800; }
+        .badge-review { background: #f0e6ff; color: #7700cc; }
+        .order-price {
+            font-weight: 700;
+            font-size: 12px;
+            color: #1c2128;
+        }
+
+        /* --- PROFILE VIEW --- */
+        .profile-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid #f0f0f0;
+        }
+        .profile-avatar-large {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background-image: url('https://i.pravatar.cc/150?img=11');
+            background-size: cover;
+            background-position: center;
+            margin: 0 auto 13px auto;
+            border: 3px solid #f5b83d;
+        }
+        .profile-name {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-bottom: 1px;
+        }
+        .profile-role {
+            text-align: center;
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 16px;
+        }
+        .profile-field {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .profile-field:last-child { border-bottom: none; }
+        .profile-field i {
+            width: 20px;
+            color: #f5b83d;
+            font-size: 15px;
+        }
+        .profile-field .label {
+            font-size: 10px;
+            color: #888;
+        }
+        .profile-field .value {
+            font-size: 12px;
+            font-weight: 500;
+            color: #1c2128;
+            margin-left: auto;
+        }
+        .profile-about {
+            margin-top: 16px;
+            padding-top: 13px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .profile-about p {
+            font-size: 10px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 16px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .logout-btn:active { transform: scale(0.95); }
+
+        /* --- HISTORY VIEW (Expandable Transactions) --- */
+        .history-list {
+            padding: 0 0 16px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .history-item {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 12px 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .history-item:active { transform: scale(0.98); }
+        .history-item .summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .history-item .summary .left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            color: #1c2128;
+        }
+        .history-item .summary .left i {
+            color: #667eea;
+            font-size: 12px;
+        }
+        .history-item .summary .right {
+            font-size: 10px;
+            color: #888;
+        }
+        .history-item .details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
+            padding: 0 4px;
+            font-size: 10px;
+            color: #555;
+            line-height: 1.5;
+            border-top: 1px solid transparent;
+        }
+        .history-item.open .details {
+            max-height: 200px;
+            padding: 10px 4px 4px 4px;
+            border-top-color: #f0f0f0;
+            margin-top: 8px;
+        }
+        .history-item .details .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+        }
+        .history-item .details .row .label {
+            color: #888;
+        }
+        .history-item .details .row .val {
+            font-weight: 500;
+            color: #1c2128;
+        }
+        .history-item .expand-icon {
+            transition: transform 0.3s ease;
+            font-size: 10px;
+            color: #aaa;
+        }
+        .history-item.open .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        /* --- NOTIFICATION SIDEBAR --- */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            display: none;
+        }
+        .sidebar-overlay.open { display: block; }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100%;
+            background: white;
+            z-index: 2001;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.15);
+            transition: right 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            padding: 16px 14px;
+            overflow-y: auto;
+        }
+        .sidebar.open { right: 0; }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .sidebar-header h3 {
+            font-weight: 700;
+            font-size: 15px;
+            color: #1c2128;
+        }
+        .sidebar-close {
+            font-size: 19px;
+            color: #888;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .sidebar-close:hover { color: #1c2128; }
+        .notification-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 11px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .notification-item:last-child { border-bottom: none; }
+        .notif-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #f5b83d;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+        .notif-dot.read { background: #ddd; }
+        .notif-content {
+            flex: 1;
+        }
+        .notif-content .title {
+            font-weight: 600;
+            font-size: 10px;
+            color: #1c2128;
+        }
+        .notif-content .desc {
+            font-size: 9px;
+            color: #666;
+            margin-top: 1px;
+        }
+        .notif-content .time {
+            font-size: 8px;
+            color: #aaa;
+            margin-top: 3px;
+        }
+
+        @media (max-width: 420px) {
+            .app-container { padding: 0 10px 64px 10px; }
+            .service-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .hero-title { font-size: 19px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container" id="appRoot">
+
+        <!-- ===== HEADER ===== -->
+        <div class="header">
+            <div class="header-left">
+                <div class="avatar" id="headerAvatar"></div>
+                <div class="header-text">
+                    <span>Welcome back,</span>
+                    <span>TARIQUL ISLAM</span>
+                </div>
+            </div>
+            <div class="notif-icon" id="notifIcon">
+                <i class="fa-regular fa-bell"></i>
+                <span class="notif-badge">3</span>
+            </div>
+        </div>
+
+        <!-- ===== VIEW: HOME ===== -->
+        <div id="homeView" class="view active">
+
+            <!-- Hero -->
+            <div class="hero">
+                <div class="small-grid-dots">
+                    <div></div><div></div><div></div><div></div>
+                    <div></div><div></div><div></div><div></div>
+                    <div></div><div></div><div></div><div></div>
+                    <div></div><div></div><div></div><div></div>
+                </div>
+                <div class="hero-bg-decor"></div>
+                <div class="hero-content">
+                    <div class="hero-title">
+                        WE ARE<br>
+                        <span>CREATIVE</span><br>
+                        <span>AGENCY</span>
+                    </div>
+                    <div class="hero-desc">
+                        We provide the best ideas to grow your business
+                    </div>
+                    <div class="hero-services">
+                        <div class="hero-services-title">OUR SERVICES</div>
+                        <ul class="service-list">
+                            <li><i class="fa-solid fa-check-circle"></i> Graphic Design</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Web Development</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Digital Marketing</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Branding Design</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cta-container">
+                    <div class="btn-get-started">GET STARTED</div>
+                    <div class="contact-number">Call to find out more<br><strong>+123 456 7890</strong></div>
+                </div>
+            </div>
+
+            <!-- Category Buttons -->
+            <div class="category-row" id="categoryRow">
+                <button class="cat-btn active" data-cat="all"><i class="fa-solid fa-th-large"></i> All</button>
+                <button class="cat-btn" data-cat="graphic"><i class="fa-regular fa-lightbulb"></i> Graphic</button>
+                <button class="cat-btn" data-cat="dev"><i class="fa-solid fa-code"></i> Developer</button>
+                <button class="cat-btn" data-cat="tech"><i class="fa-solid fa-gear"></i> Technical</button>
+                <button class="cat-btn" data-cat="it"><i class="fa-solid fa-headset"></i> IT Support</button>
+            </div>
+
+            <!-- Dynamic Service Grid -->
+            <div id="serviceSection">
+                <div class="dynamic-header">
+                    <span class="dynamic-title" id="dynamicTitle">RECENT WORK</span>
+                    <div class="dynamic-actions">
+                        <span class="dynamic-back" id="dynamicBack" style="display:none;">← Back</span>
+                        <span class="dynamic-view-all" id="dynamicViewAll">View All</span>
+                    </div>
+                </div>
+                <div id="serviceGridContainer" class="service-grid"></div>
+            </div>
+
+        </div>
+
+        <!-- ===== VIEW: ORDER FLOW ===== -->
+        <div id="orderFlowView" class="view">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 0 0 10px 0;">
+                <button id="backFromOrder" style="background: none; border: none; font-size: 16px; color: #1c2128; cursor: pointer; padding: 3px;">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <h3 style="font-weight: 700; font-size: 14px; color: #1c2128;">Customize Order</h3>
+            </div>
+            <div id="orderFlowContainer" class="order-flow-container">
+                <!-- Dynamically rendered -->
+            </div>
+        </div>
+
+        <!-- ===== VIEW: ORDERS ===== -->
+        <div id="ordersView" class="view">
+            <div style="padding: 0 0 13px 0;">
+                <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Your Orders</h3>
+                <p style="color: #888; font-size: 11px;">Track your projects and payments.</p>
+            </div>
+            <div class="order-grid" id="ordersGrid"></div>
+        </div>
+
+        <!-- ===== VIEW: HISTORY (Expandable Transactions) ===== -->
+        <div id="historyView" class="view">
+            <div style="padding: 0 0 13px 0;">
+                <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Transaction History</h3>
+                <p style="color: #888; font-size: 11px;">Tap a transaction to view more details.</p>
+            </div>
+            <div class="history-list" id="historyList"></div>
+        </div>
+
+        <!-- ===== VIEW: PROFILE ===== -->
+        <div id="profileView" class="view">
+            <div style="padding: 0 0 13px 0;">
+                <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">My Profile</h3>
+                <p style="color: #888; font-size: 11px;">Your personal information.</p>
+            </div>
+            <div class="profile-card">
+                <div class="profile-avatar-large"></div>
+                <div class="profile-name">Tariqul Islam</div>
+                <div class="profile-role">Founder & Creative Director</div>
+                <div class="profile-field"><i class="fa-solid fa-user"></i><span class="label">Full Name</span><span class="value">Tariqul Islam</span></div>
+                <div class="profile-field"><i class="fa-solid fa-phone"></i><span class="label">Phone</span><span class="value">+1 (555) 123-4567</span></div>
+                <div class="profile-field"><i class="fa-solid fa-envelope"></i><span class="label">Email</span><span class="value">tariqul@creative.agency</span></div>
+                <div class="profile-field"><i class="fa-solid fa-calendar"></i><span class="label">Joined</span><span class="value">January 2018</span></div>
+                <div class="profile-about">
+                    <h4 style="font-size: 11px; font-weight: 600; color: #1c2128; margin-bottom: 4px;">About</h4>
+                    <p>Passionate about design and technology. Leading a creative agency that helps brands grow through innovation and strategic design.</p>
+                </div>
+                <button class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+            </div>
+        </div>
+
+        <!-- ===== BOTTOM NAV (Fixed) ===== -->
+        <div class="bottom-nav">
+            <button class="nav-item active" data-view="homeView"><i class="fa-solid fa-house"></i><span>Home</span></button>
+            <button class="nav-item" data-view="ordersView"><i class="fa-solid fa-bag-shopping"></i><span>Orders</span></button>
+            <button class="nav-item" data-view="historyView"><i class="fa-solid fa-clock"></i><span>History</span></button>
+            <button class="nav-item" data-view="profileView"><i class="fa-regular fa-user"></i><span>Profile</span></button>
+        </div>
+
+    </div>
+
+    <!-- ===== PAYMENT MODAL ===== -->
+    <div class="payment-modal-overlay" id="paymentModal">
+        <div class="payment-modal">
+            <button class="close-btn" id="paymentCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3>💳 Payment Required</h3>
+            <p class="sub">To begin your project, you must pay 50% upfront.</p>
+
+            <div class="payment-details">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <div class="name">Airtel Mobile Number</div>
+                        <div class="number">0976760537</div>
+                        <div style="font-size:10px; color:#555;">Jubel Mobela</div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div style="font-size:10px; color:#888;">Amount to pay</div>
+                        <div class="amount-large" id="paymentAmount">ZMW 350.00</div>
+                        <div style="font-size:10px; color:#888;">50% of total</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom:10px;">
+                <label style="font-weight:600; font-size:10px; color:#1c2128; display:block; margin-bottom:3px;">Upload transaction screenshot</label>
+                <div class="upload-area" id="uploadArea">
+                    <i class="fa-regular fa-image"></i>
+                    <p>Tap to upload receipt or screenshot</p>
+                    <div class="file-name" id="fileName">No file chosen</div>
+                    <input type="file" id="fileInput" accept="image/*" style="display:none;">
+                </div>
+            </div>
+
+            <button class="btn-primary" id="confirmPaymentBtn">
+                <i class="fa-regular fa-circle-check"></i> Confirm Payment & Start Project
+            </button>
+            <p style="text-align:center; font-size:9px; color:#888; margin-top:6px;">
+                <i class="fa-regular fa-clock"></i> Project begins after payment confirmation
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== NOTIFICATION SIDEBAR ===== -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="sidebar" id="notifSidebar">
+        <div class="sidebar-header">
+            <h3>Notifications</h3>
+            <button class="sidebar-close" id="sidebarClose"><i class="fa-solid fa-times"></i></button>
+        </div>
+        <div id="notifList">
+            <div class="notification-item">
+                <div class="notif-dot"></div>
+                <div class="notif-content">
+                    <div class="title">New Project Assigned</div>
+                    <div class="desc">You've been assigned to Project D-12: Logo Redesign.</div>
+                    <div class="time">10 minutes ago</div>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notif-dot"></div>
+                <div class="notif-content">
+                    <div class="title">Payment Received</div>
+                    <div class="desc">Payment of $1,200 for order #ORD-002 has been confirmed.</div>
+                    <div class="time">1 hour ago</div>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notif-dot read"></div>
+                <div class="notif-content">
+                    <div class="title">Client Review</div>
+                    <div class="desc">New 5-star review from Fashion Hub: "Amazing work!"</div>
+                    <div class="time">3 hours ago</div>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notif-dot read"></div>
+                <div class="notif-content">
+                    <div class="title">Meeting Reminder</div>
+                    <div class="desc">Design review meeting at 3:00 PM with Pixel Studio.</div>
+                    <div class="time">5 hours ago</div>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notif-dot read"></div>
+                <div class="notif-content">
+                    <div class="title">System Update</div>
+                    <div class="desc">Your monthly usage report is ready for download.</div>
+                    <div class="time">Yesterday</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // ========== DATA ==========
+            const servicesData = [
+                { id: 'logo-brand', category: 'graphic', title: 'Logo & Brand Identity', subtitle: 'Complete brand identity including logo, color palette, and guidelines.', price: 1200.00, tags: ['Custom Design', 'Vector Files', 'Brand Guidelines'], thumb: 'thumb-1', icon: 'fa-crown', specs: { 'Design Type': 'Logo Design', 'File Format': 'AI, EPS, PNG', 'Size': 'Scalable', 'Resolution': '300 DPI', 'Delivery Time': '5 - 7 Days', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Minimalist', 'Badge', 'Mascot', 'Letterform'], orientations: ['Full Color', 'Monochrome', 'Negative'], defaultSize: 'Minimalist', defaultOrientation: 'Full Color' } },
+                { id: 'business-cards', category: 'graphic', title: 'Business Cards & Stationery', subtitle: 'Premium business card design with elegant finishes and full bleed.', price: 450.00, tags: ['Premium', 'Spot UV', 'Minimal'], thumb: 'thumb-5', icon: 'fa-id-card', specs: { 'Design Type': 'Business Card', 'File Format': 'PDF, AI, PNG', 'Size': 'Standard 3.5x2"', 'Resolution': '300 DPI', 'Delivery Time': '2 - 3 Days', 'Revisions': '2 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Standard', 'Rounded', 'Square', 'Custom'], orientations: ['Portrait', 'Landscape', 'Both'], defaultSize: 'Standard', defaultOrientation: 'Portrait' } },
+                { id: 'social-media-ads', category: 'graphic', title: 'Social Media Graphics', subtitle: 'Engaging social media posts and ads designed for impact.', price: 450.00, tags: ['Engaging', 'Brand Consistency', 'Optimized'], thumb: 'thumb-3', icon: 'fa-hashtag', specs: { 'Design Type': 'Social Media', 'File Format': 'PNG, JPG, PDF', 'Size': 'Optimized for Platforms', 'Resolution': '300 DPI', 'Delivery Time': '1 - 2 Days', 'Revisions': 'Unlimited', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Square', 'Landscape', 'Story', 'Carousel'], orientations: ['Light', 'Dark', 'Brand Colors'], defaultSize: 'Square', defaultOrientation: 'Light' } },
+                { id: 'flyer-poster', category: 'graphic', title: 'Posters, Flyers & Banners', subtitle: 'Professional flyer and poster design for your business or event.', price: 350.00, tags: ['High Quality', 'Fast Delivery', 'Unlimited Revisions'], thumb: 'thumb-4', icon: 'fa-file-image', specs: { 'Design Type': 'Flyer Design', 'File Format': 'PDF, JPG, PNG', 'Size': 'A4, A5, or Custom', 'Resolution': '300 DPI', 'Delivery Time': '2 - 3 Days', 'Revisions': 'Unlimited', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['A4', 'A5', 'Square', 'Custom'], orientations: ['Portrait', 'Landscape'], defaultSize: 'A4', defaultOrientation: 'Portrait' } },
+                { id: 'ui-ux-design', category: 'graphic', title: 'UI/UX Design', subtitle: 'User-centered interface and experience design for web and mobile.', price: 1800.00, tags: ['User-Centered', 'Interactive', 'Modern'], thumb: 'thumb-6', icon: 'fa-pen-ruler', specs: { 'Design Type': 'UI/UX Design', 'File Format': 'Figma, Sketch, XD', 'Size': 'Responsive', 'Resolution': 'High DPI', 'Delivery Time': '2 - 4 Weeks', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Web', 'Mobile', 'Both'], orientations: ['Light', 'Dark', 'Auto'], defaultSize: 'Both', defaultOrientation: 'Light' } },
+                { id: 'motion-graphics', category: 'graphic', title: 'Motion Graphics', subtitle: 'Dynamic animations and motion graphics for digital campaigns.', price: 900.00, tags: ['Animated', 'Engaging', 'High Impact'], thumb: 'thumb-7', icon: 'fa-film', specs: { 'Design Type': 'Motion Graphics', 'File Format': 'MP4, GIF, MOV', 'Size': 'Custom', 'Resolution': '1080p / 4K', 'Delivery Time': '1 - 2 Weeks', 'Revisions': '2 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['15s', '30s', '60s', 'Custom'], orientations: ['Square', 'Landscape', 'Portrait'], defaultSize: '30s', defaultOrientation: 'Landscape' } },
+                { id: 'web-dev', category: 'dev', title: 'Website Design & Development', subtitle: 'Responsive, SEO-optimized websites built with modern technology.', price: 2500.00, tags: ['Responsive', 'SEO Optimized', 'CMS Included'], thumb: 'thumb-2', icon: 'fa-laptop-code', specs: { 'Design Type': 'Custom Website', 'File Format': 'HTML, CSS, JS', 'Size': 'Responsive', 'Resolution': 'Optimized', 'Delivery Time': '3 - 4 Weeks', 'Revisions': '2 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['1-5 Pages', '6-10 Pages', '11+ Pages'], orientations: ['Standard', 'E-commerce', 'Portfolio'], defaultSize: '1-5 Pages', defaultOrientation: 'Standard' } },
+                { id: 'ecommerce-dev', category: 'dev', title: 'E-commerce Development', subtitle: 'Custom online stores with secure payment gateways.', price: 3200.00, tags: ['Secure', 'Payment Gateway', 'Inventory'], thumb: 'thumb-8', icon: 'fa-cart-shopping', specs: { 'Design Type': 'E-commerce', 'File Format': 'HTML, CSS, JS', 'Size': 'Scalable', 'Resolution': 'Optimized', 'Delivery Time': '4 - 6 Weeks', 'Revisions': '2 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Small (10-20 products)', 'Medium (20-100)', 'Large (100+)'], orientations: ['Standard', 'Marketplace', 'Subscription'], defaultSize: 'Medium (20-100)', defaultOrientation: 'Standard' } },
+                { id: 'mobile-app-dev', category: 'dev', title: 'Mobile App Development', subtitle: 'Cross-platform mobile applications with intuitive user interfaces.', price: 4000.00, tags: ['iOS & Android', 'UI/UX Design', 'API Integration'], thumb: 'thumb-5', icon: 'fa-mobile-screen', specs: { 'Design Type': 'Mobile App', 'File Format': 'Flutter, React Native', 'Size': 'Adaptive', 'Resolution': 'High DPI', 'Delivery Time': '6 - 8 Weeks', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Mobile', 'Tablet', 'Both'], orientations: ['Light', 'Dark', 'Auto'], defaultSize: 'Both', defaultOrientation: 'Light' } },
+                { id: 'custom-software', category: 'dev', title: 'Custom Software Development', subtitle: 'Tailor-made software solutions for your unique business needs.', price: 5000.00, tags: ['Tailored', 'Scalable', 'Enterprise'], thumb: 'thumb-9', icon: 'fa-gears', specs: { 'Design Type': 'Custom Software', 'File Format': 'Executable, Source', 'Size': 'Custom', 'Resolution': 'N/A', 'Delivery Time': '8 - 12 Weeks', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic', 'Standard', 'Enterprise'], orientations: ['On-Premise', 'Cloud', 'Hybrid'], defaultSize: 'Standard', defaultOrientation: 'Cloud' } },
+                { id: 'api-automation', category: 'dev', title: 'API Integration & Automation', subtitle: 'Secure and scalable API integration with automated workflows.', price: 1800.00, tags: ['REST', 'GraphQL', 'OAuth2'], thumb: 'thumb-7', icon: 'fa-plug', specs: { 'Design Type': 'API Service', 'File Format': 'JSON, YAML', 'Size': 'Custom', 'Resolution': 'N/A', 'Delivery Time': '1 - 2 Weeks', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic', 'Standard', 'Enterprise'], orientations: ['Cloud', 'On-Premise', 'Hybrid'], defaultSize: 'Standard', defaultOrientation: 'Cloud' } },
+                { id: 'cybersecurity', category: 'dev', title: 'Cybersecurity Solutions', subtitle: 'Comprehensive security assessments and protection strategies.', price: 2200.00, tags: ['Security', 'Compliance', 'Penetration Testing'], thumb: 'thumb-10', icon: 'fa-shield-halved', specs: { 'Design Type': 'Security Assessment', 'File Format': 'PDF Report', 'Size': 'N/A', 'Resolution': 'N/A', 'Delivery Time': '1 - 2 Weeks', 'Revisions': '2 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic Audit', 'Advanced Assessment', 'Enterprise'], orientations: ['Standard', 'Comprehensive', 'Premium'], defaultSize: 'Advanced Assessment', defaultOrientation: 'Comprehensive' } },
+                { id: 'computer-repair', category: 'tech', title: 'Computer & Laptop Repair', subtitle: 'Hardware diagnostics, repair, and performance upgrades.', price: 300.00, tags: ['Fast Turnaround', 'Certified', 'Affordable'], thumb: 'thumb-11', icon: 'fa-laptop', specs: { 'Design Type': 'Hardware Repair', 'File Format': 'N/A', 'Size': 'On-site or Drop-off', 'Resolution': 'N/A', 'Delivery Time': '24 - 48 Hours', 'Revisions': 'Unlimited', 'Source File': 'N/A', 'Commercial Use': 'Yes' }, customize: { sizes: ['Diagnostics', 'Repair', 'Upgrade'], orientations: ['Standard', 'Express', 'Premium'], defaultSize: 'Repair', defaultOrientation: 'Standard' } },
+                { id: 'network-setup', category: 'tech', title: 'Network Setup (Wi-Fi, LAN)', subtitle: 'Secure and high-speed network installation for homes and offices.', price: 500.00, tags: ['Secure', 'High Speed', 'Scalable'], thumb: 'thumb-12', icon: 'fa-wifi', specs: { 'Design Type': 'Network Installation', 'File Format': 'N/A', 'Size': 'Custom', 'Resolution': 'N/A', 'Delivery Time': '1 - 2 Days', 'Revisions': 'Unlimited', 'Source File': 'N/A', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic', 'Standard', 'Enterprise'], orientations: ['Small Office', 'Large Office', 'Home'], defaultSize: 'Standard', defaultOrientation: 'Small Office' } },
+                { id: 'cctv-installation', category: 'tech', title: 'CCTV Installation & Maintenance', subtitle: 'Professional security camera systems with remote monitoring.', price: 700.00, tags: ['24/7 Monitoring', 'Remote Access', 'High Definition'], thumb: 'thumb-13', icon: 'fa-video', specs: { 'Design Type': 'Security System', 'File Format': 'N/A', 'Size': 'Custom', 'Resolution': '1080p / 4K', 'Delivery Time': '1 - 3 Days', 'Revisions': 'Unlimited', 'Source File': 'N/A', 'Commercial Use': 'Yes' }, customize: { sizes: ['1-4 Cameras', '5-8 Cameras', '9+ Cameras'], orientations: ['Indoor', 'Outdoor', 'Both'], defaultSize: '1-4 Cameras', defaultOrientation: 'Both' } },
+                { id: 'data-backup', category: 'tech', title: 'Data Backup & Recovery', subtitle: 'Automated backup solutions and disaster recovery services.', price: 400.00, tags: ['Secure', 'Automated', 'Disaster Recovery'], thumb: 'thumb-14', icon: 'fa-rotate-left', specs: { 'Design Type': 'Backup Service', 'File Format': 'N/A', 'Size': 'Custom', 'Resolution': 'N/A', 'Delivery Time': 'Immediate', 'Revisions': 'Unlimited', 'Source File': 'N/A', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic (50GB)', 'Standard (200GB)', 'Enterprise (1TB+)'], orientations: ['Cloud', 'Local', 'Hybrid'], defaultSize: 'Standard (200GB)', defaultOrientation: 'Cloud' } },
+                { id: 'it-consultancy', category: 'tech', title: 'IT Consultancy', subtitle: 'Strategic technology planning and digital transformation guidance.', price: 800.00, tags: ['Strategic', 'Expert', 'Tailored'], thumb: 'thumb-15', icon: 'fa-chart-simple', specs: { 'Design Type': 'Consulting', 'File Format': 'PDF, PPT', 'Size': 'N/A', 'Resolution': 'N/A', 'Delivery Time': '1 - 2 Weeks', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['1-Hour Session', 'Half-Day Workshop', 'Full Strategy'], orientations: ['Standard', 'Advanced', 'Enterprise'], defaultSize: 'Half-Day Workshop', defaultOrientation: 'Standard' } },
+                { id: 'software-install', category: 'tech', title: 'Software Installation & Updates', subtitle: 'Professional software setup, configuration, and updates.', price: 250.00, tags: ['Quick Setup', 'Latest Versions', 'Optimized'], thumb: 'thumb-6', icon: 'fa-cloud-arrow-down', specs: { 'Design Type': 'Software Setup', 'File Format': 'N/A', 'Size': 'Custom', 'Resolution': 'N/A', 'Delivery Time': 'Same Day', 'Revisions': 'Unlimited', 'Source File': 'N/A', 'Commercial Use': 'Yes' }, customize: { sizes: ['Single Device', 'Small Office', 'Enterprise'], orientations: ['Standard', 'Custom', 'Premium'], defaultSize: 'Single Device', defaultOrientation: 'Standard' } },
+                { id: 'cloud-infra', category: 'it', title: 'Cloud Infrastructure Setup', subtitle: 'Turnkey cloud infrastructure provisioning using IaC.', price: 1500.00, tags: ['Terraform', 'CloudFormation', 'Automation'], thumb: 'thumb-10', icon: 'fa-cloud-upload', specs: { 'Design Type': 'Cloud Architecture', 'File Format': 'Terraform, CloudFormation', 'Size': 'Scalable', 'Resolution': 'N/A', 'Delivery Time': '1 - 2 Weeks', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['AWS', 'Azure', 'GCP'], orientations: ['Public', 'Private', 'Hybrid'], defaultSize: 'AWS', defaultOrientation: 'Public' } },
+                { id: 'data-encryption', category: 'it', title: 'Data Encryption & Security', subtitle: 'Enterprise-grade encryption for data at rest and in transit.', price: 800.00, tags: ['AES-256', 'TLS 1.3', 'HSM'], thumb: 'thumb-11', icon: 'fa-lock', specs: { 'Design Type': 'Encryption Service', 'File Format': 'N/A', 'Size': 'Custom', 'Resolution': 'N/A', 'Delivery Time': '2 - 3 Days', 'Revisions': '2 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic', 'Standard', 'Enterprise'], orientations: ['Single Key', 'Multi Key', 'Key Rotation'], defaultSize: 'Standard', defaultOrientation: 'Single Key' } },
+                { id: 'helpdesk-setup', category: 'it', title: 'Helpdesk Setup & Support', subtitle: 'Internal helpdesk setup with ticketing system and knowledge base.', price: 600.00, tags: ['Ticketing', 'Knowledge Base', 'SLA'], thumb: 'thumb-12', icon: 'fa-headset', specs: { 'Design Type': 'Helpdesk Service', 'File Format': 'N/A', 'Size': 'Custom', 'Resolution': 'N/A', 'Delivery Time': '1 Week', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic (5 users)', 'Standard (20 users)', 'Enterprise (50+)'], orientations: ['Standard', 'Premium', 'Custom'], defaultSize: 'Standard (20 users)', defaultOrientation: 'Standard' } },
+                { id: 'compliance-audit', category: 'it', title: 'Compliance & Audit Services', subtitle: 'Regular compliance audits against GDPR, HIPAA, SOC2, and ISO 27001.', price: 1200.00, tags: ['GDPR', 'SOC2', 'ISO27001'], thumb: 'thumb-9', icon: 'fa-scale-balanced', specs: { 'Design Type': 'Compliance Audit', 'File Format': 'PDF Report', 'Size': 'N/A', 'Resolution': 'N/A', 'Delivery Time': '2 - 3 Weeks', 'Revisions': '2 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic Audit', 'Standard Audit', 'Comprehensive'], orientations: ['Single Standard', 'Multi-Standard', 'Custom'], defaultSize: 'Standard Audit', defaultOrientation: 'Single Standard' } }
+            ];
+
+            // ========== RENDER FUNCTIONS ==========
+
+            function renderServiceGrid(category) {
+                const container = document.getElementById('serviceGridContainer');
+                const title = document.getElementById('dynamicTitle');
+                const backBtn = document.getElementById('dynamicBack');
+                const viewAll = document.getElementById('dynamicViewAll');
+
+                let filtered = category === 'all' ? servicesData : servicesData.filter(s => s.category === category);
+
+                if (category === 'all') {
+                    title.textContent = 'RECENT WORK';
+                    backBtn.style.display = 'none';
+                    viewAll.style.display = 'inline';
+                } else {
+                    const catNames = { graphic: 'GRAPHIC DESIGN', dev: 'DEVELOPER SERVICES', tech: 'TECHNICAL SERVICES', it: 'IT SUPPORT' };
+                    title.textContent = catNames[category] || 'SERVICES';
+                    backBtn.style.display = 'inline';
+                    viewAll.style.display = 'none';
+                }
+
+                container.innerHTML = filtered.map(service => `
+                    <div class="service-item" data-id="${service.id}">
+                        <div class="service-thumb ${service.thumb}">
+                            <i class="fa-solid ${service.icon}"></i>
+                        </div>
+                        <div class="service-title">${service.title}</div>
+                        <div class="service-subtitle">${service.subtitle}</div>
+                    </div>
+                `).join('');
+
+                container.querySelectorAll('.service-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        const service = servicesData.find(s => s.id === id);
+                        if (service) openOrderFlow(service);
+                    });
+                });
+            }
+
+            // ========== ORDER FLOW ==========
+
+            let selectedService = null;
+            let currentQuantity = 1;
+            let selectedSize = '';
+            let selectedOrientation = '';
+            let uploadedFile = null;
+
+            function openOrderFlow(service) {
+                selectedService = service;
+                currentQuantity = 1;
+                selectedSize = service.customize.defaultSize || service.customize.sizes[0];
+                selectedOrientation = service.customize.defaultOrientation || service.customize.orientations[0];
+
+                document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+                document.getElementById('orderFlowView').classList.add('active');
+
+                renderOrderFlow(service);
+            }
+
+            function renderOrderFlow(service) {
+                const container = document.getElementById('orderFlowContainer');
+
+                let specsHtml = '';
+                for (const [key, value] of Object.entries(service.specs)) {
+                    specsHtml += `<div class="spec-row"><span class="label">${key}</span><span class="value">${value}</span></div>`;
+                }
+
+                const sizeBtns = service.customize.sizes.map(s =>
+                    `<button class="customize-btn ${s === selectedSize ? 'active' : ''}" data-size="${s}">${s}</button>`
+                ).join('');
+
+                const orientationBtns = service.customize.orientations.map(o =>
+                    `<button class="customize-btn ${o === selectedOrientation ? 'active' : ''}" data-orientation="${o}"><i class="fa-regular ${o === 'Portrait' || o === 'Full Color' ? 'fa-arrow-up' : 'fa-arrow-right'}"></i> ${o}</button>`
+                ).join('');
+
+                const totalPrice = (service.price * currentQuantity).toFixed(2);
+
+                container.innerHTML = `
+                    <div class="order-hero-image" style="background: ${service.thumb.includes('thumb-1') ? '#0f0f0f' : service.thumb.includes('thumb-2') ? '#004d59' : service.thumb.includes('thumb-3') ? '#b3b3b3' : service.thumb.includes('thumb-4') ? '#1a1a1a' : service.thumb.includes('thumb-5') ? '#24201c' : service.thumb.includes('thumb-6') ? '#1f1f1f' : service.thumb.includes('thumb-7') ? '#2a3b4c' : service.thumb.includes('thumb-8') ? '#2e241a' : service.thumb.includes('thumb-9') ? '#0f2a22' : service.thumb.includes('thumb-10') ? '#2e1a24' : service.thumb.includes('thumb-11') ? '#1f2a15' : service.thumb.includes('thumb-12') ? '#2e1f2e' : service.thumb.includes('thumb-13') ? '#3a2a1a' : service.thumb.includes('thumb-14') ? '#1a3a2a' : '#2a3a1a'}">
+                        <div class="order-hero-tag"><i class="fa-regular fa-circle-check"></i> ${service.category.charAt(0).toUpperCase() + service.category.slice(1)} Service</div>
+                    </div>
+
+                    <div class="order-title-section">
+                        <h2>${service.title.toUpperCase()}</h2>
+                        <p>${service.subtitle}</p>
+                        <div class="price">ZMW ${service.price.toFixed(2)}</div>
+                    </div>
+
+                    <div class="order-tags">
+                        ${service.tags.map(t => `<span class="tag"><i class="fa-regular fa-circle-check"></i> ${t}</span>`).join('')}
+                    </div>
+
+                    <div class="order-specs">
+                        <h4>SPECIFICATIONS</h4>
+                        ${specsHtml}
+                    </div>
+
+                    <div class="order-customize">
+                        <h4>CUSTOMIZE YOUR ORDER</h4>
+                        <div class="customize-group">
+                            <div class="group-label">Select Size</div>
+                            <div class="customize-options" id="sizeOptions">${sizeBtns}</div>
+                        </div>
+                        <div class="customize-group">
+                            <div class="group-label">Orientation</div>
+                            <div class="customize-options" id="orientationOptions">${orientationBtns}</div>
+                        </div>
+                        <div class="customize-group">
+                            <div class="group-label">Quantity</div>
+                            <div class="quantity-selector">
+                                <button id="qtyMinus"><i class="fa-solid fa-minus"></i></button>
+                                <span id="qtyDisplay">${currentQuantity}</span>
+                                <button id="qtyPlus"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-notes">
+                        <h4 style="font-size:11px; font-weight:600; color:#1c2128; margin-bottom:5px;">Add Extra Notes (Optional)</h4>
+                        <textarea id="orderNotes" placeholder="Tell us more about your requirements..."></textarea>
+                    </div>
+
+                    <div class="order-footer">
+                        <div>
+                            <div class="total-label">Total Price</div>
+                            <div class="total-price">ZMW ${totalPrice}</div>
+                        </div>
+                        <button class="btn-confirm-order" id="confirmOrderBtn">
+                            <i class="fa-solid fa-cart-shopping"></i> CONFIRM ORDER
+                        </button>
+                    </div>
+                `;
+
+                document.querySelectorAll('#sizeOptions .customize-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('#sizeOptions .customize-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        selectedSize = this.dataset.size;
+                        updateOrderTotal();
+                    });
+                });
+
+                document.querySelectorAll('#orientationOptions .customize-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('#orientationOptions .customize-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        selectedOrientation = this.dataset.orientation;
+                    });
+                });
+
+                document.getElementById('qtyMinus').addEventListener('click', function() {
+                    if (currentQuantity > 1) { currentQuantity--; document.getElementById('qtyDisplay').textContent = currentQuantity; updateOrderTotal(); }
+                });
+
+                document.getElementById('qtyPlus').addEventListener('click', function() {
+                    currentQuantity++; document.getElementById('qtyDisplay').textContent = currentQuantity; updateOrderTotal();
+                });
+
+                document.getElementById('confirmOrderBtn').addEventListener('click', function() {
+                    const total = service.price * currentQuantity;
+                    const amount50 = total * 0.5;
+                    document.getElementById('paymentAmount').textContent = `ZMW ${amount50.toFixed(2)}`;
+                    document.getElementById('paymentModal').classList.add('open');
+                    document.getElementById('paymentModal').dataset.orderData = JSON.stringify({
+                        service: service.title,
+                        quantity: currentQuantity,
+                        total: total,
+                        size: selectedSize,
+                        orientation: selectedOrientation,
+                        notes: document.getElementById('orderNotes').value
+                    });
+                });
+            }
+
+            function updateOrderTotal() {
+                if (!selectedService) return;
+                const total = selectedService.price * currentQuantity;
+                document.querySelector('.order-footer .total-price').textContent = `ZMW ${total.toFixed(2)}`;
+            }
+
+            // ========== NAVIGATION ==========
+
+            const navItems = document.querySelectorAll('.nav-item');
+            const views = { homeView: document.getElementById('homeView'), ordersView: document.getElementById('ordersView'), historyView: document.getElementById('historyView'), profileView: document.getElementById('profileView') };
+
+            function switchView(viewId) {
+                Object.values(views).forEach(v => v.classList.remove('active'));
+                if (views[viewId]) views[viewId].classList.add('active');
+                navItems.forEach(n => n.classList.remove('active'));
+                const activeNav = Array.from(navItems).find(n => n.dataset.view === viewId);
+                if (activeNav) activeNav.classList.add('active');
+                if (viewId !== 'orderFlowView') document.getElementById('orderFlowView').classList.remove('active');
+            }
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const target = this.dataset.view;
+                    if (target) switchView(target);
+                });
+            });
+
+            // ========== CATEGORY BUTTONS ==========
+
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const cat = this.dataset.cat;
+                    renderServiceGrid(cat);
+                });
+            });
+
+            // ========== BACK FROM ORDER ==========
+
+            document.getElementById('backFromOrder').addEventListener('click', function() {
+                switchView('homeView');
+                selectedService = null;
+                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
+                renderServiceGrid('all');
+            });
+
+            // ========== DYNAMIC BACK ==========
+
+            document.getElementById('dynamicBack').addEventListener('click', function() {
+                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
+                renderServiceGrid('all');
+            });
+
+            // ========== NOTIFICATION SIDEBAR ==========
+
+            const notifIcon = document.getElementById('notifIcon');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const notifSidebar = document.getElementById('notifSidebar');
+            const sidebarClose = document.getElementById('sidebarClose');
+
+            function openSidebar() {
+                sidebarOverlay.classList.add('open');
+                notifSidebar.classList.add('open');
+            }
+            function closeSidebar() {
+                sidebarOverlay.classList.remove('open');
+                notifSidebar.classList.remove('open');
+            }
+            notifIcon.addEventListener('click', openSidebar);
+            sidebarClose.addEventListener('click', closeSidebar);
+            sidebarOverlay.addEventListener('click', closeSidebar);
+
+            // ========== PAYMENT MODAL ==========
+
+            document.getElementById('paymentCloseBtn').addEventListener('click', function() {
+                document.getElementById('paymentModal').classList.remove('open');
+            });
+            document.getElementById('paymentModal').addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('open');
+            });
+
+            document.getElementById('uploadArea').addEventListener('click', function() {
+                document.getElementById('fileInput').click();
+            });
+            document.getElementById('fileInput').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    uploadedFile = file;
+                    document.getElementById('fileName').textContent = file.name;
+                    document.getElementById('uploadArea').style.borderColor = '#f5b83d';
+                    document.getElementById('uploadArea').style.background = '#fffcf0';
+                }
+            });
+
+            document.getElementById('confirmPaymentBtn').addEventListener('click', function() {
+                if (!uploadedFile) { alert('Please upload a transaction screenshot before confirming.'); return; }
+                const modal = document.getElementById('paymentModal');
+                const dataStr = modal.dataset.orderData;
+                if (dataStr) {
+                    const data = JSON.parse(dataStr);
+                    alert('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.');
+                    modal.classList.remove('open');
+                    uploadedFile = null;
+                    document.getElementById('fileName').textContent = 'No file chosen';
+                    document.getElementById('fileInput').value = '';
+                    document.getElementById('uploadArea').style.borderColor = '#ddd';
+                    document.getElementById('uploadArea').style.background = '#fafbfc';
+                    switchView('homeView');
+                    selectedService = null;
+                    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
+                    renderServiceGrid('all');
+                }
+            });
+
+            // ========== EXPANDABLE TRANSACTIONS ==========
+
+            function renderHistory() {
+                const container = document.getElementById('historyList');
+                const transactions = [
+                    { id: 'TXN-001', type: 'Payment received', amount: '+$1,200', date: '10:30 AM', method: 'Airtel Money', status: 'Completed', ref: 'ORD-002', detail: 'Project: Website Redesign' },
+                    { id: 'TXN-002', type: 'Invoice paid', amount: '-$800', date: '9:15 AM', method: 'Bank Transfer', status: 'Completed', ref: 'INV-2024', detail: 'Project: Mobile App UI' },
+                    { id: 'TXN-003', type: 'Deposit from Client', amount: '+$500', date: 'Yesterday', method: 'Airtel Money', status: 'Pending', ref: 'CLIENT-X', detail: 'Advance payment for SEO' },
+                    { id: 'TXN-004', type: 'Subscription renewal', amount: '-$300', date: 'Yesterday', method: 'Card', status: 'Completed', ref: 'SUB-001', detail: 'Monthly hosting' },
+                    { id: 'TXN-005', type: 'Refund', amount: '+$350', date: '2 days ago', method: 'Airtel Money', status: 'Completed', ref: 'ORD-001', detail: 'Project: Logo Design' }
+                ];
+
+                container.innerHTML = transactions.map((t, index) => `
+                    <div class="history-item" data-index="${index}">
+                        <div class="summary">
+                            <div class="left">
+                                <i class="fa-solid ${t.amount.startsWith('+') ? 'fa-arrow-right' : 'fa-arrow-left'}" style="color:${t.amount.startsWith('+') ? '#00a86b' : '#cc8800'};"></i>
+                                <span>${t.type} ${t.amount}</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span class="right">${t.date}</span>
+                                <i class="fa-solid fa-chevron-down expand-icon"></i>
+                            </div>
+                        </div>
+                        <div class="details">
+                            <div class="row"><span class="label">Reference</span><span class="val">${t.ref}</span></div>
+                            <div class="row"><span class="label">Method</span><span class="val">${t.method}</span></div>
+                            <div class="row"><span class="label">Status</span><span class="val">${t.status}</span></div>
+                            <div class="row"><span class="label">Detail</span><span class="val">${t.detail}</span></div>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Click to expand
+                container.querySelectorAll('.history-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        this.classList.toggle('open');
+                    });
+                });
+            }
+
+            // ========== MISC ==========
+
+            document.getElementById('headerAvatar').addEventListener('click', () => switchView('profileView'));
+            document.querySelector('.btn-get-started').addEventListener('click', () => alert('🚀 Welcome! We will reach out with a custom proposal shortly.'));
+            document.getElementById('dynamicViewAll').addEventListener('click', () => switchView('historyView'));
+
+            // ========== INIT ==========
+
+            renderServiceGrid('all');
+            document.getElementById('ordersGrid').innerHTML = `
+                <div class="order-card"><div class="order-card-left"><div class="order-icon"><i class="fa-solid fa-globe"></i></div><div class="order-details"><span class="order-id">#ORD-001</span><span class="order-name">Website Redesign</span><div class="order-meta"><span>Pixel Studio</span><span>2025-02-10</span></div></div></div><div class="order-card-right"><span class="status-badge badge-progress">In Progress</span><span class="order-price">$1,200</span></div></div>
+                <div class="order-card"><div class="order-card-left"><div class="order-icon"><i class="fa-solid fa-mobile-screen"></i></div><div class="order-details"><span class="order-id">#ORD-002</span><span class="order-name">Mobile App UI</span><div class="order-meta"><span>FinTech Corp</span><span>2025-02-08</span></div></div></div><div class="order-card-right"><span class="status-badge badge-done">Completed</span><span class="order-price">$800</span></div></div>
+                <div class="order-card"><div class="order-card-left"><div class="order-icon"><i class="fa-solid fa-chart-line"></i></div><div class="order-details"><span class="order-id">#ORD-003</span><span class="order-name">SEO Package</span><div class="order-meta"><span>MarketPro</span><span>2025-02-12</span></div></div></div><div class="order-card-right"><span class="status-badge badge-pending">Pending</span><span class="order-price">$350</span></div></div>
+            `;
+            renderHistory();
+            switchView('homeView');
+        });
+    </script>
+
+</body>
+</html>
