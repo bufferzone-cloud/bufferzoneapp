@@ -37,7 +37,7 @@
         .app-content {
             flex: 1;
             overflow-y: auto;
-            padding: 0 14px 100px 14px;
+            padding: 0 14px 150px 14px; /* Enough space for floating bottom nav */
             -webkit-overflow-scrolling: touch;
         }
 
@@ -58,7 +58,9 @@
             z-index: 500;
             box-shadow: 0 8px 30px rgba(0,0,0,0.25);
             flex-shrink: 0;
+            pointer-events: auto;
         }
+
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -72,6 +74,7 @@
             font-size: 8px;
             gap: 1px;
             user-select: none;
+            padding: 2px 0;
         }
         .nav-item i { font-size: 20px; margin-bottom: 1px; }
         .nav-item.active { color: #f5b83d; }
@@ -1059,7 +1062,7 @@
         }
 
         @media (max-width: 420px) {
-            .app-content { padding: 0 10px 100px 10px; }
+            .app-content { padding: 0 10px 150px 10px; }
             .service-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
             .hero-title { font-size: 19px; }
             .bottom-nav { width: 95%; height: 58px; padding: 6px 16px; }
@@ -1311,28 +1314,720 @@
 
             // ========== DATA ==========
             const servicesData = [
-                { id: 'logo-brand', category: 'graphic', title: 'Logo & Brand Identity', subtitle: 'Complete brand identity including logo, color palette, and guidelines.', price: 1200.00, tags: ['Custom Design', 'Vector Files', 'Brand Guidelines'], thumb: 'thumb-1', icon: 'fa-crown', specs: { 'Design Type': 'Logo Design', 'File Format': 'AI, EPS, PNG', 'Size': 'Scalable', 'Resolution': '300 DPI', 'Delivery Time': '5 - 7 Days', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Minimalist', 'Badge', 'Mascot', 'Letterform'], orientations: ['Full Color', 'Monochrome', 'Negative'], defaultSize: 'Minimalist', defaultOrientation: 'Full Color' } },
-                { id: 'business-cards', category: 'graphic', title: 'Business Cards & Stationery', subtitle: 'Premium business card design with elegant finishes and full bleed.', price: 450.00, tags: ['Premium', 'Spot UV', 'Minimal'], thumb: 'thumb-5', icon: 'fa-id-card', specs: { 'Design Type': 'Business Card', 'File Format': 'PDF, AI, PNG', 'Size': 'Standard 3.5x2"', 'Resolution': '300 DPI', 'Delivery Time': '2 - 3 Days', 'Revisions': '2 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Standard', 'Rounded', 'Square', 'Custom'], orientations: ['Portrait', 'Landscape', 'Both'], defaultSize: 'Standard', defaultOrientation: 'Portrait' } },
-                { id: 'social-media-ads', category: 'graphic', title: 'Social Media Graphics', subtitle: 'Engaging social media posts and ads designed for impact.', price: 450.00, tags: ['Engaging', 'Brand Consistency', 'Optimized'], thumb: 'thumb-3', icon: 'fa-hashtag', specs: { 'Design Type': 'Social Media', 'File Format': 'PNG, JPG, PDF', 'Size': 'Optimized for Platforms', 'Resolution': '300 DPI', 'Delivery Time': '1 - 2 Days', 'Revisions': 'Unlimited', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Square', 'Landscape', 'Story', 'Carousel'], orientations: ['Light', 'Dark', 'Brand Colors'], defaultSize: 'Square', defaultOrientation: 'Light' } },
-                { id: 'flyer-poster', category: 'graphic', title: 'Posters, Flyers & Banners', subtitle: 'Professional flyer and poster design for your business or event.', price: 350.00, tags: ['High Quality', 'Fast Delivery', 'Unlimited Revisions'], thumb: 'thumb-4', icon: 'fa-file-image', specs: { 'Design Type': 'Flyer Design', 'File Format': 'PDF, JPG, PNG', 'Size': 'A4, A5, or Custom', 'Resolution': '300 DPI', 'Delivery Time': '2 - 3 Days', 'Revisions': 'Unlimited', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['A4', 'A5', 'Square', 'Custom'], orientations: ['Portrait', 'Landscape'], defaultSize: 'A4', defaultOrientation: 'Portrait' } },
-                { id: 'ui-ux-design', category: 'graphic', title: 'UI/UX Design', subtitle: 'User-centered interface and experience design for web and mobile.', price: 1800.00, tags: ['User-Centered', 'Interactive', 'Modern'], thumb: 'thumb-6', icon: 'fa-pen-ruler', specs: { 'Design Type': 'UI/UX Design', 'File Format': 'Figma, Sketch, XD', 'Size': 'Responsive', 'Resolution': 'High DPI', 'Delivery Time': '2 - 4 Weeks', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Web', 'Mobile', 'Both'], orientations: ['Light', 'Dark', 'Auto'], defaultSize: 'Both', defaultOrientation: 'Light' } },
-                { id: 'motion-graphics', category: 'graphic', title: 'Motion Graphics', subtitle: 'Dynamic animations and motion graphics for digital campaigns.', price: 900.00, tags: ['Animated', 'Engaging', 'High Impact'], thumb: 'thumb-7', icon: 'fa-film', specs: { 'Design Type': 'Motion Graphics', 'File Format': 'MP4, GIF, MOV', 'Size': 'Custom', 'Resolution': '1080p / 4K', 'Delivery Time': '1 - 2 Weeks', 'Revisions': '2 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['15s', '30s', '60s', 'Custom'], orientations: ['Square', 'Landscape', 'Portrait'], defaultSize: '30s', defaultOrientation: 'Landscape' } },
-                { id: 'web-dev', category: 'dev', title: 'Website Design & Development', subtitle: 'Responsive, SEO-optimized websites built with modern technology.', price: 2500.00, tags: ['Responsive', 'SEO Optimized', 'CMS Included'], thumb: 'thumb-2', icon: 'fa-laptop-code', specs: { 'Design Type': 'Custom Website', 'File Format': 'HTML, CSS, JS', 'Size': 'Responsive', 'Resolution': 'Optimized', 'Delivery Time': '3 - 4 Weeks', 'Revisions': '2 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['1-5 Pages', '6-10 Pages', '11+ Pages'], orientations: ['Standard', 'E-commerce', 'Portfolio'], defaultSize: '1-5 Pages', defaultOrientation: 'Standard' } },
-                { id: 'ecommerce-dev', category: 'dev', title: 'E-commerce Development', subtitle: 'Custom online stores with secure payment gateways.', price: 3200.00, tags: ['Secure', 'Payment Gateway', 'Inventory'], thumb: 'thumb-8', icon: 'fa-cart-shopping', specs: { 'Design Type': 'E-commerce', 'File Format': 'HTML, CSS, JS', 'Size': 'Scalable', 'Resolution': 'Optimized', 'Delivery Time': '4 - 6 Weeks', 'Revisions': '2 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Small (10-20 products)', 'Medium (20-100)', 'Large (100+)'], orientations: ['Standard', 'Marketplace', 'Subscription'], defaultSize: 'Medium (20-100)', defaultOrientation: 'Standard' } },
-                { id: 'mobile-app-dev', category: 'dev', title: 'Mobile App Development', subtitle: 'Cross-platform mobile applications with intuitive user interfaces.', price: 4000.00, tags: ['iOS & Android', 'UI/UX Design', 'API Integration'], thumb: 'thumb-5', icon: 'fa-mobile-screen', specs: { 'Design Type': 'Mobile App', 'File Format': 'Flutter, React Native', 'Size': 'Adaptive', 'Resolution': 'High DPI', 'Delivery Time': '6 - 8 Weeks', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Mobile', 'Tablet', 'Both'], orientations: ['Light', 'Dark', 'Auto'], defaultSize: 'Both', defaultOrientation: 'Light' } },
-                { id: 'custom-software', category: 'dev', title: 'Custom Software Development', subtitle: 'Tailor-made software solutions for your unique business needs.', price: 5000.00, tags: ['Tailored', 'Scalable', 'Enterprise'], thumb: 'thumb-9', icon: 'fa-gears', specs: { 'Design Type': 'Custom Software', 'File Format': 'Executable, Source', 'Size': 'Custom', 'Resolution': 'N/A', 'Delivery Time': '8 - 12 Weeks', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic', 'Standard', 'Enterprise'], orientations: ['On-Premise', 'Cloud', 'Hybrid'], defaultSize: 'Standard', defaultOrientation: 'Cloud' } },
-                { id: 'api-automation', category: 'dev', title: 'API Integration & Automation', subtitle: 'Secure and scalable API integration with automated workflows.', price: 1800.00, tags: ['REST', 'GraphQL', 'OAuth2'], thumb: 'thumb-7', icon: 'fa-plug', specs: { 'Design Type': 'API Service', 'File Format': 'JSON, YAML', 'Size': 'Custom', 'Resolution': 'N/A', 'Delivery Time': '1 - 2 Weeks', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic', 'Standard', 'Enterprise'], orientations: ['Cloud', 'On-Premise', 'Hybrid'], defaultSize: 'Standard', defaultOrientation: 'Cloud' } },
-                { id: 'cybersecurity', category: 'dev', title: 'Cybersecurity Solutions', subtitle: 'Comprehensive security assessments and protection strategies.', price: 2200.00, tags: ['Security', 'Compliance', 'Penetration Testing'], thumb: 'thumb-10', icon: 'fa-shield-halved', specs: { 'Design Type': 'Security Assessment', 'File Format': 'PDF Report', 'Size': 'N/A', 'Resolution': 'N/A', 'Delivery Time': '1 - 2 Weeks', 'Revisions': '2 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic Audit', 'Advanced Assessment', 'Enterprise'], orientations: ['Standard', 'Comprehensive', 'Premium'], defaultSize: 'Advanced Assessment', defaultOrientation: 'Comprehensive' } },
-                { id: 'computer-repair', category: 'tech', title: 'Computer & Laptop Repair', subtitle: 'Hardware diagnostics, repair, and performance upgrades.', price: 300.00, tags: ['Fast Turnaround', 'Certified', 'Affordable'], thumb: 'thumb-11', icon: 'fa-laptop', specs: { 'Design Type': 'Hardware Repair', 'File Format': 'N/A', 'Size': 'On-site or Drop-off', 'Resolution': 'N/A', 'Delivery Time': '24 - 48 Hours', 'Revisions': 'Unlimited', 'Source File': 'N/A', 'Commercial Use': 'Yes' }, customize: { sizes: ['Diagnostics', 'Repair', 'Upgrade'], orientations: ['Standard', 'Express', 'Premium'], defaultSize: 'Repair', defaultOrientation: 'Standard' } },
-                { id: 'network-setup', category: 'tech', title: 'Network Setup (Wi-Fi, LAN)', subtitle: 'Secure and high-speed network installation for homes and offices.', price: 500.00, tags: ['Secure', 'High Speed', 'Scalable'], thumb: 'thumb-12', icon: 'fa-wifi', specs: { 'Design Type': 'Network Installation', 'File Format': 'N/A', 'Size': 'Custom', 'Resolution': 'N/A', 'Delivery Time': '1 - 2 Days', 'Revisions': 'Unlimited', 'Source File': 'N/A', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic', 'Standard', 'Enterprise'], orientations: ['Small Office', 'Large Office', 'Home'], defaultSize: 'Standard', defaultOrientation: 'Small Office' } },
-                { id: 'cctv-installation', category: 'tech', title: 'CCTV Installation & Maintenance', subtitle: 'Professional security camera systems with remote monitoring.', price: 700.00, tags: ['24/7 Monitoring', 'Remote Access', 'High Definition'], thumb: 'thumb-13', icon: 'fa-video', specs: { 'Design Type': 'Security System', 'File Format': 'N/A', 'Size': 'Custom', 'Resolution': '1080p / 4K', 'Delivery Time': '1 - 3 Days', 'Revisions': 'Unlimited', 'Source File': 'N/A', 'Commercial Use': 'Yes' }, customize: { sizes: ['1-4 Cameras', '5-8 Cameras', '9+ Cameras'], orientations: ['Indoor', 'Outdoor', 'Both'], defaultSize: '1-4 Cameras', defaultOrientation: 'Both' } },
-                { id: 'data-backup', category: 'tech', title: 'Data Backup & Recovery', subtitle: 'Automated backup solutions and disaster recovery services.', price: 400.00, tags: ['Secure', 'Automated', 'Disaster Recovery'], thumb: 'thumb-14', icon: 'fa-rotate-left', specs: { 'Design Type': 'Backup Service', 'File Format': 'N/A', 'Size': 'Custom', 'Resolution': 'N/A', 'Delivery Time': 'Immediate', 'Revisions': 'Unlimited', 'Source File': 'N/A', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic (50GB)', 'Standard (200GB)', 'Enterprise (1TB+)'], orientations: ['Cloud', 'Local', 'Hybrid'], defaultSize: 'Standard (200GB)', defaultOrientation: 'Cloud' } },
-                { id: 'it-consultancy', category: 'tech', title: 'IT Consultancy', subtitle: 'Strategic technology planning and digital transformation guidance.', price: 800.00, tags: ['Strategic', 'Expert', 'Tailored'], thumb: 'thumb-15', icon: 'fa-chart-simple', specs: { 'Design Type': 'Consulting', 'File Format': 'PDF, PPT', 'Size': 'N/A', 'Resolution': 'N/A', 'Delivery Time': '1 - 2 Weeks', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['1-Hour Session', 'Half-Day Workshop', 'Full Strategy'], orientations: ['Standard', 'Advanced', 'Enterprise'], defaultSize: 'Half-Day Workshop', defaultOrientation: 'Standard' } },
-                { id: 'software-install', category: 'tech', title: 'Software Installation & Updates', subtitle: 'Professional software setup, configuration, and updates.', price: 250.00, tags: ['Quick Setup', 'Latest Versions', 'Optimized'], thumb: 'thumb-6', icon: 'fa-cloud-arrow-down', specs: { 'Design Type': 'Software Setup', 'File Format': 'N/A', 'Size': 'Custom', 'Resolution': 'N/A', 'Delivery Time': 'Same Day', 'Revisions': 'Unlimited', 'Source File': 'N/A', 'Commercial Use': 'Yes' }, customize: { sizes: ['Single Device', 'Small Office', 'Enterprise'], orientations: ['Standard', 'Custom', 'Premium'], defaultSize: 'Single Device', defaultOrientation: 'Standard' } },
-                { id: 'cloud-infra', category: 'it', title: 'Cloud Infrastructure Setup', subtitle: 'Turnkey cloud infrastructure provisioning using IaC.', price: 1500.00, tags: ['Terraform', 'CloudFormation', 'Automation'], thumb: 'thumb-10', icon: 'fa-cloud-upload', specs: { 'Design Type': 'Cloud Architecture', 'File Format': 'Terraform, CloudFormation', 'Size': 'Scalable', 'Resolution': 'N/A', 'Delivery Time': '1 - 2 Weeks', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['AWS', 'Azure', 'GCP'], orientations: ['Public', 'Private', 'Hybrid'], defaultSize: 'AWS', defaultOrientation: 'Public' } },
-                { id: 'data-encryption', category: 'it', title: 'Data Encryption & Security', subtitle: 'Enterprise-grade encryption for data at rest and in transit.', price: 800.00, tags: ['AES-256', 'TLS 1.3', 'HSM'], thumb: 'thumb-11', icon: 'fa-lock', specs: { 'Design Type': 'Encryption Service', 'File Format': 'N/A', 'Size': 'Custom', 'Resolution': 'N/A', 'Delivery Time': '2 - 3 Days', 'Revisions': '2 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic', 'Standard', 'Enterprise'], orientations: ['Single Key', 'Multi Key', 'Key Rotation'], defaultSize: 'Standard', defaultOrientation: 'Single Key' } },
-                { id: 'helpdesk-setup', category: 'it', title: 'Helpdesk Setup & Support', subtitle: 'Internal helpdesk setup with ticketing system and knowledge base.', price: 600.00, tags: ['Ticketing', 'Knowledge Base', 'SLA'], thumb: 'thumb-12', icon: 'fa-headset', specs: { 'Design Type': 'Helpdesk Service', 'File Format': 'N/A', 'Size': 'Custom', 'Resolution': 'N/A', 'Delivery Time': '1 Week', 'Revisions': '3 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic (5 users)', 'Standard (20 users)', 'Enterprise (50+)'], orientations: ['Standard', 'Premium', 'Custom'], defaultSize: 'Standard (20 users)', defaultOrientation: 'Standard' } },
-                { id: 'compliance-audit', category: 'it', title: 'Compliance & Audit Services', subtitle: 'Regular compliance audits against GDPR, HIPAA, SOC2, and ISO 27001.', price: 1200.00, tags: ['GDPR', 'SOC2', 'ISO27001'], thumb: 'thumb-9', icon: 'fa-scale-balanced', specs: { 'Design Type': 'Compliance Audit', 'File Format': 'PDF Report', 'Size': 'N/A', 'Resolution': 'N/A', 'Delivery Time': '2 - 3 Weeks', 'Revisions': '2 Rounds', 'Source File': 'Included', 'Commercial Use': 'Yes' }, customize: { sizes: ['Basic Audit', 'Standard Audit', 'Comprehensive'], orientations: ['Single Standard', 'Multi-Standard', 'Custom'], defaultSize: 'Standard Audit', defaultOrientation: 'Single Standard' } }
+                {
+                    id: 'logo-brand',
+                    category: 'graphic',
+                    title: 'Logo & Brand Identity',
+                    subtitle: 'Complete brand identity including logo, color palette, and guidelines.',
+                    price: 1200.00,
+                    tags: ['Custom Design', 'Vector Files', 'Brand Guidelines'],
+                    thumb: 'thumb-1',
+                    icon: 'fa-crown',
+                    specs: {
+                        'Design Type': 'Logo Design',
+                        'File Format': 'AI, EPS, PNG',
+                        'Size': 'Scalable',
+                        'Resolution': '300 DPI',
+                        'Delivery Time': '5 - 7 Days',
+                        'Revisions': '3 Rounds',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Minimalist', 'Badge', 'Mascot', 'Letterform'],
+                        orientations: ['Full Color', 'Monochrome', 'Negative'],
+                        formats: ['PDF', 'JPG', 'PNG', 'AI', 'PSD'],
+                        colorSchemes: ['Brand Colors', 'Light Theme', 'Dark Theme', 'Custom'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (3-5 days)', 'Express (1-2 days)', 'Rush (24 hours)'],
+                        defaultSize: 'Minimalist',
+                        defaultOrientation: 'Full Color',
+                        defaultFormat: 'PDF',
+                        defaultColorScheme: 'Brand Colors',
+                        defaultRevisions: 'Unlimited',
+                        defaultDeliverySpeed: 'Standard (3-5 days)'
+                    }
+                },
+                {
+                    id: 'business-cards',
+                    category: 'graphic',
+                    title: 'Business Cards & Stationery',
+                    subtitle: 'Premium business card design with elegant finishes and full bleed.',
+                    price: 450.00,
+                    tags: ['Premium', 'Spot UV', 'Minimal'],
+                    thumb: 'thumb-5',
+                    icon: 'fa-id-card',
+                    specs: {
+                        'Design Type': 'Business Card',
+                        'File Format': 'PDF, AI, PNG',
+                        'Size': 'Standard 3.5x2"',
+                        'Resolution': '300 DPI',
+                        'Delivery Time': '2 - 3 Days',
+                        'Revisions': '2 Rounds',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Standard', 'Rounded', 'Square', 'Custom'],
+                        orientations: ['Portrait', 'Landscape', 'Both'],
+                        formats: ['PDF', 'JPG', 'PNG', 'AI', 'PSD'],
+                        colorSchemes: ['Brand Colors', 'Light Theme', 'Dark Theme', 'Custom'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (3-5 days)', 'Express (1-2 days)', 'Rush (24 hours)'],
+                        defaultSize: 'Standard',
+                        defaultOrientation: 'Portrait',
+                        defaultFormat: 'PDF',
+                        defaultColorScheme: 'Brand Colors',
+                        defaultRevisions: '2 Rounds',
+                        defaultDeliverySpeed: 'Standard (3-5 days)'
+                    }
+                },
+                {
+                    id: 'social-media-ads',
+                    category: 'graphic',
+                    title: 'Social Media Graphics',
+                    subtitle: 'Engaging social media posts and ads designed for impact.',
+                    price: 450.00,
+                    tags: ['Engaging', 'Brand Consistency', 'Optimized'],
+                    thumb: 'thumb-3',
+                    icon: 'fa-hashtag',
+                    specs: {
+                        'Design Type': 'Social Media',
+                        'File Format': 'PNG, JPG, PDF',
+                        'Size': 'Optimized for Platforms',
+                        'Resolution': '300 DPI',
+                        'Delivery Time': '1 - 2 Days',
+                        'Revisions': 'Unlimited',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Square', 'Landscape', 'Story', 'Carousel'],
+                        orientations: ['Light', 'Dark', 'Brand Colors'],
+                        formats: ['PNG', 'JPG', 'PDF', 'GIF', 'MP4'],
+                        colorSchemes: ['Brand Colors', 'Light Theme', 'Dark Theme', 'Custom'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (1-2 days)', 'Express (24 hours)', 'Rush (6 hours)'],
+                        defaultSize: 'Square',
+                        defaultOrientation: 'Light',
+                        defaultFormat: 'PNG',
+                        defaultColorScheme: 'Brand Colors',
+                        defaultRevisions: 'Unlimited',
+                        defaultDeliverySpeed: 'Standard (1-2 days)'
+                    }
+                },
+                {
+                    id: 'flyer-poster',
+                    category: 'graphic',
+                    title: 'Posters, Flyers & Banners',
+                    subtitle: 'Professional flyer and poster design for your business or event.',
+                    price: 350.00,
+                    tags: ['High Quality', 'Fast Delivery', 'Unlimited Revisions'],
+                    thumb: 'thumb-4',
+                    icon: 'fa-file-image',
+                    specs: {
+                        'Design Type': 'Flyer Design',
+                        'File Format': 'PDF, JPG, PNG',
+                        'Size': 'A4, A5, or Custom',
+                        'Resolution': '300 DPI',
+                        'Delivery Time': '2 - 3 Days',
+                        'Revisions': 'Unlimited',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['A4', 'A5', 'Square', 'Custom'],
+                        orientations: ['Portrait', 'Landscape'],
+                        formats: ['PDF', 'JPG', 'PNG', 'AI', 'PSD'],
+                        colorSchemes: ['Brand Colors', 'Light Theme', 'Dark Theme', 'Custom'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (2-3 days)', 'Express (1 day)', 'Rush (12 hours)'],
+                        defaultSize: 'A4',
+                        defaultOrientation: 'Portrait',
+                        defaultFormat: 'PDF',
+                        defaultColorScheme: 'Brand Colors',
+                        defaultRevisions: 'Unlimited',
+                        defaultDeliverySpeed: 'Standard (2-3 days)'
+                    }
+                },
+                {
+                    id: 'ui-ux-design',
+                    category: 'graphic',
+                    title: 'UI/UX Design',
+                    subtitle: 'User-centered interface and experience design for web and mobile.',
+                    price: 1800.00,
+                    tags: ['User-Centered', 'Interactive', 'Modern'],
+                    thumb: 'thumb-6',
+                    icon: 'fa-pen-ruler',
+                    specs: {
+                        'Design Type': 'UI/UX Design',
+                        'File Format': 'Figma, Sketch, XD',
+                        'Size': 'Responsive',
+                        'Resolution': 'High DPI',
+                        'Delivery Time': '2 - 4 Weeks',
+                        'Revisions': '3 Rounds',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Web', 'Mobile', 'Both'],
+                        orientations: ['Light', 'Dark', 'Auto'],
+                        formats: ['Figma', 'Sketch', 'XD', 'PDF', 'PNG'],
+                        colorSchemes: ['Brand Colors', 'Light Theme', 'Dark Theme', 'Custom'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (2-4 weeks)', 'Express (1-2 weeks)', 'Rush (1 week)'],
+                        defaultSize: 'Both',
+                        defaultOrientation: 'Light',
+                        defaultFormat: 'Figma',
+                        defaultColorScheme: 'Brand Colors',
+                        defaultRevisions: '3 Rounds',
+                        defaultDeliverySpeed: 'Standard (2-4 weeks)'
+                    }
+                },
+                {
+                    id: 'motion-graphics',
+                    category: 'graphic',
+                    title: 'Motion Graphics',
+                    subtitle: 'Dynamic animations and motion graphics for digital campaigns.',
+                    price: 900.00,
+                    tags: ['Animated', 'Engaging', 'High Impact'],
+                    thumb: 'thumb-7',
+                    icon: 'fa-film',
+                    specs: {
+                        'Design Type': 'Motion Graphics',
+                        'File Format': 'MP4, GIF, MOV',
+                        'Size': 'Custom',
+                        'Resolution': '1080p / 4K',
+                        'Delivery Time': '1 - 2 Weeks',
+                        'Revisions': '2 Rounds',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['15s', '30s', '60s', 'Custom'],
+                        orientations: ['Square', 'Landscape', 'Portrait'],
+                        formats: ['MP4', 'GIF', 'MOV', 'WEBM'],
+                        colorSchemes: ['Brand Colors', 'Light Theme', 'Dark Theme', 'Custom'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (1-2 weeks)', 'Express (1 week)', 'Rush (3 days)'],
+                        defaultSize: '30s',
+                        defaultOrientation: 'Landscape',
+                        defaultFormat: 'MP4',
+                        defaultColorScheme: 'Brand Colors',
+                        defaultRevisions: '2 Rounds',
+                        defaultDeliverySpeed: 'Standard (1-2 weeks)'
+                    }
+                },
+                {
+                    id: 'web-dev',
+                    category: 'dev',
+                    title: 'Website Design & Development',
+                    subtitle: 'Responsive, SEO-optimized websites built with modern technology.',
+                    price: 2500.00,
+                    tags: ['Responsive', 'SEO Optimized', 'CMS Included'],
+                    thumb: 'thumb-2',
+                    icon: 'fa-laptop-code',
+                    specs: {
+                        'Design Type': 'Custom Website',
+                        'File Format': 'HTML, CSS, JS',
+                        'Size': 'Responsive',
+                        'Resolution': 'Optimized',
+                        'Delivery Time': '3 - 4 Weeks',
+                        'Revisions': '2 Rounds',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['1-5 Pages', '6-10 Pages', '11+ Pages'],
+                        orientations: ['Standard', 'E-commerce', 'Portfolio'],
+                        formats: ['HTML', 'WordPress', 'React', 'Next.js'],
+                        colorSchemes: ['Brand Colors', 'Light Theme', 'Dark Theme', 'Custom'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (3-4 weeks)', 'Express (2 weeks)', 'Rush (1 week)'],
+                        defaultSize: '1-5 Pages',
+                        defaultOrientation: 'Standard',
+                        defaultFormat: 'HTML',
+                        defaultColorScheme: 'Brand Colors',
+                        defaultRevisions: '2 Rounds',
+                        defaultDeliverySpeed: 'Standard (3-4 weeks)'
+                    }
+                },
+                {
+                    id: 'ecommerce-dev',
+                    category: 'dev',
+                    title: 'E-commerce Development',
+                    subtitle: 'Custom online stores with secure payment gateways.',
+                    price: 3200.00,
+                    tags: ['Secure', 'Payment Gateway', 'Inventory'],
+                    thumb: 'thumb-8',
+                    icon: 'fa-cart-shopping',
+                    specs: {
+                        'Design Type': 'E-commerce',
+                        'File Format': 'HTML, CSS, JS',
+                        'Size': 'Scalable',
+                        'Resolution': 'Optimized',
+                        'Delivery Time': '4 - 6 Weeks',
+                        'Revisions': '2 Rounds',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Small (10-20 products)', 'Medium (20-100)', 'Large (100+)'],
+                        orientations: ['Standard', 'Marketplace', 'Subscription'],
+                        formats: ['WooCommerce', 'Shopify', 'Custom', 'BigCommerce'],
+                        colorSchemes: ['Brand Colors', 'Light Theme', 'Dark Theme', 'Custom'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (4-6 weeks)', 'Express (3 weeks)', 'Rush (2 weeks)'],
+                        defaultSize: 'Medium (20-100)',
+                        defaultOrientation: 'Standard',
+                        defaultFormat: 'WooCommerce',
+                        defaultColorScheme: 'Brand Colors',
+                        defaultRevisions: '2 Rounds',
+                        defaultDeliverySpeed: 'Standard (4-6 weeks)'
+                    }
+                },
+                {
+                    id: 'mobile-app-dev',
+                    category: 'dev',
+                    title: 'Mobile App Development',
+                    subtitle: 'Cross-platform mobile applications with intuitive user interfaces.',
+                    price: 4000.00,
+                    tags: ['iOS & Android', 'UI/UX Design', 'API Integration'],
+                    thumb: 'thumb-5',
+                    icon: 'fa-mobile-screen',
+                    specs: {
+                        'Design Type': 'Mobile App',
+                        'File Format': 'Flutter, React Native',
+                        'Size': 'Adaptive',
+                        'Resolution': 'High DPI',
+                        'Delivery Time': '6 - 8 Weeks',
+                        'Revisions': '3 Rounds',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Mobile', 'Tablet', 'Both'],
+                        orientations: ['Light', 'Dark', 'Auto'],
+                        formats: ['Flutter', 'React Native', 'Swift', 'Kotlin'],
+                        colorSchemes: ['Brand Colors', 'Light Theme', 'Dark Theme', 'Custom'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (6-8 weeks)', 'Express (4-5 weeks)', 'Rush (3 weeks)'],
+                        defaultSize: 'Both',
+                        defaultOrientation: 'Light',
+                        defaultFormat: 'Flutter',
+                        defaultColorScheme: 'Brand Colors',
+                        defaultRevisions: '3 Rounds',
+                        defaultDeliverySpeed: 'Standard (6-8 weeks)'
+                    }
+                },
+                {
+                    id: 'api-automation',
+                    category: 'dev',
+                    title: 'API Integration & Automation',
+                    subtitle: 'Secure and scalable API integration with automated workflows.',
+                    price: 1800.00,
+                    tags: ['REST', 'GraphQL', 'OAuth2'],
+                    thumb: 'thumb-7',
+                    icon: 'fa-plug',
+                    specs: {
+                        'Design Type': 'API Service',
+                        'File Format': 'JSON, YAML',
+                        'Size': 'Custom',
+                        'Resolution': 'N/A',
+                        'Delivery Time': '1 - 2 Weeks',
+                        'Revisions': '3 Rounds',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Basic', 'Standard', 'Enterprise'],
+                        orientations: ['Cloud', 'On-Premise', 'Hybrid'],
+                        formats: ['REST', 'GraphQL', 'WebSocket', 'gRPC'],
+                        colorSchemes: ['Brand Colors', 'Light Theme', 'Dark Theme', 'Custom'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (1-2 weeks)', 'Express (1 week)', 'Rush (3 days)'],
+                        defaultSize: 'Standard',
+                        defaultOrientation: 'Cloud',
+                        defaultFormat: 'REST',
+                        defaultColorScheme: 'Brand Colors',
+                        defaultRevisions: '3 Rounds',
+                        defaultDeliverySpeed: 'Standard (1-2 weeks)'
+                    }
+                },
+                {
+                    id: 'cybersecurity',
+                    category: 'dev',
+                    title: 'Cybersecurity Solutions',
+                    subtitle: 'Comprehensive security assessments and protection strategies.',
+                    price: 2200.00,
+                    tags: ['Security', 'Compliance', 'Penetration Testing'],
+                    thumb: 'thumb-10',
+                    icon: 'fa-shield-halved',
+                    specs: {
+                        'Design Type': 'Security Assessment',
+                        'File Format': 'PDF Report',
+                        'Size': 'N/A',
+                        'Resolution': 'N/A',
+                        'Delivery Time': '1 - 2 Weeks',
+                        'Revisions': '2 Rounds',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Basic Audit', 'Advanced Assessment', 'Enterprise'],
+                        orientations: ['Standard', 'Comprehensive', 'Premium'],
+                        formats: ['PDF', 'DOCX', 'XLSX', 'HTML'],
+                        colorSchemes: ['Brand Colors', 'Light Theme', 'Dark Theme', 'Custom'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (1-2 weeks)', 'Express (1 week)', 'Rush (3 days)'],
+                        defaultSize: 'Advanced Assessment',
+                        defaultOrientation: 'Comprehensive',
+                        defaultFormat: 'PDF',
+                        defaultColorScheme: 'Brand Colors',
+                        defaultRevisions: '2 Rounds',
+                        defaultDeliverySpeed: 'Standard (1-2 weeks)'
+                    }
+                },
+                {
+                    id: 'computer-repair',
+                    category: 'tech',
+                    title: 'Computer & Laptop Repair',
+                    subtitle: 'Hardware diagnostics, repair, and performance upgrades.',
+                    price: 300.00,
+                    tags: ['Fast Turnaround', 'Certified', 'Affordable'],
+                    thumb: 'thumb-11',
+                    icon: 'fa-laptop',
+                    specs: {
+                        'Design Type': 'Hardware Repair',
+                        'File Format': 'N/A',
+                        'Size': 'On-site or Drop-off',
+                        'Resolution': 'N/A',
+                        'Delivery Time': '24 - 48 Hours',
+                        'Revisions': 'Unlimited',
+                        'Source File': 'N/A',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Diagnostics', 'Repair', 'Upgrade'],
+                        orientations: ['Standard', 'Express', 'Premium'],
+                        formats: ['N/A'],
+                        colorSchemes: ['Standard'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (24-48 hours)', 'Express (12 hours)', 'Rush (4 hours)'],
+                        defaultSize: 'Repair',
+                        defaultOrientation: 'Standard',
+                        defaultFormat: 'N/A',
+                        defaultColorScheme: 'Standard',
+                        defaultRevisions: 'Unlimited',
+                        defaultDeliverySpeed: 'Standard (24-48 hours)'
+                    }
+                },
+                {
+                    id: 'network-setup',
+                    category: 'tech',
+                    title: 'Network Setup (Wi-Fi, LAN)',
+                    subtitle: 'Secure and high-speed network installation for homes and offices.',
+                    price: 500.00,
+                    tags: ['Secure', 'High Speed', 'Scalable'],
+                    thumb: 'thumb-12',
+                    icon: 'fa-wifi',
+                    specs: {
+                        'Design Type': 'Network Installation',
+                        'File Format': 'N/A',
+                        'Size': 'Custom',
+                        'Resolution': 'N/A',
+                        'Delivery Time': '1 - 2 Days',
+                        'Revisions': 'Unlimited',
+                        'Source File': 'N/A',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Basic', 'Standard', 'Enterprise'],
+                        orientations: ['Small Office', 'Large Office', 'Home'],
+                        formats: ['N/A'],
+                        colorSchemes: ['Standard'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (1-2 days)', 'Express (1 day)', 'Rush (6 hours)'],
+                        defaultSize: 'Standard',
+                        defaultOrientation: 'Small Office',
+                        defaultFormat: 'N/A',
+                        defaultColorScheme: 'Standard',
+                        defaultRevisions: 'Unlimited',
+                        defaultDeliverySpeed: 'Standard (1-2 days)'
+                    }
+                },
+                {
+                    id: 'cctv-installation',
+                    category: 'tech',
+                    title: 'CCTV Installation & Maintenance',
+                    subtitle: 'Professional security camera systems with remote monitoring.',
+                    price: 700.00,
+                    tags: ['24/7 Monitoring', 'Remote Access', 'High Definition'],
+                    thumb: 'thumb-13',
+                    icon: 'fa-video',
+                    specs: {
+                        'Design Type': 'Security System',
+                        'File Format': 'N/A',
+                        'Size': 'Custom',
+                        'Resolution': '1080p / 4K',
+                        'Delivery Time': '1 - 3 Days',
+                        'Revisions': 'Unlimited',
+                        'Source File': 'N/A',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['1-4 Cameras', '5-8 Cameras', '9+ Cameras'],
+                        orientations: ['Indoor', 'Outdoor', 'Both'],
+                        formats: ['N/A'],
+                        colorSchemes: ['Standard'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (1-3 days)', 'Express (1 day)', 'Rush (12 hours)'],
+                        defaultSize: '1-4 Cameras',
+                        defaultOrientation: 'Both',
+                        defaultFormat: 'N/A',
+                        defaultColorScheme: 'Standard',
+                        defaultRevisions: 'Unlimited',
+                        defaultDeliverySpeed: 'Standard (1-3 days)'
+                    }
+                },
+                {
+                    id: 'data-backup',
+                    category: 'tech',
+                    title: 'Data Backup & Recovery',
+                    subtitle: 'Automated backup solutions and disaster recovery services.',
+                    price: 400.00,
+                    tags: ['Secure', 'Automated', 'Disaster Recovery'],
+                    thumb: 'thumb-14',
+                    icon: 'fa-rotate-left',
+                    specs: {
+                        'Design Type': 'Backup Service',
+                        'File Format': 'N/A',
+                        'Size': 'Custom',
+                        'Resolution': 'N/A',
+                        'Delivery Time': 'Immediate',
+                        'Revisions': 'Unlimited',
+                        'Source File': 'N/A',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Basic (50GB)', 'Standard (200GB)', 'Enterprise (1TB+)'],
+                        orientations: ['Cloud', 'Local', 'Hybrid'],
+                        formats: ['N/A'],
+                        colorSchemes: ['Standard'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (immediate)', 'Express (24 hours)', 'Rush (12 hours)'],
+                        defaultSize: 'Standard (200GB)',
+                        defaultOrientation: 'Cloud',
+                        defaultFormat: 'N/A',
+                        defaultColorScheme: 'Standard',
+                        defaultRevisions: 'Unlimited',
+                        defaultDeliverySpeed: 'Standard (immediate)'
+                    }
+                },
+                {
+                    id: 'it-consultancy',
+                    category: 'tech',
+                    title: 'IT Consultancy',
+                    subtitle: 'Strategic technology planning and digital transformation guidance.',
+                    price: 800.00,
+                    tags: ['Strategic', 'Expert', 'Tailored'],
+                    thumb: 'thumb-15',
+                    icon: 'fa-chart-simple',
+                    specs: {
+                        'Design Type': 'Consulting',
+                        'File Format': 'PDF, PPT',
+                        'Size': 'N/A',
+                        'Resolution': 'N/A',
+                        'Delivery Time': '1 - 2 Weeks',
+                        'Revisions': '3 Rounds',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['1-Hour Session', 'Half-Day Workshop', 'Full Strategy'],
+                        orientations: ['Standard', 'Advanced', 'Enterprise'],
+                        formats: ['PDF', 'PPT', 'DOCX', 'XLSX'],
+                        colorSchemes: ['Brand Colors', 'Light Theme', 'Dark Theme', 'Custom'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (1-2 weeks)', 'Express (1 week)', 'Rush (3 days)'],
+                        defaultSize: 'Half-Day Workshop',
+                        defaultOrientation: 'Standard',
+                        defaultFormat: 'PDF',
+                        defaultColorScheme: 'Brand Colors',
+                        defaultRevisions: '3 Rounds',
+                        defaultDeliverySpeed: 'Standard (1-2 weeks)'
+                    }
+                },
+                {
+                    id: 'software-install',
+                    category: 'tech',
+                    title: 'Software Installation & Updates',
+                    subtitle: 'Professional software setup, configuration, and updates.',
+                    price: 250.00,
+                    tags: ['Quick Setup', 'Latest Versions', 'Optimized'],
+                    thumb: 'thumb-6',
+                    icon: 'fa-cloud-arrow-down',
+                    specs: {
+                        'Design Type': 'Software Setup',
+                        'File Format': 'N/A',
+                        'Size': 'Custom',
+                        'Resolution': 'N/A',
+                        'Delivery Time': 'Same Day',
+                        'Revisions': 'Unlimited',
+                        'Source File': 'N/A',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Single Device', 'Small Office', 'Enterprise'],
+                        orientations: ['Standard', 'Custom', 'Premium'],
+                        formats: ['N/A'],
+                        colorSchemes: ['Standard'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (same day)', 'Express (4 hours)', 'Rush (2 hours)'],
+                        defaultSize: 'Single Device',
+                        defaultOrientation: 'Standard',
+                        defaultFormat: 'N/A',
+                        defaultColorScheme: 'Standard',
+                        defaultRevisions: 'Unlimited',
+                        defaultDeliverySpeed: 'Standard (same day)'
+                    }
+                },
+                {
+                    id: 'cloud-infra',
+                    category: 'it',
+                    title: 'Cloud Infrastructure Setup',
+                    subtitle: 'Turnkey cloud infrastructure provisioning using IaC.',
+                    price: 1500.00,
+                    tags: ['Terraform', 'CloudFormation', 'Automation'],
+                    thumb: 'thumb-10',
+                    icon: 'fa-cloud-upload',
+                    specs: {
+                        'Design Type': 'Cloud Architecture',
+                        'File Format': 'Terraform, CloudFormation',
+                        'Size': 'Scalable',
+                        'Resolution': 'N/A',
+                        'Delivery Time': '1 - 2 Weeks',
+                        'Revisions': '3 Rounds',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['AWS', 'Azure', 'GCP'],
+                        orientations: ['Public', 'Private', 'Hybrid'],
+                        formats: ['Terraform', 'CloudFormation', 'Pulumi'],
+                        colorSchemes: ['Brand Colors', 'Light Theme', 'Dark Theme', 'Custom'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (1-2 weeks)', 'Express (1 week)', 'Rush (3 days)'],
+                        defaultSize: 'AWS',
+                        defaultOrientation: 'Public',
+                        defaultFormat: 'Terraform',
+                        defaultColorScheme: 'Brand Colors',
+                        defaultRevisions: '3 Rounds',
+                        defaultDeliverySpeed: 'Standard (1-2 weeks)'
+                    }
+                },
+                {
+                    id: 'data-encryption',
+                    category: 'it',
+                    title: 'Data Encryption & Security',
+                    subtitle: 'Enterprise-grade encryption for data at rest and in transit.',
+                    price: 800.00,
+                    tags: ['AES-256', 'TLS 1.3', 'HSM'],
+                    thumb: 'thumb-11',
+                    icon: 'fa-lock',
+                    specs: {
+                        'Design Type': 'Encryption Service',
+                        'File Format': 'N/A',
+                        'Size': 'Custom',
+                        'Resolution': 'N/A',
+                        'Delivery Time': '2 - 3 Days',
+                        'Revisions': '2 Rounds',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Basic', 'Standard', 'Enterprise'],
+                        orientations: ['Single Key', 'Multi Key', 'Key Rotation'],
+                        formats: ['N/A'],
+                        colorSchemes: ['Standard'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (2-3 days)', 'Express (1 day)', 'Rush (12 hours)'],
+                        defaultSize: 'Standard',
+                        defaultOrientation: 'Single Key',
+                        defaultFormat: 'N/A',
+                        defaultColorScheme: 'Standard',
+                        defaultRevisions: '2 Rounds',
+                        defaultDeliverySpeed: 'Standard (2-3 days)'
+                    }
+                },
+                {
+                    id: 'helpdesk-setup',
+                    category: 'it',
+                    title: 'Helpdesk Setup & Support',
+                    subtitle: 'Internal helpdesk setup with ticketing system and knowledge base.',
+                    price: 600.00,
+                    tags: ['Ticketing', 'Knowledge Base', 'SLA'],
+                    thumb: 'thumb-12',
+                    icon: 'fa-headset',
+                    specs: {
+                        'Design Type': 'Helpdesk Service',
+                        'File Format': 'N/A',
+                        'Size': 'Custom',
+                        'Resolution': 'N/A',
+                        'Delivery Time': '1 Week',
+                        'Revisions': '3 Rounds',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Basic (5 users)', 'Standard (20 users)', 'Enterprise (50+)'],
+                        orientations: ['Standard', 'Premium', 'Custom'],
+                        formats: ['N/A'],
+                        colorSchemes: ['Standard'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (1 week)', 'Express (3 days)', 'Rush (24 hours)'],
+                        defaultSize: 'Standard (20 users)',
+                        defaultOrientation: 'Standard',
+                        defaultFormat: 'N/A',
+                        defaultColorScheme: 'Standard',
+                        defaultRevisions: '3 Rounds',
+                        defaultDeliverySpeed: 'Standard (1 week)'
+                    }
+                },
+                {
+                    id: 'compliance-audit',
+                    category: 'it',
+                    title: 'Compliance & Audit Services',
+                    subtitle: 'Regular compliance audits against GDPR, HIPAA, SOC2, and ISO 27001.',
+                    price: 1200.00,
+                    tags: ['GDPR', 'SOC2', 'ISO27001'],
+                    thumb: 'thumb-9',
+                    icon: 'fa-scale-balanced',
+                    specs: {
+                        'Design Type': 'Compliance Audit',
+                        'File Format': 'PDF Report',
+                        'Size': 'N/A',
+                        'Resolution': 'N/A',
+                        'Delivery Time': '2 - 3 Weeks',
+                        'Revisions': '2 Rounds',
+                        'Source File': 'Included',
+                        'Commercial Use': 'Yes'
+                    },
+                    customize: {
+                        sizes: ['Basic Audit', 'Standard Audit', 'Comprehensive'],
+                        orientations: ['Single Standard', 'Multi-Standard', 'Custom'],
+                        formats: ['PDF', 'DOCX', 'XLSX', 'HTML'],
+                        colorSchemes: ['Brand Colors', 'Light Theme', 'Dark Theme', 'Custom'],
+                        revisions: ['1 Round', '2 Rounds', '3 Rounds', 'Unlimited'],
+                        deliverySpeeds: ['Standard (2-3 weeks)', 'Express (1 week)', 'Rush (3 days)'],
+                        defaultSize: 'Standard Audit',
+                        defaultOrientation: 'Single Standard',
+                        defaultFormat: 'PDF',
+                        defaultColorScheme: 'Brand Colors',
+                        defaultRevisions: '2 Rounds',
+                        defaultDeliverySpeed: 'Standard (2-3 weeks)'
+                    }
+                }
             ];
 
             // ========== RENDER FUNCTIONS ==========
@@ -1381,6 +2076,10 @@
             let currentQuantity = 1;
             let selectedSize = '';
             let selectedOrientation = '';
+            let selectedFormat = '';
+            let selectedColorScheme = '';
+            let selectedRevisions = '';
+            let selectedDeliverySpeed = '';
             let uploadedFile = null;
 
             function openOrderFlow(service) {
@@ -1388,6 +2087,10 @@
                 currentQuantity = 1;
                 selectedSize = service.customize.defaultSize || service.customize.sizes[0];
                 selectedOrientation = service.customize.defaultOrientation || service.customize.orientations[0];
+                selectedFormat = service.customize.defaultFormat || service.customize.formats[0];
+                selectedColorScheme = service.customize.defaultColorScheme || service.customize.colorSchemes[0];
+                selectedRevisions = service.customize.defaultRevisions || service.customize.revisions[0];
+                selectedDeliverySpeed = service.customize.defaultDeliverySpeed || service.customize.deliverySpeeds[0];
 
                 document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
                 document.getElementById('orderFlowView').classList.add('active');
@@ -1403,12 +2106,29 @@
                     specsHtml += `<div class="spec-row"><span class="label">${key}</span><span class="value">${value}</span></div>`;
                 }
 
+                // Build customizer buttons
                 const sizeBtns = service.customize.sizes.map(s =>
                     `<button class="customize-btn ${s === selectedSize ? 'active' : ''}" data-size="${s}">${s}</button>`
                 ).join('');
 
                 const orientationBtns = service.customize.orientations.map(o =>
                     `<button class="customize-btn ${o === selectedOrientation ? 'active' : ''}" data-orientation="${o}"><i class="fa-regular ${o === 'Portrait' || o === 'Full Color' ? 'fa-arrow-up' : 'fa-arrow-right'}"></i> ${o}</button>`
+                ).join('');
+
+                const formatBtns = service.customize.formats.map(f =>
+                    `<button class="customize-btn ${f === selectedFormat ? 'active' : ''}" data-format="${f}">${f}</button>`
+                ).join('');
+
+                const colorBtns = service.customize.colorSchemes.map(c =>
+                    `<button class="customize-btn ${c === selectedColorScheme ? 'active' : ''}" data-colorscheme="${c}">${c}</button>`
+                ).join('');
+
+                const revisionBtns = service.customize.revisions.map(r =>
+                    `<button class="customize-btn ${r === selectedRevisions ? 'active' : ''}" data-revisions="${r}">${r}</button>`
+                ).join('');
+
+                const deliveryBtns = service.customize.deliverySpeeds.map(d =>
+                    `<button class="customize-btn ${d === selectedDeliverySpeed ? 'active' : ''}" data-delivery="${d}">${d}</button>`
                 ).join('');
 
                 const totalPrice = (service.price * currentQuantity).toFixed(2);
@@ -1439,14 +2159,37 @@
 
                     <div class="order-customize">
                         <h4>CUSTOMIZE YOUR ORDER</h4>
+
                         <div class="customize-group">
                             <div class="group-label">Select Size</div>
                             <div class="customize-options" id="sizeOptions">${sizeBtns}</div>
                         </div>
+
                         <div class="customize-group">
                             <div class="group-label">Orientation</div>
                             <div class="customize-options" id="orientationOptions">${orientationBtns}</div>
                         </div>
+
+                        <div class="customize-group">
+                            <div class="group-label">File Format</div>
+                            <div class="customize-options" id="formatOptions">${formatBtns}</div>
+                        </div>
+
+                        <div class="customize-group">
+                            <div class="group-label">Color Scheme</div>
+                            <div class="customize-options" id="colorOptions">${colorBtns}</div>
+                        </div>
+
+                        <div class="customize-group">
+                            <div class="group-label">Revisions</div>
+                            <div class="customize-options" id="revisionOptions">${revisionBtns}</div>
+                        </div>
+
+                        <div class="customize-group">
+                            <div class="group-label">Delivery Speed</div>
+                            <div class="customize-options" id="deliveryOptions">${deliveryBtns}</div>
+                        </div>
+
                         <div class="customize-group">
                             <div class="group-label">Quantity</div>
                             <div class="quantity-selector">
@@ -1473,22 +2216,13 @@
                     </div>
                 `;
 
-                document.querySelectorAll('#sizeOptions .customize-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        document.querySelectorAll('#sizeOptions .customize-btn').forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        selectedSize = this.dataset.size;
-                        updateOrderTotal();
-                    });
-                });
-
-                document.querySelectorAll('#orientationOptions .customize-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        document.querySelectorAll('#orientationOptions .customize-btn').forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        selectedOrientation = this.dataset.orientation;
-                    });
-                });
+                // Attach events for all customization buttons
+                attachCustomizerEvents('#sizeOptions', 'size');
+                attachCustomizerEvents('#orientationOptions', 'orientation');
+                attachCustomizerEvents('#formatOptions', 'format');
+                attachCustomizerEvents('#colorOptions', 'colorscheme');
+                attachCustomizerEvents('#revisionOptions', 'revisions');
+                attachCustomizerEvents('#deliveryOptions', 'delivery');
 
                 document.getElementById('qtyMinus').addEventListener('click', function() {
                     if (currentQuantity > 1) { currentQuantity--; document.getElementById('qtyDisplay').textContent = currentQuantity; updateOrderTotal(); }
@@ -1509,7 +2243,28 @@
                         total: total,
                         size: selectedSize,
                         orientation: selectedOrientation,
+                        format: selectedFormat,
+                        colorScheme: selectedColorScheme,
+                        revisions: selectedRevisions,
+                        deliverySpeed: selectedDeliverySpeed,
                         notes: document.getElementById('orderNotes').value
+                    });
+                });
+            }
+
+            function attachCustomizerEvents(containerId, dataKey) {
+                document.querySelectorAll(containerId + ' .customize-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll(containerId + ' .customize-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        const value = this.dataset[dataKey];
+                        if (dataKey === 'size') selectedSize = value;
+                        else if (dataKey === 'orientation') selectedOrientation = value;
+                        else if (dataKey === 'format') selectedFormat = value;
+                        else if (dataKey === 'colorscheme') selectedColorScheme = value;
+                        else if (dataKey === 'revisions') selectedRevisions = value;
+                        else if (dataKey === 'delivery') selectedDeliverySpeed = value;
+                        updateOrderTotal();
                     });
                 });
             }
