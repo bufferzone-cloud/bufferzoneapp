@@ -135,7 +135,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             color: #1c2128;
             font-size: 15px;
             cursor: pointer;
@@ -264,37 +264,6 @@
         .contact-number strong {
             font-size: 10px;
             font-weight: 700;
-        }
-
-        /* --- PROMOTIONS BANNER --- */
-        .promotions-banner {
-            margin: 0 0 16px 0;
-            padding: 10px 14px;
-            background: #fef9e7;
-            border-radius: 12px;
-            border: 1px solid #f5b83d;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 8px;
-        }
-        .promotions-banner .tag {
-            background: #f5b83d;
-            color: #fff;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 9px;
-            font-weight: 700;
-        }
-        .promotions-banner .msg {
-            font-size: 11px;
-            color: #1c2128;
-            flex: 1;
-        }
-        .promotions-banner .code {
-            font-weight: 700;
-            color: #1c2128;
-            font-size: 12px;
         }
 
         .category-row {
@@ -1137,80 +1106,112 @@
             transform: scale(0.95);
         }
 
-        /* --- HISTORY VIEW --- */
+        /* --- HISTORY VIEW (with payment reminder) --- */
         .history-list {
             padding: 0 0 16px 0;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
-        .history-item {
+        .history-card {
             background: #ffffff;
-            border-radius: 12px;
-            padding: 12px 14px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border-radius: 14px;
+            padding: 14px 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             border: 1px solid #f0f0f0;
             cursor: pointer;
             transition: all 0.2s;
         }
-        .history-item:active {
+        .history-card:active {
             transform: scale(0.98);
         }
-        .history-item .summary {
+        .history-card .history-summary {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .history-item .summary .left {
+        .history-card .history-summary .left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: #1c2128;
+        }
+        .history-card .history-summary .left i {
+            font-size: 14px;
+            color: #667eea;
+        }
+        .history-card .history-summary .right {
+            font-size: 11px;
+            color: #888;
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 10px;
-            color: #1c2128;
         }
-        .history-item .summary .left i {
-            color: #667eea;
-            font-size: 12px;
-        }
-        .history-item .summary .right {
-            font-size: 10px;
-            color: #888;
-        }
-        .history-item .details {
+        .history-card .history-details {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
             padding: 0 4px;
-            font-size: 10px;
-            color: #555;
-            line-height: 1.5;
             border-top: 1px solid transparent;
         }
-        .history-item.open .details {
-            max-height: 200px;
+        .history-card.open .history-details {
+            max-height: 250px;
             padding: 10px 4px 4px 4px;
             border-top-color: #f0f0f0;
             margin-top: 8px;
         }
-        .history-item .details .row {
+        .history-card .history-details .h-row {
             display: flex;
             justify-content: space-between;
             padding: 3px 0;
+            font-size: 12px;
+            color: #555;
         }
-        .history-item .details .row .label {
+        .history-card .history-details .h-row .h-label {
             color: #888;
         }
-        .history-item .details .row .val {
+        .history-card .history-details .h-row .h-val {
             font-weight: 500;
             color: #1c2128;
         }
-        .history-item .expand-icon {
+        .history-card .expand-icon {
             transition: transform 0.3s ease;
-            font-size: 10px;
+            font-size: 11px;
             color: #aaa;
         }
-        .history-item.open .expand-icon {
+        .history-card.open .expand-icon {
             transform: rotate(180deg);
+        }
+
+        /* --- PAYMENT REMINDER BANNER --- */
+        .payment-reminder-banner {
+            background: #fff8ed;
+            border: 1px solid #f5b83d;
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        .payment-reminder-banner.show {
+            display: flex;
+        }
+        .payment-reminder-banner i {
+            color: #f5b83d;
+            font-size: 20px;
+        }
+        .payment-reminder-banner .reminder-text {
+            font-size: 12px;
+            color: #1c2128;
+            font-weight: 500;
+            flex: 1;
+        }
+        .payment-reminder-banner .reminder-amount {
+            font-weight: 700;
+            color: #f5b83d;
+            font-size: 14px;
         }
 
         /* --- NOTIFICATION SIDEBAR --- */
@@ -1364,8 +1365,7 @@
                     <div class="hero-content">
                         <div class="hero-title" id="heroTitle">
                             WE ARE<br>
-                            <span id="heroTitleSpan">CREATIVE</span><br>
-                            <span id="heroAgency"></span>
+                            <span id="heroTitleSpan">CREATIVE</span>
                         </div>
                         <div class="hero-desc" id="heroDesc">
                             We provide the best ideas to grow your business
@@ -1433,11 +1433,16 @@
                 <div class="order-grid" id="ordersGrid"></div>
             </div>
 
-            <!-- ===== VIEW: HISTORY ===== -->
+            <!-- ===== VIEW: HISTORY (with payment reminder) ===== -->
             <div id="historyView" class="view">
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Transaction History</h3>
-                    <p style="color: #888; font-size: 11px;">Tap a transaction to view more details.</p>
+                    <p style="color: #888; font-size: 11px;">Tap a transaction for more details.</p>
+                </div>
+                <div id="paymentReminderBanner" class="payment-reminder-banner">
+                    <i class="fa-regular fa-circle-check"></i>
+                    <span class="reminder-text" id="reminderText">Please pay the remaining 50% of</span>
+                    <span class="reminder-amount" id="reminderAmount">ZMW 0.00</span>
                 </div>
                 <div class="history-list" id="historyList"></div>
             </div>
@@ -1597,10 +1602,11 @@
         let selectedDeliverySpeed = '';
         let uploadedFile = null;
         let cloudinaryScreenshotUrl = '';
-        let appliedPromo = null; // Store applied promo code
+        let appliedPromo = null;
         let discountApplied = false;
         let finalDiscountedPrice = 0;
         let orderTotalBeforeDiscount = 0;
+        let pendingReminderOrder = null;
 
         // =================================================================
         // DOM REFS
@@ -1611,7 +1617,6 @@
 
         const heroTitle = document.getElementById('heroTitle');
         const heroTitleSpan = document.getElementById('heroTitleSpan');
-        const heroAgency = document.getElementById('heroAgency');
         const heroDesc = document.getElementById('heroDesc');
         const heroCtaBtn = document.getElementById('heroCtaBtn');
         const heroPhone = document.getElementById('heroPhone');
@@ -1628,6 +1633,10 @@
 
         const ordersGrid = document.getElementById('ordersGrid');
         const historyList = document.getElementById('historyList');
+
+        const paymentReminderBanner = document.getElementById('paymentReminderBanner');
+        const reminderText = document.getElementById('reminderText');
+        const reminderAmount = document.getElementById('reminderAmount');
 
         const profileName = document.getElementById('profileName');
         const profileFullName = document.getElementById('profileFullName');
@@ -1788,7 +1797,7 @@
                 const data = snapshot.val();
                 if (!data) {
                     allData = {
-                        hero: { title: 'WE ARE CREATIVE ', titleSpan: 'CREATIVE', desc: 'We provide the best ideas to grow your business', cta: 'GET STARTED', phone: '+123 456 7890' },
+                        hero: { title: 'WE ARE CREATIVE AGENCY', titleSpan: 'CREATIVE', desc: 'We provide the best ideas to grow your business', cta: 'GET STARTED', phone: '+123 456 7890' },
                         policy: { title: 'BUFFER ZONE PAYMENT POLICY', desc: 'To begin your project, we require a 50% down payment. The remaining balance is due upon project completion and delivery. This ensures commitment from both parties.', tag: '50% upfront required' },
                         ourServicesList: ['Graphic Design', 'Web Development', 'Digital Marketing', 'Branding Design'],
                         services: {},
@@ -1826,10 +1835,22 @@
                 return;
             }
 
+            // Check if user is banned
+            if (currentUserData && currentUserData.banned === true) {
+                document.body.innerHTML = `
+                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
+                        <i class="fa-solid fa-ban" style="font-size:48px; color:#dc2626; margin-bottom:16px;"></i>
+                        <h1 style="font-size:24px; font-weight:700; color:#1c2128;">Account Banned</h1>
+                        <p style="color:#888; text-align:center; max-width:320px; margin-top:8px;">Your account has been banned. Please contact support for assistance.</p>
+                    </div>
+                `;
+                return;
+            }
+
             // Render Hero
             if (allData.hero) {
                 const h = allData.hero;
-                heroTitle.innerHTML = `${h.title || 'WE ARE'}<br><span>${h.titleSpan || 'CREATIVE'}</span><br><span></span>`;
+                heroTitle.innerHTML = `${h.title || 'WE ARE'}<br><span>${h.titleSpan || 'CREATIVE'}</span>`;
                 heroDesc.textContent = h.desc || 'We provide the best ideas to grow your business';
                 heroCtaBtn.textContent = h.cta || 'GET STARTED';
                 heroPhone.textContent = h.phone || '+123 456 7890';
@@ -1851,7 +1872,7 @@
             // Render Orders
             renderOrders();
 
-            // Render History
+            // Render History (with payment reminder)
             renderHistory();
 
             // Update Profile
@@ -1955,13 +1976,49 @@
             const container = historyList;
             const transactions = allData.transactions || {};
             const entries = Object.entries(transactions).filter(([key, t]) => t.userId === currentUserId);
+            
+            // Check for completed orders with pending balance
+            const orders = allData.orders || {};
+            let pendingReminder = null;
+            for (const [key, o] of Object.entries(orders)) {
+                if (o.userId === currentUserId && o.status === 'completed') {
+                    // Check if there's a transaction for this order with status pending or approved
+                    // We want to show the reminder if the order is completed but the remaining 50% hasn't been paid
+                    // For simplicity, we'll check if there's a transaction with status 'pending' for this order
+                    let hasPendingTx = false;
+                    for (const [txKey, t] of Object.entries(transactions)) {
+                        if (t.ref === o.id && t.status === 'pending') {
+                            hasPendingTx = true;
+                            break;
+                        }
+                    }
+                    // Also check if there's no transaction at all (or only the initial deposit)
+                    // We'll show the reminder if the order is completed
+                    pendingReminder = {
+                        id: o.id,
+                        amount: o.amount * 0.5,
+                        order: o
+                    };
+                    break;
+                }
+            }
+
+            // Show/hide reminder banner
+            if (pendingReminder) {
+                paymentReminderBanner.classList.add('show');
+                reminderText.textContent = `Please pay the remaining 50% of order ${pendingReminder.id}`;
+                reminderAmount.textContent = `ZMW ${pendingReminder.amount.toFixed(2)}`;
+            } else {
+                paymentReminderBanner.classList.remove('show');
+            }
+
             if (entries.length === 0) {
                 container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No transactions found.</div>`;
                 return;
             }
             container.innerHTML = entries.map(([key, t]) => `
-                <div class="history-item" data-key="${key}">
-                    <div class="summary">
+                <div class="history-card" data-key="${key}">
+                    <div class="history-summary">
                         <div class="left">
                             <i class="fa-solid ${t.amount && t.amount > 0 ? 'fa-arrow-right' : 'fa-arrow-left'}" style="color:${t.amount && t.amount > 0 ? '#00a86b' : '#cc8800'};"></i>
                             <span>${escapeHtml(t.type || 'Transaction')} ${t.amount ? 'ZMW ' + t.amount.toFixed(2) : ''}</span>
@@ -1971,16 +2028,16 @@
                             <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                     </div>
-                    <div class="details">
-                        <div class="row"><span class="label">Reference</span><span class="val">${escapeHtml(t.ref || 'N/A')}</span></div>
-                        <div class="row"><span class="label">Method</span><span class="val">${escapeHtml(t.method || 'N/A')}</span></div>
-                        <div class="row"><span class="label">Status</span><span class="val">${escapeHtml(t.status || 'N/A')}</span></div>
-                        <div class="row"><span class="label">Detail</span><span class="val">${escapeHtml(t.detail || 'N/A')}</span></div>
+                    <div class="history-details">
+                        <div class="h-row"><span class="h-label">Reference</span><span class="h-val">${escapeHtml(t.ref || 'N/A')}</span></div>
+                        <div class="h-row"><span class="h-label">Method</span><span class="h-val">${escapeHtml(t.method || 'N/A')}</span></div>
+                        <div class="h-row"><span class="h-label">Status</span><span class="h-val">${escapeHtml(t.status || 'N/A')}</span></div>
+                        <div class="h-row"><span class="h-label">Detail</span><span class="h-val">${escapeHtml(t.detail || 'N/A')}</span></div>
                     </div>
                 </div>
             `).join('');
 
-            container.querySelectorAll('.history-item').forEach(el => {
+            container.querySelectorAll('.history-card').forEach(el => {
                 el.addEventListener('click', function() {
                     this.classList.toggle('open');
                 });
@@ -2029,7 +2086,6 @@
                 </div>
             `).join('');
 
-            // Mark as read when opened
             notifList.querySelectorAll('.notification-item').forEach(el => {
                 el.addEventListener('click', function() {
                     const key = this.dataset.key;
@@ -2533,16 +2589,6 @@
                 const userRef = ref(db, 'users/' + user.uid);
                 onValue(userRef, (snapshot) => {
                     const data = snapshot.val();
-                    if (data && data.banned === true) {
-                        document.body.innerHTML = `
-                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
-                                <i class="fa-solid fa-ban" style="font-size:48px; color:#dc2626; margin-bottom:16px;"></i>
-                                <h1 style="font-size:24px; font-weight:700; color:#1c2128;">Account Banned</h1>
-                                <p style="color:#888; text-align:center; max-width:320px; margin-top:8px;">Your account has been banned. Please contact support for assistance.</p>
-                            </div>
-                        `;
-                        return;
-                    }
                     currentUserData = data || {};
                     loadData();
                 });
