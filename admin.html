@@ -915,7 +915,7 @@
             <div id="page-dashboard" class="page active">
 
                 <div class="greeting" id="greetingText">Good morning, Admin 👋</div>
-                <div class="greeting-sub">Here's what's happening with your agency today.</div>
+                <div class="greeting-sub" id="greetingSub"></div>
 
                 <div class="stat-grid">
                     <div class="stat-card">
@@ -1065,6 +1065,7 @@
                     <div style="display:flex; flex-direction:column; gap:12px;">
                         <div><strong>Name</strong><br><span style="color:#555;" id="profileName">Admin User</span></div>
                         <div><strong>Email</strong><br><span style="color:#555;" id="profileEmail">admin@bufferzone.com</span></div>
+                        <div><strong>Phone</strong><br><span style="color:#555;" id="profilePhone">Not set</span></div>
                         <div><strong>Role</strong><br><span style="color:#555;">Super Administrator</span></div>
                         <div><strong>Settings</strong><br>
                             <div class="form-group" style="margin-top:4px;">
@@ -1080,6 +1081,9 @@
                                 <input type="text" id="settingsEmail" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:10px; font-size:13px;">
                             </div>
                             <button class="btn btn-primary w-full" id="saveSettings"><i class="fa-solid fa-save"></i> Save Settings</button>
+                        </div>
+                        <div style="border-top:1px solid #f0f0f0; padding-top:12px; margin-top:4px;">
+                            <button class="btn btn-danger w-full" id="logoutBtn" style="background:#dc2626; color:#fff; border:none; padding:12px; border-radius:10px; font-size:14px; font-weight:600; cursor:pointer;"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
                         </div>
                         <div style="border-top:1px solid #f0f0f0; padding-top:12px; margin-top:4px;">
                             <div class="toggle-label">
@@ -1221,8 +1225,8 @@
         // =================================================================
 
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+        import { getDatabase, ref, set, onValue, get } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBy8ZAMagjX627gcfe0NuRaC1WfC736en0",
@@ -1245,6 +1249,7 @@
 
         let allData = null;
         let currentUser = null;
+        let currentAdminData = null;
 
         // =================================================================
         // DOM REFS
@@ -1253,7 +1258,9 @@
         const adminNameEl = document.getElementById('adminName');
         const profileNameEl = document.getElementById('profileName');
         const profileEmailEl = document.getElementById('profileEmail');
+        const profilePhoneEl = document.getElementById('profilePhone');
         const greetingText = document.getElementById('greetingText');
+        const greetingSub = document.getElementById('greetingSub');
 
         const modal = document.getElementById('serviceModal');
         const modalTitle = document.getElementById('modalTitle');
@@ -1331,11 +1338,21 @@
 
             // Update Header / Profile
             if (currentUser) {
-                const name = currentUser.displayName || currentUser.email || 'Admin';
+                const name = currentAdminData?.name || currentUser.displayName || currentUser.email || 'Admin';
+                const email = currentUser.email || 'No email';
+                const phone = currentAdminData?.phone || 'Not set';
+
                 adminNameEl.textContent = name;
                 profileNameEl.textContent = name;
-                profileEmailEl.textContent = currentUser.email || 'No email';
-                greetingText.textContent = `Good ${new Date().getHours() < 12 ? 'morning' : 'afternoon'}, ${name} 👋`;
+                profileEmailEl.textContent = email;
+                profilePhoneEl.textContent = phone;
+
+                const timeOfDay = new Date().getHours() < 12 ? 'morning' : 'afternoon';
+                greetingText.textContent = `Good ${timeOfDay}, ${name} 👋`;
+                greetingSub.textContent = email;
+                greetingSub.style.fontSize = '12px';
+                greetingSub.style.color = '#888';
+                greetingSub.style.marginTop = '2px';
             }
 
             // Populate Hero Editor
@@ -1373,7 +1390,7 @@
             // Render Orders
             renderOrders();
 
-            // Render Users
+            // Render Users (populated from `users/` node)
             renderUsers();
 
             // Render Activity
@@ -1522,62 +1539,54 @@
 
         function renderUsers(searchTerm = '') {
             const container = document.getElementById('usersList');
-            const data = allData.customers || {};
-            let entries = Object.entries(data);
-            if (searchTerm.trim()) {
-                const term = searchTerm.trim().toLowerCase();
-                entries = entries.filter(([key, c]) =>
-                    (c.name || '').toLowerCase().includes(term) ||
-                    (c.email || '').toLowerCase().includes(term) ||
-                    (c.phone || '').toLowerCase().includes(term)
-                );
-            }
-            if (entries.length === 0) {
-                container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No users found.</div>`;
-                return;
-            }
-            container.innerHTML = entries.map(([key, c]) => `
-                <div class="customer-item">
-                    <div class="c-avatar">${(c.name || 'U').charAt(0)}</div>
-                    <div class="c-info">
-                        <div class="c-name">${c.name || 'Unknown'}</div>
-                        <div class="c-email">${c.email || 'No email'}</div>
-                        <div class="c-phone"><i class="fa-solid fa-phone"></i> ${c.phone || 'No phone'}</div>
+            const usersRef = ref(db, 'users');
+            get(usersRef).then((snapshot) => {
+                const usersData = snapshot.val() || {};
+                let entries = Object.entries(usersData);
+                if (searchTerm.trim()) {
+                    const term = searchTerm.trim().toLowerCase();
+                    entries = entries.filter(([uid, u]) =>
+                        (u.firstName || '').toLowerCase().includes(term) ||
+                        (u.lastName || '').toLowerCase().includes(term) ||
+                        (u.email || '').toLowerCase().includes(term) ||
+                        (u.phone || '').toLowerCase().includes(term)
+                    );
+                }
+                if (entries.length === 0) {
+                    container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No users found.</div>`;
+                    return;
+                }
+                container.innerHTML = entries.map(([uid, u]) => `
+                    <div class="customer-item">
+                        <div class="c-avatar">${(u.firstName || 'U').charAt(0)}</div>
+                        <div class="c-info">
+                            <div class="c-name">${u.firstName || ''} ${u.lastName || ''}</div>
+                            <div class="c-email">${u.email || 'No email'}</div>
+                            <div class="c-phone"><i class="fa-solid fa-phone"></i> ${u.phone || 'No phone'}</div>
+                            <div class="c-orders">Joined: ${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</div>
+                        </div>
+                        <div class="c-status active">● Active</div>
+                        <div style="display:flex; gap:4px;">
+                            <button class="btn btn-danger btn-sm delete-user" data-uid="${uid}" style="padding:2px 10px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
+                        </div>
                     </div>
-                    <div class="c-orders">${c.orders || 0} orders</div>
-                    <div class="c-status ${c.status || 'active'}">● ${c.status || 'active'}</div>
-                    <div style="display:flex; gap:4px;">
-                        <button class="btn btn-warning btn-sm ban-user" data-key="${key}" style="padding:2px 10px; border-radius:8px; border:none; background:#f59e0b; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-ban"></i> Ban</button>
-                        <button class="btn btn-danger btn-sm delete-user" data-key="${key}" style="padding:2px 10px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                </div>
-            `).join('');
+                `).join('');
 
-            container.querySelectorAll('.ban-user').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const key = this.dataset.key;
-                    if (confirm(`Ban this user?`)) {
-                        if (allData.customers[key]) {
-                            allData.customers[key].status = 'banned';
-                            saveData().then(() => {
-                                renderAll();
-                                showToast(`User banned`);
+                container.querySelectorAll('.delete-user').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const uid = this.dataset.uid;
+                        if (confirm('Delete this user from the database?')) {
+                            const userRef = ref(db, 'users/' + uid);
+                            set(userRef, null).then(() => {
+                                showToast('User deleted');
+                                renderUsers(document.getElementById('userSearchInput').value);
                             });
                         }
-                    }
+                    });
                 });
-            });
-            container.querySelectorAll('.delete-user').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const key = this.dataset.key;
-                    if (confirm(`Delete this user?`)) {
-                        delete allData.customers[key];
-                        saveData().then(() => {
-                            renderAll();
-                            showToast(`User deleted`);
-                        });
-                    }
-                });
+            }).catch((error) => {
+                console.error('Error loading users:', error);
+                container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">Error loading users.</div>`;
             });
         }
 
@@ -1956,6 +1965,16 @@
             }
         });
 
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            signOut(auth).then(() => {
+                window.location.href = 'login.html';
+            }).catch((error) => {
+                console.error('Logout error:', error);
+                showToast('Error logging out');
+            });
+        });
+
         // =================================================================
         // TOAST
         // =================================================================
@@ -1976,22 +1995,36 @@
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
-                // Load data and render
-                loadData(() => {
-                    renderAll();
-                    // Populate hero fields again after load
-                    if (allData.hero) {
-                        document.getElementById('heroTitle').value = allData.hero.title || '';
-                        document.getElementById('heroTitleSpan').value = allData.hero.titleSpan || '';
-                        document.getElementById('heroDesc').value = allData.hero.desc || '';
-                        document.getElementById('heroCTA').value = allData.hero.cta || '';
-                        document.getElementById('heroPhone').value = allData.hero.phone || '';
+                // Fetch admin data from `admins/` node using UID
+                const adminRef = ref(db, 'admins');
+                get(adminRef).then((snapshot) => {
+                    const admins = snapshot.val() || {};
+                    // Find admin entry with matching UID
+                    let foundAdmin = null;
+                    for (const key in admins) {
+                        if (admins[key].uid === user.uid) {
+                            foundAdmin = admins[key];
+                            break;
+                        }
                     }
-                    if (allData.policy) {
-                        document.getElementById('policyTitle').value = allData.policy.title || '';
-                        document.getElementById('policyDesc').value = allData.policy.desc || '';
-                        document.getElementById('policyTag').value = allData.policy.tag || '';
-                    }
+                    currentAdminData = foundAdmin || null;
+                    // Load data and render
+                    loadData(() => {
+                        renderAll();
+                        // Populate hero fields again after load
+                        if (allData.hero) {
+                            document.getElementById('heroTitle').value = allData.hero.title || '';
+                            document.getElementById('heroTitleSpan').value = allData.hero.titleSpan || '';
+                            document.getElementById('heroDesc').value = allData.hero.desc || '';
+                            document.getElementById('heroCTA').value = allData.hero.cta || '';
+                            document.getElementById('heroPhone').value = allData.hero.phone || '';
+                        }
+                        if (allData.policy) {
+                            document.getElementById('policyTitle').value = allData.policy.title || '';
+                            document.getElementById('policyDesc').value = allData.policy.desc || '';
+                            document.getElementById('policyTag').value = allData.policy.tag || '';
+                        }
+                    });
                 });
             } else {
                 // Redirect to login if not authenticated
