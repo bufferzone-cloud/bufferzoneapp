@@ -645,23 +645,6 @@
         .order-details .row:last-child { border-bottom: none; }
         .order-details .row .label { color: #888; }
         .order-details .row .val { font-weight: 500; color: #1c2128; }
-        
-        /* Customization List in Orders */
-        .customization-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px 8px;
-        }
-        .customization-list li {
-            background: #f8f9fc;
-            border-radius: 8px;
-            padding: 2px 10px;
-            font-size: 11px;
-            color: #555;
-        }
 
         .status-badge {
             display: inline-block;
@@ -688,7 +671,7 @@
         }
         .status-select:focus { outline: none; border-color: #1c2128; }
 
-        /* --- CUSTOMER ITEM --- */
+        /* --- CUSTOMER ITEM with Ban/Unban Toggle --- */
         .customer-item {
             background: #ffffff;
             border-radius: 12px;
@@ -763,47 +746,32 @@
             transform: rotate(180deg);
         }
 
-        /* --- BAN CONFIRMATION MODAL --- */
-        .ban-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
+        /* --- BAN/UNBAN TOGGLE --- */
+        .user-status-badge {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 12px;
         }
-        .ban-modal-overlay.open { display: flex; }
-        .ban-modal-content {
-            background: #ffffff;
-            border-radius: 18px;
-            width: 100%;
-            max-width: 360px;
-            padding: 24px 22px 20px 22px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
-            text-align: center;
+        .user-status-badge.active {
+            background: #e6fffa;
+            color: #00a86b;
         }
-        .ban-modal-content h3 {
+        .user-status-badge.banned {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .ban-toggle-btn {
+            background: none;
+            border: none;
             font-size: 18px;
-            font-weight: 700;
-            color: #1c2128;
-            margin-bottom: 6px;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
-        .ban-modal-content p {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 16px;
-        }
-        .ban-modal-content .actions {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
+        .ban-toggle-btn:active { transform: scale(0.9); }
+        .ban-toggle-btn .fa-toggle-on { color: #16a34a; }
+        .ban-toggle-btn .fa-toggle-off { color: #dc2626; }
 
         /* --- TOGGLE SWITCH (iPhone style) --- */
         .toggle-switch {
@@ -1482,18 +1450,6 @@
         </div>
     </div>
 
-    <!-- ===== BAN CONFIRMATION MODAL ===== -->
-    <div class="ban-modal-overlay" id="banModal">
-        <div class="ban-modal-content">
-            <h3>Ban User</h3>
-            <p id="banModalText">Are you sure you want to ban this user?</p>
-            <div class="actions">
-                <button class="btn btn-outline" id="banCancelBtn">Cancel</button>
-                <button class="btn btn-danger" id="banConfirmBtn">Yes, Ban</button>
-            </div>
-        </div>
-    </div>
-
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
@@ -1839,11 +1795,7 @@
                     <div class="order-details">
                         <div class="row"><span class="label">Client</span><span class="val">${o.customer || 'N/A'}</span></div>
                         <div class="row"><span class="label">Client Number</span><span class="val">${o.clientNumber || 'N/A'}</span></div>
-                        <div class="row"><span class="label">Customization</span>
-                            <div class="val">
-                                ${o.customization ? `<ul class="customization-list">${o.customization.split(', ').map(c => `<li>${c}</li>`).join('')}</ul>` : 'None'}
-                            </div>
-                        </div>
+                        <div class="row"><span class="label">Customization</span><span class="val">${o.customization || 'None'}</span></div>
                         <div class="row"><span class="label">Payment Proof</span><span class="val">
                             ${o.paymentProof ? `<button class="btn-view-proof" data-screenshot="${o.paymentProof}"><i class="fa-regular fa-image"></i> View</button>` : 'No proof'}
                         </span></div>
@@ -1916,29 +1868,36 @@
                     container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No users found.</div>`;
                     return;
                 }
-                container.innerHTML = entries.map(([uid, u]) => `
-                    <div class="customer-item" data-uid="${uid}">
-                        <div class="user-summary">
-                            <div class="left">
-                                <div class="c-avatar">${(u.firstName || 'U').charAt(0)}</div>
-                                <div>
-                                    <div class="c-name">${u.firstName || ''} ${u.lastName || ''}</div>
-                                    <div class="c-email">${u.email || 'No email'}</div>
+                container.innerHTML = entries.map(([uid, u]) => {
+                    const isBanned = u.banned === true;
+                    return `
+                        <div class="customer-item" data-uid="${uid}">
+                            <div class="user-summary">
+                                <div class="left">
+                                    <div class="c-avatar">${(u.firstName || 'U').charAt(0)}</div>
+                                    <div>
+                                        <div class="c-name">${u.firstName || ''} ${u.lastName || ''}</div>
+                                        <div class="c-email">${u.email || 'No email'}</div>
+                                    </div>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:10px;">
+                                    <span class="user-status-badge ${isBanned ? 'banned' : 'active'}">${isBanned ? 'Banned' : 'Active'}</span>
+                                    <button class="ban-toggle-btn" data-uid="${uid}" data-banned="${isBanned}">
+                                        <i class="fa-solid ${isBanned ? 'fa-toggle-off' : 'fa-toggle-on'}"></i>
+                                    </button>
+                                    <i class="fa-solid fa-chevron-down expand-icon"></i>
                                 </div>
                             </div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="user-details">
-                            <div class="detail-row"><span class="label">Phone</span><span class="val">${u.phone || 'No phone'}</span></div>
-                            <div class="detail-row"><span class="label">Joined</span><span class="val">${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</span></div>
-                            <div class="detail-row"><span class="label">Status</span><span class="val" style="color:#16a34a;">Active</span></div>
-                            <div class="actions">
-                                <button class="btn btn-warning btn-sm ban-user" data-uid="${uid}" style="padding:2px 10px; border-radius:8px; border:none; background:#f59e0b; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-ban"></i> Ban</button>
-                                <button class="btn btn-danger btn-sm delete-user" data-uid="${uid}" style="padding:2px 10px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
+                            <div class="user-details">
+                                <div class="detail-row"><span class="label">Phone</span><span class="val">${u.phone || 'No phone'}</span></div>
+                                <div class="detail-row"><span class="label">Joined</span><span class="val">${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</span></div>
+                                <div class="actions">
+                                    <button class="btn btn-danger btn-sm delete-user" data-uid="${uid}" style="padding:2px 10px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
 
                 container.querySelectorAll('.customer-item').forEach(el => {
                     el.addEventListener('click', function() {
@@ -1952,15 +1911,22 @@
                     });
                 });
 
-                container.querySelectorAll('.ban-user').forEach(btn => {
+                container.querySelectorAll('.ban-toggle-btn').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
                         const uid = this.dataset.uid;
-                        userToBan = uid;
-                        const user = usersData[uid];
-                        document.getElementById('banModalText').textContent =
-                            `Are you sure you want to ban ${user.firstName || ''} ${user.lastName || ''} (${user.email || 'N/A'})?`;
-                        document.getElementById('banModal').classList.add('open');
+                        const currentlyBanned = this.dataset.banned === 'true';
+                        const newBanStatus = !currentlyBanned;
+                        
+                        if (confirm(`Are you sure you want to ${newBanStatus ? 'ban' : 'unban'} this user?`)) {
+                            const userRef = ref(db, 'users/' + uid);
+                            update(userRef, { banned: newBanStatus }).then(() => {
+                                showToast(`User ${newBanStatus ? 'banned' : 'unbanned'}`);
+                                renderUsers(document.getElementById('userSearchInput').value);
+                            }).catch((error) => {
+                                showToast('Error updating user status', 'error');
+                            });
+                        }
                     });
                 });
 
@@ -1968,7 +1934,7 @@
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
                         const uid = this.dataset.uid;
-                        if (confirm(`Delete this user?`)) {
+                        if (confirm(`Permanently delete this user?`)) {
                             const userRef = ref(db, 'users/' + uid);
                             set(userRef, null).then(() => {
                                 showToast('User deleted');
@@ -2443,31 +2409,6 @@
         document.getElementById('screenshotModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('open');
-            }
-        });
-
-        // Ban modal
-        document.getElementById('banCancelBtn').addEventListener('click', function() {
-            document.getElementById('banModal').classList.remove('open');
-            userToBan = null;
-        });
-        document.getElementById('banModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('open');
-                userToBan = null;
-            }
-        });
-        document.getElementById('banConfirmBtn').addEventListener('click', function() {
-            if (userToBan) {
-                const userRef = ref(db, 'users/' + userToBan);
-                set(userRef, null).then(() => {
-                    showToast('User banned');
-                    document.getElementById('banModal').classList.remove('open');
-                    userToBan = null;
-                    renderUsers(document.getElementById('userSearchInput').value);
-                }).catch((error) => {
-                    showToast('Error banning user', 'error');
-                });
             }
         });
 
