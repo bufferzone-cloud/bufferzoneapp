@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,500;14..32,700;14..32,800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        /* ── reset & base ── */
         * {
             margin: 0;
             padding: 0;
@@ -472,7 +471,6 @@
 
     </div>
 
-    <!-- ─── FIREBASE MODULE ─── -->
     <script type="module">
         // ─── Import modular SDK ───
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
@@ -481,7 +479,8 @@
             createUserWithEmailAndPassword,
             signInWithEmailAndPassword,
             sendPasswordResetEmail,
-            onAuthStateChanged
+            onAuthStateChanged,
+            signOut
         } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
         import {
             getDatabase,
@@ -722,11 +721,11 @@
             setLoading(signupBtn, true);
 
             try {
-                // 1. Create user in Firebase Auth
+                // 1. Create user in Firebase Auth (this automatically signs them in)
                 const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
                 const user = userCredential.user;
 
-                // 2. Write user data to Realtime Database under users/{uid}
+                // 2. Prepare user data
                 const userData = {
                     firstName: fName,
                     lastName: lName,
@@ -737,12 +736,15 @@
                     banned: false
                 };
 
-                // This is the critical step that writes to the database
-                await set(ref(db, 'users/' + user.uid), userData);
+                // 3. Write user data to Realtime Database under users/{uid}
+                const userRef = ref(db, 'users/' + user.uid);
+                await set(userRef, userData);
 
-                // 3. Redirect based on email prefix
-                const redirectUrl = email.startsWith('admin@') ? 'admin.html' : 'home.html';
-                window.location.href = redirectUrl;
+                // 4. Sign out the user so they must log in manually
+                await signOut(auth);
+
+                // 5. Redirect to login page with a success message
+                window.location.href = 'login.html?signup=success';
 
             } catch (error) {
                 setLoading(signupBtn, false);
@@ -751,6 +753,10 @@
                 else if (error.code === 'auth/weak-password') msg = '⚠️ Password is too weak. Use at least 6 characters.';
                 else if (error.code === 'auth/invalid-email') msg = '⚠️ Invalid email address.';
                 else if (error.code === 'auth/network-request-failed') msg = '⚠️ Network error. Check your connection.';
+                else {
+                    console.error('Signup Error:', error);
+                    msg = '⚠️ An unexpected error occurred. Check console for details.';
+                }
                 signupStatus.textContent = msg;
                 signupStatus.className = 'status-msg error';
             }
@@ -768,6 +774,13 @@
                 }
             }
         });
+
+        // ─── Check for signup success message ───
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('signup') === 'success') {
+            loginStatus.textContent = '✅ Account created! Please log in with your credentials.';
+            loginStatus.className = 'status-msg success';
+        }
 
         // ─── Initial focus ───
         loginEmail.focus();
