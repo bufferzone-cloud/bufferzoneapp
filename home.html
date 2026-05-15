@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Creative Agency App</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -17,26 +17,66 @@
 
         body {
             background-color: #f5f5f5;
+            display: block;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .app-root {
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-        }
-
-        .app-container {
+            flex-direction: column;
+            height: 100vh;
             width: 100%;
-            max-width: 420px;
-            min-height: 100vh;
+            max-width: 100vw;
+            margin: 0 auto;
             background-color: #ffffff;
+            overflow: hidden;
             position: relative;
-            padding: 0 14px 64px 14px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.08);
-            overflow-x: hidden;
-            transform: scale(0.8);
-            transform-origin: top center;
         }
 
-        /* --- HEADER --- */
+        .app-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 14px 100px 14px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 92%;
+            max-width: 400px;
+            height: 64px;
+            background: #1c2128;
+            border-radius: 32px;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 500;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+            flex-shrink: 0;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            color: #888;
+            transition: color 0.3s;
+            flex: 1;
+            background: none;
+            border: none;
+            font-size: 8px;
+            gap: 1px;
+            user-select: none;
+        }
+        .nav-item i { font-size: 20px; margin-bottom: 1px; }
+        .nav-item.active { color: #f5b83d; }
+        .nav-item:active { transform: scale(0.92); }
+
         .header {
             display: flex;
             align-items: center;
@@ -104,7 +144,6 @@
             justify-content: center;
         }
 
-        /* --- HERO --- */
         .hero {
             background-color: #1c2128;
             border-radius: 16px;
@@ -206,10 +245,9 @@
         }
         .contact-number strong { font-size: 10px; font-weight: 700; }
 
-        /* --- CATEGORY ROW (Scrollable) --- */
         .category-row {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             margin-bottom: 16px;
             overflow-x: auto;
             padding-bottom: 4px;
@@ -221,16 +259,16 @@
             flex-shrink: 0;
             background: white;
             border: 1px solid #f0f0f0;
-            border-radius: 16px;
-            padding: 5px 13px;
-            font-size: 9px;
+            border-radius: 20px;
+            padding: 7px 17px;
+            font-size: 12px;
             font-weight: 600;
             color: #555;
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
         .cat-btn:active { transform: scale(0.95); }
         .cat-btn.active {
@@ -240,7 +278,6 @@
         }
         .cat-btn.active i { color: #f5b83d; }
 
-        /* --- SERVICE GRID --- */
         .dynamic-header {
             display: flex;
             justify-content: space-between;
@@ -332,27 +369,60 @@
             padding: 0 0 16px 0;
         }
 
-        .order-hero-image {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            height: 160px;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: flex-start;
-            padding: 16px;
-            background-size: cover;
-            background-position: center;
+        .order-policy-panel {
             background-color: #1c2128;
-        }
-        .order-hero-tag {
-            background: #1c2128;
-            color: white;
-            padding: 3px 10px;
             border-radius: 16px;
-            font-size: 8px;
-            font-weight: 600;
+            padding: 16px 18px;
+            color: white;
+            position: relative;
+            margin-bottom: 16px;
+            overflow: hidden;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .order-policy-panel::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -20px;
+            height: 100%;
+            width: 50%;
+            z-index: 0;
+            background: radial-gradient(circle at 100% 100%, #f5b83d 0%, #f5b83d 45%, transparent 45%);
+            opacity: 0.9;
+            border-top-left-radius: 100%;
+            border-bottom-left-radius: 100%;
+        }
+        .order-policy-content {
+            position: relative;
+            z-index: 1;
+        }
+        .order-policy-content h2 {
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+        .order-policy-content h2 span {
+            color: #f5b83d;
+        }
+        .order-policy-content p {
+            font-size: 11px;
+            color: #e0e0e0;
+            line-height: 1.5;
+            max-width: 85%;
+        }
+        .order-policy-content .policy-tag {
+            display: inline-block;
+            background: rgba(245, 184, 61, 0.15);
+            color: #f5b83d;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 9px;
+            font-weight: 700;
+            margin-top: 6px;
         }
 
         .order-title-section {
@@ -532,7 +602,7 @@
             height: 100%;
             background: rgba(0,0,0,0.6);
             backdrop-filter: blur(8px);
-            z-index: 500;
+            z-index: 1000;
             display: none;
             align-items: center;
             justify-content: center;
@@ -642,47 +712,6 @@
         }
         .btn-primary:active { transform: scale(0.96); }
         .btn-primary i { color: #f5b83d; }
-
-        /* --- BOTTOM NAV (Fixed, non-scrollable) --- */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) scale(0.8);
-            transform-origin: bottom center;
-            width: 100%;
-            max-width: 420px;
-            background: #1c2128;
-            border-radius: 24px;
-            padding: 8px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            /* Ensure no scrolling */
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            color: #888;
-            transition: color 0.3s;
-            flex: 1;
-            background: none;
-            border: none;
-            font-size: 7px;
-            gap: 1px;
-            /* Prevent text selection */
-            user-select: none;
-        }
-        .nav-item i { font-size: 16px; margin-bottom: 1px; }
-        .nav-item.active { color: #f5b83d; }
-        .nav-item:active { transform: scale(0.92); }
 
         /* --- VIEWS --- */
         .view { display: none; }
@@ -872,7 +901,7 @@
         }
         .logout-btn:active { transform: scale(0.95); }
 
-        /* --- HISTORY VIEW (Expandable Transactions) --- */
+        /* --- HISTORY VIEW (Expandable) --- */
         .history-list {
             padding: 0 0 16px 0;
             display: flex;
@@ -1030,145 +1059,152 @@
         }
 
         @media (max-width: 420px) {
-            .app-container { padding: 0 10px 64px 10px; }
+            .app-content { padding: 0 10px 100px 10px; }
             .service-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
             .hero-title { font-size: 19px; }
+            .bottom-nav { width: 95%; height: 58px; padding: 6px 16px; }
+            .nav-item i { font-size: 18px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="app-container" id="appRoot">
+    <div class="app-root">
 
-        <!-- ===== HEADER ===== -->
-        <div class="header">
-            <div class="header-left">
-                <div class="avatar" id="headerAvatar"></div>
-                <div class="header-text">
-                    <span>Welcome back,</span>
-                    <span>TARIQUL ISLAM</span>
-                </div>
-            </div>
-            <div class="notif-icon" id="notifIcon">
-                <i class="fa-regular fa-bell"></i>
-                <span class="notif-badge">3</span>
-            </div>
-        </div>
+        <!-- ===== SCROLLABLE CONTENT ===== -->
+        <div class="app-content" id="appContent">
 
-        <!-- ===== VIEW: HOME ===== -->
-        <div id="homeView" class="view active">
-
-            <!-- Hero -->
-            <div class="hero">
-                <div class="small-grid-dots">
-                    <div></div><div></div><div></div><div></div>
-                    <div></div><div></div><div></div><div></div>
-                    <div></div><div></div><div></div><div></div>
-                    <div></div><div></div><div></div><div></div>
-                </div>
-                <div class="hero-bg-decor"></div>
-                <div class="hero-content">
-                    <div class="hero-title">
-                        WE ARE<br>
-                        <span>CREATIVE</span><br>
-                        <span>AGENCY</span>
-                    </div>
-                    <div class="hero-desc">
-                        We provide the best ideas to grow your business
-                    </div>
-                    <div class="hero-services">
-                        <div class="hero-services-title">OUR SERVICES</div>
-                        <ul class="service-list">
-                            <li><i class="fa-solid fa-check-circle"></i> Graphic Design</li>
-                            <li><i class="fa-solid fa-check-circle"></i> Web Development</li>
-                            <li><i class="fa-solid fa-check-circle"></i> Digital Marketing</li>
-                            <li><i class="fa-solid fa-check-circle"></i> Branding Design</li>
-                        </ul>
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <div class="avatar" id="headerAvatar"></div>
+                    <div class="header-text">
+                        <span>Welcome back,</span>
+                        <span>TARIQUL ISLAM</span>
                     </div>
                 </div>
-                <div class="cta-container">
-                    <div class="btn-get-started">GET STARTED</div>
-                    <div class="contact-number">Call to find out more<br><strong>+123 456 7890</strong></div>
+                <div class="notif-icon" id="notifIcon">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notif-badge">3</span>
                 </div>
             </div>
 
-            <!-- Category Buttons -->
-            <div class="category-row" id="categoryRow">
-                <button class="cat-btn active" data-cat="all"><i class="fa-solid fa-th-large"></i> All</button>
-                <button class="cat-btn" data-cat="graphic"><i class="fa-regular fa-lightbulb"></i> Graphic</button>
-                <button class="cat-btn" data-cat="dev"><i class="fa-solid fa-code"></i> Developer</button>
-                <button class="cat-btn" data-cat="tech"><i class="fa-solid fa-gear"></i> Technical</button>
-                <button class="cat-btn" data-cat="it"><i class="fa-solid fa-headset"></i> IT Support</button>
-            </div>
+            <!-- ===== VIEW: HOME ===== -->
+            <div id="homeView" class="view active">
 
-            <!-- Dynamic Service Grid -->
-            <div id="serviceSection">
-                <div class="dynamic-header">
-                    <span class="dynamic-title" id="dynamicTitle">RECENT WORK</span>
-                    <div class="dynamic-actions">
-                        <span class="dynamic-back" id="dynamicBack" style="display:none;">← Back</span>
-                        <span class="dynamic-view-all" id="dynamicViewAll">View All</span>
+                <!-- Hero -->
+                <div class="hero">
+                    <div class="small-grid-dots">
+                        <div></div><div></div><div></div><div></div>
+                        <div></div><div></div><div></div><div></div>
+                        <div></div><div></div><div></div><div></div>
+                        <div></div><div></div><div></div><div></div>
+                    </div>
+                    <div class="hero-bg-decor"></div>
+                    <div class="hero-content">
+                        <div class="hero-title">
+                            WE ARE<br>
+                            <span>CREATIVE</span><br>
+                            <span>AGENCY</span>
+                        </div>
+                        <div class="hero-desc">
+                            We provide the best ideas to grow your business
+                        </div>
+                        <div class="hero-services">
+                            <div class="hero-services-title">OUR SERVICES</div>
+                            <ul class="service-list">
+                                <li><i class="fa-solid fa-check-circle"></i> Graphic Design</li>
+                                <li><i class="fa-solid fa-check-circle"></i> Web Development</li>
+                                <li><i class="fa-solid fa-check-circle"></i> Digital Marketing</li>
+                                <li><i class="fa-solid fa-check-circle"></i> Branding Design</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cta-container">
+                        <div class="btn-get-started">GET STARTED</div>
+                        <div class="contact-number">Call to find out more<br><strong>+123 456 7890</strong></div>
                     </div>
                 </div>
-                <div id="serviceGridContainer" class="service-grid"></div>
-            </div>
 
-        </div>
-
-        <!-- ===== VIEW: ORDER FLOW ===== -->
-        <div id="orderFlowView" class="view">
-            <div style="display: flex; align-items: center; gap: 10px; padding: 0 0 10px 0;">
-                <button id="backFromOrder" style="background: none; border: none; font-size: 16px; color: #1c2128; cursor: pointer; padding: 3px;">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-                <h3 style="font-weight: 700; font-size: 14px; color: #1c2128;">Customize Order</h3>
-            </div>
-            <div id="orderFlowContainer" class="order-flow-container">
-                <!-- Dynamically rendered -->
-            </div>
-        </div>
-
-        <!-- ===== VIEW: ORDERS ===== -->
-        <div id="ordersView" class="view">
-            <div style="padding: 0 0 13px 0;">
-                <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Your Orders</h3>
-                <p style="color: #888; font-size: 11px;">Track your projects and payments.</p>
-            </div>
-            <div class="order-grid" id="ordersGrid"></div>
-        </div>
-
-        <!-- ===== VIEW: HISTORY (Expandable Transactions) ===== -->
-        <div id="historyView" class="view">
-            <div style="padding: 0 0 13px 0;">
-                <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Transaction History</h3>
-                <p style="color: #888; font-size: 11px;">Tap a transaction to view more details.</p>
-            </div>
-            <div class="history-list" id="historyList"></div>
-        </div>
-
-        <!-- ===== VIEW: PROFILE ===== -->
-        <div id="profileView" class="view">
-            <div style="padding: 0 0 13px 0;">
-                <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">My Profile</h3>
-                <p style="color: #888; font-size: 11px;">Your personal information.</p>
-            </div>
-            <div class="profile-card">
-                <div class="profile-avatar-large"></div>
-                <div class="profile-name">Tariqul Islam</div>
-                <div class="profile-role">Founder & Creative Director</div>
-                <div class="profile-field"><i class="fa-solid fa-user"></i><span class="label">Full Name</span><span class="value">Tariqul Islam</span></div>
-                <div class="profile-field"><i class="fa-solid fa-phone"></i><span class="label">Phone</span><span class="value">+1 (555) 123-4567</span></div>
-                <div class="profile-field"><i class="fa-solid fa-envelope"></i><span class="label">Email</span><span class="value">tariqul@creative.agency</span></div>
-                <div class="profile-field"><i class="fa-solid fa-calendar"></i><span class="label">Joined</span><span class="value">January 2018</span></div>
-                <div class="profile-about">
-                    <h4 style="font-size: 11px; font-weight: 600; color: #1c2128; margin-bottom: 4px;">About</h4>
-                    <p>Passionate about design and technology. Leading a creative agency that helps brands grow through innovation and strategic design.</p>
+                <!-- Category Buttons (30% larger) -->
+                <div class="category-row" id="categoryRow">
+                    <button class="cat-btn active" data-cat="all"><i class="fa-solid fa-th-large"></i> All</button>
+                    <button class="cat-btn" data-cat="graphic"><i class="fa-regular fa-lightbulb"></i> Graphic</button>
+                    <button class="cat-btn" data-cat="dev"><i class="fa-solid fa-code"></i> Developer</button>
+                    <button class="cat-btn" data-cat="tech"><i class="fa-solid fa-gear"></i> Technical</button>
+                    <button class="cat-btn" data-cat="it"><i class="fa-solid fa-headset"></i> IT Support</button>
                 </div>
-                <button class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+
+                <!-- Dynamic Service Grid -->
+                <div id="serviceSection">
+                    <div class="dynamic-header">
+                        <span class="dynamic-title" id="dynamicTitle">RECENT WORK</span>
+                        <div class="dynamic-actions">
+                            <span class="dynamic-back" id="dynamicBack" style="display:none;">← Back</span>
+                            <span class="dynamic-view-all" id="dynamicViewAll">View All</span>
+                        </div>
+                    </div>
+                    <div id="serviceGridContainer" class="service-grid"></div>
+                </div>
+
             </div>
+
+            <!-- ===== VIEW: ORDER FLOW ===== -->
+            <div id="orderFlowView" class="view">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 0 0 10px 0;">
+                    <button id="backFromOrder" style="background: none; border: none; font-size: 16px; color: #1c2128; cursor: pointer; padding: 3px;">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <h3 style="font-weight: 700; font-size: 14px; color: #1c2128;">Customize Order</h3>
+                </div>
+                <div id="orderFlowContainer" class="order-flow-container">
+                    <!-- Dynamically rendered -->
+                </div>
+            </div>
+
+            <!-- ===== VIEW: ORDERS ===== -->
+            <div id="ordersView" class="view">
+                <div style="padding: 0 0 13px 0;">
+                    <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Your Orders</h3>
+                    <p style="color: #888; font-size: 11px;">Track your projects and payments.</p>
+                </div>
+                <div class="order-grid" id="ordersGrid"></div>
+            </div>
+
+            <!-- ===== VIEW: HISTORY ===== -->
+            <div id="historyView" class="view">
+                <div style="padding: 0 0 13px 0;">
+                    <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Transaction History</h3>
+                    <p style="color: #888; font-size: 11px;">Tap a transaction to view more details.</p>
+                </div>
+                <div class="history-list" id="historyList"></div>
+            </div>
+
+            <!-- ===== VIEW: PROFILE ===== -->
+            <div id="profileView" class="view">
+                <div style="padding: 0 0 13px 0;">
+                    <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">My Profile</h3>
+                    <p style="color: #888; font-size: 11px;">Your personal information.</p>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-avatar-large"></div>
+                    <div class="profile-name">Tariqul Islam</div>
+                    <div class="profile-role">Founder & Creative Director</div>
+                    <div class="profile-field"><i class="fa-solid fa-user"></i><span class="label">Full Name</span><span class="value">Tariqul Islam</span></div>
+                    <div class="profile-field"><i class="fa-solid fa-phone"></i><span class="label">Phone</span><span class="value">+1 (555) 123-4567</span></div>
+                    <div class="profile-field"><i class="fa-solid fa-envelope"></i><span class="label">Email</span><span class="value">tariqul@creative.agency</span></div>
+                    <div class="profile-field"><i class="fa-solid fa-calendar"></i><span class="label">Joined</span><span class="value">January 2018</span></div>
+                    <div class="profile-about">
+                        <h4 style="font-size: 11px; font-weight: 600; color: #1c2128; margin-bottom: 4px;">About</h4>
+                        <p>Passionate about design and technology. Leading a creative agency that helps brands grow through innovation and strategic design.</p>
+                    </div>
+                    <button class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+                </div>
+            </div>
+
         </div>
 
-        <!-- ===== BOTTOM NAV (Fixed) ===== -->
+        <!-- ===== FLOATING PILL-SHAPED BOTTOM NAV ===== -->
         <div class="bottom-nav">
             <button class="nav-item active" data-view="homeView"><i class="fa-solid fa-house"></i><span>Home</span></button>
             <button class="nav-item" data-view="ordersView"><i class="fa-solid fa-bag-shopping"></i><span>Orders</span></button>
@@ -1378,8 +1414,12 @@
                 const totalPrice = (service.price * currentQuantity).toFixed(2);
 
                 container.innerHTML = `
-                    <div class="order-hero-image" style="background: ${service.thumb.includes('thumb-1') ? '#0f0f0f' : service.thumb.includes('thumb-2') ? '#004d59' : service.thumb.includes('thumb-3') ? '#b3b3b3' : service.thumb.includes('thumb-4') ? '#1a1a1a' : service.thumb.includes('thumb-5') ? '#24201c' : service.thumb.includes('thumb-6') ? '#1f1f1f' : service.thumb.includes('thumb-7') ? '#2a3b4c' : service.thumb.includes('thumb-8') ? '#2e241a' : service.thumb.includes('thumb-9') ? '#0f2a22' : service.thumb.includes('thumb-10') ? '#2e1a24' : service.thumb.includes('thumb-11') ? '#1f2a15' : service.thumb.includes('thumb-12') ? '#2e1f2e' : service.thumb.includes('thumb-13') ? '#3a2a1a' : service.thumb.includes('thumb-14') ? '#1a3a2a' : '#2a3a1a'}">
-                        <div class="order-hero-tag"><i class="fa-regular fa-circle-check"></i> ${service.category.charAt(0).toUpperCase() + service.category.slice(1)} Service</div>
+                    <div class="order-policy-panel">
+                        <div class="order-policy-content">
+                            <h2>BUFFER ZONE<br><span>PAYMENT POLICY</span></h2>
+                            <p>To begin your project, we require a <strong>50% down payment</strong>. The remaining balance is due upon project completion and delivery. This ensures commitment from both parties and allows us to allocate resources effectively.</p>
+                            <div class="policy-tag"><i class="fa-regular fa-circle-check"></i> 50% upfront required</div>
+                        </div>
                     </div>
 
                     <div class="order-title-section">
@@ -1492,6 +1532,8 @@
                 const activeNav = Array.from(navItems).find(n => n.dataset.view === viewId);
                 if (activeNav) activeNav.classList.add('active');
                 if (viewId !== 'orderFlowView') document.getElementById('orderFlowView').classList.remove('active');
+                // Scroll to top when switching views
+                document.getElementById('appContent').scrollTop = 0;
             }
 
             navItems.forEach(item => {
@@ -1625,7 +1667,6 @@
                     </div>
                 `).join('');
 
-                // Click to expand
                 container.querySelectorAll('.history-item').forEach(item => {
                     item.addEventListener('click', function() {
                         this.classList.toggle('open');
