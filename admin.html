@@ -271,26 +271,30 @@
             margin-top: 2px;
         }
 
-        /* --- SERVICE CARD (Professional & Full Info) --- */
-        .service-grid {
+        /* --- SERVICE CARD (Customer style) --- */
+        .service-grid-customer {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
             margin-top: 4px;
         }
-        .service-card-pro {
+        .service-card-customer {
             background: #ffffff;
-            border-radius: 14px;
-            padding: 16px 18px;
+            border-radius: 12px;
+            padding: 12px;
             border: 1px solid #f0f0f0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            cursor: pointer;
             transition: all 0.2s;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            align-items: center;
+            text-align: center;
         }
-        .service-card-pro:active { transform: scale(0.97); }
-        .service-card-pro .icon-wrap {
+        .service-card-customer:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+        .service-card-customer .icon-wrap {
             width: 40px;
             height: 40px;
             border-radius: 10px;
@@ -298,67 +302,37 @@
             align-items: center;
             justify-content: center;
             font-size: 18px;
-            margin-bottom: 6px;
             color: #fff;
+            margin-bottom: 6px;
         }
-        .service-card-pro .icon-wrap.graphic { background: linear-gradient(135deg, #f093fb, #f5576c); }
-        .service-card-pro .icon-wrap.dev { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-        .service-card-pro .icon-wrap.tech { background: linear-gradient(135deg, #43e97b, #38f9d7); }
-        .service-card-pro .icon-wrap.it { background: linear-gradient(135deg, #fa709a, #fee140); }
-        .service-card-pro .title {
-            font-weight: 700;
-            font-size: 15px;
-            color: #1c2128;
-        }
-        .service-card-pro .sub {
+        .service-card-customer .icon-wrap.graphic { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .service-card-customer .icon-wrap.dev { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .service-card-customer .icon-wrap.tech { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .service-card-customer .icon-wrap.it { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .service-card-customer .title {
+            font-weight: 600;
             font-size: 13px;
-            color: #555;
-        }
-        .service-card-pro .price {
-            font-weight: 700;
-            font-size: 15px;
             color: #1c2128;
+            line-height: 1.2;
         }
-        .service-card-pro .category-tag {
+        .service-card-customer .sub {
             font-size: 10px;
+            color: #888;
+            line-height: 1.2;
+        }
+        .service-card-customer .price {
+            font-weight: 700;
+            font-size: 13px;
+            color: #1c2128;
+            margin-top: 4px;
+        }
+        .service-card-customer .category-tag {
+            font-size: 9px;
             background: #f0f0f0;
-            padding: 1px 10px;
-            border-radius: 12px;
-            display: inline-block;
-            color: #555;
-        }
-        .service-card-pro .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            margin-top: 2px;
-        }
-        .service-card-pro .tags .tag-item {
-            font-size: 10px;
-            background: #f5f5f5;
             padding: 1px 8px;
             border-radius: 8px;
-            color: #666;
-        }
-        .service-card-pro .specs-preview {
-            font-size: 11px;
-            color: #777;
-            background: #fafafa;
-            padding: 6px 10px;
-            border-radius: 8px;
+            color: #555;
             margin-top: 2px;
-            line-height: 1.4;
-            max-height: 60px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-        }
-        .service-card-pro .actions {
-            display: flex;
-            gap: 6px;
-            margin-top: 4px;
         }
 
         /* --- HERO EDITOR --- */
@@ -614,14 +588,28 @@
 
         /* --- CUSTOMER ITEM --- */
         .customer-item {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 12px 16px;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .customer-item:hover {
+            border-color: #ddd;
+        }
+        .customer-item .user-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .customer-item .user-summary .left {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid #f5f5f5;
         }
-        .customer-item:last-child { border-bottom: none; }
-        .customer-item .c-avatar {
+        .customer-item .user-summary .c-avatar {
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -634,32 +622,44 @@
             font-size: 14px;
             flex-shrink: 0;
         }
-        .customer-item .c-info {
-            flex: 1;
-        }
-        .customer-item .c-info .c-name {
+        .customer-item .user-summary .c-name {
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             color: #1c2128;
         }
-        .customer-item .c-info .c-email {
-            font-size: 11px;
-            color: #777;
+        .customer-item .user-summary .c-email {
+            font-size: 12px;
+            color: #888;
         }
-        .customer-item .c-info .c-phone {
-            font-size: 11px;
+        .customer-item .user-details {
+            display: none;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .customer-item .user-details.open { display: block; }
+        .customer-item .user-details .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 13px;
             color: #555;
         }
-        .customer-item .c-orders {
-            font-size: 11px;
-            color: #555;
+        .customer-item .user-details .detail-row .label { color: #888; }
+        .customer-item .user-details .detail-row .val { font-weight: 500; color: #1c2128; }
+        .customer-item .user-details .actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
         }
-        .customer-item .c-status {
-            font-size: 10px;
-            font-weight: 600;
+        .customer-item .expand-icon {
+            font-size: 12px;
+            color: #aaa;
+            transition: transform 0.3s;
         }
-        .customer-item .c-status.active { color: #16a34a; }
-        .customer-item .c-status.banned { color: #dc2626; }
+        .customer-item.open .expand-icon {
+            transform: rotate(180deg);
+        }
 
         /* --- TOGGLE SWITCH (iPhone style) --- */
         .toggle-switch {
@@ -1302,7 +1302,6 @@
             onValue(dbRef, (snapshot) => {
                 const data = snapshot.val();
                 if (!data) {
-                    // Initialize with empty structure if it doesn't exist
                     allData = {
                         hero: { title: 'WE ARE CREATIVE AGENCY', titleSpan: 'CREATIVE', desc: 'We provide the best ideas to grow your business', cta: 'GET STARTED', phone: '+123 456 7890' },
                         policy: { title: 'BUFFER ZONE PAYMENT POLICY', desc: 'To begin your project, we require a 50% down payment. The remaining balance is due upon project completion and delivery. This ensures commitment from both parties.', tag: '50% upfront required' },
@@ -1313,7 +1312,6 @@
                         transactions: {},
                         disabled: false
                     };
-                    // Save the initial structure
                     set(dbRef, allData).then(() => {
                         if (callback) callback(allData);
                     });
@@ -1336,7 +1334,6 @@
         function renderAll() {
             if (!allData) return;
 
-            // Update Header / Profile
             if (currentUser) {
                 const name = currentAdminData?.name || currentUser.displayName || currentUser.email || 'Admin';
                 const email = currentUser.email || 'No email';
@@ -1355,7 +1352,6 @@
                 greetingSub.style.marginTop = '2px';
             }
 
-            // Populate Hero Editor
             if (allData.hero) {
                 document.getElementById('heroTitle').value = allData.hero.title || '';
                 document.getElementById('heroTitleSpan').value = allData.hero.titleSpan || '';
@@ -1364,39 +1360,25 @@
                 document.getElementById('heroPhone').value = allData.hero.phone || '';
             }
 
-            // Populate Policy Editor
             if (allData.policy) {
                 document.getElementById('policyTitle').value = allData.policy.title || '';
                 document.getElementById('policyDesc').value = allData.policy.desc || '';
                 document.getElementById('policyTag').value = allData.policy.tag || '';
             }
 
-            // Populate Settings
             document.getElementById('settingsName').value = 'Buffer Zone Creative Agency';
             document.getElementById('settingsPhone').value = '+260 97 676 0537';
             document.getElementById('settingsEmail').value = 'bufferzone802@gmail.com';
 
-            // App Status
             const toggle = document.getElementById('disableAppToggle');
             toggle.checked = allData.disabled || false;
             document.getElementById('appStatusLabel').textContent = allData.disabled ? 'Disabled' : 'Active';
 
-            // Render Dashboard
             renderDashboard();
-
-            // Render Services
             renderServices();
-
-            // Render Orders
             renderOrders();
-
-            // Render Users (populated from `users/` node)
             renderUsers();
-
-            // Render Activity
             renderActivityFeed();
-
-            // Render Our Services List
             renderOurServicesList();
         }
 
@@ -1432,7 +1414,7 @@
                 return;
             }
             container.innerHTML = filtered.map(([key, s]) => `
-                <div class="service-card-pro">
+                <div class="service-card-customer" data-key="${key}">
                     <div class="icon-wrap ${s.category || 'graphic'}">
                         <i class="fa-solid ${s.icon || 'fa-cube'}"></i>
                     </div>
@@ -1440,27 +1422,13 @@
                     <div class="sub">${s.subtitle || ''}</div>
                     <div class="price">ZMW ${(s.price || 0).toFixed(2)}</div>
                     <div class="category-tag">${s.category || 'uncategorized'}</div>
-                    <div class="tags">
-                        ${(s.tags || []).map(t => `<span class="tag-item">${t}</span>`).join('')}
-                    </div>
-                    <div class="specs-preview">${s.specs || 'No specs'}</div>
-                    <div class="actions">
-                        <button class="btn btn-outline btn-sm edit-service" data-key="${key}"><i class="fa-solid fa-pen"></i></button>
-                        <button class="btn btn-danger btn-sm delete-service" data-key="${key}"><i class="fa-solid fa-trash"></i></button>
-                    </div>
                 </div>
             `).join('');
 
-            container.querySelectorAll('.edit-service').forEach(btn => {
-                btn.addEventListener('click', function() {
+            container.querySelectorAll('.service-card-customer').forEach(el => {
+                el.addEventListener('click', function() {
                     const key = this.dataset.key;
                     openEditService(key);
-                });
-            });
-            container.querySelectorAll('.delete-service').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const key = this.dataset.key;
-                    if (confirm('Delete this service?')) deleteService(key);
                 });
             });
         }
@@ -1557,25 +1525,60 @@
                     return;
                 }
                 container.innerHTML = entries.map(([uid, u]) => `
-                    <div class="customer-item">
-                        <div class="c-avatar">${(u.firstName || 'U').charAt(0)}</div>
-                        <div class="c-info">
-                            <div class="c-name">${u.firstName || ''} ${u.lastName || ''}</div>
-                            <div class="c-email">${u.email || 'No email'}</div>
-                            <div class="c-phone"><i class="fa-solid fa-phone"></i> ${u.phone || 'No phone'}</div>
-                            <div class="c-orders">Joined: ${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</div>
+                    <div class="customer-item" data-uid="${uid}">
+                        <div class="user-summary">
+                            <div class="left">
+                                <div class="c-avatar">${(u.firstName || 'U').charAt(0)}</div>
+                                <div>
+                                    <div class="c-name">${u.firstName || ''} ${u.lastName || ''}</div>
+                                    <div class="c-email">${u.email || 'No email'}</div>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
-                        <div class="c-status active">● Active</div>
-                        <div style="display:flex; gap:4px;">
-                            <button class="btn btn-danger btn-sm delete-user" data-uid="${uid}" style="padding:2px 10px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
+                        <div class="user-details">
+                            <div class="detail-row"><span class="label">Phone</span><span class="val">${u.phone || 'No phone'}</span></div>
+                            <div class="detail-row"><span class="label">Joined</span><span class="val">${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</span></div>
+                            <div class="detail-row"><span class="label">Status</span><span class="val" style="color:#16a34a;">Active</span></div>
+                            <div class="actions">
+                                <button class="btn btn-warning btn-sm ban-user" data-uid="${uid}" style="padding:2px 10px; border-radius:8px; border:none; background:#f59e0b; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-ban"></i> Ban</button>
+                                <button class="btn btn-danger btn-sm delete-user" data-uid="${uid}" style="padding:2px 10px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
+                            </div>
                         </div>
                     </div>
                 `).join('');
 
-                container.querySelectorAll('.delete-user').forEach(btn => {
-                    btn.addEventListener('click', function() {
+                container.querySelectorAll('.customer-item').forEach(el => {
+                    el.addEventListener('click', function() {
+                        this.classList.toggle('open');
+                        const details = this.querySelector('.user-details');
+                        if (this.classList.contains('open')) {
+                            details.style.display = 'block';
+                        } else {
+                            details.style.display = 'none';
+                        }
+                    });
+                });
+
+                container.querySelectorAll('.ban-user').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
                         const uid = this.dataset.uid;
-                        if (confirm('Delete this user from the database?')) {
+                        if (confirm(`Ban this user?`)) {
+                            const userRef = ref(db, 'users/' + uid);
+                            set(userRef, null).then(() => {
+                                showToast('User banned');
+                                renderUsers(document.getElementById('userSearchInput').value);
+                            });
+                        }
+                    });
+                });
+
+                container.querySelectorAll('.delete-user').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const uid = this.dataset.uid;
+                        if (confirm(`Delete this user?`)) {
                             const userRef = ref(db, 'users/' + uid);
                             set(userRef, null).then(() => {
                                 showToast('User deleted');
@@ -1995,11 +1998,9 @@
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
-                // Fetch admin data from `admins/` node using UID
                 const adminRef = ref(db, 'admins');
                 get(adminRef).then((snapshot) => {
                     const admins = snapshot.val() || {};
-                    // Find admin entry with matching UID
                     let foundAdmin = null;
                     for (const key in admins) {
                         if (admins[key].uid === user.uid) {
@@ -2008,10 +2009,8 @@
                         }
                     }
                     currentAdminData = foundAdmin || null;
-                    // Load data and render
                     loadData(() => {
                         renderAll();
-                        // Populate hero fields again after load
                         if (allData.hero) {
                             document.getElementById('heroTitle').value = allData.hero.title || '';
                             document.getElementById('heroTitleSpan').value = allData.hero.titleSpan || '';
@@ -2027,7 +2026,6 @@
                     });
                 });
             } else {
-                // Redirect to login if not authenticated
                 window.location.href = 'login.html';
             }
         });
