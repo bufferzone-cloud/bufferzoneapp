@@ -1788,7 +1788,7 @@
                 const data = snapshot.val();
                 if (!data) {
                     allData = {
-                        hero: { title: 'WE ARE CREATIVE AGENCY', titleSpan: 'CREATIVE', desc: 'We provide the best ideas to grow your business', cta: 'GET STARTED', phone: '+123 456 7890' },
+                        hero: { title: 'WE ARE CREATIVE ', titleSpan: 'CREATIVE', desc: 'We provide the best ideas to grow your business', cta: 'GET STARTED', phone: '+123 456 7890' },
                         policy: { title: 'BUFFER ZONE PAYMENT POLICY', desc: 'To begin your project, we require a 50% down payment. The remaining balance is due upon project completion and delivery. This ensures commitment from both parties.', tag: '50% upfront required' },
                         ourServicesList: ['Graphic Design', 'Web Development', 'Digital Marketing', 'Branding Design'],
                         services: {},
@@ -1829,7 +1829,7 @@
             // Render Hero
             if (allData.hero) {
                 const h = allData.hero;
-                heroTitle.innerHTML = `${h.title || 'WE ARE'}<br><span>${h.titleSpan || 'CREATIVE'}</span><br><span>AGENCY</span>`;
+                heroTitle.innerHTML = `${h.title || 'WE ARE'}<br><span>${h.titleSpan || 'CREATIVE'}</span><br><span></span>`;
                 heroDesc.textContent = h.desc || 'We provide the best ideas to grow your business';
                 heroCtaBtn.textContent = h.cta || 'GET STARTED';
                 heroPhone.textContent = h.phone || '+123 456 7890';
