@@ -536,6 +536,82 @@
             background: #2a2a2a;
         }
 
+        /* --- PROMOTION CARD --- */
+        .promo-section {
+            padding: 0 0 16px 0;
+        }
+        .promo-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .promo-card .left .code {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1c2128;
+        }
+        .promo-card .left .discount {
+            font-size: 13px;
+            color: #16a34a;
+        }
+        .promo-card .left .times {
+            font-size: 11px;
+            color: #888;
+        }
+        .promo-card .actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        /* --- CATEGORY SECTION CSS --- */
+        .category-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 12px;
+            background: #f8f9fc;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 1px solid #f0f0f0;
+        }
+        .category-tag {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 4px 14px 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .category-tag:hover {
+            border-color: #1c2128;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .category-tag .delete-cat-btn {
+            background: none;
+            border: none;
+            color: #aaa;
+            cursor: pointer;
+            font-size: 10px;
+            padding: 0;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .category-tag .delete-cat-btn:hover {
+            color: #dc2626;
+        }
+
         /* --- ORDER CARD --- */
         .order-card {
             background: #ffffff;
@@ -562,14 +638,30 @@
         .order-details .row {
             display: flex;
             justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px solid #f5f5f5;
+            padding: 4px 0;
             font-size: 12px;
             color: #555;
         }
         .order-details .row:last-child { border-bottom: none; }
         .order-details .row .label { color: #888; }
         .order-details .row .val { font-weight: 500; color: #1c2128; }
+        
+        /* Customization List in Orders */
+        .customization-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 8px;
+        }
+        .customization-list li {
+            background: #f8f9fc;
+            border-radius: 8px;
+            padding: 2px 10px;
+            font-size: 11px;
+            color: #555;
+        }
 
         .status-badge {
             display: inline-block;
@@ -1129,12 +1221,12 @@
                     <div class="card-header">
                         <h3>Categories</h3>
                     </div>
+                    <div class="category-container" id="categoryListContainer">
+                        <!-- Rendered by JS -->
+                    </div>
                     <div style="display:flex;gap:8px;flex-wrap:wrap;padding:8px 0;">
                         <input type="text" id="newCategoryInput" placeholder="Category name" style="flex:1;min-width:100px;">
                         <button class="btn btn-primary btn-sm" id="addCategoryBtn">Add</button>
-                    </div>
-                    <div id="categoryListContainer" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
-                        <!-- Rendered by JS -->
                     </div>
                 </div>
 
@@ -1514,7 +1606,6 @@
                     });
                 } else {
                     allData = data;
-                    // Ensure categories exist
                     if (!allData.categories) {
                         allData.categories = ['graphic', 'dev', 'tech', 'it'];
                         saveData();
@@ -1609,13 +1700,13 @@
             const container = document.getElementById('categoryListContainer');
             const categories = allData.categories || [];
             container.innerHTML = categories.map(cat => `
-                <span style="background:#f0f0f0;padding:4px 12px;border-radius:12px;font-size:11px;display:inline-flex;align-items:center;gap:6px;">
+                <span class="category-tag">
                     ${cat}
-                    <button class="btn btn-danger btn-sm delete-category" data-cat="${cat}" style="padding:0 4px;font-size:9px;">✕</button>
+                    <button class="delete-cat-btn" data-cat="${cat}"><i class="fa-solid fa-times"></i></button>
                 </span>
             `).join('');
 
-            container.querySelectorAll('.delete-category').forEach(btn => {
+            container.querySelectorAll('.delete-cat-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const cat = this.dataset.cat;
                     if (confirm(`Delete category "${cat}"?`)) {
@@ -1672,6 +1763,16 @@
             const container = document.getElementById('promotionsList');
             const data = allData.promotions || {};
             const entries = Object.entries(data);
+            // Calculate used counts from users
+            const users = allData.users || {};
+            let usedCountMap = {};
+            for (const userId in users) {
+                const usedCoupons = users[userId].usedCoupons || {};
+                for (const promoId in usedCoupons) {
+                    usedCountMap[promoId] = (usedCountMap[promoId] || 0) + 1;
+                }
+            }
+
             if (entries.length === 0) {
                 container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No promotions yet.</div>`;
                 return;
@@ -1681,7 +1782,7 @@
                     <div class="left">
                         <div class="code">${p.code}</div>
                         <div class="discount">${p.discount}% OFF</div>
-                        <div class="times">Used: ${p.usedCount || 0} times</div>
+                        <div class="times">Used: ${usedCountMap[key] || 0} times</div>
                     </div>
                     <div class="actions">
                         <button class="btn btn-danger btn-sm delete-promo" data-key="${key}"><i class="fa-solid fa-trash"></i></button>
@@ -1738,7 +1839,11 @@
                     <div class="order-details">
                         <div class="row"><span class="label">Client</span><span class="val">${o.customer || 'N/A'}</span></div>
                         <div class="row"><span class="label">Client Number</span><span class="val">${o.clientNumber || 'N/A'}</span></div>
-                        <div class="row"><span class="label">Customization</span><span class="val">${o.customization || 'None'}</span></div>
+                        <div class="row"><span class="label">Customization</span>
+                            <div class="val">
+                                ${o.customization ? `<ul class="customization-list">${o.customization.split(', ').map(c => `<li>${c}</li>`).join('')}</ul>` : 'None'}
+                            </div>
+                        </div>
                         <div class="row"><span class="label">Payment Proof</span><span class="val">
                             ${o.paymentProof ? `<button class="btn-view-proof" data-screenshot="${o.paymentProof}"><i class="fa-regular fa-image"></i> View</button>` : 'No proof'}
                         </span></div>
@@ -1795,6 +1900,8 @@
             const usersRef = ref(db, 'users');
             get(usersRef).then((snapshot) => {
                 const usersData = snapshot.val() || {};
+                // Update allData.users for promo counts
+                allData.users = usersData;
                 let entries = Object.entries(usersData);
                 if (searchTerm.trim()) {
                     const term = searchTerm.trim().toLowerCase();
@@ -2106,7 +2213,6 @@
             allData.promotions[newId] = {
                 code: data.code.toUpperCase(),
                 discount: parseInt(data.discount),
-                usedCount: 0,
                 createdAt: Date.now()
             };
             return saveData();
