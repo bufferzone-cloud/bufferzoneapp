@@ -532,6 +532,9 @@
         const toggleSignupPass = document.getElementById('toggleSignupPass');
         const toggleConfirmPass = document.getElementById('toggleConfirmPass');
 
+        // ─── Prevent automatic redirects during signup ───
+        let disableAuthRedirect = false;
+
         // ─── Helpers ───
         function showView(viewId) {
             const views = document.querySelectorAll('.view');
@@ -542,6 +545,7 @@
             const target = document.getElementById(viewId);
             target.classList.remove('view--hidden');
             target.classList.add('view--active');
+            // Clear status messages
             loginStatus.textContent = '\u200B';
             loginStatus.className = 'status-msg';
             signupStatus.textContent = '\u200B';
@@ -652,8 +656,8 @@
 
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
-                const redirectUrl = email.startsWith('admin@') ? 'admin.html' : 'home.html';
-                window.location.href = redirectUrl;
+                // Auth state listener will handle redirect
+                disableAuthRedirect = false;
             } catch (error) {
                 setLoading(loginBtn, false);
                 let msg = '⚠️ ' + error.message;
@@ -681,6 +685,7 @@
             signupStatus.className = 'status-msg';
             signupStatus.textContent = '\u200B';
 
+            // Validation
             if (!fName || fName.length < 1) {
                 signupStatus.textContent = '⚠️ First name is required.';
                 signupStatus.className = 'status-msg error';
@@ -719,67 +724,99 @@
             }
 
             setLoading(signupBtn, true);
+            // Prevent auth state listener from redirecting prematurely
+            disableAuthRedirect = true;
 
             try {
-                // 1. Create user in Firebase Auth (this automatically signs them in)
+                // 1. Create user (auto sign‑in)
                 const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
                 const user = userCredential.user;
 
-                // 2. Prepare user data
+                // 2. Ensure auth token is fully available before writing to database
+                await user.getIdTokenResult(true);
+
+                // 3. Prepare user data for Realtime Database
                 const userData = {
                     firstName: fName,
                     lastName: lName,
                     email: email,
                     phone: phone,
-                    role: 'customer',
+                    role: email.startsWith('admin@') ? 'admin' : 'customer',
                     createdAt: serverTimestamp(),
                     banned: false
                 };
 
-                // 3. Write user data to Realtime Database under users/{uid}
+                // 4. Write to database – this is the critical part
                 const userRef = ref(db, 'users/' + user.uid);
                 await set(userRef, userData);
 
-                // 4. Sign out the user so they must log in manually
+                // 5. Sign out so the user must log in manually
                 await signOut(auth);
 
-                // 5. Redirect to login page with a success message
-                window.location.href = 'login.html?signup=success';
-
+                // 6. Redirect to login page with success indicator
+                window.location.href = 'index.html?signup=success';
             } catch (error) {
                 setLoading(signupBtn, false);
-                let msg = '⚠️ ' + error.message;
-                if (error.code === 'auth/email-already-in-use') msg = '⚠️ This email is already registered. Please sign in instead.';
-                else if (error.code === 'auth/weak-password') msg = '⚠️ Password is too weak. Use at least 6 characters.';
-                else if (error.code === 'auth/invalid-email') msg = '⚠️ Invalid email address.';
-                else if (error.code === 'auth/network-request-failed') msg = '⚠️ Network error. Check your connection.';
-                else {
-                    console.error('Signup Error:', error);
-                    msg = '⚠️ An unexpected error occurred. Check console for details.';
+                disableAuthRedirect = false; // re‑enable redirects on error
+
+                // Special handling for database write failure
+                let msg;
+                if (error.code === 'auth/email-already-in-use') {
+                    msg = '⚠️ This email is already registered. Please sign in instead.';
+                } else if (error.code === 'auth/weak-password') {
+                    msg = '⚠️ Password is too weak. Use at least 6 characters.';
+                } else if (error.code === 'auth/invalid-email') {
+                    msg = '⚠️ Invalid email address.';
+                } else if (error.code === 'auth/network-request-failed') {
+                    msg = '⚠️ Network error. Check your connection.';
+                } else if (error.code === 'PERMISSION_DENIED') {
+                    msg = '⚠️ Unable to save registration data. Please contact support.';
+                } else {
+                    // Database write might have failed – show the actual message
+                    msg = '⚠️ Registration data could not be saved: ' + (error.message || 'Unknown error');
                 }
+
+                // If we have a user but the database write failed, sign out to clean up
+                if (auth.currentUser) {
+                    await signOut(auth);
+                }
+
                 signupStatus.textContent = msg;
                 signupStatus.className = 'status-msg error';
+            } finally {
+                // Always re‑enable redirects when done
+                if (disableAuthRedirect) {
+                    disableAuthRedirect = false;
+                }
             }
         });
 
         // ─── Auth state listener ───
         onAuthStateChanged(auth, (user) => {
+            // If redirect is disabled (during signup), do nothing
+            if (disableAuthRedirect) return;
+
             if (user) {
                 const email = user.email;
-                if (email) {
-                    const redirectUrl = email.startsWith('admin@') ? 'admin.html' : 'home.html';
-                    window.location.href = redirectUrl;
+                // Determine where to send the user
+                if (email && email.startsWith('admin@')) {
+                    window.location.href = 'admin.html';
                 } else {
                     window.location.href = 'home.html';
                 }
             }
+            // No user → stay on the page (default)
         });
 
-        // ─── Check for signup success message ───
+        // ─── Check for signup success message (when arriving from signup redirect) ───
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('signup') === 'success') {
-            loginStatus.textContent = '✅ Account created! Please log in with your credentials.';
+            // Show login view with a success message
+            showView('loginView');
+            loginStatus.textContent = '✅ Account created successfully! Please log in.';
             loginStatus.className = 'status-msg success';
+            // Clean URL without reloading
+            window.history.replaceState({}, document.title, window.location.pathname);
         }
 
         // ─── Initial focus ───
