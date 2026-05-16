@@ -87,7 +87,6 @@
             transform: scale(0.92);
         }
 
-        /* ===== HEADER ===== */
         .header {
             display: flex;
             align-items: center;
@@ -690,7 +689,6 @@
             box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
 
-        /* ===== ORDER CARD ===== */
         .order-card {
             background: #ffffff;
             border-radius: 14px;
@@ -1349,7 +1347,6 @@
             color: #888;
         }
 
-        /* ---- Work Posts Grid (2x2) ---- */
         .work-posts-section {
             margin-top: 6px;
         }
@@ -1473,7 +1470,6 @@
             color: #dc2626;
         }
 
-        /* ---- Phone Frame ---- */
         .phone-frame {
             width: 100%;
             max-width: 220px;
@@ -1512,7 +1508,6 @@
             border-radius: 0 0 12px 12px;
         }
 
-        /* ---- Laptop Frame ---- */
         .laptop-frame {
             width: 100%;
             max-width: 320px;
@@ -1561,7 +1556,6 @@
             border-radius: 0 0 4px 4px;
         }
 
-        /* ---- Work Upload Modal ---- */
         .work-upload-modal .modal {
             max-width: 480px;
         }
@@ -1606,7 +1600,6 @@
             padding: 8px 0;
         }
 
-        /* ---- Orders header compact ---- */
         .orders-compact-header {
             display: flex;
             align-items: center;
@@ -1634,7 +1627,6 @@
             font-size: 10px;
         }
 
-        /* ---- Responsive fine-tune ---- */
         @media (max-width: 400px) {
             .work-options-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1761,7 +1753,6 @@
                     <p>Showcase your work — add new posts or manage existing ones</p>
                 </div>
 
-                <!-- 4 Option Cards -->
                 <div class="work-options-grid">
                     <div class="work-option-card" data-type="app">
                         <span class="wo-icon">📱</span>
@@ -1785,10 +1776,7 @@
                     </div>
                 </div>
 
-                <!-- Posts Display (2x2 Grid by Section) -->
-                <div class="work-posts-section" id="workPostsContainer">
-                    <!-- Rendered by JS -->
-                </div>
+                <div class="work-posts-section" id="workPostsContainer"></div>
 
             </div>
 
@@ -2074,7 +2062,7 @@
         </div>
     </div>
 
-    <!-- ===== WORK UPLOAD MODAL ===== -->
+    <!-- ===== WORK UPLOAD MODAL (Cloudinary Widget) ===== -->
     <div class="modal-overlay work-upload-modal" id="workUploadModal">
         <div class="modal">
             <button class="close-btn" id="workUploadCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -2084,7 +2072,7 @@
                 <input type="hidden" id="editWorkPostId" />
                 <input type="hidden" id="workPostType" value="app" />
 
-                <!-- Image Upload (Cloudinary) -->
+                <!-- Image Upload (Cloudinary Widget) -->
                 <div class="form-group">
                     <label>Image</label>
                     <div class="upload-preview" id="workImagePreview">
@@ -2092,27 +2080,21 @@
                         <div class="upload-text">Tap to upload an image</div>
                     </div>
                     <input type="hidden" id="workImageUrl" />
-                    <input type="file" id="workImageFile" accept="image/*" style="display:none;" />
                 </div>
 
-                <!-- Frame Preview (phone / laptop) -->
-                <div class="frame-container" id="workFrameContainer">
-                    <!-- Dynamically rendered -->
-                </div>
+                <div class="frame-container" id="workFrameContainer"></div>
 
-                <!-- App / Website fields -->
                 <div id="workAppFields">
                     <div class="form-group">
-                        <label>App Name</label>
+                        <label>App / Website Name</label>
                         <input type="text" id="workAppName" placeholder="e.g. My Awesome App" />
                     </div>
                     <div class="form-group">
-                        <label>Functionality</label>
-                        <textarea id="workAppFunc" rows="2" placeholder="Describe what the app does..."></textarea>
+                        <label>Functionality / Description</label>
+                        <textarea id="workAppFunc" rows="2" placeholder="Describe what the app/website does..."></textarea>
                     </div>
                 </div>
 
-                <!-- Flyer / Logo fields -->
                 <div id="workFlyerFields" style="display:none;">
                     <div class="form-group">
                         <label>Title</label>
@@ -2179,10 +2161,10 @@
         const auth = getAuth(app);
 
         // =================================================================
-        // CLOUDINARY CONFIG
+        // CLOUDINARY CONFIG (same as customer side)
         // =================================================================
-        const CLOUDINARY_CLOUD_NAME = 'bufferzone';
-        const CLOUDINARY_UPLOAD_PRESET = 'bufferzone_uploads';
+        const CLOUDINARY_CLOUD_NAME = 'dd3lcymrk';
+        const CLOUDINARY_UPLOAD_PRESET = 'h3eyhc2o';
 
         // =================================================================
         // STATE
@@ -2252,7 +2234,6 @@
         const workPostType = document.getElementById('workPostType');
         const editWorkPostId = document.getElementById('editWorkPostId');
         const workImagePreview = document.getElementById('workImagePreview');
-        const workImageFile = document.getElementById('workImageFile');
         const workImageUrl = document.getElementById('workImageUrl');
         const workFrameContainer = document.getElementById('workFrameContainer');
         const workAppFields = document.getElementById('workAppFields');
@@ -2323,29 +2304,65 @@
         }
 
         // =================================================================
-        // CLOUDINARY UPLOAD
+        // CLOUDINARY UPLOAD WIDGET (same as customer)
         // =================================================================
 
-        function uploadToCloudinary(file) {
-            return new Promise((resolve, reject) => {
-                const formData = new FormData();
-                formData.append('file', file);
-                formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-                formData.append('cloud_name', CLOUDINARY_CLOUD_NAME);
-
-                fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.secure_url) {
-                            resolve(data.secure_url);
+        function setupCloudinaryUpload() {
+            workImagePreview.addEventListener('click', () => {
+                const options = {
+                    cloudName: CLOUDINARY_CLOUD_NAME,
+                    uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+                    sources: ['local', 'url', 'camera'],
+                    maxFileSize: 155000000,
+                    resourceType: 'image',
+                    clientAllowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+                    maxFiles: 1,
+                    multiple: false,
+                    fieldName: 'file',
+                    language: 'en',
+                    defaultSource: 'local'
+                };
+                const widget = cloudinary.openUploadWidget(options, (error, result) => {
+                    if (error) {
+                        console.error('Cloudinary error:', error);
+                        showToast('Upload error: ' + (error.message || 'Unknown'), 'error');
+                        return;
+                    }
+                    if (result.event === 'success') {
+                        const info = result.info;
+                        const url = info.secure_url;
+                        workImageUrl.value = url;
+                        // Show preview
+                        workImagePreview.innerHTML = `<img src="${url}" alt="Uploaded" style="max-height:200px;object-fit:contain;" />`;
+                        // Update frame preview based on type
+                        const type = workPostType.value;
+                        if (type === 'app') {
+                            workFrameContainer.innerHTML = `
+                                        <div class="phone-frame">
+                                            <img src="${url}" alt="App Screenshot" />
+                                            <div class="notch"></div>
+                                        </div>
+                                    `;
+                        } else if (type === 'website') {
+                            workFrameContainer.innerHTML = `
+                                        <div class="laptop-frame">
+                                            <div class="screen">
+                                                <img src="${url}" alt="Website Screenshot" />
+                                            </div>
+                                            <div class="base"></div>
+                                        </div>
+                                    `;
                         } else {
-                            reject(new Error('Upload failed'));
+                            workFrameContainer.innerHTML = `
+                                        <div style="text-align:center;padding:8px 0;">
+                                            <img src="${url}" alt="Upload" style="max-width:100%;max-height:180px;border-radius:12px;object-fit:contain;" />
+                                        </div>
+                                    `;
                         }
-                    })
-                    .catch(err => reject(err));
+                        showToast('Image uploaded successfully!', 'success');
+                    }
+                });
+                widget.open();
             });
         }
 
@@ -2763,7 +2780,6 @@
             const posts = allData.workPosts || {};
             const entries = Object.entries(posts);
 
-            // Group by type
             const groups = { app: [], flyer: [], website: [], logo: [] };
             entries.forEach(([key, p]) => {
                 if (groups[p.type]) {
@@ -2771,7 +2787,6 @@
                 }
             });
 
-            // Sort each group by createdAt descending
             for (const type in groups) {
                 groups[type].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
             }
@@ -2840,7 +2855,6 @@
 
             container.innerHTML = html;
 
-            // Event listeners for edit / delete
             container.querySelectorAll('.btn-edit-post').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
@@ -2863,7 +2877,9 @@
             workPostType.value = type;
             editWorkPostId.value = editData ? editData.key : '';
             workImageUrl.value = editData?.imageUrl || '';
-            workImageFile.value = '';
+            workImagePreview.innerHTML = editData?.imageUrl ?
+                `<img src="${editData.imageUrl}" alt="Uploaded" style="max-height:200px;object-fit:contain;" />` :
+                `<div class="upload-icon"><i class="fa-regular fa-image"></i></div><div class="upload-text">Tap to upload an image</div>`;
 
             const typeLabels = {
                 app: 'Upload App Screenshot',
@@ -2881,17 +2897,11 @@
             workUploadTitle.textContent = editData ? `Edit ${typeLabels[type]}` : typeLabels[type];
             workUploadSub.textContent = editData ? `Update your ${type} post.` : typeSubs[type];
 
-            // Show/hide fields
             if (type === 'app' || type === 'website') {
                 workAppFields.style.display = 'block';
                 workFlyerFields.style.display = 'none';
-                if (type === 'app') {
-                    workAppName.placeholder = 'App Name';
-                    workAppFunc.placeholder = 'Describe what the app does...';
-                } else {
-                    workAppName.placeholder = 'Website Name';
-                    workAppFunc.placeholder = 'Describe the website...';
-                }
+                workAppName.placeholder = type === 'app' ? 'App Name' : 'Website Name';
+                workAppFunc.placeholder = type === 'app' ? 'Describe what the app does...' : 'Describe the website...';
                 workAppName.value = editData?.title || '';
                 workAppFunc.value = editData?.description || '';
             } else {
@@ -2925,18 +2935,6 @@
                             <div style="text-align:center;padding:8px 0;">
                                 ${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="Upload" style="max-width:100%;max-height:180px;border-radius:12px;object-fit:contain;" />` : `<div style="color:#ccc;font-size:48px;"><i class="fa-regular fa-image"></i></div>`}
                             </div>
-                        `;
-            }
-
-            // Image preview
-            if (editData?.imageUrl) {
-                workImagePreview.innerHTML = `
-                            <img src="${editData.imageUrl}" alt="Uploaded" style="max-height:200px;object-fit:contain;" />
-                        `;
-            } else {
-                workImagePreview.innerHTML = `
-                            <div class="upload-icon"><i class="fa-regular fa-image"></i></div>
-                            <div class="upload-text">Tap to upload an image</div>
                         `;
             }
 
@@ -3237,17 +3235,14 @@
         // EVENT BINDINGS
         // ================================================================
 
-        // ---- Work Avatar ----
         workAvatarBtn.addEventListener('click', function() {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-work').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            // Center the header
             mainHeader.classList.add('center-header');
             document.getElementById('appContent').scrollTop = 0;
         });
 
-        // ---- Bottom nav ----
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
                 document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -3257,14 +3252,12 @@
                 const target = document.getElementById('page-' + page);
                 if (target) target.classList.add('active');
                 document.getElementById('appContent').scrollTop = 0;
-                // Remove center header style when not on work page
                 if (page !== 'work') {
                     mainHeader.classList.remove('center-header');
                 }
             });
         });
 
-        // ---- Work option cards ----
         document.querySelectorAll('.work-option-card').forEach(card => {
             card.addEventListener('click', function() {
                 const type = this.dataset.type;
@@ -3272,62 +3265,14 @@
             });
         });
 
-        // ---- Work upload modal ----
         workUploadCloseBtn.addEventListener('click', closeWorkUploadModal);
         workUploadCancelBtn.addEventListener('click', closeWorkUploadModal);
         workUploadModal.addEventListener('click', function(e) {
             if (e.target === this) closeWorkUploadModal();
         });
 
-        // Image preview click -> file input
-        workImagePreview.addEventListener('click', function() {
-            workImageFile.click();
-        });
+        setupCloudinaryUpload();
 
-        workImageFile.addEventListener('change', function() {
-            const file = this.files[0];
-            if (!file) return;
-            // Show local preview
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                workImagePreview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-height:200px;object-fit:contain;" />`;
-            };
-            reader.readAsDataURL(file);
-            // Upload to Cloudinary
-            uploadToCloudinary(file).then(url => {
-                workImageUrl.value = url;
-                // Update frame preview
-                const type = workPostType.value;
-                if (type === 'app') {
-                    workFrameContainer.innerHTML = `
-                                <div class="phone-frame">
-                                    <img src="${url}" alt="App Screenshot" />
-                                    <div class="notch"></div>
-                                </div>
-                            `;
-                } else if (type === 'website') {
-                    workFrameContainer.innerHTML = `
-                                <div class="laptop-frame">
-                                    <div class="screen">
-                                        <img src="${url}" alt="Website Screenshot" />
-                                    </div>
-                                    <div class="base"></div>
-                                </div>
-                            `;
-                } else {
-                    workFrameContainer.innerHTML = `
-                                <div style="text-align:center;padding:8px 0;">
-                                    <img src="${url}" alt="Upload" style="max-width:100%;max-height:180px;border-radius:12px;object-fit:contain;" />
-                                </div>
-                            `;
-                }
-                showToast('Image uploaded successfully!');
-            }).catch(err => {
-                showToast('Upload failed: ' + err.message, 'error');
-            });
-        });
-
-        // ---- Work upload form submit ----
         workUploadForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const type = workPostType.value;
@@ -3374,7 +3319,6 @@
             }
         });
 
-        // ---- Services ----
         document.getElementById('addServiceBtn').addEventListener('click', () => {
             openModal('Add Service', 'Fill in the details to create a new service.', null);
         });
@@ -3647,7 +3591,7 @@
             }
         });
 
-        console.log('✅ Admin App ready with Work page and Cloudinary upload.');
+        console.log('✅ Admin App ready with Cloudinary upload widget (same as customer).');
     </script>
 </body>
 </html>
