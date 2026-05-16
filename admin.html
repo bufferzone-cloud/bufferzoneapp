@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>Admin — Buffer Zone</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <title>Admin · Buffer Zone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <!-- Cloudinary Upload Widget -->
-    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
+    </script>
     <style>
         * {
             margin: 0;
@@ -16,12 +16,14 @@
             font-family: 'Poppins', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
+
         body {
             background-color: #f8f9fc;
             display: block;
             overflow: hidden;
             height: 100%;
         }
+
         .app-root {
             display: flex;
             flex-direction: column;
@@ -33,12 +35,14 @@
             overflow: hidden;
             position: relative;
         }
+
         .app-content {
             flex: 1;
             overflow-y: auto;
             padding: 0 14px 150px 14px;
             -webkit-overflow-scrolling: touch;
         }
+
         .bottom-nav {
             position: fixed;
             bottom: 20px;
@@ -58,6 +62,7 @@
             flex-shrink: 0;
             pointer-events: auto;
         }
+
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -116,12 +121,14 @@
             gap: 10px;
             align-items: center;
         }
+
+        /* ── BLACK WORK BUTTON ── */
         .work-avatar {
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: #f5b83d;
-            color: #1c2128;
+            background: #1c2128;
+            color: #f5b83d;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -130,15 +137,16 @@
             flex-shrink: 0;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 12px rgba(245, 184, 61, 0.25);
+            box-shadow: 0 4px 12px rgba(28, 33, 40, 0.3);
             letter-spacing: 0.5px;
         }
         .work-avatar:active {
             transform: scale(0.92);
         }
         .work-avatar:hover {
-            box-shadow: 0 6px 20px rgba(245, 184, 61, 0.35);
+            box-shadow: 0 6px 20px rgba(28, 33, 40, 0.4);
         }
+
         .header-text {
             display: flex;
             flex-direction: column;
@@ -1283,9 +1291,7 @@
             justify-content: center;
         }
 
-        /* ================================================================
-                   WORK PAGE STYLES
-                   ================================================================ */
+        /* ── WORK PAGE ── */
         .work-page-header {
             text-align: center;
             padding: 12px 0 18px 0;
@@ -1470,13 +1476,14 @@
             color: #dc2626;
         }
 
+        /* ── PHONE FRAME (perfect fit for apps) ── */
         .phone-frame {
             width: 100%;
             max-width: 220px;
             margin: 0 auto;
             border: 6px solid #1c2128;
             border-radius: 30px;
-            padding: 8px;
+            padding: 6px;
             background: #fff;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
             aspect-ratio: 9/19;
@@ -1492,11 +1499,6 @@
             object-fit: cover;
             border-radius: 18px;
         }
-        .phone-frame .placeholder {
-            color: #ccc;
-            font-size: 28px;
-            text-align: center;
-        }
         .phone-frame .notch {
             position: absolute;
             top: 0;
@@ -1508,13 +1510,14 @@
             border-radius: 0 0 12px 12px;
         }
 
+        /* ── LAPTOP FRAME (perfect fit for websites) ── */
         .laptop-frame {
             width: 100%;
             max-width: 320px;
             margin: 0 auto;
             background: #1c2128;
             border-radius: 12px 12px 0 0;
-            padding: 12px 12px 0 12px;
+            padding: 10px 10px 0 10px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
         }
         .laptop-frame .screen {
@@ -1531,11 +1534,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-        .laptop-frame .screen .placeholder {
-            color: #ccc;
-            font-size: 28px;
-            text-align: center;
         }
         .laptop-frame .base {
             height: 10px;
@@ -1556,6 +1554,7 @@
             border-radius: 0 0 4px 4px;
         }
 
+        /* ── WORK UPLOAD MODAL ── */
         .work-upload-modal .modal {
             max-width: 480px;
         }
@@ -2072,7 +2071,6 @@
                 <input type="hidden" id="editWorkPostId" />
                 <input type="hidden" id="workPostType" value="app" />
 
-                <!-- Image Upload (Cloudinary Widget) -->
                 <div class="form-group">
                     <label>Image</label>
                     <div class="upload-preview" id="workImagePreview">
@@ -2137,9 +2135,9 @@
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
     <script type="module">
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // FIREBASE SDK
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
         import { getDatabase, ref, set, onValue, get, push, remove, update } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
@@ -2160,24 +2158,26 @@
         const db = getDatabase(app);
         const auth = getAuth(app);
 
-        // =================================================================
-        // CLOUDINARY CONFIG (same as customer side)
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
+        // CLOUDINARY CONFIG
+        // ───────────────────────────────────────────────────────────────────
+
         const CLOUDINARY_CLOUD_NAME = 'dd3lcymrk';
         const CLOUDINARY_UPLOAD_PRESET = 'h3eyhc2o';
+        const MAX_FILE_SIZE = 30 * 1024 * 1024; // 30 MB
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // STATE
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         let allData = null;
         let currentUser = null;
         let currentAdminData = null;
         let pendingDeleteAction = null;
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // DOM REFS
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         const adminNameEl = document.getElementById('adminName');
         const profileNameEl = document.getElementById('profileName');
@@ -2188,7 +2188,6 @@
         const mainHeader = document.getElementById('mainHeader');
         const workAvatarBtn = document.getElementById('workAvatarBtn');
 
-        // Service modal
         const modal = document.getElementById('serviceModal');
         const modalTitle = document.getElementById('modalTitle');
         const modalSub = document.getElementById('modalSub');
@@ -2217,7 +2216,6 @@
         const cancelBtn = document.getElementById('modalCancelBtn');
         const closeBtn = document.getElementById('modalCloseBtn');
 
-        // Promo modal
         const promoModal = document.getElementById('promoModal');
         const promoCloseBtn = document.getElementById('promoCloseBtn');
         const promoForm = document.getElementById('promoForm');
@@ -2225,7 +2223,6 @@
         const promoDiscount = document.getElementById('promoDiscount');
         const promoCancelBtn = document.getElementById('promoCancelBtn');
 
-        // Work Upload modal
         const workUploadModal = document.getElementById('workUploadModal');
         const workUploadCloseBtn = document.getElementById('workUploadCloseBtn');
         const workUploadForm = document.getElementById('workUploadForm');
@@ -2245,19 +2242,17 @@
         const workUploadSubmit = document.getElementById('workUploadSubmit');
         const workUploadCancelBtn = document.getElementById('workUploadCancelBtn');
 
-        // Toast
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMessage');
 
-        // Delete modal
         const deleteConfirmModal = document.getElementById('deleteConfirmModal');
         const deleteConfirmText = document.getElementById('deleteConfirmText');
         const deleteCancelBtn = document.getElementById('deleteCancelBtn');
         const deleteConfirmBtn = document.getElementById('deleteConfirmBtn');
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function loadData(callback) {
             const dbRef = ref(db, 'bufferzoneAppData');
@@ -2303,9 +2298,9 @@
             return set(dbRef, allData);
         }
 
-        // =================================================================
-        // CLOUDINARY UPLOAD WIDGET (same as customer)
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
+        // CLOUDINARY UPLOAD WIDGET (30 MB max)
+        // ───────────────────────────────────────────────────────────────────
 
         function setupCloudinaryUpload() {
             workImagePreview.addEventListener('click', () => {
@@ -2313,7 +2308,7 @@
                     cloudName: CLOUDINARY_CLOUD_NAME,
                     uploadPreset: CLOUDINARY_UPLOAD_PRESET,
                     sources: ['local', 'url', 'camera'],
-                    maxFileSize: 155000000,
+                    maxFileSize: MAX_FILE_SIZE,
                     resourceType: 'image',
                     clientAllowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
                     maxFiles: 1,
@@ -2332,9 +2327,8 @@
                         const info = result.info;
                         const url = info.secure_url;
                         workImageUrl.value = url;
-                        // Show preview
                         workImagePreview.innerHTML = `<img src="${url}" alt="Uploaded" style="max-height:200px;object-fit:contain;" />`;
-                        // Update frame preview based on type
+
                         const type = workPostType.value;
                         if (type === 'app') {
                             workFrameContainer.innerHTML = `
@@ -2366,9 +2360,9 @@
             });
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // RENDER FUNCTIONS
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function renderAll() {
             if (!allData) return;
@@ -2771,9 +2765,9 @@
                     `).join('');
         }
 
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
         // WORK POSTS
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function renderWorkPosts() {
             const container = document.getElementById('workPostsContainer');
@@ -2869,9 +2863,9 @@
             });
         }
 
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
         // WORK UPLOAD MODAL
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function openWorkUploadModal(type, editData = null) {
             workPostType.value = type;
@@ -2913,7 +2907,6 @@
                 workFlyerDesc.value = editData?.description || '';
             }
 
-            // Frame preview
             if (type === 'app') {
                 workFrameContainer.innerHTML = `
                             <div class="phone-frame">
@@ -2953,9 +2946,9 @@
             openWorkUploadModal(post.type, { key, ...post });
         }
 
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
         // WORK POST CRUD
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function addWorkPost(data) {
             const newId = 'wp' + Date.now();
@@ -2989,9 +2982,9 @@
             }
         }
 
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
         // DELETE CONFIRMATION
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function showDeleteConfirmation(type, key) {
             const messages = {
@@ -3060,9 +3053,9 @@
             pendingDeleteAction = null;
         });
 
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
         // SERVICE CRUD
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function addService(data) {
             const newId = 's' + Date.now();
@@ -3128,9 +3121,9 @@
             }
         }
 
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
         // SERVICE MODAL
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function openModal(title, subtitle, data, key) {
             modalTitle.textContent = title;
@@ -3194,9 +3187,9 @@
             openModal('Edit Service', 'Update the service details.', service, key);
         }
 
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
         // CATEGORY
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         document.getElementById('addCategoryBtn').addEventListener('click', function() {
             const name = document.getElementById('newCategoryInput').value.trim().toLowerCase();
@@ -3216,9 +3209,9 @@
             });
         });
 
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
         // PROMO
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function addPromo(data) {
             const newId = 'p' + Date.now();
@@ -3231,9 +3224,9 @@
             return saveData();
         }
 
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
         // EVENT BINDINGS
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         workAvatarBtn.addEventListener('click', function() {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -3539,9 +3532,9 @@
             }
         });
 
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
         // TOAST
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function showToast(msg, type = 'success') {
             toastMsg.textContent = msg;
@@ -3552,9 +3545,9 @@
             }, 2200);
         }
 
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
         // AUTH & INIT
-        // ================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -3591,7 +3584,7 @@
             }
         });
 
-        console.log('✅ Admin App ready with Cloudinary upload widget (same as customer).');
+        console.log('✅ Admin App ready with black Work button and 30MB max upload.');
     </script>
 </body>
 </html>
