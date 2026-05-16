@@ -47,16 +47,16 @@
             left: 50%;
             transform: translateX(-50%);
             width: 92%;
-            max-width: 400px;
+            max-width: 420px;
             height: 64px;
             background: #1c2128;
             border-radius: 32px;
-            padding: 8px 20px;
+            padding: 8px 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 500;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
             flex-shrink: 0;
             pointer-events: auto;
         }
@@ -71,26 +71,55 @@
             flex: 1;
             background: none;
             border: none;
-            font-size: 8px;
+            font-size: 7px;
             gap: 1px;
             user-select: none;
             padding: 2px 0;
         }
-        .nav-item i { font-size: 20px; margin-bottom: 1px; }
-        .nav-item.active { color: #f5b83d; }
-        .nav-item.active i { color: #f5b83d; }
-        .nav-item:active { transform: scale(0.92); }
+        .nav-item i {
+            font-size: 18px;
+            margin-bottom: 1px;
+        }
+        .nav-item.active {
+            color: #f5b83d;
+        }
+        .nav-item.active i {
+            color: #f5b83d;
+        }
+        .nav-item:active {
+            transform: scale(0.92);
+        }
 
+        /* --- HEADER --- */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 16px 0 20px 0;
+            position: relative;
         }
         .header-left {
             display: flex;
             align-items: center;
             gap: 12px;
+            flex: 1;
+        }
+        .header-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 2;
+        }
+        .header-center span:first-child {
+            font-size: 11px;
+            color: #888;
+            font-weight: 500;
+        }
+        .header-center span:last-child {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1c2128;
+            letter-spacing: -0.3px;
         }
         .avatar {
             width: 40px;
@@ -102,22 +131,21 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 11px;
             flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+            user-select: none;
         }
-        .header-text {
+        .avatar:active {
+            transform: scale(0.92);
+        }
+        .header-right {
             display: flex;
-            flex-direction: column;
-        }
-        .header-text span:first-child {
-            font-size: 12px;
-            color: #888;
-        }
-        .header-text span:last-child {
-            font-weight: 700;
-            font-size: 16px;
-            color: #1c2128;
-            letter-spacing: -0.3px;
+            gap: 10px;
+            align-items: center;
+            flex: 1;
+            justify-content: flex-end;
         }
         .promo-header-btn {
             width: 40px;
@@ -133,7 +161,9 @@
             transition: all 0.2s;
             box-shadow: 0 4px 12px rgba(245, 184, 61, 0.3);
         }
-        .promo-header-btn:active { transform: scale(0.92); }
+        .promo-header-btn:active {
+            transform: scale(0.92);
+        }
 
         .greeting {
             font-size: 22px;
@@ -156,11 +186,13 @@
             background: #ffffff;
             border-radius: 16px;
             padding: 18px 16px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
             border: 1px solid #f0f0f0;
             transition: transform 0.15s;
         }
-        .stat-card:active { transform: scale(0.97); }
+        .stat-card:active {
+            transform: scale(0.97);
+        }
         .stat-card .stat-icon {
             width: 40px;
             height: 40px;
@@ -171,10 +203,22 @@
             font-size: 18px;
             margin-bottom: 10px;
         }
-        .stat-card .stat-icon.blue { background: #e8f0fe; color: #1a73e8; }
-        .stat-card .stat-icon.green { background: #e6f7e6; color: #0f9d58; }
-        .stat-card .stat-icon.orange { background: #fef3e0; color: #f9ab00; }
-        .stat-card .stat-icon.purple { background: #f0e6ff; color: #7c3aed; }
+        .stat-card .stat-icon.blue {
+            background: #e8f0fe;
+            color: #1a73e8;
+        }
+        .stat-card .stat-icon.green {
+            background: #e6f7e6;
+            color: #0f9d58;
+        }
+        .stat-card .stat-icon.orange {
+            background: #fef3e0;
+            color: #f9ab00;
+        }
+        .stat-card .stat-icon.purple {
+            background: #f0e6ff;
+            color: #7c3aed;
+        }
         .stat-card .stat-value {
             font-size: 26px;
             font-weight: 700;
@@ -194,7 +238,9 @@
             padding-bottom: 4px;
             scrollbar-width: none;
         }
-        .quick-actions::-webkit-scrollbar { display: none; }
+        .quick-actions::-webkit-scrollbar {
+            display: none;
+        }
         .quick-action-btn {
             flex-shrink: 0;
             background: #ffffff;
@@ -209,9 +255,11 @@
             color: #1c2128;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
-        .quick-action-btn:active { transform: scale(0.95); }
+        .quick-action-btn:active {
+            transform: scale(0.95);
+        }
         .quick-action-btn i {
             font-size: 16px;
             color: #1c2128;
@@ -226,7 +274,7 @@
             border-radius: 16px;
             padding: 18px 16px;
             margin-bottom: 16px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
             border: 1px solid #f0f0f0;
         }
         .card-header {
@@ -254,7 +302,9 @@
             padding: 10px 0;
             border-bottom: 1px solid #f5f5f5;
         }
-        .activity-item:last-child { border-bottom: none; }
+        .activity-item:last-child {
+            border-bottom: none;
+        }
         .activity-item .icon-circle {
             width: 36px;
             height: 36px;
@@ -265,10 +315,22 @@
             font-size: 14px;
             flex-shrink: 0;
         }
-        .activity-item .icon-circle.green { background: #e6f7e6; color: #0f9d58; }
-        .activity-item .icon-circle.blue { background: #e8f0fe; color: #1a73e8; }
-        .activity-item .icon-circle.orange { background: #fef3e0; color: #f9ab00; }
-        .activity-item .icon-circle.purple { background: #f0e6ff; color: #7c3aed; }
+        .activity-item .icon-circle.green {
+            background: #e6f7e6;
+            color: #0f9d58;
+        }
+        .activity-item .icon-circle.blue {
+            background: #e8f0fe;
+            color: #1a73e8;
+        }
+        .activity-item .icon-circle.orange {
+            background: #fef3e0;
+            color: #f9ab00;
+        }
+        .activity-item .icon-circle.purple {
+            background: #f0e6ff;
+            color: #7c3aed;
+        }
         .activity-item .content {
             flex: 1;
         }
@@ -320,10 +382,18 @@
             margin-bottom: 8px;
             color: #fff;
         }
-        .service-card-customer .icon-wrap.graphic { background: linear-gradient(135deg, #f093fb, #f5576c); }
-        .service-card-customer .icon-wrap.dev { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-        .service-card-customer .icon-wrap.tech { background: linear-gradient(135deg, #43e97b, #38f9d7); }
-        .service-card-customer .icon-wrap.it { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .service-card-customer .icon-wrap.graphic {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+        .service-card-customer .icon-wrap.dev {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+        .service-card-customer .icon-wrap.tech {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+        .service-card-customer .icon-wrap.it {
+            background: linear-gradient(135deg, #fa709a, #fee140);
+        }
         .service-card-customer .title {
             font-size: 11px;
             font-weight: 600;
@@ -378,17 +448,17 @@
             border: none;
             font-size: 13px;
             margin-bottom: 6px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             color: #fff;
         }
         .hero-editor input::placeholder,
         .hero-editor textarea::placeholder {
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
         }
         .hero-editor input:focus,
         .hero-editor textarea:focus {
             outline: none;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
         }
         .hero-editor textarea {
             min-height: 40px;
@@ -405,7 +475,9 @@
             cursor: pointer;
             margin-top: 4px;
         }
-        .hero-editor .btn-save-hero:active { transform: scale(0.95); }
+        .hero-editor .btn-save-hero:active {
+            transform: scale(0.95);
+        }
 
         /* --- POLICY CARD EDITOR --- */
         .policy-editor {
@@ -442,17 +514,17 @@
             border: none;
             font-size: 13px;
             margin-bottom: 6px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             color: #fff;
         }
         .policy-editor input::placeholder,
         .policy-editor textarea::placeholder {
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
         }
         .policy-editor input:focus,
         .policy-editor textarea:focus {
             outline: none;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
         }
         .policy-editor textarea {
             min-height: 40px;
@@ -469,7 +541,9 @@
             cursor: pointer;
             margin-top: 4px;
         }
-        .policy-editor .btn-save-policy:active { transform: scale(0.95); }
+        .policy-editor .btn-save-policy:active {
+            transform: scale(0.95);
+        }
 
         /* --- OUR SERVICES LIST EDITOR --- */
         .list-editor {
@@ -545,7 +619,7 @@
             border-radius: 14px;
             padding: 14px 16px;
             margin-bottom: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             border: 1px solid #f0f0f0;
             display: flex;
             justify-content: space-between;
@@ -594,7 +668,7 @@
         }
         .category-tag:hover {
             border-color: #1c2128;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         .category-tag .delete-cat-btn {
             background: none;
@@ -625,7 +699,7 @@
         .cat-input:focus {
             outline: none;
             border-color: #1c2128;
-            box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
 
         /* --- ORDER CARD --- */
@@ -634,7 +708,7 @@
             border-radius: 14px;
             padding: 14px 16px;
             margin-bottom: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             border: 1px solid #f0f0f0;
         }
         .order-toggle {
@@ -643,14 +717,18 @@
             align-items: center;
             cursor: pointer;
         }
-        .order-toggle:active { transform: scale(0.98); }
+        .order-toggle:active {
+            transform: scale(0.98);
+        }
         .order-details {
             display: none;
             margin-top: 12px;
             padding-top: 12px;
             border-top: 1px solid #f0f0f0;
         }
-        .order-details.open { display: block; }
+        .order-details.open {
+            display: block;
+        }
         .order-details .row {
             display: flex;
             justify-content: space-between;
@@ -658,9 +736,16 @@
             font-size: 12px;
             color: #555;
         }
-        .order-details .row:last-child { border-bottom: none; }
-        .order-details .row .label { color: #888; }
-        .order-details .row .val { font-weight: 500; color: #1c2128; }
+        .order-details .row:last-child {
+            border-bottom: none;
+        }
+        .order-details .row .label {
+            color: #888;
+        }
+        .order-details .row .val {
+            font-weight: 500;
+            color: #1c2128;
+        }
 
         .status-badge {
             display: inline-block;
@@ -669,11 +754,26 @@
             font-size: 10px;
             font-weight: 600;
         }
-        .status-badge.progress { background: #e0f0ff; color: #0066cc; }
-        .status-badge.completed { background: #e6fffa; color: #00a86b; }
-        .status-badge.pending { background: #fff6e0; color: #cc8800; }
-        .status-badge.review { background: #f0e6ff; color: #7700cc; }
-        .status-badge.cancelled { background: #fee2e2; color: #dc2626; }
+        .status-badge.progress {
+            background: #e0f0ff;
+            color: #0066cc;
+        }
+        .status-badge.completed {
+            background: #e6fffa;
+            color: #00a86b;
+        }
+        .status-badge.pending {
+            background: #fff6e0;
+            color: #cc8800;
+        }
+        .status-badge.review {
+            background: #f0e6ff;
+            color: #7700cc;
+        }
+        .status-badge.cancelled {
+            background: #fee2e2;
+            color: #dc2626;
+        }
 
         .status-select {
             padding: 2px 10px;
@@ -685,7 +785,10 @@
             cursor: pointer;
             min-width: 80px;
         }
-        .status-select:focus { outline: none; border-color: #1c2128; }
+        .status-select:focus {
+            outline: none;
+            border-color: #1c2128;
+        }
 
         /* --- CUSTOMER ITEM with Ban/Unban Toggle --- */
         .customer-item {
@@ -738,7 +841,9 @@
             padding-top: 12px;
             border-top: 1px solid #f0f0f0;
         }
-        .customer-item .user-details.open { display: block; }
+        .customer-item .user-details.open {
+            display: block;
+        }
         .customer-item .user-details .detail-row {
             display: flex;
             justify-content: space-between;
@@ -746,8 +851,13 @@
             font-size: 13px;
             color: #555;
         }
-        .customer-item .user-details .detail-row .label { color: #888; }
-        .customer-item .user-details .detail-row .val { font-weight: 500; color: #1c2128; }
+        .customer-item .user-details .detail-row .label {
+            color: #888;
+        }
+        .customer-item .user-details .detail-row .val {
+            font-weight: 500;
+            color: #1c2128;
+        }
         .customer-item .user-details .actions {
             display: flex;
             gap: 8px;
@@ -785,9 +895,15 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-        .ban-toggle-btn:active { transform: scale(0.9); }
-        .ban-toggle-btn .fa-toggle-on { color: #16a34a; }
-        .ban-toggle-btn .fa-toggle-off { color: #dc2626; }
+        .ban-toggle-btn:active {
+            transform: scale(0.9);
+        }
+        .ban-toggle-btn .fa-toggle-on {
+            color: #16a34a;
+        }
+        .ban-toggle-btn .fa-toggle-off {
+            color: #dc2626;
+        }
 
         /* --- TOGGLE SWITCH (iPhone style) --- */
         .toggle-switch {
@@ -822,12 +938,12 @@
             background-color: white;
             transition: .3s;
             border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        input:checked + .toggle-slider {
+        input:checked+.toggle-slider {
             background-color: #1c2128;
         }
-        input:checked + .toggle-slider:before {
+        input:checked+.toggle-slider:before {
             transform: translateX(20px);
         }
         .toggle-label {
@@ -851,34 +967,51 @@
             align-items: center;
             gap: 4px;
         }
-        .btn:active { transform: scale(0.95); }
+        .btn:active {
+            transform: scale(0.95);
+        }
         .btn-primary {
             background: #1c2128;
             color: #ffffff;
         }
-        .btn-primary:hover { background: #2a2a2a; }
+        .btn-primary:hover {
+            background: #2a2a2a;
+        }
         .btn-outline {
             background: transparent;
             color: #1c2128;
             border: 1px solid #ddd;
         }
-        .btn-outline:hover { border-color: #1c2128; background: #f8f8f8; }
+        .btn-outline:hover {
+            border-color: #1c2128;
+            background: #f8f8f8;
+        }
         .btn-danger {
             background: #dc2626;
             color: #ffffff;
         }
-        .btn-danger:hover { background: #b91c1c; }
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
         .btn-success {
             background: #16a34a;
             color: #ffffff;
         }
-        .btn-success:hover { background: #15803d; }
+        .btn-success:hover {
+            background: #15803d;
+        }
         .btn-warning {
             background: #f59e0b;
             color: #1c2128;
         }
-        .btn-warning:hover { background: #d97706; color: #ffffff; }
-        .btn-sm { padding: 3px 10px; font-size: 9px; }
+        .btn-warning:hover {
+            background: #d97706;
+            color: #ffffff;
+        }
+        .btn-sm {
+            padding: 3px 10px;
+            font-size: 9px;
+        }
 
         .btn-view-proof {
             background: #1c2128;
@@ -890,21 +1023,47 @@
             font-weight: 600;
             cursor: pointer;
         }
-        .btn-view-proof:active { transform: scale(0.95); }
-        .btn-view-proof i { margin-right: 4px; }
+        .btn-view-proof:active {
+            transform: scale(0.95);
+        }
+        .btn-view-proof i {
+            margin-right: 4px;
+        }
 
-        .text-muted { color: #888; }
-        .text-center { text-align: center; }
-        .mt-8 { margin-top: 8px; }
-        .flex { display: flex; }
-        .gap-8 { gap: 8px; }
-        .gap-12 { gap: 12px; }
-        .w-full { width: 100%; }
-        .items-center { align-items: center; }
-        .justify-between { justify-content: space-between; }
+        .text-muted {
+            color: #888;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .flex {
+            display: flex;
+        }
+        .gap-8 {
+            gap: 8px;
+        }
+        .gap-12 {
+            gap: 12px;
+        }
+        .w-full {
+            width: 100%;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
 
-        .page { display: none; }
-        .page.active { display: block; }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
 
         /* --- TOAST --- */
         .toast {
@@ -918,7 +1077,7 @@
             border-radius: 12px;
             font-size: 13px;
             font-weight: 500;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
             z-index: 3000;
             opacity: 0;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -926,8 +1085,13 @@
             white-space: nowrap;
             max-width: 90%;
         }
-        .toast.show { opacity: 1; }
-        .toast i { margin-right: 8px; color: #f5b83d; }
+        .toast.show {
+            opacity: 1;
+        }
+        .toast i {
+            margin-right: 8px;
+            color: #f5b83d;
+        }
 
         /* --- MODAL (Service) --- */
         .modal-overlay {
@@ -936,7 +1100,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px);
             z-index: 2000;
             display: none;
@@ -944,7 +1108,9 @@
             justify-content: center;
             padding: 16px;
         }
-        .modal-overlay.open { display: flex; }
+        .modal-overlay.open {
+            display: flex;
+        }
         .modal {
             background: #ffffff;
             border-radius: 18px;
@@ -953,12 +1119,18 @@
             max-height: 90vh;
             overflow-y: auto;
             padding: 24px 22px 20px 22px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
             animation: modalIn 0.25s ease;
         }
         @keyframes modalIn {
-            from { opacity: 0; transform: scale(0.92) translateY(16px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+            from {
+                opacity: 0;
+                transform: scale(0.92) translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
         .modal .close-btn {
             float: right;
@@ -969,7 +1141,9 @@
             cursor: pointer;
             padding: 4px;
         }
-        .modal .close-btn:hover { color: #1c2128; }
+        .modal .close-btn:hover {
+            color: #1c2128;
+        }
         .modal h3 {
             font-size: 18px;
             font-weight: 700;
@@ -1009,7 +1183,7 @@
         .form-group textarea:focus {
             outline: none;
             border-color: #1c2128;
-            box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
         .form-group textarea {
             resize: vertical;
@@ -1027,7 +1201,9 @@
             font-size: 14px;
             border-radius: 10px;
         }
-        .modal .btn + .btn { margin-top: 8px; }
+        .modal .btn+.btn {
+            margin-top: 8px;
+        }
         .modal .btn-outline {
             border: 1px solid #ddd;
             background: #f9f9f9;
@@ -1040,7 +1216,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(8px);
             z-index: 3000;
             display: none;
@@ -1048,7 +1224,9 @@
             justify-content: center;
             padding: 20px;
         }
-        .screenshot-modal-overlay.open { display: flex; }
+        .screenshot-modal-overlay.open {
+            display: flex;
+        }
         .screenshot-modal-content {
             background: #fff;
             border-radius: 20px;
@@ -1056,7 +1234,7 @@
             width: 100%;
             padding: 24px 24px 20px 24px;
             position: relative;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
             text-align: center;
         }
         .screenshot-modal-content .close-btn {
@@ -1069,12 +1247,14 @@
             background: none;
             border: none;
         }
-        .screenshot-modal-content .close-btn:hover { color: #1c2128; }
+        .screenshot-modal-content .close-btn:hover {
+            color: #1c2128;
+        }
         .screenshot-modal-content img {
             max-width: 100%;
             border-radius: 12px;
             margin-top: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         .screenshot-modal-content h3 {
             font-size: 18px;
@@ -1090,7 +1270,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px);
             z-index: 2000;
             display: none;
@@ -1098,14 +1278,16 @@
             justify-content: center;
             padding: 16px;
         }
-        .delete-confirm-modal-overlay.open { display: flex; }
+        .delete-confirm-modal-overlay.open {
+            display: flex;
+        }
         .delete-confirm-modal-content {
             background: #ffffff;
             border-radius: 18px;
             width: 100%;
             max-width: 360px;
             padding: 24px 22px 20px 22px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
         .delete-confirm-modal-content h3 {
@@ -1124,6 +1306,329 @@
             gap: 10px;
             justify-content: center;
         }
+
+        /* ===== WORK PAGE STYLES ===== */
+        .work-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 6px 0 16px 0;
+        }
+        .work-header h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1c2128;
+        }
+        .work-header .back-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            color: #1c2128;
+            transition: all 0.2s;
+        }
+        .work-header .back-btn:active {
+            transform: scale(0.92);
+        }
+
+        .work-post-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        .work-post-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px 14px;
+            border: 2px solid #f0f0f0;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .work-post-card:active {
+            transform: scale(0.95);
+        }
+        .work-post-card:hover {
+            border-color: #1c2128;
+        }
+        .work-post-card .icon {
+            font-size: 28px;
+            color: #1c2128;
+            margin-bottom: 6px;
+        }
+        .work-post-card .label {
+            font-weight: 700;
+            font-size: 13px;
+            color: #1c2128;
+        }
+        .work-post-card .sub {
+            font-size: 10px;
+            color: #888;
+        }
+
+        .work-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1c2128;
+            margin: 20px 0 10px 0;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .work-section-title span {
+            font-size: 12px;
+            font-weight: 400;
+            color: #888;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+
+        .work-item {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 14px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            transition: transform 0.15s;
+            position: relative;
+            float: none;
+        }
+        .work-item:active {
+            transform: scale(0.97);
+        }
+        .work-item .img-wrap {
+            width: 100%;
+            aspect-ratio: 16/10;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f5f5f5;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .work-item .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .work-item .img-wrap .no-img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #bbb;
+            font-size: 12px;
+        }
+        .work-item .title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1c2128;
+            margin-bottom: 2px;
+        }
+        .work-item .subtitle {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+        .work-item .actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            justify-content: flex-end;
+        }
+        .work-item .actions .btn {
+            padding: 2px 10px;
+            font-size: 9px;
+            border-radius: 12px;
+        }
+        .work-item .type-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(28, 33, 40, 0.85);
+            color: #fff;
+            font-size: 8px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Phone & Laptop frames */
+        .phone-frame {
+            max-width: 200px;
+            margin: 0 auto;
+            border-radius: 20px;
+            border: 4px solid #1c2128;
+            padding: 8px;
+            background: #1c2128;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        .phone-frame .screen {
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f5f5f5;
+            aspect-ratio: 9/16;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .phone-frame .screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .phone-frame .screen .placeholder {
+            color: #bbb;
+            font-size: 12px;
+            text-align: center;
+            padding: 12px;
+        }
+
+        .laptop-frame {
+            max-width: 280px;
+            margin: 0 auto;
+            border-radius: 12px;
+            border: 4px solid #1c2128;
+            padding: 8px 8px 20px 8px;
+            background: #1c2128;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+        .laptop-frame .screen {
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f5f5f5;
+            aspect-ratio: 16/10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .laptop-frame .screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .laptop-frame .screen .placeholder {
+            color: #bbb;
+            font-size: 12px;
+            text-align: center;
+            padding: 12px;
+        }
+        .laptop-frame .base {
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 8px;
+            background: #1c2128;
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* --- WORK POST MODALS --- */
+        .work-form-modal .modal {
+            max-width: 480px;
+        }
+        .work-form-modal .phone-frame-container,
+        .work-form-modal .laptop-frame-container {
+            margin: 10px 0;
+        }
+        .work-form-modal .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #fafafa;
+        }
+        .work-form-modal .upload-area:hover {
+            border-color: #1c2128;
+            background: #f5f5f5;
+        }
+        .work-form-modal .upload-area i {
+            font-size: 28px;
+            color: #888;
+            margin-bottom: 6px;
+        }
+        .work-form-modal .upload-area .text {
+            font-size: 12px;
+            color: #888;
+        }
+        .work-form-modal .upload-area .preview-img {
+            max-width: 100%;
+            max-height: 120px;
+            border-radius: 8px;
+            margin-top: 6px;
+        }
+        .work-form-modal .upload-area input[type="file"] {
+            display: none;
+        }
+
+        /* Responsive: 2x2 stays 2x2 no matter screen */
+        @media (max-width: 420px) {
+            .work-grid {
+                gap: 10px;
+            }
+            .work-item {
+                padding: 10px;
+            }
+            .work-post-options {
+                gap: 10px;
+            }
+            .work-post-card {
+                padding: 14px 10px;
+            }
+            .work-post-card .icon {
+                font-size: 22px;
+            }
+        }
+        @media (min-width: 768px) {
+            .work-grid {
+                gap: 18px;
+            }
+            .work-item {
+                padding: 18px;
+            }
+            .work-post-options {
+                gap: 18px;
+            }
+            .work-post-card {
+                padding: 24px 18px;
+            }
+        }
+
+        /* --- Work page empty state --- */
+        .work-empty {
+            text-align: center;
+            padding: 30px 10px;
+            color: #888;
+        }
+        .work-empty i {
+            font-size: 40px;
+            color: #ddd;
+            margin-bottom: 10px;
+        }
+        .work-empty p {
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
@@ -1135,13 +1640,13 @@
             <!-- ===== HEADER ===== -->
             <div class="header">
                 <div class="header-left">
-                    <div class="avatar" id="adminAvatar">A</div>
-                    <div class="header-text">
-                        <span>Admin Panel</span>
-                        <span id="adminName">Buffer Zone</span>
-                    </div>
+                    <div class="avatar" id="adminAvatar">Work</div>
                 </div>
-                <div style="display:flex;gap:10px;align-items:center;">
+                <div class="header-center">
+                    <span>Admin Panel</span>
+                    <span id="adminName">Buffer Zone</span>
+                </div>
+                <div class="header-right">
                     <div class="promo-header-btn" id="promoHeaderBtn"><i class="fa-solid fa-tag"></i></div>
                     <button class="btn btn-primary btn-sm" id="addServiceQuick"><i class="fa-solid fa-plus"></i></button>
                 </div>
@@ -1382,6 +1887,43 @@
                 </div>
             </div>
 
+            <!-- ===== PAGE: WORK (Recent Projects) ===== -->
+            <div id="page-work" class="page">
+                <div class="work-header">
+                    <button class="back-btn" id="workBackBtn"><i class="fa-solid fa-arrow-left"></i></button>
+                    <h2>Recent Projects</h2>
+                </div>
+
+                <!-- 4 Post Options -->
+                <div class="work-post-options">
+                    <div class="work-post-card" data-type="app">
+                        <div class="icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                        <div class="label">App</div>
+                        <div class="sub">Post a mobile app</div>
+                    </div>
+                    <div class="work-post-card" data-type="flyer">
+                        <div class="icon"><i class="fa-regular fa-file-image"></i></div>
+                        <div class="label">Flyer</div>
+                        <div class="sub">Post a flyer design</div>
+                    </div>
+                    <div class="work-post-card" data-type="website">
+                        <div class="icon"><i class="fa-solid fa-laptop"></i></div>
+                        <div class="label">Websites</div>
+                        <div class="sub">Post a website</div>
+                    </div>
+                    <div class="work-post-card" data-type="logo">
+                        <div class="icon"><i class="fa-solid fa-font"></i></div>
+                        <div class="label">Logos</div>
+                        <div class="sub">Post a logo</div>
+                    </div>
+                </div>
+
+                <!-- Sections: App, Flyer, Websites, Logos -->
+                <div id="workSections">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+
         </div>
 
         <!-- ===== BOTTOM NAV ===== -->
@@ -1540,8 +2082,144 @@
         </div>
     </div>
 
+    <!-- ===== WORK POST MODALS ===== -->
+    <!-- App Modal -->
+    <div class="modal-overlay work-form-modal" id="workAppModal">
+        <div class="modal">
+            <button class="close-btn" id="workAppCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3>Post an App</h3>
+            <p class="sub">Upload an app screenshot and fill in the details.</p>
+            <form id="workAppForm">
+                <input type="hidden" id="workAppEditId">
+                <div class="phone-frame-container">
+                    <div class="phone-frame">
+                        <div class="screen">
+                            <div class="upload-area" id="appUploadArea">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <div class="text">Tap to upload screenshot</div>
+                                <img class="preview-img" id="appPreviewImg" style="display:none;">
+                                <input type="file" id="appFileInput" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>App Name</label>
+                    <input type="text" id="appName" placeholder="e.g. My Awesome App" required>
+                </div>
+                <div class="form-group">
+                    <label>Functionality</label>
+                    <textarea id="appFunctionality" rows="3" placeholder="Describe what the app does..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Post App</button>
+                <button type="button" class="btn btn-outline" id="workAppCancelBtn">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Flyer Modal -->
+    <div class="modal-overlay work-form-modal" id="workFlyerModal">
+        <div class="modal">
+            <button class="close-btn" id="workFlyerCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3>Post a Flyer</h3>
+            <p class="sub">Upload a flyer image and fill in the details.</p>
+            <form id="workFlyerForm">
+                <input type="hidden" id="workFlyerEditId">
+                <div class="form-group">
+                    <label>Flyer Image</label>
+                    <div class="upload-area" id="flyerUploadArea">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <div class="text">Tap to upload flyer</div>
+                        <img class="preview-img" id="flyerPreviewImg" style="display:none;">
+                        <input type="file" id="flyerFileInput" accept="image/*">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Flyer Title</label>
+                    <input type="text" id="flyerTitle" placeholder="e.g. Summer Sale Flyer" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="flyerDescription" rows="3" placeholder="Describe the flyer..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Post Flyer</button>
+                <button type="button" class="btn btn-outline" id="workFlyerCancelBtn">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Website Modal -->
+    <div class="modal-overlay work-form-modal" id="workWebsiteModal">
+        <div class="modal">
+            <button class="close-btn" id="workWebsiteCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3>Post a Website</h3>
+            <p class="sub">Upload a website screenshot and fill in the details.</p>
+            <form id="workWebsiteForm">
+                <input type="hidden" id="workWebsiteEditId">
+                <div class="laptop-frame-container">
+                    <div class="laptop-frame">
+                        <div class="screen">
+                            <div class="upload-area" id="websiteUploadArea">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <div class="text">Tap to upload screenshot</div>
+                                <img class="preview-img" id="websitePreviewImg" style="display:none;">
+                                <input type="file" id="websiteFileInput" accept="image/*">
+                            </div>
+                        </div>
+                        <div class="base"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Website Name</label>
+                    <input type="text" id="websiteName" placeholder="e.g. My Portfolio" required>
+                </div>
+                <div class="form-group">
+                    <label>Functionality</label>
+                    <textarea id="websiteFunctionality" rows="3" placeholder="Describe what the website does..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Post Website</button>
+                <button type="button" class="btn btn-outline" id="workWebsiteCancelBtn">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Logo Modal -->
+    <div class="modal-overlay work-form-modal" id="workLogoModal">
+        <div class="modal">
+            <button class="close-btn" id="workLogoCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3>Post a Logo</h3>
+            <p class="sub">Upload a logo image and fill in the details.</p>
+            <form id="workLogoForm">
+                <input type="hidden" id="workLogoEditId">
+                <div class="form-group">
+                    <label>Logo Image</label>
+                    <div class="upload-area" id="logoUploadArea">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <div class="text">Tap to upload logo</div>
+                        <img class="preview-img" id="logoPreviewImg" style="display:none;">
+                        <input type="file" id="logoFileInput" accept="image/*">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Logo Title</label>
+                    <input type="text" id="logoTitle" placeholder="e.g. Brand Logo" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="logoDescription" rows="3" placeholder="Describe the logo..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Post Logo</button>
+                <button type="button" class="btn btn-outline" id="workLogoCancelBtn">Cancel</button>
+            </form>
+        </div>
+    </div>
+
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
+
+    <!-- Cloudinary Upload Widget -->
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript">
+    </script>
 
     <script type="module">
         // =================================================================
@@ -1576,6 +2254,10 @@
         let currentAdminData = null;
         let pendingDeleteAction = null;
 
+        // Cloudinary config
+        const CLOUDINARY_CLOUD_NAME = 'bufferzone';
+        const CLOUDINARY_UPLOAD_PRESET = 'bufferzone_uploads';
+
         // =================================================================
         // DOM REFS
         // =================================================================
@@ -1586,6 +2268,7 @@
         const profilePhoneEl = document.getElementById('profilePhone');
         const greetingText = document.getElementById('greetingText');
         const greetingSub = document.getElementById('greetingSub');
+        const adminAvatar = document.getElementById('adminAvatar');
 
         const modal = document.getElementById('serviceModal');
         const modalTitle = document.getElementById('modalTitle');
@@ -1631,6 +2314,55 @@
         const deleteCancelBtn = document.getElementById('deleteCancelBtn');
         const deleteConfirmBtn = document.getElementById('deleteConfirmBtn');
 
+        // Work Page
+        const workBackBtn = document.getElementById('workBackBtn');
+        const workSections = document.getElementById('workSections');
+
+        // Work Modals
+        const workAppModal = document.getElementById('workAppModal');
+        const workAppForm = document.getElementById('workAppForm');
+        const workAppEditId = document.getElementById('workAppEditId');
+        const appName = document.getElementById('appName');
+        const appFunctionality = document.getElementById('appFunctionality');
+        const appFileInput = document.getElementById('appFileInput');
+        const appPreviewImg = document.getElementById('appPreviewImg');
+        const appUploadArea = document.getElementById('appUploadArea');
+        const workAppCloseBtn = document.getElementById('workAppCloseBtn');
+        const workAppCancelBtn = document.getElementById('workAppCancelBtn');
+
+        const workFlyerModal = document.getElementById('workFlyerModal');
+        const workFlyerForm = document.getElementById('workFlyerForm');
+        const workFlyerEditId = document.getElementById('workFlyerEditId');
+        const flyerTitle = document.getElementById('flyerTitle');
+        const flyerDescription = document.getElementById('flyerDescription');
+        const flyerFileInput = document.getElementById('flyerFileInput');
+        const flyerPreviewImg = document.getElementById('flyerPreviewImg');
+        const flyerUploadArea = document.getElementById('flyerUploadArea');
+        const workFlyerCloseBtn = document.getElementById('workFlyerCloseBtn');
+        const workFlyerCancelBtn = document.getElementById('workFlyerCancelBtn');
+
+        const workWebsiteModal = document.getElementById('workWebsiteModal');
+        const workWebsiteForm = document.getElementById('workWebsiteForm');
+        const workWebsiteEditId = document.getElementById('workWebsiteEditId');
+        const websiteName = document.getElementById('websiteName');
+        const websiteFunctionality = document.getElementById('websiteFunctionality');
+        const websiteFileInput = document.getElementById('websiteFileInput');
+        const websitePreviewImg = document.getElementById('websitePreviewImg');
+        const websiteUploadArea = document.getElementById('websiteUploadArea');
+        const workWebsiteCloseBtn = document.getElementById('workWebsiteCloseBtn');
+        const workWebsiteCancelBtn = document.getElementById('workWebsiteCancelBtn');
+
+        const workLogoModal = document.getElementById('workLogoModal');
+        const workLogoForm = document.getElementById('workLogoForm');
+        const workLogoEditId = document.getElementById('workLogoEditId');
+        const logoTitle = document.getElementById('logoTitle');
+        const logoDescription = document.getElementById('logoDescription');
+        const logoFileInput = document.getElementById('logoFileInput');
+        const logoPreviewImg = document.getElementById('logoPreviewImg');
+        const logoUploadArea = document.getElementById('logoUploadArea');
+        const workLogoCloseBtn = document.getElementById('workLogoCloseBtn');
+        const workLogoCancelBtn = document.getElementById('workLogoCancelBtn');
+
         // =================================================================
         // DATA FUNCTIONS
         // =================================================================
@@ -1651,7 +2383,13 @@
                         transactions: {},
                         promotions: {},
                         disabled: false,
-                        notifications: {}
+                        notifications: {},
+                        work: {
+                            app: {},
+                            flyer: {},
+                            website: {},
+                            logo: {}
+                        }
                     };
                     set(dbRef, allData).then(() => {
                         if (callback) callback(allData);
@@ -1662,6 +2400,10 @@
                         allData.categories = ['graphic', 'dev', 'tech', 'it'];
                         saveData();
                     }
+                    if (!allData.work) {
+                        allData.work = { app: {}, flyer: {}, website: {}, logo: {} };
+                        saveData();
+                    }
                     if (callback) callback(data);
                 }
             });
@@ -1670,6 +2412,33 @@
         function saveData() {
             const dbRef = ref(db, 'bufferzoneAppData');
             return set(dbRef, allData);
+        }
+
+        // =================================================================
+        // CLOUDINARY UPLOAD
+        // =================================================================
+
+        function uploadToCloudinary(file) {
+            return new Promise((resolve, reject) => {
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+                formData.append('cloud_name', CLOUDINARY_CLOUD_NAME);
+
+                fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.secure_url) {
+                            resolve(data.secure_url);
+                        } else {
+                            reject(data.error || 'Upload failed');
+                        }
+                    })
+                    .catch(err => reject(err));
+            });
         }
 
         // =================================================================
@@ -1727,12 +2496,12 @@
             renderUsers();
             renderActivityFeed();
             renderOurServicesList();
+            renderWorkPage();
         }
 
         function renderDashboard() {
             const services = Object.values(allData.services || {});
             const orders = Object.values(allData.orders || {});
-            // Use allData.users for customer count
             const users = Object.values(allData.users || {});
             const revenue = orders.reduce((sum, o) => sum + (o.amount || 0), 0);
             const pending = orders.filter(o => o.status === 'pending').length;
@@ -1802,7 +2571,6 @@
             const container = document.getElementById('promotionsList');
             const data = allData.promotions || {};
             const entries = Object.entries(data);
-            // Calculate used counts from users
             const users = allData.users || {};
             let usedCountMap = {};
             for (const userId in users) {
@@ -1852,7 +2620,6 @@
             if (statusFilter !== 'all') {
                 entries = entries.filter(([key, o]) => o.status === statusFilter);
             }
-            // Sort by date descending (newest first)
             entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
 
             if (entries.length === 0) {
@@ -1933,7 +2700,6 @@
             const usersRef = ref(db, 'users');
             get(usersRef).then((snapshot) => {
                 const usersData = snapshot.val() || {};
-                // Update allData.users for promo counts
                 allData.users = usersData;
                 let entries = Object.entries(usersData);
                 if (searchTerm.trim()) {
@@ -1998,7 +2764,7 @@
                         const uid = this.dataset.uid;
                         const currentlyBanned = this.dataset.banned === 'true';
                         const newBanStatus = !currentlyBanned;
-                        
+
                         if (confirm(`Are you sure you want to ${newBanStatus ? 'ban' : 'unban'} this user?`)) {
                             const userRef = ref(db, 'users/' + uid);
                             update(userRef, { banned: newBanStatus }).then(() => {
@@ -2075,19 +2841,481 @@
         }
 
         // =================================================================
+        // WORK PAGE RENDER
+        // =================================================================
+
+        function renderWorkPage() {
+            const work = allData.work || { app: {}, flyer: {}, website: {}, logo: {} };
+            const sections = [
+                { type: 'app', label: 'Apps', icon: 'fa-mobile-screen-button', data: work.app || {} },
+                { type: 'flyer', label: 'Flyers', icon: 'fa-file-image', data: work.flyer || {} },
+                { type: 'website', label: 'Websites', icon: 'fa-laptop', data: work.website || {} },
+                { type: 'logo', label: 'Logos', icon: 'fa-font', data: work.logo || {} }
+            ];
+
+            let html = '';
+            for (const section of sections) {
+                const entries = Object.entries(section.data);
+                html += `
+                    <div class="work-section-title">
+                        <i class="fa-solid ${section.icon}"></i> ${section.label}
+                        <span>(${entries.length})</span>
+                    </div>
+                    <div class="work-grid" data-type="${section.type}">
+                `;
+                if (entries.length === 0) {
+                    html += `
+                        <div class="work-empty" style="grid-column:1/-1;">
+                            <i class="fa-regular fa-circle-plus"></i>
+                            <p>No ${section.label.toLowerCase()} posted yet.</p>
+                        </div>
+                    `;
+                } else {
+                    for (const [key, item] of entries) {
+                        html += `
+                            <div class="work-item" data-type="${section.type}" data-key="${key}">
+                                <div class="img-wrap">
+                                    ${item.imageUrl ? `<img src="${item.imageUrl}" alt="${item.title || 'Work'}">` : `<div class="no-img"><i class="fa-regular fa-image"></i> No image</div>`}
+                                    <span class="type-badge">${section.label.slice(0, -1)}</span>
+                                </div>
+                                <div class="title">${item.title || 'Untitled'}</div>
+                                <div class="subtitle">${item.functionality || item.description || ''}</div>
+                                <div class="actions">
+                                    <button class="btn btn-primary btn-sm edit-work" data-type="${section.type}" data-key="${key}"><i class="fa-solid fa-pen"></i> Edit</button>
+                                    <button class="btn btn-danger btn-sm delete-work" data-type="${section.type}" data-key="${key}"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+                html += `</div>`;
+            }
+
+            workSections.innerHTML = html;
+
+            // Attach edit/delete events
+            workSections.querySelectorAll('.edit-work').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const type = this.dataset.type;
+                    const key = this.dataset.key;
+                    openWorkEdit(type, key);
+                });
+            });
+            workSections.querySelectorAll('.delete-work').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const type = this.dataset.type;
+                    const key = this.dataset.key;
+                    showDeleteConfirmation('work', { type, key });
+                });
+            });
+        }
+
+        // =================================================================
+        // WORK CRUD
+        // =================================================================
+
+        function addWorkItem(type, data) {
+            if (!allData.work) allData.work = { app: {}, flyer: {}, website: {}, logo: {} };
+            const id = 'w' + Date.now();
+            allData.work[type][id] = {
+                ...data,
+                id: id,
+                type: type,
+                createdAt: Date.now()
+            };
+            return saveData();
+        }
+
+        function updateWorkItem(type, key, data) {
+            if (!allData.work || !allData.work[type] || !allData.work[type][key]) return;
+            allData.work[type][key] = {
+                ...allData.work[type][key],
+                ...data
+            };
+            return saveData();
+        }
+
+        function deleteWorkItem(type, key) {
+            if (allData.work && allData.work[type] && allData.work[type][key]) {
+                delete allData.work[type][key];
+                return saveData();
+            }
+        }
+
+        // =================================================================
+        // WORK MODALS
+        // =================================================================
+
+        function openWorkPost(type) {
+            const modalMap = {
+                app: workAppModal,
+                flyer: workFlyerModal,
+                website: workWebsiteModal,
+                logo: workLogoModal
+            };
+            const formMap = {
+                app: workAppForm,
+                flyer: workFlyerForm,
+                website: workWebsiteForm,
+                logo: workLogoForm
+            };
+            const editIdMap = {
+                app: workAppEditId,
+                flyer: workFlyerEditId,
+                website: workWebsiteEditId,
+                logo: workLogoEditId
+            };
+
+            // Reset forms
+            const modal = modalMap[type];
+            const form = formMap[type];
+            const editId = editIdMap[type];
+            editId.value = '';
+            form.reset();
+            // Reset previews
+            const previewMap = {
+                app: appPreviewImg,
+                flyer: flyerPreviewImg,
+                website: websitePreviewImg,
+                logo: logoPreviewImg
+            };
+            const preview = previewMap[type];
+            if (preview) {
+                preview.style.display = 'none';
+                preview.src = '';
+            }
+            modal.classList.add('open');
+        }
+
+        function openWorkEdit(type, key) {
+            const work = allData.work || {};
+            const data = work[type]?.[key];
+            if (!data) return;
+
+            const modalMap = {
+                app: workAppModal,
+                flyer: workFlyerModal,
+                website: workWebsiteModal,
+                logo: workLogoModal
+            };
+            const formMap = {
+                app: workAppForm,
+                flyer: workFlyerForm,
+                website: workWebsiteForm,
+                logo: workLogoForm
+            };
+            const editIdMap = {
+                app: workAppEditId,
+                flyer: workFlyerEditId,
+                website: workWebsiteEditId,
+                logo: workLogoEditId
+            };
+            const fieldMap = {
+                app: { title: appName, functionality: appFunctionality, preview: appPreviewImg },
+                flyer: { title: flyerTitle, description: flyerDescription, preview: flyerPreviewImg },
+                website: { title: websiteName, functionality: websiteFunctionality, preview: websitePreviewImg },
+                logo: { title: logoTitle, description: logoDescription, preview: logoPreviewImg }
+            };
+
+            const modal = modalMap[type];
+            const form = formMap[type];
+            const editId = editIdMap[type];
+            const fields = fieldMap[type];
+
+            editId.value = key;
+            fields.title.value = data.title || '';
+            if (fields.functionality) fields.functionality.value = data.functionality || '';
+            if (fields.description) fields.description.value = data.description || '';
+            if (data.imageUrl) {
+                fields.preview.src = data.imageUrl;
+                fields.preview.style.display = 'block';
+            } else {
+                fields.preview.style.display = 'none';
+            }
+
+            modal.classList.add('open');
+        }
+
+        function closeWorkModal(type) {
+            const modalMap = {
+                app: workAppModal,
+                flyer: workFlyerModal,
+                website: workWebsiteModal,
+                logo: workLogoModal
+            };
+            modalMap[type].classList.remove('open');
+        }
+
+        // =================================================================
+        // WORK FORM SUBMISSIONS
+        // =================================================================
+
+        // App
+        workAppForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const editId = workAppEditId.value;
+            const name = appName.value.trim();
+            const functionality = appFunctionality.value.trim();
+            const file = appFileInput.files[0];
+
+            if (!name || !functionality) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+
+            let imageUrl = '';
+            if (file) {
+                try {
+                    showToast('Uploading image...');
+                    imageUrl = await uploadToCloudinary(file);
+                } catch (err) {
+                    showToast('Upload failed: ' + err.message, 'error');
+                    return;
+                }
+            } else if (!editId) {
+                showToast('Please upload an image', 'error');
+                return;
+            }
+
+            const data = { title: name, functionality: functionality, imageUrl: imageUrl || undefined };
+
+            if (editId) {
+                // If no new image, keep existing
+                if (!imageUrl) {
+                    const existing = allData.work?.app?.[editId];
+                    if (existing) data.imageUrl = existing.imageUrl;
+                }
+                await updateWorkItem('app', editId, data);
+                showToast('App updated');
+            } else {
+                await addWorkItem('app', data);
+                showToast('App posted!');
+            }
+            closeWorkModal('app');
+            renderWorkPage();
+        });
+
+        // Flyer
+        workFlyerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const editId = workFlyerEditId.value;
+            const title = flyerTitle.value.trim();
+            const description = flyerDescription.value.trim();
+            const file = flyerFileInput.files[0];
+
+            if (!title || !description) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+
+            let imageUrl = '';
+            if (file) {
+                try {
+                    showToast('Uploading image...');
+                    imageUrl = await uploadToCloudinary(file);
+                } catch (err) {
+                    showToast('Upload failed: ' + err.message, 'error');
+                    return;
+                }
+            } else if (!editId) {
+                showToast('Please upload an image', 'error');
+                return;
+            }
+
+            const data = { title: title, description: description, imageUrl: imageUrl || undefined };
+
+            if (editId) {
+                if (!imageUrl) {
+                    const existing = allData.work?.flyer?.[editId];
+                    if (existing) data.imageUrl = existing.imageUrl;
+                }
+                await updateWorkItem('flyer', editId, data);
+                showToast('Flyer updated');
+            } else {
+                await addWorkItem('flyer', data);
+                showToast('Flyer posted!');
+            }
+            closeWorkModal('flyer');
+            renderWorkPage();
+        });
+
+        // Website
+        workWebsiteForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const editId = workWebsiteEditId.value;
+            const name = websiteName.value.trim();
+            const functionality = websiteFunctionality.value.trim();
+            const file = websiteFileInput.files[0];
+
+            if (!name || !functionality) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+
+            let imageUrl = '';
+            if (file) {
+                try {
+                    showToast('Uploading image...');
+                    imageUrl = await uploadToCloudinary(file);
+                } catch (err) {
+                    showToast('Upload failed: ' + err.message, 'error');
+                    return;
+                }
+            } else if (!editId) {
+                showToast('Please upload an image', 'error');
+                return;
+            }
+
+            const data = { title: name, functionality: functionality, imageUrl: imageUrl || undefined };
+
+            if (editId) {
+                if (!imageUrl) {
+                    const existing = allData.work?.website?.[editId];
+                    if (existing) data.imageUrl = existing.imageUrl;
+                }
+                await updateWorkItem('website', editId, data);
+                showToast('Website updated');
+            } else {
+                await addWorkItem('website', data);
+                showToast('Website posted!');
+            }
+            closeWorkModal('website');
+            renderWorkPage();
+        });
+
+        // Logo
+        workLogoForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const editId = workLogoEditId.value;
+            const title = logoTitle.value.trim();
+            const description = logoDescription.value.trim();
+            const file = logoFileInput.files[0];
+
+            if (!title || !description) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+
+            let imageUrl = '';
+            if (file) {
+                try {
+                    showToast('Uploading image...');
+                    imageUrl = await uploadToCloudinary(file);
+                } catch (err) {
+                    showToast('Upload failed: ' + err.message, 'error');
+                    return;
+                }
+            } else if (!editId) {
+                showToast('Please upload an image', 'error');
+                return;
+            }
+
+            const data = { title: title, description: description, imageUrl: imageUrl || undefined };
+
+            if (editId) {
+                if (!imageUrl) {
+                    const existing = allData.work?.logo?.[editId];
+                    if (existing) data.imageUrl = existing.imageUrl;
+                }
+                await updateWorkItem('logo', editId, data);
+                showToast('Logo updated');
+            } else {
+                await addWorkItem('logo', data);
+                showToast('Logo posted!');
+            }
+            closeWorkModal('logo');
+            renderWorkPage();
+        });
+
+        // =================================================================
+        // WORK MODAL FILE UPLOAD HANDLERS
+        // =================================================================
+
+        function setupUploadArea(uploadArea, fileInput, previewImg) {
+            uploadArea.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        previewImg.src = e.target.result;
+                        previewImg.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    previewImg.style.display = 'none';
+                }
+            });
+        }
+
+        setupUploadArea(appUploadArea, appFileInput, appPreviewImg);
+        setupUploadArea(flyerUploadArea, flyerFileInput, flyerPreviewImg);
+        setupUploadArea(websiteUploadArea, websiteFileInput, websitePreviewImg);
+        setupUploadArea(logoUploadArea, logoFileInput, logoPreviewImg);
+
+        // =================================================================
+        // WORK MODAL CLOSE HANDLERS
+        // =================================================================
+
+        function setupWorkModalClose(modal, closeBtn, cancelBtn) {
+            closeBtn.addEventListener('click', () => modal.classList.remove('open'));
+            cancelBtn.addEventListener('click', () => modal.classList.remove('open'));
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.classList.remove('open');
+            });
+        }
+
+        setupWorkModalClose(workAppModal, workAppCloseBtn, workAppCancelBtn);
+        setupWorkModalClose(workFlyerModal, workFlyerCloseBtn, workFlyerCancelBtn);
+        setupWorkModalClose(workWebsiteModal, workWebsiteCloseBtn, workWebsiteCancelBtn);
+        setupWorkModalClose(workLogoModal, workLogoCloseBtn, workLogoCancelBtn);
+
+        // =================================================================
+        // WORK POST CARDS
+        // =================================================================
+
+        document.querySelectorAll('.work-post-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const type = this.dataset.type;
+                openWorkPost(type);
+            });
+        });
+
+        // =================================================================
+        // WORK NAVIGATION
+        // =================================================================
+
+        adminAvatar.addEventListener('click', () => {
+            // Navigate to Work page
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-work').classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            // Scroll to top
+            document.getElementById('appContent').scrollTop = 0;
+            renderWorkPage();
+        });
+
+        workBackBtn.addEventListener('click', () => {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-dashboard').classList.add('active');
+            document.querySelector('.nav-item[data-page="dashboard"]').classList.add('active');
+        });
+
+        // =================================================================
         // DELETE CONFIRMATION
         // =================================================================
 
-        function showDeleteConfirmation(type, key) {
+        function showDeleteConfirmation(type, payload) {
             const messages = {
                 'promo': 'Are you sure you want to delete this promo coupon?',
                 'order': 'Are you sure you want to delete this order?',
                 'user': 'Are you sure you want to delete this user? (This will permanently remove their account)',
                 'service': 'Are you sure you want to delete this service?',
-                'category': 'Are you sure you want to delete this category? (This will also remove all services under it)'
+                'category': 'Are you sure you want to delete this category? (This will also remove all services under it)',
+                'work': 'Are you sure you want to delete this project?'
             };
             deleteConfirmText.textContent = messages[type] || 'Are you sure you want to delete this item?';
-            pendingDeleteAction = { type, key };
+            pendingDeleteAction = { type, payload };
             deleteConfirmModal.classList.add('open');
         }
 
@@ -2098,41 +3326,34 @@
 
         document.getElementById('deleteConfirmBtn').addEventListener('click', function() {
             if (!pendingDeleteAction) return;
-            const { type, key } = pendingDeleteAction;
-            
-            // Perform deletion based on type
+            const { type, payload } = pendingDeleteAction;
+
             if (type === 'promo') {
-                if (allData.promotions && allData.promotions[key]) {
-                    delete allData.promotions[key];
-                    saveData().then(() => {
-                        renderAll();
-                        showToast('Promo deleted');
-                    });
+                if (allData.promotions && allData.promotions[payload]) {
+                    delete allData.promotions[payload];
+                    saveData().then(() => { renderAll();
+                        showToast('Promo deleted'); });
                 }
             } else if (type === 'order') {
-                if (allData.orders && allData.orders[key]) {
-                    delete allData.orders[key];
-                    saveData().then(() => {
-                        renderAll();
-                        showToast('Order deleted');
-                    });
+                if (allData.orders && allData.orders[payload]) {
+                    delete allData.orders[payload];
+                    saveData().then(() => { renderAll();
+                        showToast('Order deleted'); });
                 }
             } else if (type === 'user') {
-                const userRef = ref(db, 'users/' + key);
+                const userRef = ref(db, 'users/' + payload);
                 set(userRef, null).then(() => {
                     showToast('User deleted');
                     renderUsers(document.getElementById('userSearchInput').value);
                 });
             } else if (type === 'service') {
-                if (allData.services && allData.services[key]) {
-                    delete allData.services[key];
-                    saveData().then(() => {
-                        renderAll();
-                        showToast('Service deleted');
-                    });
+                if (allData.services && allData.services[payload]) {
+                    delete allData.services[payload];
+                    saveData().then(() => { renderAll();
+                        showToast('Service deleted'); });
                 }
             } else if (type === 'category') {
-                const cat = key;
+                const cat = payload;
                 allData.categories = allData.categories.filter(c => c !== cat);
                 if (allData.services) {
                     Object.keys(allData.services).forEach(sKey => {
@@ -2141,9 +3362,13 @@
                         }
                     });
                 }
-                saveData().then(() => {
-                    renderAll();
-                    showToast('Category deleted');
+                saveData().then(() => { renderAll();
+                    showToast('Category deleted'); });
+            } else if (type === 'work') {
+                const { type: workType, key } = payload;
+                deleteWorkItem(workType, key).then(() => {
+                    renderWorkPage();
+                    showToast('Project deleted');
                 });
             }
             deleteConfirmModal.classList.remove('open');
@@ -2151,7 +3376,7 @@
         });
 
         // =================================================================
-        // CRUD OPERATIONS
+        // CRUD OPERATIONS (Existing)
         // =================================================================
 
         function addService(data) {
@@ -2211,23 +3436,9 @@
             return saveData();
         }
 
-        function deleteService(key) {
-            if (allData.services && allData.services[key]) {
-                delete allData.services[key];
-                return saveData();
-            }
-        }
-
         function updateOrderStatus(key, status) {
             if (allData.orders && allData.orders[key]) {
                 allData.orders[key].status = status;
-                return saveData();
-            }
-        }
-
-        function deleteOrder(key) {
-            if (allData.orders && allData.orders[key]) {
-                delete allData.orders[key];
                 return saveData();
             }
         }
@@ -2336,7 +3547,7 @@
         }
 
         // =================================================================
-        // EVENT BINDINGS
+        // EVENT BINDINGS (Existing)
         // =================================================================
 
         document.getElementById('addServiceBtn').addEventListener('click', () => {
@@ -2622,7 +3833,7 @@
             }
         });
 
-        console.log('✅ Admin App ready with Firebase.');
+        console.log('✅ Admin App ready with Firebase + Work Page + Cloudinary.');
     </script>
 </body>
 </html>
