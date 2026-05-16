@@ -612,6 +612,22 @@
             color: #dc2626;
         }
 
+        /* --- CATEGORY INPUT STYLING --- */
+        .cat-input {
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 13px;
+            transition: border 0.2s;
+            flex: 1;
+            min-width: 100px;
+        }
+        .cat-input:focus {
+            outline: none;
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+        }
+
         /* --- ORDER CARD --- */
         .order-card {
             background: #ffffff;
@@ -1066,6 +1082,48 @@
             color: #1c2128;
             margin-bottom: 4px;
         }
+
+        /* --- DELETE CONFIRMATION MODAL --- */
+        .delete-confirm-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .delete-confirm-modal-overlay.open { display: flex; }
+        .delete-confirm-modal-content {
+            background: #ffffff;
+            border-radius: 18px;
+            width: 100%;
+            max-width: 360px;
+            padding: 24px 22px 20px 22px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .delete-confirm-modal-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-bottom: 6px;
+        }
+        .delete-confirm-modal-content p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 16px;
+        }
+        .delete-confirm-modal-content .actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -1138,10 +1196,22 @@
                         <h3>Quick Stats</h3>
                     </div>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:13px; color:#555;">
-                        <div><strong>Pending:</strong> <span id="statPending">0</span></div>
-                        <div><strong>In progress:</strong> <span id="statProgress">0</span></div>
-                        <div><strong>Completed:</strong> <span id="statCompleted">0</span></div>
-                        <div><strong>Total revenue:</strong> ZMW <span id="statRevenueDetail">0</span></div>
+                        <div style="background:#f0f0f0; border-radius:8px; padding:10px; text-align:center;">
+                            <div style="font-size:10px; color:#888;">Pending</div>
+                            <div style="font-size:20px; font-weight:700; color:#f5b83d;" id="statPending">0</div>
+                        </div>
+                        <div style="background:#f0f0f0; border-radius:8px; padding:10px; text-align:center;">
+                            <div style="font-size:10px; color:#888;">In Progress</div>
+                            <div style="font-size:20px; font-weight:700; color:#1a73e8;" id="statProgress">0</div>
+                        </div>
+                        <div style="background:#f0f0f0; border-radius:8px; padding:10px; text-align:center;">
+                            <div style="font-size:10px; color:#888;">Completed</div>
+                            <div style="font-size:20px; font-weight:700; color:#00a86b;" id="statCompleted">0</div>
+                        </div>
+                        <div style="background:#f0f0f0; border-radius:8px; padding:10px; text-align:center;">
+                            <div style="font-size:10px; color:#888;">Total Revenue</div>
+                            <div style="font-size:20px; font-weight:700; color:#7c3aed;" id="statRevenueDetail">0</div>
+                        </div>
                     </div>
                 </div>
 
@@ -1193,7 +1263,7 @@
                         <!-- Rendered by JS -->
                     </div>
                     <div style="display:flex;gap:8px;flex-wrap:wrap;padding:8px 0;">
-                        <input type="text" id="newCategoryInput" placeholder="Category name" style="flex:1;min-width:100px;">
+                        <input type="text" id="newCategoryInput" class="cat-input" placeholder="Category name">
                         <button class="btn btn-primary btn-sm" id="addCategoryBtn">Add</button>
                     </div>
                 </div>
@@ -1238,8 +1308,16 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>Orders</h3>
-                        <div style="display:flex; gap:8px;">
+                        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
                             <input type="text" id="orderSearchInput" placeholder="Search orders..." style="padding:6px 12px; border:1px solid #ddd; border-radius:20px; font-size:12px; width:140px; outline:none;">
+                            <select id="orderStatusFilter" style="padding:6px 12px; border:1px solid #ddd; border-radius:20px; font-size:12px; outline:none; background:#fff; cursor:pointer;">
+                                <option value="all">All Statuses</option>
+                                <option value="pending">Pending</option>
+                                <option value="progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                                <option value="review">In Review</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
                             <button class="btn btn-outline btn-sm" id="refreshOrders"><i class="fa-solid fa-rotate"></i></button>
                         </div>
                     </div>
@@ -1450,6 +1528,18 @@
         </div>
     </div>
 
+    <!-- ===== DELETE CONFIRMATION MODAL ===== -->
+    <div class="delete-confirm-modal-overlay" id="deleteConfirmModal">
+        <div class="delete-confirm-modal-content">
+            <h3>Confirm Deletion</h3>
+            <p id="deleteConfirmText">Are you sure you want to delete this item?</p>
+            <div class="actions">
+                <button class="btn btn-outline" id="deleteCancelBtn">Cancel</button>
+                <button class="btn btn-danger" id="deleteConfirmBtn">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
@@ -1484,7 +1574,7 @@
         let allData = null;
         let currentUser = null;
         let currentAdminData = null;
-        let userToBan = null;
+        let pendingDeleteAction = null;
 
         // =================================================================
         // DOM REFS
@@ -1534,6 +1624,12 @@
 
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMessage');
+
+        // Delete Modal
+        const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+        const deleteConfirmText = document.getElementById('deleteConfirmText');
+        const deleteCancelBtn = document.getElementById('deleteCancelBtn');
+        const deleteConfirmBtn = document.getElementById('deleteConfirmBtn');
 
         // =================================================================
         // DATA FUNCTIONS
@@ -1636,7 +1732,8 @@
         function renderDashboard() {
             const services = Object.values(allData.services || {});
             const orders = Object.values(allData.orders || {});
-            const customers = Object.values(allData.customers || {});
+            // Use allData.users for customer count
+            const users = Object.values(allData.users || {});
             const revenue = orders.reduce((sum, o) => sum + (o.amount || 0), 0);
             const pending = orders.filter(o => o.status === 'pending').length;
             const progress = orders.filter(o => o.status === 'progress').length;
@@ -1644,7 +1741,7 @@
 
             document.getElementById('statServices').textContent = services.length;
             document.getElementById('statOrders').textContent = orders.length;
-            document.getElementById('statCustomers').textContent = customers.length;
+            document.getElementById('statCustomers').textContent = users.length;
             document.getElementById('statRevenue').textContent = `ZMW ${revenue.toFixed(2)}`;
             document.getElementById('statPending').textContent = pending;
             document.getElementById('statProgress').textContent = progress;
@@ -1665,21 +1762,7 @@
             container.querySelectorAll('.delete-cat-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const cat = this.dataset.cat;
-                    if (confirm(`Delete category "${cat}"?`)) {
-                        allData.categories = allData.categories.filter(c => c !== cat);
-                        // Also remove services with this category
-                        if (allData.services) {
-                            Object.keys(allData.services).forEach(key => {
-                                if (allData.services[key].category === cat) {
-                                    delete allData.services[key];
-                                }
-                            });
-                        }
-                        saveData().then(() => {
-                            renderAll();
-                            showToast('Category deleted');
-                        });
-                    }
+                    showDeleteConfirmation('category', cat);
                 });
             });
         }
@@ -1749,20 +1832,12 @@
             container.querySelectorAll('.delete-promo').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
-                    if (confirm('Delete this promo coupon?')) {
-                        if (allData.promotions) {
-                            delete allData.promotions[key];
-                            saveData().then(() => {
-                                renderAll();
-                                showToast('Promo deleted');
-                            });
-                        }
-                    }
+                    showDeleteConfirmation('promo', key);
                 });
             });
         }
 
-        function renderOrders(searchTerm = '') {
+        function renderOrders(searchTerm = '', statusFilter = 'all') {
             const container = document.getElementById('ordersList');
             const data = allData.orders || {};
             let entries = Object.entries(data);
@@ -1774,6 +1849,12 @@
                     (o.service || '').toLowerCase().includes(term)
                 );
             }
+            if (statusFilter !== 'all') {
+                entries = entries.filter(([key, o]) => o.status === statusFilter);
+            }
+            // Sort by date descending (newest first)
+            entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+
             if (entries.length === 0) {
                 container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No orders found.</div>`;
                 return;
@@ -1831,7 +1912,7 @@
             container.querySelectorAll('.delete-order').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
-                    if (confirm('Delete this order?')) deleteOrder(key);
+                    showDeleteConfirmation('order', key);
                 });
             });
 
@@ -1934,13 +2015,7 @@
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
                         const uid = this.dataset.uid;
-                        if (confirm(`Permanently delete this user?`)) {
-                            const userRef = ref(db, 'users/' + uid);
-                            set(userRef, null).then(() => {
-                                showToast('User deleted');
-                                renderUsers(document.getElementById('userSearchInput').value);
-                            });
-                        }
+                        showDeleteConfirmation('user', uid);
                     });
                 });
             }).catch((error) => {
@@ -1998,6 +2073,82 @@
                 </div>
             `).join('');
         }
+
+        // =================================================================
+        // DELETE CONFIRMATION
+        // =================================================================
+
+        function showDeleteConfirmation(type, key) {
+            const messages = {
+                'promo': 'Are you sure you want to delete this promo coupon?',
+                'order': 'Are you sure you want to delete this order?',
+                'user': 'Are you sure you want to delete this user? (This will permanently remove their account)',
+                'service': 'Are you sure you want to delete this service?',
+                'category': 'Are you sure you want to delete this category? (This will also remove all services under it)'
+            };
+            deleteConfirmText.textContent = messages[type] || 'Are you sure you want to delete this item?';
+            pendingDeleteAction = { type, key };
+            deleteConfirmModal.classList.add('open');
+        }
+
+        document.getElementById('deleteCancelBtn').addEventListener('click', function() {
+            deleteConfirmModal.classList.remove('open');
+            pendingDeleteAction = null;
+        });
+
+        document.getElementById('deleteConfirmBtn').addEventListener('click', function() {
+            if (!pendingDeleteAction) return;
+            const { type, key } = pendingDeleteAction;
+            
+            // Perform deletion based on type
+            if (type === 'promo') {
+                if (allData.promotions && allData.promotions[key]) {
+                    delete allData.promotions[key];
+                    saveData().then(() => {
+                        renderAll();
+                        showToast('Promo deleted');
+                    });
+                }
+            } else if (type === 'order') {
+                if (allData.orders && allData.orders[key]) {
+                    delete allData.orders[key];
+                    saveData().then(() => {
+                        renderAll();
+                        showToast('Order deleted');
+                    });
+                }
+            } else if (type === 'user') {
+                const userRef = ref(db, 'users/' + key);
+                set(userRef, null).then(() => {
+                    showToast('User deleted');
+                    renderUsers(document.getElementById('userSearchInput').value);
+                });
+            } else if (type === 'service') {
+                if (allData.services && allData.services[key]) {
+                    delete allData.services[key];
+                    saveData().then(() => {
+                        renderAll();
+                        showToast('Service deleted');
+                    });
+                }
+            } else if (type === 'category') {
+                const cat = key;
+                allData.categories = allData.categories.filter(c => c !== cat);
+                if (allData.services) {
+                    Object.keys(allData.services).forEach(sKey => {
+                        if (allData.services[sKey].category === cat) {
+                            delete allData.services[sKey];
+                        }
+                    });
+                }
+                saveData().then(() => {
+                    renderAll();
+                    showToast('Category deleted');
+                });
+            }
+            deleteConfirmModal.classList.remove('open');
+            pendingDeleteAction = null;
+        });
 
         // =================================================================
         // CRUD OPERATIONS
@@ -2340,12 +2491,19 @@
 
         document.getElementById('refreshOrders').addEventListener('click', () => {
             const searchTerm = document.getElementById('orderSearchInput').value;
-            renderOrders(searchTerm);
+            const statusFilter = document.getElementById('orderStatusFilter').value;
+            renderOrders(searchTerm, statusFilter);
             showToast('Orders refreshed');
         });
 
         document.getElementById('orderSearchInput').addEventListener('input', function() {
-            renderOrders(this.value);
+            const statusFilter = document.getElementById('orderStatusFilter').value;
+            renderOrders(this.value, statusFilter);
+        });
+
+        document.getElementById('orderStatusFilter').addEventListener('change', function() {
+            const searchTerm = document.getElementById('orderSearchInput').value;
+            renderOrders(searchTerm, this.value);
         });
 
         document.getElementById('userSearchInput').addEventListener('input', function() {
