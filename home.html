@@ -58,7 +58,7 @@
             justify-content: space-between;
             align-items: center;
             z-index: 500;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
             flex-shrink: 0;
             pointer-events: auto;
         }
@@ -273,7 +273,7 @@
             background: #fef9e7;
             border-radius: 12px;
             border: 1px solid #f5b83d;
-            display: none; /* Hidden by default */
+            display: none;
             flex-wrap: wrap;
             align-items: center;
             gap: 8px;
@@ -918,14 +918,6 @@
             color: #f5b83d;
         }
 
-        /* --- VIEWS --- */
-        .view {
-            display: none;
-        }
-        .view.active {
-            display: block;
-        }
-
         /* --- ORDERS VIEW (Enhanced) --- */
         .orders-header {
             margin-top: 8px;
@@ -987,32 +979,32 @@
             color: #1c2128;
         }
         .order-card .order-summary .right .order-status {
-            font-size: 10px;
-            font-weight: 600;
+            display: inline-block;
             padding: 2px 12px;
             border-radius: 16px;
-            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
             margin-bottom: 2px;
         }
-        .status-progress {
-            background: #e0f0ff;
-            color: #0066cc;
-        }
-        .status-completed {
-            background: #e6fffa;
-            color: #00a86b;
-        }
-        .status-pending {
+        .order-card .order-summary .right .order-status.status-pending {
             background: #fff6e0;
             color: #cc8800;
         }
-        .status-review {
-            background: #f0e6ff;
-            color: #7700cc;
+        .order-card .order-summary .right .order-status.status-progress {
+            background: #e0f0ff;
+            color: #0066cc;
         }
-        .status-cancelled {
+        .order-card .order-summary .right .order-status.status-completed {
+            background: #e6fffa;
+            color: #00a86b;
+        }
+        .order-card .order-summary .right .order-status.status-cancelled {
             background: #fee2e2;
             color: #dc2626;
+        }
+        .order-card .order-summary .right .order-status.status-review {
+            background: #f0e6ff;
+            color: #7700cc;
         }
 
         .order-card .order-details-expand {
@@ -1054,6 +1046,132 @@
         }
         .order-card.open .expand-icon {
             transform: rotate(180deg);
+        }
+
+        /* --- HISTORY VIEW (with Payment Reminder) --- */
+        .history-list {
+            padding: 0 0 16px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .history-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 14px 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .history-card:active {
+            transform: scale(0.98);
+        }
+        .history-card .history-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .history-card .history-summary .left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: #1c2128;
+        }
+        .history-card .history-summary .left i {
+            font-size: 14px;
+            color: #667eea;
+        }
+        .history-card .history-summary .right {
+            font-size: 11px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .history-card .history-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
+            padding: 0 4px;
+            border-top: 1px solid transparent;
+        }
+        .history-card.open .history-details {
+            max-height: 250px;
+            padding: 10px 4px 4px 4px;
+            border-top-color: #f0f0f0;
+            margin-top: 8px;
+        }
+        .history-card .history-details .h-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 12px;
+            color: #555;
+        }
+        .history-card .history-details .h-row .h-label {
+            color: #888;
+        }
+        .history-card .history-details .h-row .h-val {
+            font-weight: 500;
+            color: #1c2128;
+        }
+        .history-card .expand-icon {
+            transition: transform 0.3s ease;
+            font-size: 11px;
+            color: #aaa;
+        }
+        .history-card.open .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        /* --- PAYMENT REMINDER BANNER --- */
+        .payment-reminder-banner {
+            background: #fff8ed;
+            border: 1px solid #f5b83d;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .payment-reminder-banner.show {
+            display: flex;
+        }
+        .payment-reminder-banner i {
+            color: #f5b83d;
+            font-size: 20px;
+        }
+        .payment-reminder-banner .reminder-text {
+            font-size: 12px;
+            color: #1c2128;
+            font-weight: 500;
+            flex: 1;
+        }
+        .payment-reminder-banner .reminder-amount {
+            font-weight: 700;
+            color: #f5b83d;
+            font-size: 14px;
+        }
+        .btn-done {
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-done:active {
+            transform: scale(0.95);
+        }
+        .btn-done:hover {
+            background: #2a2a2a;
         }
 
         /* --- PROFILE VIEW --- */
@@ -1146,114 +1264,6 @@
         }
         .logout-btn:active {
             transform: scale(0.95);
-        }
-
-        /* --- HISTORY VIEW (with Payment Reminder) --- */
-        .history-list {
-            padding: 0 0 16px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .history-card {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 14px 16px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            border: 1px solid #f0f0f0;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .history-card:active {
-            transform: scale(0.98);
-        }
-        .history-card .history-summary {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .history-card .history-summary .left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 12px;
-            color: #1c2128;
-        }
-        .history-card .history-summary .left i {
-            font-size: 14px;
-            color: #667eea;
-        }
-        .history-card .history-summary .right {
-            font-size: 11px;
-            color: #888;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .history-card .history-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
-            padding: 0 4px;
-            border-top: 1px solid transparent;
-        }
-        .history-card.open .history-details {
-            max-height: 250px;
-            padding: 10px 4px 4px 4px;
-            border-top-color: #f0f0f0;
-            margin-top: 8px;
-        }
-        .history-card .history-details .h-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 3px 0;
-            font-size: 12px;
-            color: #555;
-        }
-        .history-card .history-details .h-row .h-label {
-            color: #888;
-        }
-        .history-card .history-details .h-row .h-val {
-            font-weight: 500;
-            color: #1c2128;
-        }
-        .history-card .expand-icon {
-            transition: transform 0.3s ease;
-            font-size: 11px;
-            color: #aaa;
-        }
-        .history-card.open .expand-icon {
-            transform: rotate(180deg);
-        }
-
-        /* --- PAYMENT REMINDER BANNER --- */
-        .payment-reminder-banner {
-            background: #fff8ed;
-            border: 1px solid #f5b83d;
-            border-radius: 10px;
-            padding: 10px 14px;
-            margin-bottom: 12px;
-            display: none;
-            align-items: center;
-            gap: 10px;
-        }
-        .payment-reminder-banner.show {
-            display: flex;
-        }
-        .payment-reminder-banner i {
-            color: #f5b83d;
-            font-size: 20px;
-        }
-        .payment-reminder-banner .reminder-text {
-            font-size: 12px;
-            color: #1c2128;
-            font-weight: 500;
-            flex: 1;
-        }
-        .payment-reminder-banner .reminder-amount {
-            font-weight: 700;
-            color: #f5b83d;
-            font-size: 14px;
         }
 
         /* --- NOTIFICATION SIDEBAR --- */
@@ -2004,7 +2014,7 @@
                             </div>
                         </div>
                         <div class="right">
-                            <span class="status-badge ${o.status || 'pending'}">${o.status || 'pending'}</span>
+                            <span class="order-status status-${o.status || 'pending'}">${o.status || 'pending'}</span>
                             <span class="order-amount">ZMW ${(o.amount || 0).toFixed(2)}</span>
                             <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
@@ -2034,27 +2044,26 @@
             // Check for completed orders that need remaining payment
             const orders = allData.orders || {};
             let pendingReminder = null;
+            let reminderOrderId = null;
             for (const [key, o] of Object.entries(orders)) {
-                if (o.userId === currentUserId && o.status === 'completed') {
+                if (o.userId === currentUserId && o.status === 'completed' && o.amount) {
                     // Show reminder for the remaining 50%
                     const remainingAmount = o.amount * 0.5;
-                    pendingReminder = {
-                        id: o.id,
-                        amount: remainingAmount,
-                        order: o
-                    };
+                    pendingReminder = remainingAmount;
+                    reminderOrderId = o.id;
                     break;
                 }
             }
 
             // Update payment reminder banner
             const reminderBanner = document.getElementById('paymentReminderBanner');
-            if (pendingReminder) {
+            if (pendingReminder && reminderOrderId) {
                 reminderBanner.classList.add('show');
                 reminderBanner.innerHTML = `
                     <i class="fa-regular fa-circle-check"></i>
-                    <span class="reminder-text">Please pay the remaining 50% of order ${pendingReminder.id}</span>
-                    <span class="reminder-amount">ZMW ${pendingReminder.amount.toFixed(2)}</span>
+                    <span class="reminder-text">Please pay the remaining 50% of order ${reminderOrderId}</span>
+                    <span class="reminder-amount">ZMW ${pendingReminder.toFixed(2)}</span>
+                    <button class="btn-done" data-order-id="${reminderOrderId}">Mark as Paid</button>
                 `;
             } else {
                 reminderBanner.classList.remove('show');
@@ -2089,6 +2098,32 @@
                 el.addEventListener('click', function() {
                     this.classList.toggle('open');
                 });
+            });
+
+            // Attach event listener for the "Mark as Paid" button using event delegation
+            reminderBanner.querySelector('.btn-done')?.addEventListener('click', function() {
+                const orderId = this.dataset.orderId;
+                if (confirm('Mark this order as completed?')) {
+                    // Find the order in allData.orders and update its status
+                    let orderToUpdate = null;
+                    let orderKeyToUpdate = null;
+                    for (const [key, o] of Object.entries(allData.orders || {})) {
+                        if (o.id === orderId && o.userId === currentUserId) {
+                            orderToUpdate = o;
+                            orderKeyToUpdate = key;
+                            break;
+                        }
+                    }
+                    if (orderToUpdate && orderKeyToUpdate) {
+                        allData.orders[orderKeyToUpdate].status = 'completed';
+                        saveData().then(() => {
+                            renderAll();
+                            showToast('Order marked as completed!', 'success');
+                        }).catch((error) => {
+                            showToast('Error updating order status', 'error');
+                        });
+                    }
+                }
             });
         }
 
