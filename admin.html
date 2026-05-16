@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Admin — Buffer Zone</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <!-- Cloudinary Upload Widget -->
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
     <style>
         * {
             margin: 0;
@@ -14,14 +16,12 @@
             font-family: 'Poppins', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
-
         body {
             background-color: #f8f9fc;
             display: block;
             overflow: hidden;
             height: 100%;
         }
-
         .app-root {
             display: flex;
             flex-direction: column;
@@ -33,25 +33,23 @@
             overflow: hidden;
             position: relative;
         }
-
         .app-content {
             flex: 1;
             overflow-y: auto;
             padding: 0 14px 150px 14px;
             -webkit-overflow-scrolling: touch;
         }
-
         .bottom-nav {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             width: 92%;
-            max-width: 420px;
+            max-width: 400px;
             height: 64px;
             background: #1c2128;
             border-radius: 32px;
-            padding: 8px 14px;
+            padding: 8px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -60,7 +58,6 @@
             flex-shrink: 0;
             pointer-events: auto;
         }
-
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -71,13 +68,13 @@
             flex: 1;
             background: none;
             border: none;
-            font-size: 7px;
+            font-size: 8px;
             gap: 1px;
             user-select: none;
             padding: 2px 0;
         }
         .nav-item i {
-            font-size: 18px;
+            font-size: 20px;
             margin-bottom: 1px;
         }
         .nav-item.active {
@@ -90,13 +87,24 @@
             transform: scale(0.92);
         }
 
-        /* --- HEADER --- */
+        /* ===== HEADER ===== */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 16px 0 20px 0;
-            position: relative;
+            transition: all 0.3s ease;
+        }
+        .header.center-header {
+            justify-content: center;
+            gap: 16px;
+        }
+        .header.center-header .header-left {
+            justify-content: center;
+            flex: 1;
+        }
+        .header.center-header .header-right {
+            display: none;
         }
         .header-left {
             display: flex;
@@ -104,52 +112,47 @@
             gap: 12px;
             flex: 1;
         }
-        .header-center {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex: 2;
-        }
-        .header-center span:first-child {
-            font-size: 11px;
-            color: #888;
-            font-weight: 500;
-        }
-        .header-center span:last-child {
-            font-weight: 700;
-            font-size: 16px;
-            color: #1c2128;
-            letter-spacing: -0.3px;
-        }
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #1c2128;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 9px;
-            flex-shrink: 0;
-            cursor: pointer;
-            transition: transform 0.2s;
-            user-select: none;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            line-height: 1;
-            padding: 0 4px;
-        }
-        .avatar:active {
-            transform: scale(0.92);
-        }
         .header-right {
             display: flex;
             gap: 10px;
             align-items: center;
-            flex: 1;
-            justify-content: flex-end;
+        }
+        .work-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #f5b83d;
+            color: #1c2128;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(245, 184, 61, 0.25);
+            letter-spacing: 0.5px;
+        }
+        .work-avatar:active {
+            transform: scale(0.92);
+        }
+        .work-avatar:hover {
+            box-shadow: 0 6px 20px rgba(245, 184, 61, 0.35);
+        }
+        .header-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .header-text span:first-child {
+            font-size: 11px;
+            color: #888;
+        }
+        .header-text span:last-child {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1c2128;
+            letter-spacing: -0.3px;
         }
         .promo-header-btn {
             width: 40px;
@@ -268,10 +271,6 @@
             font-size: 16px;
             color: #1c2128;
         }
-        .quick-action-btn:hover {
-            border-color: #1c2128;
-            background: #fafafa;
-        }
 
         .card {
             background: #ffffff;
@@ -286,6 +285,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 14px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         .card-header h3 {
             font-size: 15px;
@@ -353,7 +354,6 @@
             margin-top: 2px;
         }
 
-        /* --- SERVICE CARD (3x3 Grid, Dark Square) --- */
         .service-grid-customer {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -417,7 +417,6 @@
             margin-top: 4px;
         }
 
-        /* --- HERO EDITOR --- */
         .hero-editor {
             background: #1c2128;
             border-radius: 14px;
@@ -483,7 +482,6 @@
             transform: scale(0.95);
         }
 
-        /* --- POLICY CARD EDITOR --- */
         .policy-editor {
             background: #1c2128;
             border-radius: 14px;
@@ -549,7 +547,6 @@
             transform: scale(0.95);
         }
 
-        /* --- OUR SERVICES LIST EDITOR --- */
         .list-editor {
             background: #ffffff;
             border-radius: 14px;
@@ -583,9 +580,6 @@
             cursor: pointer;
             font-size: 12px;
         }
-        .list-editor .list-item .btn-remove:hover {
-            background: #fecaca;
-        }
         .list-editor .btn-add {
             background: #f0f0f0;
             border: none;
@@ -595,9 +589,6 @@
             font-weight: 600;
             cursor: pointer;
             margin-top: 6px;
-        }
-        .list-editor .btn-add:hover {
-            background: #e0e0e0;
         }
         .list-editor .btn-save-list {
             background: #1c2128;
@@ -610,11 +601,7 @@
             cursor: pointer;
             margin-top: 8px;
         }
-        .list-editor .btn-save-list:hover {
-            background: #2a2a2a;
-        }
 
-        /* --- PROMOTION CARD --- */
         .promo-section {
             padding: 0 0 16px 0;
         }
@@ -647,7 +634,6 @@
             gap: 6px;
         }
 
-        /* --- CATEGORY SECTION CSS --- */
         .category-container {
             display: flex;
             flex-wrap: wrap;
@@ -689,8 +675,6 @@
         .category-tag .delete-cat-btn:hover {
             color: #dc2626;
         }
-
-        /* --- CATEGORY INPUT STYLING --- */
         .cat-input {
             padding: 10px 14px;
             border: 1px solid #ddd;
@@ -706,7 +690,7 @@
             box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
 
-        /* --- ORDER CARD --- */
+        /* ===== ORDER CARD ===== */
         .order-card {
             background: #ffffff;
             border-radius: 14px;
@@ -739,9 +723,6 @@
             padding: 4px 0;
             font-size: 12px;
             color: #555;
-        }
-        .order-details .row:last-child {
-            border-bottom: none;
         }
         .order-details .row .label {
             color: #888;
@@ -794,7 +775,6 @@
             border-color: #1c2128;
         }
 
-        /* --- CUSTOMER ITEM with Ban/Unban Toggle --- */
         .customer-item {
             background: #ffffff;
             border-radius: 12px;
@@ -876,7 +856,6 @@
             transform: rotate(180deg);
         }
 
-        /* --- BAN/UNBAN TOGGLE --- */
         .user-status-badge {
             font-size: 10px;
             font-weight: 600;
@@ -909,7 +888,6 @@
             color: #dc2626;
         }
 
-        /* --- TOGGLE SWITCH (iPhone style) --- */
         .toggle-switch {
             position: relative;
             display: inline-block;
@@ -1069,7 +1047,6 @@
             display: block;
         }
 
-        /* --- TOAST --- */
         .toast {
             position: fixed;
             bottom: 90px;
@@ -1097,7 +1074,6 @@
             color: #f5b83d;
         }
 
-        /* --- MODAL (Service) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -1213,7 +1189,6 @@
             background: #f9f9f9;
         }
 
-        /* --- SCREENSHOT VIEW MODAL --- */
         .screenshot-modal-overlay {
             position: fixed;
             top: 0;
@@ -1267,7 +1242,6 @@
             margin-bottom: 4px;
         }
 
-        /* --- DELETE CONFIRMATION MODAL --- */
         .delete-confirm-modal-overlay {
             position: fixed;
             top: 0;
@@ -1311,74 +1285,75 @@
             justify-content: center;
         }
 
-        /* ===== WORK PAGE STYLES ===== */
-        .work-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 6px 0 16px 0;
+        /* ================================================================
+                   WORK PAGE STYLES
+                   ================================================================ */
+        .work-page-header {
+            text-align: center;
+            padding: 12px 0 18px 0;
         }
-        .work-header h2 {
-            font-size: 22px;
+        .work-page-header h2 {
+            font-size: 26px;
             font-weight: 800;
             color: #1c2128;
+            letter-spacing: -0.5px;
         }
-        .work-header .back-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: #f0f0f0;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 16px;
-            color: #1c2128;
-            transition: all 0.2s;
-        }
-        .work-header .back-btn:active {
-            transform: scale(0.92);
+        .work-page-header p {
+            font-size: 13px;
+            color: #888;
+            margin-top: 2px;
         }
 
-        .work-post-options {
+        .work-options-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 24px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 28px;
         }
-        .work-post-card {
+        @media (max-width: 480px) {
+            .work-options-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+        .work-option-card {
             background: #ffffff;
             border-radius: 16px;
-            padding: 20px 14px;
-            border: 2px solid #f0f0f0;
+            padding: 18px 12px;
             text-align: center;
+            border: 2px solid #f0f0f0;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.25s ease;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
-        .work-post-card:active {
+        .work-option-card:hover {
+            border-color: #f5b83d;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 184, 61, 0.15);
+        }
+        .work-option-card:active {
             transform: scale(0.95);
         }
-        .work-post-card:hover {
-            border-color: #1c2128;
-        }
-        .work-post-card .icon {
-            font-size: 28px;
-            color: #1c2128;
+        .work-option-card .wo-icon {
+            font-size: 32px;
             margin-bottom: 6px;
+            display: block;
         }
-        .work-post-card .label {
+        .work-option-card .wo-label {
             font-weight: 700;
             font-size: 13px;
             color: #1c2128;
         }
-        .work-post-card .sub {
+        .work-option-card .wo-sub {
             font-size: 10px;
             color: #888;
         }
 
-        .work-section-title {
+        /* ---- Work Posts Grid (2x2) ---- */
+        .work-posts-section {
+            margin-top: 6px;
+        }
+        .work-posts-section .section-title {
             font-size: 16px;
             font-weight: 700;
             color: #1c2128;
@@ -1389,140 +1364,173 @@
             align-items: center;
             gap: 8px;
         }
-        .work-section-title span {
-            font-size: 12px;
-            font-weight: 400;
-            color: #888;
+        .work-posts-section .section-title .badge-count {
+            font-size: 11px;
+            background: #f0f0f0;
+            padding: 0 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            color: #555;
         }
 
-        .work-grid {
+        .work-grid-2x2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 14px;
-            margin-bottom: 8px;
+        }
+        @media (max-width: 480px) {
+            .work-grid-2x2 {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
         }
 
-        .work-item {
+        .work-post-card {
             background: #ffffff;
             border-radius: 16px;
             padding: 14px;
             border: 1px solid #f0f0f0;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-            transition: transform 0.15s;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s, box-shadow 0.2s;
             position: relative;
-            float: none;
+            display: flex;
+            flex-direction: column;
         }
-        .work-item:active {
-            transform: scale(0.97);
+        .work-post-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
-        .work-item .img-wrap {
+        .work-post-card .post-thumb {
             width: 100%;
-            aspect-ratio: 16/10;
-            border-radius: 10px;
+            aspect-ratio: 1/1;
+            border-radius: 12px;
             overflow: hidden;
             background: #f5f5f5;
-            margin-bottom: 10px;
-            position: relative;
-        }
-        .work-item .img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .work-item .img-wrap .no-img {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100%;
-            color: #bbb;
-            font-size: 12px;
+            margin-bottom: 10px;
+            position: relative;
         }
-        .work-item .title {
+        .work-post-card .post-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .work-post-card .post-thumb .no-image {
+            color: #ccc;
+            font-size: 32px;
+        }
+        .work-post-card .post-type-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(28, 33, 40, 0.8);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 12px;
+            backdrop-filter: blur(4px);
+        }
+        .work-post-card .post-title {
             font-weight: 700;
             font-size: 14px;
             color: #1c2128;
             margin-bottom: 2px;
         }
-        .work-item .subtitle {
+        .work-post-card .post-desc {
             font-size: 12px;
             color: #666;
-            margin-bottom: 6px;
+            line-height: 1.4;
+            flex: 1;
         }
-        .work-item .actions {
+        .work-post-card .post-meta {
+            font-size: 10px;
+            color: #aaa;
+            margin-top: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .work-post-card .post-actions {
             display: flex;
             gap: 6px;
             margin-top: 8px;
-            justify-content: flex-end;
         }
-        .work-item .actions .btn {
-            padding: 2px 10px;
+        .work-post-card .post-actions .btn {
+            padding: 3px 10px;
             font-size: 9px;
-            border-radius: 12px;
+            border-radius: 8px;
         }
-        .work-item .type-badge {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: rgba(28, 33, 40, 0.85);
-            color: #fff;
-            font-size: 8px;
-            font-weight: 700;
-            padding: 2px 10px;
-            border-radius: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            backdrop-filter: blur(4px);
+        .work-post-card .post-actions .btn-edit-post {
+            background: #f0f0f0;
+            color: #1c2128;
+        }
+        .work-post-card .post-actions .btn-delete-post {
+            background: #fee2e2;
+            color: #dc2626;
         }
 
-        /* Phone & Laptop frames */
+        /* ---- Phone Frame ---- */
         .phone-frame {
-            max-width: 200px;
+            width: 100%;
+            max-width: 220px;
             margin: 0 auto;
-            border-radius: 20px;
-            border: 4px solid #1c2128;
+            border: 6px solid #1c2128;
+            border-radius: 30px;
             padding: 8px;
-            background: #1c2128;
+            background: #fff;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-        }
-        .phone-frame .screen {
-            border-radius: 12px;
-            overflow: hidden;
-            background: #f5f5f5;
-            aspect-ratio: 9/16;
+            aspect-ratio: 9/19;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            position: relative;
         }
-        .phone-frame .screen img {
+        .phone-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 18px;
         }
-        .phone-frame .screen .placeholder {
-            color: #bbb;
-            font-size: 12px;
+        .phone-frame .placeholder {
+            color: #ccc;
+            font-size: 28px;
             text-align: center;
-            padding: 12px;
+        }
+        .phone-frame .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 18px;
+            background: #1c2128;
+            border-radius: 0 0 12px 12px;
         }
 
+        /* ---- Laptop Frame ---- */
         .laptop-frame {
-            max-width: 280px;
+            width: 100%;
+            max-width: 320px;
             margin: 0 auto;
-            border-radius: 12px;
-            border: 4px solid #1c2128;
-            padding: 8px 8px 20px 8px;
             background: #1c2128;
+            border-radius: 12px 12px 0 0;
+            padding: 12px 12px 0 12px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            position: relative;
         }
         .laptop-frame .screen {
-            border-radius: 8px;
-            overflow: hidden;
-            background: #f5f5f5;
+            background: #fff;
+            border-radius: 6px 6px 0 0;
             aspect-ratio: 16/10;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
         .laptop-frame .screen img {
             width: 100%;
@@ -1530,107 +1538,129 @@
             object-fit: cover;
         }
         .laptop-frame .screen .placeholder {
-            color: #bbb;
-            font-size: 12px;
+            color: #ccc;
+            font-size: 28px;
             text-align: center;
-            padding: 12px;
         }
         .laptop-frame .base {
+            height: 10px;
+            background: #2a2a2a;
+            border-radius: 0 0 8px 8px;
+            margin: 0 8px;
+            position: relative;
+        }
+        .laptop-frame .base::after {
+            content: '';
             position: absolute;
-            bottom: 4px;
+            bottom: -4px;
             left: 50%;
             transform: translateX(-50%);
             width: 60%;
-            height: 8px;
-            background: #1c2128;
-            border-radius: 0 0 8px 8px;
+            height: 4px;
+            background: #444;
+            border-radius: 0 0 4px 4px;
         }
 
-        /* --- WORK POST MODALS --- */
-        .work-form-modal .modal {
+        /* ---- Work Upload Modal ---- */
+        .work-upload-modal .modal {
             max-width: 480px;
         }
-        .work-form-modal .phone-frame-container,
-        .work-form-modal .laptop-frame-container {
-            margin: 10px 0;
-        }
-        .work-form-modal .upload-area {
-            border: 2px dashed #ddd;
+        .work-upload-modal .upload-preview {
+            width: 100%;
             border-radius: 12px;
+            border: 2px dashed #ddd;
             padding: 20px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s;
             background: #fafafa;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        .work-form-modal .upload-area:hover {
-            border-color: #1c2128;
-            background: #f5f5f5;
+        .work-upload-modal .upload-preview:hover {
+            border-color: #f5b83d;
+            background: #fefaf0;
         }
-        .work-form-modal .upload-area i {
-            font-size: 28px;
-            color: #888;
+        .work-upload-modal .upload-preview img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+        .work-upload-modal .upload-preview .upload-icon {
+            font-size: 36px;
+            color: #ccc;
             margin-bottom: 6px;
         }
-        .work-form-modal .upload-area .text {
+        .work-upload-modal .upload-preview .upload-text {
             font-size: 12px;
             color: #888;
         }
-        .work-form-modal .upload-area .preview-img {
-            max-width: 100%;
-            max-height: 120px;
-            border-radius: 8px;
-            margin-top: 6px;
-        }
-        .work-form-modal .upload-area input[type="file"] {
-            display: none;
+
+        .work-upload-modal .frame-container {
+            display: flex;
+            justify-content: center;
+            padding: 8px 0;
         }
 
-        /* Responsive: 2x2 stays 2x2 no matter screen */
-        @media (max-width: 420px) {
-            .work-grid {
-                gap: 10px;
+        /* ---- Orders header compact ---- */
+        .orders-compact-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .orders-compact-header input,
+        .orders-compact-header select {
+            padding: 5px 10px;
+            font-size: 11px;
+            border-radius: 14px;
+            border: 1px solid #ddd;
+            outline: none;
+            background: #fff;
+        }
+        .orders-compact-header input {
+            flex: 1;
+            min-width: 100px;
+        }
+        .orders-compact-header select {
+            min-width: 90px;
+        }
+        .orders-compact-header .btn {
+            padding: 4px 12px;
+            font-size: 10px;
+        }
+
+        /* ---- Responsive fine-tune ---- */
+        @media (max-width: 400px) {
+            .work-options-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
             }
-            .work-item {
+            .work-option-card {
+                padding: 12px 8px;
+            }
+            .work-option-card .wo-icon {
+                font-size: 24px;
+            }
+            .work-option-card .wo-label {
+                font-size: 11px;
+            }
+            .work-grid-2x2 {
+                gap: 8px;
+            }
+            .work-post-card {
                 padding: 10px;
             }
-            .work-post-options {
-                gap: 10px;
+            .phone-frame {
+                max-width: 160px;
             }
-            .work-post-card {
-                padding: 14px 10px;
+            .laptop-frame {
+                max-width: 240px;
             }
-            .work-post-card .icon {
-                font-size: 22px;
-            }
-        }
-        @media (min-width: 768px) {
-            .work-grid {
-                gap: 18px;
-            }
-            .work-item {
-                padding: 18px;
-            }
-            .work-post-options {
-                gap: 18px;
-            }
-            .work-post-card {
-                padding: 24px 18px;
-            }
-        }
-
-        .work-empty {
-            text-align: center;
-            padding: 30px 10px;
-            color: #888;
-        }
-        .work-empty i {
-            font-size: 40px;
-            color: #ddd;
-            margin-bottom: 10px;
-        }
-        .work-empty p {
-            font-size: 13px;
         }
     </style>
 </head>
@@ -1641,13 +1671,13 @@
         <div class="app-content" id="appContent">
 
             <!-- ===== HEADER ===== -->
-            <div class="header">
+            <div class="header" id="mainHeader">
                 <div class="header-left">
-                    <div class="avatar" id="adminAvatar">work</div>
-                </div>
-                <div class="header-center">
-                    <span>Admin Panel</span>
-                    <span id="adminName">Buffer Zone</span>
+                    <div class="work-avatar" id="workAvatarBtn" title="View Work Page">Work</div>
+                    <div class="header-text">
+                        <span>Admin Panel</span>
+                        <span id="adminName">Buffer Zone</span>
+                    </div>
                 </div>
                 <div class="header-right">
                     <div class="promo-header-btn" id="promoHeaderBtn"><i class="fa-solid fa-tag"></i></div>
@@ -1694,9 +1724,7 @@
                         <h3>Recent Activity</h3>
                         <span class="see-all" id="viewAllActivity">View All</span>
                     </div>
-                    <div id="activityFeed">
-                        <!-- Rendered by JS -->
-                    </div>
+                    <div id="activityFeed"></div>
                 </div>
 
                 <div class="card">
@@ -1725,65 +1753,93 @@
 
             </div>
 
+            <!-- ===== PAGE: WORK ===== -->
+            <div id="page-work" class="page">
+
+                <div class="work-page-header">
+                    <h2>📁 Recent Projects</h2>
+                    <p>Showcase your work — add new posts or manage existing ones</p>
+                </div>
+
+                <!-- 4 Option Cards -->
+                <div class="work-options-grid">
+                    <div class="work-option-card" data-type="app">
+                        <span class="wo-icon">📱</span>
+                        <div class="wo-label">App</div>
+                        <div class="wo-sub">Mobile App Screenshot</div>
+                    </div>
+                    <div class="work-option-card" data-type="flyer">
+                        <span class="wo-icon">📄</span>
+                        <div class="wo-label">Flyer</div>
+                        <div class="wo-sub">Post a Flyer Design</div>
+                    </div>
+                    <div class="work-option-card" data-type="website">
+                        <span class="wo-icon">💻</span>
+                        <div class="wo-label">Websites</div>
+                        <div class="wo-sub">Website Screenshot</div>
+                    </div>
+                    <div class="work-option-card" data-type="logo">
+                        <span class="wo-icon">🎨</span>
+                        <div class="wo-label">Logos</div>
+                        <div class="wo-sub">Post a Logo Design</div>
+                    </div>
+                </div>
+
+                <!-- Posts Display (2x2 Grid by Section) -->
+                <div class="work-posts-section" id="workPostsContainer">
+                    <!-- Rendered by JS -->
+                </div>
+
+            </div>
+
             <!-- ===== PAGE: SERVICES ===== -->
             <div id="page-services" class="page">
 
-                <!-- Hero Editor -->
                 <div class="hero-editor">
                     <div class="hero-content">
                         <h4 style="color:#f5b83d; font-size:13px; font-weight:700; margin-bottom:6px;">HERO SECTION EDITOR</h4>
-                        <input type="text" id="heroTitle" placeholder="Hero Title">
-                        <input type="text" id="heroTitleSpan" placeholder="Highlighted word (e.g. CREATIVE)">
+                        <input type="text" id="heroTitle" placeholder="Hero Title" />
+                        <input type="text" id="heroTitleSpan" placeholder="Highlighted word (e.g. CREATIVE)" />
                         <textarea id="heroDesc" rows="2" placeholder="Hero description"></textarea>
-                        <input type="text" id="heroCTA" placeholder="CTA Button Text">
-                        <input type="text" id="heroPhone" placeholder="Contact Phone">
+                        <input type="text" id="heroCTA" placeholder="CTA Button Text" />
+                        <input type="text" id="heroPhone" placeholder="Contact Phone" />
                         <button class="btn-save-hero" id="saveHeroBtn"><i class="fa-solid fa-save"></i> Save Hero</button>
                     </div>
                 </div>
 
-                <!-- OUR SERVICES List Editor -->
                 <div class="list-editor">
                     <h4 style="font-size:13px; font-weight:700; color:#1c2128; margin-bottom:8px;">OUR SERVICES LIST</h4>
-                    <div id="ourServicesListContainer">
-                        <!-- Rendered by JS -->
-                    </div>
+                    <div id="ourServicesListContainer"></div>
                     <button class="btn-add" id="addServiceListItem">+ Add Item</button>
                     <button class="btn-save-list" id="saveServiceList">Save List</button>
                 </div>
 
-                <!-- Payment Policy Editor -->
                 <div class="policy-editor">
                     <div class="policy-content">
                         <h4 style="color:#f5b83d; font-size:13px; font-weight:700; margin-bottom:6px;">PAYMENT POLICY CARD EDITOR</h4>
-                        <input type="text" id="policyTitle" placeholder="Policy Title">
+                        <input type="text" id="policyTitle" placeholder="Policy Title" />
                         <textarea id="policyDesc" rows="3" placeholder="Policy description"></textarea>
-                        <input type="text" id="policyTag" placeholder="Policy tag text">
+                        <input type="text" id="policyTag" placeholder="Policy tag text" />
                         <button class="btn-save-policy" id="savePolicyBtn"><i class="fa-solid fa-save"></i> Save Policy</button>
                     </div>
                 </div>
 
-                <!-- Category Management -->
                 <div class="card">
                     <div class="card-header">
                         <h3>Categories</h3>
                     </div>
-                    <div class="category-container" id="categoryListContainer">
-                        <!-- Rendered by JS -->
-                    </div>
+                    <div class="category-container" id="categoryListContainer"></div>
                     <div style="display:flex;gap:8px;flex-wrap:wrap;padding:8px 0;">
-                        <input type="text" id="newCategoryInput" class="cat-input" placeholder="Category name">
+                        <input type="text" id="newCategoryInput" class="cat-input" placeholder="Category name" />
                         <button class="btn btn-primary btn-sm" id="addCategoryBtn">Add</button>
                     </div>
                 </div>
 
-                <!-- Services List -->
                 <div class="card">
                     <div class="card-header">
                         <h3>Services</h3>
                         <button class="btn btn-primary btn-sm" id="addServiceBtn"><i class="fa-solid fa-plus"></i> Add</button>
                     </div>
-
-                    <!-- Category Filter -->
                     <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:12px; scrollbar-width:none;">
                         <button class="cat-filter active" data-cat="all" style="flex-shrink:0; background:#1c2128; color:#fff; border:none; padding:4px 14px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer;">All</button>
                         <button class="cat-filter" data-cat="graphic" style="flex-shrink:0; background:#f0f0f0; border:none; padding:4px 14px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer;">Graphic</button>
@@ -1791,10 +1847,7 @@
                         <button class="cat-filter" data-cat="tech" style="flex-shrink:0; background:#f0f0f0; border:none; padding:4px 14px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer;">Tech</button>
                         <button class="cat-filter" data-cat="it" style="flex-shrink:0; background:#f0f0f0; border:none; padding:4px 14px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer;">IT</button>
                     </div>
-
-                    <div id="servicesList">
-                        <!-- Rendered by JS -->
-                    </div>
+                    <div id="servicesList"></div>
                 </div>
             </div>
 
@@ -1805,9 +1858,7 @@
                         <h3><i class="fa-solid fa-tag" style="color:#f5b83d;"></i> Promotions</h3>
                         <button class="btn btn-primary btn-sm" id="addPromoBtn"><i class="fa-solid fa-plus"></i> New</button>
                     </div>
-                    <div class="promo-section" id="promotionsList">
-                        <!-- Rendered by JS -->
-                    </div>
+                    <div class="promo-section" id="promotionsList"></div>
                 </div>
             </div>
 
@@ -1816,9 +1867,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>Orders</h3>
-                        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
-                            <input type="text" id="orderSearchInput" placeholder="Search orders..." style="padding:6px 12px; border:1px solid #ddd; border-radius:20px; font-size:12px; width:140px; outline:none;">
-                            <select id="orderStatusFilter" style="padding:6px 12px; border:1px solid #ddd; border-radius:20px; font-size:12px; outline:none; background:#fff; cursor:pointer;">
+                        <div class="orders-compact-header">
+                            <input type="text" id="orderSearchInput" placeholder="Search orders..." />
+                            <select id="orderStatusFilter">
                                 <option value="all">All Statuses</option>
                                 <option value="pending">Pending</option>
                                 <option value="progress">In Progress</option>
@@ -1829,9 +1880,7 @@
                             <button class="btn btn-outline btn-sm" id="refreshOrders"><i class="fa-solid fa-rotate"></i></button>
                         </div>
                     </div>
-                    <div id="ordersList">
-                        <!-- Rendered by JS -->
-                    </div>
+                    <div id="ordersList"></div>
                 </div>
             </div>
 
@@ -1840,11 +1889,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>Users</h3>
-                        <input type="text" id="userSearchInput" placeholder="Search users..." style="padding:6px 12px; border:1px solid #ddd; border-radius:20px; font-size:12px; width:140px; outline:none;">
+                        <input type="text" id="userSearchInput" placeholder="Search users..." style="padding:6px 12px; border:1px solid #ddd; border-radius:20px; font-size:12px; width:140px; outline:none;" />
                     </div>
-                    <div id="usersList">
-                        <!-- Rendered by JS -->
-                    </div>
+                    <div id="usersList"></div>
                 </div>
             </div>
 
@@ -1853,22 +1900,22 @@
                 <div class="card">
                     <div class="card-header"><h3>Admin Profile</h3></div>
                     <div style="display:flex; flex-direction:column; gap:12px;">
-                        <div><strong>Name</strong><br><span style="color:#555;" id="profileName">Admin User</span></div>
-                        <div><strong>Email</strong><br><span style="color:#555;" id="profileEmail">admin@bufferzone.com</span></div>
-                        <div><strong>Phone</strong><br><span style="color:#555;" id="profilePhone">Not set</span></div>
-                        <div><strong>Role</strong><br><span style="color:#555;">Super Administrator</span></div>
-                        <div><strong>Settings</strong><br>
+                        <div><strong>Name</strong><br /><span style="color:#555;" id="profileName">Admin User</span></div>
+                        <div><strong>Email</strong><br /><span style="color:#555;" id="profileEmail">admin@bufferzone.com</span></div>
+                        <div><strong>Phone</strong><br /><span style="color:#555;" id="profilePhone">Not set</span></div>
+                        <div><strong>Role</strong><br /><span style="color:#555;">Super Administrator</span></div>
+                        <div><strong>Settings</strong><br />
                             <div class="form-group" style="margin-top:4px;">
                                 <label>Agency Name</label>
-                                <input type="text" id="settingsName" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:10px; font-size:13px;">
+                                <input type="text" id="settingsName" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:10px; font-size:13px;" />
                             </div>
                             <div class="form-group">
                                 <label>Contact Phone</label>
-                                <input type="text" id="settingsPhone" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:10px; font-size:13px;">
+                                <input type="text" id="settingsPhone" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:10px; font-size:13px;" />
                             </div>
                             <div class="form-group">
                                 <label>Contact Email</label>
-                                <input type="text" id="settingsEmail" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:10px; font-size:13px;">
+                                <input type="text" id="settingsEmail" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:10px; font-size:13px;" />
                             </div>
                             <button class="btn btn-primary w-full" id="saveSettings"><i class="fa-solid fa-save"></i> Save Settings</button>
                         </div>
@@ -1879,7 +1926,7 @@
                             <div class="toggle-label">
                                 <span>App Status</span>
                                 <label class="toggle-switch">
-                                    <input type="checkbox" id="disableAppToggle">
+                                    <input type="checkbox" id="disableAppToggle" />
                                     <span class="toggle-slider"></span>
                                 </label>
                                 <span id="appStatusLabel">Active</span>
@@ -1887,43 +1934,6 @@
                             <p class="text-muted" style="font-size:10px; margin-top:4px;">Toggle to enable or disable the app for users.</p>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- ===== PAGE: WORK (Recent Projects) ===== -->
-            <div id="page-work" class="page">
-                <div class="work-header">
-                    <button class="back-btn" id="workBackBtn"><i class="fa-solid fa-arrow-left"></i></button>
-                    <h2>Recent Projects</h2>
-                </div>
-
-                <!-- 4 Post Options -->
-                <div class="work-post-options">
-                    <div class="work-post-card" data-type="app">
-                        <div class="icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-                        <div class="label">App</div>
-                        <div class="sub">Post a mobile app</div>
-                    </div>
-                    <div class="work-post-card" data-type="flyer">
-                        <div class="icon"><i class="fa-regular fa-file-image"></i></div>
-                        <div class="label">Flyer</div>
-                        <div class="sub">Post a flyer design</div>
-                    </div>
-                    <div class="work-post-card" data-type="website">
-                        <div class="icon"><i class="fa-solid fa-laptop"></i></div>
-                        <div class="label">Websites</div>
-                        <div class="sub">Post a website</div>
-                    </div>
-                    <div class="work-post-card" data-type="logo">
-                        <div class="icon"><i class="fa-solid fa-font"></i></div>
-                        <div class="label">Logos</div>
-                        <div class="sub">Post a logo</div>
-                    </div>
-                </div>
-
-                <!-- Sections: App, Flyer, Websites, Logos -->
-                <div id="workSections">
-                    <!-- Rendered by JS -->
                 </div>
             </div>
 
@@ -1947,14 +1957,14 @@
             <h3 id="modalTitle">Add Service</h3>
             <p class="sub" id="modalSub">Fill in the details below.</p>
             <form id="serviceForm">
-                <input type="hidden" id="editServiceId">
+                <input type="hidden" id="editServiceId" />
                 <div class="form-group">
                     <label>Title</label>
-                    <input type="text" id="formTitle" placeholder="e.g. Logo Design">
+                    <input type="text" id="formTitle" placeholder="e.g. Logo Design" />
                 </div>
                 <div class="form-group">
                     <label>Subtitle</label>
-                    <input type="text" id="formSubtitle" placeholder="e.g. Complete brand identity">
+                    <input type="text" id="formSubtitle" placeholder="e.g. Complete brand identity" />
                 </div>
                 <div class="row-2">
                     <div class="form-group">
@@ -1968,16 +1978,16 @@
                     </div>
                     <div class="form-group">
                         <label>Price (ZMW)</label>
-                        <input type="number" id="formPrice" placeholder="350" step="0.01">
+                        <input type="number" id="formPrice" placeholder="350" step="0.01" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Tags (comma separated)</label>
-                    <input type="text" id="formTags" placeholder="High Quality, Fast Delivery">
+                    <input type="text" id="formTags" placeholder="High Quality, Fast Delivery" />
                 </div>
                 <div class="form-group">
                     <label>Icon (FontAwesome class)</label>
-                    <input type="text" id="formIcon" placeholder="fa-file-image">
+                    <input type="text" id="formIcon" placeholder="fa-file-image" />
                 </div>
                 <div class="form-group">
                     <label>Specifications (one per line, key: value)</label>
@@ -1985,56 +1995,56 @@
                 </div>
                 <div class="form-group">
                     <label>Sizes (comma separated)</label>
-                    <input type="text" id="formSizes" placeholder="Minimalist, Badge, Mascot">
+                    <input type="text" id="formSizes" placeholder="Minimalist, Badge, Mascot" />
                 </div>
                 <div class="form-group">
                     <label>Orientations (comma separated)</label>
-                    <input type="text" id="formOrientations" placeholder="Full Color, Monochrome, Negative">
+                    <input type="text" id="formOrientations" placeholder="Full Color, Monochrome, Negative" />
                 </div>
                 <div class="form-group">
                     <label>Formats (comma separated)</label>
-                    <input type="text" id="formFormats" placeholder="PDF, JPG, PNG, AI">
+                    <input type="text" id="formFormats" placeholder="PDF, JPG, PNG, AI" />
                 </div>
                 <div class="form-group">
                     <label>Color Schemes (comma separated)</label>
-                    <input type="text" id="formColorSchemes" placeholder="Brand Colors, Light Theme, Dark Theme">
+                    <input type="text" id="formColorSchemes" placeholder="Brand Colors, Light Theme, Dark Theme" />
                 </div>
                 <div class="form-group">
                     <label>Revisions (comma separated)</label>
-                    <input type="text" id="formRevisions" placeholder="1 Round, 2 Rounds, 3 Rounds, Unlimited">
+                    <input type="text" id="formRevisions" placeholder="1 Round, 2 Rounds, 3 Rounds, Unlimited" />
                 </div>
                 <div class="form-group">
                     <label>Delivery Speeds (comma separated)</label>
-                    <input type="text" id="formDeliverySpeeds" placeholder="Standard (3-5 days), Express (1-2 days)">
+                    <input type="text" id="formDeliverySpeeds" placeholder="Standard (3-5 days), Express (1-2 days)" />
                 </div>
                 <div class="row-2">
                     <div class="form-group">
                         <label>Default Size</label>
-                        <input type="text" id="formDefaultSize" placeholder="Minimalist">
+                        <input type="text" id="formDefaultSize" placeholder="Minimalist" />
                     </div>
                     <div class="form-group">
                         <label>Default Orientation</label>
-                        <input type="text" id="formDefaultOrientation" placeholder="Full Color">
+                        <input type="text" id="formDefaultOrientation" placeholder="Full Color" />
                     </div>
                 </div>
                 <div class="row-2">
                     <div class="form-group">
                         <label>Default Format</label>
-                        <input type="text" id="formDefaultFormat" placeholder="PDF">
+                        <input type="text" id="formDefaultFormat" placeholder="PDF" />
                     </div>
                     <div class="form-group">
                         <label>Default Color Scheme</label>
-                        <input type="text" id="formDefaultColorScheme" placeholder="Brand Colors">
+                        <input type="text" id="formDefaultColorScheme" placeholder="Brand Colors" />
                     </div>
                 </div>
                 <div class="row-2">
                     <div class="form-group">
                         <label>Default Revisions</label>
-                        <input type="text" id="formDefaultRevisions" placeholder="Unlimited">
+                        <input type="text" id="formDefaultRevisions" placeholder="Unlimited" />
                     </div>
                     <div class="form-group">
                         <label>Default Delivery Speed</label>
-                        <input type="text" id="formDefaultDeliverySpeed" placeholder="Standard (3-5 days)">
+                        <input type="text" id="formDefaultDeliverySpeed" placeholder="Standard (3-5 days)" />
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary" id="modalSubmitBtn"><i class="fa-solid fa-check"></i> Save Service</button>
@@ -2052,14 +2062,70 @@
             <form id="promoForm">
                 <div class="form-group">
                     <label>Coupon Code</label>
-                    <input type="text" id="promoCode" placeholder="e.g. SAVE20 or WELCOME" required>
+                    <input type="text" id="promoCode" placeholder="e.g. SAVE20 or WELCOME" required />
                 </div>
                 <div class="form-group">
                     <label>Discount Percentage (%)</label>
-                    <input type="number" id="promoDiscount" placeholder="20" min="1" max="100" required>
+                    <input type="number" id="promoDiscount" placeholder="20" min="1" max="100" required />
                 </div>
                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Create Coupon</button>
                 <button type="button" class="btn btn-outline" id="promoCancelBtn">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== WORK UPLOAD MODAL ===== -->
+    <div class="modal-overlay work-upload-modal" id="workUploadModal">
+        <div class="modal">
+            <button class="close-btn" id="workUploadCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3 id="workUploadTitle">Upload App Screenshot</h3>
+            <p class="sub" id="workUploadSub">Add a new project post.</p>
+            <form id="workUploadForm">
+                <input type="hidden" id="editWorkPostId" />
+                <input type="hidden" id="workPostType" value="app" />
+
+                <!-- Image Upload (Cloudinary) -->
+                <div class="form-group">
+                    <label>Image</label>
+                    <div class="upload-preview" id="workImagePreview">
+                        <div class="upload-icon"><i class="fa-regular fa-image"></i></div>
+                        <div class="upload-text">Tap to upload an image</div>
+                    </div>
+                    <input type="hidden" id="workImageUrl" />
+                    <input type="file" id="workImageFile" accept="image/*" style="display:none;" />
+                </div>
+
+                <!-- Frame Preview (phone / laptop) -->
+                <div class="frame-container" id="workFrameContainer">
+                    <!-- Dynamically rendered -->
+                </div>
+
+                <!-- App / Website fields -->
+                <div id="workAppFields">
+                    <div class="form-group">
+                        <label>App Name</label>
+                        <input type="text" id="workAppName" placeholder="e.g. My Awesome App" />
+                    </div>
+                    <div class="form-group">
+                        <label>Functionality</label>
+                        <textarea id="workAppFunc" rows="2" placeholder="Describe what the app does..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Flyer / Logo fields -->
+                <div id="workFlyerFields" style="display:none;">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="workFlyerTitle" placeholder="e.g. Summer Sale Flyer" />
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="workFlyerDesc" rows="2" placeholder="Describe the flyer/logo design..."></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="workUploadSubmit"><i class="fa-solid fa-check"></i> Post</button>
+                <button type="button" class="btn btn-outline" id="workUploadCancelBtn">Cancel</button>
             </form>
         </div>
     </div>
@@ -2069,7 +2135,7 @@
         <div class="screenshot-modal-content">
             <button class="close-btn" id="screenshotCloseBtn"><i class="fa-solid fa-times"></i></button>
             <h3>Transaction Screenshot</h3>
-            <img id="screenshotPreview" src="" alt="Screenshot">
+            <img id="screenshotPreview" src="" alt="Screenshot" />
         </div>
     </div>
 
@@ -2085,144 +2151,8 @@
         </div>
     </div>
 
-    <!-- ===== WORK POST MODALS ===== -->
-    <!-- App Modal -->
-    <div class="modal-overlay work-form-modal" id="workAppModal">
-        <div class="modal">
-            <button class="close-btn" id="workAppCloseBtn"><i class="fa-solid fa-times"></i></button>
-            <h3>Post an App</h3>
-            <p class="sub">Upload an app screenshot and fill in the details.</p>
-            <form id="workAppForm">
-                <input type="hidden" id="workAppEditId">
-                <div class="phone-frame-container">
-                    <div class="phone-frame">
-                        <div class="screen">
-                            <div class="upload-area" id="appUploadArea">
-                                <i class="fa-solid fa-cloud-arrow-up"></i>
-                                <div class="text">Tap to upload screenshot</div>
-                                <img class="preview-img" id="appPreviewImg" style="display:none;">
-                                <input type="file" id="appFileInput" accept="image/*">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>App Name</label>
-                    <input type="text" id="appName" placeholder="e.g. My Awesome App" required>
-                </div>
-                <div class="form-group">
-                    <label>Functionality</label>
-                    <textarea id="appFunctionality" rows="3" placeholder="Describe what the app does..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Post App</button>
-                <button type="button" class="btn btn-outline" id="workAppCancelBtn">Cancel</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Flyer Modal -->
-    <div class="modal-overlay work-form-modal" id="workFlyerModal">
-        <div class="modal">
-            <button class="close-btn" id="workFlyerCloseBtn"><i class="fa-solid fa-times"></i></button>
-            <h3>Post a Flyer</h3>
-            <p class="sub">Upload a flyer image and fill in the details.</p>
-            <form id="workFlyerForm">
-                <input type="hidden" id="workFlyerEditId">
-                <div class="form-group">
-                    <label>Flyer Image</label>
-                    <div class="upload-area" id="flyerUploadArea">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <div class="text">Tap to upload flyer</div>
-                        <img class="preview-img" id="flyerPreviewImg" style="display:none;">
-                        <input type="file" id="flyerFileInput" accept="image/*">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Flyer Title</label>
-                    <input type="text" id="flyerTitle" placeholder="e.g. Summer Sale Flyer" required>
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea id="flyerDescription" rows="3" placeholder="Describe the flyer..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Post Flyer</button>
-                <button type="button" class="btn btn-outline" id="workFlyerCancelBtn">Cancel</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Website Modal -->
-    <div class="modal-overlay work-form-modal" id="workWebsiteModal">
-        <div class="modal">
-            <button class="close-btn" id="workWebsiteCloseBtn"><i class="fa-solid fa-times"></i></button>
-            <h3>Post a Website</h3>
-            <p class="sub">Upload a website screenshot and fill in the details.</p>
-            <form id="workWebsiteForm">
-                <input type="hidden" id="workWebsiteEditId">
-                <div class="laptop-frame-container">
-                    <div class="laptop-frame">
-                        <div class="screen">
-                            <div class="upload-area" id="websiteUploadArea">
-                                <i class="fa-solid fa-cloud-arrow-up"></i>
-                                <div class="text">Tap to upload screenshot</div>
-                                <img class="preview-img" id="websitePreviewImg" style="display:none;">
-                                <input type="file" id="websiteFileInput" accept="image/*">
-                            </div>
-                        </div>
-                        <div class="base"></div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Website Name</label>
-                    <input type="text" id="websiteName" placeholder="e.g. My Portfolio" required>
-                </div>
-                <div class="form-group">
-                    <label>Functionality</label>
-                    <textarea id="websiteFunctionality" rows="3" placeholder="Describe what the website does..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Post Website</button>
-                <button type="button" class="btn btn-outline" id="workWebsiteCancelBtn">Cancel</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Logo Modal -->
-    <div class="modal-overlay work-form-modal" id="workLogoModal">
-        <div class="modal">
-            <button class="close-btn" id="workLogoCloseBtn"><i class="fa-solid fa-times"></i></button>
-            <h3>Post a Logo</h3>
-            <p class="sub">Upload a logo image and fill in the details.</p>
-            <form id="workLogoForm">
-                <input type="hidden" id="workLogoEditId">
-                <div class="form-group">
-                    <label>Logo Image</label>
-                    <div class="upload-area" id="logoUploadArea">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <div class="text">Tap to upload logo</div>
-                        <img class="preview-img" id="logoPreviewImg" style="display:none;">
-                        <input type="file" id="logoFileInput" accept="image/*">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Logo Title</label>
-                    <input type="text" id="logoTitle" placeholder="e.g. Brand Logo" required>
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea id="logoDescription" rows="3" placeholder="Describe the logo..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Post Logo</button>
-                <button type="button" class="btn btn-outline" id="workLogoCancelBtn">Cancel</button>
-            </form>
-        </div>
-    </div>
-
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
-
-    <!-- Cloudinary Upload Widget -->
-    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript">
-    </script>
 
     <script type="module">
         // =================================================================
@@ -2249,6 +2179,12 @@
         const auth = getAuth(app);
 
         // =================================================================
+        // CLOUDINARY CONFIG
+        // =================================================================
+        const CLOUDINARY_CLOUD_NAME = 'bufferzone';
+        const CLOUDINARY_UPLOAD_PRESET = 'bufferzone_uploads';
+
+        // =================================================================
         // STATE
         // =================================================================
 
@@ -2256,10 +2192,6 @@
         let currentUser = null;
         let currentAdminData = null;
         let pendingDeleteAction = null;
-
-        // Cloudinary config
-        const CLOUDINARY_CLOUD_NAME = 'bufferzone';
-        const CLOUDINARY_UPLOAD_PRESET = 'bufferzone_uploads';
 
         // =================================================================
         // DOM REFS
@@ -2271,8 +2203,10 @@
         const profilePhoneEl = document.getElementById('profilePhone');
         const greetingText = document.getElementById('greetingText');
         const greetingSub = document.getElementById('greetingSub');
-        const adminAvatar = document.getElementById('adminAvatar');
+        const mainHeader = document.getElementById('mainHeader');
+        const workAvatarBtn = document.getElementById('workAvatarBtn');
 
+        // Service modal
         const modal = document.getElementById('serviceModal');
         const modalTitle = document.getElementById('modalTitle');
         const modalSub = document.getElementById('modalSub');
@@ -2301,6 +2235,7 @@
         const cancelBtn = document.getElementById('modalCancelBtn');
         const closeBtn = document.getElementById('modalCloseBtn');
 
+        // Promo modal
         const promoModal = document.getElementById('promoModal');
         const promoCloseBtn = document.getElementById('promoCloseBtn');
         const promoForm = document.getElementById('promoForm');
@@ -2308,63 +2243,36 @@
         const promoDiscount = document.getElementById('promoDiscount');
         const promoCancelBtn = document.getElementById('promoCancelBtn');
 
+        // Work Upload modal
+        const workUploadModal = document.getElementById('workUploadModal');
+        const workUploadCloseBtn = document.getElementById('workUploadCloseBtn');
+        const workUploadForm = document.getElementById('workUploadForm');
+        const workUploadTitle = document.getElementById('workUploadTitle');
+        const workUploadSub = document.getElementById('workUploadSub');
+        const workPostType = document.getElementById('workPostType');
+        const editWorkPostId = document.getElementById('editWorkPostId');
+        const workImagePreview = document.getElementById('workImagePreview');
+        const workImageFile = document.getElementById('workImageFile');
+        const workImageUrl = document.getElementById('workImageUrl');
+        const workFrameContainer = document.getElementById('workFrameContainer');
+        const workAppFields = document.getElementById('workAppFields');
+        const workFlyerFields = document.getElementById('workFlyerFields');
+        const workAppName = document.getElementById('workAppName');
+        const workAppFunc = document.getElementById('workAppFunc');
+        const workFlyerTitle = document.getElementById('workFlyerTitle');
+        const workFlyerDesc = document.getElementById('workFlyerDesc');
+        const workUploadSubmit = document.getElementById('workUploadSubmit');
+        const workUploadCancelBtn = document.getElementById('workUploadCancelBtn');
+
+        // Toast
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMessage');
 
-        // Delete Modal
+        // Delete modal
         const deleteConfirmModal = document.getElementById('deleteConfirmModal');
         const deleteConfirmText = document.getElementById('deleteConfirmText');
         const deleteCancelBtn = document.getElementById('deleteCancelBtn');
         const deleteConfirmBtn = document.getElementById('deleteConfirmBtn');
-
-        // Work Page
-        const workBackBtn = document.getElementById('workBackBtn');
-        const workSections = document.getElementById('workSections');
-
-        // Work Modals
-        const workAppModal = document.getElementById('workAppModal');
-        const workAppForm = document.getElementById('workAppForm');
-        const workAppEditId = document.getElementById('workAppEditId');
-        const appName = document.getElementById('appName');
-        const appFunctionality = document.getElementById('appFunctionality');
-        const appFileInput = document.getElementById('appFileInput');
-        const appPreviewImg = document.getElementById('appPreviewImg');
-        const appUploadArea = document.getElementById('appUploadArea');
-        const workAppCloseBtn = document.getElementById('workAppCloseBtn');
-        const workAppCancelBtn = document.getElementById('workAppCancelBtn');
-
-        const workFlyerModal = document.getElementById('workFlyerModal');
-        const workFlyerForm = document.getElementById('workFlyerForm');
-        const workFlyerEditId = document.getElementById('workFlyerEditId');
-        const flyerTitle = document.getElementById('flyerTitle');
-        const flyerDescription = document.getElementById('flyerDescription');
-        const flyerFileInput = document.getElementById('flyerFileInput');
-        const flyerPreviewImg = document.getElementById('flyerPreviewImg');
-        const flyerUploadArea = document.getElementById('flyerUploadArea');
-        const workFlyerCloseBtn = document.getElementById('workFlyerCloseBtn');
-        const workFlyerCancelBtn = document.getElementById('workFlyerCancelBtn');
-
-        const workWebsiteModal = document.getElementById('workWebsiteModal');
-        const workWebsiteForm = document.getElementById('workWebsiteForm');
-        const workWebsiteEditId = document.getElementById('workWebsiteEditId');
-        const websiteName = document.getElementById('websiteName');
-        const websiteFunctionality = document.getElementById('websiteFunctionality');
-        const websiteFileInput = document.getElementById('websiteFileInput');
-        const websitePreviewImg = document.getElementById('websitePreviewImg');
-        const websiteUploadArea = document.getElementById('websiteUploadArea');
-        const workWebsiteCloseBtn = document.getElementById('workWebsiteCloseBtn');
-        const workWebsiteCancelBtn = document.getElementById('workWebsiteCancelBtn');
-
-        const workLogoModal = document.getElementById('workLogoModal');
-        const workLogoForm = document.getElementById('workLogoForm');
-        const workLogoEditId = document.getElementById('workLogoEditId');
-        const logoTitle = document.getElementById('logoTitle');
-        const logoDescription = document.getElementById('logoDescription');
-        const logoFileInput = document.getElementById('logoFileInput');
-        const logoPreviewImg = document.getElementById('logoPreviewImg');
-        const logoUploadArea = document.getElementById('logoUploadArea');
-        const workLogoCloseBtn = document.getElementById('workLogoCloseBtn');
-        const workLogoCancelBtn = document.getElementById('workLogoCancelBtn');
 
         // =================================================================
         // DATA FUNCTIONS
@@ -2376,8 +2284,10 @@
                 const data = snapshot.val();
                 if (!data) {
                     allData = {
-                        hero: { title: 'WE ARE CREATIVE AGENCY', titleSpan: 'CREATIVE', desc: 'We provide the best ideas to grow your business', cta: 'GET STARTED', phone: '+123 456 7890' },
-                        policy: { title: 'BUFFER ZONE PAYMENT POLICY', desc: 'To begin your project, we require a 50% down payment. The remaining balance is due upon project completion and delivery. This ensures commitment from both parties.', tag: '50% upfront required' },
+                        hero: { title: 'WE ARE CREATIVE AGENCY', titleSpan: 'CREATIVE', desc: 'We provide the best ideas to grow your business',
+                            cta: 'GET STARTED', phone: '+123 456 7890' },
+                        policy: { title: 'BUFFER ZONE PAYMENT POLICY', desc: 'To begin your project, we require a 50% down payment. The remaining balance is due upon project completion and delivery. This ensures commitment from both parties.',
+                            tag: '50% upfront required' },
                         ourServicesList: ['Graphic Design', 'Web Development', 'Digital Marketing', 'Branding Design'],
                         categories: ['graphic', 'dev', 'tech', 'it'],
                         services: {},
@@ -2385,14 +2295,9 @@
                         customers: {},
                         transactions: {},
                         promotions: {},
+                        workPosts: {},
                         disabled: false,
-                        notifications: {},
-                        work: {
-                            app: {},
-                            flyer: {},
-                            website: {},
-                            logo: {}
-                        }
+                        notifications: {}
                     };
                     set(dbRef, allData).then(() => {
                         if (callback) callback(allData);
@@ -2403,8 +2308,8 @@
                         allData.categories = ['graphic', 'dev', 'tech', 'it'];
                         saveData();
                     }
-                    if (!allData.work) {
-                        allData.work = { app: {}, flyer: {}, website: {}, logo: {} };
+                    if (!allData.workPosts) {
+                        allData.workPosts = {};
                         saveData();
                     }
                     if (callback) callback(data);
@@ -2437,7 +2342,7 @@
                         if (data.secure_url) {
                             resolve(data.secure_url);
                         } else {
-                            reject(data.error || 'Upload failed');
+                            reject(new Error('Upload failed'));
                         }
                     })
                     .catch(err => reject(err));
@@ -2499,7 +2404,7 @@
             renderUsers();
             renderActivityFeed();
             renderOurServicesList();
-            renderWorkPage();
+            renderWorkPosts();
         }
 
         function renderDashboard() {
@@ -2525,11 +2430,11 @@
             const container = document.getElementById('categoryListContainer');
             const categories = allData.categories || [];
             container.innerHTML = categories.map(cat => `
-                <span class="category-tag">
-                    ${cat}
-                    <button class="delete-cat-btn" data-cat="${cat}"><i class="fa-solid fa-times"></i></button>
-                </span>
-            `).join('');
+                        <span class="category-tag">
+                            ${cat}
+                            <button class="delete-cat-btn" data-cat="${cat}"><i class="fa-solid fa-times"></i></button>
+                        </span>
+                    `).join('');
 
             container.querySelectorAll('.delete-cat-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -2548,19 +2453,20 @@
                 filtered = entries.filter(([key, s]) => s.category === categoryFilter);
             }
             if (filtered.length === 0) {
-                container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No services in this category.</div>`;
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:20px;">No services in this category.</div>`;
                 return;
             }
             container.innerHTML = `<div class="service-grid-customer">` + filtered.map(([key, s]) => `
-                <div class="service-card-customer" data-key="${key}">
-                    <div class="icon-wrap ${s.category || 'graphic'}">
-                        <i class="fa-solid ${s.icon || 'fa-cube'}"></i>
-                    </div>
-                    <div class="title">${s.title || 'Untitled'}</div>
-                    <div class="sub">${s.subtitle || ''}</div>
-                    <div class="price">ZMW ${(s.price || 0).toFixed(2)}</div>
-                </div>
-            `).join('') + `</div>`;
+                        <div class="service-card-customer" data-key="${key}">
+                            <div class="icon-wrap ${s.category || 'graphic'}">
+                                <i class="fa-solid ${s.icon || 'fa-cube'}"></i>
+                            </div>
+                            <div class="title">${s.title || 'Untitled'}</div>
+                            <div class="sub">${s.subtitle || ''}</div>
+                            <div class="price">ZMW ${(s.price || 0).toFixed(2)}</div>
+                        </div>
+                    `).join('') + `</div>`;
 
             container.querySelectorAll('.service-card-customer').forEach(el => {
                 el.addEventListener('click', function() {
@@ -2584,21 +2490,22 @@
             }
 
             if (entries.length === 0) {
-                container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No promotions yet.</div>`;
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:20px;">No promotions yet.</div>`;
                 return;
             }
             container.innerHTML = entries.map(([key, p]) => `
-                <div class="promo-card">
-                    <div class="left">
-                        <div class="code">${p.code}</div>
-                        <div class="discount">${p.discount}% OFF</div>
-                        <div class="times">Used: ${usedCountMap[key] || 0} times</div>
-                    </div>
-                    <div class="actions">
-                        <button class="btn btn-danger btn-sm delete-promo" data-key="${key}"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                </div>
-            `).join('');
+                        <div class="promo-card">
+                            <div class="left">
+                                <div class="code">${p.code}</div>
+                                <div class="discount">${p.discount}% OFF</div>
+                                <div class="times">Used: ${usedCountMap[key] || 0} times</div>
+                            </div>
+                            <div class="actions">
+                                <button class="btn btn-danger btn-sm delete-promo" data-key="${key}"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                    `).join('');
 
             container.querySelectorAll('.delete-promo').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -2626,43 +2533,44 @@
             entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
 
             if (entries.length === 0) {
-                container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No orders found.</div>`;
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:20px;">No orders found.</div>`;
                 return;
             }
             container.innerHTML = entries.map(([key, o]) => `
-                <div class="order-card">
-                    <div class="order-toggle" data-key="${key}">
-                        <div>
-                            <div style="font-weight:700; font-size:14px; color:#1c2128;">${o.id || 'N/A'}</div>
-                            <div style="font-size:12px; color:#555;">${o.service || 'N/A'}</div>
-                            <div style="font-size:11px; color:#888;">${o.customer || 'N/A'}</div>
+                        <div class="order-card">
+                            <div class="order-toggle" data-key="${key}">
+                                <div>
+                                    <div style="font-weight:700; font-size:14px; color:#1c2128;">${o.id || 'N/A'}</div>
+                                    <div style="font-size:12px; color:#555;">${o.service || 'N/A'}</div>
+                                    <div style="font-size:11px; color:#888;">${o.customer || 'N/A'}</div>
+                                </div>
+                                <div style="text-align:right;">
+                                    <div style="font-weight:700; font-size:14px; color:#1c2128;">ZMW ${(o.amount || 0).toFixed(2)}</div>
+                                    <span class="status-badge ${o.status || 'pending'}">${o.status || 'pending'}</span>
+                                    <div style="font-size:10px; color:#aaa; margin-top:2px;">${o.date || ''}</div>
+                                </div>
+                            </div>
+                            <div class="order-details">
+                                <div class="row"><span class="label">Client</span><span class="val">${o.customer || 'N/A'}</span></div>
+                                <div class="row"><span class="label">Client Number</span><span class="val">${o.clientNumber || 'N/A'}</span></div>
+                                <div class="row"><span class="label">Customization</span><span class="val">${o.customization || 'None'}</span></div>
+                                <div class="row"><span class="label">Payment Proof</span><span class="val">
+                                    ${o.paymentProof ? `<button class="btn-view-proof" data-screenshot="${o.paymentProof}"><i class="fa-regular fa-image"></i> View</button>` : 'No proof'}
+                                </span></div>
+                                <div class="row"><span class="label">Status</span><span class="val">
+                                    <select class="status-select order-status" data-key="${key}" style="padding:2px 8px; border-radius:6px; border:1px solid #ddd; font-size:11px; font-weight:500; background:#ffffff; cursor:pointer;">
+                                        <option value="pending" ${o.status === 'pending' ? 'selected' : ''}>Pending</option>
+                                        <option value="progress" ${o.status === 'progress' ? 'selected' : ''}>In Progress</option>
+                                        <option value="completed" ${o.status === 'completed' ? 'selected' : ''}>Completed</option>
+                                        <option value="review" ${o.status === 'review' ? 'selected' : ''}>In Review</option>
+                                        <option value="cancelled" ${o.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+                                    </select>
+                                </span></div>
+                                <button class="btn btn-danger btn-sm delete-order" data-key="${key}" style="margin-top:8px; padding:3px 12px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:10px; cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
+                            </div>
                         </div>
-                        <div style="text-align:right;">
-                            <div style="font-weight:700; font-size:14px; color:#1c2128;">ZMW ${(o.amount || 0).toFixed(2)}</div>
-                            <span class="status-badge ${o.status || 'pending'}">${o.status || 'pending'}</span>
-                            <div style="font-size:10px; color:#aaa; margin-top:2px;">${o.date || ''}</div>
-                        </div>
-                    </div>
-                    <div class="order-details">
-                        <div class="row"><span class="label">Client</span><span class="val">${o.customer || 'N/A'}</span></div>
-                        <div class="row"><span class="label">Client Number</span><span class="val">${o.clientNumber || 'N/A'}</span></div>
-                        <div class="row"><span class="label">Customization</span><span class="val">${o.customization || 'None'}</span></div>
-                        <div class="row"><span class="label">Payment Proof</span><span class="val">
-                            ${o.paymentProof ? `<button class="btn-view-proof" data-screenshot="${o.paymentProof}"><i class="fa-regular fa-image"></i> View</button>` : 'No proof'}
-                        </span></div>
-                        <div class="row"><span class="label">Status</span><span class="val">
-                            <select class="status-select order-status" data-key="${key}" style="padding:2px 8px; border-radius:6px; border:1px solid #ddd; font-size:11px; font-weight:500; background:#ffffff; cursor:pointer;">
-                                <option value="pending" ${o.status === 'pending' ? 'selected' : ''}>Pending</option>
-                                <option value="progress" ${o.status === 'progress' ? 'selected' : ''}>In Progress</option>
-                                <option value="completed" ${o.status === 'completed' ? 'selected' : ''}>Completed</option>
-                                <option value="review" ${o.status === 'review' ? 'selected' : ''}>In Review</option>
-                                <option value="cancelled" ${o.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
-                            </select>
-                        </span></div>
-                        <button class="btn btn-danger btn-sm delete-order" data-key="${key}" style="margin-top:8px; padding:3px 12px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:10px; cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
-                    </div>
-                </div>
-            `).join('');
+                    `).join('');
 
             container.querySelectorAll('.order-toggle').forEach(el => {
                 el.addEventListener('click', function() {
@@ -2715,38 +2623,39 @@
                     );
                 }
                 if (entries.length === 0) {
-                    container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No users found.</div>`;
+                    container.innerHTML =
+                        `<div class="text-muted text-center" style="padding:20px;">No users found.</div>`;
                     return;
                 }
                 container.innerHTML = entries.map(([uid, u]) => {
                     const isBanned = u.banned === true;
                     return `
-                        <div class="customer-item" data-uid="${uid}">
-                            <div class="user-summary">
-                                <div class="left">
-                                    <div class="c-avatar">${(u.firstName || 'U').charAt(0)}</div>
-                                    <div>
-                                        <div class="c-name">${u.firstName || ''} ${u.lastName || ''}</div>
-                                        <div class="c-email">${u.email || 'No email'}</div>
+                                <div class="customer-item" data-uid="${uid}">
+                                    <div class="user-summary">
+                                        <div class="left">
+                                            <div class="c-avatar">${(u.firstName || 'U').charAt(0)}</div>
+                                            <div>
+                                                <div class="c-name">${u.firstName || ''} ${u.lastName || ''}</div>
+                                                <div class="c-email">${u.email || 'No email'}</div>
+                                            </div>
+                                        </div>
+                                        <div style="display:flex;align-items:center;gap:10px;">
+                                            <span class="user-status-badge ${isBanned ? 'banned' : 'active'}">${isBanned ? 'Banned' : 'Active'}</span>
+                                            <button class="ban-toggle-btn" data-uid="${uid}" data-banned="${isBanned}">
+                                                <i class="fa-solid ${isBanned ? 'fa-toggle-off' : 'fa-toggle-on'}"></i>
+                                            </button>
+                                            <i class="fa-solid fa-chevron-down expand-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="user-details">
+                                        <div class="detail-row"><span class="label">Phone</span><span class="val">${u.phone || 'No phone'}</span></div>
+                                        <div class="detail-row"><span class="label">Joined</span><span class="val">${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</span></div>
+                                        <div class="actions">
+                                            <button class="btn btn-danger btn-sm delete-user" data-uid="${uid}" style="padding:2px 10px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div style="display:flex;align-items:center;gap:10px;">
-                                    <span class="user-status-badge ${isBanned ? 'banned' : 'active'}">${isBanned ? 'Banned' : 'Active'}</span>
-                                    <button class="ban-toggle-btn" data-uid="${uid}" data-banned="${isBanned}">
-                                        <i class="fa-solid ${isBanned ? 'fa-toggle-off' : 'fa-toggle-on'}"></i>
-                                    </button>
-                                    <i class="fa-solid fa-chevron-down expand-icon"></i>
-                                </div>
-                            </div>
-                            <div class="user-details">
-                                <div class="detail-row"><span class="label">Phone</span><span class="val">${u.phone || 'No phone'}</span></div>
-                                <div class="detail-row"><span class="label">Joined</span><span class="val">${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</span></div>
-                                <div class="actions">
-                                    <button class="btn btn-danger btn-sm delete-user" data-uid="${uid}" style="padding:2px 10px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
+                            `;
                 }).join('');
 
                 container.querySelectorAll('.customer-item').forEach(el => {
@@ -2789,7 +2698,8 @@
                 });
             }).catch((error) => {
                 console.error('Error loading users:', error);
-                container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">Error loading users.</div>`;
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:20px;">Error loading users.</div>`;
             });
         }
 
@@ -2817,508 +2727,285 @@
                 });
             });
             if (activities.length === 0) {
-                container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No recent activity.</div>`;
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:20px;">No recent activity.</div>`;
                 return;
             }
             container.innerHTML = activities.slice(0, 5).map(a => `
-                <div class="activity-item">
-                    <div class="icon-circle ${a.iconClass}"><i class="fa-solid ${a.icon}"></i></div>
-                    <div class="content">
-                        <div class="title">${a.title}</div>
-                        <div class="desc">${a.desc}</div>
-                        <div class="time">${a.time}</div>
-                    </div>
-                </div>
-            `).join('');
+                        <div class="activity-item">
+                            <div class="icon-circle ${a.iconClass}"><i class="fa-solid ${a.icon}"></i></div>
+                            <div class="content">
+                                <div class="title">${a.title}</div>
+                                <div class="desc">${a.desc}</div>
+                                <div class="time">${a.time}</div>
+                            </div>
+                        </div>
+                    `).join('');
         }
 
         function renderOurServicesList() {
             const container = document.getElementById('ourServicesListContainer');
             const list = allData.ourServicesList || [];
             container.innerHTML = list.map((item, index) => `
-                <div class="list-item">
-                    <input type="text" value="${item}" data-index="${index}" placeholder="Service name">
-                    <button class="btn-remove" data-index="${index}">✕</button>
-                </div>
-            `).join('');
+                        <div class="list-item">
+                            <input type="text" value="${item}" data-index="${index}" placeholder="Service name" />
+                            <button class="btn-remove" data-index="${index}">✕</button>
+                        </div>
+                    `).join('');
         }
 
-        // =================================================================
-        // WORK PAGE RENDER
-        // =================================================================
+        // ================================================================
+        // WORK POSTS
+        // ================================================================
 
-        function renderWorkPage() {
-            const work = allData.work || { app: {}, flyer: {}, website: {}, logo: {} };
-            const sections = [
-                { type: 'app', label: 'Apps', icon: 'fa-mobile-screen-button', data: work.app || {} },
-                { type: 'flyer', label: 'Flyers', icon: 'fa-file-image', data: work.flyer || {} },
-                { type: 'website', label: 'Websites', icon: 'fa-laptop', data: work.website || {} },
-                { type: 'logo', label: 'Logos', icon: 'fa-font', data: work.logo || {} }
-            ];
+        function renderWorkPosts() {
+            const container = document.getElementById('workPostsContainer');
+            const posts = allData.workPosts || {};
+            const entries = Object.entries(posts);
+
+            // Group by type
+            const groups = { app: [], flyer: [], website: [], logo: [] };
+            entries.forEach(([key, p]) => {
+                if (groups[p.type]) {
+                    groups[p.type].push({ key, ...p });
+                }
+            });
+
+            // Sort each group by createdAt descending
+            for (const type in groups) {
+                groups[type].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+            }
+
+            const typeLabels = {
+                app: '📱 Apps',
+                flyer: '📄 Flyers',
+                website: '💻 Websites',
+                logo: '🎨 Logos'
+            };
+            const typeIcons = {
+                app: '📱',
+                flyer: '📄',
+                website: '💻',
+                logo: '🎨'
+            };
 
             let html = '';
-            for (const section of sections) {
-                const entries = Object.entries(section.data);
+            for (const type of ['app', 'flyer', 'website', 'logo']) {
+                const items = groups[type] || [];
+                if (items.length === 0) continue;
+
                 html += `
-                    <div class="work-section-title">
-                        <i class="fa-solid ${section.icon}"></i> ${section.label}
-                        <span>(${entries.length})</span>
-                    </div>
-                    <div class="work-grid" data-type="${section.type}">
-                `;
-                if (entries.length === 0) {
-                    html += `
-                        <div class="work-empty" style="grid-column:1/-1;">
-                            <i class="fa-regular fa-circle-plus"></i>
-                            <p>No ${section.label.toLowerCase()} posted yet.</p>
-                        </div>
-                    `;
-                } else {
-                    for (const [key, item] of entries) {
-                        html += `
-                            <div class="work-item" data-type="${section.type}" data-key="${key}">
-                                <div class="img-wrap">
-                                    ${item.imageUrl ? `<img src="${item.imageUrl}" alt="${item.title || 'Work'}">` : `<div class="no-img"><i class="fa-regular fa-image"></i> No image</div>`}
-                                    <span class="type-badge">${section.label.slice(0, -1)}</span>
-                                </div>
-                                <div class="title">${item.title || 'Untitled'}</div>
-                                <div class="subtitle">${item.functionality || item.description || ''}</div>
-                                <div class="actions">
-                                    <button class="btn btn-primary btn-sm edit-work" data-type="${section.type}" data-key="${key}"><i class="fa-solid fa-pen"></i> Edit</button>
-                                    <button class="btn btn-danger btn-sm delete-work" data-type="${section.type}" data-key="${key}"><i class="fa-solid fa-trash"></i></button>
-                                </div>
+                            <div class="section-title">
+                                ${typeLabels[type] || type}
+                                <span class="badge-count">${items.length}</span>
                             </div>
+                            <div class="work-grid-2x2">
                         `;
-                    }
-                }
+
+                items.forEach(post => {
+                    const imgHtml = post.imageUrl ?
+                        `<img src="${post.imageUrl}" alt="${post.title || 'Work'}" loading="lazy" />` :
+                        `<div class="no-image"><i class="fa-regular fa-image"></i></div>`;
+
+                    let titleText = post.title || 'Untitled';
+                    let descText = post.description || '';
+
+                    html += `
+                                <div class="work-post-card" data-key="${post.key}">
+                                    <div class="post-thumb">
+                                        ${imgHtml}
+                                        <span class="post-type-badge">${typeIcons[type] || type}</span>
+                                    </div>
+                                    <div class="post-title">${titleText}</div>
+                                    <div class="post-desc">${descText}</div>
+                                    <div class="post-meta">
+                                        <span>${post.createdAt ? new Date(post.createdAt).toLocaleDateString() : ''}</span>
+                                        <span>${post.adminName || 'Admin'}</span>
+                                    </div>
+                                    <div class="post-actions">
+                                        <button class="btn btn-edit-post" data-key="${post.key}"><i class="fa-regular fa-pen-to-square"></i> Edit</button>
+                                        <button class="btn btn-delete-post" data-key="${post.key}"><i class="fa-solid fa-trash"></i> Delete</button>
+                                    </div>
+                                </div>
+                            `;
+                });
+
                 html += `</div>`;
             }
 
-            workSections.innerHTML = html;
+            if (html === '') {
+                html =
+                    `<div class="text-muted text-center" style="padding:30px 0;">No work posts yet. Click one of the options above to get started!</div>`;
+            }
 
-            // Attach edit/delete events
-            workSections.querySelectorAll('.edit-work').forEach(btn => {
+            container.innerHTML = html;
+
+            // Event listeners for edit / delete
+            container.querySelectorAll('.btn-edit-post').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const type = this.dataset.type;
                     const key = this.dataset.key;
-                    openWorkEdit(type, key);
+                    openEditWorkPost(key);
                 });
             });
-            workSections.querySelectorAll('.delete-work').forEach(btn => {
+            container.querySelectorAll('.btn-delete-post').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const type = this.dataset.type;
                     const key = this.dataset.key;
-                    showDeleteConfirmation('work', { type, key });
+                    showDeleteConfirmation('workPost', key);
                 });
             });
         }
 
-        // =================================================================
-        // WORK CRUD
-        // =================================================================
+        // ================================================================
+        // WORK UPLOAD MODAL
+        // ================================================================
 
-        function addWorkItem(type, data) {
-            if (!allData.work) allData.work = { app: {}, flyer: {}, website: {}, logo: {} };
-            const id = 'w' + Date.now();
-            allData.work[type][id] = {
-                ...data,
-                id: id,
-                type: type,
-                createdAt: Date.now()
+        function openWorkUploadModal(type, editData = null) {
+            workPostType.value = type;
+            editWorkPostId.value = editData ? editData.key : '';
+            workImageUrl.value = editData?.imageUrl || '';
+            workImageFile.value = '';
+
+            const typeLabels = {
+                app: 'Upload App Screenshot',
+                flyer: 'Post Flyer',
+                website: 'Upload Website Screenshot',
+                logo: 'Post Logo'
+            };
+            const typeSubs = {
+                app: 'Add a new app screenshot with name and functionality.',
+                flyer: 'Post a flyer design with title and description.',
+                website: 'Add a website screenshot with name and description.',
+                logo: 'Post a logo design with title and description.'
+            };
+
+            workUploadTitle.textContent = editData ? `Edit ${typeLabels[type]}` : typeLabels[type];
+            workUploadSub.textContent = editData ? `Update your ${type} post.` : typeSubs[type];
+
+            // Show/hide fields
+            if (type === 'app' || type === 'website') {
+                workAppFields.style.display = 'block';
+                workFlyerFields.style.display = 'none';
+                if (type === 'app') {
+                    workAppName.placeholder = 'App Name';
+                    workAppFunc.placeholder = 'Describe what the app does...';
+                } else {
+                    workAppName.placeholder = 'Website Name';
+                    workAppFunc.placeholder = 'Describe the website...';
+                }
+                workAppName.value = editData?.title || '';
+                workAppFunc.value = editData?.description || '';
+            } else {
+                workAppFields.style.display = 'none';
+                workFlyerFields.style.display = 'block';
+                workFlyerTitle.placeholder = type === 'flyer' ? 'Flyer Title' : 'Logo Title';
+                workFlyerDesc.placeholder = type === 'flyer' ? 'Describe the flyer design...' : 'Describe the logo design...';
+                workFlyerTitle.value = editData?.title || '';
+                workFlyerDesc.value = editData?.description || '';
+            }
+
+            // Frame preview
+            if (type === 'app') {
+                workFrameContainer.innerHTML = `
+                            <div class="phone-frame">
+                                ${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="App Screenshot" />` : `<div class="placeholder"><i class="fa-regular fa-image"></i><br /><span style="font-size:12px;color:#aaa;">App Screenshot</span></div>`}
+                                <div class="notch"></div>
+                            </div>
+                        `;
+            } else if (type === 'website') {
+                workFrameContainer.innerHTML = `
+                            <div class="laptop-frame">
+                                <div class="screen">
+                                    ${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="Website Screenshot" />` : `<div class="placeholder"><i class="fa-regular fa-image"></i><br /><span style="font-size:12px;color:#aaa;">Website Screenshot</span></div>`}
+                                </div>
+                                <div class="base"></div>
+                            </div>
+                        `;
+            } else {
+                workFrameContainer.innerHTML = `
+                            <div style="text-align:center;padding:8px 0;">
+                                ${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="Upload" style="max-width:100%;max-height:180px;border-radius:12px;object-fit:contain;" />` : `<div style="color:#ccc;font-size:48px;"><i class="fa-regular fa-image"></i></div>`}
+                            </div>
+                        `;
+            }
+
+            // Image preview
+            if (editData?.imageUrl) {
+                workImagePreview.innerHTML = `
+                            <img src="${editData.imageUrl}" alt="Uploaded" style="max-height:200px;object-fit:contain;" />
+                        `;
+            } else {
+                workImagePreview.innerHTML = `
+                            <div class="upload-icon"><i class="fa-regular fa-image"></i></div>
+                            <div class="upload-text">Tap to upload an image</div>
+                        `;
+            }
+
+            workUploadSubmit.textContent = editData ? 'Update Post' : 'Post';
+            workUploadModal.classList.add('open');
+        }
+
+        function closeWorkUploadModal() {
+            workUploadModal.classList.remove('open');
+        }
+
+        function openEditWorkPost(key) {
+            const posts = allData.workPosts || {};
+            const post = posts[key];
+            if (!post) return;
+            openWorkUploadModal(post.type, { key, ...post });
+        }
+
+        // ================================================================
+        // WORK POST CRUD
+        // ================================================================
+
+        function addWorkPost(data) {
+            const newId = 'wp' + Date.now();
+            if (!allData.workPosts) allData.workPosts = {};
+            const name = currentAdminData?.name || currentUser?.displayName || currentUser?.email || 'Admin';
+            allData.workPosts[newId] = {
+                id: newId,
+                type: data.type,
+                title: data.title,
+                description: data.description,
+                imageUrl: data.imageUrl,
+                createdAt: Date.now(),
+                adminName: name
             };
             return saveData();
         }
 
-        function updateWorkItem(type, key, data) {
-            if (!allData.work || !allData.work[type] || !allData.work[type][key]) return;
-            allData.work[type][key] = {
-                ...allData.work[type][key],
-                ...data
-            };
+        function updateWorkPost(key, data) {
+            if (!allData.workPosts || !allData.workPosts[key]) return;
+            const post = allData.workPosts[key];
+            post.title = data.title;
+            post.description = data.description;
+            if (data.imageUrl) post.imageUrl = data.imageUrl;
             return saveData();
         }
 
-        function deleteWorkItem(type, key) {
-            if (allData.work && allData.work[type] && allData.work[type][key]) {
-                delete allData.work[type][key];
+        function deleteWorkPost(key) {
+            if (allData.workPosts && allData.workPosts[key]) {
+                delete allData.workPosts[key];
                 return saveData();
             }
         }
 
-        // =================================================================
-        // WORK MODALS
-        // =================================================================
-
-        function openWorkPost(type) {
-            const modalMap = {
-                app: workAppModal,
-                flyer: workFlyerModal,
-                website: workWebsiteModal,
-                logo: workLogoModal
-            };
-            const formMap = {
-                app: workAppForm,
-                flyer: workFlyerForm,
-                website: workWebsiteForm,
-                logo: workLogoForm
-            };
-            const editIdMap = {
-                app: workAppEditId,
-                flyer: workFlyerEditId,
-                website: workWebsiteEditId,
-                logo: workLogoEditId
-            };
-
-            // Reset forms
-            const modal = modalMap[type];
-            const form = formMap[type];
-            const editId = editIdMap[type];
-            editId.value = '';
-            form.reset();
-            // Reset previews
-            const previewMap = {
-                app: appPreviewImg,
-                flyer: flyerPreviewImg,
-                website: websitePreviewImg,
-                logo: logoPreviewImg
-            };
-            const preview = previewMap[type];
-            if (preview) {
-                preview.style.display = 'none';
-                preview.src = '';
-            }
-            modal.classList.add('open');
-        }
-
-        function openWorkEdit(type, key) {
-            const work = allData.work || {};
-            const data = work[type]?.[key];
-            if (!data) return;
-
-            const modalMap = {
-                app: workAppModal,
-                flyer: workFlyerModal,
-                website: workWebsiteModal,
-                logo: workLogoModal
-            };
-            const formMap = {
-                app: workAppForm,
-                flyer: workFlyerForm,
-                website: workWebsiteForm,
-                logo: workLogoForm
-            };
-            const editIdMap = {
-                app: workAppEditId,
-                flyer: workFlyerEditId,
-                website: workWebsiteEditId,
-                logo: workLogoEditId
-            };
-            const fieldMap = {
-                app: { title: appName, functionality: appFunctionality, preview: appPreviewImg },
-                flyer: { title: flyerTitle, description: flyerDescription, preview: flyerPreviewImg },
-                website: { title: websiteName, functionality: websiteFunctionality, preview: websitePreviewImg },
-                logo: { title: logoTitle, description: logoDescription, preview: logoPreviewImg }
-            };
-
-            const modal = modalMap[type];
-            const form = formMap[type];
-            const editId = editIdMap[type];
-            const fields = fieldMap[type];
-
-            editId.value = key;
-            fields.title.value = data.title || '';
-            if (fields.functionality) fields.functionality.value = data.functionality || '';
-            if (fields.description) fields.description.value = data.description || '';
-            if (data.imageUrl) {
-                fields.preview.src = data.imageUrl;
-                fields.preview.style.display = 'block';
-            } else {
-                fields.preview.style.display = 'none';
-            }
-
-            modal.classList.add('open');
-        }
-
-        function closeWorkModal(type) {
-            const modalMap = {
-                app: workAppModal,
-                flyer: workFlyerModal,
-                website: workWebsiteModal,
-                logo: workLogoModal
-            };
-            modalMap[type].classList.remove('open');
-        }
-
-        // =================================================================
-        // WORK FORM SUBMISSIONS
-        // =================================================================
-
-        // App
-        workAppForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const editId = workAppEditId.value;
-            const name = appName.value.trim();
-            const functionality = appFunctionality.value.trim();
-            const file = appFileInput.files[0];
-
-            if (!name || !functionality) {
-                showToast('Please fill in all fields', 'error');
-                return;
-            }
-
-            let imageUrl = '';
-            if (file) {
-                try {
-                    showToast('Uploading image...');
-                    imageUrl = await uploadToCloudinary(file);
-                } catch (err) {
-                    showToast('Upload failed: ' + err.message, 'error');
-                    return;
-                }
-            } else if (!editId) {
-                showToast('Please upload an image', 'error');
-                return;
-            }
-
-            const data = { title: name, functionality: functionality, imageUrl: imageUrl || undefined };
-
-            if (editId) {
-                // If no new image, keep existing
-                if (!imageUrl) {
-                    const existing = allData.work?.app?.[editId];
-                    if (existing) data.imageUrl = existing.imageUrl;
-                }
-                await updateWorkItem('app', editId, data);
-                showToast('App updated');
-            } else {
-                await addWorkItem('app', data);
-                showToast('App posted!');
-            }
-            closeWorkModal('app');
-            renderWorkPage();
-        });
-
-        // Flyer
-        workFlyerForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const editId = workFlyerEditId.value;
-            const title = flyerTitle.value.trim();
-            const description = flyerDescription.value.trim();
-            const file = flyerFileInput.files[0];
-
-            if (!title || !description) {
-                showToast('Please fill in all fields', 'error');
-                return;
-            }
-
-            let imageUrl = '';
-            if (file) {
-                try {
-                    showToast('Uploading image...');
-                    imageUrl = await uploadToCloudinary(file);
-                } catch (err) {
-                    showToast('Upload failed: ' + err.message, 'error');
-                    return;
-                }
-            } else if (!editId) {
-                showToast('Please upload an image', 'error');
-                return;
-            }
-
-            const data = { title: title, description: description, imageUrl: imageUrl || undefined };
-
-            if (editId) {
-                if (!imageUrl) {
-                    const existing = allData.work?.flyer?.[editId];
-                    if (existing) data.imageUrl = existing.imageUrl;
-                }
-                await updateWorkItem('flyer', editId, data);
-                showToast('Flyer updated');
-            } else {
-                await addWorkItem('flyer', data);
-                showToast('Flyer posted!');
-            }
-            closeWorkModal('flyer');
-            renderWorkPage();
-        });
-
-        // Website
-        workWebsiteForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const editId = workWebsiteEditId.value;
-            const name = websiteName.value.trim();
-            const functionality = websiteFunctionality.value.trim();
-            const file = websiteFileInput.files[0];
-
-            if (!name || !functionality) {
-                showToast('Please fill in all fields', 'error');
-                return;
-            }
-
-            let imageUrl = '';
-            if (file) {
-                try {
-                    showToast('Uploading image...');
-                    imageUrl = await uploadToCloudinary(file);
-                } catch (err) {
-                    showToast('Upload failed: ' + err.message, 'error');
-                    return;
-                }
-            } else if (!editId) {
-                showToast('Please upload an image', 'error');
-                return;
-            }
-
-            const data = { title: name, functionality: functionality, imageUrl: imageUrl || undefined };
-
-            if (editId) {
-                if (!imageUrl) {
-                    const existing = allData.work?.website?.[editId];
-                    if (existing) data.imageUrl = existing.imageUrl;
-                }
-                await updateWorkItem('website', editId, data);
-                showToast('Website updated');
-            } else {
-                await addWorkItem('website', data);
-                showToast('Website posted!');
-            }
-            closeWorkModal('website');
-            renderWorkPage();
-        });
-
-        // Logo
-        workLogoForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const editId = workLogoEditId.value;
-            const title = logoTitle.value.trim();
-            const description = logoDescription.value.trim();
-            const file = logoFileInput.files[0];
-
-            if (!title || !description) {
-                showToast('Please fill in all fields', 'error');
-                return;
-            }
-
-            let imageUrl = '';
-            if (file) {
-                try {
-                    showToast('Uploading image...');
-                    imageUrl = await uploadToCloudinary(file);
-                } catch (err) {
-                    showToast('Upload failed: ' + err.message, 'error');
-                    return;
-                }
-            } else if (!editId) {
-                showToast('Please upload an image', 'error');
-                return;
-            }
-
-            const data = { title: title, description: description, imageUrl: imageUrl || undefined };
-
-            if (editId) {
-                if (!imageUrl) {
-                    const existing = allData.work?.logo?.[editId];
-                    if (existing) data.imageUrl = existing.imageUrl;
-                }
-                await updateWorkItem('logo', editId, data);
-                showToast('Logo updated');
-            } else {
-                await addWorkItem('logo', data);
-                showToast('Logo posted!');
-            }
-            closeWorkModal('logo');
-            renderWorkPage();
-        });
-
-        // =================================================================
-        // WORK MODAL FILE UPLOAD HANDLERS
-        // =================================================================
-
-        function setupUploadArea(uploadArea, fileInput, previewImg) {
-            uploadArea.addEventListener('click', () => fileInput.click());
-            fileInput.addEventListener('change', function() {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        previewImg.src = e.target.result;
-                        previewImg.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    previewImg.style.display = 'none';
-                }
-            });
-        }
-
-        setupUploadArea(appUploadArea, appFileInput, appPreviewImg);
-        setupUploadArea(flyerUploadArea, flyerFileInput, flyerPreviewImg);
-        setupUploadArea(websiteUploadArea, websiteFileInput, websitePreviewImg);
-        setupUploadArea(logoUploadArea, logoFileInput, logoPreviewImg);
-
-        // =================================================================
-        // WORK MODAL CLOSE HANDLERS
-        // =================================================================
-
-        function setupWorkModalClose(modal, closeBtn, cancelBtn) {
-            closeBtn.addEventListener('click', () => modal.classList.remove('open'));
-            cancelBtn.addEventListener('click', () => modal.classList.remove('open'));
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) modal.classList.remove('open');
-            });
-        }
-
-        setupWorkModalClose(workAppModal, workAppCloseBtn, workAppCancelBtn);
-        setupWorkModalClose(workFlyerModal, workFlyerCloseBtn, workFlyerCancelBtn);
-        setupWorkModalClose(workWebsiteModal, workWebsiteCloseBtn, workWebsiteCancelBtn);
-        setupWorkModalClose(workLogoModal, workLogoCloseBtn, workLogoCancelBtn);
-
-        // =================================================================
-        // WORK POST CARDS
-        // =================================================================
-
-        document.querySelectorAll('.work-post-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const type = this.dataset.type;
-                openWorkPost(type);
-            });
-        });
-
-        // =================================================================
-        // WORK NAVIGATION
-        // =================================================================
-
-        adminAvatar.addEventListener('click', () => {
-            // Navigate to Work page
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-work').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            // Scroll to top
-            document.getElementById('appContent').scrollTop = 0;
-            renderWorkPage();
-        });
-
-        workBackBtn.addEventListener('click', () => {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-dashboard').classList.add('active');
-            document.querySelector('.nav-item[data-page="dashboard"]').classList.add('active');
-        });
-
-        // =================================================================
+        // ================================================================
         // DELETE CONFIRMATION
-        // =================================================================
+        // ================================================================
 
-        function showDeleteConfirmation(type, payload) {
+        function showDeleteConfirmation(type, key) {
             const messages = {
                 'promo': 'Are you sure you want to delete this promo coupon?',
                 'order': 'Are you sure you want to delete this order?',
                 'user': 'Are you sure you want to delete this user? (This will permanently remove their account)',
                 'service': 'Are you sure you want to delete this service?',
                 'category': 'Are you sure you want to delete this category? (This will also remove all services under it)',
-                'work': 'Are you sure you want to delete this project?'
+                'workPost': 'Are you sure you want to delete this work post?'
             };
             deleteConfirmText.textContent = messages[type] || 'Are you sure you want to delete this item?';
-            pendingDeleteAction = { type, payload };
+            pendingDeleteAction = { type, key };
             deleteConfirmModal.classList.add('open');
         }
 
@@ -3329,34 +3016,34 @@
 
         document.getElementById('deleteConfirmBtn').addEventListener('click', function() {
             if (!pendingDeleteAction) return;
-            const { type, payload } = pendingDeleteAction;
+            const { type, key } = pendingDeleteAction;
 
             if (type === 'promo') {
-                if (allData.promotions && allData.promotions[payload]) {
-                    delete allData.promotions[payload];
+                if (allData.promotions && allData.promotions[key]) {
+                    delete allData.promotions[key];
                     saveData().then(() => { renderAll();
                         showToast('Promo deleted'); });
                 }
             } else if (type === 'order') {
-                if (allData.orders && allData.orders[payload]) {
-                    delete allData.orders[payload];
+                if (allData.orders && allData.orders[key]) {
+                    delete allData.orders[key];
                     saveData().then(() => { renderAll();
                         showToast('Order deleted'); });
                 }
             } else if (type === 'user') {
-                const userRef = ref(db, 'users/' + payload);
+                const userRef = ref(db, 'users/' + key);
                 set(userRef, null).then(() => {
                     showToast('User deleted');
                     renderUsers(document.getElementById('userSearchInput').value);
                 });
             } else if (type === 'service') {
-                if (allData.services && allData.services[payload]) {
-                    delete allData.services[payload];
+                if (allData.services && allData.services[key]) {
+                    delete allData.services[key];
                     saveData().then(() => { renderAll();
                         showToast('Service deleted'); });
                 }
             } else if (type === 'category') {
-                const cat = payload;
+                const cat = key;
                 allData.categories = allData.categories.filter(c => c !== cat);
                 if (allData.services) {
                     Object.keys(allData.services).forEach(sKey => {
@@ -3367,20 +3054,17 @@
                 }
                 saveData().then(() => { renderAll();
                     showToast('Category deleted'); });
-            } else if (type === 'work') {
-                const { type: workType, key } = payload;
-                deleteWorkItem(workType, key).then(() => {
-                    renderWorkPage();
-                    showToast('Project deleted');
-                });
+            } else if (type === 'workPost') {
+                deleteWorkPost(key).then(() => { renderAll();
+                    showToast('Work post deleted'); });
             }
             deleteConfirmModal.classList.remove('open');
             pendingDeleteAction = null;
         });
 
-        // =================================================================
-        // CRUD OPERATIONS (Existing)
-        // =================================================================
+        // ================================================================
+        // SERVICE CRUD
+        // ================================================================
 
         function addService(data) {
             const newId = 's' + Date.now();
@@ -3446,9 +3130,9 @@
             }
         }
 
-        // =================================================================
-        // MODAL (Service)
-        // =================================================================
+        // ================================================================
+        // SERVICE MODAL
+        // ================================================================
 
         function openModal(title, subtitle, data, key) {
             modalTitle.textContent = title;
@@ -3512,9 +3196,9 @@
             openModal('Edit Service', 'Update the service details.', service, key);
         }
 
-        // =================================================================
-        // CATEGORY MANAGEMENT
-        // =================================================================
+        // ================================================================
+        // CATEGORY
+        // ================================================================
 
         document.getElementById('addCategoryBtn').addEventListener('click', function() {
             const name = document.getElementById('newCategoryInput').value.trim().toLowerCase();
@@ -3534,9 +3218,9 @@
             });
         });
 
-        // =================================================================
+        // ================================================================
         // PROMO
-        // =================================================================
+        // ================================================================
 
         function addPromo(data) {
             const newId = 'p' + Date.now();
@@ -3549,14 +3233,151 @@
             return saveData();
         }
 
-        // =================================================================
-        // EVENT BINDINGS (Existing)
-        // =================================================================
+        // ================================================================
+        // EVENT BINDINGS
+        // ================================================================
 
+        // ---- Work Avatar ----
+        workAvatarBtn.addEventListener('click', function() {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-work').classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            // Center the header
+            mainHeader.classList.add('center-header');
+            document.getElementById('appContent').scrollTop = 0;
+        });
+
+        // ---- Bottom nav ----
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                this.classList.add('active');
+                const page = this.dataset.page;
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                const target = document.getElementById('page-' + page);
+                if (target) target.classList.add('active');
+                document.getElementById('appContent').scrollTop = 0;
+                // Remove center header style when not on work page
+                if (page !== 'work') {
+                    mainHeader.classList.remove('center-header');
+                }
+            });
+        });
+
+        // ---- Work option cards ----
+        document.querySelectorAll('.work-option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const type = this.dataset.type;
+                openWorkUploadModal(type);
+            });
+        });
+
+        // ---- Work upload modal ----
+        workUploadCloseBtn.addEventListener('click', closeWorkUploadModal);
+        workUploadCancelBtn.addEventListener('click', closeWorkUploadModal);
+        workUploadModal.addEventListener('click', function(e) {
+            if (e.target === this) closeWorkUploadModal();
+        });
+
+        // Image preview click -> file input
+        workImagePreview.addEventListener('click', function() {
+            workImageFile.click();
+        });
+
+        workImageFile.addEventListener('change', function() {
+            const file = this.files[0];
+            if (!file) return;
+            // Show local preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                workImagePreview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-height:200px;object-fit:contain;" />`;
+            };
+            reader.readAsDataURL(file);
+            // Upload to Cloudinary
+            uploadToCloudinary(file).then(url => {
+                workImageUrl.value = url;
+                // Update frame preview
+                const type = workPostType.value;
+                if (type === 'app') {
+                    workFrameContainer.innerHTML = `
+                                <div class="phone-frame">
+                                    <img src="${url}" alt="App Screenshot" />
+                                    <div class="notch"></div>
+                                </div>
+                            `;
+                } else if (type === 'website') {
+                    workFrameContainer.innerHTML = `
+                                <div class="laptop-frame">
+                                    <div class="screen">
+                                        <img src="${url}" alt="Website Screenshot" />
+                                    </div>
+                                    <div class="base"></div>
+                                </div>
+                            `;
+                } else {
+                    workFrameContainer.innerHTML = `
+                                <div style="text-align:center;padding:8px 0;">
+                                    <img src="${url}" alt="Upload" style="max-width:100%;max-height:180px;border-radius:12px;object-fit:contain;" />
+                                </div>
+                            `;
+                }
+                showToast('Image uploaded successfully!');
+            }).catch(err => {
+                showToast('Upload failed: ' + err.message, 'error');
+            });
+        });
+
+        // ---- Work upload form submit ----
+        workUploadForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const type = workPostType.value;
+            const editId = editWorkPostId.value;
+            const imageUrl = workImageUrl.value;
+
+            if (!imageUrl) {
+                showToast('Please upload an image first', 'error');
+                return;
+            }
+
+            let title = '',
+                description = '';
+            if (type === 'app' || type === 'website') {
+                title = workAppName.value.trim();
+                description = workAppFunc.value.trim();
+                if (!title) {
+                    showToast('Please enter a name', 'error');
+                    return;
+                }
+            } else {
+                title = workFlyerTitle.value.trim();
+                description = workFlyerDesc.value.trim();
+                if (!title) {
+                    showToast('Please enter a title', 'error');
+                    return;
+                }
+            }
+
+            const postData = { type, title, description, imageUrl };
+
+            if (editId) {
+                updateWorkPost(editId, postData).then(() => {
+                    renderAll();
+                    closeWorkUploadModal();
+                    showToast('Work post updated!');
+                });
+            } else {
+                addWorkPost(postData).then(() => {
+                    renderAll();
+                    closeWorkUploadModal();
+                    showToast('Work post added!');
+                });
+            }
+        });
+
+        // ---- Services ----
         document.getElementById('addServiceBtn').addEventListener('click', () => {
             openModal('Add Service', 'Fill in the details to create a new service.', null);
         });
-
         document.getElementById('addServiceQuick').addEventListener('click', () => {
             openModal('Add Service', 'Fill in the details to create a new service.', null);
         });
@@ -3565,6 +3386,7 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-promotions').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            mainHeader.classList.remove('center-header');
         });
 
         document.getElementById('addPromoBtn').addEventListener('click', () => {
@@ -3666,9 +3488,9 @@
             const newItem = document.createElement('div');
             newItem.className = 'list-item';
             newItem.innerHTML = `
-                <input type="text" value="New Service" placeholder="Service name">
-                <button class="btn-remove">✕</button>
-            `;
+                        <input type="text" value="New Service" placeholder="Service name" />
+                        <button class="btn-remove">✕</button>
+                    `;
             container.appendChild(newItem);
             container.querySelectorAll('.btn-remove').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -3686,6 +3508,12 @@
                 renderAll();
                 showToast('Our Services list updated');
             });
+        });
+
+        document.getElementById('ourServicesListContainer').addEventListener('click', function(e) {
+            if (e.target.classList.contains('btn-remove')) {
+                e.target.closest('.list-item').remove();
+            }
         });
 
         document.getElementById('saveSettings').addEventListener('click', () => {
@@ -3736,35 +3564,19 @@
 
         document.getElementById('viewOrdersQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="orders"]').click();
+            mainHeader.classList.remove('center-header');
         });
 
         document.getElementById('viewUsersQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="users"]').click();
+            mainHeader.classList.remove('center-header');
         });
 
         document.getElementById('viewAllActivity').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="orders"]').click();
+            mainHeader.classList.remove('center-header');
         });
 
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-                this.classList.add('active');
-                const page = this.dataset.page;
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                const target = document.getElementById('page-' + page);
-                if (target) target.classList.add('active');
-                document.getElementById('appContent').scrollTop = 0;
-            });
-        });
-
-        document.getElementById('ourServicesListContainer').addEventListener('click', function(e) {
-            if (e.target.classList.contains('btn-remove')) {
-                e.target.closest('.list-item').remove();
-            }
-        });
-
-        // Logout
         document.getElementById('logoutBtn').addEventListener('click', () => {
             signOut(auth).then(() => {
                 window.location.href = 'login.html';
@@ -3774,7 +3586,6 @@
             });
         });
 
-        // Screenshot modal close
         document.getElementById('screenshotCloseBtn').addEventListener('click', function() {
             document.getElementById('screenshotModal').classList.remove('open');
         });
@@ -3784,11 +3595,11 @@
             }
         });
 
-        // =================================================================
+        // ================================================================
         // TOAST
-        // =================================================================
+        // ================================================================
 
-        function showToast(msg) {
+        function showToast(msg, type = 'success') {
             toastMsg.textContent = msg;
             toast.classList.add('show');
             clearTimeout(toast._timeout);
@@ -3797,9 +3608,9 @@
             }, 2200);
         }
 
-        // =================================================================
+        // ================================================================
         // AUTH & INIT
-        // =================================================================
+        // ================================================================
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -3836,7 +3647,7 @@
             }
         });
 
-        console.log('✅ Admin App ready with Work Page + Cloudinary.');
+        console.log('✅ Admin App ready with Work page and Cloudinary upload.');
     </script>
 </body>
 </html>
