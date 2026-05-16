@@ -92,6 +92,7 @@
             transform: scale(0.92);
         }
 
+        /* ── HEADER: Work button LEFT, Admin panel CENTERED ── */
         .header {
             display: flex;
             align-items: center;
@@ -99,22 +100,34 @@
             padding: 16px 0 20px 0;
             transition: all 0.3s ease;
         }
-        .header.center-header {
-            justify-content: center;
+        .header.work-active {
+            justify-content: flex-start;
             gap: 16px;
         }
-        .header.center-header .header-left {
-            justify-content: center;
-            flex: 1;
+        .header.work-active .header-left {
+            flex: 0 0 auto;
         }
-        .header.center-header .header-right {
+        .header.work-active .header-center {
+            flex: 1;
+            text-align: center;
+        }
+        .header.work-active .header-right {
             display: none;
         }
+
         .header-left {
             display: flex;
             align-items: center;
             gap: 12px;
             flex: 1;
+        }
+        .header-center {
+            display: none;
+            flex: 1;
+            text-align: center;
+        }
+        .header.work-active .header-center {
+            display: block;
         }
         .header-right {
             display: flex;
@@ -122,7 +135,7 @@
             align-items: center;
         }
 
-        /* ── BLACK WORK BUTTON ── */
+        /* ── BLACK WORK BUTTON (left) ── */
         .work-avatar {
             width: 44px;
             height: 44px;
@@ -1388,6 +1401,7 @@
             }
         }
 
+        /* ── WORK POST CARD WITH FRAME ── */
         .work-post-card {
             background: #ffffff;
             border-radius: 16px;
@@ -1405,7 +1419,6 @@
         }
         .work-post-card .post-thumb {
             width: 100%;
-            aspect-ratio: 1/1;
             border-radius: 12px;
             overflow: hidden;
             background: #f5f5f5;
@@ -1476,7 +1489,7 @@
             color: #dc2626;
         }
 
-        /* ── PHONE FRAME (perfect fit for apps) ── */
+        /* ── PHONE FRAME (app) ── */
         .phone-frame {
             width: 100%;
             max-width: 220px;
@@ -1509,8 +1522,13 @@
             background: #1c2128;
             border-radius: 0 0 12px 12px;
         }
+        .phone-frame .placeholder {
+            color: #ccc;
+            font-size: 28px;
+            text-align: center;
+        }
 
-        /* ── LAPTOP FRAME (perfect fit for websites) ── */
+        /* ── LAPTOP FRAME (website) ── */
         .laptop-frame {
             width: 100%;
             max-width: 320px;
@@ -1534,6 +1552,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+        .laptop-frame .screen .placeholder {
+            color: #ccc;
+            font-size: 28px;
+            text-align: center;
         }
         .laptop-frame .base {
             height: 10px;
@@ -1661,10 +1684,12 @@
 
         <div class="app-content" id="appContent">
 
-            <!-- ===== HEADER ===== -->
+            <!-- ===== HEADER: Work left, Admin centered ===== -->
             <div class="header" id="mainHeader">
                 <div class="header-left">
                     <div class="work-avatar" id="workAvatarBtn" title="View Work Page">Work</div>
+                </div>
+                <div class="header-center" id="headerCenter">
                     <div class="header-text">
                         <span>Admin Panel</span>
                         <span id="adminName">Buffer Zone</span>
@@ -1710,14 +1735,7 @@
                     <button class="quick-action-btn" id="viewUsersQuick"><i class="fa-solid fa-users"></i> Users</button>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Recent Activity</h3>
-                        <span class="see-all" id="viewAllActivity">View All</span>
-                    </div>
-                    <div id="activityFeed"></div>
-                </div>
-
+                <!-- ── QUICK STATS (above activity) ── -->
                 <div class="card">
                     <div class="card-header">
                         <h3>Quick Stats</h3>
@@ -1740,6 +1758,15 @@
                             <div style="font-size:20px; font-weight:700; color:#7c3aed;" id="statRevenueDetail">0</div>
                         </div>
                     </div>
+                </div>
+
+                <!-- ── RECENT ACTIVITY (below quick stats) ── -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Recent Activity</h3>
+                        <span class="see-all" id="viewAllActivity">View All</span>
+                    </div>
+                    <div id="activityFeed"></div>
                 </div>
 
             </div>
@@ -2766,7 +2793,7 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // WORK POSTS
+        // WORK POSTS (with frames preserved)
         // ───────────────────────────────────────────────────────────────────
 
         function renderWorkPosts() {
@@ -2812,19 +2839,41 @@
                         `;
 
                 items.forEach(post => {
+                    let frameHtml = '';
                     const imgHtml = post.imageUrl ?
                         `<img src="${post.imageUrl}" alt="${post.title || 'Work'}" loading="lazy" />` :
                         `<div class="no-image"><i class="fa-regular fa-image"></i></div>`;
+
+                    if (type === 'app') {
+                        frameHtml = `
+                                    <div class="phone-frame">
+                                        ${imgHtml}
+                                        <div class="notch"></div>
+                                    </div>
+                                `;
+                    } else if (type === 'website') {
+                        frameHtml = `
+                                    <div class="laptop-frame">
+                                        <div class="screen">
+                                            ${imgHtml}
+                                        </div>
+                                        <div class="base"></div>
+                                    </div>
+                                `;
+                    } else {
+                        frameHtml = `
+                                    <div class="post-thumb" style="aspect-ratio:1/1;">
+                                        ${imgHtml}
+                                    </div>
+                                `;
+                    }
 
                     let titleText = post.title || 'Untitled';
                     let descText = post.description || '';
 
                     html += `
                                 <div class="work-post-card" data-key="${post.key}">
-                                    <div class="post-thumb">
-                                        ${imgHtml}
-                                        <span class="post-type-badge">${typeIcons[type] || type}</span>
-                                    </div>
+                                    ${frameHtml}
                                     <div class="post-title">${titleText}</div>
                                     <div class="post-desc">${descText}</div>
                                     <div class="post-meta">
@@ -2907,6 +2956,7 @@
                 workFlyerDesc.value = editData?.description || '';
             }
 
+            // Show the frame preview (same as will appear in the post)
             if (type === 'app') {
                 workFrameContainer.innerHTML = `
                             <div class="phone-frame">
@@ -3232,7 +3282,7 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-work').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            mainHeader.classList.add('center-header');
+            mainHeader.classList.add('work-active');
             document.getElementById('appContent').scrollTop = 0;
         });
 
@@ -3246,7 +3296,7 @@
                 if (target) target.classList.add('active');
                 document.getElementById('appContent').scrollTop = 0;
                 if (page !== 'work') {
-                    mainHeader.classList.remove('center-header');
+                    mainHeader.classList.remove('work-active');
                 }
             });
         });
@@ -3323,7 +3373,7 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-promotions').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            mainHeader.classList.remove('center-header');
+            mainHeader.classList.remove('work-active');
         });
 
         document.getElementById('addPromoBtn').addEventListener('click', () => {
@@ -3501,17 +3551,17 @@
 
         document.getElementById('viewOrdersQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="orders"]').click();
-            mainHeader.classList.remove('center-header');
+            mainHeader.classList.remove('work-active');
         });
 
         document.getElementById('viewUsersQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="users"]').click();
-            mainHeader.classList.remove('center-header');
+            mainHeader.classList.remove('work-active');
         });
 
         document.getElementById('viewAllActivity').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="orders"]').click();
-            mainHeader.classList.remove('center-header');
+            mainHeader.classList.remove('work-active');
         });
 
         document.getElementById('logoutBtn').addEventListener('click', () => {
@@ -3584,7 +3634,7 @@
             }
         });
 
-        console.log('✅ Admin App ready with black Work button and 30MB max upload.');
+        console.log('✅ Admin App ready with Work button left, centered admin, framed posts.');
     </script>
 </body>
 </html>
