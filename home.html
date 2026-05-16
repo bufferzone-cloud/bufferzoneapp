@@ -2209,7 +2209,7 @@
         }
 
         // =================================================================
-        // SAMPLES RENDER (2x2 grid with frames)
+        // SAMPLES RENDER (2x2 grid with frames - images fit without cropping)
         // =================================================================
 
         function renderSamples() {
@@ -2234,12 +2234,6 @@
                 website: '💻 Websites',
                 logo: '🎨 Logos'
             };
-            const typeIcons = {
-                app: '📱',
-                flyer: '📄',
-                website: '💻',
-                logo: '🎨'
-            };
 
             let html = '';
             for (const type of ['app', 'flyer', 'website', 'logo']) {
@@ -2247,7 +2241,7 @@
                 if (items.length === 0) continue;
 
                 html += `
-                            <div class="section-title" style="font-size:16px;font-weight:700;color:#1c2128;margin:20px 0 10px 0;padding-bottom:6px;border-bottom:2px solid #f0f0f0;display:flex;align-items:center;gap:8px;">
+                            <div style="font-size:16px;font-weight:700;color:#1c2128;margin:20px 0 10px 0;padding-bottom:6px;border-bottom:2px solid #f0f0f0;display:flex;align-items:center;gap:8px;">
                                 ${typeLabels[type] || type}
                                 <span style="font-size:11px;background:#f0f0f0;padding:0 10px;border-radius:12px;font-weight:600;color:#555;">${items.length}</span>
                             </div>
@@ -2257,7 +2251,7 @@
                 items.forEach(post => {
                     let frameHtml = '';
                     const imgHtml = post.imageUrl ?
-                        `<img src="${post.imageUrl}" alt="${post.title || 'Work'}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" />` :
+                        `<img src="${post.imageUrl}" alt="${post.title || 'Work'}" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block;" />` :
                         `<div style="color:#ccc;font-size:32px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><i class="fa-regular fa-image"></i></div>`;
 
                     if (type === 'app') {
@@ -2963,7 +2957,7 @@
             }
         });
 
-        console.log('✅ Customer App ready with Samples page.');
+        console.log('✅ Customer App ready with Samples page — images fit perfectly in frames.');
     </script>
 </body>
 </html>
