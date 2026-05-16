@@ -131,11 +131,15 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 11px;
+            font-size: 9px;
             flex-shrink: 0;
             cursor: pointer;
             transition: transform 0.2s;
             user-select: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1;
+            padding: 0 4px;
         }
         .avatar:active {
             transform: scale(0.92);
@@ -1615,7 +1619,6 @@
             }
         }
 
-        /* --- Work page empty state --- */
         .work-empty {
             text-align: center;
             padding: 30px 10px;
@@ -1640,7 +1643,7 @@
             <!-- ===== HEADER ===== -->
             <div class="header">
                 <div class="header-left">
-                    <div class="avatar" id="adminAvatar">Work</div>
+                    <div class="avatar" id="adminAvatar">work</div>
                 </div>
                 <div class="header-center">
                     <span>Admin Panel</span>
@@ -3833,7 +3836,7 @@
             }
         });
 
-        console.log('✅ Admin App ready with Firebase + Work Page + Cloudinary.');
+        console.log('✅ Admin App ready with Work Page + Cloudinary.');
     </script>
 </body>
 </html>
