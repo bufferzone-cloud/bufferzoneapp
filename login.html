@@ -825,5 +825,143 @@
         console.log('🔥 Buffer Zone login ready — Firebase modular SDK connected.');
     </script>
 
+    <!-- PWA: Service Worker + Manifest + Install Banner -->
+    <script>
+        (function() {
+            // 1. Inject Manifest (Blob URL)
+            const manifest = {
+                name: "BUFFER ZONE",
+                short_name: "BUFFER ZONE",
+                start_url: "https://bufferzone-cloud.github.io/bufferzoneapp/login.html",
+                display: "standalone",
+                background_color: "#ffffff",
+                theme_color: "#000000",
+                icons: [
+                    {
+                        src: "bufferzone.png",
+                        sizes: "512x512",
+                        type: "image/png",
+                        purpose: "any maskable"
+                    }
+                ]
+            };
+            const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+            const manifestURL = URL.createObjectURL(manifestBlob);
+            const link = document.createElement('link');
+            link.rel = 'manifest';
+            link.href = manifestURL;
+            document.head.appendChild(link);
+
+            // 2. Register Service Worker (Blob-based, minimal)
+            if ('serviceWorker' in navigator) {
+                const swCode = `
+                    self.addEventListener('install', () => self.skipWaiting());
+                    self.addEventListener('activate', (e) => e.waitUntil(clients.claim()));
+                    self.addEventListener('fetch', (e) => e.respondWith(fetch(e.request)));
+                `;
+                const swBlob = new Blob([swCode], { type: 'application/javascript' });
+                const swURL = URL.createObjectURL(swBlob);
+                navigator.serviceWorker.register(swURL)
+                    .catch(err => console.warn('SW registration failed (non‑critical):', err));
+            }
+
+            // 3. Add install banner CSS (does not affect existing styles)
+            const style = document.createElement('style');
+            style.textContent = `
+                .install-banner {
+                    position: fixed;
+                    bottom: 24px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #000;
+                    color: #fff;
+                    display: none;          /* hidden by default, shown via JS */
+                    align-items: center;
+                    gap: 12px;
+                    padding: 12px 20px;
+                    border-radius: 50px;
+                    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+                    z-index: 1000;
+                    font-family: 'Inter', sans-serif;
+                    font-size: 14px;
+                    font-weight: 500;
+                    max-width: 90vw;
+                }
+                .install-banner .install-logo {
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 6px;
+                }
+                .install-banner #installBtn {
+                    background: #fff;
+                    color: #000;
+                    border: none;
+                    padding: 8px 16px;
+                    border-radius: 30px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    font-family: 'Inter', sans-serif;
+                }
+                .install-banner #dismissInstall {
+                    background: none;
+                    border: none;
+                    color: #fff;
+                    font-size: 18px;
+                    cursor: pointer;
+                    margin-left: 4px;
+                }
+            `;
+            document.head.appendChild(style);
+
+            // 4. Create the banner HTML
+            const bannerHTML = `
+                <div id="installBanner" class="install-banner">
+                    <img src="bufferzone.png" alt="logo" class="install-logo">
+                    <span>Install BUFFER ZONE</span>
+                    <button id="installBtn">Install</button>
+                    <button id="dismissInstall">&times;</button>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', bannerHTML);
+
+            const banner = document.getElementById('installBanner');
+            const installBtn = document.getElementById('installBtn');
+            const dismissBtn = document.getElementById('dismissInstall');
+            let deferredPrompt = null;
+
+            // 5. Listen for the install prompt
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();          // don't show the mini‑infobar automatically
+                deferredPrompt = e;
+                banner.style.display = 'flex'; // drop down the install bar
+            });
+
+            // 6. Handle the Install button click
+            installBtn.addEventListener('click', () => {
+                if (!deferredPrompt) return;
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('✅ User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                    banner.style.display = 'none';
+                });
+            });
+
+            // 7. Dismiss button hides the banner
+            dismissBtn.addEventListener('click', () => {
+                banner.style.display = 'none';
+            });
+
+            // 8. If the app gets installed later, hide the banner
+            window.addEventListener('appinstalled', () => {
+                banner.style.display = 'none';
+                deferredPrompt = null;
+                console.log('🎉 App was installed');
+            });
+        })();
+    </script>
+
 </body>
 </html>
