@@ -754,7 +754,7 @@
                 await signOut(auth);
 
                 // 6. Redirect to login page with success indicator
-                window.location.href = 'index.html?signup=success';
+                window.location.href = 'login.html?signup=success';
             } catch (error) {
                 setLoading(signupBtn, false);
                 disableAuthRedirect = false; // re‑enable redirects on error
