@@ -2209,7 +2209,7 @@
         }
 
         // =================================================================
-        // SAMPLES RENDER (2x2 grid with frames - images fit without cropping)
+        // SAMPLES RENDER (2x2 grid with frames - app images fill the phone)
         // =================================================================
 
         function renderSamples() {
@@ -2250,8 +2250,10 @@
 
                 items.forEach(post => {
                     let frameHtml = '';
+                    // For app: cover mode fills the phone frame with rounded corners
+                    // For other types: contain mode shows full image without cropping
                     const imgHtml = post.imageUrl ?
-                        `<img src="${post.imageUrl}" alt="${post.title || 'Work'}" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block;" />` :
+                        `<img src="${post.imageUrl}" alt="${post.title || 'Work'}" loading="lazy" style="width:100%;height:100%;display:block;${type === 'app' ? 'object-fit:cover;border-radius:18px;' : 'object-fit:contain;'}" />` :
                         `<div style="color:#ccc;font-size:32px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><i class="fa-regular fa-image"></i></div>`;
 
                     if (type === 'app') {
@@ -2957,7 +2959,7 @@
             }
         });
 
-        console.log('✅ Customer App ready with Samples page — images fit perfectly in frames.');
+        console.log('✅ Customer App ready with Samples page — app screenshots fill the phone frame.');
     </script>
 </body>
 </html>
