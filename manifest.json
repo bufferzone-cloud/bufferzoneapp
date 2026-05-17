@@ -8,13 +8,13 @@
   "icons": [
     {
       "src": "bufferzone.png",
-      "sizes": "192x192",
+      "sizes": "172x172",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
       "src": "bufferzone.png",
-      "sizes": "512x512",
+      "sizes": "412x412",
       "type": "image/png",
       "purpose": "any maskable"
     }
