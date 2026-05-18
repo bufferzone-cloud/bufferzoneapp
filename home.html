@@ -267,14 +267,14 @@
             font-weight: 700;
         }
 
-        /* ===== PROMO CAROUSEL (COVER FLOW) ===== */
+        /* ===== PROMO CAROUSEL (COVER FLOW) — NO CROP, FULL BANNER ===== */
         .promo-carousel-wrapper {
             position: relative;
             margin: 4px 0 14px 0;
             overflow: hidden;
             border-radius: 16px;
-            height: 200px;
-            /* will be adjusted by JS to match hero height */;
+            height: 220px;
+            background: #f8f9fc;
         }
 
         .promo-carousel-track {
@@ -289,8 +289,6 @@
             align-items: center;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            padding-top: 0;
-            padding-bottom: 0;
         }
         .promo-carousel-track::-webkit-scrollbar {
             display: none;
@@ -305,24 +303,31 @@
             overflow: hidden;
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
             height: 100%;
-            aspect-ratio: auto;
-            will-change: transform;
+            background: #ffffff;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
             transform-origin: center center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
+        /* FIX: show full banner without cropping */
         .promo-slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
+            background-color: #ffffff;
+            padding: 4px;
         }
+
         .promo-slide .slide-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
             padding: 24px 16px 16px 16px;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.70));
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.65));
             min-height: 70px;
             display: flex;
             flex-direction: column;
@@ -345,7 +350,7 @@
             text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
         }
 
-        /* sizes for the cover flow effect — applied via JS */
+        /* cover flow scaling */
         .promo-slide.active-slide {
             transform: scale(1) translateX(0);
             z-index: 2;
@@ -533,52 +538,6 @@
             font-size: 7px;
             color: #777;
             line-height: 1.2;
-        }
-
-        .thumb-1 {
-            background: linear-gradient(135deg, #0f0f0f 0%, #3a3a3a 100%);
-        }
-        .thumb-2 {
-            background: linear-gradient(135deg, #004d59 0%, #0d2528 100%);
-        }
-        .thumb-3 {
-            background: linear-gradient(135deg, #e0e0e0 0%, #b3b3b3 100%);
-        }
-        .thumb-4 {
-            background: linear-gradient(135deg, #1a1a1a 0%, #504a4a 100%);
-        }
-        .thumb-5 {
-            background: linear-gradient(135deg, #5b4f46 0%, #24201c 100%);
-        }
-        .thumb-6 {
-            background: linear-gradient(135deg, #3f3f3f 0%, #1f1f1f 100%);
-        }
-        .thumb-7 {
-            background: linear-gradient(135deg, #2a3b4c 0%, #1a252f 100%);
-        }
-        .thumb-8 {
-            background: linear-gradient(135deg, #4a3a2a 0%, #2e241a 100%);
-        }
-        .thumb-9 {
-            background: linear-gradient(135deg, #1e4a3a 0%, #0f2a22 100%);
-        }
-        .thumb-10 {
-            background: linear-gradient(135deg, #4a2a3a 0%, #2e1a24 100%);
-        }
-        .thumb-11 {
-            background: linear-gradient(135deg, #3a4a2a 0%, #1f2a15 100%);
-        }
-        .thumb-12 {
-            background: linear-gradient(135deg, #4a3a4a 0%, #2e1f2e 100%);
-        }
-        .thumb-13 {
-            background: linear-gradient(135deg, #6a4a3a 0%, #3a2a1a 100%);
-        }
-        .thumb-14 {
-            background: linear-gradient(135deg, #2a6a4a 0%, #1a3a2a 100%);
-        }
-        .thumb-15 {
-            background: linear-gradient(135deg, #4a6a3a 0%, #2a3a1a 100%);
         }
 
         /* ===== ORDER FLOW ===== */
@@ -1775,7 +1734,7 @@
                     </div>
                 </div>
 
-                <!-- ===== PROMO CAROUSEL (COVER FLOW) ===== -->
+                <!-- ===== PROMO CAROUSEL (NO CROP, FULL BANNER) ===== -->
                 <div class="promo-carousel-wrapper" id="promoCarouselWrapper">
                     <div class="promo-carousel-track" id="promoCarouselTrack">
                         <!-- Rendered by JS -->
@@ -2289,7 +2248,7 @@
         }
 
         // =================================================================
-        // PROMO CAROUSEL (COVER FLOW)
+        // PROMO CAROUSEL (COVER FLOW) — FULL BANNER, NO CROP
         // =================================================================
 
         function renderPromoCarousel() {
@@ -2345,7 +2304,6 @@
             const track = promoCarouselTrack;
             track.addEventListener('scroll', () => {
                 if (isUserInteracting) {
-                    // User is scrolling — determine which slide is centered
                     const containerWidth = track.clientWidth;
                     const scrollLeft = track.scrollLeft;
                     const slides = track.querySelectorAll('.promo-slide');
@@ -3346,7 +3304,7 @@
             }
         });
 
-        console.log('✅ Customer App ready with Cover Flow promo carousel — auto-scrolls every 3s, user can slide.');
+        console.log('✅ Customer App ready with Cover Flow promo carousel — full banner, no cropping.');
     </script>
 </body>
 </html>
