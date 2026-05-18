@@ -157,13 +157,14 @@
             justify-content: center;
         }
 
+        /* ===== HERO ===== */
         .hero {
             background-color: #1c2128;
             border-radius: 16px;
             padding: 20px 16px;
             color: white;
             position: relative;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             overflow: hidden;
             min-height: 210px;
         }
@@ -266,9 +267,135 @@
             font-weight: 700;
         }
 
-        /* --- PROMOTIONS BANNER --- */
+        /* ===== PROMO CAROUSEL (COVER FLOW) ===== */
+        .promo-carousel-wrapper {
+            position: relative;
+            margin: 4px 0 14px 0;
+            overflow: hidden;
+            border-radius: 16px;
+            height: 200px;
+            /* will be adjusted by JS to match hero height */;
+        }
+
+        .promo-carousel-track {
+            display: flex;
+            gap: 16px;
+            padding: 0 20%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            height: 100%;
+            align-items: center;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .promo-carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .promo-slide {
+            flex: 0 0 60%;
+            max-width: 60%;
+            scroll-snap-align: center;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+            height: 100%;
+            aspect-ratio: auto;
+            will-change: transform;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+            transform-origin: center center;
+        }
+        .promo-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .promo-slide .slide-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px 16px 16px 16px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.70));
+            min-height: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .promo-slide .slide-text {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+            line-height: 1.2;
+            word-break: break-word;
+        }
+        .promo-slide .slide-text small {
+            font-weight: 400;
+            font-size: 13px;
+            opacity: 0.9;
+            display: block;
+            margin-top: 2px;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* sizes for the cover flow effect — applied via JS */
+        .promo-slide.active-slide {
+            transform: scale(1) translateX(0);
+            z-index: 2;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+        }
+        .promo-slide.prev-slide {
+            transform: scale(0.72) translateX(20px);
+            z-index: 1;
+            opacity: 0.7;
+        }
+        .promo-slide.next-slide {
+            transform: scale(0.72) translateX(-20px);
+            z-index: 1;
+            opacity: 0.7;
+        }
+        .promo-slide.far-slide {
+            transform: scale(0.55) translateX(0);
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        .promo-carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 6px;
+            padding: 0 0 6px 0;
+        }
+        .promo-carousel-indicators .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0;
+        }
+        .promo-carousel-indicators .dot.active {
+            background: #f5b83d;
+            width: 24px;
+            border-radius: 12px;
+        }
+        .promo-carousel-indicators .dot:active {
+            transform: scale(0.85);
+        }
+
+        /* ===== PROMOTIONS BANNER ===== */
         .promotions-banner {
-            margin: 0 0 16px 0;
+            margin: 0 0 14px 0;
             padding: 10px 14px;
             background: #fef9e7;
             border-radius: 12px;
@@ -454,7 +581,7 @@
             background: linear-gradient(135deg, #4a6a3a 0%, #2a3a1a 100%);
         }
 
-        /* --- ORDER FLOW --- */
+        /* ===== ORDER FLOW ===== */
         .order-flow-container {
             padding: 0 0 16px 0;
         }
@@ -712,7 +839,7 @@
             color: #f5b83d;
         }
 
-        /* --- PAYMENT MODAL (with Coupon) --- */
+        /* ===== PAYMENT MODAL ===== */
         .payment-modal-overlay {
             position: fixed;
             top: 0;
@@ -799,7 +926,6 @@
             color: #f5b83d;
         }
 
-        /* --- COUPON SECTION IN MODAL --- */
         .coupon-section {
             display: flex;
             gap: 8px;
@@ -918,7 +1044,7 @@
             color: #f5b83d;
         }
 
-        /* --- VIEWS --- */
+        /* ===== VIEWS ===== */
         .view {
             display: none;
         }
@@ -926,7 +1052,7 @@
             display: block;
         }
 
-        /* --- ORDERS VIEW (Enhanced) --- */
+        /* ===== ORDERS VIEW ===== */
         .orders-header {
             margin-top: 8px;
             margin-bottom: 16px;
@@ -995,7 +1121,6 @@
             margin-bottom: 2px;
         }
 
-        /* --- STATUS COLORS (FIXED) --- */
         .status-pending {
             background: #fff6e0;
             color: #cc8800;
@@ -1017,10 +1142,6 @@
             color: #dc2626;
         }
         .status-done {
-            background: #d1fae5;
-            color: #065f46;
-        }
-        .status-fully-paid {
             background: #d1fae5;
             color: #065f46;
         }
@@ -1070,99 +1191,7 @@
             transform: rotate(180deg);
         }
 
-        /* --- PROFILE VIEW --- */
-        .profile-card {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 16px;
-            margin-top: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            border: 1px solid #f0f0f0;
-        }
-        .profile-avatar-large {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            background-color: #1c2128;
-            color: #f5b83d;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 28px;
-            margin: 0 auto 13px auto;
-        }
-        .profile-name {
-            text-align: center;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1c2128;
-            margin-bottom: 1px;
-        }
-        .profile-role {
-            text-align: center;
-            font-size: 11px;
-            color: #888;
-            margin-bottom: 16px;
-        }
-        .profile-field {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 0;
-            border-bottom: 1px solid #f5f5f5;
-        }
-        .profile-field:last-child {
-            border-bottom: none;
-        }
-        .profile-field i {
-            width: 20px;
-            color: #f5b83d;
-            font-size: 15px;
-        }
-        .profile-field .label {
-            font-size: 10px;
-            color: #888;
-        }
-        .profile-field .value {
-            font-size: 12px;
-            font-weight: 500;
-            color: #1c2128;
-            margin-left: auto;
-        }
-        .profile-about {
-            margin-top: 16px;
-            padding-top: 13px;
-            border-top: 1px solid #f0f0f0;
-        }
-        .profile-about p {
-            font-size: 10px;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .logout-btn {
-            width: 100%;
-            padding: 10px;
-            margin-top: 16px;
-            background: #ef4444;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .logout-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* --- HISTORY VIEW (with Payment Reminder) --- */
+        /* ===== HISTORY VIEW ===== */
         .history-list {
             padding: 0 0 16px 0;
             display: flex;
@@ -1240,7 +1269,7 @@
             transform: rotate(180deg);
         }
 
-        /* --- PAYMENT REMINDER BANNER (with DONE BUTTON) --- */
+        /* ===== PAYMENT REMINDER BANNER ===== */
         .payment-reminder-banner {
             background: #fff8ed;
             border: 1px solid #f5b83d;
@@ -1316,7 +1345,7 @@
             display: inline-block;
         }
 
-        /* --- NOTIFICATION SIDEBAR --- */
+        /* ===== NOTIFICATION SIDEBAR ===== */
         .sidebar-overlay {
             position: fixed;
             top: 0;
@@ -1409,6 +1438,234 @@
             margin-top: 3px;
         }
 
+        /* ===== SAMPLES GRID ===== */
+        .samples-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            padding: 0 0 16px 0;
+        }
+        @media (max-width: 420px) {
+            .samples-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+
+        .sample-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 14px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .sample-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+        .sample-card .sample-frame {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        .sample-card .sample-frame img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+        .sample-card .sample-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1c2128;
+            margin-bottom: 2px;
+        }
+        .sample-card .sample-desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+            flex: 1;
+        }
+        .sample-card .sample-meta {
+            font-size: 10px;
+            color: #aaa;
+            margin-top: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .phone-frame-sample {
+            border: 6px solid #1c2128;
+            border-radius: 30px;
+            padding: 6px;
+            background: #fff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            aspect-ratio: 9/19;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            max-width: 220px;
+            margin: 0 auto;
+        }
+        .phone-frame-sample .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 18px;
+            background: #1c2128;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .laptop-frame-sample {
+            background: #1c2128;
+            border-radius: 12px 12px 0 0;
+            padding: 10px 10px 0 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+        .laptop-frame-sample .screen {
+            background: #fff;
+            border-radius: 6px 6px 0 0;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .laptop-frame-sample .screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .laptop-frame-sample .base {
+            height: 10px;
+            background: #2a2a2a;
+            border-radius: 0 0 8px 8px;
+            margin: 0 8px;
+            position: relative;
+        }
+        .laptop-frame-sample .base::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 4px;
+            background: #444;
+            border-radius: 0 0 4px 4px;
+        }
+
+        /* ===== PROFILE ===== */
+        .profile-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f0f0f0;
+        }
+        .profile-avatar-large {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background-color: #1c2128;
+            color: #f5b83d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 28px;
+            margin: 0 auto 13px auto;
+        }
+        .profile-name {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-bottom: 1px;
+        }
+        .profile-role {
+            text-align: center;
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 16px;
+        }
+        .profile-field {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .profile-field:last-child {
+            border-bottom: none;
+        }
+        .profile-field i {
+            width: 20px;
+            color: #f5b83d;
+            font-size: 15px;
+        }
+        .profile-field .label {
+            font-size: 10px;
+            color: #888;
+        }
+        .profile-field .value {
+            font-size: 12px;
+            font-weight: 500;
+            color: #1c2128;
+            margin-left: auto;
+        }
+        .profile-about {
+            margin-top: 16px;
+            padding-top: 13px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .profile-about p {
+            font-size: 10px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 16px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .logout-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 420px) {
             .app-content {
                 padding: 0 10px 150px 10px;
@@ -1435,6 +1692,32 @@
             .payment-reminder-banner .reminder-text {
                 font-size: 11px;
             }
+            .promo-slide {
+                flex: 0 0 70%;
+                max-width: 70%;
+            }
+            .promo-carousel-track {
+                padding: 0 15%;
+            }
+            .promo-slide .slide-text {
+                font-size: 16px;
+            }
+            .promo-slide .slide-text small {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .promo-slide {
+                flex: 0 0 80%;
+                max-width: 80%;
+            }
+            .promo-carousel-track {
+                padding: 0 10%;
+            }
+            .promo-slide .slide-text {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -1444,7 +1727,7 @@
 
         <div class="app-content" id="appContent">
 
-            <!-- Header -->
+            <!-- ===== HEADER ===== -->
             <div class="header">
                 <div class="header-left">
                     <div class="avatar" id="headerAvatar">U</div>
@@ -1462,7 +1745,7 @@
             <!-- ===== VIEW: HOME ===== -->
             <div id="homeView" class="view active">
 
-                <!-- Hero -->
+                <!-- ===== HERO ===== -->
                 <div class="hero">
                     <div class="small-grid-dots">
                         <div></div><div></div><div></div><div></div>
@@ -1492,12 +1775,20 @@
                     </div>
                 </div>
 
-                <!-- PROMOTIONS BANNER -->
+                <!-- ===== PROMO CAROUSEL (COVER FLOW) ===== -->
+                <div class="promo-carousel-wrapper" id="promoCarouselWrapper">
+                    <div class="promo-carousel-track" id="promoCarouselTrack">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+                <div class="promo-carousel-indicators" id="promoCarouselIndicators"></div>
+
+                <!-- ===== PROMOTIONS BANNER ===== -->
                 <div id="promotionsBanner" class="promotions-banner">
                     <!-- Rendered by JS -->
                 </div>
 
-                <!-- Category Buttons -->
+                <!-- ===== CATEGORY BUTTONS ===== -->
                 <div class="category-row" id="categoryRow">
                     <button class="cat-btn active" data-cat="all"><i class="fa-solid fa-th-large"></i> All</button>
                     <button class="cat-btn" data-cat="graphic"><i class="fa-regular fa-lightbulb"></i> Graphic</button>
@@ -1506,7 +1797,7 @@
                     <button class="cat-btn" data-cat="it"><i class="fa-solid fa-headset"></i> IT Support</button>
                 </div>
 
-                <!-- Dynamic Service Grid -->
+                <!-- ===== SERVICE GRID ===== -->
                 <div id="serviceSection">
                     <div class="dynamic-header">
                         <span class="dynamic-title" id="dynamicTitle">RECENT WORK</span>
@@ -1533,7 +1824,7 @@
                 </div>
             </div>
 
-            <!-- ===== VIEW: ORDERS (Enhanced) ===== -->
+            <!-- ===== VIEW: ORDERS ===== -->
             <div id="ordersView" class="view">
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Your Orders</h3>
@@ -1542,7 +1833,7 @@
                 <div class="order-grid" id="ordersGrid"></div>
             </div>
 
-            <!-- ===== VIEW: HISTORY (with Payment Reminder) ===== -->
+            <!-- ===== VIEW: HISTORY ===== -->
             <div id="historyView" class="view">
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Transaction History</h3>
@@ -1587,7 +1878,7 @@
 
         </div>
 
-        <!-- ===== FLOATING PILL-SHAPED BOTTOM NAV ===== -->
+        <!-- ===== BOTTOM NAV ===== -->
         <div class="bottom-nav">
             <button class="nav-item active" data-view="homeView"><i class="fa-solid fa-house"></i><span>Home</span></button>
             <button class="nav-item" data-view="ordersView"><i class="fa-solid fa-bag-shopping"></i><span>Orders</span></button>
@@ -1598,7 +1889,7 @@
 
     </div>
 
-    <!-- ===== PAYMENT MODAL (with Coupon) ===== -->
+    <!-- ===== PAYMENT MODAL ===== -->
     <div class="payment-modal-overlay" id="paymentModal">
         <div class="payment-modal">
             <button class="close-btn" id="paymentCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -1620,14 +1911,13 @@
                 </div>
             </div>
 
-            <!-- COUPON SECTION -->
+            <!-- COUPON -->
             <div class="coupon-section">
                 <input type="text" id="couponInput" placeholder="Coupon code">
                 <button class="apply-btn" id="applyCouponBtn">Apply</button>
             </div>
             <span class="coupon-msg" id="couponMsg"></span>
 
-            <!-- PRICE BREAKDOWN -->
             <div class="price-breakdown" id="priceBreakdown" style="display:none;">
                 <div class="row"><span class="label">Original Price</span><span class="val" id="origPriceVal">ZMW 0.00</span></div>
                 <div class="row"><span class="label">Discount</span><span class="val discounted" id="discountVal">- ZMW 0.00</span></div>
@@ -1670,7 +1960,6 @@
     <!-- ===== CLOUDINARY WIDGET SCRIPT ===== -->
     <script type="text/javascript">
         // Cloudinary is loaded via CDN script tag in head
-        // We will initialize the widget inside the module script
     </script>
 
     <!-- ===== FIREBASE MODULE ===== -->
@@ -1724,6 +2013,12 @@
         let finalDiscountedPrice = 0;
         let orderTotalBeforeDiscount = 0;
 
+        // Carousel state
+        let carouselItems = [];
+        let currentCarouselIndex = 0;
+        let autoScrollTimer = null;
+        let isUserInteracting = false;
+
         // =================================================================
         // DOM REFS
         // =================================================================
@@ -1770,6 +2065,11 @@
 
         const promotionsBanner = document.getElementById('promotionsBanner');
 
+        // Carousel
+        const promoCarouselTrack = document.getElementById('promoCarouselTrack');
+        const promoCarouselIndicators = document.getElementById('promoCarouselIndicators');
+        const promoCarouselWrapper = document.getElementById('promoCarouselWrapper');
+
         // Payment Modal
         const paymentModal = document.getElementById('paymentModal');
         const paymentCloseBtn = document.getElementById('paymentCloseBtn');
@@ -1783,7 +2083,6 @@
         const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
         const cloudinaryScreenshotUrlInput = document.getElementById('cloudinaryScreenshotUrl');
 
-        // Coupon Elements
         const couponInput = document.getElementById('couponInput');
         const applyCouponBtn = document.getElementById('applyCouponBtn');
         const couponMsg = document.getElementById('couponMsg');
@@ -1793,7 +2092,6 @@
         const finalPriceVal = document.getElementById('finalPriceVal');
         const finalDepositVal = document.getElementById('finalDepositVal');
 
-        // Samples Container
         const samplesContainer = document.getElementById('samplesContainer');
 
         // =================================================================
@@ -1821,8 +2119,7 @@
                 white-space: nowrap;
                 max-width: 90%;
             `;
-            const icon = type === 'success' ? 'fa-check-circle' : (type === 'error' ? 'fa-exclamation-circle' :
-                'fa-bell');
+            const icon = type === 'success' ? 'fa-check-circle' : (type === 'error' ? 'fa-exclamation-circle' : 'fa-bell');
             toast.innerHTML = `<i class="fas ${icon}" style="color: #f5b83d; margin-right: 8px;"></i> ${msg}`;
             document.body.appendChild(toast);
             requestAnimationFrame(() => {
@@ -1865,7 +2162,7 @@
         }
 
         // =================================================================
-        // CLOUDINARY UPLOAD WIDGET
+        // CLOUDINARY UPLOAD
         // =================================================================
 
         function setupCloudinaryUpload() {
@@ -1921,15 +2218,15 @@
                         transactions: {},
                         promotions: {},
                         workPosts: {},
+                        promoPics: {},
                         disabled: false,
                         notifications: {}
                     };
                     set(dbRef, allData);
                 } else {
                     allData = data;
-                    if (!allData.workPosts) {
-                        allData.workPosts = {};
-                    }
+                    if (!allData.workPosts) allData.workPosts = {};
+                    if (!allData.promoPics) allData.promoPics = {};
                 }
                 renderAll();
                 if (callback) callback();
@@ -1943,7 +2240,6 @@
         function renderAll() {
             if (!allData) return;
 
-            // Check if app is disabled
             if (allData.disabled === true) {
                 document.body.innerHTML = `
                     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
@@ -1955,7 +2251,6 @@
                 return;
             }
 
-            // Render Hero
             if (allData.hero) {
                 const h = allData.hero;
                 heroTitle.innerHTML = `${h.title || 'WE ARE'}<br><span>${h.titleSpan || 'CREATIVE'}</span>`;
@@ -1964,32 +2259,21 @@
                 heroPhone.textContent = h.phone || '+123 456 7890';
             }
 
-            // Render "Our Services" list
             if (allData.ourServicesList) {
                 ourServicesList.innerHTML = allData.ourServicesList.map(item =>
                     `<li><i class="fa-solid fa-check-circle"></i> ${item}</li>`
                 ).join('');
             }
 
-            // Render Promotions Banner
             renderPromotionsBanner();
-
-            // Render Services Grid
+            renderPromoCarousel();
             renderServices();
-
-            // Render Orders
             renderOrders();
-
-            // Render History
             renderHistory();
-
-            // Render Samples
             renderSamples();
-
-            // Update Profile
             renderProfile();
+            renderNotifications();
 
-            // Payment policy
             if (allData.policy) {
                 const p = allData.policy;
                 document.querySelector('.order-policy-content h2').innerHTML =
@@ -2002,9 +2286,172 @@
                 paymentName.textContent = p.name || 'Airtel Mobile Number';
                 paymentAccountName.textContent = p.accountName || 'Jubel Mobela';
             }
+        }
 
-            // Update notifications
-            renderNotifications();
+        // =================================================================
+        // PROMO CAROUSEL (COVER FLOW)
+        // =================================================================
+
+        function renderPromoCarousel() {
+            const promoPics = allData.promoPics || {};
+            const entries = Object.entries(promoPics);
+            entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+
+            carouselItems = entries;
+
+            if (entries.length === 0) {
+                promoCarouselTrack.innerHTML = `
+                    <div style="flex:0 0 80%; max-width:80%; text-align:center; color:#888; font-size:13px; padding:20px; background:#f8f9fc; border-radius:16px; height:100%; display:flex; align-items:center; justify-content:center;">
+                        <div>
+                            <i class="fa-regular fa-images" style="font-size:32px; color:#ddd; display:block; margin-bottom:8px;"></i>
+                            No promo flyers yet
+                        </div>
+                    </div>
+                `;
+                promoCarouselIndicators.innerHTML = '';
+                return;
+            }
+
+            // Build slides
+            promoCarouselTrack.innerHTML = entries.map(([key, pic]) => `
+                <div class="promo-slide" data-key="${key}" data-index="${entries.indexOf([key, pic])}">
+                    <img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" />
+                    <div class="slide-overlay">
+                        <div class="slide-text">
+                            ${escapeHtml(pic.text || 'Promo')}
+                            ${pic.subtext ? `<small>${escapeHtml(pic.subtext)}</small>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Indicators
+            promoCarouselIndicators.innerHTML = entries.map((_, i) => `
+                <button class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></button>
+            `).join('');
+
+            // Set initial active state
+            updateCarouselClasses(0);
+
+            // Attach indicator clicks
+            promoCarouselIndicators.querySelectorAll('.dot').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const idx = parseInt(this.dataset.index);
+                    goToSlide(idx);
+                });
+            });
+
+            // Scroll event for manual control
+            const track = promoCarouselTrack;
+            track.addEventListener('scroll', () => {
+                if (isUserInteracting) {
+                    // User is scrolling — determine which slide is centered
+                    const containerWidth = track.clientWidth;
+                    const scrollLeft = track.scrollLeft;
+                    const slides = track.querySelectorAll('.promo-slide');
+                    let closestIdx = 0;
+                    let closestDist = Infinity;
+                    slides.forEach((slide, i) => {
+                        const rect = slide.getBoundingClientRect();
+                        const centerX = rect.left + rect.width / 2;
+                        const containerCenter = track.getBoundingClientRect().left + containerWidth / 2;
+                        const dist = Math.abs(centerX - containerCenter);
+                        if (dist < closestDist) {
+                            closestDist = dist;
+                            closestIdx = i;
+                        }
+                    });
+                    if (closestIdx !== currentCarouselIndex) {
+                        currentCarouselIndex = closestIdx;
+                        updateCarouselClasses(currentCarouselIndex);
+                        updateIndicators(currentCarouselIndex);
+                        resetAutoScroll();
+                    }
+                }
+                isUserInteracting = true;
+                clearTimeout(track._scrollTimeout);
+                track._scrollTimeout = setTimeout(() => {
+                    isUserInteracting = false;
+                    resetAutoScroll();
+                }, 2000);
+            });
+
+            // Initial scroll to center first slide
+            setTimeout(() => {
+                const firstSlide = track.querySelector('.promo-slide');
+                if (firstSlide) {
+                    const containerWidth = track.clientWidth;
+                    const slideWidth = firstSlide.offsetWidth;
+                    const scrollPos = (slideWidth + 16) * 0 - (containerWidth - slideWidth) / 2;
+                    track.scrollLeft = Math.max(0, scrollPos);
+                }
+            }, 100);
+
+            // Start auto-scroll
+            startAutoScroll();
+        }
+
+        function updateCarouselClasses(activeIndex) {
+            const slides = promoCarouselTrack.querySelectorAll('.promo-slide');
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active-slide', 'prev-slide', 'next-slide', 'far-slide');
+                if (i === activeIndex) {
+                    slide.classList.add('active-slide');
+                } else if (i === activeIndex - 1) {
+                    slide.classList.add('prev-slide');
+                } else if (i === activeIndex + 1) {
+                    slide.classList.add('next-slide');
+                } else {
+                    slide.classList.add('far-slide');
+                }
+            });
+        }
+
+        function updateIndicators(activeIndex) {
+            const dots = promoCarouselIndicators.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === activeIndex);
+            });
+        }
+
+        function goToSlide(index) {
+            const slides = promoCarouselTrack.querySelectorAll('.promo-slide');
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+
+            const slide = slides[index];
+            if (!slide) return;
+
+            const containerWidth = promoCarouselTrack.clientWidth;
+            const slideWidth = slide.offsetWidth;
+            const scrollPos = slide.offsetLeft - (containerWidth - slideWidth) / 2;
+
+            promoCarouselTrack.scrollTo({
+                left: Math.max(0, scrollPos),
+                behavior: 'smooth'
+            });
+
+            currentCarouselIndex = index;
+            updateCarouselClasses(index);
+            updateIndicators(index);
+            resetAutoScroll();
+        }
+
+        function startAutoScroll() {
+            if (autoScrollTimer) clearInterval(autoScrollTimer);
+            autoScrollTimer = setInterval(() => {
+                if (!isUserInteracting && carouselItems.length > 0) {
+                    const nextIndex = (currentCarouselIndex + 1) % carouselItems.length;
+                    goToSlide(nextIndex);
+                }
+            }, 3000);
+        }
+
+        function resetAutoScroll() {
+            if (autoScrollTimer) {
+                clearInterval(autoScrollTimer);
+                startAutoScroll();
+            }
         }
 
         function renderPromotionsBanner() {
@@ -2022,6 +2469,10 @@
                 <span class="msg">Use code <strong>${p.code}</strong> for <strong>${p.discount}%</strong> off!</span>
             `).join('');
         }
+
+        // =================================================================
+        // SERVICES
+        // =================================================================
 
         function renderServices(category = 'all') {
             const container = serviceGridContainer;
@@ -2055,6 +2506,10 @@
             });
         }
 
+        // =================================================================
+        // ORDERS
+        // =================================================================
+
         function renderOrders() {
             const container = ordersGrid;
             const orders = allData.orders || {};
@@ -2064,7 +2519,6 @@
                 return;
             }
             container.innerHTML = entries.map(([key, o]) => {
-                // Parse customization string
                 let customizationHtml = '';
                 if (o.customization) {
                     const parts = o.customization.split(', ');
@@ -2078,7 +2532,6 @@
                     customizationHtml = `<div class="detail-row"><span class="label">Customization</span><span class="val">None</span></div>`;
                 }
 
-                // Determine status class
                 const statusClass = o.status ? `status-${o.status}` : 'status-pending';
                 const statusDisplay = o.status ? o.status.charAt(0).toUpperCase() + o.status.slice(1) : 'Pending';
 
@@ -2109,7 +2562,6 @@
                 `;
             }).join('');
 
-            // Toggle order details on click
             container.querySelectorAll('.order-summary').forEach(el => {
                 el.addEventListener('click', function() {
                     const parent = this.closest('.order-card');
@@ -2118,31 +2570,27 @@
             });
         }
 
+        // =================================================================
+        // HISTORY
+        // =================================================================
+
         function renderHistory() {
             const container = historyList;
             const transactions = allData.transactions || {};
             const entries = Object.entries(transactions).filter(([key, t]) => t.userId === currentUserId);
 
-            // Check for completed orders that need remaining payment
             const orders = allData.orders || {};
             let pendingReminder = null;
             let orderKeyToUpdate = null;
             for (const [key, o] of Object.entries(orders)) {
                 if (o.userId === currentUserId && o.status === 'completed' && o.remainingPaid !== true) {
-                    // Show reminder for the remaining 50%
                     const remainingAmount = (o.amount || 0) * 0.5;
-                    pendingReminder = {
-                        id: o.id,
-                        amount: remainingAmount,
-                        order: o,
-                        key: key
-                    };
+                    pendingReminder = { id: o.id, amount: remainingAmount, order: o, key: key };
                     orderKeyToUpdate = key;
                     break;
                 }
             }
 
-            // Update payment reminder banner
             const reminderBanner = document.getElementById('paymentReminderBanner');
             if (pendingReminder) {
                 reminderBanner.classList.add('show');
@@ -2156,7 +2604,6 @@
                     <span class="done-badge" id="doneBadge">✅ Paid in full</span>
                 `;
 
-                // Attach event to Done button
                 const doneBtn = document.getElementById('doneRemainingBtn');
                 if (doneBtn) {
                     doneBtn.addEventListener('click', function(e) {
@@ -2165,7 +2612,6 @@
                     });
                 }
 
-                // Check if already marked done (e.g. from previous click)
                 if (pendingReminder.order.remainingPaid === true) {
                     const doneBadge = document.getElementById('doneBadge');
                     const doneBtn2 = document.getElementById('doneRemainingBtn');
@@ -2209,107 +2655,7 @@
         }
 
         // =================================================================
-        // SAMPLES RENDER (2x2 grid with frames - app images fill the phone)
-        // =================================================================
-
-        function renderSamples() {
-            const container = samplesContainer;
-            const posts = allData.workPosts || {};
-            const entries = Object.entries(posts);
-
-            const groups = { app: [], flyer: [], website: [], logo: [] };
-            entries.forEach(([key, p]) => {
-                if (groups[p.type]) {
-                    groups[p.type].push({ key, ...p });
-                }
-            });
-
-            for (const type in groups) {
-                groups[type].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-            }
-
-            const typeLabels = {
-                app: '📱 Apps',
-                flyer: '📄 Flyers',
-                website: '💻 Websites',
-                logo: '🎨 Logos'
-            };
-
-            let html = '';
-            for (const type of ['app', 'flyer', 'website', 'logo']) {
-                const items = groups[type] || [];
-                if (items.length === 0) continue;
-
-                html += `
-                            <div style="font-size:16px;font-weight:700;color:#1c2128;margin:20px 0 10px 0;padding-bottom:6px;border-bottom:2px solid #f0f0f0;display:flex;align-items:center;gap:8px;">
-                                ${typeLabels[type] || type}
-                                <span style="font-size:11px;background:#f0f0f0;padding:0 10px;border-radius:12px;font-weight:600;color:#555;">${items.length}</span>
-                            </div>
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
-                        `;
-
-                items.forEach(post => {
-                    let frameHtml = '';
-                    // For app: cover mode fills the phone frame with rounded corners
-                    // For other types: contain mode shows full image without cropping
-                    const imgHtml = post.imageUrl ?
-                        `<img src="${post.imageUrl}" alt="${post.title || 'Work'}" loading="lazy" style="width:100%;height:100%;display:block;${type === 'app' ? 'object-fit:cover;border-radius:18px;' : 'object-fit:contain;'}" />` :
-                        `<div style="color:#ccc;font-size:32px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><i class="fa-regular fa-image"></i></div>`;
-
-                    if (type === 'app') {
-                        frameHtml = `
-                                    <div style="width:100%;max-width:220px;margin:0 auto;border:6px solid #1c2128;border-radius:30px;padding:6px;background:#fff;box-shadow:0 8px 30px rgba(0,0,0,0.15);aspect-ratio:9/19;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
-                                        ${imgHtml}
-                                        <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:18px;background:#1c2128;border-radius:0 0 12px 12px;"></div>
-                                    </div>
-                                `;
-                    } else if (type === 'website') {
-                        frameHtml = `
-                                    <div style="width:100%;max-width:320px;margin:0 auto;background:#1c2128;border-radius:12px 12px 0 0;padding:10px 10px 0 10px;box-shadow:0 8px 30px rgba(0,0,0,0.15);">
-                                        <div style="background:#fff;border-radius:6px 6px 0 0;aspect-ratio:16/10;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;">
-                                            ${imgHtml}
-                                        </div>
-                                        <div style="height:10px;background:#2a2a2a;border-radius:0 0 8px 8px;margin:0 8px;position:relative;">
-                                            <div style="position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:60%;height:4px;background:#444;border-radius:0 0 4px 4px;"></div>
-                                        </div>
-                                    </div>
-                                `;
-                    } else {
-                        frameHtml = `
-                                    <div style="width:100%;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#f5f5f5;display:flex;align-items:center;justify-content:center;position:relative;">
-                                        ${imgHtml}
-                                    </div>
-                                `;
-                    }
-
-                    let titleText = post.title || 'Untitled';
-                    let descText = post.description || '';
-
-                    html += `
-                                <div style="background:#ffffff;border-radius:16px;padding:14px;border:1px solid #f0f0f0;box-shadow:0 2px 12px rgba(0,0,0,0.04);transition:transform 0.2s,box-shadow 0.2s;position:relative;display:flex;flex-direction:column;">
-                                    ${frameHtml}
-                                    <div style="font-weight:700;font-size:14px;color:#1c2128;margin-bottom:2px;margin-top:6px;">${titleText}</div>
-                                    <div style="font-size:12px;color:#666;line-height:1.4;flex:1;">${descText}</div>
-                                    <div style="font-size:10px;color:#aaa;margin-top:6px;display:flex;justify-content:space-between;align-items:center;">
-                                        <span>${post.createdAt ? new Date(post.createdAt).toLocaleDateString() : ''}</span>
-                                        <span>${post.adminName || 'Admin'}</span>
-                                    </div>
-                                </div>
-                            `;
-                });
-
-                html += `</div>`;
-            }
-
-            if (html === '') {
-                html = `<div style="text-align:center;padding:30px 0;color:#888;">No samples available yet. Check back soon!</div>`;
-            }
-
-            container.innerHTML = html;
-        }
-
-        // =================================================================
-        // MARK REMAINING PAYMENT AS DONE
+        // MARK REMAINING PAYMENT
         // =================================================================
 
         function markRemainingAsPaid(orderKey, orderData) {
@@ -2318,16 +2664,10 @@
                 return;
             }
 
-            // Update order: set status to 'done' and remainingPaid to true
             const orderRef = ref(db, `bufferzoneAppData/orders/${orderKey}`);
-            const updates = {
-                status: 'done',
-                remainingPaid: true,
-                remainingPaidAt: Date.now()
-            };
+            const updates = { status: 'done', remainingPaid: true, remainingPaidAt: Date.now() };
 
             update(orderRef, updates).then(() => {
-                // Also create a transaction record for the remaining payment
                 const txData = {
                     type: 'Remaining 50% payment for ' + orderData.service,
                     amount: (orderData.amount || 0) * 0.5,
@@ -2348,7 +2688,6 @@
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 set(txRef, txData);
 
-                // Add notification
                 const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
                 set(notifRef, {
                     title: 'Payment Complete',
@@ -2359,16 +2698,13 @@
 
                 showToast(`✅ Order ${orderData.id} marked as fully paid!`, 'success');
 
-                // Update UI
                 const doneBadge = document.getElementById('doneBadge');
                 const doneBtn = document.getElementById('doneRemainingBtn');
                 if (doneBadge) doneBadge.classList.add('show');
                 if (doneBtn) doneBtn.style.display = 'none';
 
-                // Re-render orders and history
                 renderOrders();
                 renderHistory();
-
             }).catch((error) => {
                 console.error('Error marking payment as done:', error);
                 showToast('Error updating order: ' + error.message, 'error');
@@ -2376,7 +2712,7 @@
         }
 
         // =================================================================
-        // RENDER PROFILE
+        // PROFILE
         // =================================================================
 
         function renderProfile() {
@@ -2387,14 +2723,17 @@
                 profileFullName.textContent = fullName;
                 profilePhone.textContent = currentUserData.phone || 'Not set';
                 profileEmail.textContent = currentUser.email || 'No email';
-                profileJoined.textContent = currentUserData.createdAt ? new Date(currentUserData.createdAt).toLocaleDateString() :
-                    'N/A';
+                profileJoined.textContent = currentUserData.createdAt ? new Date(currentUserData.createdAt).toLocaleDateString() : 'N/A';
                 profileAvatarLarge.textContent = initial;
                 headerAvatar.textContent = initial;
                 headerName.textContent = fullName;
                 profileRole.textContent = currentUserData.role || 'Customer';
             }
         }
+
+        // =================================================================
+        // NOTIFICATIONS
+        // =================================================================
 
         function renderNotifications() {
             const notifications = allData.notifications || {};
@@ -2421,7 +2760,6 @@
                 </div>
             `).join('');
 
-            // Mark as read when opened
             notifList.querySelectorAll('.notification-item').forEach(el => {
                 el.addEventListener('click', function() {
                     const key = this.dataset.key;
@@ -2433,6 +2771,87 @@
                     }
                 });
             });
+        }
+
+        // =================================================================
+        // SAMPLES
+        // =================================================================
+
+        function renderSamples() {
+            const container = samplesContainer;
+            const posts = allData.workPosts || {};
+            const entries = Object.entries(posts);
+            const groups = { app: [], flyer: [], website: [], logo: [] };
+            entries.forEach(([key, p]) => {
+                if (groups[p.type]) groups[p.type].push({ key, ...p });
+            });
+            for (const type in groups) {
+                groups[type].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+            }
+
+            const typeLabels = { app: '📱 Apps', flyer: '📄 Flyers', website: '💻 Websites', logo: '🎨 Logos' };
+
+            let html = '';
+            for (const type of ['app', 'flyer', 'website', 'logo']) {
+                const items = groups[type] || [];
+                if (items.length === 0) continue;
+
+                html += `
+                    <div style="font-size:16px;font-weight:700;color:#1c2128;margin:20px 0 10px 0;padding-bottom:6px;border-bottom:2px solid #f0f0f0;display:flex;align-items:center;gap:8px;">
+                        ${typeLabels[type] || type}
+                        <span style="font-size:11px;background:#f0f0f0;padding:0 10px;border-radius:12px;font-weight:600;color:#555;">${items.length}</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
+                `;
+
+                items.forEach(post => {
+                    let frameHtml = '';
+                    const imgHtml = post.imageUrl ?
+                        `<img src="${post.imageUrl}" alt="${post.title || 'Work'}" loading="lazy" style="width:100%;height:100%;display:block;${type === 'app' ? 'object-fit:cover;border-radius:18px;' : 'object-fit:contain;'}" />` :
+                        `<div style="color:#ccc;font-size:32px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><i class="fa-regular fa-image"></i></div>`;
+
+                    if (type === 'app') {
+                        frameHtml = `
+                            <div class="phone-frame-sample">
+                                ${imgHtml}
+                                <div class="notch"></div>
+                            </div>
+                        `;
+                    } else if (type === 'website') {
+                        frameHtml = `
+                            <div class="laptop-frame-sample">
+                                <div class="screen">${imgHtml}</div>
+                                <div class="base"></div>
+                            </div>
+                        `;
+                    } else {
+                        frameHtml = `
+                            <div style="width:100%;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#f5f5f5;display:flex;align-items:center;justify-content:center;position:relative;">
+                                ${imgHtml}
+                            </div>
+                        `;
+                    }
+
+                    html += `
+                        <div class="sample-card">
+                            ${frameHtml}
+                            <div class="sample-title">${escapeHtml(post.title || 'Untitled')}</div>
+                            <div class="sample-desc">${escapeHtml(post.description || '')}</div>
+                            <div class="sample-meta">
+                                <span>${post.createdAt ? new Date(post.createdAt).toLocaleDateString() : ''}</span>
+                                <span>${post.adminName || 'Admin'}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+            }
+
+            if (html === '') {
+                html = `<div style="text-align:center;padding:30px 0;color:#888;">No samples available yet. Check back soon!</div>`;
+            }
+            container.innerHTML = html;
         }
 
         // =================================================================
@@ -2561,7 +2980,6 @@
                 </div>
             `;
 
-            // Attach events
             document.querySelectorAll('#sizeOptions .customize-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('#sizeOptions .customize-btn').forEach(b => b.classList.remove('active'));
@@ -2624,7 +3042,6 @@
                 orderTotalBeforeDiscount = total;
                 const amount50 = total * 0.5;
                 paymentAmount.textContent = `ZMW ${amount50.toFixed(2)}`;
-                // Reset coupon state
                 discountApplied = false;
                 appliedPromo = null;
                 couponInput.value = '';
@@ -2633,7 +3050,6 @@
                 priceBreakdown.style.display = 'none';
                 applyCouponBtn.disabled = false;
                 couponInput.disabled = false;
-                // Store data in modal dataset
                 paymentModal.dataset.orderData = JSON.stringify({
                     service: service.title,
                     serviceId: service.id || key,
@@ -2658,7 +3074,7 @@
         }
 
         // =================================================================
-        // COUPON LOGIC
+        // COUPON
         // =================================================================
 
         function applyCoupon() {
@@ -2669,7 +3085,6 @@
                 return;
             }
 
-            // Check if coupon exists in promotions
             const promotions = allData.promotions || {};
             let foundPromo = null;
             let promoKey = null;
@@ -2687,7 +3102,6 @@
                 return;
             }
 
-            // Check if user has already used this coupon
             const usedCouponsRef = ref(db, `users/${currentUserId}/usedCoupons`);
             get(usedCouponsRef).then((snapshot) => {
                 const usedCoupons = snapshot.val() || {};
@@ -2697,21 +3111,18 @@
                     return;
                 }
 
-                // Apply discount
                 const orderData = JSON.parse(paymentModal.dataset.orderData || '{}');
                 const total = orderData.total || orderTotalBeforeDiscount;
                 const discountAmount = total * (foundPromo.discount / 100);
                 const finalPrice = total - discountAmount;
                 const depositAmount = finalPrice * 0.5;
 
-                // Update price breakdown
                 origPriceVal.textContent = `ZMW ${total.toFixed(2)}`;
                 discountVal.textContent = `- ZMW ${discountAmount.toFixed(2)}`;
                 finalPriceVal.textContent = `ZMW ${finalPrice.toFixed(2)}`;
                 finalDepositVal.textContent = `ZMW ${depositAmount.toFixed(2)}`;
                 priceBreakdown.style.display = 'block';
 
-                // Update payment amount
                 paymentAmount.textContent = `ZMW ${depositAmount.toFixed(2)}`;
 
                 couponMsg.textContent = `✅ Coupon applied! ${foundPromo.discount}% off.`;
@@ -2722,9 +3133,7 @@
                 applyCouponBtn.disabled = true;
                 couponInput.disabled = true;
 
-                // Store applied promo in modal dataset for confirmation
                 paymentModal.dataset.appliedPromo = JSON.stringify(appliedPromo);
-
             }).catch((error) => {
                 console.error('Error checking used coupons:', error);
                 couponMsg.textContent = 'Error validating coupon.';
@@ -2733,7 +3142,7 @@
         }
 
         // =================================================================
-        // PAYMENT CONFIRMATION
+        // CONFIRM PAYMENT
         // =================================================================
 
         function confirmPayment() {
@@ -2754,7 +3163,6 @@
             const customerName = currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
                 currentUser.email || 'Customer';
 
-            // Calculate final amount
             let finalAmount = data.total;
             let discountAppliedVal = 0;
             let promoCodeUsed = null;
@@ -2765,7 +3173,6 @@
                 finalAmount = data.total * (1 - discountAppliedVal / 100);
             }
 
-            // Create order
             const orderData = {
                 id: orderId,
                 service: data.service,
@@ -2786,13 +3193,11 @@
             const orderRef = push(ref(db, 'bufferzoneAppData/orders'));
             set(orderRef, orderData);
 
-            // Record coupon usage
             if (appliedPromo) {
                 const usedCouponRef = ref(db, `users/${currentUserId}/usedCoupons/${appliedPromo.key}`);
                 set(usedCouponRef, true);
             }
 
-            // Create transaction
             const txData = {
                 type: 'Payment for ' + data.service,
                 amount: finalAmount * 0.5,
@@ -2800,8 +3205,7 @@
                 status: 'pending',
                 date: new Date().toLocaleString(),
                 ref: orderId,
-                detail: '50% down payment for ' + data.service + (discountAppliedVal > 0 ? ` (${discountAppliedVal}% off)` :
-                    ''),
+                detail: '50% down payment for ' + data.service + (discountAppliedVal > 0 ? ` (${discountAppliedVal}% off)` : ''),
                 screenshot: screenshotUrl,
                 userId: currentUserId,
                 itemId: data.serviceId || 'N/A',
@@ -2814,7 +3218,6 @@
             const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
             set(txRef, txData);
 
-            // Add notification
             const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
             set(notifRef, {
                 title: 'Order Placed',
@@ -2823,8 +3226,7 @@
                 read: false
             });
 
-            showToast('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.',
-                'success');
+            showToast('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.', 'success');
             paymentModal.classList.remove('open');
             cloudinaryScreenshotUrlInput.value = '';
             fileName.textContent = 'No file chosen';
@@ -2841,7 +3243,6 @@
         // EVENT BINDINGS
         // =================================================================
 
-        // Navigation
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
                 const viewId = this.dataset.view;
@@ -2849,7 +3250,6 @@
             });
         });
 
-        // Back from order
         backFromOrder.addEventListener('click', function() {
             switchView('homeView');
             selectedService = null;
@@ -2858,7 +3258,6 @@
             renderServices('all');
         });
 
-        // Category buttons
         document.querySelectorAll('.cat-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
@@ -2870,8 +3269,7 @@
                     dynamicBack.style.display = 'none';
                     dynamicViewAll.style.display = 'inline';
                 } else {
-                    const names = { graphic: 'GRAPHIC DESIGN', dev: 'DEVELOPER SERVICES', tech: 'TECHNICAL SERVICES',
-                        it: 'IT SUPPORT' };
+                    const names = { graphic: 'GRAPHIC DESIGN', dev: 'DEVELOPER SERVICES', tech: 'TECHNICAL SERVICES', it: 'IT SUPPORT' };
                     dynamicTitle.textContent = names[cat] || 'SERVICES';
                     dynamicBack.style.display = 'inline';
                     dynamicViewAll.style.display = 'none';
@@ -2879,7 +3277,6 @@
             });
         });
 
-        // Dynamic back
         dynamicBack.addEventListener('click', function() {
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
             document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
@@ -2889,10 +3286,8 @@
             dynamicViewAll.style.display = 'inline';
         });
 
-        // View All -> History
         dynamicViewAll.addEventListener('click', () => switchView('historyView'));
 
-        // Logout
         logoutBtn.addEventListener('click', () => {
             signOut(auth).then(() => {
                 window.location.href = 'login.html';
@@ -2902,12 +3297,10 @@
             });
         });
 
-        // Notification sidebar
         notifIcon.addEventListener('click', openSidebar);
         sidebarClose.addEventListener('click', closeSidebar);
         sidebarOverlay.addEventListener('click', closeSidebar);
 
-        // Payment modal
         paymentCloseBtn.addEventListener('click', function() {
             paymentModal.classList.remove('open');
         });
@@ -2915,18 +3308,13 @@
             if (e.target === this) this.classList.remove('open');
         });
 
-        // Coupon apply
         applyCouponBtn.addEventListener('click', applyCoupon);
         couponInput.addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') {
-                applyCoupon();
-            }
+            if (e.key === 'Enter') applyCoupon();
         });
 
-        // Confirm payment
         confirmPaymentBtn.addEventListener('click', confirmPayment);
 
-        // Cloudinary upload
         setupCloudinaryUpload();
 
         // =================================================================
@@ -2937,7 +3325,6 @@
             if (user) {
                 currentUser = user;
                 currentUserId = user.uid;
-                // Check if user is banned
                 const userRef = ref(db, 'users/' + user.uid);
                 onValue(userRef, (snapshot) => {
                     const data = snapshot.val();
@@ -2959,7 +3346,7 @@
             }
         });
 
-        console.log('✅ Customer App ready with Samples page — app screenshots fill the phone frame.');
+        console.log('✅ Customer App ready with Cover Flow promo carousel — auto-scrolls every 3s, user can slide.');
     </script>
 </body>
 </html>
