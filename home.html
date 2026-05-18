@@ -272,9 +272,10 @@
             position: relative;
             margin: 4px 0 14px 0;
             overflow: hidden;
-            border-radius: 16px;
-            height: 220px;
+            border-radius: 24px;
+            height: 280px;
             background: #f8f9fc;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
 
         .promo-carousel-track {
@@ -299,16 +300,17 @@
             max-width: 100%;
             scroll-snap-align: center;
             position: relative;
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
             transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease, box-shadow 0.5s ease;
-            height: 100%;
+            height: 90%;
             background: #ffffff;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
             transform-origin: center center;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: auto 0;
         }
 
         .promo-slide img {
@@ -317,7 +319,6 @@
             object-fit: contain;
             display: block;
             background-color: #ffffff;
-            padding: 4px;
         }
 
         .promo-slide .slide-overlay {
@@ -325,16 +326,17 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 24px 16px 16px 16px;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.65));
-            min-height: 70px;
+            padding: 28px 20px 20px 20px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.70));
+            min-height: 80px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
+            border-radius: 0 0 20px 20px;
         }
         .promo-slide .slide-text {
             color: #fff;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
             line-height: 1.2;
@@ -342,7 +344,7 @@
         }
         .promo-slide .slide-text small {
             font-weight: 400;
-            font-size: 13px;
+            font-size: 14px;
             opacity: 0.9;
             display: block;
             margin-top: 2px;
@@ -2247,7 +2249,7 @@
 
             if (entries.length === 0) {
                 promoCarouselTrack.innerHTML = `
-                    <div style="flex:0 0 100%; max-width:100%; text-align:center; color:#888; font-size:13px; padding:20px; background:#f8f9fc; border-radius:16px; height:100%; display:flex; align-items:center; justify-content:center;">
+                    <div style="flex:0 0 100%; max-width:100%; text-align:center; color:#888; font-size:13px; padding:20px; background:#f8f9fc; border-radius:24px; height:100%; display:flex; align-items:center; justify-content:center;">
                         <div>
                             <i class="fa-regular fa-images" style="font-size:32px; color:#ddd; display:block; margin-bottom:8px;"></i>
                             No promo flyers yet
