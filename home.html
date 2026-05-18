@@ -267,7 +267,7 @@
             font-weight: 700;
         }
 
-        /* ===== PROMO CAROUSEL – BURGER STYLE (center full, edges peek) ===== */
+        /* ===== PROMO CAROUSEL – BURGER STYLE (EDGE PEEK) ===== */
         .promo-carousel-wrapper {
             position: relative;
             margin: 4px 0 14px 0;
@@ -349,7 +349,7 @@
             text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
         }
 
-        /* BURGER STYLE — only the center slide is large */
+        /* BURGER STYLE — center full, neighbors peek by a small edge */
         .promo-slide.active-slide {
             transform: scale(1) translateX(0);
             z-index: 2;
@@ -357,19 +357,19 @@
             opacity: 1;
         }
         .promo-slide.prev-slide {
-            transform: scale(0.6) translateX(-80%);
+            transform: scale(0.78) translateX(-72%);
             z-index: 1;
-            opacity: 0.7;
+            opacity: 0.8;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
         }
         .promo-slide.next-slide {
-            transform: scale(0.6) translateX(80%);
+            transform: scale(0.78) translateX(72%);
             z-index: 1;
-            opacity: 0.7;
+            opacity: 0.8;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
         }
         .promo-slide.far-slide {
-            transform: scale(0.5) translateX(0);
+            transform: scale(0.6) translateX(0);
             z-index: 0;
             opacity: 0.2;
         }
@@ -500,6 +500,7 @@
             cursor: pointer;
         }
 
+        /* ===== ORIGINAL SERVICE GRID – KEPT EXACTLY ===== */
         .service-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -541,6 +542,22 @@
             color: #777;
             line-height: 1.2;
         }
+
+        .thumb-1 { background: linear-gradient(135deg, #0f0f0f 0%, #3a3a3a 100%); }
+        .thumb-2 { background: linear-gradient(135deg, #004d59 0%, #0d2528 100%); }
+        .thumb-3 { background: linear-gradient(135deg, #e0e0e0 0%, #b3b3b3 100%); }
+        .thumb-4 { background: linear-gradient(135deg, #1a1a1a 0%, #504a4a 100%); }
+        .thumb-5 { background: linear-gradient(135deg, #5b4f46 0%, #24201c 100%); }
+        .thumb-6 { background: linear-gradient(135deg, #3f3f3f 0%, #1f1f1f 100%); }
+        .thumb-7 { background: linear-gradient(135deg, #2a3b4c 0%, #1a252f 100%); }
+        .thumb-8 { background: linear-gradient(135deg, #4a3a2a 0%, #2e241a 100%); }
+        .thumb-9 { background: linear-gradient(135deg, #1e4a3a 0%, #0f2a22 100%); }
+        .thumb-10 { background: linear-gradient(135deg, #4a2a3a 0%, #2e1a24 100%); }
+        .thumb-11 { background: linear-gradient(135deg, #3a4a2a 0%, #1f2a15 100%); }
+        .thumb-12 { background: linear-gradient(135deg, #4a3a4a 0%, #2e1f2e 100%); }
+        .thumb-13 { background: linear-gradient(135deg, #6a4a3a 0%, #3a2a1a 100%); }
+        .thumb-14 { background: linear-gradient(135deg, #2a6a4a 0%, #1a3a2a 100%); }
+        .thumb-15 { background: linear-gradient(135deg, #4a6a3a 0%, #2a3a1a 100%); }
 
         /* ===== ORDER FLOW ===== */
         .order-flow-container {
@@ -1082,30 +1099,12 @@
             margin-bottom: 2px;
         }
 
-        .status-pending {
-            background: #fff6e0;
-            color: #cc8800;
-        }
-        .status-progress {
-            background: #e0f0ff;
-            color: #0066cc;
-        }
-        .status-completed {
-            background: #e6fffa;
-            color: #00a86b;
-        }
-        .status-review {
-            background: #f0e6ff;
-            color: #7700cc;
-        }
-        .status-cancelled {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-        .status-done {
-            background: #d1fae5;
-            color: #065f46;
-        }
+        .status-pending { background: #fff6e0; color: #cc8800; }
+        .status-progress { background: #e0f0ff; color: #0066cc; }
+        .status-completed { background: #e6fffa; color: #00a86b; }
+        .status-review { background: #f0e6ff; color: #7700cc; }
+        .status-cancelled { background: #fee2e2; color: #dc2626; }
+        .status-done { background: #d1fae5; color: #065f46; }
 
         .order-card .order-details-expand {
             max-height: 0;
@@ -1722,7 +1721,7 @@
                     </div>
                 </div>
 
-                <!-- ===== PROMO CAROUSEL – BURGER STYLE ===== -->
+                <!-- ===== PROMO CAROUSEL – BURGER STYLE (EDGE PEEK) ===== -->
                 <div class="promo-carousel-wrapper" id="promoCarouselWrapper">
                     <div class="promo-carousel-track" id="promoCarouselTrack">
                         <!-- Rendered by JS -->
@@ -2236,7 +2235,7 @@
         }
 
         // =================================================================
-        // PROMO CAROUSEL – BURGER STYLE
+        // PROMO CAROUSEL – BURGER STYLE (EDGE PEEK)
         // =================================================================
 
         function renderPromoCarousel() {
@@ -3292,7 +3291,7 @@
             }
         });
 
-        console.log('✅ Customer App ready with BURGER‑STYLE carousel — center banner full size, edges peek.');
+        console.log('✅ Final Customer App – Burger carousel with edge peek, original service icons preserved.');
     </script>
 </body>
 </html>
