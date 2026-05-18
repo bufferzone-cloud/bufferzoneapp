@@ -92,31 +92,31 @@
             transform: scale(0.92);
         }
 
-        /* ── HEADER: Admin name top, Promo Pics below, then admin panel ── */
+        /* ── HEADER: Centered admin panel, admin name, and promo pics button ── */
         .header {
             display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
+            align-items: center;
+            justify-content: center;
             padding: 14px 0 12px 0;
             transition: all 0.3s ease;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
+            position: relative;
         }
 
         .header-left {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
             gap: 4px;
-            flex: 1;
-            min-width: 160px;
+            flex: 0 0 auto;
         }
 
         .header-left .top-row {
             display: flex;
             align-items: center;
             gap: 10px;
-            width: 100%;
+            justify-content: center;
         }
 
         .work-avatar {
@@ -146,6 +146,7 @@
         .header-text {
             display: flex;
             flex-direction: column;
+            align-items: center;
         }
         .header-text span:first-child {
             font-size: 11px;
@@ -158,7 +159,7 @@
             letter-spacing: -0.3px;
         }
 
-        /* ── PROMO PICS BUTTON (below admin name) ── */
+        /* ── PROMO PICS BUTTON (centered below admin name) ── */
         .promo-pics-btn {
             display: inline-flex;
             align-items: center;
@@ -174,8 +175,8 @@
             box-shadow: 0 4px 12px rgba(28, 33, 40, 0.25);
             border: none;
             white-space: nowrap;
-            margin-top: 2px;
-            align-self: flex-start;
+            margin-top: 4px;
+            align-self: center;
         }
         .promo-pics-btn i {
             font-size: 16px;
@@ -840,19 +841,196 @@
             color: #dc2626;
         }
 
-        .status-select {
-            padding: 2px 10px;
-            border-radius: 6px;
-            border: 1px solid #ddd;
+        /* ── NICE STATUS BUTTON ── */
+        .status-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 14px;
+            border-radius: 20px;
             font-size: 11px;
-            font-weight: 500;
-            background: #ffffff;
+            font-weight: 600;
+            border: none;
             cursor: pointer;
-            min-width: 80px;
+            transition: all 0.25s ease;
+            background: #f0f0f0;
+            color: #1c2128;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
         }
-        .status-select:focus {
-            outline: none;
+        .status-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        .status-btn:active {
+            transform: scale(0.94);
+        }
+        .status-btn i {
+            font-size: 10px;
+            opacity: 0.6;
+        }
+
+        .status-btn.pending {
+            background: #fff6e0;
+            color: #cc8800;
+        }
+        .status-btn.progress {
+            background: #e0f0ff;
+            color: #0066cc;
+        }
+        .status-btn.completed {
+            background: #e6fffa;
+            color: #00a86b;
+        }
+        .status-btn.review {
+            background: #f0e6ff;
+            color: #7700cc;
+        }
+        .status-btn.cancelled {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* ── ORDER STATUS MODAL (white floating form) ── */
+        .status-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(6px);
+            z-index: 2500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .status-modal-overlay.open {
+            display: flex;
+        }
+        .status-modal {
+            background: #ffffff;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 380px;
+            padding: 28px 24px 22px 24px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            animation: modalIn 0.25s ease;
+            position: relative;
+        }
+        .status-modal .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #999;
+            cursor: pointer;
+            padding: 4px;
+            transition: color 0.2s;
+        }
+        .status-modal .close-btn:hover {
+            color: #1c2128;
+        }
+        .status-modal h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        .status-modal .sub {
+            color: #777;
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        .status-modal .status-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .status-modal .status-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 2px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #fafafa;
+        }
+        .status-modal .status-option:hover {
+            border-color: #d0d0d0;
+            transform: translateX(4px);
+        }
+        .status-modal .status-option.selected {
             border-color: #1c2128;
+            background: #f8f9fc;
+        }
+        .status-modal .status-option .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .status-modal .status-option .dot.pending {
+            background: #cc8800;
+        }
+        .status-modal .status-option .dot.progress {
+            background: #0066cc;
+        }
+        .status-modal .status-option .dot.completed {
+            background: #00a86b;
+        }
+        .status-modal .status-option .dot.review {
+            background: #7700cc;
+        }
+        .status-modal .status-option .dot.cancelled {
+            background: #dc2626;
+        }
+        .status-modal .status-option .label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1c2128;
+        }
+        .status-modal .status-option .check {
+            margin-left: auto;
+            color: #f5b83d;
+            font-size: 16px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .status-modal .status-option.selected .check {
+            opacity: 1;
+        }
+        .status-modal .btn-confirm-status {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            background: #1c2128;
+            color: #fff;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(28, 33, 40, 0.2);
+        }
+        .status-modal .btn-confirm-status:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(28, 33, 40, 0.3);
+        }
+        .status-modal .btn-confirm-status:active {
+            transform: scale(0.96);
+        }
+        .status-modal .btn-confirm-status:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .customer-item {
@@ -1462,7 +1640,6 @@
             }
         }
 
-        /* ── WORK POST CARD WITH FRAME ── */
         .work-post-card {
             background: #ffffff;
             border-radius: 16px;
@@ -1550,7 +1727,6 @@
             color: #dc2626;
         }
 
-        /* ── PHONE FRAME (app) ── */
         .phone-frame {
             width: 100%;
             max-width: 220px;
@@ -1589,7 +1765,6 @@
             text-align: center;
         }
 
-        /* ── LAPTOP FRAME (website) ── */
         .laptop-frame {
             width: 100%;
             max-width: 320px;
@@ -1638,7 +1813,6 @@
             border-radius: 0 0 4px 4px;
         }
 
-        /* ── WORK UPLOAD MODAL ── */
         .work-upload-modal .modal {
             max-width: 480px;
         }
@@ -1683,7 +1857,7 @@
             padding: 8px 0;
         }
 
-        /* ── PROMO PICS PAGE — 1×1 grid, 800×450 px, no crop ── */
+        /* ── PROMO PICS PAGE — 1×1 grid, 800×450 px, no crop, no frame, floating ── */
         .promo-pics-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -1697,18 +1871,19 @@
             position: relative;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
             background: #fff;
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid #f0f0f0;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            /* border removed — no frame */
+            border: none;
             width: 100%;
             height: 450px;
             max-width: 800px;
             margin: 0 auto;
         }
         .promo-pic-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
         }
         .promo-pic-card .pic-image {
             width: 100%;
@@ -1891,7 +2066,7 @@
 
         <div class="app-content" id="appContent">
 
-            <!-- ===== HEADER: Admin name top, Promo Pics below, then admin panel ===== -->
+            <!-- ===== HEADER: Centered admin panel, admin name, and promo pics button ===== -->
             <div class="header" id="mainHeader">
                 <div class="header-left">
                     <div class="top-row">
@@ -1901,7 +2076,7 @@
                             <span id="adminName">Buffer Zone</span>
                         </div>
                     </div>
-                    <!-- Promo Pics button directly below admin name -->
+                    <!-- Promo Pics button centered below admin name -->
                     <button class="promo-pics-btn" id="promoPicsBtn">
                         <i class="fa-regular fa-images"></i> Promo Pics
                     </button>
@@ -2423,6 +2598,43 @@
         </div>
     </div>
 
+    <!-- ===== ORDER STATUS MODAL (white floating form) ===== -->
+    <div class="status-modal-overlay" id="orderStatusModal">
+        <div class="status-modal">
+            <button class="close-btn" id="statusModalCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3>🔄 Change Order Status</h3>
+            <p class="sub">Select a new status for this order.</p>
+            <div class="status-options" id="statusOptionsContainer">
+                <div class="status-option" data-status="pending">
+                    <span class="dot pending"></span>
+                    <span class="label">Pending</span>
+                    <span class="check"><i class="fa-solid fa-check"></i></span>
+                </div>
+                <div class="status-option" data-status="progress">
+                    <span class="dot progress"></span>
+                    <span class="label">In Progress</span>
+                    <span class="check"><i class="fa-solid fa-check"></i></span>
+                </div>
+                <div class="status-option" data-status="completed">
+                    <span class="dot completed"></span>
+                    <span class="label">Completed</span>
+                    <span class="check"><i class="fa-solid fa-check"></i></span>
+                </div>
+                <div class="status-option" data-status="review">
+                    <span class="dot review"></span>
+                    <span class="label">In Review</span>
+                    <span class="check"><i class="fa-solid fa-check"></i></span>
+                </div>
+                <div class="status-option" data-status="cancelled">
+                    <span class="dot cancelled"></span>
+                    <span class="label">Cancelled</span>
+                    <span class="check"><i class="fa-solid fa-check"></i></span>
+                </div>
+            </div>
+            <button class="btn-confirm-status" id="confirmStatusBtn" disabled>Confirm Status</button>
+        </div>
+    </div>
+
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
@@ -2466,6 +2678,8 @@
         let currentUser = null;
         let currentAdminData = null;
         let pendingDeleteAction = null;
+        let pendingStatusOrderId = null;
+        let selectedStatus = null;
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -2555,6 +2769,12 @@
         const deleteConfirmText = document.getElementById('deleteConfirmText');
         const deleteCancelBtn = document.getElementById('deleteCancelBtn');
         const deleteConfirmBtn = document.getElementById('deleteConfirmBtn');
+
+        // Order Status Modal
+        const statusModal = document.getElementById('orderStatusModal');
+        const statusModalCloseBtn = document.getElementById('statusModalCloseBtn');
+        const statusOptionsContainer = document.getElementById('statusOptionsContainer');
+        const confirmStatusBtn = document.getElementById('confirmStatusBtn');
 
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
@@ -2665,8 +2885,22 @@
                 profileEmailEl.textContent = email;
                 profilePhoneEl.textContent = phone;
 
-                const timeOfDay = new Date().getHours() < 12 ? 'morning' : 'afternoon';
-                greetingText.textContent = `Good ${timeOfDay}, ${name} 👋`;
+                // ── Zambian time greeting ──
+                const now = new Date();
+                const zambiaOffset = 2; // CAT = UTC+2
+                const utcHours = now.getUTCHours();
+                const zambiaHours = (utcHours + zambiaOffset) % 24;
+
+                let timeGreeting = 'Good evening';
+                if (zambiaHours >= 1 && zambiaHours <= 12) {
+                    timeGreeting = 'Good morning';
+                } else if (zambiaHours >= 12 && zambiaHours <= 17) {
+                    timeGreeting = 'Good afternoon';
+                } else {
+                    timeGreeting = 'Good evening';
+                }
+
+                greetingText.textContent = `${timeGreeting}, ${name} 👋`;
                 greetingSub.textContent = email;
                 greetingSub.style.fontSize = '12px';
                 greetingSub.style.color = '#888';
@@ -2847,7 +3081,9 @@
                                 </div>
                                 <div style="text-align:right;">
                                     <div style="font-weight:700; font-size:14px; color:#1c2128;">ZMW ${(o.amount || 0).toFixed(2)}</div>
-                                    <span class="status-badge ${o.status || 'pending'}">${o.status || 'pending'}</span>
+                                    <button class="status-btn ${o.status || 'pending'}" data-key="${key}" data-status="${o.status || 'pending'}">
+                                        <i class="fa-solid fa-pen"></i> ${o.status || 'pending'}
+                                    </button>
                                     <div style="font-size:10px; color:#aaa; margin-top:2px;">${o.date || ''}</div>
                                 </div>
                             </div>
@@ -2859,13 +3095,7 @@
                                     ${o.paymentProof ? `<button class="btn-view-proof" data-screenshot="${o.paymentProof}"><i class="fa-regular fa-image"></i> View</button>` : 'No proof'}
                                 </span></div>
                                 <div class="row"><span class="label">Status</span><span class="val">
-                                    <select class="status-select order-status" data-key="${key}" style="padding:2px 8px; border-radius:6px; border:1px solid #ddd; font-size:11px; font-weight:500; background:#ffffff; cursor:pointer;">
-                                        <option value="pending" ${o.status === 'pending' ? 'selected' : ''}>Pending</option>
-                                        <option value="progress" ${o.status === 'progress' ? 'selected' : ''}>In Progress</option>
-                                        <option value="completed" ${o.status === 'completed' ? 'selected' : ''}>Completed</option>
-                                        <option value="review" ${o.status === 'review' ? 'selected' : ''}>In Review</option>
-                                        <option value="cancelled" ${o.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
-                                    </select>
+                                    <span class="status-badge ${o.status || 'pending'}">${o.status || 'pending'}</span>
                                 </span></div>
                                 <button class="btn btn-danger btn-sm delete-order" data-key="${key}" style="margin-top:8px; padding:3px 12px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:10px; cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
                             </div>
@@ -2880,11 +3110,12 @@
                 });
             });
 
-            container.querySelectorAll('.order-status').forEach(sel => {
-                sel.addEventListener('change', function() {
+            container.querySelectorAll('.status-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
                     const key = this.dataset.key;
-                    const newStatus = this.value;
-                    updateOrderStatus(key, newStatus);
+                    const currentStatus = this.dataset.status;
+                    openStatusModal(key, currentStatus);
                 });
             });
             container.querySelectorAll('.delete-order').forEach(btn => {
@@ -3505,6 +3736,60 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
+        // ORDER STATUS MODAL
+        // ───────────────────────────────────────────────────────────────────
+
+        function openStatusModal(orderId, currentStatus) {
+            pendingStatusOrderId = orderId;
+            selectedStatus = currentStatus;
+            statusModal.classList.add('open');
+
+            const options = statusOptionsContainer.querySelectorAll('.status-option');
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+                if (opt.dataset.status === currentStatus) {
+                    opt.classList.add('selected');
+                }
+            });
+
+            confirmStatusBtn.disabled = true;
+            confirmStatusBtn.textContent = 'Confirm Status';
+        }
+
+        function closeStatusModal() {
+            statusModal.classList.remove('open');
+            pendingStatusOrderId = null;
+            selectedStatus = null;
+        }
+
+        statusModalCloseBtn.addEventListener('click', closeStatusModal);
+        statusModal.addEventListener('click', function(e) {
+            if (e.target === this) closeStatusModal();
+        });
+
+        statusOptionsContainer.querySelectorAll('.status-option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                statusOptionsContainer.querySelectorAll('.status-option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedStatus = this.dataset.status;
+                confirmStatusBtn.disabled = false;
+                confirmStatusBtn.textContent = `Confirm: ${selectedStatus}`;
+            });
+        });
+
+        confirmStatusBtn.addEventListener('click', function() {
+            if (!pendingStatusOrderId || !selectedStatus) return;
+            updateOrderStatus(pendingStatusOrderId, selectedStatus).then(() => {
+                renderAll();
+                closeStatusModal();
+                showToast(`Order status updated to ${selectedStatus}`);
+            }).catch((error) => {
+                showToast('Error updating status', 'error');
+                console.error(error);
+            });
+        });
+
+        // ───────────────────────────────────────────────────────────────────
         // SERVICE MODAL
         // ───────────────────────────────────────────────────────────────────
 
@@ -4054,7 +4339,7 @@
             }
         });
 
-        console.log('✅ Admin App ready — Promo Pics button below admin name, 1×1 grid 800×450px, no crop.');
+        console.log('✅ Admin App ready — Centered header, floating promo pics (no frame, no crop), order status modal.');
     </script>
 </body>
 </html>
