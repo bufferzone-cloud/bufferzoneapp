@@ -92,40 +92,30 @@
             transform: scale(0.92);
         }
 
-        /* ── HEADER: Work left, Promo Pics center, Promotion right ── */
+        /* ── HEADER: Work left, Promo Pics below admin name ── */
         .header {
             display: flex;
-            align-items: center;
+            align-items: stretch;
             justify-content: space-between;
-            padding: 16px 0 20px 0;
-            transition: all 0.3s ease;
+            padding: 12px 0 16px 0;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
         .header-left {
             display: flex;
-            align-items: center;
-            gap: 8px;
-            flex: 0 0 auto;
-        }
-
-        .header-center {
-            display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
             gap: 6px;
+            flex: 1;
+            min-width: 120px;
         }
 
-        .header-right {
+        .header-left-top {
             display: flex;
-            gap: 8px;
             align-items: center;
-            flex: 0 0 auto;
+            gap: 10px;
         }
 
-        /* ── WORK BUTTON ── */
         .work-avatar {
             width: 44px;
             height: 44px;
@@ -150,15 +140,30 @@
             box-shadow: 0 6px 20px rgba(28, 33, 40, 0.4);
         }
 
-        /* ── PROMO PICS BUTTON (center) ── */
+        .header-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .header-text span:first-child {
+            font-size: 11px;
+            color: #888;
+        }
+        .header-text span:last-child {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1c2128;
+            letter-spacing: -0.3px;
+        }
+
+        /* ── PROMO PICS BUTTON (below admin name) ── */
         .promo-pics-btn {
             display: flex;
             align-items: center;
             gap: 8px;
             background: #1c2128;
             color: #fff;
-            padding: 8px 18px;
-            border-radius: 24px;
+            padding: 6px 16px;
+            border-radius: 20px;
             font-weight: 600;
             font-size: 12px;
             cursor: pointer;
@@ -166,9 +171,10 @@
             box-shadow: 0 4px 12px rgba(28, 33, 40, 0.25);
             border: none;
             white-space: nowrap;
+            align-self: flex-start;
         }
         .promo-pics-btn i {
-            font-size: 16px;
+            font-size: 14px;
             color: #f5b83d;
         }
         .promo-pics-btn:active {
@@ -178,7 +184,19 @@
             box-shadow: 0 6px 20px rgba(28, 33, 40, 0.35);
         }
 
-        /* ── PROMO HEADER BUTTON (right) ── */
+        /* ── WORK MODE: hide promo-pics-btn, show admin title ── */
+        .header.work-active .promo-pics-btn {
+            display: none;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            flex: 0 0 auto;
+            padding-top: 4px;
+        }
+
         .promo-header-btn {
             width: 40px;
             height: 40px;
@@ -197,31 +215,18 @@
             transform: scale(0.92);
         }
 
-        .header-text {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .btn-add-service {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
         }
-        .header-text span:first-child {
-            font-size: 11px;
-            color: #888;
-        }
-        .header-text span:last-child {
-            font-weight: 700;
-            font-size: 16px;
-            color: #1c2128;
-            letter-spacing: -0.3px;
-        }
-
-        /* ── WORK MODE: hide promo-pics-btn ── */
-        .header.work-active .promo-pics-btn {
-            display: none;
-        }
-        .header.work-active .header-right .promo-header-btn {
-            display: none;
-        }
-        .header.work-active .header-right .btn-add-service {
-            display: none;
+        .btn-add-service:active {
+            transform: scale(0.95);
         }
 
         .greeting {
@@ -1654,159 +1659,162 @@
             padding: 8px 0;
         }
 
-        /* ── PROMO PICS VERTICAL BURGER ── */
-        .promo-pics-vertical-container {
+        /* ── PROMO PICS PAGE – VERTICAL BURGER STYLE ── */
+        .promo-carousel-wrapper {
+            position: relative;
+            margin: 4px 0 14px 0;
+            overflow: hidden;
+            border-radius: 24px;
+            height: 480px;
+            background: #f8f9fc;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .promo-carousel-track {
             display: flex;
             flex-direction: column;
+            gap: 0;
+            padding: 0;
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            height: 100%;
             align-items: center;
-            gap: 16px;
-            padding: 20px 0;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
-        
-        .promo-pic-card-stack {
+        .promo-carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .promo-slide {
+            flex: 0 0 100%;
+            max-height: 100%;
+            scroll-snap-align: center;
             position: relative;
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            background: #fff;
             transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease, box-shadow 0.5s ease;
-            width: 100%;
-            aspect-ratio: 16/9;
+            width: 90%;
+            height: 90%;
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
             transform-origin: center center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto 0;
+            flex-shrink: 0;
         }
-        
-        .promo-pic-card-stack .pic-image {
+
+        .promo-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            background-color: #ffffff;
         }
-        
-        .promo-pic-card-stack.active-slide {
-            transform: scale(1);
-            z-index: 2;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
-            opacity: 1;
-        }
-        
-        .promo-pic-card-stack.prev-slide {
-            transform: scale(0.78) translateY(40px);
-            z-index: 1;
-            opacity: 0.8;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .promo-pic-card-stack.next-slide {
-            transform: scale(0.78) translateY(-40px);
-            z-index: 1;
-            opacity: 0.8;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .promo-pic-card-stack.far-slide {
-            transform: scale(0.6) translateY(0);
-            z-index: 0;
-            opacity: 0.2;
-        }
-        
-        .promo-pic-card-stack .pic-overlay {
+
+        .promo-slide .slide-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 20px 14px 14px 14px;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.65));
-            min-height: 60px;
-            display: flex;
-            align-items: flex-end;
-        }
-        
-        .promo-pic-card-stack .pic-overlay .pic-text {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 700;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            word-break: break-word;
-            line-height: 1.3;
-        }
-        
-        .promo-pic-card-stack .pic-overlay .pic-text small {
-            font-weight: 400;
-            font-size: 12px;
-            opacity: 0.8;
-            display: block;
-            margin-top: 2px;
-        }
-        
-        .promo-pic-card-stack .pic-delete-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: rgba(220, 38, 38, 0.85);
-            color: #fff;
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            backdrop-filter: blur(4px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .promo-pic-card-stack .pic-delete-btn:hover {
-            background: #dc2626;
-            transform: scale(1.1);
-        }
-        
-        .promo-pic-card-stack .pic-delete-btn:active {
-            transform: scale(0.9);
-        }
-
-        .promo-pics-upload-area {
+            padding: 28px 20px 20px 20px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.70));
+            min-height: 80px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #ddd;
-            border-radius: 16px;
-            padding: 40px 20px;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: #fafafa;
-            min-height: 180px;
-            aspect-ratio: 16/9;
-            max-width: 500px;
-            margin: 0 auto;
+            justify-content: flex-end;
+            border-radius: 0 0 20px 20px;
         }
-        .promo-pics-upload-area:hover {
-            border-color: #f5b83d;
-            background: #fefaf0;
+        .promo-slide .slide-text {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 700;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+            line-height: 1.2;
+            word-break: break-word;
         }
-        .promo-pics-upload-area .upload-icon {
-            font-size: 48px;
-            color: #ccc;
-            margin-bottom: 10px;
-        }
-        .promo-pics-upload-area .upload-text {
+        .promo-slide .slide-text small {
+            font-weight: 400;
             font-size: 14px;
-            color: #888;
-            font-weight: 500;
-        }
-        .promo-pics-upload-area .upload-sub {
-            font-size: 11px;
-            color: #aaa;
-            margin-top: 4px;
+            opacity: 0.9;
+            display: block;
+            margin-top: 2px;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
         }
 
+        .promo-slide.active-slide {
+            transform: scale(1) translateY(0);
+            z-index: 2;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+            opacity: 1;
+        }
+        .promo-slide.prev-slide {
+            transform: scale(0.78) translateY(-72%);
+            z-index: 1;
+            opacity: 0.8;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+        .promo-slide.next-slide {
+            transform: scale(0.78) translateY(72%);
+            z-index: 1;
+            opacity: 0.8;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+        .promo-slide.far-slide {
+            transform: scale(0.6) translateY(0);
+            z-index: 0;
+            opacity: 0.2;
+        }
+
+        .promo-carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 6px;
+            padding: 0 0 6px 0;
+        }
+        .promo-carousel-indicators .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0;
+        }
+        .promo-carousel-indicators .dot.active {
+            background: #f5b83d;
+            width: 24px;
+            border-radius: 12px;
+        }
+        .promo-carousel-indicators .dot:active {
+            transform: scale(0.85);
+        }
+
+        .promo-pics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 0 0 8px 0;
+        }
+        .promo-pics-header h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1c2128;
+        }
+        .promo-pics-header p {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* ── ORDERS COMPACT ── */
         .orders-compact-header {
             display: flex;
             align-items: center;
@@ -1860,14 +1868,11 @@
             .laptop-frame {
                 max-width: 240px;
             }
-            .promo-pics-vertical-container {
-                max-width: 100%;
+            .promo-carousel-wrapper {
+                height: 380px;
             }
-            .promo-pic-card-stack {
-                aspect-ratio: 16/9;
-            }
-            .promo-pic-card-stack .pic-overlay .pic-text {
-                font-size: 14px;
+            .promo-slide .slide-text {
+                font-size: 16px;
             }
         }
     </style>
@@ -1878,15 +1883,15 @@
 
         <div class="app-content" id="appContent">
 
-            <!-- ===== HEADER: Work left, Admin Name + Promo Pics center, Promotion right ===== -->
+            <!-- ===== HEADER: Work left, Promo Pics button below admin name ===== -->
             <div class="header" id="mainHeader">
                 <div class="header-left">
-                    <div class="work-avatar" id="workAvatarBtn" title="View Work Page">Work</div>
-                </div>
-                <div class="header-center">
-                    <div class="header-text" id="headerGreetingCenter">
-                        <span>Admin Panel</span>
-                        <span id="adminNameCenter">Buffer Zone</span>
+                    <div class="header-left-top">
+                        <div class="work-avatar" id="workAvatarBtn" title="View Work Page">Work</div>
+                        <div class="header-text" id="headerGreeting">
+                            <span>Admin Panel</span>
+                            <span id="adminName">Buffer Zone</span>
+                        </div>
                     </div>
                     <button class="promo-pics-btn" id="promoPicsBtn">
                         <i class="fa-regular fa-images"></i> Promo Pics
@@ -2002,22 +2007,25 @@
 
             </div>
 
-            <!-- ===== PAGE: PROMO PICS ===== -->
+            <!-- ===== PAGE: PROMO PICS – VERTICAL BURGER CAROUSEL ===== -->
             <div id="page-promo-pics" class="page">
 
-                <div class="card" style="border: none; box-shadow: none; padding: 0 0 8px 0;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-                        <div>
-                            <h2 style="font-size:24px; font-weight:800; color:#1c2128;"><i class="fa-regular fa-images" style="color:#f5b83d;"></i> Promo Pics</h2>
-                            <p style="font-size:13px; color:#888;">Upload flyer pictures — each with a text overlay and delete option.</p>
-                        </div>
-                        <button class="btn btn-primary" id="addPromoPicBtn" style="padding:10px 24px; font-size:14px; border-radius:30px;">
-                            <i class="fa-solid fa-cloud-arrow-up"></i> Upload Flyer
-                        </button>
+                <div class="promo-pics-header">
+                    <div>
+                        <h2><i class="fa-regular fa-images" style="color:#f5b83d;"></i> Promo Pics</h2>
+                        <p>Upload flyer pictures — each with a text overlay and delete option.</p>
                     </div>
+                    <button class="btn btn-primary" id="addPromoPicBtn" style="padding:10px 24px; font-size:14px; border-radius:30px;">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Upload Flyer
+                    </button>
                 </div>
 
-                <div id="promoPicsGrid"></div>
+                <div class="promo-carousel-wrapper" id="promoCarouselWrapper">
+                    <div class="promo-carousel-track" id="promoCarouselTrack">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+                <div class="promo-carousel-indicators" id="promoCarouselIndicators"></div>
 
             </div>
 
@@ -2446,13 +2454,16 @@
         let currentUser = null;
         let currentAdminData = null;
         let pendingDeleteAction = null;
+        let promoCarouselItems = [];
+        let currentPromoIndex = 0;
+        let autoScrollTimer = null;
+        let isUserInteracting = false;
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
         // ───────────────────────────────────────────────────────────────────
 
         const adminNameEl = document.getElementById('adminName');
-        const adminNameCenterEl = document.getElementById('adminNameCenter');
         const profileNameEl = document.getElementById('profileName');
         const profileEmailEl = document.getElementById('profileEmail');
         const profilePhoneEl = document.getElementById('profilePhone');
@@ -2516,7 +2527,11 @@
         const workUploadSubmit = document.getElementById('workUploadSubmit');
         const workUploadCancelBtn = document.getElementById('workUploadCancelBtn');
 
-        // Promo Pics
+        // Promo Pics carousel refs
+        const promoCarouselTrack = document.getElementById('promoCarouselTrack');
+        const promoCarouselIndicators = document.getElementById('promoCarouselIndicators');
+        const promoCarouselWrapper = document.getElementById('promoCarouselWrapper');
+
         const promoPicUploadModal = document.getElementById('promoPicUploadModal');
         const promoPicUploadCloseBtn = document.getElementById('promoPicUploadCloseBtn');
         const promoPicUploadForm = document.getElementById('promoPicUploadForm');
@@ -2525,7 +2540,6 @@
         const promoPicText = document.getElementById('promoPicText');
         const promoPicSubtext = document.getElementById('promoPicSubtext');
         const promoPicUploadCancelBtn = document.getElementById('promoPicUploadCancelBtn');
-        const promoPicsGrid = document.getElementById('promoPicsGrid');
         const addPromoPicBtn = document.getElementById('addPromoPicBtn');
 
         const toast = document.getElementById('toast');
@@ -2640,7 +2654,6 @@
                 const phone = currentAdminData?.phone || 'Not set';
 
                 adminNameEl.textContent = name;
-                adminNameCenterEl.textContent = name;
                 profileNameEl.textContent = name;
                 profileEmailEl.textContent = email;
                 profilePhoneEl.textContent = phone;
@@ -2684,7 +2697,7 @@
             renderActivityFeed();
             renderOurServicesList();
             renderWorkPosts();
-            renderPromoPics();
+            renderPromoCarousel(); // new vertical carousel for promo pics
         }
 
         function renderDashboard() {
@@ -3035,84 +3048,180 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // PROMO PICS VERTICAL BURGER
+        // PROMO PICS – VERTICAL BURGER CAROUSEL
         // ───────────────────────────────────────────────────────────────────
 
-        function renderPromoPics() {
-            const data = allData.promoPics || {};
-            const entries = Object.entries(data);
+        function renderPromoCarousel() {
+            const promoPics = allData.promoPics || {};
+            const entries = Object.entries(promoPics);
             entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
 
+            promoCarouselItems = entries;
+
             if (entries.length === 0) {
-                promoPicsGrid.innerHTML = `
-                            <div class="promo-pics-upload-area" id="emptyPromoUpload">
-                                <div class="upload-icon"><i class="fa-regular fa-images"></i></div>
-                                <div class="upload-text">No flyers yet</div>
-                                <div class="upload-sub">Tap "Upload Flyer" to add your first promo picture</div>
+                promoCarouselTrack.innerHTML = `
+                            <div style="flex:0 0 100%; max-height:100%; text-align:center; color:#888; font-size:13px; padding:20px; background:#f8f9fc; border-radius:24px; height:100%; display:flex; align-items:center; justify-content:center;">
+                                <div>
+                                    <i class="fa-regular fa-images" style="font-size:32px; color:#ddd; display:block; margin-bottom:8px;"></i>
+                                    No promo flyers yet
+                                </div>
                             </div>
                         `;
-                document.getElementById('emptyPromoUpload')?.addEventListener('click', () => {
-                    promoPicUploadModal.classList.add('open');
-                });
+                promoCarouselIndicators.innerHTML = '';
                 return;
             }
 
-            // Create the vertical container
-            promoPicsGrid.innerHTML = `<div class="promo-pics-vertical-container" id="promoPicsVerticalContainer">${entries.map(([key, p]) => `
-                        <div class="promo-pic-card-stack" data-key="${key}">
-                            <img class="pic-image" src="${p.imageUrl}" alt="${p.text || 'Promo'}" loading="lazy" />
-                            <div class="pic-overlay">
-                                <div class="pic-text">
-                                    ${p.text || 'Promo'}
-                                    ${p.subtext ? `<small>${p.subtext}</small>` : ''}
+            // Build slides
+            promoCarouselTrack.innerHTML = entries.map(([key, pic]) => `
+                        <div class="promo-slide" data-key="${key}" data-index="${entries.indexOf([key, pic])}">
+                            <img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" />
+                            <div class="slide-overlay">
+                                <div class="slide-text">
+                                    ${escapeHtml(pic.text || 'Promo')}
+                                    ${pic.subtext ? `<small>${escapeHtml(pic.subtext)}</small>` : ''}
                                 </div>
                             </div>
-                            <button class="pic-delete-btn" data-key="${key}" title="Delete flyer">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
                         </div>
-                    `).join('')}</div>`;
+                    `).join('');
 
-            // Apply classes for burger effect
-            const stackItems = promoPicsGrid.querySelectorAll('.promo-pic-card-stack');
-            let activeIndex = 0; // Default to the first item
+            // Indicators
+            promoCarouselIndicators.innerHTML = entries.map((_, i) => `
+                        <button class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></button>
+                    `).join('');
 
-            function updateStackClasses(index) {
-                stackItems.forEach((item, i) => {
-                    item.classList.remove('active-slide', 'prev-slide', 'next-slide', 'far-slide');
-                    if (i === index) {
-                        item.classList.add('active-slide');
-                    } else if (i === index - 1) {
-                        item.classList.add('prev-slide');
-                    } else if (i === index + 1) {
-                        item.classList.add('next-slide');
-                    } else {
-                        item.classList.add('far-slide');
-                    }
-                });
-            }
+            // Set initial active state
+            updatePromoCarouselClasses(0);
 
-            updateStackClasses(activeIndex);
-
-            stackItems.forEach((item, i) => {
-                item.addEventListener('click', function(e) {
-                    // Don't trigger if delete button is clicked
-                    if (e.target.closest('.pic-delete-btn')) return;
-                    
-                    activeIndex = i;
-                    updateStackClasses(activeIndex);
+            // Attach indicator clicks
+            promoCarouselIndicators.querySelectorAll('.dot').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const idx = parseInt(this.dataset.index);
+                    goToPromoSlide(idx);
                 });
             });
 
-            // Add delete functionality
-            promoPicsGrid.querySelectorAll('.pic-delete-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const key = this.dataset.key;
-                    showDeleteConfirmation('promoPic', key);
-                });
+            // Scroll event for manual control
+            const track = promoCarouselTrack;
+            track.addEventListener('scroll', () => {
+                if (isUserInteracting) {
+                    const containerHeight = track.clientHeight;
+                    const scrollTop = track.scrollTop;
+                    const slides = track.querySelectorAll('.promo-slide');
+                    let closestIdx = 0;
+                    let closestDist = Infinity;
+                    slides.forEach((slide, i) => {
+                        const rect = slide.getBoundingClientRect();
+                        const centerY = rect.top + rect.height / 2;
+                        const containerCenter = track.getBoundingClientRect().top + containerHeight / 2;
+                        const dist = Math.abs(centerY - containerCenter);
+                        if (dist < closestDist) {
+                            closestDist = dist;
+                            closestIdx = i;
+                        }
+                    });
+                    if (closestIdx !== currentPromoIndex) {
+                        currentPromoIndex = closestIdx;
+                        updatePromoCarouselClasses(currentPromoIndex);
+                        updatePromoIndicators(currentPromoIndex);
+                        resetPromoAutoScroll();
+                    }
+                }
+                isUserInteracting = true;
+                clearTimeout(track._scrollTimeout);
+                track._scrollTimeout = setTimeout(() => {
+                    isUserInteracting = false;
+                    resetPromoAutoScroll();
+                }, 2000);
+            });
+
+            // Initial scroll to center first slide
+            setTimeout(() => {
+                const firstSlide = track.querySelector('.promo-slide');
+                if (firstSlide) {
+                    const containerHeight = track.clientHeight;
+                    const slideHeight = firstSlide.offsetHeight;
+                    const scrollPos = 0;
+                    track.scrollTop = Math.max(0, scrollPos);
+                }
+            }, 100);
+
+            // Start auto-scroll
+            startPromoAutoScroll();
+        }
+
+        function updatePromoCarouselClasses(activeIndex) {
+            const slides = promoCarouselTrack.querySelectorAll('.promo-slide');
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active-slide', 'prev-slide', 'next-slide', 'far-slide');
+                if (i === activeIndex) {
+                    slide.classList.add('active-slide');
+                } else if (i === activeIndex - 1) {
+                    slide.classList.add('prev-slide');
+                } else if (i === activeIndex + 1) {
+                    slide.classList.add('next-slide');
+                } else {
+                    slide.classList.add('far-slide');
+                }
             });
         }
+
+        function updatePromoIndicators(activeIndex) {
+            const dots = promoCarouselIndicators.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === activeIndex);
+            });
+        }
+
+        function goToPromoSlide(index) {
+            const slides = promoCarouselTrack.querySelectorAll('.promo-slide');
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+
+            const slide = slides[index];
+            if (!slide) return;
+
+            const containerHeight = promoCarouselTrack.clientHeight;
+            const slideHeight = slide.offsetHeight;
+            const scrollPos = slide.offsetTop - (containerHeight - slideHeight) / 2;
+
+            promoCarouselTrack.scrollTo({
+                top: Math.max(0, scrollPos),
+                behavior: 'smooth'
+            });
+
+            currentPromoIndex = index;
+            updatePromoCarouselClasses(index);
+            updatePromoIndicators(index);
+            resetPromoAutoScroll();
+        }
+
+        function startPromoAutoScroll() {
+            if (autoScrollTimer) clearInterval(autoScrollTimer);
+            autoScrollTimer = setInterval(() => {
+                if (!isUserInteracting && promoCarouselItems.length > 0) {
+                    const nextIndex = (currentPromoIndex + 1) % promoCarouselItems.length;
+                    goToPromoSlide(nextIndex);
+                }
+            }, 3000);
+        }
+
+        function resetPromoAutoScroll() {
+            if (autoScrollTimer) {
+                clearInterval(autoScrollTimer);
+                startPromoAutoScroll();
+            }
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ───────────────────────────────────────────────────────────────────
+        // PROMO PICS CRUD
+        // ───────────────────────────────────────────────────────────────────
 
         function addPromoPic(data) {
             const newId = 'pp' + Date.now();
@@ -3135,7 +3244,7 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // WORK POSTS (with frames preserved)
+        // WORK POSTS
         // ───────────────────────────────────────────────────────────────────
 
         function renderWorkPosts() {
@@ -4067,7 +4176,7 @@
             }
         });
 
-        console.log('✅ Admin App ready with Promo Pics button below Admin Name and vertical burger flyer stack.');
+        console.log('✅ Admin App ready – Promo Pics button below admin name, vertical burger carousel.');
     </script>
 </body>
 </html>
