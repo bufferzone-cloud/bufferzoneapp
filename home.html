@@ -267,7 +267,7 @@
             font-weight: 700;
         }
 
-        /* ===== PROMO CAROUSEL (COVER FLOW) — NO CROP, FULL BANNER ===== */
+        /* ===== PROMO CAROUSEL – BURGER STYLE (center full, edges peek) ===== */
         .promo-carousel-wrapper {
             position: relative;
             margin: 4px 0 14px 0;
@@ -279,8 +279,8 @@
 
         .promo-carousel-track {
             display: flex;
-            gap: 16px;
-            padding: 0 20%;
+            gap: 0;
+            padding: 0;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
@@ -295,13 +295,13 @@
         }
 
         .promo-slide {
-            flex: 0 0 60%;
-            max-width: 60%;
+            flex: 0 0 100%;
+            max-width: 100%;
             scroll-snap-align: center;
             position: relative;
             border-radius: 16px;
             overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease, box-shadow 0.5s ease;
             height: 100%;
             background: #ffffff;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
@@ -311,7 +311,6 @@
             justify-content: center;
         }
 
-        /* FIX: show full banner without cropping */
         .promo-slide img {
             width: 100%;
             height: 100%;
@@ -350,26 +349,29 @@
             text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
         }
 
-        /* cover flow scaling */
+        /* BURGER STYLE — only the center slide is large */
         .promo-slide.active-slide {
             transform: scale(1) translateX(0);
             z-index: 2;
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+            opacity: 1;
         }
         .promo-slide.prev-slide {
-            transform: scale(0.72) translateX(20px);
+            transform: scale(0.6) translateX(-80%);
             z-index: 1;
             opacity: 0.7;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
         }
         .promo-slide.next-slide {
-            transform: scale(0.72) translateX(-20px);
+            transform: scale(0.6) translateX(80%);
             z-index: 1;
             opacity: 0.7;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
         }
         .promo-slide.far-slide {
-            transform: scale(0.55) translateX(0);
+            transform: scale(0.5) translateX(0);
             z-index: 0;
-            opacity: 0.3;
+            opacity: 0.2;
         }
 
         .promo-carousel-indicators {
@@ -1651,13 +1653,6 @@
             .payment-reminder-banner .reminder-text {
                 font-size: 11px;
             }
-            .promo-slide {
-                flex: 0 0 70%;
-                max-width: 70%;
-            }
-            .promo-carousel-track {
-                padding: 0 15%;
-            }
             .promo-slide .slide-text {
                 font-size: 16px;
             }
@@ -1667,13 +1662,6 @@
         }
 
         @media (max-width: 380px) {
-            .promo-slide {
-                flex: 0 0 80%;
-                max-width: 80%;
-            }
-            .promo-carousel-track {
-                padding: 0 10%;
-            }
             .promo-slide .slide-text {
                 font-size: 14px;
             }
@@ -1734,7 +1722,7 @@
                     </div>
                 </div>
 
-                <!-- ===== PROMO CAROUSEL (NO CROP, FULL BANNER) ===== -->
+                <!-- ===== PROMO CAROUSEL – BURGER STYLE ===== -->
                 <div class="promo-carousel-wrapper" id="promoCarouselWrapper">
                     <div class="promo-carousel-track" id="promoCarouselTrack">
                         <!-- Rendered by JS -->
@@ -2248,7 +2236,7 @@
         }
 
         // =================================================================
-        // PROMO CAROUSEL (COVER FLOW) — FULL BANNER, NO CROP
+        // PROMO CAROUSEL – BURGER STYLE
         // =================================================================
 
         function renderPromoCarousel() {
@@ -2260,7 +2248,7 @@
 
             if (entries.length === 0) {
                 promoCarouselTrack.innerHTML = `
-                    <div style="flex:0 0 80%; max-width:80%; text-align:center; color:#888; font-size:13px; padding:20px; background:#f8f9fc; border-radius:16px; height:100%; display:flex; align-items:center; justify-content:center;">
+                    <div style="flex:0 0 100%; max-width:100%; text-align:center; color:#888; font-size:13px; padding:20px; background:#f8f9fc; border-radius:16px; height:100%; display:flex; align-items:center; justify-content:center;">
                         <div>
                             <i class="fa-regular fa-images" style="font-size:32px; color:#ddd; display:block; margin-bottom:8px;"></i>
                             No promo flyers yet
@@ -2340,7 +2328,7 @@
                 if (firstSlide) {
                     const containerWidth = track.clientWidth;
                     const slideWidth = firstSlide.offsetWidth;
-                    const scrollPos = (slideWidth + 16) * 0 - (containerWidth - slideWidth) / 2;
+                    const scrollPos = 0;
                     track.scrollLeft = Math.max(0, scrollPos);
                 }
             }, 100);
@@ -3304,7 +3292,7 @@
             }
         });
 
-        console.log('✅ Customer App ready with Cover Flow promo carousel — full banner, no cropping.');
+        console.log('✅ Customer App ready with BURGER‑STYLE carousel — center banner full size, edges peek.');
     </script>
 </body>
 </html>
