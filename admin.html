@@ -2370,6 +2370,125 @@
             color: #f5b83d;
         }
 
+        /* ── WITHDRAWAL CONFIRMATION MODAL ── */
+        .withdraw-confirm-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 2200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .withdraw-confirm-modal-overlay.open {
+            display: flex;
+        }
+        .withdraw-confirm-modal {
+            background: #ffffff;
+            border-radius: 18px;
+            width: 100%;
+            max-width: 400px;
+            padding: 28px 24px 20px 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+            animation: modalIn 0.25s ease;
+            text-align: center;
+        }
+        .withdraw-confirm-modal .close-btn {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #999;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .withdraw-confirm-modal .close-btn:hover {
+            color: #1c2128;
+        }
+        .withdraw-confirm-modal h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-bottom: 6px;
+            clear: both;
+        }
+        .withdraw-confirm-modal .sub {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .withdraw-confirm-modal .details {
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 16px;
+            text-align: left;
+            border: 1px solid #f0f0f0;
+        }
+        .withdraw-confirm-modal .details .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 13px;
+        }
+        .withdraw-confirm-modal .details .row .label {
+            color: #888;
+        }
+        .withdraw-confirm-modal .details .row .val {
+            font-weight: 600;
+            color: #1c2128;
+        }
+        .withdraw-confirm-modal .btn-confirm-withdraw {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 4px;
+        }
+        .withdraw-confirm-modal .btn-confirm-withdraw:hover {
+            transform: translateY(-2px);
+        }
+        .withdraw-confirm-modal .btn-confirm-withdraw:active {
+            transform: scale(0.96);
+        }
+        .withdraw-confirm-modal .btn-confirm-withdraw.approve {
+            background: #16a34a;
+            color: #fff;
+        }
+        .withdraw-confirm-modal .btn-confirm-withdraw.decline {
+            background: #dc2626;
+            color: #fff;
+        }
+        .withdraw-confirm-modal .btn-cancel-withdraw {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            background: #f0f0f0;
+            color: #555;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.2s;
+        }
+        .withdraw-confirm-modal .btn-cancel-withdraw:hover {
+            background: #e0e0e0;
+        }
+        .withdraw-confirm-modal .btn-cancel-withdraw:active {
+            transform: scale(0.95);
+        }
+
         /* ── ACCOUNT UPDATE MODAL ── */
         .account-update-modal-overlay {
             position: fixed;
@@ -3435,6 +3554,20 @@
         </div>
     </div>
 
+    <!-- ===== WITHDRAWAL CONFIRMATION MODAL ===== -->
+    <div class="withdraw-confirm-modal-overlay" id="withdrawConfirmModal">
+        <div class="withdraw-confirm-modal">
+            <button class="close-btn" id="withdrawConfirmCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3 id="withdrawConfirmTitle">Confirm Action</h3>
+            <p class="sub" id="withdrawConfirmSub">Are you sure you want to proceed with this withdrawal action?</p>
+            <div class="details" id="withdrawConfirmDetails">
+                <!-- Rendered by JS -->
+            </div>
+            <button class="btn-confirm-withdraw" id="withdrawConfirmActionBtn">Confirm</button>
+            <button class="btn-cancel-withdraw" id="withdrawConfirmCancelBtn">Cancel</button>
+        </div>
+    </div>
+
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
@@ -3481,6 +3614,7 @@
         let pendingStatusOrderId = null;
         let selectedStatus = null;
         let allUsersCache = {};
+        let pendingWithdrawAction = null; // { key, action: 'approve' | 'decline' }
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -3630,6 +3764,15 @@
         const amountLabel = document.getElementById('amountLabel');
         const accountUpdateAmount = document.getElementById('accountUpdateAmount');
         const applyAccountUpdateBtn = document.getElementById('applyAccountUpdateBtn');
+
+        // ── Withdrawal Confirm DOM ──
+        const withdrawConfirmModal = document.getElementById('withdrawConfirmModal');
+        const withdrawConfirmCloseBtn = document.getElementById('withdrawConfirmCloseBtn');
+        const withdrawConfirmTitle = document.getElementById('withdrawConfirmTitle');
+        const withdrawConfirmSub = document.getElementById('withdrawConfirmSub');
+        const withdrawConfirmDetails = document.getElementById('withdrawConfirmDetails');
+        const withdrawConfirmActionBtn = document.getElementById('withdrawConfirmActionBtn');
+        const withdrawConfirmCancelBtn = document.getElementById('withdrawConfirmCancelBtn');
 
         // ── Action buttons ──
         const actionPromoPics = document.getElementById('actionPromoPics');
@@ -4382,7 +4525,6 @@
                     const key = this.dataset.key;
                     const amount = this.dataset.amount;
                     referralPromoAmount.value = amount;
-                    // Store edit key
                     this.closest('.referral-item').dataset.editKey = key;
                     showToast('Edit the amount and click Post to update', 'success');
                 });
@@ -4578,161 +4720,168 @@
             withdrawalsList.querySelectorAll('.approve-withdraw').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
-                    if (confirm('Approve this withdrawal? Money will be sent to customer and deducted from their account.')) {
-                        approveWithdrawal(key);
-                    }
+                    openWithdrawConfirmModal(key, 'approve');
                 });
             });
 
             withdrawalsList.querySelectorAll('.decline-withdraw').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
-                    if (confirm('Decline this withdrawal request?')) {
-                        declineWithdrawal(key);
-                    }
+                    openWithdrawConfirmModal(key, 'decline');
                 });
             });
         }
 
-        // ─── WITHDRAWAL APPROVAL LOGIC ──────────────────────────────────
+        // ─── WITHDRAWAL CONFIRMATION MODAL ──────────────────────────────
 
-        function approveWithdrawal(key) {
-            if (!allData.withdrawalRequests || !allData.withdrawalRequests[key]) {
+        function openWithdrawConfirmModal(key, action) {
+            const withdrawals = allData.withdrawalRequests || {};
+            const users = allData.users || {};
+            const w = withdrawals[key];
+            if (!w) {
                 showToast('Withdrawal request not found.', 'error');
                 return;
             }
+            const user = users[w.userId] || {};
+            const name = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
+            const amount = w.amount || 0;
 
-            const withdrawal = allData.withdrawalRequests[key];
-            const userId = withdrawal.userId;
-            const amount = withdrawal.amount || 0;
+            pendingWithdrawAction = { key, action };
 
-            // Deduct from customer account
-            if (!allData.customerAccounts) allData.customerAccounts = {};
-            if (!allData.customerAccounts[userId]) {
-                allData.customerAccounts[userId] = { balance: 0 };
+            if (action === 'approve') {
+                withdrawConfirmTitle.textContent = '✅ Approve Withdrawal';
+                withdrawConfirmSub.textContent = 'You are about to approve this withdrawal request. The customer will be notified.';
+                withdrawConfirmActionBtn.textContent = 'Confirm Approval';
+                withdrawConfirmActionBtn.className = 'btn-confirm-withdraw approve';
+            } else {
+                withdrawConfirmTitle.textContent = '❌ Decline Withdrawal';
+                withdrawConfirmSub.textContent = 'You are about to decline this withdrawal request. The amount will be refunded to the customer.';
+                withdrawConfirmActionBtn.textContent = 'Confirm Decline';
+                withdrawConfirmActionBtn.className = 'btn-confirm-withdraw decline';
             }
-            const currentBalance = allData.customerAccounts[userId].balance || 0;
-            if (amount > currentBalance) {
-                showToast('Insufficient balance. Cannot approve.', 'error');
-                return;
-            }
-            allData.customerAccounts[userId].balance = currentBalance - amount;
 
-            // Update withdrawal status
-            allData.withdrawalRequests[key].status = 'approved';
+            withdrawConfirmDetails.innerHTML = `
+                        <div class="row"><span class="label">Customer</span><span class="val">${name}</span></div>
+                        <div class="row"><span class="label">Phone</span><span class="val">${w.phone || 'N/A'}</span></div>
+                        <div class="row"><span class="label">Referral Code</span><span class="val">${user.referralCode || '—'}</span></div>
+                        <div class="row"><span class="label">Amount</span><span class="val highlight">ZMW ${amount.toFixed(2)}</span></div>
+                    `;
 
-            // Record transaction for user
-            if (!allData.transactions) allData.transactions = {};
-            const txUserRef = push(ref(db, 'bufferzoneAppData/transactions'));
-            const user = allData.users?.[userId] || {};
-            const userName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Customer';
-            const txUserData = {
-                type: 'Withdrawal Approved',
-                amount: amount,
-                method: 'Bank Transfer',
-                status: 'completed',
-                date: new Date().toLocaleString(),
-                ref: 'W-' + key,
-                detail: `Withdrawal of ZMW ${amount.toFixed(2)} approved and processed.`,
-                screenshot: 'N/A',
-                userId: userId,
-                itemId: key,
-                itemTitle: 'Withdrawal',
-                itemType: 'withdrawal',
-                userName: userName,
-                userEmail: user.email || 'N/A',
-                userPhone: user.phone || 'N/A'
-            };
-            set(txUserRef, txUserData);
-
-            // Record transaction for admin (system)
-            const txAdminRef = push(ref(db, 'bufferzoneAppData/transactions'));
-            const txAdminData = {
-                type: 'Withdrawal Approved (Admin)',
-                amount: amount,
-                method: 'Bank Transfer',
-                status: 'completed',
-                date: new Date().toLocaleString(),
-                ref: 'W-' + key + '-admin',
-                detail: `Admin approved withdrawal of ZMW ${amount.toFixed(2)} for ${userName}.`,
-                screenshot: 'N/A',
-                userId: 'admin',
-                itemId: key,
-                itemTitle: 'Withdrawal Approval',
-                itemType: 'admin',
-                userName: 'Admin',
-                userEmail: currentUser?.email || 'admin@bufferzone.com',
-                userPhone: 'N/A'
-            };
-            set(txAdminRef, txAdminData);
-
-            // Notify user
-            const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
-            set(notifRef, {
-                title: '✅ Withdrawal Approved',
-                message: `Your withdrawal of ZMW ${amount.toFixed(2)} has been approved and processed.`,
-                timestamp: Date.now(),
-                read: false,
-                userId: userId
-            });
-
-            saveData().then(() => {
-                renderAll();
-                showToast(`✅ Withdrawal of ZMW ${amount.toFixed(2)} approved. Funds deducted from user account.`, 'success');
-            });
+            withdrawConfirmModal.classList.add('open');
         }
 
-        function declineWithdrawal(key) {
-            if (!allData.withdrawalRequests || !allData.withdrawalRequests[key]) {
+        function closeWithdrawConfirmModal() {
+            withdrawConfirmModal.classList.remove('open');
+            pendingWithdrawAction = null;
+        }
+
+        function executeWithdrawAction() {
+            if (!pendingWithdrawAction) return;
+            const { key, action } = pendingWithdrawAction;
+            const withdrawals = allData.withdrawalRequests || {};
+            const users = allData.users || {};
+            const w = withdrawals[key];
+            if (!w) {
                 showToast('Withdrawal request not found.', 'error');
+                closeWithdrawConfirmModal();
                 return;
             }
+            const user = users[w.userId] || {};
+            const name = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
+            const amount = w.amount || 0;
 
-            const withdrawal = allData.withdrawalRequests[key];
-            const userId = withdrawal.userId;
-            const amount = withdrawal.amount || 0;
+            if (action === 'approve') {
+                // Approve withdrawal
+                withdrawals[key].status = 'approved';
 
-            // Update withdrawal status
-            allData.withdrawalRequests[key].status = 'declined';
+                // Record transaction for user
+                if (!allData.transactions) allData.transactions = {};
+                const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
+                const txData = {
+                    type: 'Withdrawal Approved',
+                    amount: amount,
+                    method: 'Bank Transfer',
+                    status: 'completed',
+                    date: new Date().toLocaleString(),
+                    ref: 'W-' + key,
+                    detail: `ZMW ${amount.toFixed(2)} was approved for ${name}`,
+                    screenshot: 'N/A',
+                    userId: w.userId,
+                    itemId: key,
+                    itemTitle: 'Withdrawal',
+                    itemType: 'withdrawal',
+                    userName: name,
+                    userEmail: user.email || 'N/A',
+                    userPhone: user.phone || 'N/A'
+                };
+                set(txRef, txData);
 
-            // Record transaction for user
-            if (!allData.transactions) allData.transactions = {};
-            const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
-            const user = allData.users?.[userId] || {};
-            const userName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Customer';
-            const txData = {
-                type: 'Withdrawal Declined',
-                amount: amount,
-                method: 'Bank Transfer',
-                status: 'declined',
-                date: new Date().toLocaleString(),
-                ref: 'W-' + key,
-                detail: `Your withdrawal request of ZMW ${amount.toFixed(2)} has been declined. Please try again another time.`,
-                screenshot: 'N/A',
-                userId: userId,
-                itemId: key,
-                itemTitle: 'Withdrawal',
-                itemType: 'withdrawal',
-                userName: userName,
-                userEmail: user.email || 'N/A',
-                userPhone: user.phone || 'N/A'
-            };
-            set(txRef, txData);
+                // Notify user
+                const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
+                set(notifRef, {
+                    title: '✅ Withdrawal Approved',
+                    message: `ZMW ${amount.toFixed(2)} was approved for you.`,
+                    timestamp: Date.now(),
+                    read: false,
+                    userId: w.userId
+                });
 
-            // Notify user
-            const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
-            set(notifRef, {
-                title: '❌ Withdrawal Declined',
-                message: `Your withdrawal request of ZMW ${amount.toFixed(2)} has been declined. Please try again another time.`,
-                timestamp: Date.now(),
-                read: false,
-                userId: userId
-            });
+                saveData().then(() => {
+                    renderAll();
+                    closeWithdrawConfirmModal();
+                    showToast(`✅ ZMW ${amount.toFixed(2)} was approved for ${name}`, 'success');
+                });
 
-            saveData().then(() => {
-                renderAll();
-                showToast(`❌ Withdrawal of ZMW ${amount.toFixed(2)} declined. Transaction recorded.`, 'success');
-            });
+            } else if (action === 'decline') {
+                // Decline withdrawal - refund the amount
+                withdrawals[key].status = 'declined';
+
+                // Refund the amount to customer's account
+                if (!allData.customerAccounts) allData.customerAccounts = {};
+                if (!allData.customerAccounts[w.userId]) {
+                    allData.customerAccounts[w.userId] = { balance: 0 };
+                }
+                const currentBal = allData.customerAccounts[w.userId].balance || 0;
+                allData.customerAccounts[w.userId].balance = currentBal + amount;
+
+                // Record transaction for user
+                if (!allData.transactions) allData.transactions = {};
+                const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
+                const txData = {
+                    type: 'Withdrawal Declined',
+                    amount: amount,
+                    method: 'Bank Transfer',
+                    status: 'declined',
+                    date: new Date().toLocaleString(),
+                    ref: 'W-' + key,
+                    detail: `ZMW ${amount.toFixed(2)} was declined for ${name}. Amount refunded.`,
+                    screenshot: 'N/A',
+                    userId: w.userId,
+                    itemId: key,
+                    itemTitle: 'Withdrawal',
+                    itemType: 'withdrawal',
+                    userName: name,
+                    userEmail: user.email || 'N/A',
+                    userPhone: user.phone || 'N/A'
+                };
+                set(txRef, txData);
+
+                // Notify user
+                const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
+                set(notifRef, {
+                    title: '❌ Withdrawal Declined',
+                    message: `ZMW ${amount.toFixed(2)} was declined for you. The amount has been refunded.`,
+                    timestamp: Date.now(),
+                    read: false,
+                    userId: w.userId
+                });
+
+                saveData().then(() => {
+                    renderAll();
+                    closeWithdrawConfirmModal();
+                    showToast(`❌ ZMW ${amount.toFixed(2)} was declined for ${name}. Amount refunded.`, 'success');
+                });
+            }
         }
 
         // ───────────────────────────────────────────────────────────────────
@@ -4789,10 +4938,8 @@
                         `;
             }).join('');
 
-            // Update selected count
             updateSelectedCount();
 
-            // Add change listeners
             userCheckboxList.querySelectorAll('input[type="checkbox"]').forEach(cb => {
                 cb.addEventListener('change', updateSelectedCount);
             });
@@ -4811,7 +4958,6 @@
 
         function openAccountUpdateModal() {
             renderAccountUpdateUserList();
-            // Reset action to "add"
             setActiveAction('add');
             accountUpdateAmount.value = '';
             wipeWarning.classList.remove('show');
@@ -4865,11 +5011,9 @@
                 if (!confirm(`Are you sure you want to wipe (set to 0) the accounts of ${selectedIds.length} user(s)? This cannot be undone.`)) {
                     return;
                 }
-                // Wipe selected accounts
                 selectedIds.forEach(uid => {
                     if (!allData.customerAccounts) allData.customerAccounts = {};
                     allData.customerAccounts[uid] = { balance: 0 };
-                    // Record transaction
                     if (!allData.transactions) allData.transactions = {};
                     const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                     const user = allData.users?.[uid] || {};
@@ -4914,7 +5058,6 @@
                     }
                     const current = allData.customerAccounts[uid].balance || 0;
                     allData.customerAccounts[uid].balance = current + amount;
-                    // Record transaction
                     if (!allData.transactions) allData.transactions = {};
                     const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                     const user = allData.users?.[uid] || {};
@@ -4946,7 +5089,6 @@
                 selectedIds.forEach(uid => {
                     if (!allData.customerAccounts) allData.customerAccounts = {};
                     allData.customerAccounts[uid] = { balance: amount };
-                    // Record transaction
                     if (!allData.transactions) allData.transactions = {};
                     const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                     const user = allData.users?.[uid] || {};
@@ -5444,7 +5586,6 @@
                 return;
             }
 
-            // Check if there's an edit pending
             const editItem = referralPromoList.querySelector('.referral-item[data-edit-key]');
             if (editItem) {
                 const key = editItem.dataset.editKey;
@@ -5459,7 +5600,6 @@
                 return;
             }
 
-            // New post
             const newId = 'rp' + Date.now();
             if (!allData.referralPromos) allData.referralPromos = {};
             allData.referralPromos[newId] = {
@@ -5670,7 +5810,6 @@
             }
             allData.customerAccounts[userId].balance = (allData.customerAccounts[userId].balance || 0) + amount;
 
-            // Also record transaction
             if (!allData.transactions) allData.transactions = {};
             const txId = 'tx' + Date.now();
             allData.transactions[txId] = {
@@ -5723,6 +5862,17 @@
         });
 
         applyAccountUpdateBtn.addEventListener('click', applyAccountUpdate);
+
+        // ───────────────────────────────────────────────────────────────────
+        // WITHDRAWAL CONFIRMATION EVENT BINDINGS
+        // ───────────────────────────────────────────────────────────────────
+
+        withdrawConfirmCloseBtn.addEventListener('click', closeWithdrawConfirmModal);
+        withdrawConfirmModal.addEventListener('click', function(e) {
+            if (e.target === this) closeWithdrawConfirmModal();
+        });
+        withdrawConfirmCancelBtn.addEventListener('click', closeWithdrawConfirmModal);
+        withdrawConfirmActionBtn.addEventListener('click', executeWithdrawAction);
 
         // ───────────────────────────────────────────────────────────────────
         // EVENT BINDINGS
@@ -6185,7 +6335,7 @@
             }
         });
 
-        console.log('✅ Admin App ready — Account Update feature added: edit, wipe, or mass-add to accounts.');
+        console.log('✅ Admin App ready — Withdrawal confirmation modal added. Approve/Decline shows transaction message: "ZMW [amount] was approved/declined for [username]". Account Update feature included.');
     </script>
 </body>
 </html>
