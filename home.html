@@ -1605,7 +1605,7 @@
             line-height: 1.6;
         }
 
-        /* ===== REFERRAL & ACCOUNT ===== */
+        /* ===== NEW: ACCOUNT & REFERRAL SECTION ===== */
         .referral-code-box {
             background: #1c2128;
             border-radius: 16px;
@@ -2291,7 +2291,7 @@
         // =================================================================
 
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-        import { getDatabase, ref, onValue, set, push, get, update } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
+        import { getDatabase, ref, onValue, set, push, get, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
         const firebaseConfig = {
@@ -2568,11 +2568,11 @@
                         promoPics: {},
                         disabled: false,
                         notifications: {},
+                        customerAccounts: {},
+                        withdrawalRequests: {},
                         referralPromos: {},
                         customReferrals: {},
-                        referralDiscounts: {},
-                        customerAccounts: {},
-                        withdrawalRequests: {}
+                        referralDiscounts: {}
                     };
                     set(dbRef, allData);
                 } else {
@@ -3206,7 +3206,7 @@
         }
 
         // =================================================================
-        // ACCOUNT & REFERRAL
+        // ACCOUNT & REFERRAL (NEW)
         // =================================================================
 
         function renderAccountAndReferral() {
@@ -3221,6 +3221,7 @@
                 navigator.clipboard.writeText(code).then(() => {
                     showToast('Referral code copied!', 'success');
                 }).catch(() => {
+                    // Fallback
                     const textArea = document.createElement('textarea');
                     textArea.value = code;
                     document.body.appendChild(textArea);
@@ -3238,7 +3239,7 @@
         }
 
         // =================================================================
-        // TRANSACTION MESSAGES
+        // TRANSACTION MESSAGES (NEW)
         // =================================================================
 
         function renderTransactionMessages() {
@@ -3276,6 +3277,7 @@
 
                 // Special messages
                 if (t.type?.toLowerCase().includes('referral') && t.userName) {
+                    const parts = t.type.split(' ');
                     const sourceName = t.userName || 'a user';
                     title = `💰 Referral Bonus`;
                     desc = `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${sourceName} who used your referral code.`;
