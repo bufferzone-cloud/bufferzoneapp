@@ -455,6 +455,17 @@
                     </div>
                 </div>
 
+                <!-- ═══ NEW: Referral Code Field ═══ -->
+                <div class="form-group">
+                    <span class="label">Referral code (optional)</span>
+                    <div class="input-wrap">
+                        <i class="fas fa-gift icon"></i>
+                        <input type="text" id="referralCode" placeholder="e.g. BZ-12ABC" />
+                    </div>
+                    <!-- Message displayed below the field -->
+                    <div id="referralMsg" style="font-size:13px; margin-top:6px; min-height:20px; color:rgba(0,0,0,0.40);">&#8203;</div>
+                </div>
+
                 <button type="submit" class="btn-primary" id="signupBtn">
                     <span class="btn-text">Create Account <i class="fas fa-arrow-right"></i></span>
                 </button>
@@ -490,7 +501,13 @@
             getDatabase,
             ref,
             set,
-            serverTimestamp
+            serverTimestamp,
+            get,
+            query,
+            orderByChild,
+            equalTo,
+            update,
+            push
         } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
 
         // ─── Firebase config ───
@@ -535,6 +552,10 @@
         const signupStatus = document.getElementById('signupStatus');
         const toggleSignupPass = document.getElementById('toggleSignupPass');
         const toggleConfirmPass = document.getElementById('toggleConfirmPass');
+
+        // ═══ NEW: Referral DOM elements ═══
+        const referralCodeInput = document.getElementById('referralCode');
+        const referralMsg = document.getElementById('referralMsg');
 
         // ─── Prevent automatic redirects during signup ───
         let disableAuthRedirect = false;
@@ -675,6 +696,92 @@
             }
         });
 
+        // ═══ NEW: Functions for referral code generation & validation ═══
+
+        /** Generate a random referral code in format BZ-XXYYY where XX are digits, YYY are uppercase letters */
+        function generateRandomReferralCode() {
+            const digits = Math.floor(10 + Math.random() * 90); // 10-99 (two digits)
+            const letters = String.fromCharCode(
+                65 + Math.floor(Math.random() * 26),
+                65 + Math.floor(Math.random() * 26),
+                65 + Math.floor(Math.random() * 26)
+            );
+            return `BZ-${digits}${letters}`;
+        }
+
+        /** Check if a referral code already exists in the database */
+        async function referralCodeExists(code) {
+            const usersRef = ref(db, 'users');
+            const q = query(usersRef, orderByChild('referralCode'), equalTo(code));
+            const snapshot = await get(q);
+            return snapshot.exists();
+        }
+
+        /** Generate a unique referral code (max 10 attempts) */
+        async function generateUniqueReferralCode() {
+            for (let attempt = 0; attempt < 10; attempt++) {
+                const code = generateRandomReferralCode();
+                if (!(await referralCodeExists(code))) {
+                    return code;
+                }
+            }
+            throw new Error('Could not generate a unique referral code after 10 attempts.');
+        }
+
+        /** Lookup a referral code and return the user data (uid, firstName, lastName) or null */
+        async function lookupReferralCode(code) {
+            const usersRef = ref(db, 'users');
+            const q = query(usersRef, orderByChild('referralCode'), equalTo(code));
+            const snapshot = await get(q);
+            if (!snapshot.exists()) return null;
+            // Get the first matching user (there should be only one)
+            let referrerUid = null;
+            let referrerData = null;
+            snapshot.forEach(child => {
+                referrerUid = child.key;
+                referrerData = child.val();
+            });
+            return { uid: referrerUid, ...referrerData };
+        }
+
+        /** Handle referral code input validation and display message */
+        let referralCheckTimeout = null;
+        referralCodeInput.addEventListener('input', function() {
+            clearTimeout(referralCheckTimeout);
+            const code = this.value.trim().toUpperCase();
+            // Clear message if empty
+            if (code === '') {
+                referralMsg.textContent = '\u200B';
+                referralMsg.style.color = 'rgba(0,0,0,0.40)';
+                return;
+            }
+            // Basic format check (BZ- followed by 5 alphanumeric characters)
+            if (!/^BZ-[A-Z0-9]{5}$/.test(code)) {
+                referralMsg.textContent = 'Format should be BZ-XXXXX (e.g. BZ-12ABC)';
+                referralMsg.style.color = '#c92a2a';
+                return;
+            }
+            // Debounce database check
+            referralCheckTimeout = setTimeout(async () => {
+                try {
+                    const referrer = await lookupReferralCode(code);
+                    if (referrer && referrer.uid) {
+                        // Display the username (first + last name) of the referrer
+                        const name = [referrer.firstName, referrer.lastName].filter(Boolean).join(' ');
+                        referralMsg.textContent = `This referral code belongs to ${name}`;
+                        referralMsg.style.color = '#2b8a3e';
+                    } else {
+                        referralMsg.textContent = 'Invalid referral code';
+                        referralMsg.style.color = '#c92a2a';
+                    }
+                } catch (error) {
+                    referralMsg.textContent = 'Error checking referral code';
+                    referralMsg.style.color = '#c92a2a';
+                    console.error('Referral lookup error:', error);
+                }
+            }, 600);
+        });
+
         // ─── Signup ───
         signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -685,6 +792,7 @@
             const phone = signupPhone.value.trim();
             const pass = signupPassword.value;
             const confirm = confirmPassword.value;
+            const referralCodeEntered = referralCodeInput.value.trim().toUpperCase();
 
             signupStatus.className = 'status-msg';
             signupStatus.textContent = '\u200B';
@@ -727,19 +835,42 @@
                 return;
             }
 
+            // Validate referral code if provided
+            let referrerUid = null;
+            if (referralCodeEntered !== '') {
+                try {
+                    const referrer = await lookupReferralCode(referralCodeEntered);
+                    if (referrer && referrer.uid) {
+                        referrerUid = referrer.uid;
+                    } else {
+                        signupStatus.textContent = '⚠️ Invalid referral code. Please check or leave empty.';
+                        signupStatus.className = 'status-msg error';
+                        referralCodeInput.focus();
+                        return;
+                    }
+                } catch (error) {
+                    signupStatus.textContent = '⚠️ Error validating referral code. Please try again.';
+                    signupStatus.className = 'status-msg error';
+                    console.error('Referral validation error:', error);
+                    return;
+                }
+            }
+
             setLoading(signupBtn, true);
-            // Prevent auth state listener from redirecting prematurely
             disableAuthRedirect = true;
 
             try {
-                // 1. Create user (auto sign‑in)
+                // 1. Create user
                 const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
                 const user = userCredential.user;
 
-                // 2. Ensure auth token is fully available before writing to database
+                // 2. Ensure auth token is fully available
                 await user.getIdTokenResult(true);
 
-                // 3. Prepare user data for Realtime Database
+                // 3. Generate a unique referral code for the new user
+                const newReferralCode = await generateUniqueReferralCode();
+
+                // 4. Prepare user data
                 const userData = {
                     firstName: fName,
                     lastName: lName,
@@ -747,23 +878,39 @@
                     phone: phone,
                     role: email.startsWith('admin@') ? 'admin' : 'customer',
                     createdAt: serverTimestamp(),
-                    banned: false
+                    banned: false,
+                    referralCode: newReferralCode
                 };
+                if (referrerUid) {
+                    userData.referredBy = referrerUid;
+                }
 
-                // 4. Write to database – this is the critical part
+                // 5. Write new user to database
                 const userRef = ref(db, 'users/' + user.uid);
                 await set(userRef, userData);
 
-                // 5. Sign out so the user must log in manually
+                // 6. If referral was used, update the referrer's record
+                if (referrerUid) {
+                    const referrerRef = ref(db, 'users/' + referrerUid + '/referrals');
+                    await push(referrerRef, {
+                        newUserName: `${fName} ${lName}`,
+                        newUserEmail: email,
+                        newUserUid: user.uid,
+                        timestamp: serverTimestamp()
+                    });
+                    // Optional: also store a display message in the referrer's node (e.g. notifications)
+                    // Here we simply push the above object; the client can later display "X has registered with your referral code"
+                }
+
+                // 7. Sign out so the user must log in manually
                 await signOut(auth);
 
-                // 6. Redirect to login page with success indicator
+                // 8. Redirect to login page with success indicator
                 window.location.href = 'login.html?signup=success';
             } catch (error) {
                 setLoading(signupBtn, false);
-                disableAuthRedirect = false; // re‑enable redirects on error
+                disableAuthRedirect = false;
 
-                // Special handling for database write failure
                 let msg;
                 if (error.code === 'auth/email-already-in-use') {
                     msg = '⚠️ This email is already registered. Please sign in instead.';
@@ -776,11 +923,9 @@
                 } else if (error.code === 'PERMISSION_DENIED') {
                     msg = '⚠️ Unable to save registration data. Please contact support.';
                 } else {
-                    // Database write might have failed – show the actual message
                     msg = '⚠️ Registration data could not be saved: ' + (error.message || 'Unknown error');
                 }
 
-                // If we have a user but the database write failed, sign out to clean up
                 if (auth.currentUser) {
                     await signOut(auth);
                 }
@@ -788,7 +933,6 @@
                 signupStatus.textContent = msg;
                 signupStatus.className = 'status-msg error';
             } finally {
-                // Always re‑enable redirects when done
                 if (disableAuthRedirect) {
                     disableAuthRedirect = false;
                 }
@@ -797,29 +941,24 @@
 
         // ─── Auth state listener ───
         onAuthStateChanged(auth, (user) => {
-            // If redirect is disabled (during signup), do nothing
             if (disableAuthRedirect) return;
 
             if (user) {
                 const email = user.email;
-                // Determine where to send the user
                 if (email && email.startsWith('admin@')) {
                     window.location.href = 'admin.html';
                 } else {
                     window.location.href = 'home.html';
                 }
             }
-            // No user → stay on the page (default)
         });
 
-        // ─── Check for signup success message (when arriving from signup redirect) ───
+        // ─── Check for signup success message ───
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('signup') === 'success') {
-            // Show login view with a success message
             showView('loginView');
             loginStatus.textContent = '✅ Account created successfully! Please log in.';
             loginStatus.className = 'status-msg success';
-            // Clean URL without reloading
             window.history.replaceState({}, document.title, window.location.pathname);
         }
 
@@ -838,9 +977,8 @@
         }
     </script>
 
-    <!-- ═══ ADDITION 3: Install banner (drops down when app not installed) ═══ -->
+    <!-- ═══ ADDITION 3: Install banner ═══ -->
     <style>
-        /* Install banner styles – do not affect existing layout */
         .install-banner {
             position: fixed;
             bottom: 24px;
@@ -848,7 +986,7 @@
             transform: translateX(-50%);
             background: #000000;
             color: #ffffff;
-            display: none;               /* hidden until beforeinstallprompt */
+            display: none;
             align-items: center;
             gap: 12px;
             padding: 12px 20px;
@@ -902,7 +1040,7 @@
             window.addEventListener('beforeinstallprompt', (e) => {
                 e.preventDefault();
                 deferredPrompt = e;
-                banner.style.display = 'flex';   // show the install bar
+                banner.style.display = 'flex';
             });
 
             installBtn.addEventListener('click', () => {
