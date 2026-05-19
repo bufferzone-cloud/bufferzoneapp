@@ -569,7 +569,8 @@
             query,
             orderByChild,
             equalTo,
-            push
+            push,
+            update
         } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
 
         // ─── Firebase config ───
@@ -905,11 +906,23 @@
 
             // Validate referral code if provided
             let referrerUid = null;
+            let referrerData = null;
+            let isCustomReferral = false;
+
             if (referralCodeEntered !== '') {
                 try {
                     const referrer = await lookupReferralCode(referralCodeEntered);
                     if (referrer && referrer.uid) {
                         referrerUid = referrer.uid;
+                        referrerData = referrer;
+                        // Check if this is a custom referral
+                        const customReferrals = allData?.customReferrals || {};
+                        for (const key in customReferrals) {
+                            if (customReferrals[key].referralCode === referralCodeEntered && customReferrals[key].userId === referrerUid) {
+                                isCustomReferral = true;
+                                break;
+                            }
+                        }
                     } else {
                         signupStatus.textContent = '⚠️ Invalid referral code. Please check or leave empty.';
                         signupStatus.className = 'status-msg error';
@@ -928,12 +941,65 @@
             disableAuthRedirect = true;
 
             try {
+                // ── 1. Create user account ──
                 const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
                 const user = userCredential.user;
                 await user.getIdTokenResult(true);
 
                 const newReferralCode = await generateUniqueReferralCode();
 
+                // ── 2. Fetch current app data to get signup bonuses and referral configs ──
+                const appDataSnapshot = await get(ref(db, 'bufferzoneAppData'));
+                const appData = appDataSnapshot.val() || {};
+                allData = appData;
+
+                const signupBonuses = allData.signupBonuses || { withReferral: 0, withCustomReferral: 0, withoutReferral: 0 };
+                const referralPromos = allData.referralPromos || {};
+                const customReferrals = allData.customReferrals || {};
+
+                // ── 3. Determine signup bonus for new user ──
+                let newUserBonus = 0;
+                let bonusType = 'withoutReferral';
+
+                if (referrerUid) {
+                    if (isCustomReferral) {
+                        newUserBonus = signupBonuses.withCustomReferral || 0;
+                        bonusType = 'withCustomReferral';
+                    } else {
+                        newUserBonus = signupBonuses.withReferral || 0;
+                        bonusType = 'withReferral';
+                    }
+                } else {
+                    newUserBonus = signupBonuses.withoutReferral || 0;
+                    bonusType = 'withoutReferral';
+                }
+
+                // ── 4. Determine referrer bonus ──
+                let referrerBonus = 0;
+                let referrerBonusType = 'none';
+
+                if (referrerUid) {
+                    if (isCustomReferral) {
+                        // Check custom referral config
+                        for (const key in customReferrals) {
+                            if (customReferrals[key].referralCode === referralCodeEntered && customReferrals[key].userId === referrerUid) {
+                                referrerBonus = customReferrals[key].amount || 0;
+                                referrerBonusType = 'customReferral';
+                                break;
+                            }
+                        }
+                    } else {
+                        // Check general referral promo (use the latest one)
+                        const promoKeys = Object.keys(referralPromos);
+                        if (promoKeys.length > 0) {
+                            const latestKey = promoKeys[promoKeys.length - 1];
+                            referrerBonus = referralPromos[latestKey].amount || 0;
+                            referrerBonusType = 'referralPromo';
+                        }
+                    }
+                }
+
+                // ── 5. Create user data object ──
                 const userData = {
                     firstName: fName,
                     lastName: lName,
@@ -951,10 +1017,90 @@
                 const userRef = ref(db, 'users/' + user.uid);
                 await set(userRef, userData);
 
-                // Record referral for the referrer
-                if (referrerUid) {
-                    const referrerRef = ref(db, 'users/' + referrerUid + '/referrals');
-                    await push(referrerRef, {
+                // ── 6. Initialize customer account balance ──
+                if (newUserBonus > 0) {
+                    const accountRef = ref(db, 'bufferzoneAppData/customerAccounts/' + user.uid);
+                    await set(accountRef, { balance: newUserBonus });
+                } else {
+                    const accountRef = ref(db, 'bufferzoneAppData/customerAccounts/' + user.uid);
+                    await set(accountRef, { balance: 0 });
+                }
+
+                // ── 7. Record transaction for new user (signup bonus) ──
+                if (newUserBonus > 0) {
+                    const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
+                    const txData = {
+                        type: 'Signup Bonus',
+                        amount: newUserBonus,
+                        method: 'Referral System',
+                        status: 'completed',
+                        date: new Date().toLocaleString(),
+                        ref: 'SIGNUP-' + user.uid.slice(-6),
+                        detail: `You received ZMW ${newUserBonus.toFixed(2)} as a signup bonus (${bonusType.replace(/([A-Z])/g, ' $1').trim()}).`,
+                        screenshot: 'N/A',
+                        userId: user.uid,
+                        itemId: 'signup',
+                        itemTitle: 'Signup Bonus',
+                        itemType: 'signup',
+                        userName: `${fName} ${lName}`,
+                        userEmail: email,
+                        userPhone: phone
+                    };
+                    await set(txRef, txData);
+
+                    // ── 8. Send notification to new user ──
+                    const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
+                    await set(notifRef, {
+                        title: '🎉 Welcome Bonus!',
+                        message: `You received ZMW ${newUserBonus.toFixed(2)} as a signup bonus.`,
+                        timestamp: Date.now(),
+                        read: false,
+                        userId: user.uid
+                    });
+                }
+
+                // ── 9. Process referrer bonus ──
+                if (referrerUid && referrerBonus > 0) {
+                    // Update referrer's account balance
+                    const referrerAccountRef = ref(db, 'bufferzoneAppData/customerAccounts/' + referrerUid);
+                    const referrerAccountSnapshot = await get(referrerAccountRef);
+                    const currentBalance = referrerAccountSnapshot.val()?.balance || 0;
+                    await set(referrerAccountRef, { balance: currentBalance + referrerBonus });
+
+                    // ── 10. Record transaction for referrer ──
+                    const referrerTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
+                    const referrerTxData = {
+                        type: 'Referral Bonus',
+                        amount: referrerBonus,
+                        method: 'Referral System',
+                        status: 'completed',
+                        date: new Date().toLocaleString(),
+                        ref: 'REF-' + user.uid.slice(-6),
+                        detail: `You received ZMW ${referrerBonus.toFixed(2)} from ${fName} ${lName} who used your referral code.`,
+                        screenshot: 'N/A',
+                        userId: referrerUid,
+                        itemId: user.uid,
+                        itemTitle: 'Referral Bonus',
+                        itemType: 'referral',
+                        userName: `${fName} ${lName}`,
+                        userEmail: email,
+                        userPhone: phone
+                    };
+                    await set(referrerTxRef, referrerTxData);
+
+                    // ── 11. Send notification to referrer ──
+                    const referrerNotifRef = push(ref(db, 'bufferzoneAppData/notifications'));
+                    await set(referrerNotifRef, {
+                        title: '💰 Referral Bonus!',
+                        message: `You received ZMW ${referrerBonus.toFixed(2)} from ${fName} ${lName} who used your referral code.`,
+                        timestamp: Date.now(),
+                        read: false,
+                        userId: referrerUid
+                    });
+
+                    // ── 12. Record referral in referrer's referrals list ──
+                    const referralListRef = ref(db, 'users/' + referrerUid + '/referrals');
+                    await push(referralListRef, {
                         newUserName: `${fName} ${lName}`,
                         newUserEmail: email,
                         newUserUid: user.uid,
@@ -962,6 +1108,7 @@
                     });
                 }
 
+                // ── 13. Sign out and redirect ──
                 await signOut(auth);
                 window.location.href = 'login.html?signup=success';
             } catch (error) {
@@ -1021,7 +1168,16 @@
         // ─── Initial focus ───
         loginEmail.focus();
 
-        console.log('🔥 Buffer Zone login ready — Firebase modular SDK connected.');
+        // ─── Global allData variable ───
+        let allData = null;
+        // Load app data for referral validation
+        get(ref(db, 'bufferzoneAppData')).then((snapshot) => {
+            allData = snapshot.val() || {};
+        }).catch((err) => {
+            console.warn('Could not load app data:', err);
+        });
+
+        console.log('🔥 Buffer Zone login ready — Referral bonuses, notifications, and transactions integrated.');
     </script>
 
     <!-- Service worker registration -->
