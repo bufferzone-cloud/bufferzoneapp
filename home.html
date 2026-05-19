@@ -1827,6 +1827,7 @@
             font-size: 14px;
         }
 
+        /* ===== WITHDRAWAL ITEMS ===== */
         .withdrawal-item {
             background: #ffffff;
             border-radius: 14px;
@@ -2337,7 +2338,7 @@
                 <div class="account-section" id="accountSection">
                     <div class="account-toggle-row">
                         <button class="toggle-btn active" id="accountTransactionsBtn"><i class="fa-solid fa-receipt"></i> Transactions</button>
-                        <button class="toggle-btn" id="accountWithdrawBtn"><i class="fa-solid fa-arrow-up"></i> Withdraw</button>
+                        <button class="toggle-btn" id="accountWithdrawBtn"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
                     </div>
 
                     <!-- Transactions View -->
@@ -2362,13 +2363,16 @@
                         </div>
                     </div>
 
-                    <!-- Withdraw View (same as withdraw button action) -->
+                    <!-- Withdrawals View -->
                     <div class="account-view" id="accountWithdrawView">
                         <div style="text-align:center; padding:20px 0;">
-                            <p style="color:#888; font-size:13px;">Click the "Withdraw" button below to request a withdrawal from your account.</p>
+                            <p style="color:#888; font-size:13px;">Click the "Withdraw" button below to request a withdrawal from your account. Admin will review within 24 hours.</p>
                             <button class="withdraw-btn" id="withdrawBtnFromView" style="margin-top:12px; background:#f5b83d; border:none; padding:12px 30px; border-radius:30px; font-weight:700; font-size:14px; color:#1c2128; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
                                 <i class="fa-solid fa-arrow-up"></i> Withdraw Funds
                             </button>
+                            <div style="margin-top:16px; background:#f8f9fc; border-radius:12px; padding:12px; border:1px solid #f0f0f0;">
+                                <p style="font-size:11px; color:#888;">Withdrawals are processed within 24 hours. You will be notified once your request is approved or declined.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -4150,7 +4154,7 @@
                 return;
             }
 
-            // Create withdrawal request
+            // Create withdrawal request – this goes directly to admin's payables
             if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
             const wId = 'w' + Date.now();
             allData.withdrawalRequests[wId] = {
@@ -4163,10 +4167,10 @@
                 date: new Date().toLocaleString()
             };
 
-            // Deduct from account
+            // Deduct from account immediately (pending until admin approves)
             allData.customerAccounts[currentUserId] = { balance: balance - amount };
 
-            // Record transaction
+            // Record transaction for customer (pending)
             if (!allData.transactions) allData.transactions = {};
             const txId = 'tx' + Date.now();
             allData.transactions[txId] = {
@@ -4176,7 +4180,7 @@
                 status: 'pending',
                 date: new Date().toLocaleString(),
                 ref: 'W-' + wId,
-                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested.`,
+                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested. Admin will review within 24 hours.`,
                 screenshot: 'N/A',
                 userId: currentUserId,
                 itemId: wId,
@@ -4187,19 +4191,13 @@
                 userPhone: currentUserData?.phone || 'N/A'
             };
 
-            // Notify
-            const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
-            set(notifRef, {
-                title: '💰 Withdrawal Requested',
-                message: `Your withdrawal of ZMW ${amount.toFixed(2)} has been submitted and will be processed within 24 hours.`,
-                timestamp: Date.now(),
-                read: false
-            });
+            // NO notification for withdrawal – it goes to admin's payables
 
             saveData().then(() => {
                 closeWithdrawModal();
                 withdrawSuccessModal.classList.add('open');
                 renderAll();
+                showToast('✅ Withdrawal request submitted! Admin will review within 24 hours.', 'success');
             });
         }
 
@@ -4374,7 +4372,7 @@
             }
         });
 
-        console.log('✅ Customer App – Profile with Account section, toggle, withdrawal, and enhanced referral button styling.');
+        console.log('✅ Customer App – Withdrawals go directly to admin payables, NOT notifications. Admin sees name, phone, referral code, amount. Withdrawals show statuses in customer transactions.');
     </script>
 </body>
 </html>
