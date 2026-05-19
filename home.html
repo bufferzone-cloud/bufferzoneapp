@@ -313,7 +313,6 @@
             margin: auto 0;
         }
 
-        /* Fills the entire burger frame – 800x450 images stretch edge-to-edge */
         .promo-slide img {
             width: 100%;
             height: 100%;
@@ -352,7 +351,6 @@
             text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
         }
 
-        /* BURGER STYLE — center full, neighbors peek by a small edge */
         .promo-slide.active-slide {
             transform: scale(1) translateX(0);
             z-index: 2;
@@ -1607,6 +1605,314 @@
             line-height: 1.6;
         }
 
+        /* ===== NEW: ACCOUNT & REFERRAL SECTION ===== */
+        .referral-code-box {
+            background: #1c2128;
+            border-radius: 16px;
+            padding: 20px 16px;
+            margin: 16px 0 12px 0;
+            text-align: center;
+            color: white;
+        }
+        .referral-code-box .label {
+            font-size: 10px;
+            color: #f5b83d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .referral-code-box .code {
+            font-size: 32px;
+            font-weight: 800;
+            color: #f5b83d;
+            letter-spacing: 2px;
+            margin: 6px 0;
+            word-break: break-all;
+        }
+        .referral-code-box .copy-btn {
+            background: #f5b83d;
+            border: none;
+            padding: 6px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 12px;
+            color: #1c2128;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .referral-code-box .copy-btn:active {
+            transform: scale(0.95);
+        }
+        .referral-code-box .copy-btn i {
+            font-size: 14px;
+        }
+
+        .account-balance-box {
+            background: linear-gradient(135deg, #1c2128 0%, #2a2a2a 100%);
+            border-radius: 16px;
+            padding: 18px 16px;
+            margin: 0 0 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        .account-balance-box .left .label {
+            font-size: 10px;
+            color: #f5b83d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .account-balance-box .left .balance {
+            font-size: 28px;
+            font-weight: 800;
+            color: #fff;
+        }
+        .account-balance-box .withdraw-btn {
+            background: #f5b83d;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 12px;
+            color: #1c2128;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .account-balance-box .withdraw-btn:active {
+            transform: scale(0.95);
+        }
+        .account-balance-box .withdraw-btn i {
+            font-size: 14px;
+        }
+
+        .transaction-msg {
+            background: #f8f9fc;
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            border-left: 4px solid #f5b83d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .transaction-msg .left .title {
+            font-weight: 600;
+            font-size: 12px;
+            color: #1c2128;
+        }
+        .transaction-msg .left .desc {
+            font-size: 10px;
+            color: #555;
+        }
+        .transaction-msg .right .amount {
+            font-weight: 700;
+            font-size: 14px;
+            color: #00a86b;
+        }
+        .transaction-msg .right .amount.negative {
+            color: #dc2626;
+        }
+
+        .withdraw-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .withdraw-modal-overlay.open {
+            display: flex;
+        }
+        .withdraw-modal {
+            background: white;
+            border-radius: 18px;
+            width: 100%;
+            max-width: 340px;
+            padding: 24px 20px 20px 20px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+        }
+        .withdraw-modal h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-bottom: 4px;
+        }
+        .withdraw-modal .sub {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 14px;
+        }
+        .withdraw-modal .form-group {
+            margin-bottom: 14px;
+        }
+        .withdraw-modal .form-group label {
+            font-weight: 600;
+            font-size: 12px;
+            color: #222;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .withdraw-modal .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+        .withdraw-modal .form-group input:focus {
+            outline: none;
+            border-color: #1c2128;
+        }
+        .withdraw-modal .btn-withdraw {
+            width: 100%;
+            padding: 11px;
+            background: #1c2128;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .withdraw-modal .btn-withdraw:active {
+            transform: scale(0.95);
+        }
+        .withdraw-modal .btn-cancel-withdraw {
+            width: 100%;
+            padding: 11px;
+            background: #f0f0f0;
+            color: #555;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        .withdraw-modal .btn-cancel-withdraw:active {
+            transform: scale(0.95);
+        }
+
+        .withdraw-success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .withdraw-success-overlay.open {
+            display: flex;
+        }
+        .withdraw-success-modal {
+            background: white;
+            border-radius: 18px;
+            width: 100%;
+            max-width: 340px;
+            padding: 28px 20px 20px 20px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+        }
+        .withdraw-success-modal i {
+            font-size: 48px;
+            color: #f5b83d;
+            margin-bottom: 10px;
+        }
+        .withdraw-success-modal h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-bottom: 4px;
+        }
+        .withdraw-success-modal p {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .withdraw-success-modal .btn-ok {
+            margin-top: 16px;
+            padding: 10px 30px;
+            background: #1c2128;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .withdraw-success-modal .btn-ok:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== PAYMENT MODAL TOGGLES ===== */
+        .toggle-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .toggle-row .toggle-code-btn {
+            flex: 1;
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            background: #fafafa;
+            font-size: 11px;
+            font-weight: 600;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            min-width: 80px;
+        }
+        .toggle-row .toggle-code-btn.active {
+            background: #1c2128;
+            color: white;
+            border-color: #1c2128;
+        }
+        .toggle-row .toggle-code-btn:active {
+            transform: scale(0.95);
+        }
+
+        .code-input-wrap {
+            display: none;
+            margin-bottom: 10px;
+        }
+        .code-input-wrap.open {
+            display: block;
+        }
+        .code-input-wrap input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        .code-input-wrap input:focus {
+            outline: none;
+            border-color: #f5b83d;
+        }
+
         .logout-btn {
             width: 100%;
             padding: 10px;
@@ -1660,6 +1966,12 @@
             }
             .promo-slide .slide-text small {
                 font-size: 11px;
+            }
+            .referral-code-box .code {
+                font-size: 24px;
+            }
+            .account-balance-box .left .balance {
+                font-size: 22px;
             }
         }
 
@@ -1809,6 +2121,28 @@
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">My Profile</h3>
                     <p style="color: #888; font-size: 11px;">Your personal information.</p>
                 </div>
+
+                <!-- ===== REFERRAL CODE (BOLD & BIG) ===== -->
+                <div class="referral-code-box" id="referralCodeBox">
+                    <div class="label">Your Referral Code</div>
+                    <div class="code" id="referralCodeDisplay">BZ-XXXXX</div>
+                    <button class="copy-btn" id="copyReferralBtn"><i class="fa-regular fa-copy"></i> Copy</button>
+                </div>
+
+                <!-- ===== ACCOUNT BALANCE ===== -->
+                <div class="account-balance-box" id="accountBalanceBox">
+                    <div class="left">
+                        <div class="label">Account Balance</div>
+                        <div class="balance" id="accountBalanceDisplay">ZMW 0.00</div>
+                    </div>
+                    <button class="withdraw-btn" id="withdrawBtn"><i class="fa-solid fa-arrow-up"></i> Withdraw</button>
+                </div>
+
+                <!-- ===== TRANSACTION MESSAGES ===== -->
+                <div id="transactionMessages">
+                    <!-- Rendered by JS -->
+                </div>
+
                 <div class="profile-card">
                     <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
                     <div class="profile-name" id="profileName">User</div>
@@ -1860,12 +2194,27 @@
                 </div>
             </div>
 
-            <!-- COUPON -->
-            <div class="coupon-section">
-                <input type="text" id="couponInput" placeholder="Coupon code">
-                <button class="apply-btn" id="applyCouponBtn">Apply</button>
+            <!-- ===== TOGGLE: PROMO CODE / REFERRAL CODE ===== -->
+            <div class="toggle-row">
+                <button class="toggle-code-btn active" id="togglePromoBtn">Promo Code</button>
+                <button class="toggle-code-btn" id="toggleReferralBtn">Referral Code</button>
             </div>
-            <span class="coupon-msg" id="couponMsg"></span>
+
+            <!-- Promo Code Input -->
+            <div class="code-input-wrap open" id="promoCodeWrap">
+                <div class="coupon-section">
+                    <input type="text" id="couponInput" placeholder="Enter promo code">
+                    <button class="apply-btn" id="applyCouponBtn">Apply</button>
+                </div>
+                <span class="coupon-msg" id="couponMsg"></span>
+            </div>
+
+            <!-- Referral Code Input -->
+            <div class="code-input-wrap" id="referralCodeWrap">
+                <input type="text" id="referralCodeInput" placeholder="Enter referral code">
+                <button class="apply-btn" id="applyReferralBtn" style="margin-top:6px;">Apply Referral</button>
+                <span class="coupon-msg" id="referralMsg"></span>
+            </div>
 
             <div class="price-breakdown" id="priceBreakdown" style="display:none;">
                 <div class="row"><span class="label">Original Price</span><span class="val" id="origPriceVal">ZMW 0.00</span></div>
@@ -1891,6 +2240,30 @@
             <p style="text-align:center; font-size:9px; color:#888; margin-top:6px;">
                 <i class="fa-regular fa-clock"></i> Project begins after payment confirmation
             </p>
+        </div>
+    </div>
+
+    <!-- ===== WITHDRAW MODAL ===== -->
+    <div class="withdraw-modal-overlay" id="withdrawModal">
+        <div class="withdraw-modal">
+            <h3>💸 Withdraw Funds</h3>
+            <p class="sub">Enter the amount you'd like to withdraw from your account.</p>
+            <div class="form-group">
+                <label>Amount (ZMW)</label>
+                <input type="number" id="withdrawAmountInput" placeholder="e.g. 50" step="0.01" />
+            </div>
+            <button class="btn-withdraw" id="confirmWithdrawBtn"><i class="fa-solid fa-arrow-up"></i> Submit Withdrawal</button>
+            <button class="btn-cancel-withdraw" id="cancelWithdrawBtn">Cancel</button>
+        </div>
+    </div>
+
+    <!-- ===== WITHDRAW SUCCESS MODAL ===== -->
+    <div class="withdraw-success-overlay" id="withdrawSuccessModal">
+        <div class="withdraw-success-modal">
+            <i class="fa-regular fa-circle-check"></i>
+            <h3>Withdrawal Submitted</h3>
+            <p>Your withdrawal request has been submitted and will be processed within 24 hours. Please check the status in your transactions.</p>
+            <button class="btn-ok" id="withdrawSuccessOkBtn">OK</button>
         </div>
     </div>
 
@@ -1961,6 +2334,7 @@
         let discountApplied = false;
         let finalDiscountedPrice = 0;
         let orderTotalBeforeDiscount = 0;
+        let appliedReferral = null;
 
         // Carousel state
         let carouselItems = [];
@@ -2042,6 +2416,30 @@
         const finalDepositVal = document.getElementById('finalDepositVal');
 
         const samplesContainer = document.getElementById('samplesContainer');
+
+        // ===== NEW: Referral & Account =====
+        const referralCodeDisplay = document.getElementById('referralCodeDisplay');
+        const copyReferralBtn = document.getElementById('copyReferralBtn');
+        const accountBalanceDisplay = document.getElementById('accountBalanceDisplay');
+        const withdrawBtn = document.getElementById('withdrawBtn');
+        const transactionMessages = document.getElementById('transactionMessages');
+
+        const withdrawModal = document.getElementById('withdrawModal');
+        const withdrawAmountInput = document.getElementById('withdrawAmountInput');
+        const confirmWithdrawBtn = document.getElementById('confirmWithdrawBtn');
+        const cancelWithdrawBtn = document.getElementById('cancelWithdrawBtn');
+
+        const withdrawSuccessModal = document.getElementById('withdrawSuccessModal');
+        const withdrawSuccessOkBtn = document.getElementById('withdrawSuccessOkBtn');
+
+        // ===== NEW: Toggle buttons in payment modal =====
+        const togglePromoBtn = document.getElementById('togglePromoBtn');
+        const toggleReferralBtn = document.getElementById('toggleReferralBtn');
+        const promoCodeWrap = document.getElementById('promoCodeWrap');
+        const referralCodeWrap = document.getElementById('referralCodeWrap');
+        const referralCodeInput = document.getElementById('referralCodeInput');
+        const applyReferralBtn = document.getElementById('applyReferralBtn');
+        const referralMsg = document.getElementById('referralMsg');
 
         // =================================================================
         // HELPER FUNCTIONS
@@ -2169,13 +2567,17 @@
                         workPosts: {},
                         promoPics: {},
                         disabled: false,
-                        notifications: {}
+                        notifications: {},
+                        customerAccounts: {},
+                        withdrawalRequests: {}
                     };
                     set(dbRef, allData);
                 } else {
                     allData = data;
                     if (!allData.workPosts) allData.workPosts = {};
                     if (!allData.promoPics) allData.promoPics = {};
+                    if (!allData.customerAccounts) allData.customerAccounts = {};
+                    if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
                 }
                 renderAll();
                 if (callback) callback();
@@ -2222,6 +2624,8 @@
             renderSamples();
             renderProfile();
             renderNotifications();
+            renderAccountAndReferral();
+            renderTransactionMessages();
 
             if (allData.policy) {
                 const p = allData.policy;
@@ -2261,7 +2665,6 @@
                 return;
             }
 
-            // Build slides
             promoCarouselTrack.innerHTML = entries.map(([key, pic]) => `
                 <div class="promo-slide" data-key="${key}" data-index="${entries.indexOf([key, pic])}">
                     <img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" />
@@ -2274,15 +2677,12 @@
                 </div>
             `).join('');
 
-            // Indicators
             promoCarouselIndicators.innerHTML = entries.map((_, i) => `
                 <button class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></button>
             `).join('');
 
-            // Set initial active state
             updateCarouselClasses(0);
 
-            // Attach indicator clicks
             promoCarouselIndicators.querySelectorAll('.dot').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const idx = parseInt(this.dataset.index);
@@ -2290,7 +2690,6 @@
                 });
             });
 
-            // Scroll event for manual control
             const track = promoCarouselTrack;
             track.addEventListener('scroll', () => {
                 if (isUserInteracting) {
@@ -2324,7 +2723,6 @@
                 }, 2000);
             });
 
-            // Initial scroll to center first slide
             setTimeout(() => {
                 const firstSlide = track.querySelector('.promo-slide');
                 if (firstSlide) {
@@ -2335,7 +2733,6 @@
                 }
             }, 100);
 
-            // Start auto-scroll
             startAutoScroll();
         }
 
@@ -2803,6 +3200,117 @@
         }
 
         // =================================================================
+        // ACCOUNT & REFERRAL (NEW)
+        // =================================================================
+
+        function renderAccountAndReferral() {
+            if (!currentUserData) return;
+
+            // Referral code
+            const code = currentUserData.referralCode || 'BZ-XXXXX';
+            referralCodeDisplay.textContent = code;
+
+            // Copy referral code
+            copyReferralBtn.addEventListener('click', function() {
+                navigator.clipboard.writeText(code).then(() => {
+                    showToast('Referral code copied!', 'success');
+                }).catch(() => {
+                    // Fallback
+                    const textArea = document.createElement('textarea');
+                    textArea.value = code;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    showToast('Referral code copied!', 'success');
+                });
+            });
+
+            // Account balance
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            accountBalanceDisplay.textContent = `ZMW ${(userAccount.balance || 0).toFixed(2)}`;
+        }
+
+        // =================================================================
+        // TRANSACTION MESSAGES (NEW)
+        // =================================================================
+
+        function renderTransactionMessages() {
+            const container = transactionMessages;
+            const transactions = allData.transactions || {};
+            const entries = Object.entries(transactions)
+                .filter(([key, t]) => t.userId === currentUserId)
+                .sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
+
+            if (entries.length === 0) {
+                container.innerHTML = `<div style="text-align:center;padding:16px;color:#888;font-size:12px;">No transaction messages yet.</div>`;
+                return;
+            }
+
+            container.innerHTML = entries.slice(0, 10).map(([key, t]) => {
+                const isCredit = t.amount && t.amount > 0 && (t.type?.toLowerCase().includes('referral') || t.type?.toLowerCase().includes('received'));
+                const isWithdraw = t.type?.toLowerCase().includes('withdraw') || t.type?.toLowerCase().includes('withdrawal');
+                let amountDisplay = '';
+                let amountClass = '';
+                if (t.amount) {
+                    if (isCredit) {
+                        amountDisplay = `+ZMW ${t.amount.toFixed(2)}`;
+                        amountClass = 'positive';
+                    } else if (isWithdraw) {
+                        amountDisplay = `-ZMW ${t.amount.toFixed(2)}`;
+                        amountClass = 'negative';
+                    } else {
+                        amountDisplay = `ZMW ${t.amount.toFixed(2)}`;
+                        amountClass = '';
+                    }
+                }
+
+                let title = t.type || 'Transaction';
+                let desc = t.detail || t.message || '';
+
+                // Special messages
+                if (t.type?.toLowerCase().includes('referral') && t.userName) {
+                    const parts = t.type.split(' ');
+                    const sourceName = t.userName || 'a user';
+                    title = `💰 Referral Bonus`;
+                    desc = `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${sourceName} who used your referral code.`;
+                }
+                if (t.type?.toLowerCase().includes('discount') && t.userName) {
+                    title = `🎯 Referral Discount`;
+                    desc = `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral for a service discount.`;
+                }
+                if (t.type?.toLowerCase().includes('withdraw') && t.status === 'approved') {
+                    title = `✅ Withdrawal Approved`;
+                    desc = `Your withdrawal of ZMW ${t.amount?.toFixed(2) || '0.00'} has been approved and processed.`;
+                    amountDisplay = `-ZMW ${t.amount?.toFixed(2) || '0.00'}`;
+                    amountClass = 'negative';
+                }
+                if (t.type?.toLowerCase().includes('withdraw') && t.status === 'declined') {
+                    title = `❌ Withdrawal Declined`;
+                    desc = `Your withdrawal request of ZMW ${t.amount?.toFixed(2) || '0.00'} has been declined.`;
+                }
+                if (t.type?.toLowerCase().includes('withdraw') && t.status === 'pending') {
+                    title = `⏳ Withdrawal Pending`;
+                    desc = `Your withdrawal request of ZMW ${t.amount?.toFixed(2) || '0.00'} is being processed.`;
+                }
+
+                return `
+                    <div class="transaction-msg">
+                        <div class="left">
+                            <div class="title">${escapeHtml(title)}</div>
+                            <div class="desc">${escapeHtml(desc)}</div>
+                            <div style="font-size:9px;color:#aaa;">${t.date ? new Date(t.date).toLocaleString() : ''}</div>
+                        </div>
+                        <div class="right">
+                            ${amountDisplay ? `<span class="amount ${amountClass}">${amountDisplay}</span>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // =================================================================
         // SAVE DATA
         // =================================================================
 
@@ -2992,12 +3500,17 @@
                 paymentAmount.textContent = `ZMW ${amount50.toFixed(2)}`;
                 discountApplied = false;
                 appliedPromo = null;
+                appliedReferral = null;
                 couponInput.value = '';
                 couponMsg.textContent = '';
                 couponMsg.className = 'coupon-msg';
                 priceBreakdown.style.display = 'none';
                 applyCouponBtn.disabled = false;
                 couponInput.disabled = false;
+                // Reset referral
+                referralCodeInput.value = '';
+                referralMsg.textContent = '';
+                referralMsg.className = 'coupon-msg';
                 paymentModal.dataset.orderData = JSON.stringify({
                     service: service.title,
                     serviceId: service.id || key,
@@ -3090,6 +3603,93 @@
         }
 
         // =================================================================
+        // REFERRAL CODE IN PAYMENT
+        // =================================================================
+
+        function applyReferral() {
+            const code = referralCodeInput.value.trim().toUpperCase();
+            if (!code) {
+                referralMsg.textContent = 'Please enter a referral code.';
+                referralMsg.className = 'coupon-msg error';
+                return;
+            }
+
+            // Look up the referral code in users
+            const usersRef = ref(db, 'users');
+            get(usersRef).then((snapshot) => {
+                const users = snapshot.val() || {};
+                let referrerUid = null;
+                let referrerData = null;
+                for (const [uid, u] of Object.entries(users)) {
+                    if (u.referralCode === code) {
+                        referrerUid = uid;
+                        referrerData = u;
+                        break;
+                    }
+                }
+
+                if (!referrerUid || referrerUid === currentUserId) {
+                    referralMsg.textContent = 'Invalid referral code.';
+                    referralMsg.className = 'coupon-msg error';
+                    return;
+                }
+
+                // Check referral discount
+                const discounts = allData.referralDiscounts || {};
+                let foundDiscount = null;
+                let discountKey = null;
+                for (const [key, d] of Object.entries(discounts)) {
+                    if (d.referralCode === code) {
+                        foundDiscount = d;
+                        discountKey = key;
+                        break;
+                    }
+                }
+
+                if (!foundDiscount) {
+                    referralMsg.textContent = 'This referral code has no active discount.';
+                    referralMsg.className = 'coupon-msg error';
+                    return;
+                }
+
+                const orderData = JSON.parse(paymentModal.dataset.orderData || '{}');
+                const total = orderData.total || orderTotalBeforeDiscount;
+                const discountAmount = total * (foundDiscount.discount / 100);
+                const finalPrice = total - discountAmount;
+                const depositAmount = finalPrice * 0.5;
+
+                origPriceVal.textContent = `ZMW ${total.toFixed(2)}`;
+                discountVal.textContent = `- ZMW ${discountAmount.toFixed(2)}`;
+                finalPriceVal.textContent = `ZMW ${finalPrice.toFixed(2)}`;
+                finalDepositVal.textContent = `ZMW ${depositAmount.toFixed(2)}`;
+                priceBreakdown.style.display = 'block';
+
+                paymentAmount.textContent = `ZMW ${depositAmount.toFixed(2)}`;
+
+                referralMsg.textContent = `✅ Referral applied! ${foundDiscount.discount}% off. Owner will receive ZMW ${foundDiscount.ownerAmount || 0}.`;
+                referralMsg.className = 'coupon-msg success';
+
+                appliedReferral = {
+                    key: discountKey,
+                    code: code,
+                    discount: foundDiscount.discount,
+                    ownerAmount: foundDiscount.ownerAmount || 0,
+                    referrerUid: referrerUid,
+                    referrerData: referrerData
+                };
+                discountApplied = true;
+                referralCodeInput.disabled = true;
+                applyReferralBtn.disabled = true;
+
+                paymentModal.dataset.appliedReferral = JSON.stringify(appliedReferral);
+            }).catch((error) => {
+                console.error('Error checking referral:', error);
+                referralMsg.textContent = 'Error validating referral.';
+                referralMsg.className = 'coupon-msg error';
+            });
+        }
+
+        // =================================================================
         // CONFIRM PAYMENT
         // =================================================================
 
@@ -3121,6 +3721,12 @@
                 finalAmount = data.total * (1 - discountAppliedVal / 100);
             }
 
+            if (discountApplied && appliedReferral) {
+                discountAppliedVal = appliedReferral.discount;
+                promoCodeUsed = appliedReferral.code;
+                finalAmount = data.total * (1 - discountAppliedVal / 100);
+            }
+
             const orderData = {
                 id: orderId,
                 service: data.service,
@@ -3144,6 +3750,48 @@
             if (appliedPromo) {
                 const usedCouponRef = ref(db, `users/${currentUserId}/usedCoupons/${appliedPromo.key}`);
                 set(usedCouponRef, true);
+            }
+
+            // Handle referral bonus for referrer
+            if (appliedReferral && appliedReferral.referrerUid) {
+                const bonusAmount = appliedReferral.ownerAmount || 0;
+                if (bonusAmount > 0) {
+                    // Add to referrer's account
+                    const accRef = ref(db, `bufferzoneAppData/customerAccounts/${appliedReferral.referrerUid}`);
+                    get(accRef).then((snapshot) => {
+                        const currentBal = snapshot.val()?.balance || 0;
+                        set(accRef, { balance: currentBal + bonusAmount });
+                    });
+
+                    // Record transaction for referrer
+                    const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
+                    set(txRef, {
+                        type: 'Referral Discount Bonus',
+                        amount: bonusAmount,
+                        method: 'Referral System',
+                        status: 'completed',
+                        date: new Date().toLocaleString(),
+                        ref: orderId + '-ref',
+                        detail: `You received ZMW ${bonusAmount.toFixed(2)} from ${customerName} who used your referral code for a service discount.`,
+                        screenshot: 'N/A',
+                        userId: appliedReferral.referrerUid,
+                        itemId: orderId,
+                        itemTitle: data.service,
+                        itemType: 'referral',
+                        userName: customerName,
+                        userEmail: currentUser.email || 'N/A',
+                        userPhone: currentUserData?.phone || 'N/A'
+                    });
+
+                    // Notify referrer
+                    const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
+                    set(notifRef, {
+                        title: '💰 Referral Bonus',
+                        message: `You received ZMW ${bonusAmount.toFixed(2)} from ${customerName} who used your referral code.`,
+                        timestamp: Date.now(),
+                        read: false
+                    });
+                }
             }
 
             const txData = {
@@ -3185,6 +3833,88 @@
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
             document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
             renderServices('all');
+        }
+
+        // =================================================================
+        // WITHDRAWAL
+        // =================================================================
+
+        function openWithdrawModal() {
+            withdrawModal.classList.add('open');
+            withdrawAmountInput.value = '';
+        }
+
+        function closeWithdrawModal() {
+            withdrawModal.classList.remove('open');
+        }
+
+        function submitWithdrawal() {
+            const amount = parseFloat(withdrawAmountInput.value);
+            if (!amount || amount <= 0) {
+                showToast('Please enter a valid amount.', 'error');
+                return;
+            }
+
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+
+            if (amount > balance) {
+                showToast('Insufficient balance.', 'error');
+                return;
+            }
+
+            // Create withdrawal request
+            if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
+            const wId = 'w' + Date.now();
+            allData.withdrawalRequests[wId] = {
+                id: wId,
+                userId: currentUserId,
+                amount: amount,
+                phone: currentUserData?.phone || 'N/A',
+                status: 'pending',
+                createdAt: Date.now(),
+                date: new Date().toLocaleString()
+            };
+
+            // Deduct from account
+            allData.customerAccounts[currentUserId] = { balance: balance - amount };
+
+            // Record transaction
+            if (!allData.transactions) allData.transactions = {};
+            const txId = 'tx' + Date.now();
+            allData.transactions[txId] = {
+                type: 'Withdrawal Request',
+                amount: amount,
+                method: 'Bank Transfer',
+                status: 'pending',
+                date: new Date().toLocaleString(),
+                ref: 'W-' + wId,
+                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested.`,
+                screenshot: 'N/A',
+                userId: currentUserId,
+                itemId: wId,
+                itemTitle: 'Withdrawal',
+                itemType: 'withdrawal',
+                userName: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` : currentUser.email || 'Customer',
+                userEmail: currentUser.email || 'N/A',
+                userPhone: currentUserData?.phone || 'N/A'
+            };
+
+            // Notify
+            const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
+            set(notifRef, {
+                title: '💰 Withdrawal Requested',
+                message: `Your withdrawal of ZMW ${amount.toFixed(2)} has been submitted and will be processed within 24 hours.`,
+                timestamp: Date.now(),
+                read: false
+            });
+
+            saveData().then(() => {
+                closeWithdrawModal();
+                withdrawSuccessModal.classList.add('open');
+                renderAll();
+            });
         }
 
         // =================================================================
@@ -3261,9 +3991,47 @@
             if (e.key === 'Enter') applyCoupon();
         });
 
+        // Toggle promo/referral code in payment modal
+        togglePromoBtn.addEventListener('click', function() {
+            togglePromoBtn.classList.add('active');
+            toggleReferralBtn.classList.remove('active');
+            promoCodeWrap.classList.add('open');
+            referralCodeWrap.classList.remove('open');
+        });
+
+        toggleReferralBtn.addEventListener('click', function() {
+            toggleReferralBtn.classList.add('active');
+            togglePromoBtn.classList.remove('active');
+            referralCodeWrap.classList.add('open');
+            promoCodeWrap.classList.remove('open');
+        });
+
+        applyReferralBtn.addEventListener('click', applyReferral);
+        referralCodeInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') applyReferral();
+        });
+
         confirmPaymentBtn.addEventListener('click', confirmPayment);
 
         setupCloudinaryUpload();
+
+        // ===== Withdraw =====
+        withdrawBtn.addEventListener('click', openWithdrawModal);
+        cancelWithdrawBtn.addEventListener('click', closeWithdrawModal);
+        withdrawModal.addEventListener('click', function(e) {
+            if (e.target === this) closeWithdrawModal();
+        });
+        confirmWithdrawBtn.addEventListener('click', submitWithdrawal);
+        withdrawSuccessOkBtn.addEventListener('click', function() {
+            withdrawSuccessModal.classList.remove('open');
+            switchView('profileView');
+        });
+        withdrawSuccessModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+                switchView('profileView');
+            }
+        });
 
         // =================================================================
         // AUTH & INIT
@@ -3294,7 +4062,7 @@
             }
         });
 
-        console.log('✅ Final Customer App – Burger carousel with edge peek, original service icons preserved.');
+        console.log('✅ Final Customer App – Referral code, Account balance, Withdrawals, and Transaction messages integrated.');
     </script>
 </body>
 </html>
