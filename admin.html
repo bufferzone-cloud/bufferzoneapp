@@ -2574,6 +2574,34 @@
                     </div>
                 </div>
 
+                <!-- ── SIGNUP BONUSES ── -->
+                <div class="referral-section">
+                    <div class="section-title"><i class="fa-solid fa-gift"></i> Signup Bonuses <span style="font-size:12px; font-weight:400; color:#888; margin-left:4px;">(amount new user receives)</span></div>
+                    <div class="form-row-custom">
+                        <div class="form-group full-width">
+                            <label>With referral code (ZMW)</label>
+                            <input type="number" id="signupBonusWithReferral" placeholder="e.g. 20" step="0.01" />
+                        </div>
+                        <div class="form-group full-width">
+                            <label>With custom referral code (ZMW)</label>
+                            <input type="number" id="signupBonusWithCustomReferral" placeholder="e.g. 30" step="0.01" />
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Without referral code (ZMW)</label>
+                            <input type="number" id="signupBonusWithoutReferral" placeholder="e.g. 5" step="0.01" />
+                        </div>
+                    </div>
+                    <button class="btn-post" id="saveSignupBonuses"><i class="fa-solid fa-check"></i> Save Signup Bonuses</button>
+                    <div style="margin-top:14px;">
+                        <h4 style="font-size:13px; font-weight:600; color:#1c2128; margin-bottom:8px;">Current Signup Bonuses</h4>
+                        <div id="signupBonusesDisplay" style="font-size:13px; color:#555;">
+                            With referral: <strong id="displayWithReferral">ZMW 0.00</strong> &middot;
+                            With custom: <strong id="displayWithCustom">ZMW 0.00</strong> &middot;
+                            Without referral: <strong id="displayWithoutReferral">ZMW 0.00</strong>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- ===== PAGE: PAYABLES ===== -->
@@ -3200,6 +3228,15 @@
         const postReferralDiscountBtn = document.getElementById('postReferralDiscount');
         const referralDiscountList = document.getElementById('referralDiscountList');
 
+        // ── Signup Bonuses ──
+        const signupBonusWithReferral = document.getElementById('signupBonusWithReferral');
+        const signupBonusWithCustomReferral = document.getElementById('signupBonusWithCustomReferral');
+        const signupBonusWithoutReferral = document.getElementById('signupBonusWithoutReferral');
+        const saveSignupBonusesBtn = document.getElementById('saveSignupBonuses');
+        const displayWithReferral = document.getElementById('displayWithReferral');
+        const displayWithCustom = document.getElementById('displayWithCustom');
+        const displayWithoutReferral = document.getElementById('displayWithoutReferral');
+
         // ── Payables DOM ──
         const toggleAccounts = document.getElementById('toggleAccounts');
         const toggleWithdrawals = document.getElementById('toggleWithdrawals');
@@ -3249,7 +3286,12 @@
                         customReferrals: {},
                         referralDiscounts: {},
                         customerAccounts: {},
-                        withdrawalRequests: {}
+                        withdrawalRequests: {},
+                        signupBonuses: {
+                            withReferral: 0,
+                            withCustomReferral: 0,
+                            withoutReferral: 0
+                        }
                     };
                     set(dbRef, allData).then(() => {
                         if (callback) callback(allData);
@@ -3272,6 +3314,14 @@
                         saveData(); }
                     if (!allData.withdrawalRequests) { allData.withdrawalRequests = {};
                         saveData(); }
+                    if (!allData.signupBonuses) {
+                        allData.signupBonuses = {
+                            withReferral: 0,
+                            withCustomReferral: 0,
+                            withoutReferral: 0
+                        };
+                        saveData();
+                    }
                     if (callback) callback(data);
                 }
             });
@@ -3391,6 +3441,7 @@
             renderReferralPromos();
             renderCustomReferrals();
             renderReferralDiscounts();
+            renderSignupBonuses();
 
             // ── Payables renders ──
             renderAccounts();
@@ -4037,6 +4088,16 @@
                     showToast('Edit and click Post to update', 'success');
                 });
             });
+        }
+
+        function renderSignupBonuses() {
+            const bonuses = allData.signupBonuses || { withReferral: 0, withCustomReferral: 0, withoutReferral: 0 };
+            displayWithReferral.textContent = `ZMW ${(bonuses.withReferral || 0).toFixed(2)}`;
+            displayWithCustom.textContent = `ZMW ${(bonuses.withCustomReferral || 0).toFixed(2)}`;
+            displayWithoutReferral.textContent = `ZMW ${(bonuses.withoutReferral || 0).toFixed(2)}`;
+            signupBonusWithReferral.value = bonuses.withReferral || '';
+            signupBonusWithCustomReferral.value = bonuses.withCustomReferral || '';
+            signupBonusWithoutReferral.value = bonuses.withoutReferral || '';
         }
 
         // ───────────────────────────────────────────────────────────────────
@@ -4769,6 +4830,28 @@
         });
 
         // ───────────────────────────────────────────────────────────────────
+        // SIGNUP BONUSES
+        // ───────────────────────────────────────────────────────────────────
+
+        saveSignupBonusesBtn.addEventListener('click', function() {
+            const withReferral = parseFloat(signupBonusWithReferral.value) || 0;
+            const withCustomReferral = parseFloat(signupBonusWithCustomReferral.value) || 0;
+            const withoutReferral = parseFloat(signupBonusWithoutReferral.value) || 0;
+
+            if (!allData.signupBonuses) {
+                allData.signupBonuses = { withReferral: 0, withCustomReferral: 0, withoutReferral: 0 };
+            }
+            allData.signupBonuses.withReferral = withReferral;
+            allData.signupBonuses.withCustomReferral = withCustomReferral;
+            allData.signupBonuses.withoutReferral = withoutReferral;
+
+            saveData().then(() => {
+                renderAll();
+                showToast('Signup bonuses saved!');
+            });
+        });
+
+        // ───────────────────────────────────────────────────────────────────
         // PAYABLES TOGGLES
         // ───────────────────────────────────────────────────────────────────
 
@@ -5317,7 +5400,7 @@
             }
         });
 
-        console.log('✅ Admin App ready — Referral & Payables integrated.');
+        console.log('✅ Admin App ready — Referral, Payables & Signup Bonuses integrated.');
     </script>
 </body>
 </html>
