@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>BUFFER ZONE · Login &amp; Signup</title>
 
-    <!-- ═══ ADDITION 1: Manifest link ═══ -->
+    <!-- Manifest link -->
     <link rel="manifest" href="manifest.json" />
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,500;14..32,700;14..32,800&display=swap" rel="stylesheet" />
@@ -315,6 +315,61 @@
             color: rgba(0, 0, 0, 0.50);
         }
 
+        /* ─── Referral dropdown styles ─── */
+        .referral-toggle-btn {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.50);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 0;
+        }
+
+        .referral-toggle-btn:hover {
+            background: rgba(0, 0, 0, 0.06);
+            color: #000000;
+        }
+
+        .referral-toggle-btn i {
+            font-size: 14px;
+        }
+
+        .referral-dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .referral-dropdown.open {
+            max-height: 180px;
+            opacity: 1;
+            margin-top: 14px;
+        }
+
+        .referral-dropdown .form-group {
+            margin-bottom: 0;
+        }
+
+        .referral-msg {
+            font-size: 13px;
+            margin-top: 6px;
+            min-height: 20px;
+            color: rgba(0, 0, 0, 0.40);
+            transition: color 0.3s ease;
+        }
+
         @media (max-width: 600px) {
             .hero-logo {
                 max-width: 90%;
@@ -455,15 +510,23 @@
                     </div>
                 </div>
 
-                <!-- ═══ NEW: Referral Code Field ═══ -->
-                <div class="form-group">
-                    <span class="label">Referral code (optional)</span>
-                    <div class="input-wrap">
-                        <i class="fas fa-gift icon"></i>
-                        <input type="text" id="referralCode" placeholder="e.g. BZ-12ABC" />
+                <!-- ═══ REFERRAL CODE – DROPDOWN BUTTON ═══ -->
+                <div style="width:100%; margin-bottom:18px;">
+                    <button type="button" class="referral-toggle-btn" id="referralToggleBtn">
+                        <i class="fas fa-gift"></i>
+                        <span>Have a referral code?</span>
+                        <i class="fas fa-chevron-down" id="referralChevron" style="margin-left:auto; transition:transform 0.3s ease;"></i>
+                    </button>
+                    <div class="referral-dropdown" id="referralDropdown">
+                        <div class="form-group">
+                            <span class="label">Referral code</span>
+                            <div class="input-wrap">
+                                <i class="fas fa-tag icon"></i>
+                                <input type="text" id="referralCode" placeholder="e.g. BZ-12ABC" />
+                            </div>
+                            <div class="referral-msg" id="referralMsg">&#8203;</div>
+                        </div>
                     </div>
-                    <!-- Message displayed below the field -->
-                    <div id="referralMsg" style="font-size:13px; margin-top:6px; min-height:20px; color:rgba(0,0,0,0.40);">&#8203;</div>
                 </div>
 
                 <button type="submit" class="btn-primary" id="signupBtn">
@@ -506,7 +569,6 @@
             query,
             orderByChild,
             equalTo,
-            update,
             push
         } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
 
@@ -553,7 +615,10 @@
         const toggleSignupPass = document.getElementById('toggleSignupPass');
         const toggleConfirmPass = document.getElementById('toggleConfirmPass');
 
-        // ═══ NEW: Referral DOM elements ═══
+        // ─── Referral DOM elements ───
+        const referralToggleBtn = document.getElementById('referralToggleBtn');
+        const referralDropdown = document.getElementById('referralDropdown');
+        const referralChevron = document.getElementById('referralChevron');
         const referralCodeInput = document.getElementById('referralCode');
         const referralMsg = document.getElementById('referralMsg');
 
@@ -681,7 +746,6 @@
 
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
-                // Auth state listener will handle redirect
                 disableAuthRedirect = false;
             } catch (error) {
                 setLoading(loginBtn, false);
@@ -696,11 +760,24 @@
             }
         });
 
-        // ═══ NEW: Functions for referral code generation & validation ═══
+        // ─── Referral dropdown toggle ───
+        referralToggleBtn.addEventListener('click', () => {
+            const isOpen = referralDropdown.classList.contains('open');
+            if (isOpen) {
+                referralDropdown.classList.remove('open');
+                referralChevron.style.transform = 'rotate(0deg)';
+                referralToggleBtn.querySelector('span').textContent = 'Have a referral code?';
+            } else {
+                referralDropdown.classList.add('open');
+                referralChevron.style.transform = 'rotate(180deg)';
+                referralToggleBtn.querySelector('span').textContent = 'Close referral code';
+                referralCodeInput.focus();
+            }
+        });
 
-        /** Generate a random referral code in format BZ-XXYYY where XX are digits, YYY are uppercase letters */
+        // ─── Referral code generation ───
         function generateRandomReferralCode() {
-            const digits = Math.floor(10 + Math.random() * 90); // 10-99 (two digits)
+            const digits = Math.floor(10 + Math.random() * 90);
             const letters = String.fromCharCode(
                 65 + Math.floor(Math.random() * 26),
                 65 + Math.floor(Math.random() * 26),
@@ -709,7 +786,6 @@
             return `BZ-${digits}${letters}`;
         }
 
-        /** Check if a referral code already exists in the database */
         async function referralCodeExists(code) {
             const usersRef = ref(db, 'users');
             const q = query(usersRef, orderByChild('referralCode'), equalTo(code));
@@ -717,7 +793,6 @@
             return snapshot.exists();
         }
 
-        /** Generate a unique referral code (max 10 attempts) */
         async function generateUniqueReferralCode() {
             for (let attempt = 0; attempt < 10; attempt++) {
                 const code = generateRandomReferralCode();
@@ -728,13 +803,11 @@
             throw new Error('Could not generate a unique referral code after 10 attempts.');
         }
 
-        /** Lookup a referral code and return the user data (uid, firstName, lastName) or null */
         async function lookupReferralCode(code) {
             const usersRef = ref(db, 'users');
             const q = query(usersRef, orderByChild('referralCode'), equalTo(code));
             const snapshot = await get(q);
             if (!snapshot.exists()) return null;
-            // Get the first matching user (there should be only one)
             let referrerUid = null;
             let referrerData = null;
             snapshot.forEach(child => {
@@ -744,29 +817,25 @@
             return { uid: referrerUid, ...referrerData };
         }
 
-        /** Handle referral code input validation and display message */
+        // ─── Referral code live validation ───
         let referralCheckTimeout = null;
         referralCodeInput.addEventListener('input', function() {
             clearTimeout(referralCheckTimeout);
             const code = this.value.trim().toUpperCase();
-            // Clear message if empty
             if (code === '') {
                 referralMsg.textContent = '\u200B';
                 referralMsg.style.color = 'rgba(0,0,0,0.40)';
                 return;
             }
-            // Basic format check (BZ- followed by 5 alphanumeric characters)
             if (!/^BZ-[A-Z0-9]{5}$/.test(code)) {
                 referralMsg.textContent = 'Format should be BZ-XXXXX (e.g. BZ-12ABC)';
                 referralMsg.style.color = '#c92a2a';
                 return;
             }
-            // Debounce database check
             referralCheckTimeout = setTimeout(async () => {
                 try {
                     const referrer = await lookupReferralCode(code);
                     if (referrer && referrer.uid) {
-                        // Display the username (first + last name) of the referrer
                         const name = [referrer.firstName, referrer.lastName].filter(Boolean).join(' ');
                         referralMsg.textContent = `This referral code belongs to ${name}`;
                         referralMsg.style.color = '#2b8a3e';
@@ -797,7 +866,6 @@
             signupStatus.className = 'status-msg';
             signupStatus.textContent = '\u200B';
 
-            // Validation
             if (!fName || fName.length < 1) {
                 signupStatus.textContent = '⚠️ First name is required.';
                 signupStatus.className = 'status-msg error';
@@ -860,17 +928,12 @@
             disableAuthRedirect = true;
 
             try {
-                // 1. Create user
                 const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
                 const user = userCredential.user;
-
-                // 2. Ensure auth token is fully available
                 await user.getIdTokenResult(true);
 
-                // 3. Generate a unique referral code for the new user
                 const newReferralCode = await generateUniqueReferralCode();
 
-                // 4. Prepare user data
                 const userData = {
                     firstName: fName,
                     lastName: lName,
@@ -885,11 +948,10 @@
                     userData.referredBy = referrerUid;
                 }
 
-                // 5. Write new user to database
                 const userRef = ref(db, 'users/' + user.uid);
                 await set(userRef, userData);
 
-                // 6. If referral was used, update the referrer's record
+                // Record referral for the referrer
                 if (referrerUid) {
                     const referrerRef = ref(db, 'users/' + referrerUid + '/referrals');
                     await push(referrerRef, {
@@ -898,14 +960,9 @@
                         newUserUid: user.uid,
                         timestamp: serverTimestamp()
                     });
-                    // Optional: also store a display message in the referrer's node (e.g. notifications)
-                    // Here we simply push the above object; the client can later display "X has registered with your referral code"
                 }
 
-                // 7. Sign out so the user must log in manually
                 await signOut(auth);
-
-                // 8. Redirect to login page with success indicator
                 window.location.href = 'login.html?signup=success';
             } catch (error) {
                 setLoading(signupBtn, false);
@@ -921,7 +978,7 @@
                 } else if (error.code === 'auth/network-request-failed') {
                     msg = '⚠️ Network error. Check your connection.';
                 } else if (error.code === 'PERMISSION_DENIED') {
-                    msg = '⚠️ Unable to save registration data. Please contact support.';
+                    msg = '⚠️ Unable to save registration data. Please check your Firebase database rules.';
                 } else {
                     msg = '⚠️ Registration data could not be saved: ' + (error.message || 'Unknown error');
                 }
@@ -942,7 +999,6 @@
         // ─── Auth state listener ───
         onAuthStateChanged(auth, (user) => {
             if (disableAuthRedirect) return;
-
             if (user) {
                 const email = user.email;
                 if (email && email.startsWith('admin@')) {
@@ -968,7 +1024,7 @@
         console.log('🔥 Buffer Zone login ready — Firebase modular SDK connected.');
     </script>
 
-    <!-- ═══ ADDITION 2: Service worker registration ═══ -->
+    <!-- Service worker registration -->
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js')
@@ -977,7 +1033,7 @@
         }
     </script>
 
-    <!-- ═══ ADDITION 3: Install banner ═══ -->
+    <!-- Install banner -->
     <style>
         .install-banner {
             position: fixed;
