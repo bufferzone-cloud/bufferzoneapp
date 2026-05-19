@@ -1605,7 +1605,7 @@
             line-height: 1.6;
         }
 
-        /* ===== NEW: ACCOUNT & REFERRAL SECTION ===== */
+        /* ===== REFERRAL & ACCOUNT ===== */
         .referral-code-box {
             background: #1c2128;
             border-radius: 16px;
@@ -2568,6 +2568,9 @@
                         promoPics: {},
                         disabled: false,
                         notifications: {},
+                        referralPromos: {},
+                        customReferrals: {},
+                        referralDiscounts: {},
                         customerAccounts: {},
                         withdrawalRequests: {}
                     };
@@ -2578,6 +2581,9 @@
                     if (!allData.promoPics) allData.promoPics = {};
                     if (!allData.customerAccounts) allData.customerAccounts = {};
                     if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
+                    if (!allData.referralPromos) allData.referralPromos = {};
+                    if (!allData.customReferrals) allData.customReferrals = {};
+                    if (!allData.referralDiscounts) allData.referralDiscounts = {};
                 }
                 renderAll();
                 if (callback) callback();
@@ -3200,7 +3206,7 @@
         }
 
         // =================================================================
-        // ACCOUNT & REFERRAL (NEW)
+        // ACCOUNT & REFERRAL
         // =================================================================
 
         function renderAccountAndReferral() {
@@ -3215,7 +3221,6 @@
                 navigator.clipboard.writeText(code).then(() => {
                     showToast('Referral code copied!', 'success');
                 }).catch(() => {
-                    // Fallback
                     const textArea = document.createElement('textarea');
                     textArea.value = code;
                     document.body.appendChild(textArea);
@@ -3233,7 +3238,7 @@
         }
 
         // =================================================================
-        // TRANSACTION MESSAGES (NEW)
+        // TRANSACTION MESSAGES
         // =================================================================
 
         function renderTransactionMessages() {
@@ -3271,7 +3276,6 @@
 
                 // Special messages
                 if (t.type?.toLowerCase().includes('referral') && t.userName) {
-                    const parts = t.type.split(' ');
                     const sourceName = t.userName || 'a user';
                     title = `💰 Referral Bonus`;
                     desc = `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${sourceName} who used your referral code.`;
