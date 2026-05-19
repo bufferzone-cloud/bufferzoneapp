@@ -92,36 +92,27 @@
             transform: scale(0.92);
         }
 
-        /* ── HEADER: Centered admin panel, admin name, and three buttons ── */
+        /* ── HEADER: Work button left, Admin name center, Promo button right ── */
         .header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 14px 0 12px 0;
+            justify-content: space-between;
+            padding: 10px 0 6px 0;
             transition: all 0.3s ease;
-            gap: 10px;
-            flex-wrap: wrap;
             position: relative;
+            flex-wrap: wrap;
         }
 
         .header-left {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 8px;
             flex: 0 0 auto;
         }
 
-        .header-left .top-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            justify-content: center;
-        }
-
         .work-avatar {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: #1c2128;
             color: #f5b83d;
@@ -129,7 +120,7 @@
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 14px;
+            font-size: 13px;
             flex-shrink: 0;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
@@ -143,71 +134,29 @@
             box-shadow: 0 6px 20px rgba(28, 33, 40, 0.4);
         }
 
-        .header-text {
+        .header-center {
             display: flex;
             flex-direction: column;
             align-items: center;
+            flex: 1;
+            text-align: center;
         }
-        .header-text span:first-child {
+
+        .header-center .admin-title {
             font-size: 11px;
             color: #888;
         }
-        .header-text span:last-child {
+        .header-center .admin-name {
             font-weight: 700;
-            font-size: 16px;
+            font-size: 17px;
             color: #1c2128;
             letter-spacing: -0.3px;
         }
 
-        /* ── THREE BUTTONS (Promo Pics, Referral, Payables) ── */
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 4px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .header-action-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #1c2128;
-            color: #fff;
-            padding: 5px 16px;
-            border-radius: 24px;
-            font-weight: 600;
-            font-size: 11px;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 12px rgba(28, 33, 40, 0.25);
-            border: none;
-            white-space: nowrap;
-        }
-        .header-action-btn i {
-            font-size: 14px;
-            color: #f5b83d;
-        }
-        .header-action-btn:active {
-            transform: scale(0.95);
-        }
-        .header-action-btn:hover {
-            box-shadow: 0 6px 20px rgba(28, 33, 40, 0.35);
-        }
-
-        .header-center {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-            gap: 10px;
-            min-width: 80px;
-        }
-
         .header-right {
             display: flex;
-            gap: 8px;
             align-items: center;
+            gap: 8px;
             flex: 0 0 auto;
         }
 
@@ -229,34 +178,47 @@
             transform: scale(0.92);
         }
 
-        .admin-title {
-            display: none;
-            text-align: center;
+        /* ── THREE BUTTONS BELOW HEADER ── */
+        .header-actions-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 6px 0 8px 0;
+            width: 100%;
+            flex-wrap: wrap;
         }
-        .admin-title span:first-child {
-            font-size: 11px;
-            color: #888;
-            display: block;
+        .header-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #1c2128;
+            color: #fff;
+            padding: 6px 18px;
+            border-radius: 24px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(28, 33, 40, 0.25);
+            border: none;
+            white-space: nowrap;
         }
-        .admin-title span:last-child {
-            font-weight: 700;
-            font-size: 16px;
-            color: #1c2128;
+        .header-action-btn i {
+            font-size: 14px;
+            color: #f5b83d;
+        }
+        .header-action-btn:active {
+            transform: scale(0.95);
+        }
+        .header-action-btn:hover {
+            box-shadow: 0 6px 20px rgba(28, 33, 40, 0.35);
         }
 
-        .header.work-active .admin-title {
-            display: block;
-        }
-        .header.work-active .header-actions {
+        .header.work-active .header-actions-row {
             display: none;
         }
-        .header.work-active .header-left .work-avatar {
-            display: flex;
-        }
-        .header.work-active .header-right .promo-header-btn {
-            display: none;
-        }
-        .header.work-active .header-right .btn-add-service {
+        .header.work-active .header-center .admin-title {
             display: none;
         }
 
@@ -847,7 +809,6 @@
             color: #dc2626;
         }
 
-        /* ── NICE STATUS BUTTON ── */
         .status-btn {
             display: inline-flex;
             align-items: center;
@@ -896,7 +857,6 @@
             color: #dc2626;
         }
 
-        /* ── ORDER STATUS MODAL (white floating form) ── */
         .status-modal-overlay {
             position: fixed;
             top: 0;
@@ -1549,7 +1509,6 @@
             justify-content: center;
         }
 
-        /* ── WORK PAGE ── */
         .work-page-header {
             text-align: center;
             padding: 12px 0 18px 0;
@@ -1863,7 +1822,6 @@
             padding: 8px 0;
         }
 
-        /* ── PROMO PICS PAGE — 1×1 grid, 800×450 px, no crop, no frame, floating ── */
         .promo-pics-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -2064,7 +2022,6 @@
             }
         }
 
-        /* ── REFERRAL PAGE STYLES ── */
         .referral-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -2135,7 +2092,6 @@
             font-size: 9px;
         }
 
-        /* ── PAYABLES PAGE STYLES ── */
         .payables-toggles {
             display: flex;
             gap: 12px;
@@ -2225,7 +2181,6 @@
             color: #1c2128;
         }
 
-        /* ── MODAL FOR REFERRAL FORM ── */
         #referralModal .modal {
             max-width: 440px;
         }
@@ -2241,6 +2196,43 @@
             outline: none;
             border-color: #1c2128;
         }
+
+        .user-select-item {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fafafa;
+        }
+        .user-select-item:hover {
+            border-color: #1c2128;
+            background: #f0f0f0;
+        }
+        .user-select-item.selected {
+            border-color: #f5b83d;
+            background: #fefaf0;
+        }
+        .user-select-item .name {
+            font-weight: 600;
+            font-size: 13px;
+            color: #1c2128;
+        }
+        .user-select-item .code {
+            font-size: 11px;
+            color: #888;
+        }
+        .user-select-item .badge {
+            font-size: 10px;
+            background: #1c2128;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
     </style>
 </head>
 <body>
@@ -2249,39 +2241,31 @@
 
         <div class="app-content" id="appContent">
 
-            <!-- ===== HEADER: Centered admin panel, admin name, and three buttons ===== -->
+            <!-- ===== HEADER: Work left, Admin name center, Promo right ===== -->
             <div class="header" id="mainHeader">
                 <div class="header-left">
-                    <div class="top-row">
-                        <div class="work-avatar" id="workAvatarBtn" title="View Work Page">Work</div>
-                        <div class="header-text" id="headerGreeting">
-                            <span>Admin Panel</span>
-                            <span id="adminName">Buffer Zone</span>
-                        </div>
-                    </div>
-                    <!-- Three buttons: Promo Pics, Referral, Payables -->
-                    <div class="header-actions">
-                        <button class="header-action-btn" id="promoPicsBtn">
-                            <i class="fa-regular fa-images"></i> Promo Pics
-                        </button>
-                        <button class="header-action-btn" id="referralBtn">
-                            <i class="fa-solid fa-gift"></i> Referral
-                        </button>
-                        <button class="header-action-btn" id="payablesBtn">
-                            <i class="fa-solid fa-money-bill-wave"></i> Payables
-                        </button>
-                    </div>
+                    <div class="work-avatar" id="workAvatarBtn" title="View Work Page">Work</div>
                 </div>
                 <div class="header-center">
-                    <div class="admin-title">
-                        <span>Admin Panel</span>
-                        <span id="adminNameCenter">Buffer Zone</span>
-                    </div>
+                    <div class="admin-title">Admin Panel</div>
+                    <div class="admin-name" id="adminNameCenter">Buffer Zone</div>
                 </div>
                 <div class="header-right">
                     <div class="promo-header-btn" id="promoHeaderBtn"><i class="fa-solid fa-tag"></i></div>
-                    <button class="btn btn-primary btn-sm btn-add-service" id="addServiceQuick"><i class="fa-solid fa-plus"></i></button>
                 </div>
+            </div>
+
+            <!-- ===== THREE BUTTONS BELOW HEADER ===== -->
+            <div class="header-actions-row">
+                <button class="header-action-btn" id="promoPicsBtn">
+                    <i class="fa-regular fa-images"></i> Promo Pics
+                </button>
+                <button class="header-action-btn" id="referralBtn">
+                    <i class="fa-solid fa-gift"></i> Referral
+                </button>
+                <button class="header-action-btn" id="payablesBtn">
+                    <i class="fa-solid fa-money-bill-wave"></i> Payables
+                </button>
             </div>
 
             <!-- ===== PAGE: DASHBOARD ===== -->
@@ -2417,7 +2401,6 @@
                     </div>
                 </div>
 
-                <!-- Three referral action cards -->
                 <div class="referral-grid">
                     <div class="referral-card" id="openReferralPromo">
                         <div class="icon"><i class="fa-solid fa-tag"></i></div>
@@ -2460,7 +2443,6 @@
                     <button class="toggle-btn" id="toggleWithdraws">Withdraws</button>
                 </div>
 
-                <!-- Accounts Section -->
                 <div id="payablesAccounts" style="display:block;">
                     <div class="card">
                         <div class="card-header">
@@ -2470,7 +2452,6 @@
                     </div>
                 </div>
 
-                <!-- Withdraws Section -->
                 <div id="payablesWithdraws" style="display:none;">
                     <div class="card">
                         <div class="card-header">
@@ -2918,9 +2899,10 @@
 
                 <div class="form-group" id="referralCustomFields" style="display:none;">
                     <label>Select User</label>
-                    <select id="referralUserSelect" required>
-                        <option value="">— Select a user —</option>
-                    </select>
+                    <div id="referralUserSelectContainer">
+                        <div class="text-muted" style="font-size:12px; padding:8px;">Loading users...</div>
+                    </div>
+                    <input type="hidden" id="referralUserId" />
                     <label style="margin-top:8px; display:block;">Amount for this User (ZMW)</label>
                     <input type="number" id="referralCustomAmount" placeholder="e.g. 100" step="0.01" required />
                 </div>
@@ -2986,6 +2968,7 @@
         let pendingStatusOrderId = null;
         let selectedStatus = null;
         let allUsersData = {};
+        let referralUsersList = [];
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -3058,7 +3041,6 @@
         const workUploadSubmit = document.getElementById('workUploadSubmit');
         const workUploadCancelBtn = document.getElementById('workUploadCancelBtn');
 
-        // Promo Pics
         const promoPicUploadModal = document.getElementById('promoPicUploadModal');
         const promoPicUploadCloseBtn = document.getElementById('promoPicUploadCloseBtn');
         const promoPicUploadForm = document.getElementById('promoPicUploadForm');
@@ -3070,14 +3052,14 @@
         const promoPicsGrid = document.getElementById('promoPicsGrid');
         const addPromoPicBtn = document.getElementById('addPromoPicBtn');
 
-        // Referral
         const referralModal = document.getElementById('referralModal');
         const referralModalCloseBtn = document.getElementById('referralModalCloseBtn');
         const referralForm = document.getElementById('referralForm');
         const editReferralId = document.getElementById('editReferralId');
         const referralType = document.getElementById('referralType');
         const referralAmount = document.getElementById('referralAmount');
-        const referralUserSelect = document.getElementById('referralUserSelect');
+        const referralUserSelectContainer = document.getElementById('referralUserSelectContainer');
+        const referralUserId = document.getElementById('referralUserId');
         const referralCustomAmount = document.getElementById('referralCustomAmount');
         const referralDiscountCode = document.getElementById('referralDiscountCode');
         const referralDiscountPercent = document.getElementById('referralDiscountPercent');
@@ -3088,7 +3070,6 @@
         const referralCustomFields = document.getElementById('referralCustomFields');
         const referralDiscountFields = document.getElementById('referralDiscountFields');
 
-        // Payables
         const toggleAccounts = document.getElementById('toggleAccounts');
         const toggleWithdraws = document.getElementById('toggleWithdraws');
         const payablesAccounts = document.getElementById('payablesAccounts');
@@ -3104,7 +3085,6 @@
         const deleteCancelBtn = document.getElementById('deleteCancelBtn');
         const deleteConfirmBtn = document.getElementById('deleteConfirmBtn');
 
-        // Order Status Modal
         const statusModal = document.getElementById('orderStatusModal');
         const statusModalCloseBtn = document.getElementById('statusModalCloseBtn');
         const statusOptionsContainer = document.getElementById('statusOptionsContainer');
@@ -3228,7 +3208,6 @@
                 const email = currentUser.email || 'No email';
                 const phone = currentAdminData?.phone || 'Not set';
 
-                adminNameEl.textContent = name;
                 adminNameCenterEl.textContent = name;
                 profileNameEl.textContent = name;
                 profileEmailEl.textContent = email;
@@ -3290,7 +3269,6 @@
             renderReferralPromos();
             renderCustomerBalances();
             renderWithdrawRequests();
-            populateReferralUserSelect();
         }
 
         function renderDashboard() {
@@ -3513,6 +3491,7 @@
                 }
                 container.innerHTML = entries.map(([uid, u]) => {
                     const isBanned = u.banned === true;
+                    const referralCode = u.referralCode || 'N/A';
                     return `
                                 <div class="customer-item" data-uid="${uid}">
                                     <div class="user-summary">
@@ -3524,6 +3503,7 @@
                                             </div>
                                         </div>
                                         <div style="display:flex;align-items:center;gap:10px;">
+                                            <span style="font-size:10px; color:#888; background:#f0f0f0; padding:2px 10px; border-radius:12px;">${referralCode}</span>
                                             <span class="user-status-badge ${isBanned ? 'banned' : 'active'}">${isBanned ? 'Banned' : 'Active'}</span>
                                             <button class="ban-toggle-btn" data-uid="${uid}" data-banned="${isBanned}">
                                                 <i class="fa-solid ${isBanned ? 'fa-toggle-off' : 'fa-toggle-on'}"></i>
@@ -3534,6 +3514,7 @@
                                     <div class="user-details">
                                         <div class="detail-row"><span class="label">Phone</span><span class="val">${u.phone || 'No phone'}</span></div>
                                         <div class="detail-row"><span class="label">Joined</span><span class="val">${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</span></div>
+                                        <div class="detail-row"><span class="label">Referral Code</span><span class="val">${referralCode}</span></div>
                                         <div class="actions">
                                             <button class="btn btn-danger btn-sm delete-user" data-uid="${uid}" style="padding:2px 10px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
                                         </div>
@@ -3638,10 +3619,6 @@
                     `).join('');
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // PROMO PICS
-        // ───────────────────────────────────────────────────────────────────
-
         function renderPromoPics() {
             const data = allData.promoPics || {};
             const entries = Object.entries(data);
@@ -3705,10 +3682,6 @@
             }
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // WORK POSTS (with frames preserved)
-        // ───────────────────────────────────────────────────────────────────
-
         function renderWorkPosts() {
             const container = document.getElementById('workPostsContainer');
             const posts = allData.workPosts || {};
@@ -3730,12 +3703,6 @@
                 flyer: '📄 Flyers',
                 website: '💻 Websites',
                 logo: '🎨 Logos'
-            };
-            const typeIcons = {
-                app: '📱',
-                flyer: '📄',
-                website: '💻',
-                logo: '🎨'
             };
 
             let html = '';
@@ -3825,10 +3792,6 @@
             });
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // WORK UPLOAD MODAL
-        // ───────────────────────────────────────────────────────────────────
-
         function openWorkUploadModal(type, editData = null) {
             workPostType.value = type;
             editWorkPostId.value = editData ? editData.key : '';
@@ -3908,10 +3871,6 @@
             openWorkUploadModal(post.type, { key, ...post });
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // WORK POST CRUD
-        // ───────────────────────────────────────────────────────────────────
-
         function addWorkPost(data) {
             const newId = 'wp' + Date.now();
             if (!allData.workPosts) allData.workPosts = {};
@@ -3943,10 +3902,6 @@
                 return saveData();
             }
         }
-
-        // ───────────────────────────────────────────────────────────────────
-        // REFERRAL PROMOS
-        // ───────────────────────────────────────────────────────────────────
 
         function renderReferralPromos() {
             const container = document.getElementById('referralPromosList');
@@ -3998,113 +3953,6 @@
                 });
             });
         }
-
-        function openReferralModal(type, editData = null) {
-            referralType.value = type;
-            editReferralId.value = editData ? editData.key : '';
-
-            referralStandardFields.style.display = 'none';
-            referralCustomFields.style.display = 'none';
-            referralDiscountFields.style.display = 'none';
-
-            if (type === 'standard') {
-                referralStandardFields.style.display = 'block';
-                document.getElementById('referralModalTitle').textContent = 'Set up Referral Promo';
-                document.getElementById('referralModalSub').textContent = 'Every referrer will receive this amount (ZMW) when someone signs up with their code.';
-                referralAmount.value = editData?.amount || '';
-            } else if (type === 'custom') {
-                referralCustomFields.style.display = 'block';
-                document.getElementById('referralModalTitle').textContent = 'Set up Custom Referral';
-                document.getElementById('referralModalSub').textContent = 'Select a user and set the amount they will receive per referral.';
-                if (editData) {
-                    referralUserSelect.value = editData.userId || '';
-                    referralCustomAmount.value = editData.amount || '';
-                } else {
-                    referralUserSelect.value = '';
-                    referralCustomAmount.value = '';
-                }
-                populateReferralUserSelect();
-            } else if (type === 'discount') {
-                referralDiscountFields.style.display = 'block';
-                document.getElementById('referralModalTitle').textContent = 'Referral Discount';
-                document.getElementById('referralModalSub').textContent = 'When a user applies this code to a service, they get a % discount, and the referrer gets the amount below.';
-                if (editData) {
-                    referralDiscountCode.value = editData.code || '';
-                    referralDiscountPercent.value = editData.discount || '';
-                    referralDiscountAmount.value = editData.amount || '';
-                } else {
-                    referralDiscountCode.value = '';
-                    referralDiscountPercent.value = '';
-                    referralDiscountAmount.value = '';
-                }
-            }
-
-            referralSubmitBtn.textContent = editData ? 'Update' : 'Save';
-            referralModal.classList.add('open');
-        }
-
-        function closeReferralModal() {
-            referralModal.classList.remove('open');
-        }
-
-        function openEditReferral(key) {
-            const data = allData.referralPromos?.[key];
-            if (!data) return;
-            openReferralModal(data.type, { key, ...data });
-        }
-
-        function populateReferralUserSelect() {
-            const select = referralUserSelect;
-            const currentValue = select.value;
-            select.innerHTML = '<option value="">— Select a user —</option>';
-            for (const uid in allUsersData) {
-                const u = allUsersData[uid];
-                const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || u.email || uid;
-                const opt = document.createElement('option');
-                opt.value = uid;
-                opt.textContent = `${name} (${u.email || 'No email'})`;
-                select.appendChild(opt);
-            }
-            select.value = currentValue;
-        }
-
-        function addReferralPromo(data) {
-            const newId = 'rp' + Date.now();
-            if (!allData.referralPromos) allData.referralPromos = {};
-            allData.referralPromos[newId] = {
-                id: newId,
-                type: data.type,
-                amount: parseFloat(data.amount) || 0,
-                userId: data.userId || '',
-                code: data.code || '',
-                discount: parseInt(data.discount) || 0,
-                createdAt: Date.now(),
-                updatedAt: Date.now()
-            };
-            return saveData();
-        }
-
-        function updateReferralPromo(key, data) {
-            if (!allData.referralPromos?.[key]) return;
-            const promo = allData.referralPromos[key];
-            promo.amount = parseFloat(data.amount) || 0;
-            promo.userId = data.userId || '';
-            promo.code = data.code || '';
-            promo.discount = parseInt(data.discount) || 0;
-            promo.updatedAt = Date.now();
-            return saveData();
-        }
-
-        function deleteReferralPromo(key) {
-            if (allData.referralPromos && allData.referralPromos[key]) {
-                delete allData.referralPromos[key];
-                return saveData();
-            }
-        }
-
-        // ───────────────────────────────────────────────────────────────────
-        // PAYABLES: Accounts & Withdraws
-        // ───────────────────────────────────────────────────────────────────
 
         function renderCustomerBalances() {
             const container = customerBalancesList;
@@ -4186,7 +4034,6 @@
                 return;
             }
             if (newStatus === 'approved') {
-                // Deduct from customer balance
                 const uid = req.userId;
                 const balances = allData.customerBalances || {};
                 const currentBalance = balances[uid] || 0;
@@ -4511,6 +4358,142 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
+        // REFERRAL PROMOS CRUD
+        // ───────────────────────────────────────────────────────────────────
+
+        function addReferralPromo(data) {
+            const newId = 'rp' + Date.now();
+            if (!allData.referralPromos) allData.referralPromos = {};
+            allData.referralPromos[newId] = {
+                id: newId,
+                type: data.type,
+                amount: parseFloat(data.amount) || 0,
+                userId: data.userId || '',
+                code: data.code || '',
+                discount: parseInt(data.discount) || 0,
+                createdAt: Date.now(),
+                updatedAt: Date.now()
+            };
+            return saveData();
+        }
+
+        function updateReferralPromo(key, data) {
+            if (!allData.referralPromos?.[key]) return;
+            const promo = allData.referralPromos[key];
+            promo.amount = parseFloat(data.amount) || 0;
+            promo.userId = data.userId || '';
+            promo.code = data.code || '';
+            promo.discount = parseInt(data.discount) || 0;
+            promo.updatedAt = Date.now();
+            return saveData();
+        }
+
+        function deleteReferralPromo(key) {
+            if (allData.referralPromos && allData.referralPromos[key]) {
+                delete allData.referralPromos[key];
+                return saveData();
+            }
+        }
+
+        // ───────────────────────────────────────────────────────────────────
+        // REFERRAL MODAL
+        // ───────────────────────────────────────────────────────────────────
+
+        function openReferralModal(type, editData = null) {
+            referralType.value = type;
+            editReferralId.value = editData ? editData.key : '';
+
+            referralStandardFields.style.display = 'none';
+            referralCustomFields.style.display = 'none';
+            referralDiscountFields.style.display = 'none';
+
+            if (type === 'standard') {
+                referralStandardFields.style.display = 'block';
+                document.getElementById('referralModalTitle').textContent = 'Set up Referral Promo';
+                document.getElementById('referralModalSub').textContent = 'Every referrer will receive this amount (ZMW) when someone signs up with their code.';
+                referralAmount.value = editData?.amount || '';
+            } else if (type === 'custom') {
+                referralCustomFields.style.display = 'block';
+                document.getElementById('referralModalTitle').textContent = 'Set up Custom Referral';
+                document.getElementById('referralModalSub').textContent = 'Select a user and set the amount they will receive per referral.';
+                if (editData) {
+                    referralUserId.value = editData.userId || '';
+                    referralCustomAmount.value = editData.amount || '';
+                } else {
+                    referralUserId.value = '';
+                    referralCustomAmount.value = '';
+                }
+                renderReferralUserSelect();
+            } else if (type === 'discount') {
+                referralDiscountFields.style.display = 'block';
+                document.getElementById('referralModalTitle').textContent = 'Referral Discount';
+                document.getElementById('referralModalSub').textContent = 'When a user applies this code to a service, they get a % discount, and the referrer gets the amount below.';
+                if (editData) {
+                    referralDiscountCode.value = editData.code || '';
+                    referralDiscountPercent.value = editData.discount || '';
+                    referralDiscountAmount.value = editData.amount || '';
+                } else {
+                    referralDiscountCode.value = '';
+                    referralDiscountPercent.value = '';
+                    referralDiscountAmount.value = '';
+                }
+            }
+
+            referralSubmitBtn.textContent = editData ? 'Update' : 'Save';
+            referralModal.classList.add('open');
+        }
+
+        function closeReferralModal() {
+            referralModal.classList.remove('open');
+        }
+
+        function openEditReferral(key) {
+            const data = allData.referralPromos?.[key];
+            if (!data) return;
+            openReferralModal(data.type, { key, ...data });
+        }
+
+        function renderReferralUserSelect() {
+            const container = referralUserSelectContainer;
+            const users = allUsersData || {};
+            const entries = Object.entries(users);
+
+            if (entries.length === 0) {
+                container.innerHTML = `<div class="text-muted" style="font-size:12px; padding:8px;">No users found.</div>`;
+                return;
+            }
+
+            let html = '';
+            entries.forEach(([uid, u]) => {
+                const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || u.email || uid;
+                const code = u.referralCode || 'N/A';
+                const selected = referralUserId.value === uid ? 'selected' : '';
+                html += `
+                            <div class="user-select-item ${selected}" data-uid="${uid}">
+                                <div>
+                                    <div class="name">${name}</div>
+                                    <div class="code">Referral Code: ${code}</div>
+                                </div>
+                                <div class="badge">${selected ? '✓ Selected' : 'Select'}</div>
+                            </div>
+                        `;
+            });
+
+            container.innerHTML = html;
+
+            container.querySelectorAll('.user-select-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    container.querySelectorAll('.user-select-item').forEach(el => el.classList.remove('selected'));
+                    this.classList.add('selected');
+                    referralUserId.value = this.dataset.uid;
+                    // Update the badge text
+                    container.querySelectorAll('.user-select-item .badge').forEach(b => b.textContent = 'Select');
+                    this.querySelector('.badge').textContent = '✓ Selected';
+                });
+            });
+        }
+
+        // ───────────────────────────────────────────────────────────────────
         // EVENT BINDINGS
         // ───────────────────────────────────────────────────────────────────
 
@@ -4518,7 +4501,6 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-work').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            mainHeader.classList.add('work-active');
             document.getElementById('appContent').scrollTop = 0;
         });
 
@@ -4527,7 +4509,6 @@
             document.getElementById('page-promo-pics').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.querySelector('.nav-item[data-page="promo-pics"]').classList.add('active');
-            mainHeader.classList.remove('work-active');
             document.getElementById('appContent').scrollTop = 0;
         });
 
@@ -4535,7 +4516,6 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-referral').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            mainHeader.classList.remove('work-active');
             document.getElementById('appContent').scrollTop = 0;
         });
 
@@ -4543,7 +4523,6 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-payables').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            mainHeader.classList.remove('work-active');
             document.getElementById('appContent').scrollTop = 0;
         });
 
@@ -4556,9 +4535,6 @@
                 const target = document.getElementById('page-' + page);
                 if (target) target.classList.add('active');
                 document.getElementById('appContent').scrollTop = 0;
-                if (page !== 'work') {
-                    mainHeader.classList.remove('work-active');
-                }
             });
         });
 
@@ -4575,7 +4551,6 @@
             if (e.target === this) closeWorkUploadModal();
         });
 
-        // Cloudinary for work uploads — 50 MB
         setupCloudinaryUpload(workImagePreview, workImageUrl, workImagePreview, (url) => {
             const type = workPostType.value;
             if (type === 'app') {
@@ -4649,7 +4624,6 @@
             }
         });
 
-        // ── Promo Pics Upload ──
         addPromoPicBtn.addEventListener('click', () => {
             promoPicUploadModal.classList.add('open');
         });
@@ -4664,7 +4638,6 @@
             if (e.target === promoPicUploadModal) promoPicUploadModal.classList.remove('open');
         });
 
-        // Cloudinary for promo pics — 50 MB
         setupCloudinaryUpload(promoPicImagePreview, promoPicImageUrl, promoPicImagePreview);
 
         promoPicUploadForm.addEventListener('submit', function(e) {
@@ -4694,7 +4667,6 @@
             });
         });
 
-        // ── Referral Promos ──
         document.getElementById('openReferralPromo').addEventListener('click', () => {
             openReferralModal('standard');
         });
@@ -4725,7 +4697,7 @@
                 }
                 data.amount = amount;
             } else if (type === 'custom') {
-                const userId = referralUserSelect.value;
+                const userId = referralUserId.value;
                 const amount = parseFloat(referralCustomAmount.value);
                 if (!userId) {
                     showToast('Please select a user.', 'error');
@@ -4773,7 +4745,6 @@
             }
         });
 
-        // ── Payables Toggles ──
         toggleAccounts.addEventListener('click', function() {
             toggleAccounts.classList.add('active');
             toggleWithdraws.classList.remove('active');
@@ -4787,8 +4758,6 @@
             payablesWithdraws.style.display = 'block';
         });
 
-        // ── Other buttons ──
-
         document.getElementById('addServiceBtn').addEventListener('click', () => {
             openModal('Add Service', 'Fill in the details to create a new service.', null);
         });
@@ -4800,7 +4769,6 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-promotions').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            mainHeader.classList.remove('work-active');
         });
 
         document.getElementById('addPromoBtn').addEventListener('click', () => {
@@ -4978,22 +4946,18 @@
 
         document.getElementById('viewOrdersQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="orders"]').click();
-            mainHeader.classList.remove('work-active');
         });
 
         document.getElementById('viewUsersQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="users"]').click();
-            mainHeader.classList.remove('work-active');
         });
 
         document.getElementById('viewPromoPicsQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="promo-pics"]').click();
-            mainHeader.classList.remove('work-active');
         });
 
         document.getElementById('viewAllActivity').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="orders"]').click();
-            mainHeader.classList.remove('work-active');
         });
 
         document.getElementById('logoutBtn').addEventListener('click', () => {
@@ -5066,7 +5030,7 @@
             }
         });
 
-        console.log('✅ Admin App ready — Centered header, three action buttons (Promo Pics, Referral, Payables).');
+        console.log('✅ Admin App ready — Header: Work left, Admin name center, Promo right, three buttons below.');
     </script>
 </body>
 </html>
