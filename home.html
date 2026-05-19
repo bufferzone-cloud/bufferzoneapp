@@ -544,21 +544,51 @@
             line-height: 1.2;
         }
 
-        .thumb-1 { background: linear-gradient(135deg, #0f0f0f 0%, #3a3a3a 100%); }
-        .thumb-2 { background: linear-gradient(135deg, #004d59 0%, #0d2528 100%); }
-        .thumb-3 { background: linear-gradient(135deg, #e0e0e0 0%, #b3b3b3 100%); }
-        .thumb-4 { background: linear-gradient(135deg, #1a1a1a 0%, #504a4a 100%); }
-        .thumb-5 { background: linear-gradient(135deg, #5b4f46 0%, #24201c 100%); }
-        .thumb-6 { background: linear-gradient(135deg, #3f3f3f 0%, #1f1f1f 100%); }
-        .thumb-7 { background: linear-gradient(135deg, #2a3b4c 0%, #1a252f 100%); }
-        .thumb-8 { background: linear-gradient(135deg, #4a3a2a 0%, #2e241a 100%); }
-        .thumb-9 { background: linear-gradient(135deg, #1e4a3a 0%, #0f2a22 100%); }
-        .thumb-10 { background: linear-gradient(135deg, #4a2a3a 0%, #2e1a24 100%); }
-        .thumb-11 { background: linear-gradient(135deg, #3a4a2a 0%, #1f2a15 100%); }
-        .thumb-12 { background: linear-gradient(135deg, #4a3a4a 0%, #2e1f2e 100%); }
-        .thumb-13 { background: linear-gradient(135deg, #6a4a3a 0%, #3a2a1a 100%); }
-        .thumb-14 { background: linear-gradient(135deg, #2a6a4a 0%, #1a3a2a 100%); }
-        .thumb-15 { background: linear-gradient(135deg, #4a6a3a 0%, #2a3a1a 100%); }
+        .thumb-1 {
+            background: linear-gradient(135deg, #0f0f0f 0%, #3a3a3a 100%);
+        }
+        .thumb-2 {
+            background: linear-gradient(135deg, #004d59 0%, #0d2528 100%);
+        }
+        .thumb-3 {
+            background: linear-gradient(135deg, #e0e0e0 0%, #b3b3b3 100%);
+        }
+        .thumb-4 {
+            background: linear-gradient(135deg, #1a1a1a 0%, #504a4a 100%);
+        }
+        .thumb-5 {
+            background: linear-gradient(135deg, #5b4f46 0%, #24201c 100%);
+        }
+        .thumb-6 {
+            background: linear-gradient(135deg, #3f3f3f 0%, #1f1f1f 100%);
+        }
+        .thumb-7 {
+            background: linear-gradient(135deg, #2a3b4c 0%, #1a252f 100%);
+        }
+        .thumb-8 {
+            background: linear-gradient(135deg, #4a3a2a 0%, #2e241a 100%);
+        }
+        .thumb-9 {
+            background: linear-gradient(135deg, #1e4a3a 0%, #0f2a22 100%);
+        }
+        .thumb-10 {
+            background: linear-gradient(135deg, #4a2a3a 0%, #2e1a24 100%);
+        }
+        .thumb-11 {
+            background: linear-gradient(135deg, #3a4a2a 0%, #1f2a15 100%);
+        }
+        .thumb-12 {
+            background: linear-gradient(135deg, #4a3a4a 0%, #2e1f2e 100%);
+        }
+        .thumb-13 {
+            background: linear-gradient(135deg, #6a4a3a 0%, #3a2a1a 100%);
+        }
+        .thumb-14 {
+            background: linear-gradient(135deg, #2a6a4a 0%, #1a3a2a 100%);
+        }
+        .thumb-15 {
+            background: linear-gradient(135deg, #4a6a3a 0%, #2a3a1a 100%);
+        }
 
         /* ===== ORDER FLOW ===== */
         .order-flow-container {
@@ -1100,12 +1130,30 @@
             margin-bottom: 2px;
         }
 
-        .status-pending { background: #fff6e0; color: #cc8800; }
-        .status-progress { background: #e0f0ff; color: #0066cc; }
-        .status-completed { background: #e6fffa; color: #00a86b; }
-        .status-review { background: #f0e6ff; color: #7700cc; }
-        .status-cancelled { background: #fee2e2; color: #dc2626; }
-        .status-done { background: #d1fae5; color: #065f46; }
+        .status-pending {
+            background: #fff6e0;
+            color: #cc8800;
+        }
+        .status-progress {
+            background: #e0f0ff;
+            color: #0066cc;
+        }
+        .status-completed {
+            background: #e6fffa;
+            color: #00a86b;
+        }
+        .status-review {
+            background: #f0e6ff;
+            color: #7700cc;
+        }
+        .status-cancelled {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        .status-done {
+            background: #d1fae5;
+            color: #065f46;
+        }
 
         .order-card .order-details-expand {
             max-height: 0;
@@ -1721,6 +1769,7 @@
             color: #dc2626;
         }
 
+        /* ===== WITHDRAWAL MODAL ===== */
         .withdraw-modal-overlay {
             position: fixed;
             top: 0;
@@ -1934,6 +1983,106 @@
             transform: scale(0.95);
         }
 
+        /* ===== TRANSACTIONS VIEW – NEW ===== */
+        .transactions-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 0 6px 0;
+        }
+        .transactions-header h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1c2128;
+        }
+        .transactions-header button {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #1c2128;
+            cursor: pointer;
+            padding: 2px 6px;
+        }
+
+        .total-withdrawn-box {
+            background: linear-gradient(135deg, #1c2128 0%, #2a2a2a 100%);
+            border-radius: 20px;
+            padding: 24px 20px;
+            margin: 0 0 18px 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+        }
+        .total-withdrawn-box .label {
+            font-size: 11px;
+            color: #f5b83d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .total-withdrawn-box .amount {
+            font-size: 48px;
+            font-weight: 900;
+            color: #fff;
+            margin: 4px 0;
+            letter-spacing: 1px;
+        }
+        .total-withdrawn-box .sub {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .withdrawal-item {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .withdrawal-item .left .amount {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1c2128;
+        }
+        .withdrawal-item .left .date {
+            font-size: 11px;
+            color: #888;
+        }
+        .withdrawal-item .status-badge {
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        .withdrawal-item .status-badge.pending {
+            background: #fff6e0;
+            color: #cc8800;
+        }
+        .withdrawal-item .status-badge.approved {
+            background: #e6fffa;
+            color: #00a86b;
+        }
+        .withdrawal-item .status-badge.declined {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .empty-withdrawals {
+            text-align: center;
+            padding: 30px 0;
+            color: #888;
+        }
+        .empty-withdrawals i {
+            font-size: 40px;
+            color: #ddd;
+            display: block;
+            margin-bottom: 8px;
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 420px) {
             .app-content {
@@ -1972,6 +2121,9 @@
             }
             .account-balance-box .left .balance {
                 font-size: 22px;
+            }
+            .total-withdrawn-box .amount {
+                font-size: 32px;
             }
         }
 
@@ -2144,11 +2296,9 @@
                 </div>
 
                 <!-- ===== TRANSACTIONS BUTTON (NEW) ===== -->
-                <div style="margin: 8px 0 16px 0;">
-                    <button id="transactionsBtn" style="width:100%; padding:10px; background:#1c2128; color:white; border:none; border-radius:12px; font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
-                        <i class="fa-solid fa-credit-card"></i> Withdrawal Transactions
-                    </button>
-                </div>
+                <button class="btn-primary" id="viewTransactionsBtn" style="margin: 12px 0 16px 0; background: #1c2128; color: white; border: none; border-radius: 12px; padding: 12px 16px; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;">
+                    <i class="fa-solid fa-receipt"></i> View My Transactions
+                </button>
 
                 <div class="profile-card">
                     <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
@@ -2166,23 +2316,24 @@
                 </div>
             </div>
 
-            <!-- ===== VIEW: TRANSACTIONS (NEW PAGE) ===== -->
+            <!-- ===== NEW VIEW: TRANSACTIONS (Withdrawals) ===== -->
             <div id="transactionsView" class="view">
-                <div style="display: flex; align-items: center; gap: 10px; padding: 0 0 10px 0;">
-                    <button id="backFromTransactions" style="background: none; border: none; font-size: 16px; color: #1c2128; cursor: pointer; padding: 3px;">
-                        <i class="fa-solid fa-arrow-left"></i>
-                    </button>
-                    <h3 style="font-weight: 700; font-size: 14px; color: #1c2128;">Withdrawal Transactions</h3>
+                <div class="transactions-header">
+                    <button id="backFromTransactions"><i class="fa-solid fa-arrow-left"></i></button>
+                    <h2>My Transactions</h2>
                 </div>
 
-                <!-- Total Withdrawn Display -->
-                <div style="background: linear-gradient(135deg, #1c2128 0%, #2a2a2a 100%); border-radius: 16px; padding: 20px 16px; margin: 0 0 16px 0; text-align: center; color: white;">
-                    <div style="font-size: 10px; color: #f5b83d; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Total Withdrawn</div>
-                    <div style="font-size: 32px; font-weight: 800; color: #fff;" id="totalWithdrawnDisplay">ZMW 0.00</div>
+                <!-- ===== TOTAL WITHDRAWN (HUGE DISPLAY) ===== -->
+                <div class="total-withdrawn-box" id="totalWithdrawnBox">
+                    <div class="label">Total Withdrawn</div>
+                    <div class="amount" id="totalWithdrawnAmount">ZMW 0.00</div>
+                    <div class="sub">All-time withdrawal requests</div>
                 </div>
 
-                <!-- Withdrawal List -->
-                <div id="withdrawalTransactionList" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                <!-- ===== WITHDRAWAL REQUESTS LIST ===== -->
+                <div id="withdrawalsListContainer">
+                    <!-- Rendered by JS -->
+                </div>
             </div>
 
         </div>
@@ -2275,7 +2426,7 @@
             <h3>💸 Withdraw Funds</h3>
             <p class="sub">Enter the amount you'd like to withdraw from your account.</p>
             <div class="form-group">
-                <label>Amount (ZMW)</label>
+                <label>Amount (ZMW) — max: <span id="withdrawMaxLabel">0.00</span></label>
                 <input type="number" id="withdrawAmountInput" placeholder="e.g. 50" step="0.01" />
             </div>
             <button class="btn-withdraw" id="confirmWithdrawBtn"><i class="fa-solid fa-arrow-up"></i> Submit Withdrawal</button>
@@ -2454,6 +2605,7 @@
         const withdrawAmountInput = document.getElementById('withdrawAmountInput');
         const confirmWithdrawBtn = document.getElementById('confirmWithdrawBtn');
         const cancelWithdrawBtn = document.getElementById('cancelWithdrawBtn');
+        const withdrawMaxLabel = document.getElementById('withdrawMaxLabel');
 
         const withdrawSuccessModal = document.getElementById('withdrawSuccessModal');
         const withdrawSuccessOkBtn = document.getElementById('withdrawSuccessOkBtn');
@@ -2467,12 +2619,12 @@
         const applyReferralBtn = document.getElementById('applyReferralBtn');
         const referralMsg = document.getElementById('referralMsg');
 
-        // ===== NEW: Transactions view elements =====
+        // ===== NEW: Transactions View =====
         const transactionsView = document.getElementById('transactionsView');
         const backFromTransactions = document.getElementById('backFromTransactions');
-        const transactionsBtn = document.getElementById('transactionsBtn');
-        const totalWithdrawnDisplay = document.getElementById('totalWithdrawnDisplay');
-        const withdrawalTransactionList = document.getElementById('withdrawalTransactionList');
+        const viewTransactionsBtn = document.getElementById('viewTransactionsBtn');
+        const totalWithdrawnAmount = document.getElementById('totalWithdrawnAmount');
+        const withdrawalsListContainer = document.getElementById('withdrawalsListContainer');
 
         // =================================================================
         // HELPER FUNCTIONS
@@ -2665,7 +2817,7 @@
             renderNotifications();
             renderAccountAndReferral();
             renderTransactionMessages();
-            renderWithdrawalTransactions();
+            renderWithdrawalsList();
 
             if (allData.policy) {
                 const p = allData.policy;
@@ -3354,60 +3506,53 @@
         }
 
         // =================================================================
-        // WITHDRAWAL TRANSACTIONS (NEW)
+        // WITHDRAWALS LIST – NEW
         // =================================================================
 
-        function renderWithdrawalTransactions() {
+        function renderWithdrawalsList() {
+            const container = withdrawalsListContainer;
             const withdrawals = allData.withdrawalRequests || {};
             const entries = Object.entries(withdrawals)
                 .filter(([key, w]) => w.userId === currentUserId)
                 .sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
 
-            // Calculate total withdrawn (sum of approved amounts)
+            // Calculate total withdrawn (all approved withdrawals)
             let totalWithdrawn = 0;
             entries.forEach(([key, w]) => {
                 if (w.status === 'approved') {
                     totalWithdrawn += (w.amount || 0);
                 }
             });
-            totalWithdrawnDisplay.textContent = `ZMW ${totalWithdrawn.toFixed(2)}`;
+            totalWithdrawnAmount.textContent = `ZMW ${totalWithdrawn.toFixed(2)}`;
 
-            // Render list
             if (entries.length === 0) {
-                withdrawalTransactionList.innerHTML = `
-                    <div style="text-align:center;padding:20px;color:#888;font-size:13px;">No withdrawal transactions found.</div>
+                container.innerHTML = `
+                    <div class="empty-withdrawals">
+                        <i class="fa-regular fa-receipt"></i>
+                        No withdrawal requests yet.
+                    </div>
                 `;
                 return;
             }
 
-            withdrawalTransactionList.innerHTML = entries.map(([key, w]) => {
-                let statusColor = '#888';
-                let statusLabel = w.status || 'pending';
-                if (w.status === 'approved') {
-                    statusColor = '#00a86b';
-                    statusLabel = 'Approved';
-                } else if (w.status === 'declined') {
-                    statusColor = '#dc2626';
-                    statusLabel = 'Declined';
-                } else if (w.status === 'pending') {
-                    statusColor = '#cc8800';
-                    statusLabel = 'Pending';
-                }
+            container.innerHTML = entries.map(([key, w]) => {
+                const statusClass = w.status || 'pending';
+                const statusDisplay = w.status ? w.status.charAt(0).toUpperCase() + w.status.slice(1) : 'Pending';
+                const dateStr = w.date ? new Date(w.date).toLocaleString() : (w.createdAt ? new Date(w.createdAt).toLocaleString() : 'N/A');
+
+                let statusEmoji = '⏳';
+                if (w.status === 'approved') statusEmoji = '✅';
+                else if (w.status === 'declined') statusEmoji = '❌';
 
                 return `
-                    <div style="background:#ffffff; border-radius:12px; padding:14px 16px; border:1px solid #f0f0f0; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div>
-                                <div style="font-weight:600; font-size:14px; color:#1c2128;">ZMW ${(w.amount || 0).toFixed(2)}</div>
-                                <div style="font-size:12px; color:#888;">${w.date ? new Date(w.date).toLocaleString() : 'N/A'}</div>
-                            </div>
-                            <div>
-                                <span style="display:inline-block; padding:3px 12px; border-radius:12px; font-size:11px; font-weight:600; background:${statusColor}20; color:${statusColor};">
-                                    ${statusLabel}
-                                </span>
-                            </div>
+                    <div class="withdrawal-item">
+                        <div class="left">
+                            <div class="amount">${statusEmoji} ZMW ${(w.amount || 0).toFixed(2)}</div>
+                            <div class="date">${dateStr}</div>
                         </div>
-                        ${w.phone ? `<div style="font-size:11px; color:#888; margin-top:4px;">Phone: ${w.phone}</div>` : ''}
+                        <div>
+                            <span class="status-badge ${statusClass}">${statusDisplay}</span>
+                        </div>
                     </div>
                 `;
             }).join('');
@@ -3943,6 +4088,10 @@
         // =================================================================
 
         function openWithdrawModal() {
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+            withdrawMaxLabel.textContent = balance.toFixed(2);
             withdrawModal.classList.add('open');
             withdrawAmountInput.value = '';
         }
@@ -3963,7 +4112,7 @@
             const balance = userAccount.balance || 0;
 
             if (amount > balance) {
-                showToast('Insufficient balance.', 'error');
+                showToast('Insufficient balance. You have ZMW ' + balance.toFixed(2), 'error');
                 return;
             }
 
@@ -4136,9 +4285,10 @@
             }
         });
 
-        // ===== Transactions button =====
-        transactionsBtn.addEventListener('click', function() {
+        // ===== NEW: View Transactions =====
+        viewTransactionsBtn.addEventListener('click', function() {
             switchView('transactionsView');
+            renderWithdrawalsList();
         });
 
         backFromTransactions.addEventListener('click', function() {
@@ -4174,7 +4324,7 @@
             }
         });
 
-        console.log('✅ Final Customer App – Withdrawal transactions page with total withdrawn amount added.');
+        console.log('✅ Customer App – Transactions view added with total withdrawn display and withdrawal status tracking.');
     </script>
 </body>
 </html>
