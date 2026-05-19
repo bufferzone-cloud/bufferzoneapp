@@ -3088,7 +3088,10 @@
 
         function renderNotifications() {
             const notifications = allData.notifications || {};
-            const entries = Object.entries(notifications).sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
+            const entries = Object.entries(notifications)
+                .filter(([key, n]) => n.userId === currentUserId)
+                .sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
+
             if (entries.length === 0) {
                 notifList.innerHTML =
                     `<div style="text-align:center;padding:30px;color:#888;"><i class="fa-regular fa-bell-slash" style="font-size:32px;color:#ddd;display:block;margin-bottom:8px;"></i>No notifications</div>`;
@@ -4068,7 +4071,7 @@
             }
         });
 
-        console.log('✅ Final Customer App – Referral code, Account balance, Withdrawals, and Transaction messages integrated.');
+        console.log('✅ Final Customer App – Notifications filtered per user, withdrawal requests shown in history.');
     </script>
 </body>
 </html>
