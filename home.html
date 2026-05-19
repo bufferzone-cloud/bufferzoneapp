@@ -544,51 +544,21 @@
             line-height: 1.2;
         }
 
-        .thumb-1 {
-            background: linear-gradient(135deg, #0f0f0f 0%, #3a3a3a 100%);
-        }
-        .thumb-2 {
-            background: linear-gradient(135deg, #004d59 0%, #0d2528 100%);
-        }
-        .thumb-3 {
-            background: linear-gradient(135deg, #e0e0e0 0%, #b3b3b3 100%);
-        }
-        .thumb-4 {
-            background: linear-gradient(135deg, #1a1a1a 0%, #504a4a 100%);
-        }
-        .thumb-5 {
-            background: linear-gradient(135deg, #5b4f46 0%, #24201c 100%);
-        }
-        .thumb-6 {
-            background: linear-gradient(135deg, #3f3f3f 0%, #1f1f1f 100%);
-        }
-        .thumb-7 {
-            background: linear-gradient(135deg, #2a3b4c 0%, #1a252f 100%);
-        }
-        .thumb-8 {
-            background: linear-gradient(135deg, #4a3a2a 0%, #2e241a 100%);
-        }
-        .thumb-9 {
-            background: linear-gradient(135deg, #1e4a3a 0%, #0f2a22 100%);
-        }
-        .thumb-10 {
-            background: linear-gradient(135deg, #4a2a3a 0%, #2e1a24 100%);
-        }
-        .thumb-11 {
-            background: linear-gradient(135deg, #3a4a2a 0%, #1f2a15 100%);
-        }
-        .thumb-12 {
-            background: linear-gradient(135deg, #4a3a4a 0%, #2e1f2e 100%);
-        }
-        .thumb-13 {
-            background: linear-gradient(135deg, #6a4a3a 0%, #3a2a1a 100%);
-        }
-        .thumb-14 {
-            background: linear-gradient(135deg, #2a6a4a 0%, #1a3a2a 100%);
-        }
-        .thumb-15 {
-            background: linear-gradient(135deg, #4a6a3a 0%, #2a3a1a 100%);
-        }
+        .thumb-1 { background: linear-gradient(135deg, #0f0f0f 0%, #3a3a3a 100%); }
+        .thumb-2 { background: linear-gradient(135deg, #004d59 0%, #0d2528 100%); }
+        .thumb-3 { background: linear-gradient(135deg, #e0e0e0 0%, #b3b3b3 100%); }
+        .thumb-4 { background: linear-gradient(135deg, #1a1a1a 0%, #504a4a 100%); }
+        .thumb-5 { background: linear-gradient(135deg, #5b4f46 0%, #24201c 100%); }
+        .thumb-6 { background: linear-gradient(135deg, #3f3f3f 0%, #1f1f1f 100%); }
+        .thumb-7 { background: linear-gradient(135deg, #2a3b4c 0%, #1a252f 100%); }
+        .thumb-8 { background: linear-gradient(135deg, #4a3a2a 0%, #2e241a 100%); }
+        .thumb-9 { background: linear-gradient(135deg, #1e4a3a 0%, #0f2a22 100%); }
+        .thumb-10 { background: linear-gradient(135deg, #4a2a3a 0%, #2e1a24 100%); }
+        .thumb-11 { background: linear-gradient(135deg, #3a4a2a 0%, #1f2a15 100%); }
+        .thumb-12 { background: linear-gradient(135deg, #4a3a4a 0%, #2e1f2e 100%); }
+        .thumb-13 { background: linear-gradient(135deg, #6a4a3a 0%, #3a2a1a 100%); }
+        .thumb-14 { background: linear-gradient(135deg, #2a6a4a 0%, #1a3a2a 100%); }
+        .thumb-15 { background: linear-gradient(135deg, #4a6a3a 0%, #2a3a1a 100%); }
 
         /* ===== ORDER FLOW ===== */
         .order-flow-container {
@@ -1130,30 +1100,12 @@
             margin-bottom: 2px;
         }
 
-        .status-pending {
-            background: #fff6e0;
-            color: #cc8800;
-        }
-        .status-progress {
-            background: #e0f0ff;
-            color: #0066cc;
-        }
-        .status-completed {
-            background: #e6fffa;
-            color: #00a86b;
-        }
-        .status-review {
-            background: #f0e6ff;
-            color: #7700cc;
-        }
-        .status-cancelled {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-        .status-done {
-            background: #d1fae5;
-            color: #065f46;
-        }
+        .status-pending { background: #fff6e0; color: #cc8800; }
+        .status-progress { background: #e0f0ff; color: #0066cc; }
+        .status-completed { background: #e6fffa; color: #00a86b; }
+        .status-review { background: #f0e6ff; color: #7700cc; }
+        .status-cancelled { background: #fee2e2; color: #dc2626; }
+        .status-done { background: #d1fae5; color: #065f46; }
 
         .order-card .order-details-expand {
             max-height: 0;
@@ -1336,9 +1288,6 @@
         .payment-reminder-banner .btn-done-remaining i {
             color: #f5b83d;
             font-size: 12px;
-        }
-        .payment-reminder-banner .btn-done-remaining:hover i {
-            color: #1c2128;
         }
         .payment-reminder-banner .done-badge {
             background: #d1fae5;
@@ -1582,7 +1531,7 @@
             border-radius: 0 0 4px 4px;
         }
 
-        /* ===== PROFILE ===== */
+        /* ===== PROFILE VIEW (CLEANED) ===== */
         .profile-card {
             background: #ffffff;
             border-radius: 16px;
@@ -1653,49 +1602,77 @@
             line-height: 1.6;
         }
 
-        /* ===== NEW: ACCOUNT & REFERRAL SECTION ===== */
-        .referral-code-box {
+        .account-btn-container {
+            margin: 16px 0 8px 0;
+        }
+        .account-btn {
             background: #1c2128;
-            border-radius: 16px;
-            padding: 20px 16px;
-            margin: 16px 0 12px 0;
-            text-align: center;
             color: white;
-        }
-        .referral-code-box .label {
-            font-size: 10px;
-            color: #f5b83d;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-        .referral-code-box .code {
-            font-size: 32px;
-            font-weight: 800;
-            color: #f5b83d;
-            letter-spacing: 2px;
-            margin: 6px 0;
-            word-break: break-all;
-        }
-        .referral-code-box .copy-btn {
-            background: #f5b83d;
             border: none;
-            padding: 6px 20px;
-            border-radius: 30px;
-            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .account-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        .account-btn:active {
+            transform: scale(0.96);
+        }
+        .account-btn i {
+            color: #f5b83d;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 16px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 10px;
             font-size: 12px;
-            color: #1c2128;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
         }
-        .referral-code-box .copy-btn:active {
+        .logout-btn:active {
             transform: scale(0.95);
         }
-        .referral-code-box .copy-btn i {
-            font-size: 14px;
+
+        /* ===== ACCOUNT VIEW (NEW) ===== */
+        .account-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 0 12px 0;
+        }
+        .account-header button {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #1c2128;
+            cursor: pointer;
+            padding: 2px 6px;
+        }
+        .account-header h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1c2128;
         }
 
         .account-balance-box {
@@ -1741,6 +1718,93 @@
             font-size: 14px;
         }
 
+        .referral-code-box {
+            background: #1c2128;
+            border-radius: 16px;
+            padding: 20px 16px;
+            margin: 0 0 16px 0;
+            text-align: center;
+            color: white;
+        }
+        .referral-code-box .label {
+            font-size: 10px;
+            color: #f5b83d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .referral-code-box .code {
+            font-size: 32px;
+            font-weight: 800;
+            color: #f5b83d;
+            letter-spacing: 2px;
+            margin: 6px 0;
+            word-break: break-all;
+        }
+        .referral-code-box .copy-btn {
+            background: #f5b83d;
+            border: none;
+            padding: 6px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 12px;
+            color: #1c2128;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .referral-code-box .copy-btn:active {
+            transform: scale(0.95);
+        }
+        .referral-code-box .copy-btn i {
+            font-size: 14px;
+        }
+
+        .account-action-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .account-action-row .action-btn {
+            flex: 1;
+            padding: 14px 10px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .account-action-row .action-btn:active {
+            transform: scale(0.95);
+        }
+        .account-action-row .txn-btn {
+            background: #1c2128;
+            color: white;
+        }
+        .account-action-row .txn-btn:hover {
+            background: #2a2a2a;
+        }
+        .account-action-row .txn-btn i {
+            color: #f5b83d;
+        }
+        .account-action-row .withdraw-btn-alt {
+            background: #f5b83d;
+            color: #1c2128;
+        }
+        .account-action-row .withdraw-btn-alt:hover {
+            background: #e0a835;
+        }
+        .account-action-row .withdraw-btn-alt i {
+            color: #1c2128;
+        }
+
         .transaction-msg {
             background: #f8f9fc;
             border-radius: 12px;
@@ -1769,7 +1833,19 @@
             color: #dc2626;
         }
 
-        /* ===== WITHDRAWAL MODAL ===== */
+        .empty-state {
+            text-align: center;
+            padding: 30px 0;
+            color: #888;
+        }
+        .empty-state i {
+            font-size: 40px;
+            color: #ddd;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* ===== WITHDRAW MODAL ===== */
         .withdraw-modal-overlay {
             position: fixed;
             top: 0;
@@ -1960,127 +2036,6 @@
         .code-input-wrap input:focus {
             outline: none;
             border-color: #f5b83d;
-        }
-
-        .logout-btn {
-            width: 100%;
-            padding: 10px;
-            margin-top: 16px;
-            background: #ef4444;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .logout-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* ===== TRANSACTIONS VIEW – NEW ===== */
-        .transactions-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0 0 6px 0;
-        }
-        .transactions-header h2 {
-            font-size: 20px;
-            font-weight: 800;
-            color: #1c2128;
-        }
-        .transactions-header button {
-            background: none;
-            border: none;
-            font-size: 18px;
-            color: #1c2128;
-            cursor: pointer;
-            padding: 2px 6px;
-        }
-
-        .total-withdrawn-box {
-            background: linear-gradient(135deg, #1c2128 0%, #2a2a2a 100%);
-            border-radius: 20px;
-            padding: 24px 20px;
-            margin: 0 0 18px 0;
-            text-align: center;
-            color: white;
-            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
-        }
-        .total-withdrawn-box .label {
-            font-size: 11px;
-            color: #f5b83d;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-        .total-withdrawn-box .amount {
-            font-size: 48px;
-            font-weight: 900;
-            color: #fff;
-            margin: 4px 0;
-            letter-spacing: 1px;
-        }
-        .total-withdrawn-box .sub {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .withdrawal-item {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 14px 16px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            border: 1px solid #f0f0f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .withdrawal-item .left .amount {
-            font-weight: 700;
-            font-size: 16px;
-            color: #1c2128;
-        }
-        .withdrawal-item .left .date {
-            font-size: 11px;
-            color: #888;
-        }
-        .withdrawal-item .status-badge {
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 600;
-        }
-        .withdrawal-item .status-badge.pending {
-            background: #fff6e0;
-            color: #cc8800;
-        }
-        .withdrawal-item .status-badge.approved {
-            background: #e6fffa;
-            color: #00a86b;
-        }
-        .withdrawal-item .status-badge.declined {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-
-        .empty-withdrawals {
-            text-align: center;
-            padding: 30px 0;
-            color: #888;
-        }
-        .empty-withdrawals i {
-            font-size: 40px;
-            color: #ddd;
-            display: block;
-            margin-bottom: 8px;
         }
 
         /* ===== RESPONSIVE ===== */
@@ -2274,31 +2229,12 @@
                     <p style="color: #888; font-size: 11px;">Your personal information.</p>
                 </div>
 
-                <!-- ===== REFERRAL CODE (BOLD & BIG) ===== -->
-                <div class="referral-code-box" id="referralCodeBox">
-                    <div class="label">Your Referral Code</div>
-                    <div class="code" id="referralCodeDisplay">BZ-XXXXX</div>
-                    <button class="copy-btn" id="copyReferralBtn"><i class="fa-regular fa-copy"></i> Copy</button>
+                <!-- ===== ACCOUNT BUTTON ===== -->
+                <div class="account-btn-container">
+                    <button class="account-btn" id="goToAccountBtn">
+                        <i class="fa-solid fa-wallet"></i> Account Details
+                    </button>
                 </div>
-
-                <!-- ===== ACCOUNT BALANCE ===== -->
-                <div class="account-balance-box" id="accountBalanceBox">
-                    <div class="left">
-                        <div class="label">Account Balance</div>
-                        <div class="balance" id="accountBalanceDisplay">ZMW 0.00</div>
-                    </div>
-                    <button class="withdraw-btn" id="withdrawBtn"><i class="fa-solid fa-arrow-up"></i> Withdraw</button>
-                </div>
-
-                <!-- ===== TRANSACTION MESSAGES ===== -->
-                <div id="transactionMessages">
-                    <!-- Rendered by JS -->
-                </div>
-
-                <!-- ===== TRANSACTIONS BUTTON (NEW) ===== -->
-                <button class="btn-primary" id="viewTransactionsBtn" style="margin: 12px 0 16px 0; background: #1c2128; color: white; border: none; border-radius: 12px; padding: 12px 16px; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;">
-                    <i class="fa-solid fa-receipt"></i> View My Transactions
-                </button>
 
                 <div class="profile-card">
                     <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
@@ -2316,7 +2252,46 @@
                 </div>
             </div>
 
-            <!-- ===== NEW VIEW: TRANSACTIONS (Withdrawals) ===== -->
+            <!-- ===== VIEW: ACCOUNT (NEW) ===== -->
+            <div id="accountView" class="view">
+                <div class="account-header">
+                    <button id="backFromAccount"><i class="fa-solid fa-arrow-left"></i></button>
+                    <h2>Account Overview</h2>
+                </div>
+
+                <!-- ===== REFERRAL CODE ===== -->
+                <div class="referral-code-box" id="referralCodeBox">
+                    <div class="label">Your Referral Code</div>
+                    <div class="code" id="referralCodeDisplay">BZ-XXXXX</div>
+                    <button class="copy-btn" id="copyReferralBtn"><i class="fa-regular fa-copy"></i> Copy</button>
+                </div>
+
+                <!-- ===== ACCOUNT BALANCE ===== -->
+                <div class="account-balance-box" id="accountBalanceBox">
+                    <div class="left">
+                        <div class="label">Account Balance</div>
+                        <div class="balance" id="accountBalanceDisplay">ZMW 0.00</div>
+                    </div>
+                    <button class="withdraw-btn" id="withdrawBtn"><i class="fa-solid fa-arrow-up"></i> Withdraw</button>
+                </div>
+
+                <!-- ===== ACTION ROW ===== -->
+                <div class="account-action-row">
+                    <button class="action-btn txn-btn" id="viewTxnBtn">
+                        <i class="fa-solid fa-receipt"></i> Transaction History
+                    </button>
+                    <button class="action-btn withdraw-btn-alt" id="withdrawAltBtn">
+                        <i class="fa-solid fa-arrow-up"></i> Withdraw
+                    </button>
+                </div>
+
+                <!-- ===== TRANSACTION MESSAGES ===== -->
+                <div id="transactionMessages">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+
+            <!-- ===== VIEW: TRANSACTIONS (Withdrawals) ===== -->
             <div id="transactionsView" class="view">
                 <div class="transactions-header">
                     <button id="backFromTransactions"><i class="fa-solid fa-arrow-left"></i></button>
@@ -2600,6 +2575,7 @@
         const accountBalanceDisplay = document.getElementById('accountBalanceDisplay');
         const withdrawBtn = document.getElementById('withdrawBtn');
         const transactionMessages = document.getElementById('transactionMessages');
+        const withdrawAltBtn = document.getElementById('withdrawAltBtn');
 
         const withdrawModal = document.getElementById('withdrawModal');
         const withdrawAmountInput = document.getElementById('withdrawAmountInput');
@@ -2625,6 +2601,12 @@
         const viewTransactionsBtn = document.getElementById('viewTransactionsBtn');
         const totalWithdrawnAmount = document.getElementById('totalWithdrawnAmount');
         const withdrawalsListContainer = document.getElementById('withdrawalsListContainer');
+
+        // ===== NEW: Account View =====
+        const accountView = document.getElementById('accountView');
+        const backFromAccount = document.getElementById('backFromAccount');
+        const goToAccountBtn = document.getElementById('goToAccountBtn');
+        const viewTxnBtn = document.getElementById('viewTxnBtn');
 
         // =================================================================
         // HELPER FUNCTIONS
@@ -3439,7 +3421,7 @@
                 .sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
 
             if (entries.length === 0) {
-                container.innerHTML = `<div style="text-align:center;padding:16px;color:#888;font-size:12px;">No transaction messages yet.</div>`;
+                container.innerHTML = `<div class="empty-state"><i class="fa-regular fa-receipt"></i>No transaction messages yet.</div>`;
                 return;
             }
 
@@ -3527,7 +3509,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML = `
-                    <div class="empty-withdrawals">
+                    <div class="empty-state">
                         <i class="fa-regular fa-receipt"></i>
                         No withdrawal requests yet.
                     </div>
@@ -4269,6 +4251,7 @@
 
         // ===== Withdraw =====
         withdrawBtn.addEventListener('click', openWithdrawModal);
+        withdrawAltBtn.addEventListener('click', openWithdrawModal);
         cancelWithdrawBtn.addEventListener('click', closeWithdrawModal);
         withdrawModal.addEventListener('click', function(e) {
             if (e.target === this) closeWithdrawModal();
@@ -4276,23 +4259,36 @@
         confirmWithdrawBtn.addEventListener('click', submitWithdrawal);
         withdrawSuccessOkBtn.addEventListener('click', function() {
             withdrawSuccessModal.classList.remove('open');
-            switchView('profileView');
+            switchView('accountView');
         });
         withdrawSuccessModal.addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('open');
-                switchView('profileView');
+                switchView('accountView');
             }
         });
 
-        // ===== NEW: View Transactions =====
+        // ===== NEW: Account View =====
+        goToAccountBtn.addEventListener('click', function() {
+            switchView('accountView');
+        });
+
+        backFromAccount.addEventListener('click', function() {
+            switchView('profileView');
+        });
+
+        viewTxnBtn.addEventListener('click', function() {
+            switchView('transactionsView');
+        });
+
+        // ===== NEW: Transactions View =====
         viewTransactionsBtn.addEventListener('click', function() {
             switchView('transactionsView');
             renderWithdrawalsList();
         });
 
         backFromTransactions.addEventListener('click', function() {
-            switchView('profileView');
+            switchView('accountView');
         });
 
         // =================================================================
@@ -4324,7 +4320,7 @@
             }
         });
 
-        console.log('✅ Customer App – Transactions view added with total withdrawn display and withdrawal status tracking.');
+        console.log('✅ Customer App – Profile cleaned, Account view added with withdrawal history and professional withdrawal form.');
     </script>
 </body>
 </html>
