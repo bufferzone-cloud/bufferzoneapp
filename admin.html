@@ -1484,7 +1484,7 @@
             border-radius: 20px;
             max-width: 500px;
             width: 100%;
-            padding: 24px 24px 20px 24px;
+            padding: 24px 24px 20px 20px;
             position: relative;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
             text-align: center;
@@ -2035,7 +2035,7 @@
             font-size: 16px;
             font-weight: 700;
             color: #1c2128;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -2043,16 +2043,24 @@
         .referral-section .section-title i {
             color: #f5b83d;
         }
+        .referral-section .section-title .badge {
+            font-size: 11px;
+            background: #f5b83d;
+            color: #1c2128;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
         .referral-section .form-row-custom {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 14px;
         }
         .referral-section .form-row-custom .full-width {
             grid-column: 1 / -1;
         }
         .referral-section .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .referral-section .form-group label {
             display: block;
@@ -2064,7 +2072,7 @@
         .referral-section .form-group input,
         .referral-section .form-group select {
             width: 100%;
-            padding: 8px 12px;
+            padding: 10px 14px;
             border: 1px solid #ddd;
             border-radius: 10px;
             font-size: 13px;
@@ -2082,13 +2090,16 @@
             background: #1c2128;
             color: #fff;
             border: none;
-            padding: 8px 24px;
+            padding: 10px 28px;
             border-radius: 30px;
             font-weight: 600;
             font-size: 13px;
             cursor: pointer;
             transition: all 0.2s;
-            margin-top: 4px;
+            margin-top: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         .referral-section .btn-post:hover {
             background: #2a2a2a;
@@ -2098,48 +2109,76 @@
         .referral-section .btn-post:active {
             transform: scale(0.95);
         }
+        .referral-section .btn-post i {
+            color: #f5b83d;
+        }
 
         .referral-item {
             background: #f8f9fc;
             border-radius: 12px;
-            padding: 12px 16px;
-            margin-bottom: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
             border: 1px solid #f0f0f0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.2s;
+        }
+        .referral-item:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
         .referral-item .left .code {
             font-weight: 700;
-            font-size: 14px;
+            font-size: 15px;
             color: #1c2128;
         }
         .referral-item .left .detail {
             font-size: 12px;
             color: #555;
+            margin-top: 2px;
         }
         .referral-item .left .detail span {
             font-weight: 600;
             color: #1c2128;
         }
+        .referral-item .left .detail .label {
+            color: #888;
+            font-weight: 400;
+        }
         .referral-item .actions {
             display: flex;
-            gap: 6px;
+            gap: 8px;
         }
         .referral-item .actions .btn-sm {
-            padding: 3px 10px;
+            padding: 4px 14px;
             font-size: 10px;
+            border-radius: 16px;
+        }
+
+        .referral-list-container {
+            margin-top: 6px;
+        }
+        .referral-list-container .empty-state {
+            text-align: center;
+            padding: 24px 0;
+            color: #888;
+        }
+        .referral-list-container .empty-state i {
+            font-size: 32px;
+            color: #ddd;
+            display: block;
+            margin-bottom: 8px;
         }
 
         /* ── PAYABLES PAGE ── */
         .payables-toggle-row {
             display: flex;
-            gap: 10px;
-            margin-bottom: 16px;
+            gap: 12px;
+            margin-bottom: 18px;
             justify-content: center;
         }
         .payables-toggle-row .toggle-btn {
-            padding: 8px 28px;
+            padding: 10px 32px;
             border-radius: 30px;
             border: 2px solid #ddd;
             background: #fff;
@@ -2157,6 +2196,9 @@
         .payables-toggle-row .toggle-btn:active {
             transform: scale(0.95);
         }
+        .payables-toggle-row .toggle-btn i {
+            margin-right: 6px;
+        }
 
         .payables-view {
             display: none;
@@ -2168,12 +2210,16 @@
         .account-item {
             background: #ffffff;
             border-radius: 12px;
-            padding: 12px 16px;
+            padding: 14px 18px;
             border: 1px solid #f0f0f0;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.2s;
+        }
+        .account-item:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
         .account-item .left .name {
             font-weight: 600;
@@ -2193,16 +2239,20 @@
         .withdraw-card {
             background: #ffffff;
             border-radius: 12px;
-            padding: 14px 16px;
+            padding: 16px 18px;
             border: 1px solid #f0f0f0;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s;
+        }
+        .withdraw-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
         .withdraw-card .row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 3px 0;
+            padding: 4px 0;
         }
         .withdraw-card .row .label {
             font-size: 12px;
@@ -2213,48 +2263,101 @@
             font-size: 13px;
             color: #1c2128;
         }
+        .withdraw-card .row .value.highlight {
+            color: #f5b83d;
+            font-weight: 700;
+        }
+        .withdraw-card .row .value .ref-code {
+            background: #f0f0f0;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
         .withdraw-card .actions {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 10px;
+            margin-top: 10px;
             justify-content: flex-end;
         }
         .withdraw-card .actions .btn-approve {
             background: #16a34a;
             color: #fff;
             border: none;
-            padding: 4px 16px;
+            padding: 6px 20px;
             border-radius: 20px;
             font-weight: 600;
             font-size: 11px;
             cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .withdraw-card .actions .btn-approve:hover {
+            background: #15803d;
+            transform: translateY(-1px);
         }
         .withdraw-card .actions .btn-decline {
             background: #dc2626;
             color: #fff;
             border: none;
-            padding: 4px 16px;
+            padding: 6px 20px;
             border-radius: 20px;
             font-weight: 600;
             font-size: 11px;
             cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .withdraw-card .actions .btn-decline:hover {
+            background: #b91c1c;
+            transform: translateY(-1px);
         }
         .withdraw-card .actions .btn-approve:active,
         .withdraw-card .actions .btn-decline:active {
             transform: scale(0.95);
+        }
+        .withdraw-card .actions .btn-approve i,
+        .withdraw-card .actions .btn-decline i {
+            font-size: 12px;
+        }
+
+        .withdraw-card .status-badge {
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        .withdraw-card .status-badge.approved {
+            background: #e6fffa;
+            color: #00a86b;
+        }
+        .withdraw-card .status-badge.declined {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        .withdraw-card .status-badge.pending {
+            background: #fff6e0;
+            color: #cc8800;
         }
 
         .manual-deposit-btn {
             background: #1c2128;
             color: #fff;
             border: none;
-            padding: 8px 20px;
+            padding: 10px 24px;
             border-radius: 30px;
             font-weight: 600;
             font-size: 12px;
             cursor: pointer;
             transition: all 0.2s;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         .manual-deposit-btn:hover {
             background: #2a2a2a;
@@ -2264,7 +2367,6 @@
             transform: scale(0.95);
         }
         .manual-deposit-btn i {
-            margin-right: 6px;
             color: #f5b83d;
         }
 
@@ -2510,7 +2612,10 @@
 
                 <!-- ── SET UP REFERRAL PROMO (All Users) ── -->
                 <div class="referral-section">
-                    <div class="section-title"><i class="fa-solid fa-users"></i> Set Up Referral Promo <span style="font-size:12px; font-weight:400; color:#888; margin-left:4px;">(all users)</span></div>
+                    <div class="section-title">
+                        <i class="fa-solid fa-users"></i> Set Up Referral Promo
+                        <span class="badge">all users</span>
+                    </div>
                     <div class="form-row-custom">
                         <div class="form-group full-width">
                             <label>Amount user receives (ZMW) when someone uses their referral code</label>
@@ -2518,15 +2623,18 @@
                         </div>
                     </div>
                     <button class="btn-post" id="postReferralPromo"><i class="fa-solid fa-check"></i> Post Referral Promo</button>
-                    <div style="margin-top:14px;">
-                        <h4 style="font-size:13px; font-weight:600; color:#1c2128; margin-bottom:8px;">Posted Referral Promos</h4>
-                        <div id="referralPromoList"></div>
+                    <div style="margin-top:18px;">
+                        <h4 style="font-size:14px; font-weight:600; color:#1c2128; margin-bottom:10px;">Posted Referral Promos</h4>
+                        <div class="referral-list-container" id="referralPromoList"></div>
                     </div>
                 </div>
 
                 <!-- ── SET UP CUSTOM REFERRAL (Specific User) ── -->
                 <div class="referral-section">
-                    <div class="section-title"><i class="fa-solid fa-user-gear"></i> Set Up Custom Referral <span style="font-size:12px; font-weight:400; color:#888; margin-left:4px;">(specific user)</span></div>
+                    <div class="section-title">
+                        <i class="fa-solid fa-user-gear"></i> Set Up Custom Referral
+                        <span class="badge">specific user</span>
+                    </div>
                     <div class="form-row-custom">
                         <div class="form-group">
                             <label>Select User</label>
@@ -2544,15 +2652,17 @@
                         </div>
                     </div>
                     <button class="btn-post" id="postCustomReferral"><i class="fa-solid fa-check"></i> Post Custom Referral</button>
-                    <div style="margin-top:14px;">
-                        <h4 style="font-size:13px; font-weight:600; color:#1c2128; margin-bottom:8px;">Posted Custom Referrals</h4>
-                        <div id="customReferralList"></div>
+                    <div style="margin-top:18px;">
+                        <h4 style="font-size:14px; font-weight:600; color:#1c2128; margin-bottom:10px;">Posted Custom Referrals</h4>
+                        <div class="referral-list-container" id="customReferralList"></div>
                     </div>
                 </div>
 
                 <!-- ── REFERRAL DISCOUNT ── -->
                 <div class="referral-section">
-                    <div class="section-title"><i class="fa-solid fa-percent"></i> Referral Discount</div>
+                    <div class="section-title">
+                        <i class="fa-solid fa-percent"></i> Referral Discount
+                    </div>
                     <div class="form-row-custom">
                         <div class="form-group">
                             <label>Referral Code</label>
@@ -2568,15 +2678,18 @@
                         </div>
                     </div>
                     <button class="btn-post" id="postReferralDiscount"><i class="fa-solid fa-check"></i> Post Referral Discount</button>
-                    <div style="margin-top:14px;">
-                        <h4 style="font-size:13px; font-weight:600; color:#1c2128; margin-bottom:8px;">Posted Referral Discounts</h4>
-                        <div id="referralDiscountList"></div>
+                    <div style="margin-top:18px;">
+                        <h4 style="font-size:14px; font-weight:600; color:#1c2128; margin-bottom:10px;">Posted Referral Discounts</h4>
+                        <div class="referral-list-container" id="referralDiscountList"></div>
                     </div>
                 </div>
 
                 <!-- ── SIGNUP BONUSES ── -->
                 <div class="referral-section">
-                    <div class="section-title"><i class="fa-solid fa-gift"></i> Signup Bonuses <span style="font-size:12px; font-weight:400; color:#888; margin-left:4px;">(amount new user receives)</span></div>
+                    <div class="section-title">
+                        <i class="fa-solid fa-gift"></i> Signup Bonuses
+                        <span class="badge">new user rewards</span>
+                    </div>
                     <div class="form-row-custom">
                         <div class="form-group full-width">
                             <label>With referral code (ZMW)</label>
@@ -2592,9 +2705,9 @@
                         </div>
                     </div>
                     <button class="btn-post" id="saveSignupBonuses"><i class="fa-solid fa-check"></i> Save Signup Bonuses</button>
-                    <div style="margin-top:14px;">
-                        <h4 style="font-size:13px; font-weight:600; color:#1c2128; margin-bottom:8px;">Current Signup Bonuses</h4>
-                        <div id="signupBonusesDisplay" style="font-size:13px; color:#555;">
+                    <div style="margin-top:18px;">
+                        <h4 style="font-size:14px; font-weight:600; color:#1c2128; margin-bottom:10px;">Current Signup Bonuses</h4>
+                        <div id="signupBonusesDisplay" style="font-size:13px; color:#555; background:#f8f9fc; padding:12px 16px; border-radius:10px; border:1px solid #f0f0f0;">
                             With referral: <strong id="displayWithReferral">ZMW 0.00</strong> &middot;
                             With custom: <strong id="displayWithCustom">ZMW 0.00</strong> &middot;
                             Without referral: <strong id="displayWithoutReferral">ZMW 0.00</strong>
@@ -2613,8 +2726,8 @@
                 </div>
 
                 <div class="payables-toggle-row">
-                    <button class="toggle-btn active" id="toggleAccounts">📊 Accounts</button>
-                    <button class="toggle-btn" id="toggleWithdrawals">💸 Withdrawals</button>
+                    <button class="toggle-btn active" id="toggleAccounts"><i class="fa-solid fa-wallet"></i> Accounts</button>
+                    <button class="toggle-btn" id="toggleWithdrawals"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
                 </div>
 
                 <!-- Accounts View -->
@@ -3966,12 +4079,17 @@
         function renderReferralPromos() {
             const data = allData.referralPromos || {};
             const entries = Object.entries(data);
+            const container = referralPromoList;
             if (entries.length === 0) {
-                referralPromoList.innerHTML =
-                    `<div class="text-muted text-center" style="padding:12px;">No referral promos posted yet.</div>`;
+                container.innerHTML = `
+                            <div class="empty-state">
+                                <i class="fa-regular fa-circle"></i>
+                                No referral promos posted yet.
+                            </div>
+                        `;
                 return;
             }
-            referralPromoList.innerHTML = entries.map(([key, r]) => `
+            container.innerHTML = entries.map(([key, r]) => `
                         <div class="referral-item">
                             <div class="left">
                                 <div class="code">ZMW ${r.amount}</div>
@@ -3984,13 +4102,13 @@
                         </div>
                     `).join('');
 
-            referralPromoList.querySelectorAll('.delete-referral-promo').forEach(btn => {
+            container.querySelectorAll('.delete-referral-promo').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
                     showDeleteConfirmation('referralPromo', key);
                 });
             });
-            referralPromoList.querySelectorAll('.edit-referral-promo').forEach(btn => {
+            container.querySelectorAll('.edit-referral-promo').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
                     const amount = this.dataset.amount;
@@ -4005,12 +4123,17 @@
         function renderCustomReferrals() {
             const data = allData.customReferrals || {};
             const entries = Object.entries(data);
+            const container = customReferralList;
             if (entries.length === 0) {
-                customReferralList.innerHTML =
-                    `<div class="text-muted text-center" style="padding:12px;">No custom referrals posted yet.</div>`;
+                container.innerHTML = `
+                            <div class="empty-state">
+                                <i class="fa-regular fa-circle"></i>
+                                No custom referrals posted yet.
+                            </div>
+                        `;
                 return;
             }
-            customReferralList.innerHTML = entries.map(([key, r]) => {
+            container.innerHTML = entries.map(([key, r]) => {
                 const user = allData.users?.[r.userId] || {};
                 const userName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
                 return `
@@ -4027,13 +4150,13 @@
                         `;
             }).join('');
 
-            customReferralList.querySelectorAll('.delete-custom-referral').forEach(btn => {
+            container.querySelectorAll('.delete-custom-referral').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
                     showDeleteConfirmation('customReferral', key);
                 });
             });
-            customReferralList.querySelectorAll('.edit-custom-referral').forEach(btn => {
+            container.querySelectorAll('.edit-custom-referral').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
                     const userId = this.dataset.userid;
@@ -4051,12 +4174,17 @@
         function renderReferralDiscounts() {
             const data = allData.referralDiscounts || {};
             const entries = Object.entries(data);
+            const container = referralDiscountList;
             if (entries.length === 0) {
-                referralDiscountList.innerHTML =
-                    `<div class="text-muted text-center" style="padding:12px;">No referral discounts posted yet.</div>`;
+                container.innerHTML = `
+                            <div class="empty-state">
+                                <i class="fa-regular fa-circle"></i>
+                                No referral discounts posted yet.
+                            </div>
+                        `;
                 return;
             }
-            referralDiscountList.innerHTML = entries.map(([key, r]) => `
+            container.innerHTML = entries.map(([key, r]) => `
                         <div class="referral-item">
                             <div class="left">
                                 <div class="code">${r.referralCode}</div>
@@ -4069,13 +4197,13 @@
                         </div>
                     `).join('');
 
-            referralDiscountList.querySelectorAll('.delete-referral-discount').forEach(btn => {
+            container.querySelectorAll('.delete-referral-discount').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
                     showDeleteConfirmation('referralDiscount', key);
                 });
             });
-            referralDiscountList.querySelectorAll('.edit-referral-discount').forEach(btn => {
+            container.querySelectorAll('.edit-referral-discount').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
                     const code = this.dataset.code;
@@ -4150,6 +4278,8 @@
             withdrawalsList.innerHTML = entries.map(([key, w]) => {
                 const user = users[w.userId] || {};
                 const name = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
+                const phone = w.phone || 'N/A';
+                const refCode = user.referralCode || '—';
                 return `
                             <div class="withdraw-card">
                                 <div class="row">
@@ -4158,11 +4288,15 @@
                                 </div>
                                 <div class="row">
                                     <span class="label">Phone</span>
-                                    <span class="value">${w.phone || 'N/A'}</span>
+                                    <span class="value">${phone}</span>
+                                </div>
+                                <div class="row">
+                                    <span class="label">Referral Code</span>
+                                    <span class="value"><span class="ref-code">${refCode}</span></span>
                                 </div>
                                 <div class="row">
                                     <span class="label">Amount</span>
-                                    <span class="value" style="font-weight:700;color:#f5b83d;">ZMW ${(w.amount || 0).toFixed(2)}</span>
+                                    <span class="value highlight">ZMW ${(w.amount || 0).toFixed(2)}</span>
                                 </div>
                                 <div class="actions">
                                     <button class="btn-approve approve-withdraw" data-key="${key}"><i class="fa-solid fa-check"></i> Approve</button>
@@ -4175,14 +4309,8 @@
             withdrawalsList.querySelectorAll('.approve-withdraw').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
-                    if (confirm('Approve this withdrawal? Money has been sent to customer.')) {
-                        if (allData.withdrawalRequests && allData.withdrawalRequests[key]) {
-                            allData.withdrawalRequests[key].status = 'approved';
-                            saveData().then(() => {
-                                renderAll();
-                                showToast('Withdrawal approved');
-                            });
-                        }
+                    if (confirm('Approve this withdrawal? Money will be sent to customer and deducted from their account.')) {
+                        approveWithdrawal(key);
                     }
                 });
             });
@@ -4191,17 +4319,156 @@
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
                     if (confirm('Decline this withdrawal request?')) {
-                        if (allData.withdrawalRequests && allData.withdrawalRequests[key]) {
-                            allData.withdrawalRequests[key].status = 'declined';
-                            saveData().then(() => {
-                                renderAll();
-                                showToast('Withdrawal declined');
-                            });
-                        }
+                        declineWithdrawal(key);
                     }
                 });
             });
         }
+
+        // ─── WITHDRAWAL APPROVAL LOGIC ──────────────────────────────────
+
+        function approveWithdrawal(key) {
+            if (!allData.withdrawalRequests || !allData.withdrawalRequests[key]) {
+                showToast('Withdrawal request not found.', 'error');
+                return;
+            }
+
+            const withdrawal = allData.withdrawalRequests[key];
+            const userId = withdrawal.userId;
+            const amount = withdrawal.amount || 0;
+
+            // Deduct from customer account
+            if (!allData.customerAccounts) allData.customerAccounts = {};
+            if (!allData.customerAccounts[userId]) {
+                allData.customerAccounts[userId] = { balance: 0 };
+            }
+            const currentBalance = allData.customerAccounts[userId].balance || 0;
+            if (amount > currentBalance) {
+                showToast('Insufficient balance. Cannot approve.', 'error');
+                return;
+            }
+            allData.customerAccounts[userId].balance = currentBalance - amount;
+
+            // Update withdrawal status
+            allData.withdrawalRequests[key].status = 'approved';
+
+            // Record transaction for user
+            if (!allData.transactions) allData.transactions = {};
+            const txUserRef = push(ref(db, 'bufferzoneAppData/transactions'));
+            const user = allData.users?.[userId] || {};
+            const userName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Customer';
+            const txUserData = {
+                type: 'Withdrawal Approved',
+                amount: amount,
+                method: 'Bank Transfer',
+                status: 'completed',
+                date: new Date().toLocaleString(),
+                ref: 'W-' + key,
+                detail: `Withdrawal of ZMW ${amount.toFixed(2)} approved and processed.`,
+                screenshot: 'N/A',
+                userId: userId,
+                itemId: key,
+                itemTitle: 'Withdrawal',
+                itemType: 'withdrawal',
+                userName: userName,
+                userEmail: user.email || 'N/A',
+                userPhone: user.phone || 'N/A'
+            };
+            set(txUserRef, txUserData);
+
+            // Record transaction for admin (system)
+            const txAdminRef = push(ref(db, 'bufferzoneAppData/transactions'));
+            const txAdminData = {
+                type: 'Withdrawal Approved (Admin)',
+                amount: amount,
+                method: 'Bank Transfer',
+                status: 'completed',
+                date: new Date().toLocaleString(),
+                ref: 'W-' + key + '-admin',
+                detail: `Admin approved withdrawal of ZMW ${amount.toFixed(2)} for ${userName}.`,
+                screenshot: 'N/A',
+                userId: 'admin',
+                itemId: key,
+                itemTitle: 'Withdrawal Approval',
+                itemType: 'admin',
+                userName: 'Admin',
+                userEmail: currentUser?.email || 'admin@bufferzone.com',
+                userPhone: 'N/A'
+            };
+            set(txAdminRef, txAdminData);
+
+            // Notify user
+            const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
+            set(notifRef, {
+                title: '✅ Withdrawal Approved',
+                message: `Your withdrawal of ZMW ${amount.toFixed(2)} has been approved and processed.`,
+                timestamp: Date.now(),
+                read: false,
+                userId: userId
+            });
+
+            saveData().then(() => {
+                renderAll();
+                showToast(`✅ Withdrawal of ZMW ${amount.toFixed(2)} approved. Funds deducted from user account.`, 'success');
+            });
+        }
+
+        function declineWithdrawal(key) {
+            if (!allData.withdrawalRequests || !allData.withdrawalRequests[key]) {
+                showToast('Withdrawal request not found.', 'error');
+                return;
+            }
+
+            const withdrawal = allData.withdrawalRequests[key];
+            const userId = withdrawal.userId;
+            const amount = withdrawal.amount || 0;
+
+            // Update withdrawal status
+            allData.withdrawalRequests[key].status = 'declined';
+
+            // Record transaction for user
+            if (!allData.transactions) allData.transactions = {};
+            const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
+            const user = allData.users?.[userId] || {};
+            const userName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Customer';
+            const txData = {
+                type: 'Withdrawal Declined',
+                amount: amount,
+                method: 'Bank Transfer',
+                status: 'declined',
+                date: new Date().toLocaleString(),
+                ref: 'W-' + key,
+                detail: `Your withdrawal request of ZMW ${amount.toFixed(2)} has been declined. Please try again another time.`,
+                screenshot: 'N/A',
+                userId: userId,
+                itemId: key,
+                itemTitle: 'Withdrawal',
+                itemType: 'withdrawal',
+                userName: userName,
+                userEmail: user.email || 'N/A',
+                userPhone: user.phone || 'N/A'
+            };
+            set(txRef, txData);
+
+            // Notify user
+            const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
+            set(notifRef, {
+                title: '❌ Withdrawal Declined',
+                message: `Your withdrawal request of ZMW ${amount.toFixed(2)} has been declined. Please try again another time.`,
+                timestamp: Date.now(),
+                read: false,
+                userId: userId
+            });
+
+            saveData().then(() => {
+                renderAll();
+                showToast(`❌ Withdrawal of ZMW ${amount.toFixed(2)} declined. Transaction recorded.`, 'success');
+            });
+        }
+
+        // ───────────────────────────────────────────────────────────────────
+        // POPULATE SELECTS
+        // ───────────────────────────────────────────────────────────────────
 
         function populateUserSelects() {
             const users = allData.users || {};
@@ -5400,7 +5667,7 @@
             }
         });
 
-        console.log('✅ Admin App ready — Referral, Payables & Signup Bonuses integrated.');
+        console.log('✅ Admin App ready — Referral page cleaned up, withdrawal approval/decline with full transaction recording.');
     </script>
 </body>
 </html>
