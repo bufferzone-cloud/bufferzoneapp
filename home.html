@@ -1653,7 +1653,7 @@
             line-height: 1.6;
         }
 
-        /* ===== NEW: ACCOUNT SECTION ===== */
+        /* ===== ACCOUNT SECTION ===== */
         .account-section {
             display: none;
             margin-top: 16px;
@@ -2371,7 +2371,7 @@
                                 <i class="fa-solid fa-arrow-up"></i> Withdraw Funds
                             </button>
                             <div style="margin-top:16px; background:#f8f9fc; border-radius:12px; padding:12px; border:1px solid #f0f0f0;">
-                                <p style="font-size:11px; color:#888;">Withdrawals are processed within 24 hours. You will be notified once your request is approved or declined.</p>
+                                <p style="font-size:11px; color:#888;">Withdrawals are processed within 24 hours. You will be notified once your request is approved or declined. Declined withdrawals are refunded to your account.</p>
                             </div>
                         </div>
                     </div>
@@ -2636,7 +2636,7 @@
 
         const samplesContainer = document.getElementById('samplesContainer');
 
-        // ===== NEW: Account & Referral =====
+        // ===== Account & Referral =====
         const accountToggleBtn = document.getElementById('accountToggleBtn');
         const accountSection = document.getElementById('accountSection');
         const accountTransactionsBtn = document.getElementById('accountTransactionsBtn');
@@ -2660,7 +2660,7 @@
         const withdrawSuccessModal = document.getElementById('withdrawSuccessModal');
         const withdrawSuccessOkBtn = document.getElementById('withdrawSuccessOkBtn');
 
-        // ===== NEW: Toggle buttons in payment modal =====
+        // ===== Toggle buttons in payment modal =====
         const togglePromoBtn = document.getElementById('togglePromoBtn');
         const toggleReferralBtn = document.getElementById('toggleReferralBtn');
         const promoCodeWrap = document.getElementById('promoCodeWrap');
@@ -3438,7 +3438,7 @@
         }
 
         // =================================================================
-        // ACCOUNT & REFERRAL (NEW)
+        // ACCOUNT & REFERRAL
         // =================================================================
 
         function renderAccountAndReferral() {
@@ -3453,7 +3453,6 @@
                 navigator.clipboard.writeText(code).then(() => {
                     showToast('Referral code copied!', 'success');
                 }).catch(() => {
-                    // Fallback
                     const textArea = document.createElement('textarea');
                     textArea.value = code;
                     document.body.appendChild(textArea);
@@ -3475,7 +3474,7 @@
         }
 
         // =================================================================
-        // TRANSACTION MESSAGES (NEW)
+        // TRANSACTION MESSAGES
         // =================================================================
 
         function renderTransactionMessages() {
@@ -3499,9 +3498,15 @@
                     if (isCredit) {
                         amountDisplay = `+ZMW ${t.amount.toFixed(2)}`;
                         amountClass = 'positive';
-                    } else if (isWithdraw) {
+                    } else if (isWithdraw && t.status === 'pending') {
+                        amountDisplay = `-ZMW ${t.amount.toFixed(2)} (pending)`;
+                        amountClass = '';
+                    } else if (isWithdraw && t.status === 'approved') {
                         amountDisplay = `-ZMW ${t.amount.toFixed(2)}`;
                         amountClass = 'negative';
+                    } else if (isWithdraw && t.status === 'declined') {
+                        amountDisplay = `↩ ZMW ${t.amount.toFixed(2)} refunded`;
+                        amountClass = 'positive';
                     } else {
                         amountDisplay = `ZMW ${t.amount.toFixed(2)}`;
                         amountClass = '';
@@ -3511,12 +3516,9 @@
                 let title = t.type || 'Transaction';
                 let desc = t.detail || t.message || '';
 
-                // Special messages
                 if (t.type?.toLowerCase().includes('referral') && t.userName) {
-                    const parts = t.type.split(' ');
-                    const sourceName = t.userName || 'a user';
                     title = `💰 Referral Bonus`;
-                    desc = `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${sourceName} who used your referral code.`;
+                    desc = `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral code.`;
                 }
                 if (t.type?.toLowerCase().includes('discount') && t.userName) {
                     title = `🎯 Referral Discount`;
@@ -3525,16 +3527,26 @@
                 if (t.type?.toLowerCase().includes('withdraw') && t.status === 'approved') {
                     title = `✅ Withdrawal Approved`;
                     desc = `Your withdrawal of ZMW ${t.amount?.toFixed(2) || '0.00'} has been approved and processed.`;
-                    amountDisplay = `-ZMW ${t.amount?.toFixed(2) || '0.00'}`;
-                    amountClass = 'negative';
+                    if (t.amount) {
+                        amountDisplay = `-ZMW ${t.amount.toFixed(2)}`;
+                        amountClass = 'negative';
+                    }
                 }
                 if (t.type?.toLowerCase().includes('withdraw') && t.status === 'declined') {
-                    title = `❌ Withdrawal Declined`;
-                    desc = `Your withdrawal request of ZMW ${t.amount?.toFixed(2) || '0.00'} has been declined.`;
+                    title = `↩ Withdrawal Declined (Refunded)`;
+                    desc = `Your withdrawal request of ZMW ${t.amount?.toFixed(2) || '0.00'} has been declined. The amount has been refunded to your account.`;
+                    if (t.amount) {
+                        amountDisplay = `↩ +ZMW ${t.amount.toFixed(2)}`;
+                        amountClass = 'positive';
+                    }
                 }
                 if (t.type?.toLowerCase().includes('withdraw') && t.status === 'pending') {
                     title = `⏳ Withdrawal Pending`;
-                    desc = `Your withdrawal request of ZMW ${t.amount?.toFixed(2) || '0.00'} is being processed.`;
+                    desc = `Your withdrawal request of ZMW ${t.amount?.toFixed(2) || '0.00'} is being processed by admin.`;
+                    if (t.amount) {
+                        amountDisplay = `-ZMW ${t.amount.toFixed(2)} (pending)`;
+                        amountClass = '';
+                    }
                 }
 
                 return `
@@ -3553,7 +3565,7 @@
         }
 
         // =================================================================
-        // WITHDRAWALS LIST – NEW
+        // WITHDRAWALS LIST
         // =================================================================
 
         function renderWithdrawalsList() {
@@ -3580,7 +3592,7 @@
 
                 let statusEmoji = '⏳';
                 if (w.status === 'approved') statusEmoji = '✅';
-                else if (w.status === 'declined') statusEmoji = '❌';
+                else if (w.status === 'declined') statusEmoji = '↩';
 
                 return `
                     <div class="withdrawal-item">
@@ -3793,7 +3805,6 @@
                 priceBreakdown.style.display = 'none';
                 applyCouponBtn.disabled = false;
                 couponInput.disabled = false;
-                // Reset referral
                 referralCodeInput.value = '';
                 referralMsg.textContent = '';
                 referralMsg.className = 'coupon-msg';
@@ -3900,7 +3911,6 @@
                 return;
             }
 
-            // Look up the referral code in users
             const usersRef = ref(db, 'users');
             get(usersRef).then((snapshot) => {
                 const users = snapshot.val() || {};
@@ -3920,7 +3930,6 @@
                     return;
                 }
 
-                // Check referral discount
                 const discounts = allData.referralDiscounts || {};
                 let foundDiscount = null;
                 let discountKey = null;
@@ -4038,18 +4047,15 @@
                 set(usedCouponRef, true);
             }
 
-            // Handle referral bonus for referrer
             if (appliedReferral && appliedReferral.referrerUid) {
                 const bonusAmount = appliedReferral.ownerAmount || 0;
                 if (bonusAmount > 0) {
-                    // Add to referrer's account
                     const accRef = ref(db, `bufferzoneAppData/customerAccounts/${appliedReferral.referrerUid}`);
                     get(accRef).then((snapshot) => {
                         const currentBal = snapshot.val()?.balance || 0;
                         set(accRef, { balance: currentBal + bonusAmount });
                     });
 
-                    // Record transaction for referrer
                     const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                     set(txRef, {
                         type: 'Referral Discount Bonus',
@@ -4069,7 +4075,6 @@
                         userPhone: currentUserData?.phone || 'N/A'
                     });
 
-                    // Notify referrer
                     const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
                     set(notifRef, {
                         title: '💰 Referral Bonus',
@@ -4154,7 +4159,7 @@
                 return;
             }
 
-            // Create withdrawal request – this goes directly to admin's payables
+            // Create withdrawal request – goes directly to admin payables
             if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
             const wId = 'w' + Date.now();
             allData.withdrawalRequests[wId] = {
@@ -4167,7 +4172,7 @@
                 date: new Date().toLocaleString()
             };
 
-            // Deduct from account immediately (pending until admin approves)
+            // Deduct from account immediately (pending admin approval)
             allData.customerAccounts[currentUserId] = { balance: balance - amount };
 
             // Record transaction for customer (pending)
@@ -4190,8 +4195,6 @@
                 userEmail: currentUser.email || 'N/A',
                 userPhone: currentUserData?.phone || 'N/A'
             };
-
-            // NO notification for withdrawal – it goes to admin's payables
 
             saveData().then(() => {
                 closeWithdrawModal();
@@ -4275,7 +4278,6 @@
             if (e.key === 'Enter') applyCoupon();
         });
 
-        // Toggle promo/referral code in payment modal
         togglePromoBtn.addEventListener('click', function() {
             togglePromoBtn.classList.add('active');
             toggleReferralBtn.classList.remove('active');
@@ -4372,7 +4374,7 @@
             }
         });
 
-        console.log('✅ Customer App – Withdrawals go directly to admin payables, NOT notifications. Admin sees name, phone, referral code, amount. Withdrawals show statuses in customer transactions.');
+        console.log('✅ Customer App – Final: Withdrawals go to admin payables (not notifications). Declined withdrawals are refunded to account. All transactions properly arranged.');
     </script>
 </body>
 </html>
