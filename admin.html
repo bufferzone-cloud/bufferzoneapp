@@ -92,7 +92,7 @@
             transform: scale(0.92);
         }
 
-        /* ── HEADER: Centered admin panel, admin name, and promo pics button ── */
+        /* ── HEADER: Centered admin panel, admin name, and three buttons ── */
         .header {
             display: flex;
             align-items: center;
@@ -159,33 +159,39 @@
             letter-spacing: -0.3px;
         }
 
-        /* ── PROMO PICS BUTTON (centered below admin name) ── */
-        .promo-pics-btn {
-            display: inline-flex;
+        /* ── THREE BUTTONS (Promo Pics, Referral, Payables) ── */
+        .header-actions {
+            display: flex;
             align-items: center;
             gap: 8px;
+            margin-top: 4px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .header-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             background: #1c2128;
             color: #fff;
-            padding: 6px 18px;
+            padding: 5px 16px;
             border-radius: 24px;
             font-weight: 600;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
             transition: all 0.2s;
             box-shadow: 0 4px 12px rgba(28, 33, 40, 0.25);
             border: none;
             white-space: nowrap;
-            margin-top: 4px;
-            align-self: center;
         }
-        .promo-pics-btn i {
-            font-size: 16px;
+        .header-action-btn i {
+            font-size: 14px;
             color: #f5b83d;
         }
-        .promo-pics-btn:active {
+        .header-action-btn:active {
             transform: scale(0.95);
         }
-        .promo-pics-btn:hover {
+        .header-action-btn:hover {
             box-shadow: 0 6px 20px rgba(28, 33, 40, 0.35);
         }
 
@@ -241,7 +247,7 @@
         .header.work-active .admin-title {
             display: block;
         }
-        .header.work-active .promo-pics-btn {
+        .header.work-active .header-actions {
             display: none;
         }
         .header.work-active .header-left .work-avatar {
@@ -1874,7 +1880,6 @@
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
             background: #fff;
             transition: transform 0.25s ease, box-shadow 0.25s ease;
-            /* border removed — no frame */
             border: none;
             width: 100%;
             height: 450px;
@@ -2058,6 +2063,184 @@
                 height: 380px;
             }
         }
+
+        /* ── REFERRAL PAGE STYLES ── */
+        .referral-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        @media (max-width: 600px) {
+            .referral-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .referral-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 18px 16px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .referral-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+        .referral-card .icon {
+            font-size: 36px;
+            color: #f5b83d;
+            margin-bottom: 6px;
+        }
+        .referral-card .title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1c2128;
+        }
+        .referral-card .sub {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .referral-promo-item {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            border: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .referral-promo-item .left .type {
+            font-weight: 700;
+            font-size: 13px;
+            color: #1c2128;
+        }
+        .referral-promo-item .left .detail {
+            font-size: 12px;
+            color: #555;
+        }
+        .referral-promo-item .actions {
+            display: flex;
+            gap: 6px;
+        }
+        .referral-promo-item .actions .btn {
+            padding: 2px 10px;
+            font-size: 9px;
+        }
+
+        /* ── PAYABLES PAGE STYLES ── */
+        .payables-toggles {
+            display: flex;
+            gap: 12px;
+            margin: 16px 0;
+            justify-content: center;
+        }
+        .payables-toggles .toggle-btn {
+            padding: 8px 24px;
+            border-radius: 30px;
+            border: 2px solid #ddd;
+            background: #fff;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #888;
+        }
+        .payables-toggles .toggle-btn.active {
+            background: #1c2128;
+            color: #fff;
+            border-color: #1c2128;
+        }
+        .payables-toggles .toggle-btn:active {
+            transform: scale(0.95);
+        }
+
+        .withdraw-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .withdraw-card .info .name {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1c2128;
+        }
+        .withdraw-card .info .phone {
+            font-size: 12px;
+            color: #555;
+        }
+        .withdraw-card .info .amount {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1c2128;
+            margin-top: 2px;
+        }
+        .withdraw-card .actions {
+            display: flex;
+            gap: 8px;
+        }
+        .withdraw-card .actions .btn {
+            padding: 5px 16px;
+            font-size: 11px;
+            border-radius: 20px;
+        }
+
+        .account-item {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .account-item .left .name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1c2128;
+        }
+        .account-item .left .email {
+            font-size: 12px;
+            color: #888;
+        }
+        .account-item .right .balance {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1c2128;
+        }
+
+        /* ── MODAL FOR REFERRAL FORM ── */
+        #referralModal .modal {
+            max-width: 440px;
+        }
+        #referralModal .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 13px;
+            background: #fff;
+        }
+        #referralModal .form-group select:focus {
+            outline: none;
+            border-color: #1c2128;
+        }
     </style>
 </head>
 <body>
@@ -2066,7 +2249,7 @@
 
         <div class="app-content" id="appContent">
 
-            <!-- ===== HEADER: Centered admin panel, admin name, and promo pics button ===== -->
+            <!-- ===== HEADER: Centered admin panel, admin name, and three buttons ===== -->
             <div class="header" id="mainHeader">
                 <div class="header-left">
                     <div class="top-row">
@@ -2076,10 +2259,18 @@
                             <span id="adminName">Buffer Zone</span>
                         </div>
                     </div>
-                    <!-- Promo Pics button centered below admin name -->
-                    <button class="promo-pics-btn" id="promoPicsBtn">
-                        <i class="fa-regular fa-images"></i> Promo Pics
-                    </button>
+                    <!-- Three buttons: Promo Pics, Referral, Payables -->
+                    <div class="header-actions">
+                        <button class="header-action-btn" id="promoPicsBtn">
+                            <i class="fa-regular fa-images"></i> Promo Pics
+                        </button>
+                        <button class="header-action-btn" id="referralBtn">
+                            <i class="fa-solid fa-gift"></i> Referral
+                        </button>
+                        <button class="header-action-btn" id="payablesBtn">
+                            <i class="fa-solid fa-money-bill-wave"></i> Payables
+                        </button>
+                    </div>
                 </div>
                 <div class="header-center">
                     <div class="admin-title">
@@ -2213,6 +2404,81 @@
                 </div>
 
                 <div class="promo-pics-grid" id="promoPicsGrid"></div>
+
+            </div>
+
+            <!-- ===== PAGE: REFERRAL ===== -->
+            <div id="page-referral" class="page">
+
+                <div class="card" style="border: none; box-shadow: none; padding: 0 0 8px 0;">
+                    <div>
+                        <h2 style="font-size:24px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-gift" style="color:#f5b83d;"></i> Referral Management</h2>
+                        <p style="font-size:13px; color:#888;">Set up referral promos, custom rewards, and discount incentives.</p>
+                    </div>
+                </div>
+
+                <!-- Three referral action cards -->
+                <div class="referral-grid">
+                    <div class="referral-card" id="openReferralPromo">
+                        <div class="icon"><i class="fa-solid fa-tag"></i></div>
+                        <div class="title">Set up Referral Promo</div>
+                        <div class="sub">Standard reward for all referrers</div>
+                    </div>
+                    <div class="referral-card" id="openCustomReferral">
+                        <div class="icon"><i class="fa-solid fa-user-pen"></i></div>
+                        <div class="title">Set up Custom Referral</div>
+                        <div class="sub">Reward a specific user</div>
+                    </div>
+                    <div class="referral-card" id="openReferralDiscount">
+                        <div class="icon"><i class="fa-solid fa-percent"></i></div>
+                        <div class="title">Referral Discount</div>
+                        <div class="sub">Discount for service + referrer reward</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>All Referral Promos</h3>
+                    </div>
+                    <div id="referralPromosList"></div>
+                </div>
+
+            </div>
+
+            <!-- ===== PAGE: PAYABLES ===== -->
+            <div id="page-payables" class="page">
+
+                <div class="card" style="border: none; box-shadow: none; padding: 0 0 8px 0;">
+                    <div>
+                        <h2 style="font-size:24px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-money-bill-wave" style="color:#f5b83d;"></i> Payables</h2>
+                        <p style="font-size:13px; color:#888;">Manage customer balances and withdrawal requests.</p>
+                    </div>
+                </div>
+
+                <div class="payables-toggles">
+                    <button class="toggle-btn active" id="toggleAccounts">Accounts</button>
+                    <button class="toggle-btn" id="toggleWithdraws">Withdraws</button>
+                </div>
+
+                <!-- Accounts Section -->
+                <div id="payablesAccounts" style="display:block;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Customer Balances</h3>
+                        </div>
+                        <div id="customerBalancesList"></div>
+                    </div>
+                </div>
+
+                <!-- Withdraws Section -->
+                <div id="payablesWithdraws" style="display:none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Withdrawal Requests</h3>
+                        </div>
+                        <div id="withdrawRequestsList"></div>
+                    </div>
+                </div>
 
             </div>
 
@@ -2635,6 +2901,45 @@
         </div>
     </div>
 
+    <!-- ===== REFERRAL MODAL ===== -->
+    <div class="modal-overlay" id="referralModal">
+        <div class="modal">
+            <button class="close-btn" id="referralModalCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3 id="referralModalTitle">Set up Referral Promo</h3>
+            <p class="sub" id="referralModalSub">Fill in the details below.</p>
+            <form id="referralForm">
+                <input type="hidden" id="editReferralId" />
+                <input type="hidden" id="referralType" value="standard" />
+
+                <div class="form-group" id="referralStandardFields">
+                    <label>Amount for Referrer (ZMW)</label>
+                    <input type="number" id="referralAmount" placeholder="e.g. 50" step="0.01" required />
+                </div>
+
+                <div class="form-group" id="referralCustomFields" style="display:none;">
+                    <label>Select User</label>
+                    <select id="referralUserSelect" required>
+                        <option value="">— Select a user —</option>
+                    </select>
+                    <label style="margin-top:8px; display:block;">Amount for this User (ZMW)</label>
+                    <input type="number" id="referralCustomAmount" placeholder="e.g. 100" step="0.01" required />
+                </div>
+
+                <div class="form-group" id="referralDiscountFields" style="display:none;">
+                    <label>Referral Code</label>
+                    <input type="text" id="referralDiscountCode" placeholder="e.g. BZ-12ABC" required />
+                    <label style="margin-top:8px; display:block;">Discount % for Service</label>
+                    <input type="number" id="referralDiscountPercent" placeholder="e.g. 10" min="1" max="100" required />
+                    <label style="margin-top:8px; display:block;">Amount for Referrer (ZMW)</label>
+                    <input type="number" id="referralDiscountAmount" placeholder="e.g. 50" step="0.01" required />
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="referralSubmitBtn"><i class="fa-solid fa-check"></i> Save</button>
+                <button type="button" class="btn btn-outline" id="referralCancelBtn">Cancel</button>
+            </form>
+        </div>
+    </div>
+
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
@@ -2680,6 +2985,7 @@
         let pendingDeleteAction = null;
         let pendingStatusOrderId = null;
         let selectedStatus = null;
+        let allUsersData = {};
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -2695,6 +3001,8 @@
         const mainHeader = document.getElementById('mainHeader');
         const workAvatarBtn = document.getElementById('workAvatarBtn');
         const promoPicsBtn = document.getElementById('promoPicsBtn');
+        const referralBtn = document.getElementById('referralBtn');
+        const payablesBtn = document.getElementById('payablesBtn');
 
         const modal = document.getElementById('serviceModal');
         const modalTitle = document.getElementById('modalTitle');
@@ -2762,6 +3070,32 @@
         const promoPicsGrid = document.getElementById('promoPicsGrid');
         const addPromoPicBtn = document.getElementById('addPromoPicBtn');
 
+        // Referral
+        const referralModal = document.getElementById('referralModal');
+        const referralModalCloseBtn = document.getElementById('referralModalCloseBtn');
+        const referralForm = document.getElementById('referralForm');
+        const editReferralId = document.getElementById('editReferralId');
+        const referralType = document.getElementById('referralType');
+        const referralAmount = document.getElementById('referralAmount');
+        const referralUserSelect = document.getElementById('referralUserSelect');
+        const referralCustomAmount = document.getElementById('referralCustomAmount');
+        const referralDiscountCode = document.getElementById('referralDiscountCode');
+        const referralDiscountPercent = document.getElementById('referralDiscountPercent');
+        const referralDiscountAmount = document.getElementById('referralDiscountAmount');
+        const referralSubmitBtn = document.getElementById('referralSubmitBtn');
+        const referralCancelBtn = document.getElementById('referralCancelBtn');
+        const referralStandardFields = document.getElementById('referralStandardFields');
+        const referralCustomFields = document.getElementById('referralCustomFields');
+        const referralDiscountFields = document.getElementById('referralDiscountFields');
+
+        // Payables
+        const toggleAccounts = document.getElementById('toggleAccounts');
+        const toggleWithdraws = document.getElementById('toggleWithdraws');
+        const payablesAccounts = document.getElementById('payablesAccounts');
+        const payablesWithdraws = document.getElementById('payablesWithdraws');
+        const customerBalancesList = document.getElementById('customerBalancesList');
+        const withdrawRequestsList = document.getElementById('withdrawRequestsList');
+
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMessage');
 
@@ -2800,7 +3134,10 @@
                         workPosts: {},
                         promoPics: {},
                         disabled: false,
-                        notifications: {}
+                        notifications: {},
+                        referralPromos: {},
+                        withdrawRequests: {},
+                        customerBalances: {}
                     };
                     set(dbRef, allData).then(() => {
                         if (callback) callback(allData);
@@ -2817,6 +3154,18 @@
                     }
                     if (!allData.promoPics) {
                         allData.promoPics = {};
+                        saveData();
+                    }
+                    if (!allData.referralPromos) {
+                        allData.referralPromos = {};
+                        saveData();
+                    }
+                    if (!allData.withdrawRequests) {
+                        allData.withdrawRequests = {};
+                        saveData();
+                    }
+                    if (!allData.customerBalances) {
+                        allData.customerBalances = {};
                         saveData();
                     }
                     if (callback) callback(data);
@@ -2885,9 +3234,8 @@
                 profileEmailEl.textContent = email;
                 profilePhoneEl.textContent = phone;
 
-                // ── Zambian time greeting ──
                 const now = new Date();
-                const zambiaOffset = 2; // CAT = UTC+2
+                const zambiaOffset = 2;
                 const utcHours = now.getUTCHours();
                 const zambiaHours = (utcHours + zambiaOffset) % 24;
 
@@ -2939,6 +3287,10 @@
             renderOurServicesList();
             renderWorkPosts();
             renderPromoPics();
+            renderReferralPromos();
+            renderCustomerBalances();
+            renderWithdrawRequests();
+            populateReferralUserSelect();
         }
 
         function renderDashboard() {
@@ -3143,6 +3495,7 @@
             get(usersRef).then((snapshot) => {
                 const usersData = snapshot.val() || {};
                 allData.users = usersData;
+                allUsersData = usersData;
                 let entries = Object.entries(usersData);
                 if (searchTerm.trim()) {
                     const term = searchTerm.trim().toLowerCase();
@@ -3516,7 +3869,6 @@
                 workFlyerDesc.value = editData?.description || '';
             }
 
-            // Show the frame preview (same as will appear in the post)
             if (type === 'app') {
                 workFrameContainer.innerHTML = `
                             <div class="phone-frame">
@@ -3593,6 +3945,268 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
+        // REFERRAL PROMOS
+        // ───────────────────────────────────────────────────────────────────
+
+        function renderReferralPromos() {
+            const container = document.getElementById('referralPromosList');
+            const data = allData.referralPromos || {};
+            const entries = Object.entries(data);
+            entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+
+            if (entries.length === 0) {
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:20px;">No referral promos set up.</div>`;
+                return;
+            }
+
+            container.innerHTML = entries.map(([key, p]) => {
+                let detail = '';
+                if (p.type === 'standard') {
+                    detail = `Referrer gets ZMW ${p.amount}`;
+                } else if (p.type === 'custom') {
+                    const user = allUsersData[p.userId] || {};
+                    const userName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || p.userId;
+                    detail = `User: ${userName} gets ZMW ${p.amount}`;
+                } else if (p.type === 'discount') {
+                    detail = `Code: ${p.code} — ${p.discount}% off service, referrer gets ZMW ${p.amount}`;
+                }
+                return `
+                            <div class="referral-promo-item">
+                                <div class="left">
+                                    <div class="type">${p.type.charAt(0).toUpperCase() + p.type.slice(1)}</div>
+                                    <div class="detail">${detail}</div>
+                                </div>
+                                <div class="actions">
+                                    <button class="btn btn-outline btn-sm edit-referral" data-key="${key}"><i class="fa-regular fa-pen-to-square"></i> Edit</button>
+                                    <button class="btn btn-danger btn-sm delete-referral" data-key="${key}"><i class="fa-solid fa-trash"></i> Delete</button>
+                                </div>
+                            </div>
+                        `;
+            }).join('');
+
+            container.querySelectorAll('.edit-referral').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const key = this.dataset.key;
+                    openEditReferral(key);
+                });
+            });
+            container.querySelectorAll('.delete-referral').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const key = this.dataset.key;
+                    showDeleteConfirmation('referral', key);
+                });
+            });
+        }
+
+        function openReferralModal(type, editData = null) {
+            referralType.value = type;
+            editReferralId.value = editData ? editData.key : '';
+
+            referralStandardFields.style.display = 'none';
+            referralCustomFields.style.display = 'none';
+            referralDiscountFields.style.display = 'none';
+
+            if (type === 'standard') {
+                referralStandardFields.style.display = 'block';
+                document.getElementById('referralModalTitle').textContent = 'Set up Referral Promo';
+                document.getElementById('referralModalSub').textContent = 'Every referrer will receive this amount (ZMW) when someone signs up with their code.';
+                referralAmount.value = editData?.amount || '';
+            } else if (type === 'custom') {
+                referralCustomFields.style.display = 'block';
+                document.getElementById('referralModalTitle').textContent = 'Set up Custom Referral';
+                document.getElementById('referralModalSub').textContent = 'Select a user and set the amount they will receive per referral.';
+                if (editData) {
+                    referralUserSelect.value = editData.userId || '';
+                    referralCustomAmount.value = editData.amount || '';
+                } else {
+                    referralUserSelect.value = '';
+                    referralCustomAmount.value = '';
+                }
+                populateReferralUserSelect();
+            } else if (type === 'discount') {
+                referralDiscountFields.style.display = 'block';
+                document.getElementById('referralModalTitle').textContent = 'Referral Discount';
+                document.getElementById('referralModalSub').textContent = 'When a user applies this code to a service, they get a % discount, and the referrer gets the amount below.';
+                if (editData) {
+                    referralDiscountCode.value = editData.code || '';
+                    referralDiscountPercent.value = editData.discount || '';
+                    referralDiscountAmount.value = editData.amount || '';
+                } else {
+                    referralDiscountCode.value = '';
+                    referralDiscountPercent.value = '';
+                    referralDiscountAmount.value = '';
+                }
+            }
+
+            referralSubmitBtn.textContent = editData ? 'Update' : 'Save';
+            referralModal.classList.add('open');
+        }
+
+        function closeReferralModal() {
+            referralModal.classList.remove('open');
+        }
+
+        function openEditReferral(key) {
+            const data = allData.referralPromos?.[key];
+            if (!data) return;
+            openReferralModal(data.type, { key, ...data });
+        }
+
+        function populateReferralUserSelect() {
+            const select = referralUserSelect;
+            const currentValue = select.value;
+            select.innerHTML = '<option value="">— Select a user —</option>';
+            for (const uid in allUsersData) {
+                const u = allUsersData[uid];
+                const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || u.email || uid;
+                const opt = document.createElement('option');
+                opt.value = uid;
+                opt.textContent = `${name} (${u.email || 'No email'})`;
+                select.appendChild(opt);
+            }
+            select.value = currentValue;
+        }
+
+        function addReferralPromo(data) {
+            const newId = 'rp' + Date.now();
+            if (!allData.referralPromos) allData.referralPromos = {};
+            allData.referralPromos[newId] = {
+                id: newId,
+                type: data.type,
+                amount: parseFloat(data.amount) || 0,
+                userId: data.userId || '',
+                code: data.code || '',
+                discount: parseInt(data.discount) || 0,
+                createdAt: Date.now(),
+                updatedAt: Date.now()
+            };
+            return saveData();
+        }
+
+        function updateReferralPromo(key, data) {
+            if (!allData.referralPromos?.[key]) return;
+            const promo = allData.referralPromos[key];
+            promo.amount = parseFloat(data.amount) || 0;
+            promo.userId = data.userId || '';
+            promo.code = data.code || '';
+            promo.discount = parseInt(data.discount) || 0;
+            promo.updatedAt = Date.now();
+            return saveData();
+        }
+
+        function deleteReferralPromo(key) {
+            if (allData.referralPromos && allData.referralPromos[key]) {
+                delete allData.referralPromos[key];
+                return saveData();
+            }
+        }
+
+        // ───────────────────────────────────────────────────────────────────
+        // PAYABLES: Accounts & Withdraws
+        // ───────────────────────────────────────────────────────────────────
+
+        function renderCustomerBalances() {
+            const container = customerBalancesList;
+            const balances = allData.customerBalances || {};
+            const users = allData.users || {};
+            const entries = Object.entries(balances);
+            if (entries.length === 0) {
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:20px;">No customer balances yet.</div>`;
+                return;
+            }
+            container.innerHTML = entries.map(([uid, balance]) => {
+                const u = users[uid] || {};
+                const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || u.email || uid;
+                return `
+                            <div class="account-item">
+                                <div class="left">
+                                    <div class="name">${name}</div>
+                                    <div class="email">${u.email || ''}</div>
+                                </div>
+                                <div class="right">
+                                    <div class="balance">ZMW ${balance.toFixed(2)}</div>
+                                </div>
+                            </div>
+                        `;
+            }).join('');
+        }
+
+        function renderWithdrawRequests() {
+            const container = withdrawRequestsList;
+            const requests = allData.withdrawRequests || {};
+            const entries = Object.entries(requests);
+            entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+            if (entries.length === 0) {
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:20px;">No withdrawal requests.</div>`;
+                return;
+            }
+            container.innerHTML = entries.map(([key, r]) => {
+                const statusText = r.status || 'pending';
+                const isPending = statusText === 'pending';
+                return `
+                            <div class="withdraw-card" data-key="${key}">
+                                <div class="info">
+                                    <div class="name">${r.customerName || 'Unknown'}</div>
+                                    <div class="phone">${r.phone || 'No phone'}</div>
+                                    <div class="amount">ZMW ${(r.amount || 0).toFixed(2)}</div>
+                                    <div style="font-size:11px; color:#888; margin-top:2px;">Status: ${statusText}</div>
+                                </div>
+                                <div class="actions">
+                                    ${isPending ? `
+                                        <button class="btn btn-success btn-sm approve-withdraw" data-key="${key}"><i class="fa-solid fa-check"></i> Approve</button>
+                                        <button class="btn btn-danger btn-sm decline-withdraw" data-key="${key}"><i class="fa-solid fa-times"></i> Decline</button>
+                                    ` : `<span class="text-muted" style="font-size:11px;">${statusText === 'approved' ? '✅ Approved' : '❌ Declined'}</span>`}
+                                </div>
+                            </div>
+                        `;
+            }).join('');
+
+            container.querySelectorAll('.approve-withdraw').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const key = this.dataset.key;
+                    processWithdraw(key, 'approved');
+                });
+            });
+            container.querySelectorAll('.decline-withdraw').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const key = this.dataset.key;
+                    processWithdraw(key, 'declined');
+                });
+            });
+        }
+
+        function processWithdraw(key, newStatus) {
+            if (!allData.withdrawRequests?.[key]) return;
+            const req = allData.withdrawRequests[key];
+            if (req.status !== 'pending') {
+                showToast('This request has already been processed.', 'error');
+                return;
+            }
+            if (newStatus === 'approved') {
+                // Deduct from customer balance
+                const uid = req.userId;
+                const balances = allData.customerBalances || {};
+                const currentBalance = balances[uid] || 0;
+                const amount = req.amount || 0;
+                if (currentBalance < amount) {
+                    showToast('Insufficient balance for this user.', 'error');
+                    return;
+                }
+                balances[uid] = currentBalance - amount;
+                allData.customerBalances = balances;
+            }
+            req.status = newStatus;
+            req.processedAt = Date.now();
+            saveData().then(() => {
+                renderAll();
+                showToast(`Withdrawal ${newStatus}`);
+            });
+        }
+
+        // ───────────────────────────────────────────────────────────────────
         // DELETE CONFIRMATION
         // ───────────────────────────────────────────────────────────────────
 
@@ -3604,7 +4218,8 @@
                 'service': 'Are you sure you want to delete this service?',
                 'category': 'Are you sure you want to delete this category? (This will also remove all services under it)',
                 'workPost': 'Are you sure you want to delete this work post?',
-                'promoPic': 'Are you sure you want to delete this flyer?'
+                'promoPic': 'Are you sure you want to delete this flyer?',
+                'referral': 'Are you sure you want to delete this referral promo?'
             };
             deleteConfirmText.textContent = messages[type] || 'Are you sure you want to delete this item?';
             pendingDeleteAction = { type, key };
@@ -3662,6 +4277,9 @@
             } else if (type === 'promoPic') {
                 deletePromoPic(key).then(() => { renderAll();
                     showToast('Flyer deleted'); });
+            } else if (type === 'referral') {
+                deleteReferralPromo(key).then(() => { renderAll();
+                    showToast('Referral promo deleted'); });
             }
             deleteConfirmModal.classList.remove('open');
             pendingDeleteAction = null;
@@ -3913,6 +4531,22 @@
             document.getElementById('appContent').scrollTop = 0;
         });
 
+        referralBtn.addEventListener('click', function() {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-referral').classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            mainHeader.classList.remove('work-active');
+            document.getElementById('appContent').scrollTop = 0;
+        });
+
+        payablesBtn.addEventListener('click', function() {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-payables').classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            mainHeader.classList.remove('work-active');
+            document.getElementById('appContent').scrollTop = 0;
+        });
+
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
                 document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -4058,6 +4692,99 @@
                 promoPicSubtext.value = '';
                 showToast('Flyer uploaded!');
             });
+        });
+
+        // ── Referral Promos ──
+        document.getElementById('openReferralPromo').addEventListener('click', () => {
+            openReferralModal('standard');
+        });
+        document.getElementById('openCustomReferral').addEventListener('click', () => {
+            openReferralModal('custom');
+        });
+        document.getElementById('openReferralDiscount').addEventListener('click', () => {
+            openReferralModal('discount');
+        });
+
+        referralModalCloseBtn.addEventListener('click', closeReferralModal);
+        referralCancelBtn.addEventListener('click', closeReferralModal);
+        referralModal.addEventListener('click', (e) => {
+            if (e.target === referralModal) closeReferralModal();
+        });
+
+        referralForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const type = referralType.value;
+            const editId = editReferralId.value;
+            const data = { type };
+
+            if (type === 'standard') {
+                const amount = parseFloat(referralAmount.value);
+                if (!amount || amount <= 0) {
+                    showToast('Please enter a valid amount.', 'error');
+                    return;
+                }
+                data.amount = amount;
+            } else if (type === 'custom') {
+                const userId = referralUserSelect.value;
+                const amount = parseFloat(referralCustomAmount.value);
+                if (!userId) {
+                    showToast('Please select a user.', 'error');
+                    return;
+                }
+                if (!amount || amount <= 0) {
+                    showToast('Please enter a valid amount.', 'error');
+                    return;
+                }
+                data.userId = userId;
+                data.amount = amount;
+            } else if (type === 'discount') {
+                const code = referralDiscountCode.value.trim();
+                const discount = parseInt(referralDiscountPercent.value);
+                const amount = parseFloat(referralDiscountAmount.value);
+                if (!code) {
+                    showToast('Please enter a referral code.', 'error');
+                    return;
+                }
+                if (!discount || discount < 1 || discount > 100) {
+                    showToast('Please enter a valid discount percentage (1-100).', 'error');
+                    return;
+                }
+                if (!amount || amount <= 0) {
+                    showToast('Please enter a valid amount for the referrer.', 'error');
+                    return;
+                }
+                data.code = code;
+                data.discount = discount;
+                data.amount = amount;
+            }
+
+            if (editId) {
+                updateReferralPromo(editId, data).then(() => {
+                    renderAll();
+                    closeReferralModal();
+                    showToast('Referral promo updated!');
+                });
+            } else {
+                addReferralPromo(data).then(() => {
+                    renderAll();
+                    closeReferralModal();
+                    showToast('Referral promo created!');
+                });
+            }
+        });
+
+        // ── Payables Toggles ──
+        toggleAccounts.addEventListener('click', function() {
+            toggleAccounts.classList.add('active');
+            toggleWithdraws.classList.remove('active');
+            payablesAccounts.style.display = 'block';
+            payablesWithdraws.style.display = 'none';
+        });
+        toggleWithdraws.addEventListener('click', function() {
+            toggleWithdraws.classList.add('active');
+            toggleAccounts.classList.remove('active');
+            payablesAccounts.style.display = 'none';
+            payablesWithdraws.style.display = 'block';
         });
 
         // ── Other buttons ──
@@ -4339,7 +5066,7 @@
             }
         });
 
-        console.log('✅ Admin App ready — Centered header, floating promo pics (no frame, no crop), order status modal.');
+        console.log('✅ Admin App ready — Centered header, three action buttons (Promo Pics, Referral, Payables).');
     </script>
 </body>
 </html>
