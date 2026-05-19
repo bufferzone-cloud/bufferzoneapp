@@ -6,8 +6,7 @@
     <title>Admin · Buffer Zone</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
-    </script>
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
     <style>
         * {
             margin: 0;
@@ -16,14 +15,12 @@
             font-family: 'Poppins', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
-
         body {
             background-color: #f8f9fc;
             display: block;
             overflow: hidden;
             height: 100%;
         }
-
         .app-root {
             display: flex;
             flex-direction: column;
@@ -35,14 +32,12 @@
             overflow: hidden;
             position: relative;
         }
-
         .app-content {
             flex: 1;
             overflow-y: auto;
             padding: 0 14px 150px 14px;
             -webkit-overflow-scrolling: touch;
         }
-
         .bottom-nav {
             position: fixed;
             bottom: 20px;
@@ -62,7 +57,6 @@
             flex-shrink: 0;
             pointer-events: auto;
         }
-
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -92,7 +86,6 @@
             transform: scale(0.92);
         }
 
-        /* ── HEADER: Work button left, Admin name center, Promo button right ── */
         .header {
             display: flex;
             align-items: center;
@@ -102,14 +95,12 @@
             position: relative;
             flex-wrap: wrap;
         }
-
         .header-left {
             display: flex;
             align-items: center;
             gap: 8px;
             flex: 0 0 auto;
         }
-
         .work-avatar {
             width: 40px;
             height: 40px;
@@ -125,15 +116,10 @@
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 4px 12px rgba(28, 33, 40, 0.3);
-            letter-spacing: 0.5px;
         }
         .work-avatar:active {
             transform: scale(0.92);
         }
-        .work-avatar:hover {
-            box-shadow: 0 6px 20px rgba(28, 33, 40, 0.4);
-        }
-
         .header-center {
             display: flex;
             flex-direction: column;
@@ -141,7 +127,6 @@
             flex: 1;
             text-align: center;
         }
-
         .header-center .admin-title {
             font-size: 11px;
             color: #888;
@@ -152,14 +137,12 @@
             color: #1c2128;
             letter-spacing: -0.3px;
         }
-
         .header-right {
             display: flex;
             align-items: center;
             gap: 8px;
             flex: 0 0 auto;
         }
-
         .promo-header-btn {
             width: 40px;
             height: 40px;
@@ -178,7 +161,6 @@
             transform: scale(0.92);
         }
 
-        /* ── THREE BUTTONS BELOW HEADER ── */
         .header-actions-row {
             display: flex;
             align-items: center;
@@ -210,16 +192,6 @@
         }
         .header-action-btn:active {
             transform: scale(0.95);
-        }
-        .header-action-btn:hover {
-            box-shadow: 0 6px 20px rgba(28, 33, 40, 0.35);
-        }
-
-        .header.work-active .header-actions-row {
-            display: none;
-        }
-        .header.work-active .header-center .admin-title {
-            display: none;
         }
 
         .greeting {
@@ -436,18 +408,6 @@
             margin-bottom: 8px;
             color: #fff;
         }
-        .service-card-customer .icon-wrap.graphic {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-        }
-        .service-card-customer .icon-wrap.dev {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-        }
-        .service-card-customer .icon-wrap.tech {
-            background: linear-gradient(135deg, #43e97b, #38f9d7);
-        }
-        .service-card-customer .icon-wrap.it {
-            background: linear-gradient(135deg, #fa709a, #fee140);
-        }
         .service-card-customer .title {
             font-size: 11px;
             font-weight: 600;
@@ -475,23 +435,6 @@
             margin-bottom: 16px;
             position: relative;
             overflow: hidden;
-        }
-        .hero-editor::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: -20px;
-            height: 100%;
-            width: 40%;
-            z-index: 0;
-            background: radial-gradient(circle at 100% 100%, #f5b83d 0%, #f5b83d 45%, transparent 45%);
-            opacity: 0.2;
-            border-top-left-radius: 100%;
-            border-bottom-left-radius: 100%;
-        }
-        .hero-editor .hero-content {
-            position: relative;
-            z-index: 1;
         }
         .hero-editor input,
         .hero-editor textarea {
@@ -528,9 +471,6 @@
             cursor: pointer;
             margin-top: 4px;
         }
-        .hero-editor .btn-save-hero:active {
-            transform: scale(0.95);
-        }
 
         .policy-editor {
             background: #1c2128;
@@ -540,23 +480,6 @@
             margin-bottom: 16px;
             position: relative;
             overflow: hidden;
-        }
-        .policy-editor::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: -20px;
-            height: 100%;
-            width: 40%;
-            z-index: 0;
-            background: radial-gradient(circle at 100% 100%, #f5b83d 0%, #f5b83d 45%, transparent 45%);
-            opacity: 0.2;
-            border-top-left-radius: 100%;
-            border-bottom-left-radius: 100%;
-        }
-        .policy-editor .policy-content {
-            position: relative;
-            z-index: 1;
         }
         .policy-editor input,
         .policy-editor textarea {
@@ -592,9 +515,6 @@
             font-size: 11px;
             cursor: pointer;
             margin-top: 4px;
-        }
-        .policy-editor .btn-save-policy:active {
-            transform: scale(0.95);
         }
 
         .list-editor {
@@ -706,10 +626,6 @@
             gap: 8px;
             transition: all 0.2s;
         }
-        .category-tag:hover {
-            border-color: #1c2128;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
         .category-tag .delete-cat-btn {
             background: none;
             border: none;
@@ -718,9 +634,6 @@
             font-size: 10px;
             padding: 0;
             transition: color 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         .category-tag .delete-cat-btn:hover {
             color: #dc2626;
@@ -824,18 +737,9 @@
             color: #1c2128;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
         }
-        .status-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-        }
         .status-btn:active {
             transform: scale(0.94);
         }
-        .status-btn i {
-            font-size: 10px;
-            opacity: 0.6;
-        }
-
         .status-btn.pending {
             background: #fff6e0;
             color: #cc8800;
@@ -894,7 +798,6 @@
             color: #999;
             cursor: pointer;
             padding: 4px;
-            transition: color 0.2s;
         }
         .status-modal .close-btn:hover {
             color: #1c2128;
@@ -942,21 +845,6 @@
             border-radius: 50%;
             flex-shrink: 0;
         }
-        .status-modal .status-option .dot.pending {
-            background: #cc8800;
-        }
-        .status-modal .status-option .dot.progress {
-            background: #0066cc;
-        }
-        .status-modal .status-option .dot.completed {
-            background: #00a86b;
-        }
-        .status-modal .status-option .dot.review {
-            background: #7700cc;
-        }
-        .status-modal .status-option .dot.cancelled {
-            background: #dc2626;
-        }
         .status-modal .status-option .label {
             font-weight: 600;
             font-size: 14px;
@@ -986,13 +874,6 @@
             transition: all 0.2s;
             box-shadow: 0 4px 12px rgba(28, 33, 40, 0.2);
         }
-        .status-modal .btn-confirm-status:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(28, 33, 40, 0.3);
-        }
-        .status-modal .btn-confirm-status:active {
-            transform: scale(0.96);
-        }
         .status-modal .btn-confirm-status:disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -1007,9 +888,6 @@
             margin-bottom: 8px;
             cursor: pointer;
             transition: all 0.2s;
-        }
-        .customer-item:hover {
-            border-color: #ddd;
         }
         .customer-item .user-summary {
             display: flex;
@@ -1105,12 +983,6 @@
         .ban-toggle-btn:active {
             transform: scale(0.9);
         }
-        .ban-toggle-btn .fa-toggle-on {
-            color: #16a34a;
-        }
-        .ban-toggle-btn .fa-toggle-off {
-            color: #dc2626;
-        }
 
         .toggle-switch {
             position: relative;
@@ -1180,38 +1052,17 @@
             background: #1c2128;
             color: #ffffff;
         }
-        .btn-primary:hover {
-            background: #2a2a2a;
-        }
         .btn-outline {
             background: transparent;
             color: #1c2128;
             border: 1px solid #ddd;
         }
-        .btn-outline:hover {
-            border-color: #1c2128;
-            background: #f8f8f8;
-        }
         .btn-danger {
             background: #dc2626;
             color: #ffffff;
         }
-        .btn-danger:hover {
-            background: #b91c1c;
-        }
         .btn-success {
             background: #16a34a;
-            color: #ffffff;
-        }
-        .btn-success:hover {
-            background: #15803d;
-        }
-        .btn-warning {
-            background: #f59e0b;
-            color: #1c2128;
-        }
-        .btn-warning:hover {
-            background: #d97706;
             color: #ffffff;
         }
         .btn-sm {
@@ -1229,39 +1080,12 @@
             font-weight: 600;
             cursor: pointer;
         }
-        .btn-view-proof:active {
-            transform: scale(0.95);
-        }
-        .btn-view-proof i {
-            margin-right: 4px;
-        }
 
         .text-muted {
             color: #888;
         }
         .text-center {
             text-align: center;
-        }
-        .mt-8 {
-            margin-top: 8px;
-        }
-        .flex {
-            display: flex;
-        }
-        .gap-8 {
-            gap: 8px;
-        }
-        .gap-12 {
-            gap: 12px;
-        }
-        .w-full {
-            width: 100%;
-        }
-        .items-center {
-            align-items: center;
-        }
-        .justify-between {
-            justify-content: space-between;
         }
 
         .page {
@@ -1325,16 +1149,6 @@
             padding: 24px 22px 20px 22px;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
             animation: modalIn 0.25s ease;
-        }
-        @keyframes modalIn {
-            from {
-                opacity: 0;
-                transform: scale(0.92) translateY(16px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
         }
         .modal .close-btn {
             float: right;
@@ -1405,13 +1219,6 @@
             font-size: 14px;
             border-radius: 10px;
         }
-        .modal .btn+.btn {
-            margin-top: 8px;
-        }
-        .modal .btn-outline {
-            border: 1px solid #ddd;
-            background: #f9f9f9;
-        }
 
         .screenshot-modal-overlay {
             position: fixed;
@@ -1450,20 +1257,11 @@
             background: none;
             border: none;
         }
-        .screenshot-modal-content .close-btn:hover {
-            color: #1c2128;
-        }
         .screenshot-modal-content img {
             max-width: 100%;
             border-radius: 12px;
             margin-top: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .screenshot-modal-content h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1c2128;
-            margin-bottom: 4px;
         }
 
         .delete-confirm-modal-overlay {
@@ -1724,11 +1522,6 @@
             background: #1c2128;
             border-radius: 0 0 12px 12px;
         }
-        .phone-frame .placeholder {
-            color: #ccc;
-            font-size: 28px;
-            text-align: center;
-        }
 
         .laptop-frame {
             width: 100%;
@@ -1754,28 +1547,12 @@
             height: 100%;
             object-fit: cover;
         }
-        .laptop-frame .screen .placeholder {
-            color: #ccc;
-            font-size: 28px;
-            text-align: center;
-        }
         .laptop-frame .base {
             height: 10px;
             background: #2a2a2a;
             border-radius: 0 0 8px 8px;
             margin: 0 8px;
             position: relative;
-        }
-        .laptop-frame .base::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 4px;
-            background: #444;
-            border-radius: 0 0 4px 4px;
         }
 
         .work-upload-modal .modal {
@@ -1830,7 +1607,6 @@
             max-width: 800px;
             margin: 0 auto;
         }
-
         .promo-pic-card {
             position: relative;
             border-radius: 16px;
@@ -1905,9 +1681,6 @@
             background: #dc2626;
             transform: scale(1.1);
         }
-        .promo-pic-card .pic-delete-btn:active {
-            transform: scale(0.9);
-        }
 
         .promo-pics-upload-area {
             display: flex;
@@ -1971,55 +1744,6 @@
         .orders-compact-header .btn {
             padding: 4px 12px;
             font-size: 10px;
-        }
-
-        @media (max-width: 400px) {
-            .work-options-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-            .work-option-card {
-                padding: 12px 8px;
-            }
-            .work-option-card .wo-icon {
-                font-size: 24px;
-            }
-            .work-option-card .wo-label {
-                font-size: 11px;
-            }
-            .work-grid-2x2 {
-                gap: 8px;
-            }
-            .work-post-card {
-                padding: 10px;
-            }
-            .phone-frame {
-                max-width: 160px;
-            }
-            .laptop-frame {
-                max-width: 240px;
-            }
-            .promo-pics-grid {
-                gap: 16px;
-            }
-            .promo-pic-card {
-                height: 350px;
-            }
-            .promo-pic-card .pic-overlay .pic-text {
-                font-size: 14px;
-            }
-            .promo-pics-upload-area {
-                height: 350px;
-                padding: 20px;
-            }
-        }
-        @media (min-width: 401px) and (max-width: 600px) {
-            .promo-pic-card {
-                height: 380px;
-            }
-            .promo-pics-upload-area {
-                height: 380px;
-            }
         }
 
         .referral-grid {
@@ -2087,10 +1811,6 @@
             display: flex;
             gap: 6px;
         }
-        .referral-promo-item .actions .btn {
-            padding: 2px 10px;
-            font-size: 9px;
-        }
 
         .payables-toggles {
             display: flex;
@@ -2113,9 +1833,6 @@
             background: #1c2128;
             color: #fff;
             border-color: #1c2128;
-        }
-        .payables-toggles .toggle-btn:active {
-            transform: scale(0.95);
         }
 
         .withdraw-card {
@@ -2192,10 +1909,6 @@
             font-size: 13px;
             background: #fff;
         }
-        #referralModal .form-group select:focus {
-            outline: none;
-            border-color: #1c2128;
-        }
 
         .user-select-item {
             padding: 8px 12px;
@@ -2233,15 +1946,63 @@
             padding: 2px 10px;
             border-radius: 12px;
         }
+
+        @media (max-width: 400px) {
+            .work-options-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .work-option-card {
+                padding: 12px 8px;
+            }
+            .work-option-card .wo-icon {
+                font-size: 24px;
+            }
+            .work-option-card .wo-label {
+                font-size: 11px;
+            }
+            .work-grid-2x2 {
+                gap: 8px;
+            }
+            .work-post-card {
+                padding: 10px;
+            }
+            .phone-frame {
+                max-width: 160px;
+            }
+            .laptop-frame {
+                max-width: 240px;
+            }
+            .promo-pics-grid {
+                gap: 16px;
+            }
+            .promo-pic-card {
+                height: 350px;
+            }
+            .promo-pic-card .pic-overlay .pic-text {
+                font-size: 14px;
+            }
+            .promo-pics-upload-area {
+                height: 350px;
+                padding: 20px;
+            }
+        }
+        @media (min-width: 401px) and (max-width: 600px) {
+            .promo-pic-card {
+                height: 380px;
+            }
+            .promo-pics-upload-area {
+                height: 380px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="app-root">
-
         <div class="app-content" id="appContent">
 
-            <!-- ===== HEADER: Work left, Admin name center, Promo right ===== -->
+            <!-- ===== HEADER ===== -->
             <div class="header" id="mainHeader">
                 <div class="header-left">
                     <div class="work-avatar" id="workAvatarBtn" title="View Work Page">Work</div>
@@ -2270,31 +2031,14 @@
 
             <!-- ===== PAGE: DASHBOARD ===== -->
             <div id="page-dashboard" class="page active">
-
                 <div class="greeting" id="greetingText">Good morning, Admin 👋</div>
                 <div class="greeting-sub" id="greetingSub"></div>
 
                 <div class="stat-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon blue"><i class="fa-solid fa-layer-group"></i></div>
-                        <div class="stat-value" id="statServices">0</div>
-                        <div class="stat-label">Services</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon green"><i class="fa-solid fa-truck"></i></div>
-                        <div class="stat-value" id="statOrders">0</div>
-                        <div class="stat-label">Orders</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon orange"><i class="fa-solid fa-users"></i></div>
-                        <div class="stat-value" id="statCustomers">0</div>
-                        <div class="stat-label">Customers</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon purple"><i class="fa-solid fa-credit-card"></i></div>
-                        <div class="stat-value" id="statRevenue">ZMW 0</div>
-                        <div class="stat-label">Revenue</div>
-                    </div>
+                    <div class="stat-card"><div class="stat-icon blue"><i class="fa-solid fa-layer-group"></i></div><div class="stat-value" id="statServices">0</div><div class="stat-label">Services</div></div>
+                    <div class="stat-card"><div class="stat-icon green"><i class="fa-solid fa-truck"></i></div><div class="stat-value" id="statOrders">0</div><div class="stat-label">Orders</div></div>
+                    <div class="stat-card"><div class="stat-icon orange"><i class="fa-solid fa-users"></i></div><div class="stat-value" id="statCustomers">0</div><div class="stat-label">Customers</div></div>
+                    <div class="stat-card"><div class="stat-icon purple"><i class="fa-solid fa-credit-card"></i></div><div class="stat-value" id="statRevenue">ZMW 0</div><div class="stat-label">Revenue</div></div>
                 </div>
 
                 <div class="quick-actions">
@@ -2304,9 +2048,7 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header">
-                        <h3>Quick Stats</h3>
-                    </div>
+                    <div class="card-header"><h3>Quick Stats</h3></div>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:13px; color:#555;">
                         <div style="background:#f0f0f0; border-radius:8px; padding:10px; text-align:center;">
                             <div style="font-size:10px; color:#888;">Pending</div>
@@ -2328,53 +2070,28 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header">
-                        <h3>Recent Activity</h3>
-                        <span class="see-all" id="viewAllActivity">View All</span>
-                    </div>
+                    <div class="card-header"><h3>Recent Activity</h3><span class="see-all" id="viewAllActivity">View All</span></div>
                     <div id="activityFeed"></div>
                 </div>
-
             </div>
 
             <!-- ===== PAGE: WORK ===== -->
             <div id="page-work" class="page">
-
                 <div class="work-page-header">
                     <h2>📁 Recent Projects</h2>
                     <p>Showcase your work — add new posts or manage existing ones</p>
                 </div>
-
                 <div class="work-options-grid">
-                    <div class="work-option-card" data-type="app">
-                        <span class="wo-icon">📱</span>
-                        <div class="wo-label">App</div>
-                        <div class="wo-sub">Mobile App Screenshot</div>
-                    </div>
-                    <div class="work-option-card" data-type="flyer">
-                        <span class="wo-icon">📄</span>
-                        <div class="wo-label">Flyer</div>
-                        <div class="wo-sub">Post a Flyer Design</div>
-                    </div>
-                    <div class="work-option-card" data-type="website">
-                        <span class="wo-icon">💻</span>
-                        <div class="wo-label">Websites</div>
-                        <div class="wo-sub">Website Screenshot</div>
-                    </div>
-                    <div class="work-option-card" data-type="logo">
-                        <span class="wo-icon">🎨</span>
-                        <div class="wo-label">Logos</div>
-                        <div class="wo-sub">Post a Logo Design</div>
-                    </div>
+                    <div class="work-option-card" data-type="app"><span class="wo-icon">📱</span><div class="wo-label">App</div><div class="wo-sub">Mobile App Screenshot</div></div>
+                    <div class="work-option-card" data-type="flyer"><span class="wo-icon">📄</span><div class="wo-label">Flyer</div><div class="wo-sub">Post a Flyer Design</div></div>
+                    <div class="work-option-card" data-type="website"><span class="wo-icon">💻</span><div class="wo-label">Websites</div><div class="wo-sub">Website Screenshot</div></div>
+                    <div class="work-option-card" data-type="logo"><span class="wo-icon">🎨</span><div class="wo-label">Logos</div><div class="wo-sub">Post a Logo Design</div></div>
                 </div>
-
                 <div class="work-posts-section" id="workPostsContainer"></div>
-
             </div>
 
             <!-- ===== PAGE: PROMO PICS ===== -->
             <div id="page-promo-pics" class="page">
-
                 <div class="card" style="border: none; box-shadow: none; padding: 0 0 8px 0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
                         <div>
@@ -2386,21 +2103,17 @@
                         </button>
                     </div>
                 </div>
-
                 <div class="promo-pics-grid" id="promoPicsGrid"></div>
-
             </div>
 
             <!-- ===== PAGE: REFERRAL ===== -->
             <div id="page-referral" class="page">
-
                 <div class="card" style="border: none; box-shadow: none; padding: 0 0 8px 0;">
                     <div>
                         <h2 style="font-size:24px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-gift" style="color:#f5b83d;"></i> Referral Management</h2>
                         <p style="font-size:13px; color:#888;">Set up referral promos, custom rewards, and discount incentives.</p>
                     </div>
                 </div>
-
                 <div class="referral-grid">
                     <div class="referral-card" id="openReferralPromo">
                         <div class="icon"><i class="fa-solid fa-tag"></i></div>
@@ -2418,54 +2131,40 @@
                         <div class="sub">Discount for service + referrer reward</div>
                     </div>
                 </div>
-
                 <div class="card">
-                    <div class="card-header">
-                        <h3>All Referral Promos</h3>
-                    </div>
+                    <div class="card-header"><h3>All Referral Promos</h3></div>
                     <div id="referralPromosList"></div>
                 </div>
-
             </div>
 
             <!-- ===== PAGE: PAYABLES ===== -->
             <div id="page-payables" class="page">
-
                 <div class="card" style="border: none; box-shadow: none; padding: 0 0 8px 0;">
                     <div>
                         <h2 style="font-size:24px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-money-bill-wave" style="color:#f5b83d;"></i> Payables</h2>
                         <p style="font-size:13px; color:#888;">Manage customer balances and withdrawal requests.</p>
                     </div>
                 </div>
-
                 <div class="payables-toggles">
                     <button class="toggle-btn active" id="toggleAccounts">Accounts</button>
                     <button class="toggle-btn" id="toggleWithdraws">Withdraws</button>
                 </div>
-
                 <div id="payablesAccounts" style="display:block;">
                     <div class="card">
-                        <div class="card-header">
-                            <h3>Customer Balances</h3>
-                        </div>
+                        <div class="card-header"><h3>Customer Balances</h3></div>
                         <div id="customerBalancesList"></div>
                     </div>
                 </div>
-
                 <div id="payablesWithdraws" style="display:none;">
                     <div class="card">
-                        <div class="card-header">
-                            <h3>Withdrawal Requests</h3>
-                        </div>
+                        <div class="card-header"><h3>Withdrawal Requests</h3></div>
                         <div id="withdrawRequestsList"></div>
                     </div>
                 </div>
-
             </div>
 
             <!-- ===== PAGE: SERVICES ===== -->
             <div id="page-services" class="page">
-
                 <div class="hero-editor">
                     <div class="hero-content">
                         <h4 style="color:#f5b83d; font-size:13px; font-weight:700; margin-bottom:6px;">HERO SECTION EDITOR</h4>
@@ -2477,14 +2176,12 @@
                         <button class="btn-save-hero" id="saveHeroBtn"><i class="fa-solid fa-save"></i> Save Hero</button>
                     </div>
                 </div>
-
                 <div class="list-editor">
                     <h4 style="font-size:13px; font-weight:700; color:#1c2128; margin-bottom:8px;">OUR SERVICES LIST</h4>
                     <div id="ourServicesListContainer"></div>
                     <button class="btn-add" id="addServiceListItem">+ Add Item</button>
                     <button class="btn-save-list" id="saveServiceList">Save List</button>
                 </div>
-
                 <div class="policy-editor">
                     <div class="policy-content">
                         <h4 style="color:#f5b83d; font-size:13px; font-weight:700; margin-bottom:6px;">PAYMENT POLICY CARD EDITOR</h4>
@@ -2494,23 +2191,16 @@
                         <button class="btn-save-policy" id="savePolicyBtn"><i class="fa-solid fa-save"></i> Save Policy</button>
                     </div>
                 </div>
-
                 <div class="card">
-                    <div class="card-header">
-                        <h3>Categories</h3>
-                    </div>
+                    <div class="card-header"><h3>Categories</h3></div>
                     <div class="category-container" id="categoryListContainer"></div>
                     <div style="display:flex;gap:8px;flex-wrap:wrap;padding:8px 0;">
                         <input type="text" id="newCategoryInput" class="cat-input" placeholder="Category name" />
                         <button class="btn btn-primary btn-sm" id="addCategoryBtn">Add</button>
                     </div>
                 </div>
-
                 <div class="card">
-                    <div class="card-header">
-                        <h3>Services</h3>
-                        <button class="btn btn-primary btn-sm" id="addServiceBtn"><i class="fa-solid fa-plus"></i> Add</button>
-                    </div>
+                    <div class="card-header"><h3>Services</h3><button class="btn btn-primary btn-sm" id="addServiceBtn"><i class="fa-solid fa-plus"></i> Add</button></div>
                     <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:12px; scrollbar-width:none;">
                         <button class="cat-filter active" data-cat="all" style="flex-shrink:0; background:#1c2128; color:#fff; border:none; padding:4px 14px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer;">All</button>
                         <button class="cat-filter" data-cat="graphic" style="flex-shrink:0; background:#f0f0f0; border:none; padding:4px 14px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer;">Graphic</button>
@@ -2525,10 +2215,7 @@
             <!-- ===== PAGE: PROMOTIONS ===== -->
             <div id="page-promotions" class="page">
                 <div class="card">
-                    <div class="card-header">
-                        <h3><i class="fa-solid fa-tag" style="color:#f5b83d;"></i> Promotions</h3>
-                        <button class="btn btn-primary btn-sm" id="addPromoBtn"><i class="fa-solid fa-plus"></i> New</button>
-                    </div>
+                    <div class="card-header"><h3><i class="fa-solid fa-tag" style="color:#f5b83d;"></i> Promotions</h3><button class="btn btn-primary btn-sm" id="addPromoBtn"><i class="fa-solid fa-plus"></i> New</button></div>
                     <div class="promo-section" id="promotionsList"></div>
                 </div>
             </div>
@@ -2630,17 +2317,10 @@
             <p class="sub" id="modalSub">Fill in the details below.</p>
             <form id="serviceForm">
                 <input type="hidden" id="editServiceId" />
-                <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" id="formTitle" placeholder="e.g. Logo Design" />
-                </div>
-                <div class="form-group">
-                    <label>Subtitle</label>
-                    <input type="text" id="formSubtitle" placeholder="e.g. Complete brand identity" />
-                </div>
+                <div class="form-group"><label>Title</label><input type="text" id="formTitle" placeholder="e.g. Logo Design" /></div>
+                <div class="form-group"><label>Subtitle</label><input type="text" id="formSubtitle" placeholder="e.g. Complete brand identity" /></div>
                 <div class="row-2">
-                    <div class="form-group">
-                        <label>Category</label>
+                    <div class="form-group"><label>Category</label>
                         <select id="formCategory">
                             <option value="graphic">Graphic Design</option>
                             <option value="dev">Developer Services</option>
@@ -2648,76 +2328,28 @@
                             <option value="it">IT Support</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Price (ZMW)</label>
-                        <input type="number" id="formPrice" placeholder="350" step="0.01" />
-                    </div>
+                    <div class="form-group"><label>Price (ZMW)</label><input type="number" id="formPrice" placeholder="350" step="0.01" /></div>
                 </div>
-                <div class="form-group">
-                    <label>Tags (comma separated)</label>
-                    <input type="text" id="formTags" placeholder="High Quality, Fast Delivery" />
-                </div>
-                <div class="form-group">
-                    <label>Icon (FontAwesome class)</label>
-                    <input type="text" id="formIcon" placeholder="fa-file-image" />
-                </div>
-                <div class="form-group">
-                    <label>Specifications (one per line, key: value)</label>
-                    <textarea id="formSpecs" rows="4" placeholder="Design Type: Flyer Design&#10;File Format: PDF, JPG, PNG"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Sizes (comma separated)</label>
-                    <input type="text" id="formSizes" placeholder="Minimalist, Badge, Mascot" />
-                </div>
-                <div class="form-group">
-                    <label>Orientations (comma separated)</label>
-                    <input type="text" id="formOrientations" placeholder="Full Color, Monochrome, Negative" />
-                </div>
-                <div class="form-group">
-                    <label>Formats (comma separated)</label>
-                    <input type="text" id="formFormats" placeholder="PDF, JPG, PNG, AI" />
-                </div>
-                <div class="form-group">
-                    <label>Color Schemes (comma separated)</label>
-                    <input type="text" id="formColorSchemes" placeholder="Brand Colors, Light Theme, Dark Theme" />
-                </div>
-                <div class="form-group">
-                    <label>Revisions (comma separated)</label>
-                    <input type="text" id="formRevisions" placeholder="1 Round, 2 Rounds, 3 Rounds, Unlimited" />
-                </div>
-                <div class="form-group">
-                    <label>Delivery Speeds (comma separated)</label>
-                    <input type="text" id="formDeliverySpeeds" placeholder="Standard (3-5 days), Express (1-2 days)" />
+                <div class="form-group"><label>Tags (comma separated)</label><input type="text" id="formTags" placeholder="High Quality, Fast Delivery" /></div>
+                <div class="form-group"><label>Icon (FontAwesome class)</label><input type="text" id="formIcon" placeholder="fa-file-image" /></div>
+                <div class="form-group"><label>Specifications (one per line, key: value)</label><textarea id="formSpecs" rows="4" placeholder="Design Type: Flyer Design&#10;File Format: PDF, JPG, PNG"></textarea></div>
+                <div class="form-group"><label>Sizes (comma separated)</label><input type="text" id="formSizes" placeholder="Minimalist, Badge, Mascot" /></div>
+                <div class="form-group"><label>Orientations (comma separated)</label><input type="text" id="formOrientations" placeholder="Full Color, Monochrome, Negative" /></div>
+                <div class="form-group"><label>Formats (comma separated)</label><input type="text" id="formFormats" placeholder="PDF, JPG, PNG, AI" /></div>
+                <div class="form-group"><label>Color Schemes (comma separated)</label><input type="text" id="formColorSchemes" placeholder="Brand Colors, Light Theme, Dark Theme" /></div>
+                <div class="form-group"><label>Revisions (comma separated)</label><input type="text" id="formRevisions" placeholder="1 Round, 2 Rounds, 3 Rounds, Unlimited" /></div>
+                <div class="form-group"><label>Delivery Speeds (comma separated)</label><input type="text" id="formDeliverySpeeds" placeholder="Standard (3-5 days), Express (1-2 days)" /></div>
+                <div class="row-2">
+                    <div class="form-group"><label>Default Size</label><input type="text" id="formDefaultSize" placeholder="Minimalist" /></div>
+                    <div class="form-group"><label>Default Orientation</label><input type="text" id="formDefaultOrientation" placeholder="Full Color" /></div>
                 </div>
                 <div class="row-2">
-                    <div class="form-group">
-                        <label>Default Size</label>
-                        <input type="text" id="formDefaultSize" placeholder="Minimalist" />
-                    </div>
-                    <div class="form-group">
-                        <label>Default Orientation</label>
-                        <input type="text" id="formDefaultOrientation" placeholder="Full Color" />
-                    </div>
+                    <div class="form-group"><label>Default Format</label><input type="text" id="formDefaultFormat" placeholder="PDF" /></div>
+                    <div class="form-group"><label>Default Color Scheme</label><input type="text" id="formDefaultColorScheme" placeholder="Brand Colors" /></div>
                 </div>
                 <div class="row-2">
-                    <div class="form-group">
-                        <label>Default Format</label>
-                        <input type="text" id="formDefaultFormat" placeholder="PDF" />
-                    </div>
-                    <div class="form-group">
-                        <label>Default Color Scheme</label>
-                        <input type="text" id="formDefaultColorScheme" placeholder="Brand Colors" />
-                    </div>
-                </div>
-                <div class="row-2">
-                    <div class="form-group">
-                        <label>Default Revisions</label>
-                        <input type="text" id="formDefaultRevisions" placeholder="Unlimited" />
-                    </div>
-                    <div class="form-group">
-                        <label>Default Delivery Speed</label>
-                        <input type="text" id="formDefaultDeliverySpeed" placeholder="Standard (3-5 days)" />
-                    </div>
+                    <div class="form-group"><label>Default Revisions</label><input type="text" id="formDefaultRevisions" placeholder="Unlimited" /></div>
+                    <div class="form-group"><label>Default Delivery Speed</label><input type="text" id="formDefaultDeliverySpeed" placeholder="Standard (3-5 days)" /></div>
                 </div>
                 <button type="submit" class="btn btn-primary" id="modalSubmitBtn"><i class="fa-solid fa-check"></i> Save Service</button>
                 <button type="button" class="btn btn-outline" id="modalCancelBtn">Cancel</button>
@@ -2732,21 +2364,15 @@
             <h3>Create Promo Coupon</h3>
             <p class="sub">Set a code and discount percentage.</p>
             <form id="promoForm">
-                <div class="form-group">
-                    <label>Coupon Code</label>
-                    <input type="text" id="promoCode" placeholder="e.g. SAVE20 or WELCOME" required />
-                </div>
-                <div class="form-group">
-                    <label>Discount Percentage (%)</label>
-                    <input type="number" id="promoDiscount" placeholder="20" min="1" max="100" required />
-                </div>
+                <div class="form-group"><label>Coupon Code</label><input type="text" id="promoCode" placeholder="e.g. SAVE20 or WELCOME" required /></div>
+                <div class="form-group"><label>Discount Percentage (%)</label><input type="number" id="promoDiscount" placeholder="20" min="1" max="100" required /></div>
                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Create Coupon</button>
                 <button type="button" class="btn btn-outline" id="promoCancelBtn">Cancel</button>
             </form>
         </div>
     </div>
 
-    <!-- ===== WORK UPLOAD MODAL (Cloudinary Widget) ===== -->
+    <!-- ===== WORK UPLOAD MODAL ===== -->
     <div class="modal-overlay work-upload-modal" id="workUploadModal">
         <div class="modal">
             <button class="close-btn" id="workUploadCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -2755,7 +2381,6 @@
             <form id="workUploadForm">
                 <input type="hidden" id="editWorkPostId" />
                 <input type="hidden" id="workPostType" value="app" />
-
                 <div class="form-group">
                     <label>Image</label>
                     <div class="upload-preview" id="workImagePreview">
@@ -2764,31 +2389,15 @@
                     </div>
                     <input type="hidden" id="workImageUrl" />
                 </div>
-
                 <div class="frame-container" id="workFrameContainer"></div>
-
                 <div id="workAppFields">
-                    <div class="form-group">
-                        <label>App / Website Name</label>
-                        <input type="text" id="workAppName" placeholder="e.g. My Awesome App" />
-                    </div>
-                    <div class="form-group">
-                        <label>Functionality / Description</label>
-                        <textarea id="workAppFunc" rows="2" placeholder="Describe what the app/website does..."></textarea>
-                    </div>
+                    <div class="form-group"><label>App / Website Name</label><input type="text" id="workAppName" placeholder="e.g. My Awesome App" /></div>
+                    <div class="form-group"><label>Functionality / Description</label><textarea id="workAppFunc" rows="2" placeholder="Describe what the app/website does..."></textarea></div>
                 </div>
-
                 <div id="workFlyerFields" style="display:none;">
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" id="workFlyerTitle" placeholder="e.g. Summer Sale Flyer" />
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea id="workFlyerDesc" rows="2" placeholder="Describe the flyer/logo design..."></textarea>
-                    </div>
+                    <div class="form-group"><label>Title</label><input type="text" id="workFlyerTitle" placeholder="e.g. Summer Sale Flyer" /></div>
+                    <div class="form-group"><label>Description</label><textarea id="workFlyerDesc" rows="2" placeholder="Describe the flyer/logo design..."></textarea></div>
                 </div>
-
                 <button type="submit" class="btn btn-primary" id="workUploadSubmit"><i class="fa-solid fa-check"></i> Post</button>
                 <button type="button" class="btn btn-outline" id="workUploadCancelBtn">Cancel</button>
             </form>
@@ -2802,22 +2411,15 @@
             <h3><i class="fa-regular fa-images" style="color:#f5b83d;"></i> Upload Flyer</h3>
             <p class="sub">Upload a flyer picture and add text to display on the overlay.</p>
             <form id="promoPicUploadForm">
-                <div class="form-group">
-                    <label>Flyer Image</label>
+                <div class="form-group"><label>Flyer Image</label>
                     <div class="upload-preview" id="promoPicImagePreview">
                         <div class="upload-icon"><i class="fa-regular fa-image"></i></div>
                         <div class="upload-text">Tap to upload an image</div>
                     </div>
                     <input type="hidden" id="promoPicImageUrl" />
                 </div>
-                <div class="form-group">
-                    <label>Overlay Text</label>
-                    <input type="text" id="promoPicText" placeholder="e.g. Summer Sale 50% OFF" required />
-                </div>
-                <div class="form-group">
-                    <label>Subtext (optional)</label>
-                    <input type="text" id="promoPicSubtext" placeholder="e.g. Limited time offer" />
-                </div>
+                <div class="form-group"><label>Overlay Text</label><input type="text" id="promoPicText" placeholder="e.g. Summer Sale 50% OFF" required /></div>
+                <div class="form-group"><label>Subtext (optional)</label><input type="text" id="promoPicSubtext" placeholder="e.g. Limited time offer" /></div>
                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Upload Flyer</button>
                 <button type="button" class="btn btn-outline" id="promoPicUploadCancelBtn">Cancel</button>
             </form>
@@ -2845,38 +2447,18 @@
         </div>
     </div>
 
-    <!-- ===== ORDER STATUS MODAL (white floating form) ===== -->
+    <!-- ===== ORDER STATUS MODAL ===== -->
     <div class="status-modal-overlay" id="orderStatusModal">
         <div class="status-modal">
             <button class="close-btn" id="statusModalCloseBtn"><i class="fa-solid fa-times"></i></button>
             <h3>🔄 Change Order Status</h3>
             <p class="sub">Select a new status for this order.</p>
             <div class="status-options" id="statusOptionsContainer">
-                <div class="status-option" data-status="pending">
-                    <span class="dot pending"></span>
-                    <span class="label">Pending</span>
-                    <span class="check"><i class="fa-solid fa-check"></i></span>
-                </div>
-                <div class="status-option" data-status="progress">
-                    <span class="dot progress"></span>
-                    <span class="label">In Progress</span>
-                    <span class="check"><i class="fa-solid fa-check"></i></span>
-                </div>
-                <div class="status-option" data-status="completed">
-                    <span class="dot completed"></span>
-                    <span class="label">Completed</span>
-                    <span class="check"><i class="fa-solid fa-check"></i></span>
-                </div>
-                <div class="status-option" data-status="review">
-                    <span class="dot review"></span>
-                    <span class="label">In Review</span>
-                    <span class="check"><i class="fa-solid fa-check"></i></span>
-                </div>
-                <div class="status-option" data-status="cancelled">
-                    <span class="dot cancelled"></span>
-                    <span class="label">Cancelled</span>
-                    <span class="check"><i class="fa-solid fa-check"></i></span>
-                </div>
+                <div class="status-option" data-status="pending"><span class="dot pending"></span><span class="label">Pending</span><span class="check"><i class="fa-solid fa-check"></i></span></div>
+                <div class="status-option" data-status="progress"><span class="dot progress"></span><span class="label">In Progress</span><span class="check"><i class="fa-solid fa-check"></i></span></div>
+                <div class="status-option" data-status="completed"><span class="dot completed"></span><span class="label">Completed</span><span class="check"><i class="fa-solid fa-check"></i></span></div>
+                <div class="status-option" data-status="review"><span class="dot review"></span><span class="label">In Review</span><span class="check"><i class="fa-solid fa-check"></i></span></div>
+                <div class="status-option" data-status="cancelled"><span class="dot cancelled"></span><span class="label">Cancelled</span><span class="check"><i class="fa-solid fa-check"></i></span></div>
             </div>
             <button class="btn-confirm-status" id="confirmStatusBtn" disabled>Confirm Status</button>
         </div>
@@ -2926,10 +2508,7 @@
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
     <script type="module">
-        // ───────────────────────────────────────────────────────────────────
-        // FIREBASE SDK
-        // ───────────────────────────────────────────────────────────────────
-
+        // ─── FIREBASE IMPORTS ───
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
         import { getDatabase, ref, set, onValue, get, push, remove, update } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
@@ -2949,17 +2528,9 @@
         const db = getDatabase(app);
         const auth = getAuth(app);
 
-        // ───────────────────────────────────────────────────────────────────
-        // CLOUDINARY CONFIG — 50 MB MAX
-        // ───────────────────────────────────────────────────────────────────
-
         const CLOUDINARY_CLOUD_NAME = 'dd3lcymrk';
         const CLOUDINARY_UPLOAD_PRESET = 'h3eyhc2o';
-        const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 MB
-
-        // ───────────────────────────────────────────────────────────────────
-        // STATE
-        // ───────────────────────────────────────────────────────────────────
+        const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
         let allData = null;
         let currentUser = null;
@@ -2968,21 +2539,14 @@
         let pendingStatusOrderId = null;
         let selectedStatus = null;
         let allUsersData = {};
-        let referralUsersList = [];
 
-        // ───────────────────────────────────────────────────────────────────
-        // DOM REFS
-        // ───────────────────────────────────────────────────────────────────
-
-        const adminNameEl = document.getElementById('adminName');
         const adminNameCenterEl = document.getElementById('adminNameCenter');
         const profileNameEl = document.getElementById('profileName');
         const profileEmailEl = document.getElementById('profileEmail');
         const profilePhoneEl = document.getElementById('profilePhone');
         const greetingText = document.getElementById('greetingText');
         const greetingSub = document.getElementById('greetingSub');
-        const mainHeader = document.getElementById('mainHeader');
-        const workAvatarBtn = document.getElementById('workAvatarBtn');
+
         const promoPicsBtn = document.getElementById('promoPicsBtn');
         const referralBtn = document.getElementById('referralBtn');
         const payablesBtn = document.getElementById('payablesBtn');
@@ -3090,10 +2654,7 @@
         const statusOptionsContainer = document.getElementById('statusOptionsContainer');
         const confirmStatusBtn = document.getElementById('confirmStatusBtn');
 
-        // ───────────────────────────────────────────────────────────────────
-        // DATA FUNCTIONS
-        // ───────────────────────────────────────────────────────────────────
-
+        // ─── DATA ───
         function loadData(callback) {
             const dbRef = ref(db, 'bufferzoneAppData');
             onValue(dbRef, (snapshot) => {
@@ -3119,35 +2680,21 @@
                         withdrawRequests: {},
                         customerBalances: {}
                     };
-                    set(dbRef, allData).then(() => {
-                        if (callback) callback(allData);
-                    });
+                    set(dbRef, allData).then(() => { if (callback) callback(allData); });
                 } else {
                     allData = data;
-                    if (!allData.categories) {
-                        allData.categories = ['graphic', 'dev', 'tech', 'it'];
-                        saveData();
-                    }
-                    if (!allData.workPosts) {
-                        allData.workPosts = {};
-                        saveData();
-                    }
-                    if (!allData.promoPics) {
-                        allData.promoPics = {};
-                        saveData();
-                    }
-                    if (!allData.referralPromos) {
-                        allData.referralPromos = {};
-                        saveData();
-                    }
-                    if (!allData.withdrawRequests) {
-                        allData.withdrawRequests = {};
-                        saveData();
-                    }
-                    if (!allData.customerBalances) {
-                        allData.customerBalances = {};
-                        saveData();
-                    }
+                    if (!allData.categories) { allData.categories = ['graphic', 'dev', 'tech', 'it'];
+                        saveData(); }
+                    if (!allData.workPosts) { allData.workPosts = {};
+                        saveData(); }
+                    if (!allData.promoPics) { allData.promoPics = {};
+                        saveData(); }
+                    if (!allData.referralPromos) { allData.referralPromos = {};
+                        saveData(); }
+                    if (!allData.withdrawRequests) { allData.withdrawRequests = {};
+                        saveData(); }
+                    if (!allData.customerBalances) { allData.customerBalances = {};
+                        saveData(); }
                     if (callback) callback(data);
                 }
             });
@@ -3158,10 +2705,7 @@
             return set(dbRef, allData);
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // CLOUDINARY UPLOAD WIDGET — 50 MB limit for ALL uploads
-        // ───────────────────────────────────────────────────────────────────
-
+        // ─── CLOUDINARY ───
         function setupCloudinaryUpload(triggerEl, urlInputEl, previewEl, onSuccess) {
             triggerEl.addEventListener('click', () => {
                 const options = {
@@ -3178,16 +2722,13 @@
                     defaultSource: 'local'
                 };
                 const widget = cloudinary.openUploadWidget(options, (error, result) => {
-                    if (error) {
-                        console.error('Cloudinary error:', error);
-                        showToast('Upload error: ' + (error.message || 'Unknown'), 'error');
-                        return;
-                    }
+                    if (error) { console.error('Cloudinary error:', error);
+                        showToast('Upload error: ' + (error.message || 'Unknown'), 'error'); return; }
                     if (result.event === 'success') {
-                        const info = result.info;
-                        const url = info.secure_url;
+                        const url = result.info.secure_url;
                         urlInputEl.value = url;
-                        previewEl.innerHTML = `<img src="${url}" alt="Uploaded" style="max-height:200px;object-fit:contain;" />`;
+                        previewEl.innerHTML =
+                        `<img src="${url}" alt="Uploaded" style="max-height:200px;object-fit:contain;" />`;
                         if (onSuccess) onSuccess(url);
                         showToast('Image uploaded successfully!', 'success');
                     }
@@ -3196,44 +2737,31 @@
             });
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // RENDER FUNCTIONS
-        // ───────────────────────────────────────────────────────────────────
-
+        // ─── RENDER ───
         function renderAll() {
             if (!allData) return;
-
             if (currentUser) {
                 const name = currentAdminData?.name || currentUser.displayName || currentUser.email || 'Admin';
                 const email = currentUser.email || 'No email';
                 const phone = currentAdminData?.phone || 'Not set';
-
                 adminNameCenterEl.textContent = name;
                 profileNameEl.textContent = name;
                 profileEmailEl.textContent = email;
                 profilePhoneEl.textContent = phone;
-
                 const now = new Date();
                 const zambiaOffset = 2;
                 const utcHours = now.getUTCHours();
                 const zambiaHours = (utcHours + zambiaOffset) % 24;
-
                 let timeGreeting = 'Good evening';
-                if (zambiaHours >= 1 && zambiaHours <= 12) {
-                    timeGreeting = 'Good morning';
-                } else if (zambiaHours >= 12 && zambiaHours <= 17) {
-                    timeGreeting = 'Good afternoon';
-                } else {
-                    timeGreeting = 'Good evening';
-                }
-
+                if (zambiaHours >= 1 && zambiaHours <= 12) timeGreeting = 'Good morning';
+                else if (zambiaHours >= 12 && zambiaHours <= 17) timeGreeting = 'Good afternoon';
+                else timeGreeting = 'Good evening';
                 greetingText.textContent = `${timeGreeting}, ${name} 👋`;
                 greetingSub.textContent = email;
                 greetingSub.style.fontSize = '12px';
                 greetingSub.style.color = '#888';
                 greetingSub.style.marginTop = '2px';
             }
-
             if (allData.hero) {
                 document.getElementById('heroTitle').value = allData.hero.title || '';
                 document.getElementById('heroTitleSpan').value = allData.hero.titleSpan || '';
@@ -3241,17 +2769,14 @@
                 document.getElementById('heroCTA').value = allData.hero.cta || '';
                 document.getElementById('heroPhone').value = allData.hero.phone || '';
             }
-
             if (allData.policy) {
                 document.getElementById('policyTitle').value = allData.policy.title || '';
                 document.getElementById('policyDesc').value = allData.policy.desc || '';
                 document.getElementById('policyTag').value = allData.policy.tag || '';
             }
-
             document.getElementById('settingsName').value = 'Buffer Zone Creative Agency';
             document.getElementById('settingsPhone').value = '+260 97 676 0537';
             document.getElementById('settingsEmail').value = 'bufferzone802@gmail.com';
-
             const toggle = document.getElementById('disableAppToggle');
             toggle.checked = allData.disabled || false;
             document.getElementById('appStatusLabel').textContent = allData.disabled ? 'Disabled' : 'Active';
@@ -3279,7 +2804,6 @@
             const pending = orders.filter(o => o.status === 'pending').length;
             const progress = orders.filter(o => o.status === 'progress').length;
             const completed = orders.filter(o => o.status === 'completed').length;
-
             document.getElementById('statServices').textContent = services.length;
             document.getElementById('statOrders').textContent = orders.length;
             document.getElementById('statCustomers').textContent = users.length;
@@ -3293,18 +2817,11 @@
         function renderCategories() {
             const container = document.getElementById('categoryListContainer');
             const categories = allData.categories || [];
-            container.innerHTML = categories.map(cat => `
-                        <span class="category-tag">
-                            ${cat}
-                            <button class="delete-cat-btn" data-cat="${cat}"><i class="fa-solid fa-times"></i></button>
-                        </span>
-                    `).join('');
-
+            container.innerHTML = categories.map(cat =>
+                `<span class="category-tag">${cat}<button class="delete-cat-btn" data-cat="${cat}"><i class="fa-solid fa-times"></i></button></span>`
+            ).join('');
             container.querySelectorAll('.delete-cat-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const cat = this.dataset.cat;
-                    showDeleteConfirmation('category', cat);
-                });
+                btn.addEventListener('click', function() { showDeleteConfirmation('category', this.dataset.cat); });
             });
         }
 
@@ -3313,9 +2830,7 @@
             const data = allData.services || {};
             const entries = Object.entries(data);
             let filtered = entries;
-            if (categoryFilter !== 'all') {
-                filtered = entries.filter(([key, s]) => s.category === categoryFilter);
-            }
+            if (categoryFilter !== 'all') filtered = entries.filter(([key, s]) => s.category === categoryFilter);
             if (filtered.length === 0) {
                 container.innerHTML =
                     `<div class="text-muted text-center" style="padding:20px;">No services in this category.</div>`;
@@ -3323,20 +2838,14 @@
             }
             container.innerHTML = `<div class="service-grid-customer">` + filtered.map(([key, s]) => `
                         <div class="service-card-customer" data-key="${key}">
-                            <div class="icon-wrap ${s.category || 'graphic'}">
-                                <i class="fa-solid ${s.icon || 'fa-cube'}"></i>
-                            </div>
+                            <div class="icon-wrap ${s.category || 'graphic'}"><i class="fa-solid ${s.icon || 'fa-cube'}"></i></div>
                             <div class="title">${s.title || 'Untitled'}</div>
                             <div class="sub">${s.subtitle || ''}</div>
                             <div class="price">ZMW ${(s.price || 0).toFixed(2)}</div>
                         </div>
                     `).join('') + `</div>`;
-
             container.querySelectorAll('.service-card-customer').forEach(el => {
-                el.addEventListener('click', function() {
-                    const key = this.dataset.key;
-                    openEditService(key);
-                });
+                el.addEventListener('click', function() { openEditService(this.dataset.key); });
             });
         }
 
@@ -3348,11 +2857,8 @@
             let usedCountMap = {};
             for (const userId in users) {
                 const usedCoupons = users[userId].usedCoupons || {};
-                for (const promoId in usedCoupons) {
-                    usedCountMap[promoId] = (usedCountMap[promoId] || 0) + 1;
-                }
+                for (const promoId in usedCoupons) { usedCountMap[promoId] = (usedCountMap[promoId] || 0) + 1; }
             }
-
             if (entries.length === 0) {
                 container.innerHTML =
                     `<div class="text-muted text-center" style="padding:20px;">No promotions yet.</div>`;
@@ -3365,17 +2871,11 @@
                                 <div class="discount">${p.discount}% OFF</div>
                                 <div class="times">Used: ${usedCountMap[key] || 0} times</div>
                             </div>
-                            <div class="actions">
-                                <button class="btn btn-danger btn-sm delete-promo" data-key="${key}"><i class="fa-solid fa-trash"></i></button>
-                            </div>
+                            <div class="actions"><button class="btn btn-danger btn-sm delete-promo" data-key="${key}"><i class="fa-solid fa-trash"></i></button></div>
                         </div>
                     `).join('');
-
             container.querySelectorAll('.delete-promo').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const key = this.dataset.key;
-                    showDeleteConfirmation('promo', key);
-                });
+                btn.addEventListener('click', function() { showDeleteConfirmation('promo', this.dataset.key); });
             });
         }
 
@@ -3391,11 +2891,8 @@
                     (o.service || '').toLowerCase().includes(term)
                 );
             }
-            if (statusFilter !== 'all') {
-                entries = entries.filter(([key, o]) => o.status === statusFilter);
-            }
+            if (statusFilter !== 'all') entries = entries.filter(([key, o]) => o.status === statusFilter);
             entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
-
             if (entries.length === 0) {
                 container.innerHTML =
                     `<div class="text-muted text-center" style="padding:20px;">No orders found.</div>`;
@@ -3405,16 +2902,16 @@
                         <div class="order-card">
                             <div class="order-toggle" data-key="${key}">
                                 <div>
-                                    <div style="font-weight:700; font-size:14px; color:#1c2128;">${o.id || 'N/A'}</div>
-                                    <div style="font-size:12px; color:#555;">${o.service || 'N/A'}</div>
-                                    <div style="font-size:11px; color:#888;">${o.customer || 'N/A'}</div>
+                                    <div style="font-weight:700;font-size:14px;color:#1c2128;">${o.id || 'N/A'}</div>
+                                    <div style="font-size:12px;color:#555;">${o.service || 'N/A'}</div>
+                                    <div style="font-size:11px;color:#888;">${o.customer || 'N/A'}</div>
                                 </div>
                                 <div style="text-align:right;">
-                                    <div style="font-weight:700; font-size:14px; color:#1c2128;">ZMW ${(o.amount || 0).toFixed(2)}</div>
+                                    <div style="font-weight:700;font-size:14px;color:#1c2128;">ZMW ${(o.amount || 0).toFixed(2)}</div>
                                     <button class="status-btn ${o.status || 'pending'}" data-key="${key}" data-status="${o.status || 'pending'}">
                                         <i class="fa-solid fa-pen"></i> ${o.status || 'pending'}
                                     </button>
-                                    <div style="font-size:10px; color:#aaa; margin-top:2px;">${o.date || ''}</div>
+                                    <div style="font-size:10px;color:#aaa;margin-top:2px;">${o.date || ''}</div>
                                 </div>
                             </div>
                             <div class="order-details">
@@ -3424,45 +2921,31 @@
                                 <div class="row"><span class="label">Payment Proof</span><span class="val">
                                     ${o.paymentProof ? `<button class="btn-view-proof" data-screenshot="${o.paymentProof}"><i class="fa-regular fa-image"></i> View</button>` : 'No proof'}
                                 </span></div>
-                                <div class="row"><span class="label">Status</span><span class="val">
-                                    <span class="status-badge ${o.status || 'pending'}">${o.status || 'pending'}</span>
-                                </span></div>
-                                <button class="btn btn-danger btn-sm delete-order" data-key="${key}" style="margin-top:8px; padding:3px 12px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:10px; cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
+                                <div class="row"><span class="label">Status</span><span class="val"><span class="status-badge ${o.status || 'pending'}">${o.status || 'pending'}</span></span></div>
+                                <button class="btn btn-danger btn-sm delete-order" data-key="${key}" style="margin-top:8px;padding:3px 12px;border-radius:8px;border:none;background:#dc2626;color:#fff;font-size:10px;cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
                             </div>
                         </div>
                     `).join('');
-
             container.querySelectorAll('.order-toggle').forEach(el => {
                 el.addEventListener('click', function() {
-                    const parent = this.closest('.order-card');
-                    const details = parent.querySelector('.order-details');
-                    details.classList.toggle('open');
+                    this.closest('.order-card').querySelector('.order-details').classList.toggle('open');
                 });
             });
-
             container.querySelectorAll('.status-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    const key = this.dataset.key;
-                    const currentStatus = this.dataset.status;
-                    openStatusModal(key, currentStatus);
+                    openStatusModal(this.dataset.key, this.dataset.status);
                 });
             });
             container.querySelectorAll('.delete-order').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const key = this.dataset.key;
-                    showDeleteConfirmation('order', key);
-                });
+                btn.addEventListener('click', function() { showDeleteConfirmation('order', this.dataset.key); });
             });
-
             container.querySelectorAll('.btn-view-proof').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     const url = this.dataset.screenshot;
-                    if (url) {
-                        document.getElementById('screenshotPreview').src = url;
-                        document.getElementById('screenshotModal').classList.add('open');
-                    }
+                    if (url) { document.getElementById('screenshotPreview').src = url;
+                        document.getElementById('screenshotModal').classList.add('open'); }
                 });
             });
         }
@@ -3503,7 +2986,7 @@
                                             </div>
                                         </div>
                                         <div style="display:flex;align-items:center;gap:10px;">
-                                            <span style="font-size:10px; color:#888; background:#f0f0f0; padding:2px 10px; border-radius:12px;">${referralCode}</span>
+                                            <span style="font-size:10px;color:#888;background:#f0f0f0;padding:2px 10px;border-radius:12px;">${referralCode}</span>
                                             <span class="user-status-badge ${isBanned ? 'banned' : 'active'}">${isBanned ? 'Banned' : 'Active'}</span>
                                             <button class="ban-toggle-btn" data-uid="${uid}" data-banned="${isBanned}">
                                                 <i class="fa-solid ${isBanned ? 'fa-toggle-off' : 'fa-toggle-on'}"></i>
@@ -3516,49 +2999,37 @@
                                         <div class="detail-row"><span class="label">Joined</span><span class="val">${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</span></div>
                                         <div class="detail-row"><span class="label">Referral Code</span><span class="val">${referralCode}</span></div>
                                         <div class="actions">
-                                            <button class="btn btn-danger btn-sm delete-user" data-uid="${uid}" style="padding:2px 10px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
+                                            <button class="btn btn-danger btn-sm delete-user" data-uid="${uid}" style="padding:2px 10px;border-radius:8px;border:none;background:#dc2626;color:#fff;font-size:9px;cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
                                         </div>
                                     </div>
                                 </div>
                             `;
                 }).join('');
-
                 container.querySelectorAll('.customer-item').forEach(el => {
                     el.addEventListener('click', function() {
                         this.classList.toggle('open');
                         const details = this.querySelector('.user-details');
-                        if (this.classList.contains('open')) {
-                            details.style.display = 'block';
-                        } else {
-                            details.style.display = 'none';
-                        }
+                        details.style.display = this.classList.contains('open') ? 'block' : 'none';
                     });
                 });
-
                 container.querySelectorAll('.ban-toggle-btn').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
                         const uid = this.dataset.uid;
                         const currentlyBanned = this.dataset.banned === 'true';
                         const newBanStatus = !currentlyBanned;
-
                         if (confirm(`Are you sure you want to ${newBanStatus ? 'ban' : 'unban'} this user?`)) {
-                            const userRef = ref(db, 'users/' + uid);
-                            update(userRef, { banned: newBanStatus }).then(() => {
+                            update(ref(db, 'users/' + uid), { banned: newBanStatus }).then(() => {
                                 showToast(`User ${newBanStatus ? 'banned' : 'unbanned'}`);
                                 renderUsers(document.getElementById('userSearchInput').value);
-                            }).catch((error) => {
-                                showToast('Error updating user status', 'error');
-                            });
+                            }).catch((error) => { showToast('Error updating user status', 'error'); });
                         }
                     });
                 });
-
                 container.querySelectorAll('.delete-user').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
-                        const uid = this.dataset.uid;
-                        showDeleteConfirmation('user', uid);
+                        showDeleteConfirmation('user', this.dataset.uid);
                     });
                 });
             }).catch((error) => {
@@ -3574,22 +3045,12 @@
             const transactions = Object.values(allData.transactions || {});
             const activities = [];
             orders.slice(-5).reverse().forEach(o => {
-                activities.push({
-                    icon: 'fa-truck',
-                    iconClass: 'blue',
-                    title: `Order ${o.id}`,
-                    desc: `${o.service} — ${o.customer}`,
-                    time: o.date || ''
-                });
+                activities.push({ icon: 'fa-truck', iconClass: 'blue', title: `Order ${o.id}`, desc: `${o.service} — ${o.customer}`,
+                    time: o.date || '' });
             });
             transactions.slice(-3).reverse().forEach(t => {
-                activities.push({
-                    icon: 'fa-credit-card',
-                    iconClass: 'green',
-                    title: t.type || 'Transaction',
-                    desc: `ZMW ${(t.amount || 0).toFixed(2)} via ${t.method || 'N/A'}`,
-                    time: t.date || ''
-                });
+                activities.push({ icon: 'fa-credit-card', iconClass: 'green', title: t.type || 'Transaction',
+                    desc: `ZMW ${(t.amount || 0).toFixed(2)} via ${t.method || 'N/A'}`, time: t.date || '' });
             });
             if (activities.length === 0) {
                 container.innerHTML =
@@ -3623,7 +3084,6 @@
             const data = allData.promoPics || {};
             const entries = Object.entries(data);
             entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
-
             if (entries.length === 0) {
                 promoPicsGrid.innerHTML = `
                             <div class="promo-pics-upload-area" id="emptyPromoUpload">
@@ -3632,12 +3092,10 @@
                                 <div class="upload-sub">Tap "Upload Flyer" to add your first promo picture</div>
                             </div>
                         `;
-                document.getElementById('emptyPromoUpload')?.addEventListener('click', () => {
-                    promoPicUploadModal.classList.add('open');
-                });
+                document.getElementById('emptyPromoUpload')?.addEventListener('click', () => { promoPicUploadModal.classList
+                        .add('open'); });
                 return;
             }
-
             promoPicsGrid.innerHTML = entries.map(([key, p]) => `
                         <div class="promo-pic-card" data-key="${key}">
                             <img class="pic-image" src="${p.imageUrl}" alt="${p.text || 'Promo'}" loading="lazy" />
@@ -3652,12 +3110,10 @@
                             </button>
                         </div>
                     `).join('');
-
             promoPicsGrid.querySelectorAll('.pic-delete-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    const key = this.dataset.key;
-                    showDeleteConfirmation('promoPic', key);
+                    showDeleteConfirmation('promoPic', this.dataset.key);
                 });
             });
         }
@@ -3665,92 +3121,45 @@
         function addPromoPic(data) {
             const newId = 'pp' + Date.now();
             if (!allData.promoPics) allData.promoPics = {};
-            allData.promoPics[newId] = {
-                id: newId,
-                imageUrl: data.imageUrl,
-                text: data.text || '',
-                subtext: data.subtext || '',
-                createdAt: Date.now()
-            };
+            allData.promoPics[newId] = { id: newId, imageUrl: data.imageUrl, text: data.text || '', subtext: data.subtext || '',
+                createdAt: Date.now() };
             return saveData();
         }
 
         function deletePromoPic(key) {
-            if (allData.promoPics && allData.promoPics[key]) {
-                delete allData.promoPics[key];
-                return saveData();
-            }
+            if (allData.promoPics && allData.promoPics[key]) { delete allData.promoPics[key]; return saveData(); }
         }
 
         function renderWorkPosts() {
             const container = document.getElementById('workPostsContainer');
             const posts = allData.workPosts || {};
             const entries = Object.entries(posts);
-
             const groups = { app: [], flyer: [], website: [], logo: [] };
-            entries.forEach(([key, p]) => {
-                if (groups[p.type]) {
-                    groups[p.type].push({ key, ...p });
-                }
-            });
-
-            for (const type in groups) {
-                groups[type].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-            }
-
-            const typeLabels = {
-                app: '📱 Apps',
-                flyer: '📄 Flyers',
-                website: '💻 Websites',
-                logo: '🎨 Logos'
-            };
-
+            entries.forEach(([key, p]) => { if (groups[p.type]) groups[p.type].push({ key, ...p }); });
+            for (const type in groups) groups[type].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+            const typeLabels = { app: '📱 Apps', flyer: '📄 Flyers', website: '💻 Websites', logo: '🎨 Logos' };
             let html = '';
             for (const type of ['app', 'flyer', 'website', 'logo']) {
                 const items = groups[type] || [];
                 if (items.length === 0) continue;
-
-                html += `
-                            <div class="section-title">
-                                ${typeLabels[type] || type}
-                                <span class="badge-count">${items.length}</span>
-                            </div>
-                            <div class="work-grid-2x2">
-                        `;
-
+                html += `<div class="section-title">${typeLabels[type] || type}<span class="badge-count">${items.length}</span></div><div class="work-grid-2x2">`;
                 items.forEach(post => {
                     let frameHtml = '';
                     const imgHtml = post.imageUrl ?
                         `<img src="${post.imageUrl}" alt="${post.title || 'Work'}" loading="lazy" />` :
                         `<div class="no-image"><i class="fa-regular fa-image"></i></div>`;
-
                     if (type === 'app') {
-                        frameHtml = `
-                                    <div class="phone-frame">
-                                        ${imgHtml}
-                                        <div class="notch"></div>
-                                    </div>
-                                `;
+                        frameHtml =
+                            `<div class="phone-frame">${imgHtml}<div class="notch"></div></div>`;
                     } else if (type === 'website') {
-                        frameHtml = `
-                                    <div class="laptop-frame">
-                                        <div class="screen">
-                                            ${imgHtml}
-                                        </div>
-                                        <div class="base"></div>
-                                    </div>
-                                `;
+                        frameHtml =
+                            `<div class="laptop-frame"><div class="screen">${imgHtml}</div><div class="base"></div></div>`;
                     } else {
-                        frameHtml = `
-                                    <div class="post-thumb" style="aspect-ratio:1/1;">
-                                        ${imgHtml}
-                                    </div>
-                                `;
+                        frameHtml =
+                            `<div class="post-thumb" style="aspect-ratio:1/1;">${imgHtml}</div>`;
                     }
-
                     let titleText = post.title || 'Untitled';
                     let descText = post.description || '';
-
                     html += `
                                 <div class="work-post-card" data-key="${post.key}">
                                     ${frameHtml}
@@ -3767,28 +3176,16 @@
                                 </div>
                             `;
                 });
-
                 html += `</div>`;
             }
-
-            if (html === '') {
-                html =
-                    `<div class="text-muted text-center" style="padding:30px 0;">No work posts yet. Click one of the options above to get started!</div>`;
-            }
-
+            if (html === '') html =
+                `<div class="text-muted text-center" style="padding:30px 0;">No work posts yet. Click one of the options above to get started!</div>`;
             container.innerHTML = html;
-
             container.querySelectorAll('.btn-edit-post').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const key = this.dataset.key;
-                    openEditWorkPost(key);
-                });
+                btn.addEventListener('click', function() { openEditWorkPost(this.dataset.key); });
             });
             container.querySelectorAll('.btn-delete-post').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const key = this.dataset.key;
-                    showDeleteConfirmation('workPost', key);
-                });
+                btn.addEventListener('click', function() { showDeleteConfirmation('workPost', this.dataset.key); });
             });
         }
 
@@ -3799,23 +3196,12 @@
             workImagePreview.innerHTML = editData?.imageUrl ?
                 `<img src="${editData.imageUrl}" alt="Uploaded" style="max-height:200px;object-fit:contain;" />` :
                 `<div class="upload-icon"><i class="fa-regular fa-image"></i></div><div class="upload-text">Tap to upload an image</div>`;
-
-            const typeLabels = {
-                app: 'Upload App Screenshot',
-                flyer: 'Post Flyer',
-                website: 'Upload Website Screenshot',
-                logo: 'Post Logo'
-            };
-            const typeSubs = {
-                app: 'Add a new app screenshot with name and functionality.',
-                flyer: 'Post a flyer design with title and description.',
-                website: 'Add a website screenshot with name and description.',
-                logo: 'Post a logo design with title and description.'
-            };
-
+            const typeLabels = { app: 'Upload App Screenshot', flyer: 'Post Flyer', website: 'Upload Website Screenshot',
+                logo: 'Post Logo' };
+            const typeSubs = { app: 'Add a new app screenshot with name and functionality.', flyer: 'Post a flyer design with title and description.',
+                website: 'Add a website screenshot with name and description.', logo: 'Post a logo design with title and description.' };
             workUploadTitle.textContent = editData ? `Edit ${typeLabels[type]}` : typeLabels[type];
             workUploadSub.textContent = editData ? `Update your ${type} post.` : typeSubs[type];
-
             if (type === 'app' || type === 'website') {
                 workAppFields.style.display = 'block';
                 workFlyerFields.style.display = 'none';
@@ -3831,38 +3217,21 @@
                 workFlyerTitle.value = editData?.title || '';
                 workFlyerDesc.value = editData?.description || '';
             }
-
             if (type === 'app') {
-                workFrameContainer.innerHTML = `
-                            <div class="phone-frame">
-                                ${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="App Screenshot" />` : `<div class="placeholder"><i class="fa-regular fa-image"></i><br /><span style="font-size:12px;color:#aaa;">App Screenshot</span></div>`}
-                                <div class="notch"></div>
-                            </div>
-                        `;
+                workFrameContainer.innerHTML =
+                    `<div class="phone-frame">${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="App Screenshot" />` : `<div class="placeholder"><i class="fa-regular fa-image"></i><br /><span style="font-size:12px;color:#aaa;">App Screenshot</span></div>`}<div class="notch"></div></div>`;
             } else if (type === 'website') {
-                workFrameContainer.innerHTML = `
-                            <div class="laptop-frame">
-                                <div class="screen">
-                                    ${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="Website Screenshot" />` : `<div class="placeholder"><i class="fa-regular fa-image"></i><br /><span style="font-size:12px;color:#aaa;">Website Screenshot</span></div>`}
-                                </div>
-                                <div class="base"></div>
-                            </div>
-                        `;
+                workFrameContainer.innerHTML =
+                    `<div class="laptop-frame"><div class="screen">${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="Website Screenshot" />` : `<div class="placeholder"><i class="fa-regular fa-image"></i><br /><span style="font-size:12px;color:#aaa;">Website Screenshot</span></div>`}</div><div class="base"></div></div>`;
             } else {
-                workFrameContainer.innerHTML = `
-                            <div style="text-align:center;padding:8px 0;">
-                                ${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="Upload" style="max-width:100%;max-height:180px;border-radius:12px;object-fit:contain;" />` : `<div style="color:#ccc;font-size:48px;"><i class="fa-regular fa-image"></i></div>`}
-                            </div>
-                        `;
+                workFrameContainer.innerHTML =
+                    `<div style="text-align:center;padding:8px 0;">${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="Upload" style="max-width:100%;max-height:180px;border-radius:12px;object-fit:contain;" />` : `<div style="color:#ccc;font-size:48px;"><i class="fa-regular fa-image"></i></div>`}</div>`;
             }
-
             workUploadSubmit.textContent = editData ? 'Update Post' : 'Post';
             workUploadModal.classList.add('open');
         }
 
-        function closeWorkUploadModal() {
-            workUploadModal.classList.remove('open');
-        }
+        function closeWorkUploadModal() { workUploadModal.classList.remove('open'); }
 
         function openEditWorkPost(key) {
             const posts = allData.workPosts || {};
@@ -3875,15 +3244,8 @@
             const newId = 'wp' + Date.now();
             if (!allData.workPosts) allData.workPosts = {};
             const name = currentAdminData?.name || currentUser?.displayName || currentUser?.email || 'Admin';
-            allData.workPosts[newId] = {
-                id: newId,
-                type: data.type,
-                title: data.title,
-                description: data.description,
-                imageUrl: data.imageUrl,
-                createdAt: Date.now(),
-                adminName: name
-            };
+            allData.workPosts[newId] = { id: newId, type: data.type, title: data.title, description: data.description,
+                imageUrl: data.imageUrl, createdAt: Date.now(), adminName: name };
             return saveData();
         }
 
@@ -3897,10 +3259,7 @@
         }
 
         function deleteWorkPost(key) {
-            if (allData.workPosts && allData.workPosts[key]) {
-                delete allData.workPosts[key];
-                return saveData();
-            }
+            if (allData.workPosts && allData.workPosts[key]) { delete allData.workPosts[key]; return saveData(); }
         }
 
         function renderReferralPromos() {
@@ -3908,18 +3267,15 @@
             const data = allData.referralPromos || {};
             const entries = Object.entries(data);
             entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
-
             if (entries.length === 0) {
                 container.innerHTML =
                     `<div class="text-muted text-center" style="padding:20px;">No referral promos set up.</div>`;
                 return;
             }
-
             container.innerHTML = entries.map(([key, p]) => {
                 let detail = '';
-                if (p.type === 'standard') {
-                    detail = `Referrer gets ZMW ${p.amount}`;
-                } else if (p.type === 'custom') {
+                if (p.type === 'standard') detail = `Referrer gets ZMW ${p.amount}`;
+                else if (p.type === 'custom') {
                     const user = allUsersData[p.userId] || {};
                     const userName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || p.userId;
                     detail = `User: ${userName} gets ZMW ${p.amount}`;
@@ -3939,18 +3295,11 @@
                             </div>
                         `;
             }).join('');
-
             container.querySelectorAll('.edit-referral').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const key = this.dataset.key;
-                    openEditReferral(key);
-                });
+                btn.addEventListener('click', function() { openEditReferral(this.dataset.key); });
             });
             container.querySelectorAll('.delete-referral').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const key = this.dataset.key;
-                    showDeleteConfirmation('referral', key);
-                });
+                btn.addEventListener('click', function() { showDeleteConfirmation('referral', this.dataset.key); });
             });
         }
 
@@ -3967,17 +3316,7 @@
             container.innerHTML = entries.map(([uid, balance]) => {
                 const u = users[uid] || {};
                 const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || u.email || uid;
-                return `
-                            <div class="account-item">
-                                <div class="left">
-                                    <div class="name">${name}</div>
-                                    <div class="email">${u.email || ''}</div>
-                                </div>
-                                <div class="right">
-                                    <div class="balance">ZMW ${balance.toFixed(2)}</div>
-                                </div>
-                            </div>
-                        `;
+                return `<div class="account-item"><div class="left"><div class="name">${name}</div><div class="email">${u.email || ''}</div></div><div class="right"><div class="balance">ZMW ${balance.toFixed(2)}</div></div></div>`;
             }).join('');
         }
 
@@ -4011,52 +3350,34 @@
                             </div>
                         `;
             }).join('');
-
             container.querySelectorAll('.approve-withdraw').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const key = this.dataset.key;
-                    processWithdraw(key, 'approved');
-                });
+                btn.addEventListener('click', function() { processWithdraw(this.dataset.key, 'approved'); });
             });
             container.querySelectorAll('.decline-withdraw').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const key = this.dataset.key;
-                    processWithdraw(key, 'declined');
-                });
+                btn.addEventListener('click', function() { processWithdraw(this.dataset.key, 'declined'); });
             });
         }
 
         function processWithdraw(key, newStatus) {
             if (!allData.withdrawRequests?.[key]) return;
             const req = allData.withdrawRequests[key];
-            if (req.status !== 'pending') {
-                showToast('This request has already been processed.', 'error');
-                return;
-            }
+            if (req.status !== 'pending') { showToast('This request has already been processed.', 'error'); return; }
             if (newStatus === 'approved') {
                 const uid = req.userId;
                 const balances = allData.customerBalances || {};
                 const currentBalance = balances[uid] || 0;
                 const amount = req.amount || 0;
-                if (currentBalance < amount) {
-                    showToast('Insufficient balance for this user.', 'error');
-                    return;
-                }
+                if (currentBalance < amount) { showToast('Insufficient balance for this user.', 'error'); return; }
                 balances[uid] = currentBalance - amount;
                 allData.customerBalances = balances;
             }
             req.status = newStatus;
             req.processedAt = Date.now();
-            saveData().then(() => {
-                renderAll();
-                showToast(`Withdrawal ${newStatus}`);
-            });
+            saveData().then(() => { renderAll();
+                showToast(`Withdrawal ${newStatus}`); });
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // DELETE CONFIRMATION
-        // ───────────────────────────────────────────────────────────────────
-
+        // ─── DELETE ───
         function showDeleteConfirmation(type, key) {
             const messages = {
                 'promo': 'Are you sure you want to delete this promo coupon?',
@@ -4077,43 +3398,32 @@
             deleteConfirmModal.classList.remove('open');
             pendingDeleteAction = null;
         });
-
         document.getElementById('deleteConfirmBtn').addEventListener('click', function() {
             if (!pendingDeleteAction) return;
             const { type, key } = pendingDeleteAction;
-
             if (type === 'promo') {
-                if (allData.promotions && allData.promotions[key]) {
-                    delete allData.promotions[key];
+                if (allData.promotions && allData.promotions[key]) { delete allData.promotions[key];
                     saveData().then(() => { renderAll();
-                        showToast('Promo deleted'); });
-                }
+                        showToast('Promo deleted'); }); }
             } else if (type === 'order') {
-                if (allData.orders && allData.orders[key]) {
-                    delete allData.orders[key];
+                if (allData.orders && allData.orders[key]) { delete allData.orders[key];
                     saveData().then(() => { renderAll();
-                        showToast('Order deleted'); });
-                }
+                        showToast('Order deleted'); }); }
             } else if (type === 'user') {
-                const userRef = ref(db, 'users/' + key);
-                set(userRef, null).then(() => {
+                set(ref(db, 'users/' + key), null).then(() => {
                     showToast('User deleted');
                     renderUsers(document.getElementById('userSearchInput').value);
                 });
             } else if (type === 'service') {
-                if (allData.services && allData.services[key]) {
-                    delete allData.services[key];
+                if (allData.services && allData.services[key]) { delete allData.services[key];
                     saveData().then(() => { renderAll();
-                        showToast('Service deleted'); });
-                }
+                        showToast('Service deleted'); }); }
             } else if (type === 'category') {
                 const cat = key;
                 allData.categories = allData.categories.filter(c => c !== cat);
                 if (allData.services) {
                     Object.keys(allData.services).forEach(sKey => {
-                        if (allData.services[sKey].category === cat) {
-                            delete allData.services[sKey];
-                        }
+                        if (allData.services[sKey].category === cat) { delete allData.services[sKey]; }
                     });
                 }
                 saveData().then(() => { renderAll();
@@ -4132,10 +3442,7 @@
             pendingDeleteAction = null;
         });
 
-        // ───────────────────────────────────────────────────────────────────
-        // SERVICE CRUD
-        // ───────────────────────────────────────────────────────────────────
-
+        // ─── SERVICE ───
         function addService(data) {
             const newId = 's' + Date.now();
             if (!allData.services) allData.services = {};
@@ -4194,29 +3501,19 @@
         }
 
         function updateOrderStatus(key, status) {
-            if (allData.orders && allData.orders[key]) {
-                allData.orders[key].status = status;
-                return saveData();
-            }
+            if (allData.orders && allData.orders[key]) { allData.orders[key].status = status; return saveData(); }
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // ORDER STATUS MODAL
-        // ───────────────────────────────────────────────────────────────────
-
+        // ─── ORDER STATUS MODAL ───
         function openStatusModal(orderId, currentStatus) {
             pendingStatusOrderId = orderId;
             selectedStatus = currentStatus;
             statusModal.classList.add('open');
-
             const options = statusOptionsContainer.querySelectorAll('.status-option');
             options.forEach(opt => {
                 opt.classList.remove('selected');
-                if (opt.dataset.status === currentStatus) {
-                    opt.classList.add('selected');
-                }
+                if (opt.dataset.status === currentStatus) opt.classList.add('selected');
             });
-
             confirmStatusBtn.disabled = true;
             confirmStatusBtn.textContent = 'Confirm Status';
         }
@@ -4226,12 +3523,8 @@
             pendingStatusOrderId = null;
             selectedStatus = null;
         }
-
         statusModalCloseBtn.addEventListener('click', closeStatusModal);
-        statusModal.addEventListener('click', function(e) {
-            if (e.target === this) closeStatusModal();
-        });
-
+        statusModal.addEventListener('click', function(e) { if (e.target === this) closeStatusModal(); });
         statusOptionsContainer.querySelectorAll('.status-option').forEach(opt => {
             opt.addEventListener('click', function() {
                 statusOptionsContainer.querySelectorAll('.status-option').forEach(o => o.classList.remove('selected'));
@@ -4241,23 +3534,17 @@
                 confirmStatusBtn.textContent = `Confirm: ${selectedStatus}`;
             });
         });
-
         confirmStatusBtn.addEventListener('click', function() {
             if (!pendingStatusOrderId || !selectedStatus) return;
             updateOrderStatus(pendingStatusOrderId, selectedStatus).then(() => {
                 renderAll();
                 closeStatusModal();
                 showToast(`Order status updated to ${selectedStatus}`);
-            }).catch((error) => {
-                showToast('Error updating status', 'error');
-                console.error(error);
-            });
+            }).catch((error) => { showToast('Error updating status', 'error');
+                console.error(error); });
         });
 
-        // ───────────────────────────────────────────────────────────────────
-        // SERVICE MODAL
-        // ───────────────────────────────────────────────────────────────────
-
+        // ─── SERVICE MODAL ───
         function openModal(title, subtitle, data, key) {
             modalTitle.textContent = title;
             modalSub.textContent = subtitle;
@@ -4310,9 +3597,7 @@
             modal.classList.add('open');
         }
 
-        function closeModal() {
-            modal.classList.remove('open');
-        }
+        function closeModal() { modal.classList.remove('open'); }
 
         function openEditService(key) {
             if (!allData.services || !allData.services[key]) return;
@@ -4320,47 +3605,27 @@
             openModal('Edit Service', 'Update the service details.', service, key);
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // CATEGORY
-        // ───────────────────────────────────────────────────────────────────
-
+        // ─── CATEGORY ───
         document.getElementById('addCategoryBtn').addEventListener('click', function() {
             const name = document.getElementById('newCategoryInput').value.trim().toLowerCase();
-            if (!name) {
-                showToast('Please enter a category name', 'error');
-                return;
-            }
-            if (allData.categories.includes(name)) {
-                showToast('Category already exists', 'error');
-                return;
-            }
+            if (!name) { showToast('Please enter a category name', 'error'); return; }
+            if (allData.categories.includes(name)) { showToast('Category already exists', 'error'); return; }
             allData.categories.push(name);
-            saveData().then(() => {
-                renderAll();
+            saveData().then(() => { renderAll();
                 document.getElementById('newCategoryInput').value = '';
-                showToast('Category added');
-            });
+                showToast('Category added'); });
         });
 
-        // ───────────────────────────────────────────────────────────────────
-        // PROMO
-        // ───────────────────────────────────────────────────────────────────
-
+        // ─── PROMO ───
         function addPromo(data) {
             const newId = 'p' + Date.now();
             if (!allData.promotions) allData.promotions = {};
-            allData.promotions[newId] = {
-                code: data.code.toUpperCase(),
-                discount: parseInt(data.discount),
-                createdAt: Date.now()
-            };
+            allData.promotions[newId] = { code: data.code.toUpperCase(), discount: parseInt(data.discount),
+            createdAt: Date.now() };
             return saveData();
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // REFERRAL PROMOS CRUD
-        // ───────────────────────────────────────────────────────────────────
-
+        // ─── REFERRAL ───
         function addReferralPromo(data) {
             const newId = 'rp' + Date.now();
             if (!allData.referralPromos) allData.referralPromos = {};
@@ -4389,33 +3654,26 @@
         }
 
         function deleteReferralPromo(key) {
-            if (allData.referralPromos && allData.referralPromos[key]) {
-                delete allData.referralPromos[key];
-                return saveData();
-            }
+            if (allData.referralPromos && allData.referralPromos[key]) { delete allData.referralPromos[key]; return saveData(); }
         }
-
-        // ───────────────────────────────────────────────────────────────────
-        // REFERRAL MODAL
-        // ───────────────────────────────────────────────────────────────────
 
         function openReferralModal(type, editData = null) {
             referralType.value = type;
             editReferralId.value = editData ? editData.key : '';
-
             referralStandardFields.style.display = 'none';
             referralCustomFields.style.display = 'none';
             referralDiscountFields.style.display = 'none';
-
             if (type === 'standard') {
                 referralStandardFields.style.display = 'block';
                 document.getElementById('referralModalTitle').textContent = 'Set up Referral Promo';
-                document.getElementById('referralModalSub').textContent = 'Every referrer will receive this amount (ZMW) when someone signs up with their code.';
+                document.getElementById('referralModalSub').textContent =
+                    'Every referrer will receive this amount (ZMW) when someone signs up with their code.';
                 referralAmount.value = editData?.amount || '';
             } else if (type === 'custom') {
                 referralCustomFields.style.display = 'block';
                 document.getElementById('referralModalTitle').textContent = 'Set up Custom Referral';
-                document.getElementById('referralModalSub').textContent = 'Select a user and set the amount they will receive per referral.';
+                document.getElementById('referralModalSub').textContent =
+                'Select a user and set the amount they will receive per referral.';
                 if (editData) {
                     referralUserId.value = editData.userId || '';
                     referralCustomAmount.value = editData.amount || '';
@@ -4427,7 +3685,8 @@
             } else if (type === 'discount') {
                 referralDiscountFields.style.display = 'block';
                 document.getElementById('referralModalTitle').textContent = 'Referral Discount';
-                document.getElementById('referralModalSub').textContent = 'When a user applies this code to a service, they get a % discount, and the referrer gets the amount below.';
+                document.getElementById('referralModalSub').textContent =
+                    'When a user applies this code to a service, they get a % discount, and the referrer gets the amount below.';
                 if (editData) {
                     referralDiscountCode.value = editData.code || '';
                     referralDiscountPercent.value = editData.discount || '';
@@ -4438,14 +3697,11 @@
                     referralDiscountAmount.value = '';
                 }
             }
-
             referralSubmitBtn.textContent = editData ? 'Update' : 'Save';
             referralModal.classList.add('open');
         }
 
-        function closeReferralModal() {
-            referralModal.classList.remove('open');
-        }
+        function closeReferralModal() { referralModal.classList.remove('open'); }
 
         function openEditReferral(key) {
             const data = allData.referralPromos?.[key];
@@ -4457,12 +3713,10 @@
             const container = referralUserSelectContainer;
             const users = allUsersData || {};
             const entries = Object.entries(users);
-
             if (entries.length === 0) {
                 container.innerHTML = `<div class="text-muted" style="font-size:12px; padding:8px;">No users found.</div>`;
                 return;
             }
-
             let html = '';
             entries.forEach(([uid, u]) => {
                 const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || u.email || uid;
@@ -4478,26 +3732,20 @@
                             </div>
                         `;
             });
-
             container.innerHTML = html;
-
             container.querySelectorAll('.user-select-item').forEach(item => {
                 item.addEventListener('click', function() {
                     container.querySelectorAll('.user-select-item').forEach(el => el.classList.remove('selected'));
                     this.classList.add('selected');
                     referralUserId.value = this.dataset.uid;
-                    // Update the badge text
                     container.querySelectorAll('.user-select-item .badge').forEach(b => b.textContent = 'Select');
                     this.querySelector('.badge').textContent = '✓ Selected';
                 });
             });
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // EVENT BINDINGS
-        // ───────────────────────────────────────────────────────────────────
-
-        workAvatarBtn.addEventListener('click', function() {
+        // ─── EVENT BINDINGS ───
+        document.getElementById('workAvatarBtn').addEventListener('click', function() {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-work').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -4539,42 +3787,24 @@
         });
 
         document.querySelectorAll('.work-option-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const type = this.dataset.type;
-                openWorkUploadModal(type);
-            });
+            card.addEventListener('click', function() { openWorkUploadModal(this.dataset.type); });
         });
 
         workUploadCloseBtn.addEventListener('click', closeWorkUploadModal);
         workUploadCancelBtn.addEventListener('click', closeWorkUploadModal);
-        workUploadModal.addEventListener('click', function(e) {
-            if (e.target === this) closeWorkUploadModal();
-        });
+        workUploadModal.addEventListener('click', function(e) { if (e.target === this) closeWorkUploadModal(); });
 
         setupCloudinaryUpload(workImagePreview, workImageUrl, workImagePreview, (url) => {
             const type = workPostType.value;
             if (type === 'app') {
-                workFrameContainer.innerHTML = `
-                            <div class="phone-frame">
-                                <img src="${url}" alt="App Screenshot" />
-                                <div class="notch"></div>
-                            </div>
-                        `;
+                workFrameContainer.innerHTML =
+                    `<div class="phone-frame"><img src="${url}" alt="App Screenshot" /><div class="notch"></div></div>`;
             } else if (type === 'website') {
-                workFrameContainer.innerHTML = `
-                            <div class="laptop-frame">
-                                <div class="screen">
-                                    <img src="${url}" alt="Website Screenshot" />
-                                </div>
-                                <div class="base"></div>
-                            </div>
-                        `;
+                workFrameContainer.innerHTML =
+                    `<div class="laptop-frame"><div class="screen"><img src="${url}" alt="Website Screenshot" /></div><div class="base"></div></div>`;
             } else {
-                workFrameContainer.innerHTML = `
-                            <div style="text-align:center;padding:8px 0;">
-                                <img src="${url}" alt="Upload" style="max-width:100%;max-height:180px;border-radius:12px;object-fit:contain;" />
-                            </div>
-                        `;
+                workFrameContainer.innerHTML =
+                    `<div style="text-align:center;padding:8px 0;"><img src="${url}" alt="Upload" style="max-width:100%;max-height:180px;border-radius:12px;object-fit:contain;" /></div>`;
             }
         });
 
@@ -4583,60 +3813,35 @@
             const type = workPostType.value;
             const editId = editWorkPostId.value;
             const imageUrl = workImageUrl.value;
-
-            if (!imageUrl) {
-                showToast('Please upload an image first', 'error');
-                return;
-            }
-
+            if (!imageUrl) { showToast('Please upload an image first', 'error'); return; }
             let title = '',
                 description = '';
             if (type === 'app' || type === 'website') {
                 title = workAppName.value.trim();
                 description = workAppFunc.value.trim();
-                if (!title) {
-                    showToast('Please enter a name', 'error');
-                    return;
-                }
+                if (!title) { showToast('Please enter a name', 'error'); return; }
             } else {
                 title = workFlyerTitle.value.trim();
                 description = workFlyerDesc.value.trim();
-                if (!title) {
-                    showToast('Please enter a title', 'error');
-                    return;
-                }
+                if (!title) { showToast('Please enter a title', 'error'); return; }
             }
-
             const postData = { type, title, description, imageUrl };
-
             if (editId) {
-                updateWorkPost(editId, postData).then(() => {
-                    renderAll();
+                updateWorkPost(editId, postData).then(() => { renderAll();
                     closeWorkUploadModal();
-                    showToast('Work post updated!');
-                });
+                    showToast('Work post updated!'); });
             } else {
-                addWorkPost(postData).then(() => {
-                    renderAll();
+                addWorkPost(postData).then(() => { renderAll();
                     closeWorkUploadModal();
-                    showToast('Work post added!');
-                });
+                    showToast('Work post added!'); });
             }
         });
 
-        addPromoPicBtn.addEventListener('click', () => {
-            promoPicUploadModal.classList.add('open');
-        });
-
-        promoPicUploadCloseBtn.addEventListener('click', () => {
-            promoPicUploadModal.classList.remove('open');
-        });
-        promoPicUploadCancelBtn.addEventListener('click', () => {
-            promoPicUploadModal.classList.remove('open');
-        });
-        promoPicUploadModal.addEventListener('click', (e) => {
-            if (e.target === promoPicUploadModal) promoPicUploadModal.classList.remove('open');
-        });
+        addPromoPicBtn.addEventListener('click', () => { promoPicUploadModal.classList.add('open'); });
+        promoPicUploadCloseBtn.addEventListener('click', () => { promoPicUploadModal.classList.remove('open'); });
+        promoPicUploadCancelBtn.addEventListener('click', () => { promoPicUploadModal.classList.remove('open'); });
+        promoPicUploadModal.addEventListener('click', (e) => { if (e.target === promoPicUploadModal) promoPicUploadModal
+                .classList.remove('open'); });
 
         setupCloudinaryUpload(promoPicImagePreview, promoPicImageUrl, promoPicImagePreview);
 
@@ -4645,16 +3850,8 @@
             const imageUrl = promoPicImageUrl.value;
             const text = promoPicText.value.trim();
             const subtext = promoPicSubtext.value.trim();
-
-            if (!imageUrl) {
-                showToast('Please upload an image first', 'error');
-                return;
-            }
-            if (!text) {
-                showToast('Please enter overlay text', 'error');
-                return;
-            }
-
+            if (!imageUrl) { showToast('Please upload an image first', 'error'); return; }
+            if (!text) { showToast('Please enter overlay text', 'error'); return; }
             addPromoPic({ imageUrl, text, subtext }).then(() => {
                 renderAll();
                 promoPicUploadModal.classList.remove('open');
@@ -4667,81 +3864,50 @@
             });
         });
 
-        document.getElementById('openReferralPromo').addEventListener('click', () => {
-            openReferralModal('standard');
-        });
-        document.getElementById('openCustomReferral').addEventListener('click', () => {
-            openReferralModal('custom');
-        });
-        document.getElementById('openReferralDiscount').addEventListener('click', () => {
-            openReferralModal('discount');
-        });
+        document.getElementById('openReferralPromo').addEventListener('click', () => { openReferralModal('standard'); });
+        document.getElementById('openCustomReferral').addEventListener('click', () => { openReferralModal('custom'); });
+        document.getElementById('openReferralDiscount').addEventListener('click', () => { openReferralModal('discount'); });
 
         referralModalCloseBtn.addEventListener('click', closeReferralModal);
         referralCancelBtn.addEventListener('click', closeReferralModal);
-        referralModal.addEventListener('click', (e) => {
-            if (e.target === referralModal) closeReferralModal();
-        });
+        referralModal.addEventListener('click', (e) => { if (e.target === referralModal) closeReferralModal(); });
 
         referralForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const type = referralType.value;
             const editId = editReferralId.value;
             const data = { type };
-
             if (type === 'standard') {
                 const amount = parseFloat(referralAmount.value);
-                if (!amount || amount <= 0) {
-                    showToast('Please enter a valid amount.', 'error');
-                    return;
-                }
+                if (!amount || amount <= 0) { showToast('Please enter a valid amount.', 'error'); return; }
                 data.amount = amount;
             } else if (type === 'custom') {
                 const userId = referralUserId.value;
                 const amount = parseFloat(referralCustomAmount.value);
-                if (!userId) {
-                    showToast('Please select a user.', 'error');
-                    return;
-                }
-                if (!amount || amount <= 0) {
-                    showToast('Please enter a valid amount.', 'error');
-                    return;
-                }
+                if (!userId) { showToast('Please select a user.', 'error'); return; }
+                if (!amount || amount <= 0) { showToast('Please enter a valid amount.', 'error'); return; }
                 data.userId = userId;
                 data.amount = amount;
             } else if (type === 'discount') {
                 const code = referralDiscountCode.value.trim();
                 const discount = parseInt(referralDiscountPercent.value);
                 const amount = parseFloat(referralDiscountAmount.value);
-                if (!code) {
-                    showToast('Please enter a referral code.', 'error');
-                    return;
-                }
-                if (!discount || discount < 1 || discount > 100) {
-                    showToast('Please enter a valid discount percentage (1-100).', 'error');
-                    return;
-                }
-                if (!amount || amount <= 0) {
-                    showToast('Please enter a valid amount for the referrer.', 'error');
-                    return;
-                }
+                if (!code) { showToast('Please enter a referral code.', 'error'); return; }
+                if (!discount || discount < 1 || discount > 100) { showToast('Please enter a valid discount percentage (1-100).',
+                        'error'); return; }
+                if (!amount || amount <= 0) { showToast('Please enter a valid amount for the referrer.', 'error'); return; }
                 data.code = code;
                 data.discount = discount;
                 data.amount = amount;
             }
-
             if (editId) {
-                updateReferralPromo(editId, data).then(() => {
-                    renderAll();
+                updateReferralPromo(editId, data).then(() => { renderAll();
                     closeReferralModal();
-                    showToast('Referral promo updated!');
-                });
+                    showToast('Referral promo updated!'); });
             } else {
-                addReferralPromo(data).then(() => {
-                    renderAll();
+                addReferralPromo(data).then(() => { renderAll();
                     closeReferralModal();
-                    showToast('Referral promo created!');
-                });
+                    showToast('Referral promo created!'); });
             }
         });
 
@@ -4758,12 +3924,10 @@
             payablesWithdraws.style.display = 'block';
         });
 
-        document.getElementById('addServiceBtn').addEventListener('click', () => {
-            openModal('Add Service', 'Fill in the details to create a new service.', null);
-        });
-        document.getElementById('addServiceQuick').addEventListener('click', () => {
-            openModal('Add Service', 'Fill in the details to create a new service.', null);
-        });
+        document.getElementById('addServiceBtn').addEventListener('click', () => { openModal('Add Service',
+                'Fill in the details to create a new service.', null); });
+        document.getElementById('addServiceQuick').addEventListener('click', () => { openModal('Add Service',
+                'Fill in the details to create a new service.', null); });
 
         document.getElementById('promoHeaderBtn').addEventListener('click', () => {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -4771,12 +3935,9 @@
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
         });
 
-        document.getElementById('addPromoBtn').addEventListener('click', () => {
-            promoModal.classList.add('open');
-        });
-
-        promoCloseBtn.addEventListener('click', () => promoModal.classList.remove('open'));
-        promoCancelBtn.addEventListener('click', () => promoModal.classList.remove('open'));
+        document.getElementById('addPromoBtn').addEventListener('click', () => { promoModal.classList.add('open'); });
+        promoCloseBtn.addEventListener('click', () => { promoModal.classList.remove('open'); });
+        promoCancelBtn.addEventListener('click', () => { promoModal.classList.remove('open'); });
         promoModal.addEventListener('click', (e) => { if (e.target === promoModal) promoModal.classList.remove('open'); });
 
         promoForm.addEventListener('submit', (e) => {
@@ -4825,17 +3986,13 @@
             };
             const editId = editIdInput.value;
             if (editId) {
-                updateService(editId, data).then(() => {
-                    renderAll();
+                updateService(editId, data).then(() => { renderAll();
                     closeModal();
-                    showToast('Service updated');
-                });
+                    showToast('Service updated'); });
             } else {
-                addService(data).then(() => {
-                    renderAll();
+                addService(data).then(() => { renderAll();
                     closeModal();
-                    showToast('Service added');
-                });
+                    showToast('Service added'); });
             }
         });
 
@@ -4847,10 +4004,8 @@
                 cta: document.getElementById('heroCTA').value,
                 phone: document.getElementById('heroPhone').value
             };
-            saveData().then(() => {
-                renderAll();
-                showToast('Hero section updated');
-            });
+            saveData().then(() => { renderAll();
+                showToast('Hero section updated'); });
         });
 
         document.getElementById('savePolicyBtn').addEventListener('click', () => {
@@ -4859,25 +4014,19 @@
                 desc: document.getElementById('policyDesc').value,
                 tag: document.getElementById('policyTag').value
             };
-            saveData().then(() => {
-                renderAll();
-                showToast('Policy card updated');
-            });
+            saveData().then(() => { renderAll();
+                showToast('Policy card updated'); });
         });
 
         document.getElementById('addServiceListItem').addEventListener('click', () => {
             const container = document.getElementById('ourServicesListContainer');
             const newItem = document.createElement('div');
             newItem.className = 'list-item';
-            newItem.innerHTML = `
-                        <input type="text" value="New Service" placeholder="Service name" />
-                        <button class="btn-remove">✕</button>
-                    `;
+            newItem.innerHTML =
+                `<input type="text" value="New Service" placeholder="Service name" /><button class="btn-remove">✕</button>`;
             container.appendChild(newItem);
             container.querySelectorAll('.btn-remove').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    this.closest('.list-item').remove();
-                });
+                btn.addEventListener('click', function() { this.closest('.list-item').remove(); });
             });
         });
 
@@ -4886,16 +4035,12 @@
             const inputs = container.querySelectorAll('.list-item input');
             const newList = Array.from(inputs).map(input => input.value.trim()).filter(v => v);
             allData.ourServicesList = newList;
-            saveData().then(() => {
-                renderAll();
-                showToast('Our Services list updated');
-            });
+            saveData().then(() => { renderAll();
+                showToast('Our Services list updated'); });
         });
 
         document.getElementById('ourServicesListContainer').addEventListener('click', function(e) {
-            if (e.target.classList.contains('btn-remove')) {
-                e.target.closest('.list-item').remove();
-            }
+            if (e.target.classList.contains('btn-remove')) { e.target.closest('.list-item').remove(); }
         });
 
         document.getElementById('saveSettings').addEventListener('click', () => {
@@ -4907,10 +4052,8 @@
 
         document.getElementById('disableAppToggle').addEventListener('change', function() {
             allData.disabled = this.checked;
-            saveData().then(() => {
-                renderAll();
-                showToast(this.checked ? 'App disabled' : 'App enabled');
-            });
+            saveData().then(() => { renderAll();
+                showToast(this.checked ? 'App disabled' : 'App enabled'); });
         });
 
         document.getElementById('refreshOrders').addEventListener('click', () => {
@@ -4930,40 +4073,32 @@
             renderOrders(searchTerm, this.value);
         });
 
-        document.getElementById('userSearchInput').addEventListener('input', function() {
-            renderUsers(this.value);
-        });
+        document.getElementById('userSearchInput').addEventListener('input', function() { renderUsers(this.value); });
 
         document.querySelectorAll('.cat-filter').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.cat-filter').forEach(b => b.style.background = '#f0f0f0');
                 this.style.background = '#1c2128';
                 this.style.color = '#fff';
-                const cat = this.dataset.cat;
-                renderServices(cat);
+                renderServices(this.dataset.cat);
             });
         });
 
         document.getElementById('viewOrdersQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="orders"]').click();
         });
-
         document.getElementById('viewUsersQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="users"]').click();
         });
-
         document.getElementById('viewPromoPicsQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="promo-pics"]').click();
         });
-
         document.getElementById('viewAllActivity').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="orders"]').click();
         });
 
         document.getElementById('logoutBtn').addEventListener('click', () => {
-            signOut(auth).then(() => {
-                window.location.href = 'login.html';
-            }).catch((error) => {
+            signOut(auth).then(() => { window.location.href = 'login.html'; }).catch((error) => {
                 console.error('Logout error:', error);
                 showToast('Error logging out');
             });
@@ -4973,28 +4108,18 @@
             document.getElementById('screenshotModal').classList.remove('open');
         });
         document.getElementById('screenshotModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('open');
-            }
+            if (e.target === this) { this.classList.remove('open'); }
         });
 
-        // ───────────────────────────────────────────────────────────────────
-        // TOAST
-        // ───────────────────────────────────────────────────────────────────
-
+        // ─── TOAST ───
         function showToast(msg, type = 'success') {
             toastMsg.textContent = msg;
             toast.classList.add('show');
             clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2200);
+            toast._timeout = setTimeout(() => { toast.classList.remove('show'); }, 2200);
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // AUTH & INIT
-        // ───────────────────────────────────────────────────────────────────
-
+        // ─── AUTH ───
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
@@ -5003,10 +4128,7 @@
                     const admins = snapshot.val() || {};
                     let foundAdmin = null;
                     for (const key in admins) {
-                        if (admins[key].uid === user.uid) {
-                            foundAdmin = admins[key];
-                            break;
-                        }
+                        if (admins[key].uid === user.uid) { foundAdmin = admins[key]; break; }
                     }
                     currentAdminData = foundAdmin || null;
                     loadData(() => {
@@ -5030,7 +4152,7 @@
             }
         });
 
-        console.log('✅ Admin App ready — Header: Work left, Admin name center, Promo right, three buttons below.');
+        console.log('✅ Admin App ready — fully functional with referrals and payables.');
     </script>
 </body>
 </html>
