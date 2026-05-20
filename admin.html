@@ -3619,8 +3619,8 @@
         let pendingStatusOrderId = null;
         let selectedStatus = null;
         let allUsersCache = {};
-        let pendingWithdrawAction = null; // { key, action: 'approve' | 'decline' }
-        let withdrawalsFilter = 'pending'; // 'pending' | 'approved' | 'declined'
+        let pendingWithdrawAction = null;
+        let withdrawalsFilter = 'pending';
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -4820,10 +4820,8 @@
             const amount = w.amount || 0;
 
             if (action === 'approve') {
-                // Approve withdrawal
                 withdrawals[key].status = 'approved';
 
-                // Record transaction for user
                 if (!allData.transactions) allData.transactions = {};
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 const txData = {
@@ -4845,7 +4843,6 @@
                 };
                 set(txRef, txData);
 
-                // Notify user
                 const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
                 set(notifRef, {
                     title: '✅ Withdrawal Approved',
@@ -4862,10 +4859,8 @@
                 });
 
             } else if (action === 'decline') {
-                // Decline withdrawal - refund the amount
                 withdrawals[key].status = 'declined';
 
-                // Refund the amount to customer's account
                 if (!allData.customerAccounts) allData.customerAccounts = {};
                 if (!allData.customerAccounts[w.userId]) {
                     allData.customerAccounts[w.userId] = { balance: 0 };
@@ -4873,7 +4868,6 @@
                 const currentBal = allData.customerAccounts[w.userId].balance || 0;
                 allData.customerAccounts[w.userId].balance = currentBal + amount;
 
-                // Record transaction for user
                 if (!allData.transactions) allData.transactions = {};
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 const txData = {
@@ -4895,7 +4889,6 @@
                 };
                 set(txRef, txData);
 
-                // Notify user
                 const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
                 set(notifRef, {
                     title: '❌ Withdrawal Declined',
@@ -6391,7 +6384,7 @@
             }
         });
 
-        console.log('✅ Admin App ready — Withdrawals: Pending shown by default, with Approved/Rejected filter buttons. Confirmation modal added. Account Update included.');
+        console.log('✅ Admin App ready — Withdrawals filter properly moves approved/declined out of pending. Account Update included.');
     </script>
 </body>
 </html>
