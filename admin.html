@@ -5019,6 +5019,7 @@
             }
         }
 
+        // ─── FIXED: applyAccountUpdate now correctly updates balances ───
         function applyAccountUpdate() {
             const selectedIds = getSelectedUserIds();
             if (selectedIds.length === 0) {
@@ -5034,12 +5035,14 @@
 
             const action = activeAction.dataset.action;
 
+            // Ensure customerAccounts exists
+            if (!allData.customerAccounts) allData.customerAccounts = {};
+
             if (action === 'wipe') {
                 if (!confirm(`Are you sure you want to wipe (set to 0) the accounts of ${selectedIds.length} user(s)? This cannot be undone.`)) {
                     return;
                 }
                 selectedIds.forEach(uid => {
-                    if (!allData.customerAccounts) allData.customerAccounts = {};
                     allData.customerAccounts[uid] = { balance: 0 };
                     if (!allData.transactions) allData.transactions = {};
                     const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
@@ -5079,7 +5082,6 @@
 
             if (action === 'add') {
                 selectedIds.forEach(uid => {
-                    if (!allData.customerAccounts) allData.customerAccounts = {};
                     if (!allData.customerAccounts[uid]) {
                         allData.customerAccounts[uid] = { balance: 0 };
                     }
@@ -5114,7 +5116,6 @@
                 });
             } else if (action === 'set') {
                 selectedIds.forEach(uid => {
-                    if (!allData.customerAccounts) allData.customerAccounts = {};
                     allData.customerAccounts[uid] = { balance: amount };
                     if (!allData.transactions) allData.transactions = {};
                     const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
