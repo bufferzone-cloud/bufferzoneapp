@@ -3535,7 +3535,7 @@
         }
 
         // =================================================================
-        // WITHDRAWALS LIST (color-coded by status)
+        // WITHDRAWALS LIST (color-coded by status, real‑time updates)
         // =================================================================
 
         function renderWithdrawalsList() {
@@ -3566,11 +3566,11 @@
                 if (w.status === 'approved') {
                     statusEmoji = '✅';
                     statusColor = '#00a86b';
-                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was approved. Please check your mobile money.`;
+                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was approved. The amount has been deducted from your account.`;
                 } else if (w.status === 'declined') {
                     statusEmoji = '❌';
                     statusColor = '#dc2626';
-                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount has been refunded to your account.`;
+                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount remains in your account.`;
                 } else {
                     statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
                 }
@@ -4119,7 +4119,7 @@
         }
 
         // =================================================================
-        // WITHDRAWAL — FIXED: NO NOTIFICATION, MONEY DEDUCTED ON APPROVAL
+        // WITHDRAWAL — PENDING REQUEST, ADMIN APPROVES/DEDUCTS
         // =================================================================
 
         function openWithdrawModal() {
@@ -4185,9 +4185,7 @@
                 userPhone: currentUserData?.phone || 'N/A'
             };
 
-            // NO notification created for withdrawal — the user requested no notification for withdrawals
-            // The admin will handle approval/decline and money movement
-
+            // Save and refresh
             saveData().then(() => {
                 closeWithdrawModal();
                 withdrawSuccessModal.classList.add('open');
@@ -4356,11 +4354,10 @@
             }
         });
 
-        console.log('✅ FIXED: Withdrawals are now submitted as admin requests, not notifications.');
-        console.log('✅ Money is ONLY deducted when the admin approves the withdrawal.');
-        console.log('✅ Approved withdrawals show GREEN, declined show RED with refunds.');
-        console.log('✅ Each user has their own dedicated notifications for orders, transactions, and promotions.');
-        console.log('✅ Withdrawal status is shown in both History and Withdrawals tabs.');
+        console.log('✅ Customer App ready — Withdrawals are correctly submitted as pending requests.');
+        console.log('✅ Balance is ONLY deducted when the admin approves the withdrawal.');
+        console.log('✅ Approved withdrawals show ✅, declined show ❌ with no balance change.');
+        console.log('✅ Withdrawal status updates in real time via Firebase listener.');
     </script>
 </body>
 </html>
