@@ -1827,7 +1827,7 @@
             font-size: 14px;
         }
 
-        /* ===== WITHDRAWAL ITEMS ===== */
+        /* ===== WITHDRAWAL ITEMS (color-coded by status) ===== */
         .withdrawal-item {
             background: #ffffff;
             border-radius: 14px;
@@ -1838,6 +1838,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.2s;
         }
         .withdrawal-item .left .amount {
             font-weight: 700;
@@ -1865,6 +1866,12 @@
         .withdrawal-item .status-badge.declined {
             background: #fee2e2;
             color: #dc2626;
+        }
+        .withdrawal-item .status-message {
+            font-size: 11px;
+            color: #555;
+            margin-top: 2px;
+            display: block;
         }
 
         .empty-withdrawals {
@@ -2356,23 +2363,21 @@
                             <button class="withdraw-btn" id="withdrawBtnFromBalance"><i class="fa-solid fa-arrow-up"></i> Withdraw</button>
                         </div>
                         <div id="transactionMessages">
-                            <!-- Rendered by JS -->
-                        </div>
-                        <div id="withdrawalsListContainer">
-                            <!-- Rendered by JS (withdrawals with statuses) -->
+                            <!-- Rendered by JS (only non-withdrawal transactions) -->
                         </div>
                     </div>
 
                     <!-- Withdrawals View -->
                     <div class="account-view" id="accountWithdrawView">
                         <div style="text-align:center; padding:20px 0;">
-                            <p style="color:#888; font-size:13px;">Click the "Withdraw" button below to request a withdrawal from your account. Admin will review within 24 hours.</p>
+                            <p style="color:#888; font-size:13px;">Click the "Withdraw" button below to request a withdrawal from your account.</p>
                             <button class="withdraw-btn" id="withdrawBtnFromView" style="margin-top:12px; background:#f5b83d; border:none; padding:12px 30px; border-radius:30px; font-weight:700; font-size:14px; color:#1c2128; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
                                 <i class="fa-solid fa-arrow-up"></i> Withdraw Funds
                             </button>
-                            <div style="margin-top:16px; background:#f8f9fc; border-radius:12px; padding:12px; border:1px solid #f0f0f0;">
-                                <p style="font-size:11px; color:#888;">Withdrawals are processed within 24 hours. You will be notified once your request is approved or declined. Declined withdrawals are refunded to your account.</p>
-                            </div>
+                        </div>
+                        <!-- Withdrawals list -->
+                        <div id="withdrawalsListContainer">
+                            <!-- Rendered by JS -->
                         </div>
                     </div>
                 </div>
@@ -2481,7 +2486,7 @@
         <div class="withdraw-success-modal">
             <i class="fa-regular fa-circle-check"></i>
             <h3>Withdrawal Submitted</h3>
-            <p>Your withdrawal request has been submitted and will be processed within 24 hours. Please check the status in your transactions.</p>
+            <p>Your withdrawal request has been submitted and will be processed within 24 hours.</p>
             <button class="btn-ok" id="withdrawSuccessOkBtn">OK</button>
         </div>
     </div>
@@ -3474,38 +3479,28 @@
         }
 
         // =================================================================
-        // TRANSACTION MESSAGES
+        // TRANSACTION MESSAGES (only non-withdrawal transactions)
         // =================================================================
 
         function renderTransactionMessages() {
             const container = transactionMessages;
             const transactions = allData.transactions || {};
             const entries = Object.entries(transactions)
-                .filter(([key, t]) => t.userId === currentUserId)
+                .filter(([key, t]) => t.userId === currentUserId && !t.type?.toLowerCase().includes('withdraw'))
                 .sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
 
             if (entries.length === 0) {
-                container.innerHTML = `<div style="text-align:center;padding:16px;color:#888;font-size:12px;">No transaction messages yet.</div>`;
+                container.innerHTML = `<div style="text-align:center;padding:16px;color:#888;font-size:12px;">No transactions yet.</div>`;
                 return;
             }
 
             container.innerHTML = entries.slice(0, 10).map(([key, t]) => {
                 const isCredit = t.amount && t.amount > 0 && (t.type?.toLowerCase().includes('referral') || t.type?.toLowerCase().includes('received'));
-                const isWithdraw = t.type?.toLowerCase().includes('withdraw') || t.type?.toLowerCase().includes('withdrawal');
                 let amountDisplay = '';
                 let amountClass = '';
                 if (t.amount) {
                     if (isCredit) {
                         amountDisplay = `+ZMW ${t.amount.toFixed(2)}`;
-                        amountClass = 'positive';
-                    } else if (isWithdraw && t.status === 'pending') {
-                        amountDisplay = `-ZMW ${t.amount.toFixed(2)} (pending)`;
-                        amountClass = '';
-                    } else if (isWithdraw && t.status === 'approved') {
-                        amountDisplay = `-ZMW ${t.amount.toFixed(2)}`;
-                        amountClass = 'negative';
-                    } else if (isWithdraw && t.status === 'declined') {
-                        amountDisplay = `↩ ZMW ${t.amount.toFixed(2)} refunded`;
                         amountClass = 'positive';
                     } else {
                         amountDisplay = `ZMW ${t.amount.toFixed(2)}`;
@@ -3524,30 +3519,6 @@
                     title = `🎯 Referral Discount`;
                     desc = `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral for a service discount.`;
                 }
-                if (t.type?.toLowerCase().includes('withdraw') && t.status === 'approved') {
-                    title = `✅ Withdrawal Approved`;
-                    desc = `Your withdrawal of ZMW ${t.amount?.toFixed(2) || '0.00'} has been approved and processed.`;
-                    if (t.amount) {
-                        amountDisplay = `-ZMW ${t.amount.toFixed(2)}`;
-                        amountClass = 'negative';
-                    }
-                }
-                if (t.type?.toLowerCase().includes('withdraw') && t.status === 'declined') {
-                    title = `↩ Withdrawal Declined (Refunded)`;
-                    desc = `Your withdrawal request of ZMW ${t.amount?.toFixed(2) || '0.00'} has been declined. The amount has been refunded to your account.`;
-                    if (t.amount) {
-                        amountDisplay = `↩ +ZMW ${t.amount.toFixed(2)}`;
-                        amountClass = 'positive';
-                    }
-                }
-                if (t.type?.toLowerCase().includes('withdraw') && t.status === 'pending') {
-                    title = `⏳ Withdrawal Pending`;
-                    desc = `Your withdrawal request of ZMW ${t.amount?.toFixed(2) || '0.00'} is being processed by admin.`;
-                    if (t.amount) {
-                        amountDisplay = `-ZMW ${t.amount.toFixed(2)} (pending)`;
-                        amountClass = '';
-                    }
-                }
 
                 return `
                     <div class="transaction-msg">
@@ -3565,7 +3536,7 @@
         }
 
         // =================================================================
-        // WITHDRAWALS LIST
+        // WITHDRAWALS LIST (color-coded by status)
         // =================================================================
 
         function renderWithdrawalsList() {
@@ -3590,15 +3561,24 @@
                 const statusDisplay = w.status ? w.status.charAt(0).toUpperCase() + w.status.slice(1) : 'Pending';
                 const dateStr = w.date ? new Date(w.date).toLocaleString() : (w.createdAt ? new Date(w.createdAt).toLocaleString() : 'N/A');
 
+                let statusMessage = '';
                 let statusEmoji = '⏳';
-                if (w.status === 'approved') statusEmoji = '✅';
-                else if (w.status === 'declined') statusEmoji = '↩';
+                if (w.status === 'approved') {
+                    statusEmoji = '✅';
+                    statusMessage = `Your withdraw request of ZMW ${(w.amount || 0).toFixed(2)} was approved. Please check your mobile money.`;
+                } else if (w.status === 'declined') {
+                    statusEmoji = '❌';
+                    statusMessage = `Your withdraw request of ZMW ${(w.amount || 0).toFixed(2)} was declined. Please try again another time.`;
+                } else {
+                    statusMessage = `Your withdraw request of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
+                }
 
                 return `
                     <div class="withdrawal-item">
                         <div class="left">
                             <div class="amount">${statusEmoji} ZMW ${(w.amount || 0).toFixed(2)}</div>
                             <div class="date">${dateStr}</div>
+                            <div class="status-message">${statusMessage}</div>
                         </div>
                         <div>
                             <span class="status-badge ${statusClass}">${statusDisplay}</span>
@@ -4159,7 +4139,7 @@
                 return;
             }
 
-            // Create withdrawal request – goes directly to admin payables
+            // Create withdrawal request
             if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
             const wId = 'w' + Date.now();
             allData.withdrawalRequests[wId] = {
@@ -4172,10 +4152,10 @@
                 date: new Date().toLocaleString()
             };
 
-            // Deduct from account immediately (pending admin approval)
+            // Deduct from account (pending until admin approves/declines)
             allData.customerAccounts[currentUserId] = { balance: balance - amount };
 
-            // Record transaction for customer (pending)
+            // Record withdrawal transaction (separate from regular transactions)
             if (!allData.transactions) allData.transactions = {};
             const txId = 'tx' + Date.now();
             allData.transactions[txId] = {
@@ -4185,7 +4165,7 @@
                 status: 'pending',
                 date: new Date().toLocaleString(),
                 ref: 'W-' + wId,
-                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested. Admin will review within 24 hours.`,
+                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested.`,
                 screenshot: 'N/A',
                 userId: currentUserId,
                 itemId: wId,
@@ -4196,11 +4176,20 @@
                 userPhone: currentUserData?.phone || 'N/A'
             };
 
+            // Notify user
+            const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
+            set(notifRef, {
+                title: '💰 Withdrawal Requested',
+                message: `Your withdrawal of ZMW ${amount.toFixed(2)} has been submitted and will be processed within 24 hours.`,
+                timestamp: Date.now(),
+                read: false
+            });
+
             saveData().then(() => {
                 closeWithdrawModal();
                 withdrawSuccessModal.classList.add('open');
                 renderAll();
-                showToast('✅ Withdrawal request submitted! Admin will review within 24 hours.', 'success');
+                showToast('✅ Withdrawal request submitted!', 'success');
             });
         }
 
@@ -4374,7 +4363,7 @@
             }
         });
 
-        console.log('✅ Customer App – Final: Withdrawals go to admin payables (not notifications). Declined withdrawals are refunded to account. All transactions properly arranged.');
+        console.log('✅ Customer App — Withdrawals separated from transactions, color-coded by status, with clear status messages.');
     </script>
 </body>
 </html>
