@@ -157,7 +157,6 @@
             justify-content: center;
         }
 
-        /* ===== HERO ===== */
         .hero {
             background-color: #1c2128;
             border-radius: 16px;
@@ -267,7 +266,6 @@
             font-weight: 700;
         }
 
-        /* ===== PROMO CAROUSEL – BURGER STYLE (EDGE PEEK) ===== */
         .promo-carousel-wrapper {
             position: relative;
             margin: 4px 0 14px 0;
@@ -401,7 +399,6 @@
             transform: scale(0.85);
         }
 
-        /* ===== PROMOTIONS BANNER ===== */
         .promotions-banner {
             margin: 0 0 14px 0;
             padding: 10px 14px;
@@ -501,7 +498,6 @@
             cursor: pointer;
         }
 
-        /* ===== ORIGINAL SERVICE GRID – KEPT EXACTLY ===== */
         .service-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -590,7 +586,6 @@
             background: linear-gradient(135deg, #4a6a3a 0%, #2a3a1a 100%);
         }
 
-        /* ===== ORDER FLOW ===== */
         .order-flow-container {
             padding: 0 0 16px 0;
         }
@@ -853,7 +848,6 @@
             color: #f5b83d;
         }
 
-        /* ===== PAYMENT MODAL ===== */
         .payment-modal-overlay {
             position: fixed;
             top: 0;
@@ -1058,7 +1052,6 @@
             color: #f5b83d;
         }
 
-        /* ===== VIEWS ===== */
         .view {
             display: none;
         }
@@ -1066,7 +1059,6 @@
             display: block;
         }
 
-        /* ===== ORDERS VIEW ===== */
         .orders-header {
             margin-top: 8px;
             margin-bottom: 16px;
@@ -1205,7 +1197,6 @@
             transform: rotate(180deg);
         }
 
-        /* ===== HISTORY VIEW ===== */
         .history-list {
             padding: 0 0 16px 0;
             display: flex;
@@ -1283,7 +1274,6 @@
             transform: rotate(180deg);
         }
 
-        /* ===== PAYMENT REMINDER BANNER ===== */
         .payment-reminder-banner {
             background: #fff8ed;
             border: 1px solid #f5b83d;
@@ -1359,7 +1349,6 @@
             display: inline-block;
         }
 
-        /* ===== NOTIFICATION SIDEBAR ===== */
         .sidebar-overlay {
             position: fixed;
             top: 0;
@@ -1452,7 +1441,6 @@
             margin-top: 3px;
         }
 
-        /* ===== SAMPLES GRID ===== */
         .samples-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1587,7 +1575,6 @@
             border-radius: 0 0 4px 4px;
         }
 
-        /* ===== PROFILE ===== */
         .profile-card {
             background: #ffffff;
             border-radius: 16px;
@@ -1658,7 +1645,6 @@
             line-height: 1.6;
         }
 
-        /* ===== ACCOUNT SECTION ===== */
         .account-section {
             display: none;
             margin-top: 16px;
@@ -1832,7 +1818,6 @@
             font-size: 14px;
         }
 
-        /* ===== WITHDRAWAL ITEMS (color-coded by status) ===== */
         .withdrawal-item {
             background: #ffffff;
             border-radius: 14px;
@@ -1891,7 +1876,6 @@
             margin-bottom: 8px;
         }
 
-        /* ===== WITHDRAWAL MODAL ===== */
         .withdraw-modal-overlay {
             position: fixed;
             top: 0;
@@ -2035,7 +2019,6 @@
             transform: scale(0.95);
         }
 
-        /* ===== PAYMENT MODAL TOGGLES ===== */
         .toggle-row {
             display: flex;
             gap: 8px;
@@ -2084,7 +2067,6 @@
             border-color: #f5b83d;
         }
 
-        /* ===== APPLY REFERRAL BUTTON STYLING ===== */
         .apply-btn {
             background: #f5b83d;
             color: #1c2128;
@@ -2133,7 +2115,6 @@
             transform: scale(0.95);
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 420px) {
             .app-content {
                 padding: 0 10px 150px 10px;
@@ -3283,7 +3264,8 @@
                     title: 'Payment Complete',
                     message: `Order ${orderData.id} is now fully paid. Thank you!`,
                     timestamp: Date.now(),
-                    read: false
+                    read: false,
+                    userId: currentUserId
                 });
 
                 showToast(`✅ Order ${orderData.id} marked as fully paid!`, 'success');
@@ -3573,7 +3555,7 @@
                     statusMessage = `Your withdraw request of ZMW ${(w.amount || 0).toFixed(2)} was approved. Please check your mobile money.`;
                 } else if (w.status === 'declined') {
                     statusEmoji = '❌';
-                    statusMessage = `Your withdraw request of ZMW ${(w.amount || 0).toFixed(2)} was declined. Please try again another time.`;
+                    statusMessage = `Your withdraw request of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount has been refunded.`;
                 } else {
                     statusMessage = `Your withdraw request of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
                 }
@@ -4076,7 +4058,8 @@
                         title: '💰 Referral Bonus',
                         message: `You received ZMW ${bonusAmount.toFixed(2)} from ${customerName} who used your referral code.`,
                         timestamp: Date.now(),
-                        read: false
+                        read: false,
+                        userId: appliedReferral.referrerUid
                     });
                 }
             }
@@ -4106,7 +4089,8 @@
                 title: 'Order Placed',
                 message: `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.${data.notes ? ` Notes: "${data.notes}"` : ''}`,
                 timestamp: Date.now(),
-                read: false
+                read: false,
+                userId: currentUserId
             });
 
             showToast('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.', 'success');
@@ -4155,7 +4139,7 @@
                 return;
             }
 
-            // Create withdrawal request
+            // Create withdrawal request (this is a transaction, not a notification)
             if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
             const wId = 'w' + Date.now();
             allData.withdrawalRequests[wId] = {
@@ -4192,13 +4176,14 @@
                 userPhone: currentUserData?.phone || 'N/A'
             };
 
-            // Notify user
+            // Notify user about the withdrawal request (separate from the transaction)
             const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
             set(notifRef, {
                 title: '💰 Withdrawal Requested',
                 message: `Your withdrawal of ZMW ${amount.toFixed(2)} has been submitted and will be processed within 24 hours.`,
                 timestamp: Date.now(),
-                read: false
+                read: false,
+                userId: currentUserId
             });
 
             saveData().then(() => {
@@ -4379,7 +4364,7 @@
             }
         });
 
-        console.log('✅ Customer App — Extra notes captured in orders, withdrawal status shows approved/declined with clear messages.');
+        console.log('✅ Customer App — Withdrawals are submitted as transactions. Statuses: pending (⏳), approved (✅), declined (❌). Refund on decline.');
     </script>
 </body>
 </html>
