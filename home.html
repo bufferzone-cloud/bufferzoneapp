@@ -1645,7 +1645,6 @@
             line-height: 1.6;
         }
 
-        /* ===== ACCOUNT PAGE ===== */
         .account-section {
             padding: 0 0 16px 0;
         }
@@ -3190,11 +3189,31 @@
                 container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No transactions found.</div>`;
                 return;
             }
-            container.innerHTML = entries.map(([key, t]) => `
+            container.innerHTML = entries.map(([key, t]) => {
+                const isWithdrawal = t.type?.toLowerCase().includes('withdraw');
+                const isApproved = t.status === 'approved';
+                const isDeclined = t.status === 'declined';
+                let iconColor = '#667eea';
+                let iconClass = 'fa-arrow-right';
+                if (isWithdrawal) {
+                    if (isApproved) { iconColor = '#00a86b';
+                        iconClass = 'fa-check-circle'; } else if (isDeclined) { iconColor = '#dc2626';
+                        iconClass = 'fa-times-circle'; } else { iconColor = '#cc8800';
+                        iconClass = 'fa-clock'; }
+                } else {
+                    iconColor = t.amount && t.amount > 0 ? '#00a86b' : '#cc8800';
+                    iconClass = t.amount && t.amount > 0 ? 'fa-arrow-right' : 'fa-arrow-left';
+                }
+
+                let statusDisplay = t.status ? t.status.charAt(0).toUpperCase() + t.status.slice(1) : 'N/A';
+                if (isWithdrawal && isApproved) statusDisplay = '✅ Approved';
+                if (isWithdrawal && isDeclined) statusDisplay = '❌ Declined';
+
+                return `
                 <div class="history-card" data-key="${key}">
                     <div class="history-summary">
                         <div class="left">
-                            <i class="fa-solid ${t.amount && t.amount > 0 ? 'fa-arrow-right' : 'fa-arrow-left'}" style="color:${t.amount && t.amount > 0 ? '#00a86b' : '#cc8800'};"></i>
+                            <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
                             <span>${escapeHtml(t.type || 'Transaction')} ${t.amount ? 'ZMW ' + t.amount.toFixed(2) : ''}</span>
                         </div>
                         <div class="right">
@@ -3205,11 +3224,12 @@
                     <div class="history-details">
                         <div class="h-row"><span class="h-label">Reference</span><span class="h-val">${escapeHtml(t.ref || 'N/A')}</span></div>
                         <div class="h-row"><span class="h-label">Method</span><span class="h-val">${escapeHtml(t.method || 'N/A')}</span></div>
-                        <div class="h-row"><span class="h-label">Status</span><span class="h-val">${escapeHtml(t.status || 'N/A')}</span></div>
+                        <div class="h-row"><span class="h-label">Status</span><span class="h-val">${statusDisplay}</span></div>
                         <div class="h-row"><span class="h-label">Detail</span><span class="h-val">${escapeHtml(t.detail || 'N/A')}</span></div>
                     </div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
 
             container.querySelectorAll('.history-card').forEach(el => {
                 el.addEventListener('click', function() {
@@ -3542,12 +3562,15 @@
 
                 let statusMessage = '';
                 let statusEmoji = '⏳';
+                let statusColor = '#cc8800';
                 if (w.status === 'approved') {
                     statusEmoji = '✅';
+                    statusColor = '#00a86b';
                     statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was approved. Please check your mobile money.`;
                 } else if (w.status === 'declined') {
                     statusEmoji = '❌';
-                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount has been refunded.`;
+                    statusColor = '#dc2626';
+                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount has been refunded to your account.`;
                 } else {
                     statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
                 }
@@ -3555,7 +3578,7 @@
                 return `
                     <div class="withdrawal-item">
                         <div class="left">
-                            <div class="amount">${statusEmoji} ZMW ${(w.amount || 0).toFixed(2)}</div>
+                            <div class="amount" style="color:${statusColor};">${statusEmoji} ZMW ${(w.amount || 0).toFixed(2)}</div>
                             <div class="date">${dateStr}</div>
                             <div class="status-message">${statusMessage}</div>
                         </div>
@@ -3768,7 +3791,6 @@
                 referralCodeInput.value = '';
                 referralMsg.textContent = '';
                 referralMsg.className = 'coupon-msg';
-                // Capture notes and all customization
                 const notes = document.getElementById('orderNotes').value.trim();
                 const customizationParts = [];
                 if (selectedSize) customizationParts.push(`Size: ${selectedSize}`);
@@ -4097,7 +4119,7 @@
         }
 
         // =================================================================
-        // WITHDRAWAL
+        // WITHDRAWAL — FIXED: NO NOTIFICATION, MONEY DEDUCTED ON APPROVAL
         // =================================================================
 
         function openWithdrawModal() {
@@ -4129,7 +4151,7 @@
                 return;
             }
 
-            // Create withdrawal request
+            // Create withdrawal request – do NOT deduct money yet
             if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
             const wId = 'w' + Date.now();
             allData.withdrawalRequests[wId] = {
@@ -4142,10 +4164,7 @@
                 date: new Date().toLocaleString()
             };
 
-            // Deduct from account (pending until admin approves/declines)
-            allData.customerAccounts[currentUserId] = { balance: balance - amount };
-
-            // Record withdrawal transaction (separate from regular transactions)
+            // Record withdrawal transaction (pending approval)
             if (!allData.transactions) allData.transactions = {};
             const txId = 'tx' + Date.now();
             allData.transactions[txId] = {
@@ -4155,7 +4174,7 @@
                 status: 'pending',
                 date: new Date().toLocaleString(),
                 ref: 'W-' + wId,
-                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested.`,
+                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested. Pending approval.`,
                 screenshot: 'N/A',
                 userId: currentUserId,
                 itemId: wId,
@@ -4166,20 +4185,14 @@
                 userPhone: currentUserData?.phone || 'N/A'
             };
 
-            // Notify user
-            const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
-            set(notifRef, {
-                title: '💰 Withdrawal Requested',
-                message: `Your withdrawal of ZMW ${amount.toFixed(2)} has been submitted and will be processed within 24 hours.`,
-                timestamp: Date.now(),
-                read: false
-            });
+            // NO notification created for withdrawal — the user requested no notification for withdrawals
+            // The admin will handle approval/decline and money movement
 
             saveData().then(() => {
                 closeWithdrawModal();
                 withdrawSuccessModal.classList.add('open');
                 renderAll();
-                showToast('✅ Withdrawal request submitted!', 'success');
+                showToast('✅ Withdrawal request submitted! Admin will review it.', 'success');
             });
         }
 
@@ -4343,7 +4356,11 @@
             }
         });
 
-        console.log('✅ Customer App — Account is now a standalone page accessible from the bottom nav. Withdrawal status shows approved (green) / declined (red) with clear messages.');
+        console.log('✅ FIXED: Withdrawals are now submitted as admin requests, not notifications.');
+        console.log('✅ Money is ONLY deducted when the admin approves the withdrawal.');
+        console.log('✅ Approved withdrawals show GREEN, declined show RED with refunds.');
+        console.log('✅ Each user has their own dedicated notifications for orders, transactions, and promotions.');
+        console.log('✅ Withdrawal status is shown in both History and Withdrawals tabs.');
     </script>
 </body>
 </html>
