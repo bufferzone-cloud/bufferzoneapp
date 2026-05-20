@@ -49,11 +49,11 @@
             left: 50%;
             transform: translateX(-50%);
             width: 92%;
-            max-width: 400px;
+            max-width: 420px;
             height: 64px;
             background: #1c2128;
             border-radius: 32px;
-            padding: 8px 20px;
+            padding: 8px 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -73,13 +73,13 @@
             flex: 1;
             background: none;
             border: none;
-            font-size: 8px;
+            font-size: 7px;
             gap: 1px;
             user-select: none;
             padding: 2px 0;
         }
         .nav-item i {
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 1px;
         }
         .nav-item.active {
@@ -157,7 +157,6 @@
             justify-content: center;
         }
 
-        /* ===== HERO ===== */
         .hero {
             background-color: #1c2128;
             border-radius: 16px;
@@ -267,7 +266,6 @@
             font-weight: 700;
         }
 
-        /* ===== PROMO CAROUSEL – BURGER STYLE (EDGE PEEK) ===== */
         .promo-carousel-wrapper {
             position: relative;
             margin: 4px 0 14px 0;
@@ -401,7 +399,6 @@
             transform: scale(0.85);
         }
 
-        /* ===== PROMOTIONS BANNER ===== */
         .promotions-banner {
             margin: 0 0 14px 0;
             padding: 10px 14px;
@@ -501,7 +498,6 @@
             cursor: pointer;
         }
 
-        /* ===== ORIGINAL SERVICE GRID – KEPT EXACTLY ===== */
         .service-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -590,7 +586,6 @@
             background: linear-gradient(135deg, #4a6a3a 0%, #2a3a1a 100%);
         }
 
-        /* ===== ORDER FLOW ===== */
         .order-flow-container {
             padding: 0 0 16px 0;
         }
@@ -853,7 +848,6 @@
             color: #f5b83d;
         }
 
-        /* ===== PAYMENT MODAL ===== */
         .payment-modal-overlay {
             position: fixed;
             top: 0;
@@ -1058,7 +1052,6 @@
             color: #f5b83d;
         }
 
-        /* ===== VIEWS ===== */
         .view {
             display: none;
         }
@@ -1066,7 +1059,6 @@
             display: block;
         }
 
-        /* ===== ORDERS VIEW ===== */
         .orders-header {
             margin-top: 8px;
             margin-bottom: 16px;
@@ -1205,7 +1197,6 @@
             transform: rotate(180deg);
         }
 
-        /* ===== HISTORY VIEW ===== */
         .history-list {
             padding: 0 0 16px 0;
             display: flex;
@@ -1283,7 +1274,6 @@
             transform: rotate(180deg);
         }
 
-        /* ===== PAYMENT REMINDER BANNER ===== */
         .payment-reminder-banner {
             background: #fff8ed;
             border: 1px solid #f5b83d;
@@ -1359,7 +1349,6 @@
             display: inline-block;
         }
 
-        /* ===== NOTIFICATION SIDEBAR ===== */
         .sidebar-overlay {
             position: fixed;
             top: 0;
@@ -1452,7 +1441,6 @@
             margin-top: 3px;
         }
 
-        /* ===== SAMPLES GRID ===== */
         .samples-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1587,7 +1575,6 @@
             border-radius: 0 0 4px 4px;
         }
 
-        /* ===== PROFILE ===== */
         .profile-card {
             background: #ffffff;
             border-radius: 16px;
@@ -1658,20 +1645,10 @@
             line-height: 1.6;
         }
 
-        /* ===== ACCOUNT SECTION ===== */
+        /* ===== ACCOUNT PAGE ===== */
         .account-section {
-            display: none;
-            margin-top: 16px;
-            padding: 16px;
-            background: #ffffff;
-            border-radius: 16px;
-            border: 1px solid #f0f0f0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            padding: 0 0 16px 0;
         }
-        .account-section.open {
-            display: block;
-        }
-
         .account-toggle-row {
             display: flex;
             gap: 12px;
@@ -1832,7 +1809,6 @@
             font-size: 14px;
         }
 
-        /* ===== WITHDRAWAL ITEMS (color-coded by status) ===== */
         .withdrawal-item {
             background: #ffffff;
             border-radius: 14px;
@@ -1891,7 +1867,6 @@
             margin-bottom: 8px;
         }
 
-        /* ===== WITHDRAWAL MODAL ===== */
         .withdraw-modal-overlay {
             position: fixed;
             top: 0;
@@ -2035,7 +2010,6 @@
             transform: scale(0.95);
         }
 
-        /* ===== PAYMENT MODAL TOGGLES ===== */
         .toggle-row {
             display: flex;
             gap: 8px;
@@ -2084,7 +2058,6 @@
             border-color: #f5b83d;
         }
 
-        /* ===== APPLY REFERRAL BUTTON STYLING ===== */
         .apply-btn {
             background: #f5b83d;
             color: #1c2128;
@@ -2133,7 +2106,6 @@
             transform: scale(0.95);
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 420px) {
             .app-content {
                 padding: 0 10px 150px 10px;
@@ -2148,10 +2120,13 @@
             .bottom-nav {
                 width: 95%;
                 height: 58px;
-                padding: 6px 16px;
+                padding: 6px 10px;
             }
             .nav-item i {
-                font-size: 18px;
+                font-size: 16px;
+            }
+            .nav-item {
+                font-size: 6px;
             }
             .payment-reminder-banner .btn-done-remaining {
                 font-size: 10px;
@@ -2239,7 +2214,7 @@
                     </div>
                 </div>
 
-                <!-- ===== PROMO CAROUSEL – BURGER STYLE (EDGE PEEK) ===== -->
+                <!-- ===== PROMO CAROUSEL ===== -->
                 <div class="promo-carousel-wrapper" id="promoCarouselWrapper">
                     <div class="promo-carousel-track" id="promoCarouselTrack">
                         <!-- Rendered by JS -->
@@ -2318,36 +2293,14 @@
                 <div id="samplesContainer" class="samples-grid"></div>
             </div>
 
-            <!-- ===== VIEW: PROFILE ===== -->
-            <div id="profileView" class="view">
+            <!-- ===== VIEW: ACCOUNT ===== -->
+            <div id="accountView" class="view">
                 <div style="padding: 0 0 13px 0;">
-                    <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">My Profile</h3>
-                    <p style="color: #888; font-size: 11px;">Your personal information.</p>
+                    <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">💰 My Account</h3>
+                    <p style="color: #888; font-size: 11px;">Manage your balance, referrals, and withdrawals.</p>
                 </div>
 
-                <!-- ===== PROFILE CARD ===== -->
-                <div class="profile-card">
-                    <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
-                    <div class="profile-name" id="profileName">User</div>
-                    <div class="profile-role" id="profileRole">Customer</div>
-                    <div class="profile-field"><i class="fa-solid fa-user"></i><span class="label">Full Name</span><span class="value" id="profileFullName">User</span></div>
-                    <div class="profile-field"><i class="fa-solid fa-phone"></i><span class="label">Phone</span><span class="value" id="profilePhone">Not set</span></div>
-                    <div class="profile-field"><i class="fa-solid fa-envelope"></i><span class="label">Email</span><span class="value" id="profileEmail">No email</span></div>
-                    <div class="profile-field"><i class="fa-solid fa-calendar"></i><span class="label">Joined</span><span class="value" id="profileJoined">N/A</span></div>
-                    <div class="profile-about">
-                        <h4 style="font-size: 11px; font-weight: 600; color: #1c2128; margin-bottom: 4px;">About</h4>
-                        <p>Passionate about design and technology. Helping brands grow through innovation and strategic design.</p>
-                    </div>
-                    <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
-                </div>
-
-                <!-- ===== ACCOUNT BUTTON ===== -->
-                <button id="accountToggleBtn" style="width:100%; margin-top:16px; padding:12px; background:#1c2128; color:white; border:none; border-radius:30px; font-weight:700; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;">
-                    <i class="fa-solid fa-wallet" style="color:#f5b83d;"></i> My Account
-                </button>
-
-                <!-- ===== ACCOUNT SECTION (hidden by default) ===== -->
-                <div class="account-section" id="accountSection">
+                <div class="account-section">
                     <div class="account-toggle-row">
                         <button class="toggle-btn active" id="accountTransactionsBtn"><i class="fa-solid fa-receipt"></i> Transactions</button>
                         <button class="toggle-btn" id="accountWithdrawBtn"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
@@ -2388,6 +2341,28 @@
                 </div>
             </div>
 
+            <!-- ===== VIEW: PROFILE ===== -->
+            <div id="profileView" class="view">
+                <div style="padding: 0 0 13px 0;">
+                    <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">My Profile</h3>
+                    <p style="color: #888; font-size: 11px;">Your personal information.</p>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
+                    <div class="profile-name" id="profileName">User</div>
+                    <div class="profile-role" id="profileRole">Customer</div>
+                    <div class="profile-field"><i class="fa-solid fa-user"></i><span class="label">Full Name</span><span class="value" id="profileFullName">User</span></div>
+                    <div class="profile-field"><i class="fa-solid fa-phone"></i><span class="label">Phone</span><span class="value" id="profilePhone">Not set</span></div>
+                    <div class="profile-field"><i class="fa-solid fa-envelope"></i><span class="label">Email</span><span class="value" id="profileEmail">No email</span></div>
+                    <div class="profile-field"><i class="fa-solid fa-calendar"></i><span class="label">Joined</span><span class="value" id="profileJoined">N/A</span></div>
+                    <div class="profile-about">
+                        <h4 style="font-size: 11px; font-weight: 600; color: #1c2128; margin-bottom: 4px;">About</h4>
+                        <p>Passionate about design and technology. Helping brands grow through innovation and strategic design.</p>
+                    </div>
+                    <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+                </div>
+            </div>
+
         </div>
 
         <!-- ===== BOTTOM NAV ===== -->
@@ -2396,6 +2371,7 @@
             <button class="nav-item" data-view="ordersView"><i class="fa-solid fa-bag-shopping"></i><span>Orders</span></button>
             <button class="nav-item" data-view="historyView"><i class="fa-solid fa-clock"></i><span>History</span></button>
             <button class="nav-item" data-view="samplesView"><i class="fa-solid fa-images"></i><span>Samples</span></button>
+            <button class="nav-item" data-view="accountView"><i class="fa-solid fa-wallet"></i><span>Account</span></button>
             <button class="nav-item" data-view="profileView"><i class="fa-regular fa-user"></i><span>Profile</span></button>
         </div>
 
@@ -2647,8 +2623,6 @@
         const samplesContainer = document.getElementById('samplesContainer');
 
         // ===== Account & Referral =====
-        const accountToggleBtn = document.getElementById('accountToggleBtn');
-        const accountSection = document.getElementById('accountSection');
         const accountTransactionsBtn = document.getElementById('accountTransactionsBtn');
         const accountWithdrawBtn = document.getElementById('accountWithdrawBtn');
         const accountTransactionsView = document.getElementById('accountTransactionsView');
@@ -3379,7 +3353,7 @@
                 if (groups[p.type]) groups[p.type].push({ key, ...p });
             });
             for (const type in groups) {
-                groups[type].sort((a, b) => (b.createdAt || 0) - (a[1].createdAt || 0));
+                groups[type].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
             }
 
             const typeLabels = { app: '📱 Apps', flyer: '📄 Flyers', website: '💻 Websites', logo: '🎨 Logos' };
@@ -3570,12 +3544,12 @@
                 let statusEmoji = '⏳';
                 if (w.status === 'approved') {
                     statusEmoji = '✅';
-                    statusMessage = `Your withdraw request of ZMW ${(w.amount || 0).toFixed(2)} was approved. Please check your mobile money.`;
+                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was approved. Please check your mobile money.`;
                 } else if (w.status === 'declined') {
                     statusEmoji = '❌';
-                    statusMessage = `Your withdraw request of ZMW ${(w.amount || 0).toFixed(2)} was declined. Please try again another time.`;
+                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount has been refunded.`;
                 } else {
-                    statusMessage = `Your withdraw request of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
+                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
                 }
 
                 return `
@@ -4306,16 +4280,6 @@
 
         setupCloudinaryUpload();
 
-        // ===== Account Section Toggle =====
-        accountToggleBtn.addEventListener('click', function() {
-            accountSection.classList.toggle('open');
-            if (accountSection.classList.contains('open')) {
-                this.innerHTML = '<i class="fa-solid fa-wallet" style="color:#f5b83d;"></i> Hide Account';
-            } else {
-                this.innerHTML = '<i class="fa-solid fa-wallet" style="color:#f5b83d;"></i> My Account';
-            }
-        });
-
         // ===== Account Toggle Buttons =====
         accountTransactionsBtn.addEventListener('click', function() {
             accountTransactionsBtn.classList.add('active');
@@ -4341,12 +4305,12 @@
         confirmWithdrawBtn.addEventListener('click', submitWithdrawal);
         withdrawSuccessOkBtn.addEventListener('click', function() {
             withdrawSuccessModal.classList.remove('open');
-            switchView('profileView');
+            switchView('accountView');
         });
         withdrawSuccessModal.addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('open');
-                switchView('profileView');
+                switchView('accountView');
             }
         });
 
@@ -4379,7 +4343,7 @@
             }
         });
 
-        console.log('✅ Customer App — Withdrawals fully integrated: requests are transactions, status shown in history & withdrawals list, approved (green) / declined (red) with refunds, and dedicated notifications.');
+        console.log('✅ Customer App — Account is now a standalone page accessible from the bottom nav. Withdrawal status shows approved (green) / declined (red) with clear messages.');
     </script>
 </body>
 </html>
