@@ -804,10 +804,15 @@
             min-height: 48px;
             background: #fafbfc;
             transition: border 0.2s;
+            font-family: 'Poppins', sans-serif;
         }
         .order-notes textarea:focus {
             outline: none;
             border-color: #1c2128;
+        }
+        .order-notes textarea::placeholder {
+            color: #bbb;
+            font-size: 10px;
         }
 
         .order-footer {
@@ -3698,9 +3703,10 @@
                     </div>
                 </div>
 
-                <div class="order-notes">
-                    <h4 style="font-size:11px; font-weight:600; color:#1c2128; margin-bottom:5px;">Add Extra Notes (Optional)</h4>
-                    <textarea id="orderNotes" placeholder="Tell us more about your requirements..."></textarea>
+                <div class="order-notes" style="margin-top:4px;">
+                    <h4 style="font-size:11px; font-weight:600; color:#1c2128; margin-bottom:5px;">📝 Add Extra Notes (Optional)</h4>
+                    <textarea id="orderNotes" placeholder="Tell us more about your requirements, special instructions, or any additional details..." style="width:100%; padding:10px; border:1px solid #eee; border-radius:10px; font-size:10px; resize:vertical; min-height:48px; background:#fafbfc; transition:border 0.2s; font-family:'Poppins',sans-serif;"></textarea>
+                    <p style="font-size:8px; color:#aaa; margin-top:3px;">These notes will be attached to your order for the team to review.</p>
                 </div>
 
                 <div class="order-footer">
@@ -3788,6 +3794,15 @@
                 referralCodeInput.value = '';
                 referralMsg.textContent = '';
                 referralMsg.className = 'coupon-msg';
+                // Capture notes and all customization
+                const notes = document.getElementById('orderNotes').value.trim();
+                const customizationParts = [];
+                if (selectedSize) customizationParts.push(`Size: ${selectedSize}`);
+                if (selectedOrientation) customizationParts.push(`Orientation: ${selectedOrientation}`);
+                if (selectedFormat) customizationParts.push(`Format: ${selectedFormat}`);
+                if (selectedColorScheme) customizationParts.push(`Color Scheme: ${selectedColorScheme}`);
+                if (selectedRevisions) customizationParts.push(`Revisions: ${selectedRevisions}`);
+                if (selectedDeliverySpeed) customizationParts.push(`Delivery: ${selectedDeliverySpeed}`);
                 paymentModal.dataset.orderData = JSON.stringify({
                     service: service.title,
                     serviceId: service.id || key,
@@ -3799,7 +3814,8 @@
                     colorScheme: selectedColorScheme,
                     revisions: selectedRevisions,
                     deliverySpeed: selectedDeliverySpeed,
-                    notes: document.getElementById('orderNotes').value
+                    notes: notes,
+                    customizationString: customizationParts.join(', ')
                 });
                 paymentModal.classList.add('open');
             });
@@ -4009,7 +4025,7 @@
                 status: 'pending',
                 customer: customerName,
                 clientNumber: currentUserData?.phone || 'N/A',
-                customization: `Size: ${data.size || 'N/A'}, Orientation: ${data.orientation || 'N/A'}, Format: ${data.format || 'N/A'}`,
+                customization: data.customizationString || `Size: ${data.size || 'N/A'}, Orientation: ${data.orientation || 'N/A'}, Format: ${data.format || 'N/A'}`,
                 date: new Date().toLocaleDateString(),
                 paymentProof: screenshotUrl,
                 userId: currentUserId,
@@ -4072,7 +4088,7 @@
                 status: 'pending',
                 date: new Date().toLocaleString(),
                 ref: orderId,
-                detail: '50% down payment for ' + data.service + (discountAppliedVal > 0 ? ` (${discountAppliedVal}% off)` : ''),
+                detail: '50% down payment for ' + data.service + (discountAppliedVal > 0 ? ` (${discountAppliedVal}% off)` : '') + (data.notes ? ` · Notes: ${data.notes}` : ''),
                 screenshot: screenshotUrl,
                 userId: currentUserId,
                 itemId: data.serviceId || 'N/A',
@@ -4088,7 +4104,7 @@
             const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
             set(notifRef, {
                 title: 'Order Placed',
-                message: `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.`,
+                message: `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.${data.notes ? ` Notes: "${data.notes}"` : ''}`,
                 timestamp: Date.now(),
                 read: false
             });
@@ -4363,7 +4379,7 @@
             }
         });
 
-        console.log('✅ Customer App — Withdrawals separated from transactions, color-coded by status, with clear status messages.');
+        console.log('✅ Customer App — Extra notes captured in orders, withdrawal status shows approved/declined with clear messages.');
     </script>
 </body>
 </html>
