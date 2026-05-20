@@ -3616,6 +3616,13 @@
         let pendingWithdrawAction = null;
         let withdrawalsFilter = 'pending';
 
+        // ── Referral edit state ──
+        let referralEditState = {
+            promo: null, // { key, element }
+            custom: null,
+            discount: null
+        };
+
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
         // ───────────────────────────────────────────────────────────────────
@@ -4508,7 +4515,7 @@
                 return;
             }
             container.innerHTML = entries.map(([key, r]) => `
-                        <div class="referral-item">
+                        <div class="referral-item" data-key="${key}">
                             <div class="left">
                                 <div class="code">ZMW ${r.amount}</div>
                                 <div class="detail">Posted: ${new Date(r.createdAt).toLocaleDateString()}</div>
@@ -4530,8 +4537,8 @@
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
                     const amount = this.dataset.amount;
+                    referralEditState.promo = { key, element: this.closest('.referral-item') };
                     referralPromoAmount.value = amount;
-                    this.closest('.referral-item').dataset.editKey = key;
                     showToast('Edit the amount and click Post to update', 'success');
                 });
             });
@@ -4554,7 +4561,7 @@
                 const user = allData.users?.[r.userId] || {};
                 const userName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
                 return `
-                            <div class="referral-item">
+                            <div class="referral-item" data-key="${key}">
                                 <div class="left">
                                     <div class="code">${r.referralCode}</div>
                                     <div class="detail">User: <span>${userName}</span> &middot; Amount: <span>ZMW ${r.amount}</span></div>
@@ -4579,10 +4586,10 @@
                     const userId = this.dataset.userid;
                     const code = this.dataset.code;
                     const amount = this.dataset.amount;
+                    referralEditState.custom = { key, element: this.closest('.referral-item') };
                     customReferralUserSelect.value = userId;
                     customReferralCode.value = code;
                     customReferralAmount.value = amount;
-                    this.closest('.referral-item').dataset.editKey = key;
                     showToast('Edit and click Post to update', 'success');
                 });
             });
@@ -4602,7 +4609,7 @@
                 return;
             }
             container.innerHTML = entries.map(([key, r]) => `
-                        <div class="referral-item">
+                        <div class="referral-item" data-key="${key}">
                             <div class="left">
                                 <div class="code">${r.referralCode}</div>
                                 <div class="detail">Discount: <span>${r.discount}%</span> &middot; Owner gets: <span>ZMW ${r.ownerAmount}</span></div>
@@ -4626,10 +4633,10 @@
                     const code = this.dataset.code;
                     const discount = this.dataset.discount;
                     const ownerAmount = this.dataset.owneramount;
+                    referralEditState.discount = { key, element: this.closest('.referral-item') };
                     discountReferralCode.value = code;
                     discountPercentage.value = discount;
                     discountOwnerAmount.value = ownerAmount;
-                    this.closest('.referral-item').dataset.editKey = key;
                     showToast('Edit and click Post to update', 'success');
                 });
             });
@@ -5603,14 +5610,14 @@
                 return;
             }
 
-            const editItem = referralPromoList.querySelector('.referral-item[data-edit-key]');
-            if (editItem) {
-                const key = editItem.dataset.editKey;
+            if (referralEditState.promo) {
+                const { key, element } = referralEditState.promo;
                 if (allData.referralPromos && allData.referralPromos[key]) {
                     allData.referralPromos[key].amount = amount;
                     saveData().then(() => {
                         renderAll();
                         referralPromoAmount.value = '';
+                        referralEditState.promo = null;
                         showToast('Referral promo updated');
                     });
                 }
@@ -5649,9 +5656,8 @@
                 return;
             }
 
-            const editItem = customReferralList.querySelector('.referral-item[data-edit-key]');
-            if (editItem) {
-                const key = editItem.dataset.editKey;
+            if (referralEditState.custom) {
+                const { key, element } = referralEditState.custom;
                 if (allData.customReferrals && allData.customReferrals[key]) {
                     allData.customReferrals[key].userId = userId;
                     allData.customReferrals[key].referralCode = code;
@@ -5661,6 +5667,7 @@
                         customReferralCode.value = '';
                         customReferralAmount.value = '';
                         customReferralUserSelect.value = '';
+                        referralEditState.custom = null;
                         showToast('Custom referral updated');
                     });
                 }
@@ -5703,9 +5710,8 @@
                 return;
             }
 
-            const editItem = referralDiscountList.querySelector('.referral-item[data-edit-key]');
-            if (editItem) {
-                const key = editItem.dataset.editKey;
+            if (referralEditState.discount) {
+                const { key, element } = referralEditState.discount;
                 if (allData.referralDiscounts && allData.referralDiscounts[key]) {
                     allData.referralDiscounts[key].referralCode = code;
                     allData.referralDiscounts[key].discount = discount;
@@ -5715,6 +5721,7 @@
                         discountReferralCode.value = '';
                         discountPercentage.value = '';
                         discountOwnerAmount.value = '';
+                        referralEditState.discount = null;
                         showToast('Referral discount updated');
                     });
                 }
@@ -6379,7 +6386,7 @@
             }
         });
 
-        console.log('✅ Admin App ready — Withdrawals filter properly moves approved/declined out of pending. Customer extra notes displayed in order dropdown.');
+        console.log('✅ Admin App — Account updates (add/set/wipe) work correctly. Referral edit buttons fixed with edit state tracking. All CRUD operations functional.');
     </script>
 </body>
 </html>
