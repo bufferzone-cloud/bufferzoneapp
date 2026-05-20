@@ -138,9 +138,6 @@
         .work-avatar:active {
             transform: scale(0.92);
         }
-        .work-avatar:hover {
-            box-shadow: 0 6px 20px rgba(28, 33, 40, 0.4);
-        }
 
         .header-text {
             display: flex;
@@ -189,6 +186,30 @@
             display: flex;
         }
 
+        /* Back button on sub‑pages */
+        .page-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            color: #1c2128;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            padding: 4px 0 8px 0;
+            transition: color 0.2s;
+        }
+        .page-back-btn i {
+            font-size: 14px;
+        }
+        .page-back-btn:hover {
+            color: #f5b83d;
+        }
+        .page-back-btn:active {
+            transform: scale(0.95);
+        }
+
         .action-row {
             display: flex;
             align-items: center;
@@ -223,50 +244,6 @@
         }
         .action-btn:active {
             transform: scale(0.95);
-        }
-        .action-btn:hover {
-            box-shadow: 0 6px 22px rgba(28, 33, 40, 0.3);
-        }
-        .action-btn.promo-btn {
-            background: #1c2128;
-        }
-        .action-btn.referral-btn {
-            background: #1c2128;
-        }
-        .action-btn.payables-btn {
-            background: #1c2128;
-        }
-        .action-btn.active-btn {
-            background: #f5b83d;
-            color: #1c2128;
-        }
-        .action-btn.active-btn i {
-            color: #1c2128;
-        }
-
-        .header-right {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex: 0 0 auto;
-        }
-
-        .promo-header-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #f5b83d;
-            color: #1c2128;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 12px rgba(245, 184, 61, 0.3);
-        }
-        .promo-header-btn:active {
-            transform: scale(0.92);
         }
 
         .greeting {
@@ -1112,6 +1089,11 @@
         .customer-item .user-details .detail-row .val {
             font-weight: 500;
             color: #1c2128;
+        }
+        .customer-item .user-details .actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
         }
         .customer-item .expand-icon {
             font-size: 12px;
@@ -2303,6 +2285,10 @@
             align-items: center;
             gap: 6px;
         }
+        .withdraw-card .actions .btn-decline:hover {
+            background: #b91c1c;
+            transform: translateY(-1px);
+        }
         .withdraw-card .actions .btn-approve:active,
         .withdraw-card .actions .btn-decline:active {
             transform: scale(0.95);
@@ -2781,18 +2767,17 @@
                 </div>
             </div>
 
-            <!-- ===== THREE ACTION BUTTONS (Promo Pics · Referral · Payables) ===== -->
+            <!-- ===== THREE ACTION BUTTONS (shown only on dashboard) ===== -->
             <div class="action-row" id="actionRow">
-                <button class="action-btn promo-btn" id="actionPromoPics">
-                    <i class="fa-regular fa-images"></i> Promo Pics
-                </button>
-                <button class="action-btn referral-btn" id="actionReferral">
-                    <i class="fa-solid fa-gift"></i> Referral
-                </button>
-                <button class="action-btn payables-btn" id="actionPayables">
-                    <i class="fa-solid fa-money-bill-wave"></i> Payables
-                </button>
+                <button class="action-btn promo-btn" id="actionPromoPics"><i class="fa-regular fa-images"></i> Promo Pics</button>
+                <button class="action-btn referral-btn" id="actionReferral"><i class="fa-solid fa-gift"></i> Referral</button>
+                <button class="action-btn payables-btn" id="actionPayables"><i class="fa-solid fa-money-bill-wave"></i> Payables</button>
             </div>
+
+            <!-- ===== BACK BUTTON (shown on sub‑pages) ===== -->
+            <button class="page-back-btn" id="pageBackBtn" style="display:none;">
+                <i class="fa-solid fa-arrow-left"></i> Back
+            </button>
 
             <!-- ===== PAGE: DASHBOARD ===== -->
             <div id="page-dashboard" class="page active">
@@ -3620,6 +3605,8 @@
         const greetingSub = document.getElementById('greetingSub');
         const mainHeader = document.getElementById('mainHeader');
         const workAvatarBtn = document.getElementById('workAvatarBtn');
+        const pageBackBtn = document.getElementById('pageBackBtn');
+        const actionRow = document.getElementById('actionRow');
 
         const modal = document.getElementById('serviceModal');
         const modalTitle = document.getElementById('modalTitle');
@@ -4806,10 +4793,10 @@
             const amount = w.amount || 0;
 
             if (action === 'approve') {
-                // 1. Set withdrawal status to approved
+                // Update withdrawal status
                 withdrawals[key].status = 'approved';
 
-                // 2. DEDUCT the amount from the customer's account balance
+                // Deduct from customer account balance
                 if (!allData.customerAccounts) allData.customerAccounts = {};
                 if (!allData.customerAccounts[w.userId]) {
                     allData.customerAccounts[w.userId] = { balance: 0 };
@@ -4817,10 +4804,10 @@
                 const currentBal = allData.customerAccounts[w.userId].balance || 0;
                 allData.customerAccounts[w.userId].balance = Math.max(0, currentBal - amount);
 
-                // 3. Create transaction record for the approval
+                // Add transaction record locally (do NOT use separate push)
                 if (!allData.transactions) allData.transactions = {};
-                const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
-                const txData = {
+                const txId = 'tx-' + Date.now();
+                allData.transactions[txId] = {
                     type: 'Withdrawal Approved',
                     amount: amount,
                     method: 'Bank Transfer',
@@ -4837,35 +4824,27 @@
                     userEmail: user.email || 'N/A',
                     userPhone: user.phone || 'N/A'
                 };
-                set(txRef, txData);
 
-                // 4. Send notification to user
-                const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
-                set(notifRef, {
+                // Add notification locally
+                if (!allData.notifications) allData.notifications = {};
+                const notifId = 'notif-' + Date.now();
+                allData.notifications[notifId] = {
                     title: '✅ Withdrawal Approved',
                     message: `Your withdrawal of ZMW ${amount.toFixed(2)} was approved. The amount has been deducted from your account.`,
                     timestamp: Date.now(),
                     read: false,
                     userId: w.userId
-                });
-
-                // 5. Save all changes
-                saveData().then(() => {
-                    renderAll();
-                    closeWithdrawConfirmModal();
-                    showToast(`✅ ZMW ${amount.toFixed(2)} approved for ${name} and deducted from their account`, 'success');
-                });
+                };
 
             } else if (action === 'decline') {
-                // 1. Set withdrawal status to declined
                 withdrawals[key].status = 'declined';
 
-                // 2. DO NOT change the customer's account balance (the money was never deducted)
+                // No balance change
 
-                // 3. Create transaction record for the decline
+                // Add transaction record locally
                 if (!allData.transactions) allData.transactions = {};
-                const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
-                const txData = {
+                const txId = 'tx-' + Date.now();
+                allData.transactions[txId] = {
                     type: 'Withdrawal Declined',
                     amount: amount,
                     method: 'Bank Transfer',
@@ -4882,25 +4861,29 @@
                     userEmail: user.email || 'N/A',
                     userPhone: user.phone || 'N/A'
                 };
-                set(txRef, txData);
 
-                // 4. Send notification to user
-                const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
-                set(notifRef, {
+                // Add notification locally
+                if (!allData.notifications) allData.notifications = {};
+                const notifId = 'notif-' + Date.now();
+                allData.notifications[notifId] = {
                     title: '❌ Withdrawal Declined',
                     message: `Your withdrawal of ZMW ${amount.toFixed(2)} was declined. The amount remains in your account.`,
                     timestamp: Date.now(),
                     read: false,
                     userId: w.userId
-                });
-
-                // 5. Save all changes
-                saveData().then(() => {
-                    renderAll();
-                    closeWithdrawConfirmModal();
-                    showToast(`❌ ZMW ${amount.toFixed(2)} declined for ${name} (no balance change)`, 'success');
-                });
+                };
             }
+
+            // Save everything in one go
+            saveData().then(() => {
+                renderAll();
+                closeWithdrawConfirmModal();
+                if (action === 'approve') {
+                    showToast(`✅ ZMW ${amount.toFixed(2)} approved for ${name} and deducted from their account`, 'success');
+                } else {
+                    showToast(`❌ ZMW ${amount.toFixed(2)} declined for ${name} (no balance change)`, 'success');
+                }
+            });
         }
 
         // ───────────────────────────────────────────────────────────────────
@@ -5033,11 +5016,12 @@
                 selectedIds.forEach(uid => {
                     if (!allData.customerAccounts) allData.customerAccounts = {};
                     allData.customerAccounts[uid] = { balance: 0 };
+                    // Add transaction locally
                     if (!allData.transactions) allData.transactions = {};
-                    const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
+                    const txId = 'tx-' + Date.now();
                     const user = allData.users?.[uid] || {};
                     const userName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
-                    set(txRef, {
+                    allData.transactions[txId] = {
                         type: 'Account Wiped by Admin',
                         amount: 0,
                         method: 'Admin',
@@ -5053,7 +5037,7 @@
                         userName: userName,
                         userEmail: user.email || 'N/A',
                         userPhone: user.phone || 'N/A'
-                    });
+                    };
                 });
                 saveData().then(() => {
                     renderAll();
@@ -5077,11 +5061,12 @@
                     }
                     const current = allData.customerAccounts[uid].balance || 0;
                     allData.customerAccounts[uid].balance = current + amount;
+                    // Add transaction locally
                     if (!allData.transactions) allData.transactions = {};
-                    const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
+                    const txId = 'tx-' + Date.now();
                     const user = allData.users?.[uid] || {};
                     const userName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
-                    set(txRef, {
+                    allData.transactions[txId] = {
                         type: 'Manual Deposit by Admin (Mass)',
                         amount: amount,
                         method: 'Admin',
@@ -5097,7 +5082,7 @@
                         userName: userName,
                         userEmail: user.email || 'N/A',
                         userPhone: user.phone || 'N/A'
-                    });
+                    };
                 });
                 saveData().then(() => {
                     renderAll();
@@ -5108,11 +5093,12 @@
                 selectedIds.forEach(uid => {
                     if (!allData.customerAccounts) allData.customerAccounts = {};
                     allData.customerAccounts[uid] = { balance: amount };
+                    // Add transaction locally
                     if (!allData.transactions) allData.transactions = {};
-                    const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
+                    const txId = 'tx-' + Date.now();
                     const user = allData.users?.[uid] || {};
                     const userName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
-                    set(txRef, {
+                    allData.transactions[txId] = {
                         type: 'Balance Set by Admin',
                         amount: amount,
                         method: 'Admin',
@@ -5128,7 +5114,7 @@
                         userName: userName,
                         userEmail: user.email || 'N/A',
                         userPhone: user.phone || 'N/A'
-                    });
+                    };
                 });
                 saveData().then(() => {
                     renderAll();
@@ -5930,6 +5916,7 @@
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             mainHeader.classList.add('work-active');
             document.getElementById('appContent').scrollTop = 0;
+            showBackButton();
         });
 
         // ── Action buttons ──
@@ -5940,6 +5927,7 @@
             document.querySelector('.nav-item[data-page="promo-pics"]').classList.add('active');
             mainHeader.classList.remove('work-active');
             document.getElementById('appContent').scrollTop = 0;
+            showBackButton();
         });
 
         actionReferral.addEventListener('click', function() {
@@ -5949,6 +5937,7 @@
             mainHeader.classList.remove('work-active');
             document.getElementById('appContent').scrollTop = 0;
             renderAll();
+            showBackButton();
         });
 
         actionPayables.addEventListener('click', function() {
@@ -5958,8 +5947,31 @@
             mainHeader.classList.remove('work-active');
             document.getElementById('appContent').scrollTop = 0;
             renderAll();
+            showBackButton();
         });
 
+        // ── Back button ──
+        pageBackBtn.addEventListener('click', function() {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-dashboard').classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.querySelector('.nav-item[data-page="dashboard"]').classList.add('active');
+            mainHeader.classList.remove('work-active');
+            document.getElementById('appContent').scrollTop = 0;
+            hideBackButton();
+        });
+
+        function showBackButton() {
+            pageBackBtn.style.display = 'inline-flex';
+            actionRow.style.display = 'none';
+        }
+
+        function hideBackButton() {
+            pageBackBtn.style.display = 'none';
+            actionRow.style.display = 'flex';
+        }
+
+        // ── Bottom nav ──
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
                 document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -5971,6 +5983,11 @@
                 document.getElementById('appContent').scrollTop = 0;
                 if (page !== 'work') {
                     mainHeader.classList.remove('work-active');
+                }
+                if (page === 'dashboard') {
+                    hideBackButton();
+                } else {
+                    showBackButton();
                 }
             });
         });
@@ -6116,6 +6133,7 @@
             document.getElementById('page-promotions').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             mainHeader.classList.remove('work-active');
+            showBackButton();
         });
 
         document.getElementById('addPromoBtn').addEventListener('click', () => {
@@ -6294,21 +6312,25 @@
         document.getElementById('viewOrdersQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="orders"]').click();
             mainHeader.classList.remove('work-active');
+            showBackButton();
         });
 
         document.getElementById('viewUsersQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="users"]').click();
             mainHeader.classList.remove('work-active');
+            showBackButton();
         });
 
         document.getElementById('viewPromoPicsQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="promo-pics"]').click();
             mainHeader.classList.remove('work-active');
+            showBackButton();
         });
 
         document.getElementById('viewAllActivity').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="orders"]').click();
             mainHeader.classList.remove('work-active');
+            showBackButton();
         });
 
         document.getElementById('logoutBtn').addEventListener('click', () => {
@@ -6374,6 +6396,7 @@
                             document.getElementById('policyDesc').value = allData.policy.desc || '';
                             document.getElementById('policyTag').value = allData.policy.tag || '';
                         }
+                        hideBackButton();
                     });
                 });
             } else {
@@ -6381,10 +6404,8 @@
             }
         });
 
-        console.log('✅ Admin App ready — Account updates now correctly modify customer balances.');
-        console.log('✅ Withdrawal approval deducts money from customer accounts.');
-        console.log('✅ Withdrawal decline leaves account balances unchanged (no refund needed).');
-        console.log('✅ All data properly saved and synced with Firebase.');
+        console.log('✅ Admin App fixed — Account Update and Withdrawals now work correctly.');
+        console.log('✅ Every sub‑page has a Back button and the bottom navigation remains visible.');
     </script>
 </body>
 </html>
