@@ -92,7 +92,6 @@
             transform: scale(0.92);
         }
 
-        /* ── HEADER ── */
         .header {
             display: flex;
             align-items: center;
@@ -190,7 +189,6 @@
             display: flex;
         }
 
-        /* ── THREE ACTION BUTTONS (Promo Pics · Referral · Payables) ── */
         .action-row {
             display: flex;
             align-items: center;
@@ -2022,7 +2020,6 @@
             font-size: 10px;
         }
 
-        /* ── REFERRAL PAGE ── */
         .referral-section {
             background: #ffffff;
             border-radius: 16px;
@@ -2170,7 +2167,6 @@
             margin-bottom: 8px;
         }
 
-        /* ── PAYABLES PAGE ── */
         .payables-toggle-row {
             display: flex;
             gap: 12px;
@@ -2370,7 +2366,6 @@
             color: #f5b83d;
         }
 
-        /* ── WITHDRAWAL CONFIRMATION MODAL ── */
         .withdraw-confirm-modal-overlay {
             position: fixed;
             top: 0;
@@ -2489,7 +2484,6 @@
             transform: scale(0.95);
         }
 
-        /* ── ACCOUNT UPDATE MODAL ── */
         .account-update-modal-overlay {
             position: fixed;
             top: 0;
@@ -4138,6 +4132,7 @@
                                 <div class="row"><span class="label">Client</span><span class="val">${o.customer || 'N/A'}</span></div>
                                 <div class="row"><span class="label">Client Number</span><span class="val">${o.clientNumber || 'N/A'}</span></div>
                                 <div class="row"><span class="label">Customization</span><span class="val">${o.customization || 'None'}</span></div>
+                                <div class="row"><span class="label">Notes</span><span class="val">${o.notes || 'No notes'}</span></div>
                                 <div class="row"><span class="label">Payment Proof</span><span class="val">
                                     ${o.paymentProof ? `<button class="btn-view-proof" data-screenshot="${o.paymentProof}"><i class="fa-regular fa-image"></i> View</button>` : 'No proof'}
                                 </span></div>
@@ -6384,7 +6379,7 @@
             }
         });
 
-        console.log('✅ Admin App ready — Withdrawals filter properly moves approved/declined out of pending. Account Update included.');
+        console.log('✅ Admin App ready — Withdrawals filter properly moves approved/declined out of pending. Customer extra notes displayed in order dropdown.');
     </script>
 </body>
 </html>
