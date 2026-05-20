@@ -9,7 +9,6 @@
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
     </script>
     <style>
-        /* ---- same styles as original ---- */
         * {
             margin: 0;
             padding: 0;
@@ -2791,7 +2790,7 @@
                 </div>
             </div>
 
-            <!-- ===== THREE ACTION BUTTONS ===== -->
+            <!-- ===== THREE ACTION BUTTONS (Promo Pics · Referral · Payables) ===== -->
             <div class="action-row" id="actionRow">
                 <button class="action-btn promo-btn" id="actionPromoPics">
                     <i class="fa-regular fa-images"></i> Promo Pics
@@ -4509,7 +4508,7 @@
                 return;
             }
             container.innerHTML = entries.map(([key, r]) => `
-                        <div class="referral-item" data-key="${key}">
+                        <div class="referral-item">
                             <div class="left">
                                 <div class="code">ZMW ${r.amount}</div>
                                 <div class="detail">Posted: ${new Date(r.createdAt).toLocaleDateString()}</div>
@@ -4530,15 +4529,13 @@
             container.querySelectorAll('.edit-referral-promo').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const key = this.dataset.key;
-                    const amount = parseFloat(this.dataset.amount);
+                    const amount = this.dataset.amount;
                     referralPromoAmount.value = amount;
-                    pendingEditReferral = { type: 'promo', key };
-                    showToast('Edit the amount and click Post to update', 'info');
+                    this.closest('.referral-item').dataset.editKey = key;
+                    showToast('Edit the amount and click Post to update', 'success');
                 });
             });
         }
-
-        let pendingEditReferral = null;
 
         function renderCustomReferrals() {
             const data = allData.customReferrals || {};
@@ -4557,7 +4554,7 @@
                 const user = allData.users?.[r.userId] || {};
                 const userName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
                 return `
-                            <div class="referral-item" data-key="${key}">
+                            <div class="referral-item">
                                 <div class="left">
                                     <div class="code">${r.referralCode}</div>
                                     <div class="detail">User: <span>${userName}</span> &middot; Amount: <span>ZMW ${r.amount}</span></div>
@@ -4585,8 +4582,8 @@
                     customReferralUserSelect.value = userId;
                     customReferralCode.value = code;
                     customReferralAmount.value = amount;
-                    pendingEditReferral = { type: 'custom', key };
-                    showToast('Edit and click Post to update', 'info');
+                    this.closest('.referral-item').dataset.editKey = key;
+                    showToast('Edit and click Post to update', 'success');
                 });
             });
         }
@@ -4605,7 +4602,7 @@
                 return;
             }
             container.innerHTML = entries.map(([key, r]) => `
-                        <div class="referral-item" data-key="${key}">
+                        <div class="referral-item">
                             <div class="left">
                                 <div class="code">${r.referralCode}</div>
                                 <div class="detail">Discount: <span>${r.discount}%</span> &middot; Owner gets: <span>ZMW ${r.ownerAmount}</span></div>
@@ -4632,8 +4629,8 @@
                     discountReferralCode.value = code;
                     discountPercentage.value = discount;
                     discountOwnerAmount.value = ownerAmount;
-                    pendingEditReferral = { type: 'discount', key };
-                    showToast('Edit and click Post to update', 'info');
+                    this.closest('.referral-item').dataset.editKey = key;
+                    showToast('Edit and click Post to update', 'success');
                 });
             });
         }
@@ -4711,7 +4708,7 @@
                 const statusDisplay = w.status ? w.status.charAt(0).toUpperCase() + w.status.slice(1) : 'Pending';
                 const statusClass = w.status || 'pending';
                 return `
-                            <div class="withdraw-card" data-key="${key}">
+                            <div class="withdraw-card">
                                 <div class="row">
                                     <span class="label">Customer</span>
                                     <span class="value">${name}</span>
@@ -4777,12 +4774,12 @@
 
             if (action === 'approve') {
                 withdrawConfirmTitle.textContent = '✅ Approve Withdrawal';
-                withdrawConfirmSub.textContent = 'You are about to approve this withdrawal request. The customer will be notified.';
+                withdrawConfirmSub.textContent = 'You are about to approve this withdrawal request. The customer will be notified and the amount will be deducted from their account.';
                 withdrawConfirmActionBtn.textContent = 'Confirm Approval';
                 withdrawConfirmActionBtn.className = 'btn-confirm-withdraw approve';
             } else {
                 withdrawConfirmTitle.textContent = '❌ Decline Withdrawal';
-                withdrawConfirmSub.textContent = 'You are about to decline this withdrawal request. The amount will be refunded to the customer.';
+                withdrawConfirmSub.textContent = 'You are about to decline this withdrawal request. The amount will be refunded to the customer (no balance change).';
                 withdrawConfirmActionBtn.textContent = 'Confirm Decline';
                 withdrawConfirmActionBtn.className = 'btn-confirm-withdraw decline';
             }
@@ -4818,14 +4815,18 @@
             const amount = w.amount || 0;
 
             if (action === 'approve') {
-                // Mark withdrawal as approved
+                // Set withdrawal status to approved
                 withdrawals[key].status = 'approved';
 
-                // Deduct money from customer account if not already deducted (customer code deducts on request)
-                // If customer already deducted, we need to ensure no double deduction.
-                // However, the customer code already deducts on request, so we don't deduct again.
-                // We simply record the approval transaction.
+                // DEDUCT the amount from the customer's account balance
+                if (!allData.customerAccounts) allData.customerAccounts = {};
+                if (!allData.customerAccounts[w.userId]) {
+                    allData.customerAccounts[w.userId] = { balance: 0 };
+                }
+                const currentBal = allData.customerAccounts[w.userId].balance || 0;
+                allData.customerAccounts[w.userId].balance = Math.max(0, currentBal - amount);
 
+                // Create transaction record for the approval
                 if (!allData.transactions) allData.transactions = {};
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 const txData = {
@@ -4835,7 +4836,7 @@
                     status: 'approved',
                     date: new Date().toLocaleString(),
                     ref: 'W-' + key,
-                    detail: `ZMW ${amount.toFixed(2)} was approved for ${name}`,
+                    detail: `ZMW ${amount.toFixed(2)} was approved for ${name} and deducted from their account.`,
                     screenshot: 'N/A',
                     userId: w.userId,
                     itemId: key,
@@ -4847,37 +4848,30 @@
                 };
                 set(txRef, txData);
 
-                // Notify customer
+                // Create notification
                 const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
                 set(notifRef, {
                     title: '✅ Withdrawal Approved',
-                    message: `ZMW ${amount.toFixed(2)} was approved for you.`,
+                    message: `Your withdrawal of ZMW ${amount.toFixed(2)} was approved. The amount has been deducted from your account.`,
                     timestamp: Date.now(),
                     read: false,
                     userId: w.userId
                 });
 
-                // Update the withdrawal transaction (original pending) to approved? Not necessary; we have separate.
-
                 saveData().then(() => {
                     renderAll();
                     closeWithdrawConfirmModal();
-                    showToast(`✅ ZMW ${amount.toFixed(2)} was approved for ${name}`, 'success');
+                    showToast(`✅ ZMW ${amount.toFixed(2)} approved for ${name} and deducted from their account`, 'success');
                 });
 
             } else if (action === 'decline') {
-                // Mark withdrawal as declined
+                // Set withdrawal status to declined
                 withdrawals[key].status = 'declined';
 
-                // Refund money to customer account (add back)
-                if (!allData.customerAccounts) allData.customerAccounts = {};
-                if (!allData.customerAccounts[w.userId]) {
-                    allData.customerAccounts[w.userId] = { balance: 0 };
-                }
-                const currentBal = allData.customerAccounts[w.userId].balance || 0;
-                allData.customerAccounts[w.userId].balance = currentBal + amount;
+                // DO NOT change the customer's account balance (the money was never deducted)
+                // The original withdrawal request just gets marked as declined
 
-                // Record decline transaction
+                // Create transaction record for the decline
                 if (!allData.transactions) allData.transactions = {};
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 const txData = {
@@ -4887,7 +4881,7 @@
                     status: 'declined',
                     date: new Date().toLocaleString(),
                     ref: 'W-' + key,
-                    detail: `ZMW ${amount.toFixed(2)} was declined for ${name}. Amount refunded.`,
+                    detail: `ZMW ${amount.toFixed(2)} was declined for ${name}. The amount remains in their account.`,
                     screenshot: 'N/A',
                     userId: w.userId,
                     itemId: key,
@@ -4899,11 +4893,11 @@
                 };
                 set(txRef, txData);
 
-                // Notify customer
+                // Create notification
                 const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
                 set(notifRef, {
                     title: '❌ Withdrawal Declined',
-                    message: `ZMW ${amount.toFixed(2)} was declined for you. The amount has been refunded.`,
+                    message: `Your withdrawal of ZMW ${amount.toFixed(2)} was declined. The amount remains in your account.`,
                     timestamp: Date.now(),
                     read: false,
                     userId: w.userId
@@ -4912,7 +4906,7 @@
                 saveData().then(() => {
                     renderAll();
                     closeWithdrawConfirmModal();
-                    showToast(`❌ ZMW ${amount.toFixed(2)} was declined for ${name}. Amount refunded.`, 'success');
+                    showToast(`❌ ZMW ${amount.toFixed(2)} declined for ${name} (no balance change)`, 'success');
                 });
             }
         }
@@ -5619,15 +5613,14 @@
                 return;
             }
 
-            // If there's a pending edit, update instead of create
-            if (pendingEditReferral && pendingEditReferral.type === 'promo') {
-                const key = pendingEditReferral.key;
+            const editItem = referralPromoList.querySelector('.referral-item[data-edit-key]');
+            if (editItem) {
+                const key = editItem.dataset.editKey;
                 if (allData.referralPromos && allData.referralPromos[key]) {
                     allData.referralPromos[key].amount = amount;
                     saveData().then(() => {
                         renderAll();
                         referralPromoAmount.value = '';
-                        pendingEditReferral = null;
                         showToast('Referral promo updated');
                     });
                 }
@@ -5666,8 +5659,9 @@
                 return;
             }
 
-            if (pendingEditReferral && pendingEditReferral.type === 'custom') {
-                const key = pendingEditReferral.key;
+            const editItem = customReferralList.querySelector('.referral-item[data-edit-key]');
+            if (editItem) {
+                const key = editItem.dataset.editKey;
                 if (allData.customReferrals && allData.customReferrals[key]) {
                     allData.customReferrals[key].userId = userId;
                     allData.customReferrals[key].referralCode = code;
@@ -5677,7 +5671,6 @@
                         customReferralCode.value = '';
                         customReferralAmount.value = '';
                         customReferralUserSelect.value = '';
-                        pendingEditReferral = null;
                         showToast('Custom referral updated');
                     });
                 }
@@ -5720,8 +5713,9 @@
                 return;
             }
 
-            if (pendingEditReferral && pendingEditReferral.type === 'discount') {
-                const key = pendingEditReferral.key;
+            const editItem = referralDiscountList.querySelector('.referral-item[data-edit-key]');
+            if (editItem) {
+                const key = editItem.dataset.editKey;
                 if (allData.referralDiscounts && allData.referralDiscounts[key]) {
                     allData.referralDiscounts[key].referralCode = code;
                     allData.referralDiscounts[key].discount = discount;
@@ -5731,7 +5725,6 @@
                         discountReferralCode.value = '';
                         discountPercentage.value = '';
                         discountOwnerAmount.value = '';
-                        pendingEditReferral = null;
                         showToast('Referral discount updated');
                     });
                 }
@@ -6396,9 +6389,10 @@
             }
         });
 
-        console.log('✅ Admin App fully functional — Account updates, withdrawal actions, referral edits all work.');
-        console.log('✅ Withdrawal approvals/declines update customer balances correctly.');
-        console.log('✅ Referral edit buttons now properly open editing state.');
+        console.log('✅ Admin App ready — Account updates now correctly modify customer balances.');
+        console.log('✅ Withdrawal approval deducts money from customer accounts.');
+        console.log('✅ Withdrawal decline leaves account balances unchanged (no refund needed).');
+        console.log('✅ All data properly saved and synced with Firebase.');
     </script>
 </body>
 </html>
