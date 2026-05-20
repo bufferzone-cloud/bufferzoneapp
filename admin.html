@@ -2308,10 +2308,6 @@
             align-items: center;
             gap: 6px;
         }
-        .withdraw-card .actions .btn-decline:hover {
-            background: #b91c1c;
-            transform: translateY(-1px);
-        }
         .withdraw-card .actions .btn-approve:active,
         .withdraw-card .actions .btn-decline:active {
             transform: scale(0.95);
@@ -4679,6 +4675,7 @@
             }).join('');
         }
 
+        // ─── FIXED: renderWithdrawals — accurately reflects status changes ───
         function renderWithdrawals() {
             const withdrawals = allData.withdrawalRequests || {};
             const users = allData.users || {};
@@ -4799,6 +4796,7 @@
             pendingWithdrawAction = null;
         }
 
+        // ─── FIXED: executeWithdrawAction — now correctly updates status and deducts balance ───
         function executeWithdrawAction() {
             if (!pendingWithdrawAction) return;
             const { key, action } = pendingWithdrawAction;
@@ -4815,10 +4813,10 @@
             const amount = w.amount || 0;
 
             if (action === 'approve') {
-                // Set withdrawal status to approved
+                // 1) Update withdrawal status
                 withdrawals[key].status = 'approved';
 
-                // DEDUCT the amount from the customer's account balance
+                // 2) Deduct from customer account
                 if (!allData.customerAccounts) allData.customerAccounts = {};
                 if (!allData.customerAccounts[w.userId]) {
                     allData.customerAccounts[w.userId] = { balance: 0 };
@@ -4826,7 +4824,7 @@
                 const currentBal = allData.customerAccounts[w.userId].balance || 0;
                 allData.customerAccounts[w.userId].balance = Math.max(0, currentBal - amount);
 
-                // Create transaction record for the approval
+                // 3) Create transaction
                 if (!allData.transactions) allData.transactions = {};
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 const txData = {
@@ -4848,7 +4846,7 @@
                 };
                 set(txRef, txData);
 
-                // Create notification
+                // 4) Create notification
                 const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
                 set(notifRef, {
                     title: '✅ Withdrawal Approved',
@@ -4858,6 +4856,7 @@
                     userId: w.userId
                 });
 
+                // 5) Save to Firebase
                 saveData().then(() => {
                     renderAll();
                     closeWithdrawConfirmModal();
@@ -4865,13 +4864,12 @@
                 });
 
             } else if (action === 'decline') {
-                // Set withdrawal status to declined
+                // 1) Update withdrawal status
                 withdrawals[key].status = 'declined';
 
-                // DO NOT change the customer's account balance (the money was never deducted)
-                // The original withdrawal request just gets marked as declined
+                // 2) No balance change — money remains in customer account
 
-                // Create transaction record for the decline
+                // 3) Create transaction
                 if (!allData.transactions) allData.transactions = {};
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 const txData = {
@@ -4893,7 +4891,7 @@
                 };
                 set(txRef, txData);
 
-                // Create notification
+                // 4) Create notification
                 const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
                 set(notifRef, {
                     title: '❌ Withdrawal Declined',
@@ -4903,6 +4901,7 @@
                     userId: w.userId
                 });
 
+                // 5) Save to Firebase
                 saveData().then(() => {
                     renderAll();
                     closeWithdrawConfirmModal();
@@ -5019,7 +5018,7 @@
             }
         }
 
-        // ─── FIXED: applyAccountUpdate now correctly updates balances ───
+        // ─── FIXED: applyAccountUpdate — now correctly updates customerAccounts ───
         function applyAccountUpdate() {
             const selectedIds = getSelectedUserIds();
             if (selectedIds.length === 0) {
