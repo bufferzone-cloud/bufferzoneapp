@@ -266,7 +266,7 @@
             font-weight: 700;
         }
 
-        /* ── PROMO CAROUSEL – PEEK STYLE ── */
+        /* ── PROMO CAROUSEL – INFINITE PEEK STYLE ── */
         .promo-carousel-wrapper {
             position: relative;
             margin: 4px 0 14px 0;
@@ -539,28 +539,6 @@
             font-size: 7px;
             color: #777;
             line-height: 1.2;
-        }
-        .service-price-wrap {
-            font-size: 10px;
-            margin-top: 2px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            flex-wrap: wrap;
-        }
-        .service-price-wrap .old-price {
-            font-size: 9px;
-            color: #999;
-            text-decoration: line-through;
-            opacity: 0.6;
-        }
-        .service-price-wrap .new-price {
-            font-size: 11px;
-            font-weight: 700;
-            color: #f5b83d;
-        }
-        .service-price-wrap .new-price.regular {
-            color: #1c2128;
         }
 
         .thumb-1 {
@@ -2957,7 +2935,7 @@
         }
 
         // =================================================================
-        // PROMO CAROUSEL – PEEK STYLE
+        // PROMO CAROUSEL – INFINITE PEEK STYLE
         // =================================================================
 
         function renderPromoCarousel() {
@@ -2980,8 +2958,15 @@
                 return;
             }
 
-            promoCarouselTrack.innerHTML = entries.map(([key, pic]) => `
-                <div class="promo-slide" data-key="${key}" data-index="${entries.indexOf([key, pic])}">
+            // Create duplicated slides for infinite illusion: [last, first, second, ..., last, first]
+            const duplicated = [
+                entries[entries.length - 1],
+                ...entries,
+                entries[0]
+            ];
+
+            promoCarouselTrack.innerHTML = duplicated.map(([key, pic], idx) => `
+                <div class="promo-slide" data-key="${key}" data-index="${idx - 1}" data-real-index="${idx - 1 < 0 ? entries.length - 1 : idx - 1 >= entries.length ? 0 : idx - 1}">
                     <img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" />
                     <div class="slide-overlay">
                         <div class="slide-text">
@@ -2992,20 +2977,25 @@
                 </div>
             `).join('');
 
+            // Indicators based on real items count
             promoCarouselIndicators.innerHTML = entries.map((_, i) => `
                 <button class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></button>
             `).join('');
 
-            updateCarouselClasses(0);
-
-            promoCarouselIndicators.querySelectorAll('.dot').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const idx = parseInt(this.dataset.index);
-                    goToSlide(idx);
-                });
-            });
-
+            // Set initial scroll position to first real slide (index 1 in duplicated array)
             const track = promoCarouselTrack;
+            const slides = track.querySelectorAll('.promo-slide');
+            if (slides.length > 1) {
+                const firstRealSlide = slides[1];
+                const containerWidth = track.clientWidth;
+                const slideWidth = firstRealSlide.offsetWidth;
+                const scrollPos = firstRealSlide.offsetLeft - (containerWidth - slideWidth) / 2;
+                track.scrollLeft = Math.max(0, scrollPos);
+                currentCarouselIndex = 0;
+                updateCarouselClasses(1); // duplicated index 1 = first real
+            }
+
+            // Update classes on scroll
             track.addEventListener('scroll', () => {
                 if (isUserInteracting) {
                     const containerWidth = track.clientWidth;
@@ -3023,10 +3013,27 @@
                             closestIdx = i;
                         }
                     });
-                    if (closestIdx !== currentCarouselIndex) {
-                        currentCarouselIndex = closestIdx;
-                        updateCarouselClasses(currentCarouselIndex);
-                        updateIndicators(currentCarouselIndex);
+
+                    // If we're at the duplicated first (index 0), jump to real first (index 1)
+                    if (closestIdx === 0) {
+                        const targetSlide = slides[1];
+                        const scrollPos2 = targetSlide.offsetLeft - (containerWidth - targetSlide.offsetWidth) / 2;
+                        track.scrollLeft = Math.max(0, scrollPos2);
+                        closestIdx = 1;
+                    }
+                    // If we're at the duplicated last (index slides.length-1), jump to real last (index slides.length-2)
+                    if (closestIdx === slides.length - 1) {
+                        const targetSlide = slides[slides.length - 2];
+                        const scrollPos2 = targetSlide.offsetLeft - (containerWidth - targetSlide.offsetWidth) / 2;
+                        track.scrollLeft = Math.max(0, scrollPos2);
+                        closestIdx = slides.length - 2;
+                    }
+
+                    const realIndex = parseInt(slides[closestIdx].dataset.realIndex);
+                    if (realIndex !== currentCarouselIndex) {
+                        currentCarouselIndex = realIndex;
+                        updateCarouselClasses(closestIdx);
+                        updateIndicators(realIndex);
                         resetAutoScroll();
                     }
                 }
@@ -3038,12 +3045,25 @@
                 }, 2000);
             });
 
+            // Indicators click
+            promoCarouselIndicators.querySelectorAll('.dot').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const idx = parseInt(this.dataset.index);
+                    goToSlide(idx);
+                });
+            });
+
+            // Initial update
+            updateCarouselClasses(1);
+            updateIndicators(0);
+
             setTimeout(() => {
-                const firstSlide = track.querySelector('.promo-slide');
-                if (firstSlide) {
+                const slides2 = track.querySelectorAll('.promo-slide');
+                if (slides2.length > 1) {
+                    const firstReal = slides2[1];
                     const containerWidth = track.clientWidth;
-                    const slideWidth = firstSlide.offsetWidth;
-                    const scrollPos = firstSlide.offsetLeft - (containerWidth - slideWidth) / 2;
+                    const slideWidth = firstReal.offsetWidth;
+                    const scrollPos = firstReal.offsetLeft - (containerWidth - slideWidth) / 2;
                     track.scrollLeft = Math.max(0, scrollPos);
                 }
             }, 100);
@@ -3051,49 +3071,53 @@
             startAutoScroll();
         }
 
-        function updateCarouselClasses(activeIndex) {
+        function updateCarouselClasses(activeDuplicatedIndex) {
             const slides = promoCarouselTrack.querySelectorAll('.promo-slide');
             slides.forEach((slide, i) => {
                 slide.classList.remove('active-slide', 'prev-slide', 'next-slide', 'far-slide');
-                if (i === activeIndex) {
+                if (i === activeDuplicatedIndex) {
                     slide.classList.add('active-slide');
-                } else if (i === activeIndex - 1) {
+                } else if (i === activeDuplicatedIndex - 1) {
                     slide.classList.add('prev-slide');
-                } else if (i === activeIndex + 1) {
+                } else if (i === activeDuplicatedIndex + 1) {
                     slide.classList.add('next-slide');
-                } else if (i < activeIndex - 1 || i > activeIndex + 1) {
+                } else {
                     slide.classList.add('far-slide');
                 }
             });
         }
 
-        function updateIndicators(activeIndex) {
+        function updateIndicators(realIndex) {
             const dots = promoCarouselIndicators.querySelectorAll('.dot');
             dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === activeIndex);
+                dot.classList.toggle('active', i === realIndex);
             });
         }
 
-        function goToSlide(index) {
+        function goToSlide(realIndex) {
             const slides = promoCarouselTrack.querySelectorAll('.promo-slide');
-            if (index < 0) index = slides.length - 1;
-            if (index >= slides.length) index = 0;
-
-            const slide = slides[index];
-            if (!slide) return;
+            if (slides.length === 0) return;
+            // Find duplicated index that maps to realIndex
+            let targetIdx = -1;
+            slides.forEach((slide, i) => {
+                if (parseInt(slide.dataset.realIndex) === realIndex) {
+                    targetIdx = i;
+                }
+            });
+            if (targetIdx === -1) return;
 
             const containerWidth = promoCarouselTrack.clientWidth;
-            const slideWidth = slide.offsetWidth;
-            const scrollPos = slide.offsetLeft - (containerWidth - slideWidth) / 2;
+            const slideWidth = slides[targetIdx].offsetWidth;
+            const scrollPos = slides[targetIdx].offsetLeft - (containerWidth - slideWidth) / 2;
 
             promoCarouselTrack.scrollTo({
                 left: Math.max(0, scrollPos),
                 behavior: 'smooth'
             });
 
-            currentCarouselIndex = index;
-            updateCarouselClasses(index);
-            updateIndicators(index);
+            currentCarouselIndex = realIndex;
+            updateCarouselClasses(targetIdx);
+            updateIndicators(realIndex);
             resetAutoScroll();
         }
 
@@ -3155,9 +3179,6 @@
                     </div>
                     <div class="service-title">${escapeHtml(s.title || 'Untitled')}</div>
                     <div class="service-subtitle">${escapeHtml(s.subtitle || '')}</div>
-                    <div class="service-price-wrap">
-                        ${renderPrice(s)}
-                    </div>
                 </div>
             `).join('');
 
@@ -4509,8 +4530,9 @@
             }
         });
 
-        console.log('✅ Customer App — Carousel: 5s auto‑scroll, current slide 1.08x, adjacent slides peek 20% from edges.');
-        console.log('✅ Price display: original price with strikethrough (faded) + new price in bold.');
+        console.log('✅ Customer App — Infinite Carousel: 5s auto‑scroll, current slide 1.08x, adjacent slides peek 20% from edges.');
+        console.log('✅ Price display: original price with strikethrough (faded) + new price in bold — shown only inside order flow.');
+        console.log('✅ Service grid: only title + subtitle (no price shown).');
         console.log('✅ Referral Promo: checks both referralDiscounts AND referralPromoDiscounts.');
     </script>
 </body>
