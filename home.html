@@ -272,15 +272,15 @@
             margin: 4px 0 14px 0;
             overflow: hidden;
             border-radius: 24px;
-            height: 280px;
+            height: 300px;
             background: #f8f9fc;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            padding: 0 6%;
+            padding: 0 2%;
         }
 
         .promo-carousel-track {
             display: flex;
-            gap: 12px;
+            gap: 0;
             padding: 0;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
@@ -296,23 +296,24 @@
         }
 
         .promo-slide {
-            flex: 0 0 62%;
-            max-width: 62%;
+            flex: 0 0 70%;
+            max-width: 70%;
             scroll-snap-align: center;
             position: relative;
             border-radius: 20px;
             overflow: hidden;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease, box-shadow 0.5s ease;
-            height: 88%;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.6s ease, box-shadow 0.6s ease;
+            height: 90%;
             background: #ffffff;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: auto 0;
-            transform: scale(0.82);
-            opacity: 0.6;
+            transform: scale(0.78);
+            opacity: 0.65;
             z-index: 1;
+            will-change: transform, opacity;
         }
 
         .promo-slide img {
@@ -354,22 +355,22 @@
         }
 
         .promo-slide.active-slide {
-            transform: scale(1);
+            transform: scale(1.08);
             opacity: 1;
             z-index: 3;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25);
         }
 
         .promo-slide.prev-slide,
         .promo-slide.next-slide {
-            transform: scale(0.82);
-            opacity: 0.7;
+            transform: scale(0.78);
+            opacity: 0.8;
             z-index: 2;
         }
 
         .promo-slide.far-slide {
-            transform: scale(0.7);
-            opacity: 0.3;
+            transform: scale(0.62);
+            opacity: 0.25;
             z-index: 0;
         }
 
@@ -539,6 +540,28 @@
             color: #777;
             line-height: 1.2;
         }
+        .service-price-wrap {
+            font-size: 10px;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+        .service-price-wrap .old-price {
+            font-size: 9px;
+            color: #999;
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        .service-price-wrap .new-price {
+            font-size: 11px;
+            font-weight: 700;
+            color: #f5b83d;
+        }
+        .service-price-wrap .new-price.regular {
+            color: #1c2128;
+        }
 
         .thumb-1 {
             background: linear-gradient(135deg, #0f0f0f 0%, #3a3a3a 100%);
@@ -668,6 +691,22 @@
             font-weight: 700;
             color: #1c2128;
             margin-top: 5px;
+        }
+        .order-title-section .price .old-price {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+            opacity: 0.5;
+            font-weight: 400;
+            margin-right: 6px;
+        }
+        .order-title-section .price .new-price {
+            font-size: 19px;
+            font-weight: 700;
+            color: #f5b83d;
+        }
+        .order-title-section .price .new-price.regular {
+            color: #1c2128;
         }
 
         .order-tags {
@@ -2151,13 +2190,13 @@
                 padding: 8px 12px;
             }
             .promo-carousel-wrapper {
-                padding: 0 4%;
-                height: 230px;
+                padding: 0 2%;
+                height: 260px;
             }
             .promo-slide {
-                flex: 0 0 68%;
-                max-width: 68%;
-                height: 84%;
+                flex: 0 0 72%;
+                max-width: 72%;
+                height: 86%;
             }
             .promo-slide .slide-text {
                 font-size: 16px;
@@ -2179,12 +2218,12 @@
                 font-size: 14px;
             }
             .promo-carousel-wrapper {
-                padding: 0 3%;
-                height: 200px;
+                padding: 0 2%;
+                height: 220px;
             }
             .promo-slide {
-                flex: 0 0 72%;
-                max-width: 72%;
+                flex: 0 0 76%;
+                max-width: 76%;
             }
         }
     </style>
@@ -2749,6 +2788,30 @@
             return div.innerHTML;
         }
 
+        function renderPrice(service) {
+            const orig = service.originalPrice;
+            const curr = service.price || 0;
+            if (orig && orig !== curr) {
+                return `
+                    <span class="old-price">ZMW ${orig.toFixed(2)}</span>
+                    <span class="new-price">ZMW ${curr.toFixed(2)}</span>
+                `;
+            }
+            return `<span class="new-price regular">ZMW ${curr.toFixed(2)}</span>`;
+        }
+
+        function renderPriceInline(service) {
+            const orig = service.originalPrice;
+            const curr = service.price || 0;
+            if (orig && orig !== curr) {
+                return `
+                    <span class="old-price">ZMW ${orig.toFixed(2)}</span>
+                    <span class="new-price">ZMW ${curr.toFixed(2)}</span>
+                `;
+            }
+            return `ZMW ${curr.toFixed(2)}`;
+        }
+
         // =================================================================
         // CLOUDINARY UPLOAD
         // =================================================================
@@ -3092,6 +3155,9 @@
                     </div>
                     <div class="service-title">${escapeHtml(s.title || 'Untitled')}</div>
                     <div class="service-subtitle">${escapeHtml(s.subtitle || '')}</div>
+                    <div class="service-price-wrap">
+                        ${renderPrice(s)}
+                    </div>
                 </div>
             `).join('');
 
@@ -3250,7 +3316,8 @@
 
                 let detailText = t.detail || '';
                 if (t.type?.toLowerCase().includes('referral') && t.userName) {
-                    detailText = `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral code.`;
+                    detailText =
+                        `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral code.`;
                 }
                 if (t.type?.toLowerCase().includes('discount') && t.userName) {
                     detailText =
@@ -3724,7 +3791,9 @@
                 <div class="order-title-section">
                     <h2>${(service.title || 'Service').toUpperCase()}</h2>
                     <p>${service.subtitle || ''}</p>
-                    <div class="price">ZMW ${(service.price || 0).toFixed(2)}</div>
+                    <div class="price">
+                        ${renderPriceInline(service)}
+                    </div>
                 </div>
 
                 <div class="order-tags">
@@ -4440,9 +4509,9 @@
             }
         });
 
-        console.log('✅ Customer App — Carousel: 5s auto‑scroll, current slide largest, adjacent slides peek 20%.');
+        console.log('✅ Customer App — Carousel: 5s auto‑scroll, current slide 1.08x, adjacent slides peek 20% from edges.');
+        console.log('✅ Price display: original price with strikethrough (faded) + new price in bold.');
         console.log('✅ Referral Promo: checks both referralDiscounts AND referralPromoDiscounts.');
-        console.log('✅ Referral bonus transactions are recorded and owner account credited.');
     </script>
 </body>
 </html>
