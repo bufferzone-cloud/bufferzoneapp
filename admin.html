@@ -5700,6 +5700,7 @@
                 title: data.title,
                 subtitle: data.subtitle || '',
                 price: parseFloat(data.price) || 0,
+                originalPrice: null,
                 tags: data.tags ? data.tags.split(',').map(t => t.trim()) : [],
                 icon: data.icon || 'fa-cube',
                 specs: data.specs || '',
@@ -5724,10 +5725,16 @@
         function updateService(key, data) {
             if (!allData.services || !allData.services[key]) return;
             const service = allData.services[key];
+            const oldPrice = service.price;
             service.title = data.title;
             service.subtitle = data.subtitle || '';
             service.category = data.category || 'graphic';
             service.price = parseFloat(data.price) || 0;
+            if (oldPrice !== service.price && oldPrice !== undefined && oldPrice !== null) {
+                if (!service.originalPrice || service.originalPrice === oldPrice) {
+                    service.originalPrice = oldPrice;
+                }
+            }
             service.tags = data.tags ? data.tags.split(',').map(t => t.trim()) : [];
             service.icon = data.icon || 'fa-cube';
             service.specs = data.specs || '';
@@ -6815,6 +6822,10 @@
             if (confirm(`Apply ${modeLabel} to all ${adjustedEntries.length} services?`)) {
                 adjustedEntries.forEach(({ key, newPrice }) => {
                     if (allData.services && allData.services[key]) {
+                        // If originalPrice doesn't exist, set it to the current price before adjusting
+                        if (!allData.services[key].originalPrice) {
+                            allData.services[key].originalPrice = allData.services[key].price;
+                        }
                         allData.services[key].price = newPrice;
                     }
                 });
@@ -6894,7 +6905,8 @@
             }
         });
 
-        console.log('✅ Admin App — Added Payables alignment, Account transaction history, Referral Promos, and Services Price Adjustment.');
+        console.log('✅ Admin App — Price adjustment now preserves originalPrice so users see before/after prices.');
+        console.log('✅ Service creation/editing also preserves originalPrice when price changes.');
     </script>
 </body>
 </html>
