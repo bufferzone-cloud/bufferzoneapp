@@ -2143,37 +2143,56 @@
             margin-bottom: 8px;
         }
 
-        .payables-toggle-row {
+        /* ── Payables: Button row with equal spacing ── */
+        .payables-action-row {
             display: flex;
-            gap: 10px;
-            margin-bottom: 18px;
+            align-items: center;
             justify-content: center;
+            gap: 12px;
             flex-wrap: wrap;
+            margin-bottom: 16px;
         }
-        .payables-toggle-row .toggle-btn {
-            padding: 10px 28px;
+        .payables-action-row .p-btn {
+            padding: 8px 22px;
             border-radius: 30px;
-            border: 2px solid #ddd;
-            background: #fff;
+            border: none;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.2s;
-            color: #555;
-            flex: 0 1 auto;
-            min-width: 120px;
-            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1c2128;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
-        .payables-toggle-row .toggle-btn.active {
+        .payables-action-row .p-btn:active {
+            transform: scale(0.95);
+        }
+        .payables-action-row .p-btn i {
+            font-size: 14px;
+        }
+        .payables-action-row .p-btn.gold {
+            background: #f5b83d;
+            color: #1c2128;
+        }
+        .payables-action-row .p-btn.gold i {
+            color: #1c2128;
+        }
+        .payables-action-row .p-btn.toggle {
+            background: transparent;
+            color: #1c2128;
+            border: 2px solid #ddd;
+            box-shadow: none;
+        }
+        .payables-action-row .p-btn.toggle.active {
             border-color: #1c2128;
             background: #1c2128;
             color: #fff;
         }
-        .payables-toggle-row .toggle-btn:active {
-            transform: scale(0.95);
-        }
-        .payables-toggle-row .toggle-btn i {
-            margin-right: 6px;
+        .payables-action-row .p-btn.toggle.active i {
+            color: #f5b83d;
         }
 
         .payables-view {
@@ -2183,100 +2202,83 @@
             display: block;
         }
 
+        /* ── Account item with expandable transaction history ── */
         .account-item {
             background: #ffffff;
             border-radius: 12px;
             padding: 14px 18px;
             border: 1px solid #f0f0f0;
             margin-bottom: 10px;
-            cursor: pointer;
             transition: all 0.2s;
+            cursor: pointer;
         }
         .account-item:hover {
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
-        .account-item .account-header {
+        .account-item .account-summary {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .account-item .left .name {
+        .account-item .account-summary .left .name {
             font-weight: 600;
             font-size: 14px;
             color: #1c2128;
         }
-        .account-item .left .email {
+        .account-item .account-summary .left .email {
             font-size: 12px;
             color: #888;
         }
-        .account-item .right .balance {
+        .account-item .account-summary .right .balance {
             font-weight: 700;
             font-size: 16px;
             color: #1c2128;
         }
-        .account-item .account-details {
+        .account-item .account-summary .right .expand-icon {
+            margin-left: 10px;
+            font-size: 12px;
+            color: #aaa;
+            transition: transform 0.3s;
+        }
+        .account-item.open .account-summary .right .expand-icon {
+            transform: rotate(180deg);
+        }
+        .account-item .account-transactions {
             display: none;
             margin-top: 12px;
             padding-top: 12px;
             border-top: 1px solid #f0f0f0;
         }
-        .account-item .account-details.open {
+        .account-item .account-transactions.open {
             display: block;
         }
-        .account-item .expand-icon {
-            font-size: 12px;
-            color: #aaa;
-            transition: transform 0.3s;
-        }
-        .account-item.open .expand-icon {
-            transform: rotate(180deg);
-        }
-
-        .account-tx-item {
+        .account-item .account-transactions .tx-item {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 6px 0;
-            border-bottom: 1px solid #f5f5f5;
             font-size: 12px;
+            border-bottom: 1px solid #f5f5f5;
         }
-        .account-tx-item:last-child {
+        .account-item .account-transactions .tx-item:last-child {
             border-bottom: none;
         }
-        .account-tx-item .tx-type {
-            font-weight: 600;
-            color: #1c2128;
+        .account-item .account-transactions .tx-item .tx-desc {
+            color: #555;
         }
-        .account-tx-item .tx-amount {
+        .account-item .account-transactions .tx-item .tx-amount {
             font-weight: 600;
         }
-        .account-tx-item .tx-amount.positive {
+        .account-item .account-transactions .tx-item .tx-amount.positive {
             color: #16a34a;
         }
-        .account-tx-item .tx-amount.negative {
+        .account-item .account-transactions .tx-item .tx-amount.negative {
             color: #dc2626;
         }
-        .account-tx-item .tx-date {
-            font-size: 10px;
+        .account-item .account-transactions .tx-empty {
             color: #aaa;
-        }
-        .account-tx-item .tx-status {
-            font-size: 10px;
-            padding: 0 8px;
-            border-radius: 10px;
-            font-weight: 600;
-        }
-        .account-tx-item .tx-status.completed {
-            background: #e6fffa;
-            color: #00a86b;
-        }
-        .account-tx-item .tx-status.pending {
-            background: #fff6e0;
-            color: #cc8800;
-        }
-        .account-tx-item .tx-status.declined {
-            background: #fee2e2;
-            color: #dc2626;
+            font-size: 12px;
+            padding: 8px 0;
+            text-align: center;
         }
 
         .withdraw-card {
@@ -2385,31 +2387,6 @@
         .withdraw-card .status-badge.pending {
             background: #fff6e0;
             color: #cc8800;
-        }
-
-        .manual-deposit-btn {
-            background: #1c2128;
-            color: #fff;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .manual-deposit-btn:hover {
-            background: #2a2a2a;
-            transform: translateY(-2px);
-        }
-        .manual-deposit-btn:active {
-            transform: scale(0.95);
-        }
-        .manual-deposit-btn i {
-            color: #f5b83d;
         }
 
         .withdraw-confirm-modal-overlay {
@@ -2740,8 +2717,8 @@
             display: block;
         }
 
-        /* ─── Price Adjustment ─── */
-        .price-adjustment-section {
+        /* ── Services: Price Adjustment ── */
+        .price-adjust-box {
             background: #ffffff;
             border-radius: 16px;
             padding: 18px 16px;
@@ -2749,104 +2726,129 @@
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
             border: 1px solid #f0f0f0;
         }
-        .price-adjustment-section .section-title {
-            font-size: 16px;
+        .price-adjust-box .title {
+            font-size: 15px;
             font-weight: 700;
             color: #1c2128;
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 6px;
         }
-        .price-adjustment-section .section-title i {
+        .price-adjust-box .title i {
             color: #f5b83d;
         }
-        .price-adjustment-section .adjust-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+        .price-adjust-box .sub {
+            font-size: 12px;
+            color: #888;
             margin-bottom: 12px;
         }
-        .price-adjustment-section .adjust-options .adjust-option {
-            padding: 10px 14px;
-            border-radius: 10px;
+        .price-adjust-box .adjust-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .price-adjust-box .adjust-options .opt {
+            padding: 6px 16px;
+            border-radius: 20px;
             border: 2px solid #ddd;
             background: #fafafa;
             font-size: 12px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
-            text-align: center;
         }
-        .price-adjustment-section .adjust-options .adjust-option:hover {
+        .price-adjust-box .adjust-options .opt:hover {
             border-color: #bbb;
         }
-        .price-adjustment-section .adjust-options .adjust-option.active {
+        .price-adjust-box .adjust-options .opt.active {
             border-color: #1c2128;
-            background: #f8f9fc;
+            background: #1c2128;
+            color: #fff;
         }
-        .price-adjustment-section .adjust-options .adjust-option i {
-            margin-right: 4px;
+        .price-adjust-box .adjust-options .opt.active i {
+            color: #f5b83d;
         }
-        .price-adjustment-section .adjust-input-row {
+        .price-adjust-box .adjust-val-row {
             display: flex;
             gap: 10px;
             align-items: center;
             flex-wrap: wrap;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
-        .price-adjustment-section .adjust-input-row label {
+        .price-adjust-box .adjust-val-row label {
             font-weight: 500;
-            font-size: 13px;
+            font-size: 12px;
             color: #222;
         }
-        .price-adjustment-section .adjust-input-row input {
-            flex: 1;
-            padding: 8px 12px;
+        .price-adjust-box .adjust-val-row input {
+            padding: 6px 12px;
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 13px;
-            min-width: 80px;
+            width: 120px;
         }
-        .price-adjustment-section .adjust-input-row input:focus {
+        .price-adjust-box .adjust-val-row input:focus {
             outline: none;
             border-color: #1c2128;
         }
-        .price-adjustment-section .btn-apply-adjust {
-            padding: 10px 28px;
+        .price-adjust-box .btn-apply-adjust {
+            padding: 8px 28px;
+            border-radius: 30px;
+            border: none;
             background: #1c2128;
             color: #fff;
-            border: none;
-            border-radius: 30px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
         }
-        .price-adjustment-section .btn-apply-adjust:hover {
-            background: #2a2a2a;
+        .price-adjust-box .btn-apply-adjust:hover {
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        .price-adjustment-section .btn-apply-adjust:active {
+        .price-adjust-box .btn-apply-adjust:active {
             transform: scale(0.95);
         }
-        .price-adjustment-section .btn-apply-adjust i {
+        .price-adjust-box .btn-apply-adjust i {
             color: #f5b83d;
         }
-        .price-adjustment-section .adjust-result {
+        .price-adjust-box .adjust-preview {
             margin-top: 10px;
             padding: 10px 14px;
-            border-radius: 10px;
             background: #f8f9fc;
-            font-size: 13px;
+            border-radius: 10px;
+            border: 1px solid #f0f0f0;
+            font-size: 12px;
             color: #555;
-            display: none;
+            max-height: 300px;
+            overflow-y: auto;
         }
-        .price-adjustment-section .adjust-result.show {
-            display: block;
+        .price-adjust-box .adjust-preview .preview-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .price-adjust-box .adjust-preview .preview-item:last-child {
+            border-bottom: none;
+        }
+        .price-adjust-box .adjust-preview .preview-item .pname {
+            font-weight: 500;
+        }
+        .price-adjust-box .adjust-preview .preview-item .pprice {
+            font-weight: 600;
+        }
+        .price-adjust-box .adjust-preview .preview-item .pprice .old {
+            font-size: 10px;
+            color: #aaa;
+            text-decoration: line-through;
+            margin-right: 6px;
+        }
+        .price-adjust-box .adjust-preview .preview-item .pprice .new {
+            font-weight: 700;
+            color: #1c2128;
         }
 
         @media (max-width: 400px) {
@@ -2901,14 +2903,12 @@
             .referral-section .form-row-custom {
                 grid-template-columns: 1fr;
             }
-            .payables-toggle-row .toggle-btn {
-                padding: 6px 14px;
-                font-size: 11px;
-                min-width: 80px;
+            .payables-action-row {
+                gap: 8px;
             }
-            .price-adjustment-section .adjust-options {
-                grid-template-columns: 1fr 1fr;
-                gap: 6px;
+            .payables-action-row .p-btn {
+                padding: 6px 14px;
+                font-size: 10px;
             }
         }
         @media (min-width: 401px) and (max-width: 600px) {
@@ -3167,29 +3167,30 @@
                     </div>
                 </div>
 
-                <!-- ── REFERRAL PROMOS (Global) ── -->
+                <!-- ── REFERRAL PROMOS (NEW) ── -->
                 <div class="referral-section">
                     <div class="section-title">
-                        <i class="fa-solid fa-globe"></i> Referral Promos
-                        <span class="badge">global</span>
+                        <i class="fa-solid fa-star"></i> Referral Promos
+                        <span class="badge">customer uses another's code</span>
                     </div>
-                    <p style="font-size:13px; color:#555; margin-bottom:14px;">When a customer uses another customer's referral code, the customer gets a discount and the owner gets money in their account. Set the discount percentage and owner amount below.</p>
                     <div class="form-row-custom">
                         <div class="form-group">
-                            <label>Discount Percentage (%) for the customer using the code</label>
-                            <input type="number" id="referralGlobalDiscount" placeholder="e.g. 10" min="1" max="100" />
+                            <label>Discount for customer (%)</label>
+                            <input type="number" id="referralPromoDiscountPercent" placeholder="e.g. 15" min="1" max="100" />
                         </div>
                         <div class="form-group">
-                            <label>Amount owner receives (ZMW) when their code is used</label>
-                            <input type="number" id="referralGlobalOwnerAmount" placeholder="e.g. 25" step="0.01" />
+                            <label>Amount owner receives (ZMW)</label>
+                            <input type="number" id="referralPromoOwnerAmount" placeholder="e.g. 20" step="0.01" />
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Referral Code (optional — leave blank to apply to all codes)</label>
+                            <input type="text" id="referralPromoCodeFilter" placeholder="e.g. BZ-12ABC (optional)" />
                         </div>
                     </div>
-                    <button class="btn-post" id="postReferralGlobal"><i class="fa-solid fa-check"></i> Save Referral Promo</button>
+                    <button class="btn-post" id="postReferralPromoDiscount"><i class="fa-solid fa-check"></i> Post Referral Promo</button>
                     <div style="margin-top:18px;">
-                        <h4 style="font-size:14px; font-weight:600; color:#1c2128; margin-bottom:10px;">Current Referral Promo Settings</h4>
-                        <div id="referralGlobalDisplay" style="font-size:13px; color:#555; background:#f8f9fc; padding:12px 16px; border-radius:10px; border:1px solid #f0f0f0;">
-                            Discount: <strong id="displayGlobalDiscount">0%</strong> &middot; Owner gets: <strong id="displayGlobalOwnerAmount">ZMW 0.00</strong>
-                        </div>
+                        <h4 style="font-size:14px; font-weight:600; color:#1c2128; margin-bottom:10px;">Posted Referral Promos</h4>
+                        <div class="referral-list-container" id="referralPromoDiscountList"></div>
                     </div>
                 </div>
 
@@ -3234,12 +3235,12 @@
                     <p style="font-size:13px; color:#888;">Manage customer accounts and withdrawal requests.</p>
                 </div>
 
-                <!-- All four buttons in one row, centered, same margin -->
-                <div class="payables-toggle-row">
-                    <button class="toggle-btn active" id="toggleAccounts"><i class="fa-solid fa-wallet"></i> Accounts</button>
-                    <button class="toggle-btn" id="toggleWithdrawals"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
-                    <button class="toggle-btn" id="manualDepositBtn" style="border-color:#f5b83d; background:#f5b83d; color:#1c2128; border-color:#f5b83d;"><i class="fa-solid fa-plus-circle"></i> Manual Deposit</button>
-                    <button class="toggle-btn" id="accountUpdateBtn" style="border-color:#1c2128; background:#1c2128; color:#fff;"><i class="fa-solid fa-pen-to-square"></i> Account Update</button>
+                <!-- Unified button row: Accounts | Withdrawals | Manual Deposit | Account Update -->
+                <div class="payables-action-row">
+                    <button class="p-btn toggle active" id="toggleAccounts"><i class="fa-solid fa-wallet"></i> Accounts</button>
+                    <button class="p-btn toggle" id="toggleWithdrawals"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
+                    <button class="p-btn gold" id="manualDepositBtn"><i class="fa-solid fa-plus-circle"></i> Manual Deposit</button>
+                    <button class="p-btn gold" id="accountUpdateBtn"><i class="fa-solid fa-pen-to-square"></i> Account Update</button>
                 </div>
 
                 <!-- Accounts View -->
@@ -3274,6 +3275,26 @@
                     </div>
                 </div>
 
+                <!-- PRICE ADJUSTMENT (NEW) -->
+                <div class="price-adjust-box" id="priceAdjustBox">
+                    <div class="title"><i class="fa-solid fa-calculator"></i> Code Price Adjustment</div>
+                    <div class="sub">Apply a flat amount or percentage to all services. Preview the changes before applying.</div>
+                    <div class="adjust-options" id="adjustOptions">
+                        <button class="opt active" data-mode="add-amount"><i class="fa-solid fa-plus"></i> Add Amount</button>
+                        <button class="opt" data-mode="remove-amount"><i class="fa-solid fa-minus"></i> Remove Amount</button>
+                        <button class="opt" data-mode="add-percent"><i class="fa-solid fa-percent"></i> Add %</button>
+                        <button class="opt" data-mode="remove-percent"><i class="fa-solid fa-percent"></i> Remove %</button>
+                    </div>
+                    <div class="adjust-val-row">
+                        <label id="adjustLabel">Amount (ZMW):</label>
+                        <input type="number" id="adjustValue" placeholder="0.00" step="0.01" />
+                        <button class="btn-apply-adjust" id="applyAdjustBtn"><i class="fa-solid fa-wand-magic-sparkles"></i> Preview & Apply</button>
+                    </div>
+                    <div class="adjust-preview" id="adjustPreview">
+                        <div style="color:#aaa; text-align:center; padding:12px 0;">Select an adjustment mode and enter a value, then click "Preview & Apply".</div>
+                    </div>
+                </div>
+
                 <div class="list-editor">
                     <h4 style="font-size:13px; font-weight:700; color:#1c2128; margin-bottom:8px;">OUR SERVICES LIST</h4>
                     <div id="ourServicesListContainer"></div>
@@ -3289,26 +3310,6 @@
                         <input type="text" id="policyTag" placeholder="Policy tag text" />
                         <button class="btn-save-policy" id="savePolicyBtn"><i class="fa-solid fa-save"></i> Save Policy</button>
                     </div>
-                </div>
-
-                <!-- ── PRICE ADJUSTMENT ── -->
-                <div class="price-adjustment-section">
-                    <div class="section-title">
-                        <i class="fa-solid fa-sliders"></i> Code Price Adjustment
-                        <span class="badge">bulk update</span>
-                    </div>
-                    <div class="adjust-options">
-                        <button class="adjust-option active" data-action="add-amount" id="adjustAddAmount"><i class="fa-solid fa-plus"></i> Add Amount</button>
-                        <button class="adjust-option" data-action="remove-amount" id="adjustRemoveAmount"><i class="fa-solid fa-minus"></i> Remove Amount</button>
-                        <button class="adjust-option" data-action="add-percent" id="adjustAddPercent"><i class="fa-solid fa-percent"></i> Add %</button>
-                        <button class="adjust-option" data-action="remove-percent" id="adjustRemovePercent"><i class="fa-solid fa-percent"></i> Remove %</button>
-                    </div>
-                    <div class="adjust-input-row">
-                        <label id="adjustAmountLabel">Amount (ZMW):</label>
-                        <input type="number" id="adjustAmount" placeholder="0.00" step="0.01" />
-                        <button class="btn-apply-adjust" id="applyAdjustBtn"><i class="fa-solid fa-check"></i> Apply to All Services</button>
-                    </div>
-                    <div class="adjust-result" id="adjustResult"></div>
                 </div>
 
                 <div class="card">
@@ -3640,6 +3641,65 @@
         </div>
     </div>
 
+    <!-- ===== MANUAL DEPOSIT MODAL ===== -->
+    <div class="modal-overlay" id="manualDepositModal">
+        <div class="modal" style="max-width:400px;">
+            <button class="close-btn" id="manualDepositCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3><i class="fa-solid fa-plus-circle" style="color:#f5b83d;"></i> Manual Deposit</h3>
+            <p class="sub">Add funds to a customer's account.</p>
+            <form id="manualDepositForm">
+                <div class="form-group">
+                    <label>Select Customer</label>
+                    <select id="depositCustomerSelect" required>
+                        <option value="">— Select a customer —</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Amount (ZMW)</label>
+                    <input type="number" id="depositAmount" placeholder="e.g. 100" step="0.01" required />
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Deposit</button>
+                <button type="button" class="btn btn-outline" id="manualDepositCancelBtn">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== ACCOUNT UPDATE MODAL ===== -->
+    <div class="account-update-modal-overlay" id="accountUpdateModal">
+        <div class="account-update-modal">
+            <button class="close-btn" id="accountUpdateCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3><i class="fa-solid fa-pen-to-square" style="color:#f5b83d;"></i> Account Update</h3>
+            <p class="sub">Select users and choose an action to update their accounts.</p>
+
+            <div class="select-all-row">
+                <button id="selectAllUsersBtn"><i class="fa-regular fa-square-check"></i> Select All</button>
+                <button id="deselectAllUsersBtn"><i class="fa-regular fa-square"></i> Deselect All</button>
+                <span style="font-size:12px; color:#888; margin-left:auto;" id="selectedCount">0 selected</span>
+            </div>
+
+            <div class="user-checkbox-list" id="userCheckboxList">
+                <!-- Rendered by JS -->
+            </div>
+
+            <div class="action-type-row">
+                <button class="action-option active" data-action="add" id="actionAdd"><i class="fa-solid fa-plus"></i> Add Amount</button>
+                <button class="action-option" data-action="set" id="actionSet"><i class="fa-solid fa-pen"></i> Set Balance</button>
+                <button class="action-option" data-action="wipe" id="actionWipe"><i class="fa-solid fa-broom"></i> Wipe</button>
+            </div>
+
+            <div class="wipe-warning" id="wipeWarning">
+                <i class="fa-solid fa-triangle-exclamation"></i> This will set the selected accounts to ZMW 0.00. This action cannot be undone.
+            </div>
+
+            <div class="amount-input-row">
+                <label id="amountLabel">Amount (ZMW):</label>
+                <input type="number" id="accountUpdateAmount" placeholder="0.00" step="0.01" />
+            </div>
+
+            <button class="btn-apply-update" id="applyAccountUpdateBtn" disabled>Apply to Selected</button>
+        </div>
+    </div>
+
     <!-- ===== SCREENSHOT VIEW MODAL ===== -->
     <div class="screenshot-modal-overlay" id="screenshotModal">
         <div class="screenshot-modal-content">
@@ -3872,13 +3932,12 @@
         const postReferralDiscountBtn = document.getElementById('postReferralDiscount');
         const referralDiscountList = document.getElementById('referralDiscountList');
 
-        // ── Referral Global DOM ──
-        const referralGlobalDiscount = document.getElementById('referralGlobalDiscount');
-        const referralGlobalOwnerAmount = document.getElementById('referralGlobalOwnerAmount');
-        const postReferralGlobalBtn = document.getElementById('postReferralGlobal');
-        const referralGlobalDisplay = document.getElementById('referralGlobalDisplay');
-        const displayGlobalDiscount = document.getElementById('displayGlobalDiscount');
-        const displayGlobalOwnerAmount = document.getElementById('displayGlobalOwnerAmount');
+        // ── New Referral Promos ──
+        const referralPromoDiscountPercent = document.getElementById('referralPromoDiscountPercent');
+        const referralPromoOwnerAmount = document.getElementById('referralPromoOwnerAmount');
+        const referralPromoCodeFilter = document.getElementById('referralPromoCodeFilter');
+        const postReferralPromoDiscountBtn = document.getElementById('postReferralPromoDiscount');
+        const referralPromoDiscountList = document.getElementById('referralPromoDiscountList');
 
         // ── Signup Bonuses ──
         const signupBonusWithReferral = document.getElementById('signupBonusWithReferral');
@@ -3897,9 +3956,15 @@
         const accountsList = document.getElementById('accountsList');
         const withdrawalsList = document.getElementById('withdrawalsList');
         const manualDepositBtn = document.getElementById('manualDepositBtn');
-        const accountUpdateBtn = document.getElementById('accountUpdateBtn');
+        const manualDepositModal = document.getElementById('manualDepositModal');
+        const manualDepositCloseBtn = document.getElementById('manualDepositCloseBtn');
+        const manualDepositForm = document.getElementById('manualDepositForm');
+        const depositCustomerSelect = document.getElementById('depositCustomerSelect');
+        const depositAmount = document.getElementById('depositAmount');
+        const manualDepositCancelBtn = document.getElementById('manualDepositCancelBtn');
 
         // ── Account Update DOM ──
+        const accountUpdateBtn = document.getElementById('accountUpdateBtn');
         const accountUpdateModal = document.getElementById('accountUpdateModal');
         const accountUpdateCloseBtn = document.getElementById('accountUpdateCloseBtn');
         const userCheckboxList = document.getElementById('userCheckboxList');
@@ -3933,15 +3998,12 @@
         const actionReferral = document.getElementById('actionReferral');
         const actionPayables = document.getElementById('actionPayables');
 
-        // ── Price Adjustment DOM ──
-        const adjustAddAmount = document.getElementById('adjustAddAmount');
-        const adjustRemoveAmount = document.getElementById('adjustRemoveAmount');
-        const adjustAddPercent = document.getElementById('adjustAddPercent');
-        const adjustRemovePercent = document.getElementById('adjustRemovePercent');
-        const adjustAmount = document.getElementById('adjustAmount');
+        // ── Services price adjustment ──
+        const adjustOptions = document.getElementById('adjustOptions');
+        const adjustValue = document.getElementById('adjustValue');
+        const adjustLabel = document.getElementById('adjustLabel');
         const applyAdjustBtn = document.getElementById('applyAdjustBtn');
-        const adjustResult = document.getElementById('adjustResult');
-        const adjustAmountLabel = document.getElementById('adjustAmountLabel');
+        const adjustPreview = document.getElementById('adjustPreview');
 
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
@@ -3971,7 +4033,7 @@
                         referralPromos: {},
                         customReferrals: {},
                         referralDiscounts: {},
-                        referralGlobal: { discount: 0, ownerAmount: 0 },
+                        referralPromoDiscounts: {},
                         customerAccounts: {},
                         withdrawalRequests: {},
                         signupBonuses: {
@@ -3997,7 +4059,7 @@
                         saveData(); }
                     if (!allData.referralDiscounts) { allData.referralDiscounts = {};
                         saveData(); }
-                    if (!allData.referralGlobal) { allData.referralGlobal = { discount: 0, ownerAmount: 0 };
+                    if (!allData.referralPromoDiscounts) { allData.referralPromoDiscounts = {};
                         saveData(); }
                     if (!allData.customerAccounts) { allData.customerAccounts = {};
                         saveData(); }
@@ -4130,7 +4192,7 @@
             renderReferralPromos();
             renderCustomReferrals();
             renderReferralDiscounts();
-            renderReferralGlobal();
+            renderReferralPromoDiscounts();
             renderSignupBonuses();
 
             // ── Payables renders ──
@@ -4798,12 +4860,51 @@
             });
         }
 
-        function renderReferralGlobal() {
-            const data = allData.referralGlobal || { discount: 0, ownerAmount: 0 };
-            displayGlobalDiscount.textContent = `${data.discount}%`;
-            displayGlobalOwnerAmount.textContent = `ZMW ${(data.ownerAmount || 0).toFixed(2)}`;
-            referralGlobalDiscount.value = data.discount || '';
-            referralGlobalOwnerAmount.value = data.ownerAmount || '';
+        function renderReferralPromoDiscounts() {
+            const data = allData.referralPromoDiscounts || {};
+            const entries = Object.entries(data);
+            const container = referralPromoDiscountList;
+            if (entries.length === 0) {
+                container.innerHTML = `
+                            <div class="empty-state">
+                                <i class="fa-regular fa-circle"></i>
+                                No referral promos posted yet.
+                            </div>
+                        `;
+                return;
+            }
+            container.innerHTML = entries.map(([key, r]) => `
+                        <div class="referral-item">
+                            <div class="left">
+                                <div class="code">${r.referralCode || 'All Codes'}</div>
+                                <div class="detail">Discount: <span>${r.discount}%</span> &middot; Owner gets: <span>ZMW ${r.ownerAmount}</span></div>
+                            </div>
+                            <div class="actions">
+                                <button class="btn btn-outline btn-sm edit-referral-promo-discount" data-key="${key}" data-code="${r.referralCode || ''}" data-discount="${r.discount}" data-owneramount="${r.ownerAmount}"><i class="fa-regular fa-pen-to-square"></i></button>
+                                <button class="btn btn-danger btn-sm delete-referral-promo-discount" data-key="${key}"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                    `).join('');
+
+            container.querySelectorAll('.delete-referral-promo-discount').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const key = this.dataset.key;
+                    showDeleteConfirmation('referralPromoDiscount', key);
+                });
+            });
+            container.querySelectorAll('.edit-referral-promo-discount').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const key = this.dataset.key;
+                    const code = this.dataset.code;
+                    const discount = this.dataset.discount;
+                    const ownerAmount = this.dataset.owneramount;
+                    referralPromoDiscountPercent.value = discount;
+                    referralPromoOwnerAmount.value = ownerAmount;
+                    referralPromoCodeFilter.value = code || '';
+                    this.closest('.referral-item').dataset.editKey = key;
+                    showToast('Edit and click Post to update', 'success');
+                });
+            });
         }
 
         function renderSignupBonuses() {
@@ -4838,59 +4939,57 @@
                 const email = user.email || 'No email';
                 const balance = acc.balance || 0;
 
-                // Get user transactions
+                // Gather transactions for this user
                 const userTxs = Object.entries(transactions)
                     .filter(([txId, tx]) => tx.userId === uid)
                     .sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
 
                 const txHtml = userTxs.length === 0 ?
-                    `<div style="font-size:12px;color:#aaa;padding:8px 0;">No transactions found for this account.</div>` :
+                    `<div class="tx-empty">No transactions for this account.</div>` :
                     userTxs.map(([txId, tx]) => {
-                        const amount = tx.amount || 0;
-                        const isPositive = amount >= 0;
-                        const statusClass = tx.status || 'completed';
+                        const isPositive = tx.type === 'Manual Deposit' || tx.type === 'Manual Deposit by Admin (Mass)' ||
+                            tx.type === 'Mass Deposit' || tx.type === 'Balance Set by Admin' ||
+                            tx.type === 'Withdrawal Approved' ||
+                            (tx.amount > 0 && !tx.type.includes('Withdrawal'));
+                        const sign = isPositive ? '+' : '';
+                        const cls = isPositive ? 'positive' : 'negative';
                         return `
-                                    <div class="account-tx-item">
-                                        <div>
-                                            <div class="tx-type">${tx.type || 'Transaction'}</div>
-                                            <div class="tx-date">${tx.date || new Date(tx.createdAt).toLocaleDateString()}</div>
-                                        </div>
-                                        <div style="text-align:right;">
-                                            <div class="tx-amount ${isPositive ? 'positive' : 'negative'}">${isPositive ? '+' : ''}ZMW ${amount.toFixed(2)}</div>
-                                            <span class="tx-status ${statusClass}">${tx.status || 'completed'}</span>
-                                        </div>
+                                    <div class="tx-item">
+                                        <span class="tx-desc">${tx.type || 'Transaction'} <small style="color:#aaa;">${tx.date || ''}</small></span>
+                                        <span class="tx-amount ${cls}">${sign}ZMW ${(tx.amount || 0).toFixed(2)}</span>
                                     </div>
                                 `;
                     }).join('');
 
                 return `
                             <div class="account-item" data-uid="${uid}">
-                                <div class="account-header">
+                                <div class="account-summary">
                                     <div class="left">
                                         <div class="name">${name}</div>
                                         <div class="email">${email}</div>
                                     </div>
-                                    <div class="right" style="display:flex;align-items:center;gap:10px;">
+                                    <div class="right">
                                         <div class="balance">ZMW ${balance.toFixed(2)}</div>
                                         <i class="fa-solid fa-chevron-down expand-icon"></i>
                                     </div>
                                 </div>
-                                <div class="account-details">
-                                    <div style="font-weight:600;font-size:13px;color:#1c2128;margin-bottom:6px;">Transaction History</div>
+                                <div class="account-transactions">
+                                    <div style="font-weight:600; font-size:12px; color:#555; margin-bottom:6px;">Transaction History</div>
                                     ${txHtml}
                                 </div>
                             </div>
                         `;
             }).join('');
 
+            // Toggle account transactions
             accountsList.querySelectorAll('.account-item').forEach(el => {
                 el.addEventListener('click', function() {
                     this.classList.toggle('open');
-                    const details = this.querySelector('.account-details');
+                    const txDiv = this.querySelector('.account-transactions');
                     if (this.classList.contains('open')) {
-                        details.style.display = 'block';
+                        txDiv.classList.add('open');
                     } else {
-                        details.style.display = 'none';
+                        txDiv.classList.remove('open');
                     }
                 });
             });
@@ -5033,7 +5132,6 @@
 
             if (action === 'approve') {
                 withdrawals[key].status = 'approved';
-
                 if (!allData.customerAccounts) allData.customerAccounts = {};
                 if (!allData.customerAccounts[w.userId]) {
                     allData.customerAccounts[w.userId] = { balance: 0 };
@@ -5128,6 +5226,7 @@
             }).join('');
 
             customReferralUserSelect.innerHTML = `<option value="">— Select a user —</option>` + options;
+            depositCustomerSelect.innerHTML = `<option value="">— Select a customer —</option>` + options;
         }
 
         function populateCustomReferralSelect() {
@@ -5500,7 +5599,8 @@
                 'promoPic': 'Are you sure you want to delete this flyer?',
                 'referralPromo': 'Are you sure you want to delete this referral promo?',
                 'customReferral': 'Are you sure you want to delete this custom referral?',
-                'referralDiscount': 'Are you sure you want to delete this referral discount?'
+                'referralDiscount': 'Are you sure you want to delete this referral discount?',
+                'referralPromoDiscount': 'Are you sure you want to delete this referral promo discount?'
             };
             deleteConfirmText.textContent = messages[type] || 'Are you sure you want to delete this item?';
             pendingDeleteAction = { type, key };
@@ -5575,6 +5675,12 @@
                     delete allData.referralDiscounts[key];
                     saveData().then(() => { renderAll();
                         showToast('Referral discount deleted'); });
+                }
+            } else if (type === 'referralPromoDiscount') {
+                if (allData.referralPromoDiscounts && allData.referralPromoDiscounts[key]) {
+                    delete allData.referralPromoDiscounts[key];
+                    saveData().then(() => { renderAll();
+                        showToast('Referral promo discount deleted'); });
                 }
             }
             deleteConfirmModal.classList.remove('open');
@@ -5953,27 +6059,55 @@
             });
         });
 
-        // ── Referral Global ──
-        postReferralGlobalBtn.addEventListener('click', function() {
-            const discount = parseFloat(referralGlobalDiscount.value) || 0;
-            const ownerAmount = parseFloat(referralGlobalOwnerAmount.value) || 0;
+        // ─── New Referral Promo Discount ────────────────────────────────
 
-            if (discount < 0 || discount > 100) {
-                showToast('Please enter a valid discount (0-100)', 'error');
+        postReferralPromoDiscountBtn.addEventListener('click', function() {
+            const discount = parseFloat(referralPromoDiscountPercent.value);
+            const ownerAmount = parseFloat(referralPromoOwnerAmount.value);
+            const codeFilter = referralPromoCodeFilter.value.trim().toUpperCase();
+
+            if (!discount || discount < 1 || discount > 100) {
+                showToast('Please enter a valid discount percentage (1-100)', 'error');
                 return;
             }
-            if (ownerAmount < 0) {
+            if (!ownerAmount || ownerAmount <= 0) {
                 showToast('Please enter a valid owner amount', 'error');
                 return;
             }
 
-            if (!allData.referralGlobal) allData.referralGlobal = { discount: 0, ownerAmount: 0 };
-            allData.referralGlobal.discount = discount;
-            allData.referralGlobal.ownerAmount = ownerAmount;
+            const editItem = referralPromoDiscountList.querySelector('.referral-item[data-edit-key]');
+            if (editItem) {
+                const key = editItem.dataset.editKey;
+                if (allData.referralPromoDiscounts && allData.referralPromoDiscounts[key]) {
+                    allData.referralPromoDiscounts[key].discount = discount;
+                    allData.referralPromoDiscounts[key].ownerAmount = ownerAmount;
+                    allData.referralPromoDiscounts[key].referralCode = codeFilter || '';
+                    saveData().then(() => {
+                        renderAll();
+                        referralPromoDiscountPercent.value = '';
+                        referralPromoOwnerAmount.value = '';
+                        referralPromoCodeFilter.value = '';
+                        showToast('Referral promo updated');
+                    });
+                }
+                return;
+            }
 
+            const newId = 'rpd' + Date.now();
+            if (!allData.referralPromoDiscounts) allData.referralPromoDiscounts = {};
+            allData.referralPromoDiscounts[newId] = {
+                id: newId,
+                discount: discount,
+                ownerAmount: ownerAmount,
+                referralCode: codeFilter || '',
+                createdAt: Date.now()
+            };
             saveData().then(() => {
                 renderAll();
-                showToast('Referral promo settings saved!');
+                referralPromoDiscountPercent.value = '';
+                referralPromoOwnerAmount.value = '';
+                referralPromoCodeFilter.value = '';
+                showToast('Referral promo posted');
             });
         });
 
@@ -6017,19 +6151,6 @@
             viewAccounts.classList.remove('active');
         });
 
-        // ── Manual Deposit button ──
-        manualDepositBtn.addEventListener('click', function() {
-            // Switch to Accounts view and open deposit modal
-            toggleAccounts.click();
-            // We'll open the deposit modal via a separate handler
-            openManualDepositModal();
-        });
-
-        // ── Account Update button ──
-        accountUpdateBtn.addEventListener('click', function() {
-            openAccountUpdateModal();
-        });
-
         // ── Withdrawal filter buttons ──
         showApprovedBtn.addEventListener('click', function() {
             withdrawalsFilter = 'approved';
@@ -6058,20 +6179,13 @@
         updateFilterButtons();
 
         // ───────────────────────────────────────────────────────────────────
-        // MANUAL DEPOSIT MODAL (separate from payables toggle)
+        // MANUAL DEPOSIT
         // ───────────────────────────────────────────────────────────────────
 
-        const manualDepositModal = document.getElementById('manualDepositModal');
-        const manualDepositCloseBtn = document.getElementById('manualDepositCloseBtn');
-        const manualDepositForm = document.getElementById('manualDepositForm');
-        const depositCustomerSelect = document.getElementById('depositCustomerSelect');
-        const depositAmount = document.getElementById('depositAmount');
-        const manualDepositCancelBtn = document.getElementById('manualDepositCancelBtn');
-
-        function openManualDepositModal() {
-            populateDepositSelect();
+        manualDepositBtn.addEventListener('click', function() {
             manualDepositModal.classList.add('open');
-        }
+            populateDepositSelect();
+        });
 
         manualDepositCloseBtn.addEventListener('click', function() {
             manualDepositModal.classList.remove('open');
@@ -6175,83 +6289,6 @@
         });
         withdrawConfirmCancelBtn.addEventListener('click', closeWithdrawConfirmModal);
         withdrawConfirmActionBtn.addEventListener('click', executeWithdrawAction);
-
-        // ───────────────────────────────────────────────────────────────────
-        // PRICE ADJUSTMENT
-        // ───────────────────────────────────────────────────────────────────
-
-        let selectedAdjustAction = 'add-amount';
-
-        document.querySelectorAll('.adjust-option').forEach(opt => {
-            opt.addEventListener('click', function() {
-                document.querySelectorAll('.adjust-option').forEach(o => o.classList.remove('active'));
-                this.classList.add('active');
-                selectedAdjustAction = this.dataset.action;
-
-                const label = document.getElementById('adjustAmountLabel');
-                if (selectedAdjustAction === 'add-amount' || selectedAdjustAction === 'remove-amount') {
-                    label.textContent = 'Amount (ZMW):';
-                } else {
-                    label.textContent = 'Percentage (%):';
-                }
-            });
-        });
-
-        applyAdjustBtn.addEventListener('click', function() {
-            const val = parseFloat(adjustAmount.value);
-            if (!val || val <= 0) {
-                showToast('Please enter a valid amount/percentage', 'error');
-                return;
-            }
-
-            const services = allData.services || {};
-            const serviceEntries = Object.entries(services);
-            if (serviceEntries.length === 0) {
-                showToast('No services to adjust.', 'error');
-                return;
-            }
-
-            let changedCount = 0;
-            let results = [];
-
-            serviceEntries.forEach(([key, s]) => {
-                let oldPrice = s.price || 0;
-                let newPrice = oldPrice;
-
-                if (selectedAdjustAction === 'add-amount') {
-                    newPrice = oldPrice + val;
-                } else if (selectedAdjustAction === 'remove-amount') {
-                    newPrice = Math.max(0, oldPrice - val);
-                } else if (selectedAdjustAction === 'add-percent') {
-                    newPrice = oldPrice + (oldPrice * (val / 100));
-                } else if (selectedAdjustAction === 'remove-percent') {
-                    newPrice = Math.max(0, oldPrice - (oldPrice * (val / 100)));
-                }
-
-                if (newPrice !== oldPrice) {
-                    allData.services[key].price = newPrice;
-                    changedCount++;
-                    results.push(`${s.title}: ZMW ${oldPrice.toFixed(2)} → ZMW ${newPrice.toFixed(2)}`);
-                }
-            });
-
-            if (changedCount === 0) {
-                showToast('No prices were changed.', 'info');
-                return;
-            }
-
-            saveData().then(() => {
-                renderAll();
-                const resultDiv = document.getElementById('adjustResult');
-                resultDiv.classList.add('show');
-                resultDiv.innerHTML = `
-                            <strong>✅ Updated ${changedCount} service(s)</strong><br />
-                            ${results.slice(0, 5).map(r => `<span style="font-size:12px;">${r}</span>`).join('<br />')}
-                            ${results.length > 5 ? `<span style="font-size:12px;color:#888;">… and ${results.length - 5} more</span>` : ''}
-                        `;
-                showToast(`✅ ${changedCount} service prices updated!`, 'success');
-            });
-        });
 
         // ───────────────────────────────────────────────────────────────────
         // EVENT BINDINGS
@@ -6699,6 +6736,112 @@
         });
 
         // ───────────────────────────────────────────────────────────────────
+        // SERVICES PRICE ADJUSTMENT
+        // ───────────────────────────────────────────────────────────────────
+
+        let currentAdjustMode = 'add-amount';
+
+        adjustOptions.querySelectorAll('.opt').forEach(btn => {
+            btn.addEventListener('click', function() {
+                adjustOptions.querySelectorAll('.opt').forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+                currentAdjustMode = this.dataset.mode;
+
+                if (currentAdjustMode === 'add-amount' || currentAdjustMode === 'remove-amount') {
+                    adjustLabel.textContent = 'Amount (ZMW):';
+                    adjustValue.placeholder = '0.00';
+                } else {
+                    adjustLabel.textContent = 'Percentage (%):';
+                    adjustValue.placeholder = '0';
+                }
+                adjustPreview.innerHTML =
+                    `<div style="color:#aaa; text-align:center; padding:12px 0;">Enter a value and click "Preview & Apply".</div>`;
+            });
+        });
+
+        applyAdjustBtn.addEventListener('click', function() {
+            const val = parseFloat(adjustValue.value);
+            if (!val || val <= 0) {
+                showToast('Please enter a valid positive value.', 'error');
+                return;
+            }
+
+            const services = allData.services || {};
+            const entries = Object.entries(services);
+            if (entries.length === 0) {
+                adjustPreview.innerHTML =
+                    `<div style="color:#aaa; text-align:center; padding:12px 0;">No services to adjust.</div>`;
+                return;
+            }
+
+            let modeLabel = '';
+            let adjustedEntries = entries.map(([key, s]) => {
+                const orig = s.price || 0;
+                let newPrice = orig;
+                let mode = currentAdjustMode;
+
+                if (mode === 'add-amount') {
+                    newPrice = orig + val;
+                    modeLabel = `+ ZMW ${val.toFixed(2)}`;
+                } else if (mode === 'remove-amount') {
+                    newPrice = Math.max(0, orig - val);
+                    modeLabel = `- ZMW ${val.toFixed(2)}`;
+                } else if (mode === 'add-percent') {
+                    newPrice = orig + (orig * (val / 100));
+                    modeLabel = `+ ${val}%`;
+                } else if (mode === 'remove-percent') {
+                    newPrice = Math.max(0, orig - (orig * (val / 100)));
+                    modeLabel = `- ${val}%`;
+                }
+                return { key, service: s, orig, newPrice };
+            });
+
+            // Render preview
+            let previewHtml =
+                `<div style="font-size:11px; color:#888; margin-bottom:6px;">Preview — ${modeLabel} applied to ${adjustedEntries.length} service(s). Click "Apply" to save changes.</div>`;
+            previewHtml += adjustedEntries.map(({ key, service, orig, newPrice }) => `
+                        <div class="preview-item">
+                            <span class="pname">${service.title || 'Untitled'}</span>
+                            <span class="pprice">
+                                <span class="old">ZMW ${orig.toFixed(2)}</span>
+                                <span class="new">ZMW ${newPrice.toFixed(2)}</span>
+                            </span>
+                        </div>
+                    `).join('');
+
+            adjustPreview.innerHTML = previewHtml;
+
+            // Ask to apply
+            if (confirm(`Apply ${modeLabel} to all ${adjustedEntries.length} services?`)) {
+                adjustedEntries.forEach(({ key, newPrice }) => {
+                    if (allData.services && allData.services[key]) {
+                        allData.services[key].price = newPrice;
+                    }
+                });
+                saveData().then(() => {
+                    renderAll();
+                    // Re-render preview with updated prices
+                    const updatedEntries = Object.entries(allData.services || {}).map(([key, s]) => {
+                        return { key, service: s, orig: s.price || 0, newPrice: s.price || 0 };
+                    });
+                    let updatedHtml =
+                        `<div style="font-size:11px; color:#16a34a; margin-bottom:6px;">✅ Applied ${modeLabel} to ${updatedEntries.length} service(s).</div>`;
+                    updatedHtml += updatedEntries.map(({ key, service, orig, newPrice }) => `
+                                <div class="preview-item">
+                                    <span class="pname">${service.title || 'Untitled'}</span>
+                                    <span class="pprice">
+                                        <span class="old">ZMW ${orig.toFixed(2)}</span>
+                                        <span class="new">ZMW ${newPrice.toFixed(2)}</span>
+                                    </span>
+                                </div>
+                            `).join('');
+                    adjustPreview.innerHTML = updatedHtml;
+                    showToast(`✅ Applied ${modeLabel} to all services`, 'success');
+                });
+            }
+        });
+
+        // ───────────────────────────────────────────────────────────────────
         // TOAST
         // ───────────────────────────────────────────────────────────────────
 
@@ -6751,7 +6894,7 @@
             }
         });
 
-        console.log('✅ Admin App updated with Payables button alignment, Account transaction history, Referral Promos (global), and Price Adjustment for Services.');
+        console.log('✅ Admin App — Added Payables alignment, Account transaction history, Referral Promos, and Services Price Adjustment.');
     </script>
 </body>
 </html>
