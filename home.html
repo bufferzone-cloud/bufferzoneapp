@@ -266,6 +266,7 @@
             font-weight: 700;
         }
 
+        /* ── PROMO CAROUSEL – PEEK STYLE ── */
         .promo-carousel-wrapper {
             position: relative;
             margin: 4px 0 14px 0;
@@ -274,11 +275,12 @@
             height: 280px;
             background: #f8f9fc;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 0 6%;
         }
 
         .promo-carousel-track {
             display: flex;
-            gap: 0;
+            gap: 12px;
             padding: 0;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
@@ -294,21 +296,23 @@
         }
 
         .promo-slide {
-            flex: 0 0 100%;
-            max-width: 100%;
+            flex: 0 0 62%;
+            max-width: 62%;
             scroll-snap-align: center;
             position: relative;
             border-radius: 20px;
             overflow: hidden;
             transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease, box-shadow 0.5s ease;
-            height: 90%;
+            height: 88%;
             background: #ffffff;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-            transform-origin: center center;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: auto 0;
+            transform: scale(0.82);
+            opacity: 0.6;
+            z-index: 1;
         }
 
         .promo-slide img {
@@ -350,27 +354,23 @@
         }
 
         .promo-slide.active-slide {
-            transform: scale(1) translateX(0);
-            z-index: 2;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+            transform: scale(1);
             opacity: 1;
+            z-index: 3;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
         }
-        .promo-slide.prev-slide {
-            transform: scale(0.78) translateX(-72%);
-            z-index: 1;
-            opacity: 0.8;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-        }
+
+        .promo-slide.prev-slide,
         .promo-slide.next-slide {
-            transform: scale(0.78) translateX(72%);
-            z-index: 1;
-            opacity: 0.8;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            transform: scale(0.82);
+            opacity: 0.7;
+            z-index: 2;
         }
+
         .promo-slide.far-slide {
-            transform: scale(0.6) translateX(0);
+            transform: scale(0.7);
+            opacity: 0.3;
             z-index: 0;
-            opacity: 0.2;
         }
 
         .promo-carousel-indicators {
@@ -2150,11 +2150,41 @@
                 font-size: 11px;
                 padding: 8px 12px;
             }
+            .promo-carousel-wrapper {
+                padding: 0 4%;
+                height: 230px;
+            }
+            .promo-slide {
+                flex: 0 0 68%;
+                max-width: 68%;
+                height: 84%;
+            }
+            .promo-slide .slide-text {
+                font-size: 16px;
+            }
+            .promo-slide .slide-text small {
+                font-size: 11px;
+            }
+            .promo-carousel-indicators .dot {
+                width: 6px;
+                height: 6px;
+            }
+            .promo-carousel-indicators .dot.active {
+                width: 18px;
+            }
         }
 
         @media (max-width: 380px) {
             .promo-slide .slide-text {
                 font-size: 14px;
+            }
+            .promo-carousel-wrapper {
+                padding: 0 3%;
+                height: 200px;
+            }
+            .promo-slide {
+                flex: 0 0 72%;
+                max-width: 72%;
             }
         }
     </style>
@@ -2768,8 +2798,10 @@
                 const data = snapshot.val();
                 if (!data) {
                     allData = {
-                        hero: { title: 'WE ARE CREATIVE AGENCY', titleSpan: 'CREATIVE', desc: 'We provide the best ideas to grow your business', cta: 'GET STARTED', phone: '+123 456 7890' },
-                        policy: { title: 'BUFFER ZONE PAYMENT POLICY', desc: 'To begin your project, we require a 50% down payment. The remaining balance is due upon project completion and delivery. This ensures commitment from both parties.', tag: '50% upfront required' },
+                        hero: { title: 'WE ARE CREATIVE AGENCY', titleSpan: 'CREATIVE', desc: 'We provide the best ideas to grow your business',
+                            cta: 'GET STARTED', phone: '+123 456 7890' },
+                        policy: { title: 'BUFFER ZONE PAYMENT POLICY', desc: 'To begin your project, we require a 50% down payment. The remaining balance is due upon project completion and delivery. This ensures commitment from both parties.',
+                            tag: '50% upfront required' },
                         ourServicesList: ['Graphic Design', 'Web Development', 'Digital Marketing', 'Branding Design'],
                         services: {},
                         orders: {},
@@ -2783,7 +2815,8 @@
                         withdrawalRequests: {},
                         referralPromos: {},
                         customReferrals: {},
-                        referralDiscounts: {}
+                        referralDiscounts: {},
+                        referralPromoDiscounts: {}
                     };
                     set(dbRef, allData);
                 } else {
@@ -2795,6 +2828,7 @@
                     if (!allData.referralPromos) allData.referralPromos = {};
                     if (!allData.customReferrals) allData.customReferrals = {};
                     if (!allData.referralDiscounts) allData.referralDiscounts = {};
+                    if (!allData.referralPromoDiscounts) allData.referralPromoDiscounts = {};
                 }
                 renderAll();
                 if (callback) callback();
@@ -2860,7 +2894,7 @@
         }
 
         // =================================================================
-        // PROMO CAROUSEL – BURGER STYLE (EDGE PEEK)
+        // PROMO CAROUSEL – PEEK STYLE
         // =================================================================
 
         function renderPromoCarousel() {
@@ -2946,7 +2980,7 @@
                 if (firstSlide) {
                     const containerWidth = track.clientWidth;
                     const slideWidth = firstSlide.offsetWidth;
-                    const scrollPos = 0;
+                    const scrollPos = firstSlide.offsetLeft - (containerWidth - slideWidth) / 2;
                     track.scrollLeft = Math.max(0, scrollPos);
                 }
             }, 100);
@@ -2964,7 +2998,7 @@
                     slide.classList.add('prev-slide');
                 } else if (i === activeIndex + 1) {
                     slide.classList.add('next-slide');
-                } else {
+                } else if (i < activeIndex - 1 || i > activeIndex + 1) {
                     slide.classList.add('far-slide');
                 }
             });
@@ -3007,7 +3041,7 @@
                     const nextIndex = (currentCarouselIndex + 1) % carouselItems.length;
                     goToSlide(nextIndex);
                 }
-            }, 3000);
+            }, 5000);
         }
 
         function resetAutoScroll() {
@@ -3046,7 +3080,8 @@
             }
 
             if (entries.length === 0) {
-                container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No services available.</div>`;
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:20px;">No services available.</div>`;
                 return;
             }
 
@@ -3078,7 +3113,8 @@
             const orders = allData.orders || {};
             const entries = Object.entries(orders).filter(([key, o]) => o.userId === currentUserId);
             if (entries.length === 0) {
-                container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No orders found.</div>`;
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:20px;">No orders found.</div>`;
                 return;
             }
             container.innerHTML = entries.map(([key, o]) => {
@@ -3088,11 +3124,13 @@
                     parts.forEach(part => {
                         const [label, value] = part.split(': ');
                         if (label && value) {
-                            customizationHtml += `<div class="detail-row"><span class="label">${escapeHtml(label)}</span><span class="val">${escapeHtml(value)}</span></div>`;
+                            customizationHtml +=
+                                `<div class="detail-row"><span class="label">${escapeHtml(label)}</span><span class="val">${escapeHtml(value)}</span></div>`;
                         }
                     });
                 } else {
-                    customizationHtml = `<div class="detail-row"><span class="label">Customization</span><span class="val">None</span></div>`;
+                    customizationHtml =
+                        `<div class="detail-row"><span class="label">Customization</span><span class="val">None</span></div>`;
                 }
 
                 const statusClass = o.status ? `status-${o.status}` : 'status-pending';
@@ -3186,7 +3224,8 @@
             }
 
             if (entries.length === 0) {
-                container.innerHTML = `<div class="text-muted text-center" style="padding:20px;">No transactions found.</div>`;
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:20px;">No transactions found.</div>`;
                 return;
             }
             container.innerHTML = entries.map(([key, t]) => {
@@ -3209,6 +3248,15 @@
                 if (isWithdrawal && isApproved) statusDisplay = '✅ Approved';
                 if (isWithdrawal && isDeclined) statusDisplay = '❌ Declined';
 
+                let detailText = t.detail || '';
+                if (t.type?.toLowerCase().includes('referral') && t.userName) {
+                    detailText = `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral code.`;
+                }
+                if (t.type?.toLowerCase().includes('discount') && t.userName) {
+                    detailText =
+                        `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral for a service discount.`;
+                }
+
                 return `
                 <div class="history-card" data-key="${key}">
                     <div class="history-summary">
@@ -3225,7 +3273,7 @@
                         <div class="h-row"><span class="h-label">Reference</span><span class="h-val">${escapeHtml(t.ref || 'N/A')}</span></div>
                         <div class="h-row"><span class="h-label">Method</span><span class="h-val">${escapeHtml(t.method || 'N/A')}</span></div>
                         <div class="h-row"><span class="h-label">Status</span><span class="h-val">${statusDisplay}</span></div>
-                        <div class="h-row"><span class="h-label">Detail</span><span class="h-val">${escapeHtml(t.detail || 'N/A')}</span></div>
+                        <div class="h-row"><span class="h-label">Detail</span><span class="h-val">${escapeHtml(detailText)}</span></div>
                     </div>
                 </div>
                 `;
@@ -3307,7 +3355,8 @@
                 profileFullName.textContent = fullName;
                 profilePhone.textContent = currentUserData.phone || 'Not set';
                 profileEmail.textContent = currentUser.email || 'No email';
-                profileJoined.textContent = currentUserData.createdAt ? new Date(currentUserData.createdAt).toLocaleDateString() : 'N/A';
+                profileJoined.textContent = currentUserData.createdAt ? new Date(currentUserData.createdAt).toLocaleDateString() :
+                    'N/A';
                 profileAvatarLarge.textContent = initial;
                 headerAvatar.textContent = initial;
                 headerName.textContent = fullName;
@@ -3436,7 +3485,8 @@
             }
 
             if (html === '') {
-                html = `<div style="text-align:center;padding:30px 0;color:#888;">No samples available yet. Check back soon!</div>`;
+                html =
+                    `<div style="text-align:center;padding:30px 0;color:#888;">No samples available yet. Check back soon!</div>`;
             }
             container.innerHTML = html;
         }
@@ -3448,11 +3498,9 @@
         function renderAccountAndReferral() {
             if (!currentUserData) return;
 
-            // Referral code
             const code = currentUserData.referralCode || 'BZ-XXXXX';
             referralCodeDisplay.textContent = code;
 
-            // Copy referral code
             copyReferralBtn.addEventListener('click', function() {
                 navigator.clipboard.writeText(code).then(() => {
                     showToast('Referral code copied!', 'success');
@@ -3467,12 +3515,10 @@
                 });
             });
 
-            // Account balance
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
             accountBalanceDisplay.textContent = `ZMW ${(userAccount.balance || 0).toFixed(2)}`;
 
-            // Withdraw buttons
             withdrawBtnFromBalance.addEventListener('click', openWithdrawModal);
             withdrawBtnFromView.addEventListener('click', openWithdrawModal);
         }
@@ -3489,12 +3535,14 @@
                 .sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
 
             if (entries.length === 0) {
-                container.innerHTML = `<div style="text-align:center;padding:16px;color:#888;font-size:12px;">No transactions yet.</div>`;
+                container.innerHTML =
+                    `<div style="text-align:center;padding:16px;color:#888;font-size:12px;">No transactions yet.</div>`;
                 return;
             }
 
             container.innerHTML = entries.slice(0, 10).map(([key, t]) => {
-                const isCredit = t.amount && t.amount > 0 && (t.type?.toLowerCase().includes('referral') || t.type?.toLowerCase().includes('received'));
+                const isCredit = t.amount && t.amount > 0 && (t.type?.toLowerCase().includes('referral') || t.type
+                    ?.toLowerCase().includes('received'));
                 let amountDisplay = '';
                 let amountClass = '';
                 if (t.amount) {
@@ -3512,11 +3560,13 @@
 
                 if (t.type?.toLowerCase().includes('referral') && t.userName) {
                     title = `💰 Referral Bonus`;
-                    desc = `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral code.`;
+                    desc =
+                        `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral code.`;
                 }
                 if (t.type?.toLowerCase().includes('discount') && t.userName) {
                     title = `🎯 Referral Discount`;
-                    desc = `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral for a service discount.`;
+                    desc =
+                        `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral for a service discount.`;
                 }
 
                 return `
@@ -3558,7 +3608,8 @@
             container.innerHTML = entries.map(([key, w]) => {
                 const statusClass = w.status || 'pending';
                 const statusDisplay = w.status ? w.status.charAt(0).toUpperCase() + w.status.slice(1) : 'Pending';
-                const dateStr = w.date ? new Date(w.date).toLocaleString() : (w.createdAt ? new Date(w.createdAt).toLocaleString() : 'N/A');
+                const dateStr = w.date ? new Date(w.date).toLocaleString() : (w.createdAt ? new Date(w.createdAt)
+                    .toLocaleString() : 'N/A');
 
                 let statusMessage = '';
                 let statusEmoji = '⏳';
@@ -3566,11 +3617,13 @@
                 if (w.status === 'approved') {
                     statusEmoji = '✅';
                     statusColor = '#00a86b';
-                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was approved. The amount has been deducted from your account.`;
+                    statusMessage =
+                        `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was approved. The amount has been deducted from your account.`;
                 } else if (w.status === 'declined') {
                     statusEmoji = '❌';
                     statusColor = '#dc2626';
-                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount remains in your account.`;
+                    statusMessage =
+                        `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount remains in your account.`;
                 } else {
                     statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
                 }
@@ -3632,7 +3685,8 @@
             specLines.forEach(line => {
                 const parts = line.split(':');
                 if (parts.length === 2) {
-                    specsHtml += `<div class="spec-row"><span class="label">${parts[0].trim()}</span><span class="value">${parts[1].trim()}</span></div>`;
+                    specsHtml +=
+                        `<div class="spec-row"><span class="label">${parts[0].trim()}</span><span class="value">${parts[1].trim()}</span></div>`;
                 }
             });
 
@@ -3719,7 +3773,8 @@
 
             document.querySelectorAll('#sizeOptions .customize-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    document.querySelectorAll('#sizeOptions .customize-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('#sizeOptions .customize-btn').forEach(b => b.classList.remove(
+                    'active'));
                     this.classList.add('active');
                     selectedSize = this.dataset.size;
                     updateOrderTotal();
@@ -3727,35 +3782,40 @@
             });
             document.querySelectorAll('#orientationOptions .customize-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    document.querySelectorAll('#orientationOptions .customize-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('#orientationOptions .customize-btn').forEach(b => b.classList
+                        .remove('active'));
                     this.classList.add('active');
                     selectedOrientation = this.dataset.orientation;
                 });
             });
             document.querySelectorAll('#formatOptions .customize-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    document.querySelectorAll('#formatOptions .customize-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('#formatOptions .customize-btn').forEach(b => b.classList.remove(
+                        'active'));
                     this.classList.add('active');
                     selectedFormat = this.dataset.format;
                 });
             });
             document.querySelectorAll('#colorOptions .customize-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    document.querySelectorAll('#colorOptions .customize-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('#colorOptions .customize-btn').forEach(b => b.classList.remove(
+                        'active'));
                     this.classList.add('active');
                     selectedColorScheme = this.dataset.colorscheme;
                 });
             });
             document.querySelectorAll('#revisionOptions .customize-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    document.querySelectorAll('#revisionOptions .customize-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('#revisionOptions .customize-btn').forEach(b => b.classList
+                        .remove('active'));
                     this.classList.add('active');
                     selectedRevisions = this.dataset.revisions;
                 });
             });
             document.querySelectorAll('#deliveryOptions .customize-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    document.querySelectorAll('#deliveryOptions .customize-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('#deliveryOptions .customize-btn').forEach(b => b.classList
+                        .remove('active'));
                     this.classList.add('active');
                     selectedDeliverySpeed = this.dataset.delivery;
                 });
@@ -3922,14 +3982,32 @@
                     return;
                 }
 
+                // Check both referralDiscounts and referralPromoDiscounts
                 const discounts = allData.referralDiscounts || {};
+                const promoDiscounts = allData.referralPromoDiscounts || {};
                 let foundDiscount = null;
                 let discountKey = null;
+                let isPromo = false;
+
+                // First check exact match in referralDiscounts
                 for (const [key, d] of Object.entries(discounts)) {
                     if (d.referralCode === code) {
                         foundDiscount = d;
                         discountKey = key;
+                        isPromo = false;
                         break;
+                    }
+                }
+
+                // If not found, check referralPromoDiscounts (exact match OR code filter empty)
+                if (!foundDiscount) {
+                    for (const [key, d] of Object.entries(promoDiscounts)) {
+                        if (d.referralCode === code || d.referralCode === '') {
+                            foundDiscount = d;
+                            discountKey = key;
+                            isPromo = true;
+                            break;
+                        }
                     }
                 }
 
@@ -3953,7 +4031,8 @@
 
                 paymentAmount.textContent = `ZMW ${depositAmount.toFixed(2)}`;
 
-                referralMsg.textContent = `✅ Referral applied! ${foundDiscount.discount}% off. Owner will receive ZMW ${foundDiscount.ownerAmount || 0}.`;
+                referralMsg.textContent =
+                    `✅ Referral applied! ${foundDiscount.discount}% off. Owner will receive ZMW ${foundDiscount.ownerAmount || 0}.`;
                 referralMsg.className = 'coupon-msg success';
 
                 appliedReferral = {
@@ -3962,7 +4041,8 @@
                     discount: foundDiscount.discount,
                     ownerAmount: foundDiscount.ownerAmount || 0,
                     referrerUid: referrerUid,
-                    referrerData: referrerData
+                    referrerData: referrerData,
+                    isPromo: isPromo
                 };
                 discountApplied = true;
                 referralCodeInput.disabled = true;
@@ -4021,7 +4101,8 @@
                 status: 'pending',
                 customer: customerName,
                 clientNumber: currentUserData?.phone || 'N/A',
-                customization: data.customizationString || `Size: ${data.size || 'N/A'}, Orientation: ${data.orientation || 'N/A'}, Format: ${data.format || 'N/A'}`,
+                customization: data.customizationString ||
+                    `Size: ${data.size || 'N/A'}, Orientation: ${data.orientation || 'N/A'}, Format: ${data.format || 'N/A'}`,
                 date: new Date().toLocaleDateString(),
                 paymentProof: screenshotUrl,
                 userId: currentUserId,
@@ -4039,6 +4120,7 @@
                 set(usedCouponRef, true);
             }
 
+            // === REFERRAL BONUS: credit the referrer's account and record transaction ===
             if (appliedReferral && appliedReferral.referrerUid) {
                 const bonusAmount = appliedReferral.ownerAmount || 0;
                 if (bonusAmount > 0) {
@@ -4049,8 +4131,8 @@
                     });
 
                     const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
-                    set(txRef, {
-                        type: 'Referral Discount Bonus',
+                    const txData = {
+                        type: appliedReferral.isPromo ? 'Referral Promo Bonus' : 'Referral Discount Bonus',
                         amount: bonusAmount,
                         method: 'Referral System',
                         status: 'completed',
@@ -4065,14 +4147,16 @@
                         userName: customerName,
                         userEmail: currentUser.email || 'N/A',
                         userPhone: currentUserData?.phone || 'N/A'
-                    });
+                    };
+                    set(txRef, txData);
 
                     const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
                     set(notifRef, {
                         title: '💰 Referral Bonus',
                         message: `You received ZMW ${bonusAmount.toFixed(2)} from ${customerName} who used your referral code.`,
                         timestamp: Date.now(),
-                        read: false
+                        read: false,
+                        userId: appliedReferral.referrerUid
                     });
                 }
             }
@@ -4084,7 +4168,8 @@
                 status: 'pending',
                 date: new Date().toLocaleString(),
                 ref: orderId,
-                detail: '50% down payment for ' + data.service + (discountAppliedVal > 0 ? ` (${discountAppliedVal}% off)` : '') + (data.notes ? ` · Notes: ${data.notes}` : ''),
+                detail: '50% down payment for ' + data.service + (discountAppliedVal > 0 ? ` (${discountAppliedVal}% off)` :
+                    '') + (data.notes ? ` · Notes: ${data.notes}` : ''),
                 screenshot: screenshotUrl,
                 userId: currentUserId,
                 itemId: data.serviceId || 'N/A',
@@ -4102,10 +4187,12 @@
                 title: 'Order Placed',
                 message: `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.${data.notes ? ` Notes: "${data.notes}"` : ''}`,
                 timestamp: Date.now(),
-                read: false
+                read: false,
+                userId: currentUserId
             });
 
-            showToast('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.', 'success');
+            showToast('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.',
+                'success');
             paymentModal.classList.remove('open');
             cloudinaryScreenshotUrlInput.value = '';
             fileName.textContent = 'No file chosen';
@@ -4151,7 +4238,6 @@
                 return;
             }
 
-            // Create withdrawal request – do NOT deduct money yet
             if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
             const wId = 'w' + Date.now();
             allData.withdrawalRequests[wId] = {
@@ -4164,7 +4250,6 @@
                 date: new Date().toLocaleString()
             };
 
-            // Record withdrawal transaction (pending approval)
             if (!allData.transactions) allData.transactions = {};
             const txId = 'tx' + Date.now();
             allData.transactions[txId] = {
@@ -4180,12 +4265,12 @@
                 itemId: wId,
                 itemTitle: 'Withdrawal',
                 itemType: 'withdrawal',
-                userName: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` : currentUser.email || 'Customer',
+                userName: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
+                    currentUser.email || 'Customer',
                 userEmail: currentUser.email || 'N/A',
                 userPhone: currentUserData?.phone || 'N/A'
             };
 
-            // Save and refresh
             saveData().then(() => {
                 closeWithdrawModal();
                 withdrawSuccessModal.classList.add('open');
@@ -4224,7 +4309,8 @@
                     dynamicBack.style.display = 'none';
                     dynamicViewAll.style.display = 'inline';
                 } else {
-                    const names = { graphic: 'GRAPHIC DESIGN', dev: 'DEVELOPER SERVICES', tech: 'TECHNICAL SERVICES', it: 'IT SUPPORT' };
+                    const names = { graphic: 'GRAPHIC DESIGN', dev: 'DEVELOPER SERVICES', tech: 'TECHNICAL SERVICES',
+                        it: 'IT SUPPORT' };
                     dynamicTitle.textContent = names[cat] || 'SERVICES';
                     dynamicBack.style.display = 'inline';
                     dynamicViewAll.style.display = 'none';
@@ -4354,10 +4440,9 @@
             }
         });
 
-        console.log('✅ Customer App ready — Withdrawals are correctly submitted as pending requests.');
-        console.log('✅ Balance is ONLY deducted when the admin approves the withdrawal.');
-        console.log('✅ Approved withdrawals show ✅, declined show ❌ with no balance change.');
-        console.log('✅ Withdrawal status updates in real time via Firebase listener.');
+        console.log('✅ Customer App — Carousel: 5s auto‑scroll, current slide largest, adjacent slides peek 20%.');
+        console.log('✅ Referral Promo: checks both referralDiscounts AND referralPromoDiscounts.');
+        console.log('✅ Referral bonus transactions are recorded and owner account credited.');
     </script>
 </body>
 </html>
