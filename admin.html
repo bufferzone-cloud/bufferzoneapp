@@ -93,6 +93,7 @@
             transform: scale(0.92);
         }
 
+        /* ── Badge counter on nav items ── */
         .badge-counter {
             position: absolute;
             top: -6px;
@@ -1051,189 +1052,6 @@
             transform: none;
         }
 
-        /* ── Customer Selection Modal ── */
-        .customer-select-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            z-index: 2100;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-        }
-        .customer-select-modal-overlay.open {
-            display: flex;
-        }
-        .customer-select-modal {
-            background: #ffffff;
-            border-radius: 18px;
-            width: 100%;
-            max-width: 500px;
-            max-height: 85vh;
-            overflow-y: auto;
-            padding: 22px 20px 18px 20px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
-            animation: modalIn 0.25s ease;
-        }
-        .customer-select-modal .close-btn {
-            float: right;
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: #999;
-            cursor: pointer;
-            padding: 4px;
-        }
-        .customer-select-modal .close-btn:hover {
-            color: #1c2128;
-        }
-        .customer-select-modal h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1c2128;
-            margin-bottom: 2px;
-            clear: both;
-        }
-        .customer-select-modal .sub {
-            color: #777;
-            font-size: 13px;
-            margin-bottom: 12px;
-        }
-        .customer-select-modal .search-input {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-size: 13px;
-            margin-bottom: 14px;
-            transition: border 0.2s;
-        }
-        .customer-select-modal .search-input:focus {
-            outline: none;
-            border-color: #1c2128;
-            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
-        }
-        .customer-select-modal .customer-list {
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #f0f0f0;
-            border-radius: 10px;
-            padding: 4px;
-        }
-        .customer-select-modal .customer-list-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border-bottom: 1px solid #f5f5f5;
-        }
-        .customer-select-modal .customer-list-item:last-child {
-            border-bottom: none;
-        }
-        .customer-select-modal .customer-list-item:hover {
-            background: #f8f9fc;
-        }
-        .customer-select-modal .customer-list-item .c-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: #1c2128;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-        .customer-select-modal .customer-list-item .c-info {
-            flex: 1;
-        }
-        .customer-select-modal .customer-list-item .c-info .c-name {
-            font-weight: 600;
-            font-size: 14px;
-            color: #1c2128;
-        }
-        .customer-select-modal .customer-list-item .c-info .c-email {
-            font-size: 12px;
-            color: #888;
-        }
-        .customer-select-modal .customer-list-item .c-balance {
-            font-weight: 700;
-            font-size: 14px;
-            color: #f5b83d;
-        }
-        .customer-select-modal .customer-list-item.selected {
-            background: #f0f7ff;
-            border-left: 3px solid #1c2128;
-        }
-        .customer-select-modal .no-results {
-            text-align: center;
-            padding: 30px 0;
-            color: #888;
-        }
-        .customer-select-modal .selected-display {
-            margin-top: 14px;
-            padding: 10px 14px;
-            background: #f8f9fc;
-            border-radius: 10px;
-            border: 1px solid #f0f0f0;
-            display: none;
-        }
-        .customer-select-modal .selected-display.show {
-            display: block;
-        }
-        .customer-select-modal .selected-display .sd-label {
-            font-size: 11px;
-            color: #888;
-        }
-        .customer-select-modal .selected-display .sd-name {
-            font-weight: 600;
-            font-size: 15px;
-            color: #1c2128;
-        }
-        .customer-select-modal .selected-display .sd-email {
-            font-size: 12px;
-            color: #888;
-        }
-        .customer-select-modal .selected-display .sd-balance {
-            font-weight: 700;
-            font-size: 16px;
-            color: #f5b83d;
-            float: right;
-        }
-        .customer-select-modal .btn-select-customer {
-            width: 100%;
-            padding: 11px;
-            border-radius: 10px;
-            border: none;
-            background: #1c2128;
-            color: #fff;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            margin-top: 12px;
-            transition: all 0.2s;
-        }
-        .customer-select-modal .btn-select-customer:hover {
-            background: #2a2a2a;
-        }
-        .customer-select-modal .btn-select-customer:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        .customer-select-modal .btn-select-customer:active {
-            transform: scale(0.95);
-        }
-
         .customer-item {
             background: #ffffff;
             border-radius: 12px;
@@ -1627,11 +1445,6 @@
         .form-group textarea {
             resize: vertical;
             min-height: 50px;
-        }
-        .form-group .row-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
         }
         .modal .btn {
             width: 100%;
@@ -2355,6 +2168,7 @@
             margin-bottom: 8px;
         }
 
+        /* ── Payables: Button row with equal spacing ── */
         .payables-action-row {
             display: flex;
             align-items: center;
@@ -2413,6 +2227,7 @@
             display: block;
         }
 
+        /* ── Account item with expandable transaction history ── */
         .account-item {
             background: #ffffff;
             border-radius: 12px;
@@ -2927,6 +2742,7 @@
             display: block;
         }
 
+        /* ── Services: Price Adjustment ── */
         .price-adjust-box {
             background: #ffffff;
             border-radius: 16px;
@@ -3120,6 +2936,7 @@
                 font-size: 10px;
             }
         }
+        /* ── Promo header button (yellow circle) ── */
         .promo-header-btn {
             width: 44px;
             height: 44px;
@@ -3149,6 +2966,128 @@
             .promo-pics-upload-area {
                 height: 380px;
             }
+        }
+
+        /* ── Enhanced Customer Select ── */
+        .customer-select-wrapper {
+            position: relative;
+        }
+        .customer-select-wrapper select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 13px;
+            background: #ffffff;
+            color: #1c2128;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%23888'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+        }
+        .customer-select-wrapper select:focus {
+            outline: none;
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+        .customer-select-wrapper .customer-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+        }
+        .customer-select-wrapper .customer-option .opt-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #1c2128;
+            color: #f5b83d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        .customer-select-wrapper .customer-option .opt-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .customer-select-wrapper .customer-option .opt-info .opt-name {
+            font-weight: 600;
+            font-size: 13px;
+            color: #1c2128;
+        }
+        .customer-select-wrapper .customer-option .opt-info .opt-email {
+            font-size: 11px;
+            color: #888;
+        }
+        .customer-select-wrapper .customer-option .opt-info .opt-bal {
+            font-size: 11px;
+            color: #f5b83d;
+            font-weight: 600;
+        }
+
+        /* ── Edit Customer Modal ── */
+        .edit-customer-modal .modal {
+            max-width: 480px;
+        }
+        .edit-customer-modal .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .edit-customer-modal .form-row .full-width {
+            grid-column: 1 / -1;
+        }
+        .edit-customer-modal .form-group {
+            margin-bottom: 12px;
+        }
+        .edit-customer-modal .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 12px;
+            color: #222;
+            margin-bottom: 4px;
+        }
+        .edit-customer-modal .form-group input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            transition: border 0.2s;
+            background: #ffffff;
+            color: #1c2128;
+        }
+        .edit-customer-modal .form-group input:focus {
+            outline: none;
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+        .edit-customer-modal .btn-save-edit {
+            width: 100%;
+            padding: 11px;
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .edit-customer-modal .btn-save-edit:hover {
+            background: #2a2a2a;
+        }
+        .edit-customer-modal .btn-save-edit:active {
+            transform: scale(0.95);
+        }
+        .edit-customer-modal .btn-save-edit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -3324,6 +3263,7 @@
                     <p style="font-size:13px; color:#888;">Manage referral promos, custom referrals, and referral discounts.</p>
                 </div>
 
+                <!-- ── SET UP REFERRAL PROMO (All Users) ── -->
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-users"></i> Set Up Referral Promo
@@ -3342,6 +3282,7 @@
                     </div>
                 </div>
 
+                <!-- ── SET UP CUSTOM REFERRAL (Specific User) ── -->
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-user-gear"></i> Set Up Custom Referral
@@ -3370,6 +3311,7 @@
                     </div>
                 </div>
 
+                <!-- ── REFERRAL DISCOUNT ── -->
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-percent"></i> Referral Discount
@@ -3395,6 +3337,7 @@
                     </div>
                 </div>
 
+                <!-- ── REFERRAL PROMOS (NEW) ── -->
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-star"></i> Referral Promos
@@ -3421,6 +3364,7 @@
                     </div>
                 </div>
 
+                <!-- ── SIGNUP BONUSES ── -->
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-gift"></i> Signup Bonuses
@@ -3461,6 +3405,7 @@
                     <p style="font-size:13px; color:#888;">Manage customer accounts and withdrawal requests.</p>
                 </div>
 
+                <!-- Unified button row: Accounts | Withdrawals | Manual Deposit | Account Update -->
                 <div class="payables-action-row">
                     <button class="p-btn toggle active" id="toggleAccounts"><i class="fa-solid fa-wallet"></i> Accounts</button>
                     <button class="p-btn toggle" id="toggleWithdrawals"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
@@ -3468,10 +3413,12 @@
                     <button class="p-btn gold" id="accountUpdateBtn"><i class="fa-solid fa-pen-to-square"></i> Account Update</button>
                 </div>
 
+                <!-- Accounts View -->
                 <div class="payables-view active" id="viewAccounts">
                     <div id="accountsList"></div>
                 </div>
 
+                <!-- Withdrawals View -->
                 <div class="payables-view" id="viewWithdrawals">
                     <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px;">
                         <button class="btn btn-primary btn-sm" id="showApprovedWithdrawals" style="background:#16a34a; color:#fff; border:none; padding:6px 18px; border-radius:20px; font-size:11px; font-weight:600; cursor:pointer;">✅ Approved</button>
@@ -3498,6 +3445,7 @@
                     </div>
                 </div>
 
+                <!-- PRICE ADJUSTMENT (NEW) -->
                 <div class="price-adjust-box" id="priceAdjustBox">
                     <div class="title"><i class="fa-solid fa-calculator"></i> Code Price Adjustment</div>
                     <div class="sub">Apply a flat amount or percentage to all services. Preview the changes before applying.</div>
@@ -3879,9 +3827,11 @@
             <form id="manualDepositForm">
                 <div class="form-group">
                     <label>Select Customer</label>
-                    <select id="depositCustomerSelect" required>
-                        <option value="">— Select a customer —</option>
-                    </select>
+                    <div class="customer-select-wrapper">
+                        <select id="depositCustomerSelect" required>
+                            <option value="">— Select a customer —</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Amount (ZMW)</label>
@@ -3890,26 +3840,6 @@
                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Deposit</button>
                 <button type="button" class="btn btn-outline" id="manualDepositCancelBtn">Cancel</button>
             </form>
-        </div>
-    </div>
-
-    <!-- ===== CUSTOMER SELECT MODAL ===== -->
-    <div class="customer-select-modal-overlay" id="customerSelectModal">
-        <div class="customer-select-modal">
-            <button class="close-btn" id="customerSelectCloseBtn"><i class="fa-solid fa-times"></i></button>
-            <h3><i class="fa-solid fa-users" style="color:#f5b83d;"></i> Select Customer</h3>
-            <p class="sub">Search and select a customer from the list.</p>
-            <input type="text" class="search-input" id="customerSearchInput" placeholder="Search by name, email, or phone..." />
-            <div class="customer-list" id="customerSelectList">
-                <div class="no-results">Loading customers...</div>
-            </div>
-            <div class="selected-display" id="selectedDisplay">
-                <div class="sd-label">Selected Customer</div>
-                <div class="sd-name" id="selectedName">—</div>
-                <div class="sd-email" id="selectedEmail">—</div>
-                <div class="sd-balance" id="selectedBalance">ZMW 0.00</div>
-            </div>
-            <button class="btn-select-customer" id="selectCustomerBtn" disabled>Select Customer</button>
         </div>
     </div>
 
@@ -4021,6 +3951,41 @@
         </div>
     </div>
 
+    <!-- ===== EDIT CUSTOMER MODAL ===== -->
+    <div class="modal-overlay edit-customer-modal" id="editCustomerModal">
+        <div class="modal" style="max-width:480px;">
+            <button class="close-btn" id="editCustomerCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3><i class="fa-solid fa-user-pen" style="color:#f5b83d;"></i> Edit Customer</h3>
+            <p class="sub">Update customer details.</p>
+            <form id="editCustomerForm">
+                <input type="hidden" id="editCustomerUid" />
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="editFirstName" placeholder="First name" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="editLastName" placeholder="Last name" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="editPhone" placeholder="Phone number" />
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="editEmail" placeholder="Email address" required />
+                </div>
+                <div class="form-group">
+                    <label>Referral Code</label>
+                    <input type="text" id="editReferralCode" placeholder="Referral code" />
+                </div>
+                <button type="submit" class="btn-save-edit" id="saveEditCustomerBtn"><i class="fa-solid fa-check"></i> Save Changes</button>
+            </form>
+        </div>
+    </div>
+
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
@@ -4069,7 +4034,7 @@
         let allUsersCache = {};
         let pendingWithdrawAction = null;
         let withdrawalsFilter = 'pending';
-        let selectedCustomerForAction = null;
+        let pendingEditCustomerUid = null;
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -4213,17 +4178,6 @@
         const depositAmount = document.getElementById('depositAmount');
         const manualDepositCancelBtn = document.getElementById('manualDepositCancelBtn');
 
-        // ── Customer Select Modal ──
-        const customerSelectModal = document.getElementById('customerSelectModal');
-        const customerSelectCloseBtn = document.getElementById('customerSelectCloseBtn');
-        const customerSearchInput = document.getElementById('customerSearchInput');
-        const customerSelectList = document.getElementById('customerSelectList');
-        const selectedName = document.getElementById('selectedName');
-        const selectedEmail = document.getElementById('selectedEmail');
-        const selectedBalance = document.getElementById('selectedBalance');
-        const selectCustomerBtn = document.getElementById('selectCustomerBtn');
-        const selectedDisplay = document.getElementById('selectedDisplay');
-
         // ── Account Update DOM ──
         const accountUpdateBtn = document.getElementById('accountUpdateBtn');
         const accountUpdateModal = document.getElementById('accountUpdateModal');
@@ -4270,6 +4224,18 @@
         const badgeOrders = document.getElementById('badgeOrders');
         const badgeOrdersPending = document.getElementById('badgeOrdersPending');
         const badgeWithdrawalsPending = document.getElementById('badgeWithdrawalsPending');
+
+        // ─── Edit Customer DOM ───
+        const editCustomerModal = document.getElementById('editCustomerModal');
+        const editCustomerCloseBtn = document.getElementById('editCustomerCloseBtn');
+        const editCustomerForm = document.getElementById('editCustomerForm');
+        const editCustomerUid = document.getElementById('editCustomerUid');
+        const editFirstName = document.getElementById('editFirstName');
+        const editLastName = document.getElementById('editLastName');
+        const editPhone = document.getElementById('editPhone');
+        const editEmail = document.getElementById('editEmail');
+        const editReferralCode = document.getElementById('editReferralCode');
+        const saveEditCustomerBtn = document.getElementById('saveEditCustomerBtn');
 
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
@@ -4672,6 +4638,7 @@
                 });
             });
 
+            // Update pending orders badge
             updateBadges();
         }
 
@@ -4724,7 +4691,6 @@
                                         <div class="detail-row"><span class="label">Referral Code</span><span class="val" style="font-weight:700;color:#f5b83d;">${referralCode}</span></div>
                                         <div class="detail-row"><span class="label">Joined</span><span class="val">${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</span></div>
                                         <div class="actions">
-                                            <button class="btn btn-outline btn-sm edit-user" data-uid="${uid}" style="padding:2px 10px; border-radius:8px; border:1px solid #ddd; font-size:9px; cursor:pointer;"><i class="fa-regular fa-pen-to-square"></i> Edit</button>
                                             <button class="btn btn-danger btn-sm delete-user" data-uid="${uid}" style="padding:2px 10px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
                                         </div>
                                     </div>
@@ -4763,22 +4729,19 @@
                     });
                 });
 
-                container.querySelectorAll('.edit-user').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const uid = this.dataset.uid;
-                        const user = allData.users?.[uid];
-                        if (!user) return;
-                        // Open customer select modal with this user pre-selected
-                        openCustomerSelectModal(uid);
-                    });
-                });
-
                 container.querySelectorAll('.delete-user').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
                         const uid = this.dataset.uid;
                         showDeleteConfirmation('user', uid);
+                    });
+                });
+
+                container.querySelectorAll('.edit-user').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const uid = this.dataset.uid;
+                        openEditCustomerModal(uid);
                     });
                 });
             }).catch((error) => {
@@ -5222,6 +5185,7 @@
                 const email = user.email || 'No email';
                 const balance = acc.balance || 0;
 
+                // Gather transactions for this user
                 const userTxs = Object.entries(transactions)
                     .filter(([txId, tx]) => tx.userId === uid)
                     .sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
@@ -5263,6 +5227,7 @@
                         `;
             }).join('');
 
+            // Toggle account transactions
             accountsList.querySelectorAll('.account-item').forEach(el => {
                 el.addEventListener('click', function() {
                     this.classList.toggle('open');
@@ -5304,6 +5269,8 @@
                 const refCode = user.referralCode || '—';
                 const statusDisplay = w.status ? w.status.charAt(0).toUpperCase() + w.status.slice(1) : 'Pending';
                 const statusClass = w.status || 'pending';
+                const dateObj = w.createdAt ? new Date(w.createdAt) : new Date();
+                const dateStr = dateObj.toLocaleString();
                 return `
                             <div class="withdraw-card">
                                 <div class="row">
@@ -5325,6 +5292,10 @@
                                 <div class="row">
                                     <span class="label">Status</span>
                                     <span class="value"><span class="status-badge ${statusClass}">${statusDisplay}</span></span>
+                                </div>
+                                <div class="row">
+                                    <span class="label">Requested</span>
+                                    <span class="value">${dateStr}</span>
                                 </div>
                                 ${w.status === 'pending' ? `
                                 <div class="actions">
@@ -5352,6 +5323,7 @@
                 });
             }
 
+            // Update pending withdrawals badge
             updateBadges();
         }
 
@@ -5383,11 +5355,13 @@
                 withdrawConfirmActionBtn.className = 'btn-confirm-withdraw decline';
             }
 
+            const dateStr = w.createdAt ? new Date(w.createdAt).toLocaleString() : 'N/A';
             withdrawConfirmDetails.innerHTML = `
                         <div class="row"><span class="label">Customer</span><span class="val">${name}</span></div>
                         <div class="row"><span class="label">Phone</span><span class="val">${w.phone || 'N/A'}</span></div>
                         <div class="row"><span class="label">Referral Code</span><span class="val">${user.referralCode || '—'}</span></div>
                         <div class="row"><span class="label">Amount</span><span class="val highlight">ZMW ${amount.toFixed(2)}</span></div>
+                        <div class="row"><span class="label">Requested</span><span class="val">${dateStr}</span></div>
                     `;
 
             withdrawConfirmModal.classList.add('open');
@@ -5505,7 +5479,10 @@
             const users = allData.users || {};
             const options = Object.entries(users).map(([uid, u]) => {
                 const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
-                return `<option value="${uid}">${name} (${u.email || 'No email'})</option>`;
+                const email = u.email || 'No email';
+                const accounts = allData.customerAccounts || {};
+                const balance = accounts[uid]?.balance || 0;
+                return `<option value="${uid}">${name} (${email}) — ZMW ${balance.toFixed(2)}</option>`;
             }).join('');
 
             customReferralUserSelect.innerHTML = `<option value="">— Select a user —</option>` + options;
@@ -5521,128 +5498,6 @@
             }).join('');
             customReferralUserSelect.innerHTML = `<option value="">— Select a user —</option>` + options;
         }
-
-        // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER SELECT MODAL
-        // ───────────────────────────────────────────────────────────────────
-
-        function openCustomerSelectModal(selectedUid = null) {
-            selectedCustomerForAction = selectedUid || null;
-            customerSelectModal.classList.add('open');
-            renderCustomerSelectList('');
-            if (selectedUid) {
-                const user = allData.users?.[selectedUid];
-                if (user) {
-                    const name = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
-                    const email = user.email || 'No email';
-                    const accounts = allData.customerAccounts || {};
-                    const balance = accounts[selectedUid]?.balance || 0;
-                    selectedName.textContent = name;
-                    selectedEmail.textContent = email;
-                    selectedBalance.textContent = `ZMW ${balance.toFixed(2)}`;
-                    selectedDisplay.classList.add('show');
-                    selectCustomerBtn.disabled = false;
-                    selectCustomerBtn.textContent = 'Select Customer';
-                    document.querySelectorAll('.customer-list-item').forEach(el => {
-                        el.classList.toggle('selected', el.dataset.uid === selectedUid);
-                    });
-                }
-            } else {
-                selectedDisplay.classList.remove('show');
-                selectCustomerBtn.disabled = true;
-                selectCustomerBtn.textContent = 'Select Customer';
-            }
-        }
-
-        function closeCustomerSelectModal() {
-            customerSelectModal.classList.remove('open');
-            customerSearchInput.value = '';
-            selectedCustomerForAction = null;
-            selectedDisplay.classList.remove('show');
-            selectCustomerBtn.disabled = true;
-        }
-
-        function renderCustomerSelectList(searchTerm = '') {
-            const users = allData.users || {};
-            const entries = Object.entries(users);
-            let filtered = entries;
-            if (searchTerm.trim()) {
-                const term = searchTerm.trim().toLowerCase();
-                filtered = entries.filter(([uid, u]) =>
-                    (u.firstName || '').toLowerCase().includes(term) ||
-                    (u.lastName || '').toLowerCase().includes(term) ||
-                    (u.email || '').toLowerCase().includes(term) ||
-                    (u.phone || '').toLowerCase().includes(term)
-                );
-            }
-            if (filtered.length === 0) {
-                customerSelectList.innerHTML = `<div class="no-results">No customers found.</div>`;
-                return;
-            }
-            const accounts = allData.customerAccounts || {};
-            customerSelectList.innerHTML = filtered.map(([uid, u]) => {
-                const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
-                const email = u.email || 'No email';
-                const balance = accounts[uid]?.balance || 0;
-                const isSelected = uid === selectedCustomerForAction;
-                return `
-                            <div class="customer-list-item ${isSelected ? 'selected' : ''}" data-uid="${uid}">
-                                <div class="c-avatar">${(u.firstName || 'U').charAt(0)}</div>
-                                <div class="c-info">
-                                    <div class="c-name">${name}</div>
-                                    <div class="c-email">${email}</div>
-                                </div>
-                                <div class="c-balance">ZMW ${balance.toFixed(2)}</div>
-                            </div>
-                        `;
-            }).join('');
-
-            customerSelectList.querySelectorAll('.customer-list-item').forEach(el => {
-                el.addEventListener('click', function() {
-                    const uid = this.dataset.uid;
-                    const user = allData.users?.[uid];
-                    if (!user) return;
-                    const name = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
-                    const email = user.email || 'No email';
-                    const accounts = allData.customerAccounts || {};
-                    const balance = accounts[uid]?.balance || 0;
-                    selectedName.textContent = name;
-                    selectedEmail.textContent = email;
-                    selectedBalance.textContent = `ZMW ${balance.toFixed(2)}`;
-                    selectedDisplay.classList.add('show');
-                    selectCustomerBtn.disabled = false;
-                    selectedCustomerForAction = uid;
-                    document.querySelectorAll('.customer-list-item').forEach(el2 => {
-                        el2.classList.toggle('selected', el2.dataset.uid === uid);
-                    });
-                    selectCustomerBtn.textContent = 'Select Customer';
-                });
-            });
-        }
-
-        customerSearchInput.addEventListener('input', function() {
-            renderCustomerSelectList(this.value);
-        });
-
-        customerSelectCloseBtn.addEventListener('click', closeCustomerSelectModal);
-        customerSelectModal.addEventListener('click', function(e) {
-            if (e.target === this) closeCustomerSelectModal();
-        });
-
-        selectCustomerBtn.addEventListener('click', function() {
-            if (selectedCustomerForAction) {
-                // Trigger the actual action here — e.g., open edit form
-                const user = allData.users?.[selectedCustomerForAction];
-                if (user) {
-                    // For example, we can open the account update modal with this user pre-selected
-                    // Or we can just close and show a message
-                    showToast(`Selected ${user.firstName || ''} ${user.lastName || ''}`, 'success');
-                }
-                closeCustomerSelectModal();
-                // Re-render users to show updated info
-                renderUsers(document.getElementById('userSearchInput').value);
-            }
-        });
 
         // ───────────────────────────────────────────────────────────────────
         // ACCOUNT UPDATE MODAL FUNCTIONS
@@ -6613,7 +6468,10 @@
             const users = allData.users || {};
             const options = Object.entries(users).map(([uid, u]) => {
                 const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
-                return `<option value="${uid}">${name} (${u.email || 'No email'})</option>`;
+                const email = u.email || 'No email';
+                const accounts = allData.customerAccounts || {};
+                const balance = accounts[uid]?.balance || 0;
+                return `<option value="${uid}">${name} (${email}) — ZMW ${balance.toFixed(2)}</option>`;
             }).join('');
             depositCustomerSelect.innerHTML = `<option value="">— Select a customer —</option>` + options;
         }
@@ -6701,6 +6559,61 @@
         });
         withdrawConfirmCancelBtn.addEventListener('click', closeWithdrawConfirmModal);
         withdrawConfirmActionBtn.addEventListener('click', executeWithdrawAction);
+
+        // ───────────────────────────────────────────────────────────────────
+        // EDIT CUSTOMER MODAL EVENT BINDINGS
+        // ───────────────────────────────────────────────────────────────────
+
+        editCustomerCloseBtn.addEventListener('click', function() {
+            editCustomerModal.classList.remove('open');
+        });
+        editCustomerModal.addEventListener('click', function(e) {
+            if (e.target === this) editCustomerModal.classList.remove('open');
+        });
+
+        function openEditCustomerModal(uid) {
+            const user = allData.users?.[uid] || {};
+            if (!user) {
+                showToast('User not found.', 'error');
+                return;
+            }
+            pendingEditCustomerUid = uid;
+            editCustomerUid.value = uid;
+            editFirstName.value = user.firstName || '';
+            editLastName.value = user.lastName || '';
+            editPhone.value = user.phone || '';
+            editEmail.value = user.email || '';
+            editReferralCode.value = user.referralCode || '';
+            editCustomerModal.classList.add('open');
+        }
+
+        editCustomerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const uid = editCustomerUid.value;
+            if (!uid) {
+                showToast('Customer not found.', 'error');
+                return;
+            }
+            const updates = {
+                firstName: editFirstName.value.trim(),
+                lastName: editLastName.value.trim(),
+                phone: editPhone.value.trim(),
+                email: editEmail.value.trim(),
+                referralCode: editReferralCode.value.trim().toUpperCase()
+            };
+            if (!updates.firstName || !updates.lastName || !updates.email) {
+                showToast('Please fill in all required fields.', 'error');
+                return;
+            }
+            const userRef = ref(db, 'users/' + uid);
+            update(userRef, updates).then(() => {
+                renderAll();
+                editCustomerModal.classList.remove('open');
+                showToast('Customer updated successfully!', 'success');
+            }).catch((error) => {
+                showToast('Error updating customer: ' + error.message, 'error');
+            });
+        });
 
         // ───────────────────────────────────────────────────────────────────
         // EVENT BINDINGS
@@ -7208,6 +7121,7 @@
                 return { key, service: s, orig, newPrice };
             });
 
+            // Render preview
             let previewHtml =
                 `<div style="font-size:11px; color:#888; margin-bottom:6px;">Preview — ${modeLabel} applied to ${adjustedEntries.length} service(s). Click "Apply" to save changes.</div>`;
             previewHtml += adjustedEntries.map(({ key, service, orig, newPrice }) => `
@@ -7222,9 +7136,11 @@
 
             adjustPreview.innerHTML = previewHtml;
 
+            // Ask to apply
             if (confirm(`Apply ${modeLabel} to all ${adjustedEntries.length} services?`)) {
                 adjustedEntries.forEach(({ key, newPrice }) => {
                     if (allData.services && allData.services[key]) {
+                        // If originalPrice doesn't exist, set it to the current price before adjusting
                         if (!allData.services[key].originalPrice) {
                             allData.services[key].originalPrice = allData.services[key].price;
                         }
@@ -7233,6 +7149,7 @@
                 });
                 saveData().then(() => {
                     renderAll();
+                    // Re-render preview with updated prices
                     const updatedEntries = Object.entries(allData.services || {}).map(([key, s]) => {
                         return { key, service: s, orig: s.price || 0, newPrice: s.price || 0 };
                     });
@@ -7258,14 +7175,17 @@
         // ───────────────────────────────────────────────────────────────────
 
         function updateBadges() {
+            // Pending orders
             const orders = Object.values(allData.orders || {});
             const pendingOrders = orders.filter(o => o.status === 'pending').length;
             updateBadgeElement(badgeOrdersPending, pendingOrders);
 
+            // Pending withdrawals
             const withdrawals = Object.values(allData.withdrawalRequests || {});
             const pendingWithdrawals = withdrawals.filter(w => w.status === 'pending').length;
             updateBadgeElement(badgeWithdrawalsPending, pendingWithdrawals);
 
+            // Total orders (optional, on Home tab)
             const totalOrders = orders.length;
             updateBadgeElement(badgeOrders, totalOrders);
         }
@@ -7312,18 +7232,23 @@
                     }
                     currentAdminData = foundAdmin || null;
 
+                    // ── Load app data ──
                     loadData(() => {
+                        // ── Start listening to users for real‑time updates ──
                         const usersRef = ref(db, 'users');
                         onValue(usersRef, (snapshot) => {
                             const usersData = snapshot.val() || {};
                             allData.users = usersData;
                             allUsersCache = usersData;
+                            // Update dashboard and badges
                             renderDashboard();
                             updateBadges();
+                            // If on users page, re-render user list
                             const usersPage = document.getElementById('page-users');
                             if (usersPage.classList.contains('active')) {
                                 renderUsers(document.getElementById('userSearchInput').value);
                             }
+                            // Re-render referral sections that depend on user names
                             renderCustomReferrals();
                             renderReferralDiscounts();
                             renderReferralPromoDiscounts();
@@ -7355,7 +7280,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Customer selection modal with search, edit button next to delete for users, withdrawal system smooth.');
+        console.log('✅ Admin Dashboard — Enhanced customer select with avatars, edit customer modal, withdrawal timestamps, and consistent newest-first sorting.');
     </script>
 </body>
 </html>
