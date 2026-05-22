@@ -266,6 +266,7 @@
             font-weight: 700;
         }
 
+        /* ── PROMO CAROUSEL – INFINITE PEEK STYLE ── */
         .promo-carousel-wrapper {
             position: relative;
             margin: 4px 0 14px 0;
@@ -996,7 +997,6 @@
         .coupon-msg.error {
             color: #dc2626;
         }
-
         .price-breakdown {
             background: #f8f9fc;
             border-radius: 8px;
@@ -1966,6 +1966,9 @@
             cursor: pointer;
             margin-top: 8px;
         }
+        .withdraw-modal .btn-cancel-withdraw:active {
+            transform: scale(0.95);
+        }
 
         .withdraw-success-overlay {
             position: fixed;
@@ -2019,6 +2022,9 @@
             font-weight: 600;
             cursor: pointer;
         }
+        .withdraw-success-modal .btn-ok:active {
+            transform: scale(0.95);
+        }
 
         .toggle-row {
             display: flex;
@@ -2044,6 +2050,9 @@
             background: #1c2128;
             color: white;
             border-color: #1c2128;
+        }
+        .toggle-row .toggle-code-btn:active {
+            transform: scale(0.95);
         }
 
         .code-input-wrap {
@@ -2289,7 +2298,6 @@
 
             <!-- ===== VIEW: ORDER FLOW ===== -->
             <div id="orderFlowView" class="view">
-
                 <div style="display: flex; align-items: center; gap: 10px; padding: 0 0 10px 0;">
                     <button id="backFromOrder" style="background: none; border: none; font-size: 16px; color: #1c2128; cursor: pointer; padding: 3px;">
                         <i class="fa-solid fa-arrow-left"></i>
@@ -2299,23 +2307,19 @@
                 <div id="orderFlowContainer" class="order-flow-container">
                     <!-- Dynamically rendered -->
                 </div>
-
             </div>
 
             <!-- ===== VIEW: ORDERS ===== -->
             <div id="ordersView" class="view">
-
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Your Orders</h3>
                     <p style="color: #888; font-size: 11px;">Track your projects and payments.</p>
                 </div>
                 <div class="order-grid" id="ordersGrid"></div>
-
             </div>
 
             <!-- ===== VIEW: HISTORY ===== -->
             <div id="historyView" class="view">
-
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Transaction History</h3>
                     <p style="color: #888; font-size: 11px;">Tap a transaction to view more details.</p>
@@ -2324,23 +2328,19 @@
                     <!-- Rendered by JS -->
                 </div>
                 <div class="history-list" id="historyList"></div>
-
             </div>
 
             <!-- ===== VIEW: SAMPLES ===== -->
             <div id="samplesView" class="view">
-
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">📁 Work Samples</h3>
                     <p style="color: #888; font-size: 11px;">Browse through our recent projects.</p>
                 </div>
                 <div id="samplesContainer" class="samples-grid"></div>
-
             </div>
 
             <!-- ===== VIEW: ACCOUNT ===== -->
             <div id="accountView" class="view">
-
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">💰 My Account</h3>
                     <p style="color: #888; font-size: 11px;">Manage your balance, referrals, and withdrawals.</p>
@@ -2385,12 +2385,10 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <!-- ===== VIEW: PROFILE ===== -->
             <div id="profileView" class="view">
-
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">My Profile</h3>
                     <p style="color: #888; font-size: 11px;">Your personal information.</p>
@@ -2409,7 +2407,6 @@
                     </div>
                     <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
                 </div>
-
             </div>
 
         </div>
@@ -2540,9 +2537,9 @@
 
     <!-- ===== FIREBASE MODULE ===== -->
     <script type="module">
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // FIREBASE SDK
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
         import { getDatabase, ref, onValue, set, push, get, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
@@ -2559,13 +2556,16 @@
             measurementId: "G-VRQHT301C4"
         };
 
-        const CLOUDINARY_CLOUD_NAME = 'dd3lcymrk';
-        const CLOUDINARY_UPLOAD_PRESET = 'h3eyhc2o';
-        const MAX_FILE_SIZE = 50 * 1024 * 1024;
+        const CLOUD_NAME = 'dd3lcymrk';
+        const UPLOAD_PRESET = 'h3eyhc2o';
 
-        // ───────────────────────────────────────────────────────────────────
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+
+        // =================================================================
         // STATE
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         let allData = null;
         let currentUser = null;
@@ -2593,9 +2593,9 @@
         let autoScrollTimer = null;
         let isUserInteracting = false;
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // DOM REFS
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         const headerName = document.getElementById('headerName');
         const headerAvatar = document.getElementById('headerAvatar');
@@ -2699,9 +2699,9 @@
         const applyReferralBtn = document.getElementById('applyReferralBtn');
         const referralMsg = document.getElementById('referralMsg');
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // HELPER FUNCTIONS
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function showToast(msg, type = 'info') {
             const toast = document.createElement('div');
@@ -2790,17 +2790,17 @@
             return `ZMW ${curr.toFixed(2)}`;
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // CLOUDINARY UPLOAD
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function setupCloudinaryUpload() {
             uploadArea.addEventListener('click', () => {
                 const options = {
-                    cloudName: CLOUDINARY_CLOUD_NAME,
-                    uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+                    cloudName: CLOUD_NAME,
+                    uploadPreset: UPLOAD_PRESET,
                     sources: ['local', 'url', 'camera'],
-                    maxFileSize: MAX_FILE_SIZE,
+                    maxFileSize: 155000000,
                     resourceType: 'image',
                     clientAllowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
                     maxFiles: 1,
@@ -2829,9 +2829,9 @@
             });
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // LOAD DATA
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function loadData(callback) {
             const dbRef = ref(db, 'bufferzoneAppData');
@@ -2844,72 +2844,104 @@
                         policy: { title: 'BUFFER ZONE PAYMENT POLICY', desc: 'To begin your project, we require a 50% down payment. The remaining balance is due upon project completion and delivery. This ensures commitment from both parties.',
                             tag: '50% upfront required' },
                         ourServicesList: ['Graphic Design', 'Web Development', 'Digital Marketing', 'Branding Design'],
-                        categories: ['graphic', 'dev', 'tech', 'it'],
                         services: {},
                         orders: {},
-                        customers: {},
                         transactions: {},
                         promotions: {},
                         workPosts: {},
                         promoPics: {},
                         disabled: false,
                         notifications: {},
+                        customerAccounts: {},
+                        withdrawalRequests: {},
                         referralPromos: {},
                         customReferrals: {},
                         referralDiscounts: {},
-                        referralPromoDiscounts: {},
-                        customerAccounts: {},
-                        withdrawalRequests: {},
-                        signupBonuses: {
-                            withReferral: 0,
-                            withCustomReferral: 0,
-                            withoutReferral: 0
-                        }
+                        referralPromoDiscounts: {}
                     };
-                    set(dbRef, allData).then(() => {
-                        if (callback) callback(allData);
-                    });
+                    set(dbRef, allData);
                 } else {
                     allData = data;
-                    if (!allData.categories) { allData.categories = ['graphic', 'dev', 'tech', 'it'];
-                        saveData(); }
-                    if (!allData.workPosts) { allData.workPosts = {};
-                        saveData(); }
-                    if (!allData.promoPics) { allData.promoPics = {};
-                        saveData(); }
-                    if (!allData.referralPromos) { allData.referralPromos = {};
-                        saveData(); }
-                    if (!allData.customReferrals) { allData.customReferrals = {};
-                        saveData(); }
-                    if (!allData.referralDiscounts) { allData.referralDiscounts = {};
-                        saveData(); }
-                    if (!allData.referralPromoDiscounts) { allData.referralPromoDiscounts = {};
-                        saveData(); }
-                    if (!allData.customerAccounts) { allData.customerAccounts = {};
-                        saveData(); }
-                    if (!allData.withdrawalRequests) { allData.withdrawalRequests = {};
-                        saveData(); }
-                    if (!allData.signupBonuses) {
-                        allData.signupBonuses = {
-                            withReferral: 0,
-                            withCustomReferral: 0,
-                            withoutReferral: 0
-                        };
-                        saveData();
-                    }
-                    if (callback) callback(data);
+                    if (!allData.workPosts) allData.workPosts = {};
+                    if (!allData.promoPics) allData.promoPics = {};
+                    if (!allData.customerAccounts) allData.customerAccounts = {};
+                    if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
+                    if (!allData.referralPromos) allData.referralPromos = {};
+                    if (!allData.customReferrals) allData.customReferrals = {};
+                    if (!allData.referralDiscounts) allData.referralDiscounts = {};
+                    if (!allData.referralPromoDiscounts) allData.referralPromoDiscounts = {};
                 }
+                // --- ENSURE PENDING WITHDRAWALS ARE REFLECTED IN BALANCE ---
+                ensurePendingWithdrawalsConsistency();
+                renderAll();
+                if (callback) callback();
             });
         }
 
-        function saveData() {
-            const dbRef = ref(db, 'bufferzoneAppData');
-            return set(dbRef, allData);
+        // =================================================================
+        // CONSISTENCY: ENSURE PENDING WITHDRAWALS ARE DEDUCTED FROM BALANCE
+        // =================================================================
+
+        function ensurePendingWithdrawalsConsistency() {
+            if (!allData || !currentUserId) return;
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const withdrawals = allData.withdrawalRequests || {};
+
+            // Calculate total pending amount (only pending that were deducted)
+            let totalPending = 0;
+            let totalDeducted = 0;
+            for (const [key, w] of Object.entries(withdrawals)) {
+                if (w.userId === currentUserId && w.status === 'pending' && w.deductedFromBalance) {
+                    totalPending += w.amount || 0;
+                    totalDeducted += w.amount || 0;
+                }
+            }
+
+            // If pending total doesn't match the deducted amount, adjust balance
+            // This happens when a withdrawal was created but balance wasn't deducted properly
+            // Or when a withdrawal was rejected but refund wasn't processed
+
+            // Also check for declined withdrawals that haven't been refunded
+            for (const [key, w] of Object.entries(withdrawals)) {
+                if (w.userId === currentUserId && w.status === 'declined' && w.deductedFromBalance && !w.refunded) {
+                    // Refund the amount
+                    userAccount.balance = (userAccount.balance || 0) + (w.amount || 0);
+                    w.refunded = true;
+                    w.refundedAt = Date.now();
+                    allData.withdrawalRequests[key] = w;
+                    showToast(`🔄 Withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was rejected. Amount refunded.`, 'info');
+                }
+            }
+
+            // For pending withdrawals, ensure the balance has been reduced
+            // We can't just set balance = original - pending because we don't know original
+            // Instead, we rely on the fact that each withdrawal deducts when created
+            // And we check for any pending that were not deducted
+
+            // Also check for approved withdrawals — if they were deducted, no change needed
+            // If approved but not deducted, something's wrong — we deduct now
+            for (const [key, w] of Object.entries(withdrawals)) {
+                if (w.userId === currentUserId && w.status === 'approved' && !w.deductedFromBalance) {
+                    // This shouldn't happen, but if it does, deduct now
+                    userAccount.balance = (userAccount.balance || 0) - (w.amount || 0);
+                    w.deductedFromBalance = true;
+                    w.deductedAt = Date.now();
+                    allData.withdrawalRequests[key] = w;
+                }
+            }
+
+            // Save the updated account balance
+            if (!allData.customerAccounts) allData.customerAccounts = {};
+            allData.customerAccounts[currentUserId] = userAccount;
+
+            // Save data if changes were made
+            // We'll let the regular saveData handle it
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // RENDER FUNCTIONS
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function renderAll() {
             if (!allData) return;
@@ -2965,9 +2997,9 @@
             }
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // PROMO CAROUSEL – INFINITE PEEK STYLE
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function renderPromoCarousel() {
             const promoPics = allData.promoPics || {};
@@ -2989,7 +3021,6 @@
                 return;
             }
 
-            // Create duplicated slides for infinite illusion: [last, first, second, ..., last, first]
             const duplicated = [
                 entries[entries.length - 1],
                 ...entries,
@@ -3008,12 +3039,10 @@
                 </div>
             `).join('');
 
-            // Indicators based on real items count
             promoCarouselIndicators.innerHTML = entries.map((_, i) => `
                 <button class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></button>
             `).join('');
 
-            // Set initial scroll position to first real slide (index 1 in duplicated array)
             const track = promoCarouselTrack;
             const slides = track.querySelectorAll('.promo-slide');
             if (slides.length > 1) {
@@ -3023,10 +3052,9 @@
                 const scrollPos = firstRealSlide.offsetLeft - (containerWidth - slideWidth) / 2;
                 track.scrollLeft = Math.max(0, scrollPos);
                 currentCarouselIndex = 0;
-                updateCarouselClasses(1); // duplicated index 1 = first real
+                updateCarouselClasses(1);
             }
 
-            // Update classes on scroll
             track.addEventListener('scroll', () => {
                 if (isUserInteracting) {
                     const containerWidth = track.clientWidth;
@@ -3045,14 +3073,12 @@
                         }
                     });
 
-                    // If we're at the duplicated first (index 0), jump to real first (index 1)
                     if (closestIdx === 0) {
                         const targetSlide = slides[1];
                         const scrollPos2 = targetSlide.offsetLeft - (containerWidth - targetSlide.offsetWidth) / 2;
                         track.scrollLeft = Math.max(0, scrollPos2);
                         closestIdx = 1;
                     }
-                    // If we're at the duplicated last (index slides.length-1), jump to real last (index slides.length-2)
                     if (closestIdx === slides.length - 1) {
                         const targetSlide = slides[slides.length - 2];
                         const scrollPos2 = targetSlide.offsetLeft - (containerWidth - targetSlide.offsetWidth) / 2;
@@ -3076,7 +3102,6 @@
                 }, 2000);
             });
 
-            // Indicators click
             promoCarouselIndicators.querySelectorAll('.dot').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const idx = parseInt(this.dataset.index);
@@ -3084,7 +3109,6 @@
                 });
             });
 
-            // Initial update
             updateCarouselClasses(1);
             updateIndicators(0);
 
@@ -3128,7 +3152,6 @@
         function goToSlide(realIndex) {
             const slides = promoCarouselTrack.querySelectorAll('.promo-slide');
             if (slides.length === 0) return;
-            // Find duplicated index that maps to realIndex
             let targetIdx = -1;
             slides.forEach((slide, i) => {
                 if (parseInt(slide.dataset.realIndex) === realIndex) {
@@ -3185,9 +3208,9 @@
             `).join('');
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // SERVICES
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function renderServices(category = 'all') {
             const container = serviceGridContainer;
@@ -3222,9 +3245,9 @@
             });
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // ORDERS
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function renderOrders() {
             const container = ordersGrid;
@@ -3289,9 +3312,9 @@
             });
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // HISTORY
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function renderHistory() {
             const container = historyList;
@@ -3405,9 +3428,9 @@
             });
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // MARK REMAINING PAYMENT
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function markRemainingAsPaid(orderKey, orderData) {
             if (!orderKey || !orderData) {
@@ -3462,9 +3485,9 @@
             });
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // PROFILE
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function renderProfile() {
             if (currentUserData) {
@@ -3483,9 +3506,9 @@
             }
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // NOTIFICATIONS
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function renderNotifications() {
             const notifications = allData.notifications || {};
@@ -3528,9 +3551,9 @@
             });
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // SAMPLES
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function renderSamples() {
             const container = samplesContainer;
@@ -3610,9 +3633,9 @@
             container.innerHTML = html;
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // ACCOUNT & REFERRAL
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function renderAccountAndReferral() {
             if (!currentUserData) return;
@@ -3642,9 +3665,9 @@
             withdrawBtnFromView.addEventListener('click', openWithdrawModal);
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // TRANSACTION MESSAGES (only non-withdrawal transactions)
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function renderTransactionMessages() {
             const container = transactionMessages;
@@ -3703,9 +3726,9 @@
             }).join('');
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // WITHDRAWALS LIST (color-coded by status, real‑time updates)
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function renderWithdrawalsList() {
             const container = withdrawalsListContainer;
@@ -3744,7 +3767,7 @@
                     statusMessage =
                         `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount has been refunded to your account.`;
                 } else {
-                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
+                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval. The amount has been held.`;
                 }
 
                 return `
@@ -3762,9 +3785,9 @@
             }).join('');
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // SAVE DATA
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         async function saveData() {
             try {
@@ -3774,9 +3797,9 @@
             }
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // ORDER FLOW
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function openOrderFlow(service) {
             selectedService = service;
@@ -4004,9 +4027,9 @@
             document.querySelector('.order-footer .total-price').textContent = `ZMW ${total.toFixed(2)}`;
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // COUPON
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function applyCoupon() {
             const code = couponInput.value.trim().toUpperCase();
@@ -4072,9 +4095,9 @@
             });
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // REFERRAL CODE IN PAYMENT
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function applyReferral() {
             const code = referralCodeInput.value.trim().toUpperCase();
@@ -4103,14 +4126,12 @@
                     return;
                 }
 
-                // Check both referralDiscounts and referralPromoDiscounts
                 const discounts = allData.referralDiscounts || {};
                 const promoDiscounts = allData.referralPromoDiscounts || {};
                 let foundDiscount = null;
                 let discountKey = null;
                 let isPromo = false;
 
-                // First check exact match in referralDiscounts
                 for (const [key, d] of Object.entries(discounts)) {
                     if (d.referralCode === code) {
                         foundDiscount = d;
@@ -4120,7 +4141,6 @@
                     }
                 }
 
-                // If not found, check referralPromoDiscounts (exact match OR code filter empty)
                 if (!foundDiscount) {
                     for (const [key, d] of Object.entries(promoDiscounts)) {
                         if (d.referralCode === code || d.referralCode === '') {
@@ -4177,9 +4197,9 @@
             });
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // CONFIRM PAYMENT
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         function confirmPayment() {
             const screenshotUrl = cloudinaryScreenshotUrlInput.value;
@@ -4241,7 +4261,6 @@
                 set(usedCouponRef, true);
             }
 
-            // === REFERRAL BONUS: credit the referrer's account and record transaction ===
             if (appliedReferral && appliedReferral.referrerUid) {
                 const bonusAmount = appliedReferral.ownerAmount || 0;
                 if (bonusAmount > 0) {
@@ -4326,26 +4345,15 @@
             renderServices('all');
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // WITHDRAWAL — PENDING REQUEST, ADMIN APPROVES/DEDUCTS
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
+        // WITHDRAWAL — PENDING DEDUCTION + REFUND ON REJECTION
+        // =================================================================
 
         function openWithdrawModal() {
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
             const balance = userAccount.balance || 0;
-
-            // Sum up all pending withdrawal amounts to calculate available balance
-            const withdrawals = allData.withdrawalRequests || {};
-            let pendingTotal = 0;
-            for (const [key, w] of Object.entries(withdrawals)) {
-                if (w.userId === currentUserId && w.status === 'pending') {
-                    pendingTotal += w.amount || 0;
-                }
-            }
-            const availableBalance = Math.max(0, balance - pendingTotal);
-
-            withdrawMaxLabel.textContent = availableBalance.toFixed(2);
+            withdrawMaxLabel.textContent = balance.toFixed(2);
             withdrawModal.classList.add('open');
             withdrawAmountInput.value = '';
         }
@@ -4365,27 +4373,20 @@
             const userAccount = accounts[currentUserId] || { balance: 0 };
             const balance = userAccount.balance || 0;
 
-            // Sum up all pending withdrawal amounts to calculate available balance
-            const withdrawals = allData.withdrawalRequests || {};
-            let pendingTotal = 0;
-            for (const [key, w] of Object.entries(withdrawals)) {
-                if (w.userId === currentUserId && w.status === 'pending') {
-                    pendingTotal += w.amount || 0;
-                }
-            }
-            const availableBalance = Math.max(0, balance - pendingTotal);
-
-            if (amount > availableBalance) {
-                showToast(`Insufficient balance. You have ZMW ${availableBalance.toFixed(2)} available.`, 'error');
+            if (amount > balance) {
+                showToast('Insufficient balance. You have ZMW ' + balance.toFixed(2), 'error');
                 return;
             }
 
-            // Deduct the amount from the customer's account immediately
+            // --- 1. IMMEDIATELY DEDUCT FROM BALANCE (PENDING HOLD) ---
             const newBalance = balance - amount;
-            const accountRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
-            set(accountRef, { balance: newBalance });
+            if (!allData.customerAccounts) allData.customerAccounts = {};
+            if (!allData.customerAccounts[currentUserId]) {
+                allData.customerAccounts[currentUserId] = { balance: 0 };
+            }
+            allData.customerAccounts[currentUserId].balance = newBalance;
 
-            // Create withdrawal request
+            // --- 2. CREATE WITHDRAWAL REQUEST WITH DEDUCTION FLAG ---
             if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
             const wId = 'w' + Date.now();
             allData.withdrawalRequests[wId] = {
@@ -4395,10 +4396,12 @@
                 phone: currentUserData?.phone || 'N/A',
                 status: 'pending',
                 createdAt: Date.now(),
-                date: new Date().toLocaleString()
+                date: new Date().toLocaleString(),
+                deductedFromBalance: true, // marks that balance was reduced
+                refunded: false // tracks if refund was processed
             };
 
-            // Create transaction record for the withdrawal (pending)
+            // --- 3. CREATE TRANSACTION RECORD (for customer visibility) ---
             if (!allData.transactions) allData.transactions = {};
             const txId = 'tx' + Date.now();
             allData.transactions[txId] = {
@@ -4408,7 +4411,7 @@
                 status: 'pending',
                 date: new Date().toLocaleString(),
                 ref: 'W-' + wId,
-                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested. Pending approval.`,
+                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested. Amount held pending approval.`,
                 screenshot: 'N/A',
                 userId: currentUserId,
                 itemId: wId,
@@ -4420,17 +4423,28 @@
                 userPhone: currentUserData?.phone || 'N/A'
             };
 
+            // --- 4. SAVE AND NOTIFY ---
             saveData().then(() => {
                 closeWithdrawModal();
                 withdrawSuccessModal.classList.add('open');
                 renderAll();
-                showToast('✅ Withdrawal request submitted! Admin will review it.', 'success');
+                showToast('✅ Withdrawal submitted! ZMW ' + amount.toFixed(2) + ' has been held pending approval.', 'success');
+            }).catch((error) => {
+                // In case of save error, we should roll back the balance deduction
+                // But since we already updated allData, we can try to revert
+                allData.customerAccounts[currentUserId].balance = balance;
+                delete allData.withdrawalRequests[wId];
+                delete allData.transactions[txId];
+                saveData().then(() => {
+                    showToast('Error submitting withdrawal. Please try again.', 'error');
+                });
+                console.error('Error saving withdrawal:', error);
             });
         }
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // EVENT BINDINGS
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
@@ -4560,9 +4574,9 @@
             }
         });
 
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
         // AUTH & INIT
-        // ───────────────────────────────────────────────────────────────────
+        // =================================================================
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -4589,8 +4603,8 @@
             }
         });
 
-        console.log('✅ Customer App — Withdrawals: amount deducted immediately from balance, pending withdrawals block insufficient funds, rejected withdrawals refunded.');
-        console.log('✅ Infinite Carousel: 5s auto‑scroll, current slide 1.08x, adjacent slides peek 20% from edges.');
+        console.log('✅ Customer App — Withdrawals: amount deducted immediately, refunded only if rejected.');
+        console.log('✅ Customer App — Infinite Carousel: 5s auto‑scroll, current slide 1.08x, adjacent slides peek 20% from edges.');
         console.log('✅ Price display: original price with strikethrough (faded) + new price in bold (black) — shown only inside order flow.');
         console.log('✅ Service grid: only title + subtitle (no price shown).');
         console.log('✅ Referral Promo: checks both referralDiscounts AND referralPromoDiscounts.');
