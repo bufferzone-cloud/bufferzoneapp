@@ -681,7 +681,7 @@
         .order-title-section .price .new-price {
             font-size: 19px;
             font-weight: 700;
-            color: #1c2128; /* Changed from #f5b83d to black */
+            color: #1c2128;
         }
         .order-title-section .price .new-price.regular {
             color: #1c2128;
@@ -3711,7 +3711,7 @@
                     statusEmoji = '❌';
                     statusColor = '#dc2626';
                     statusMessage =
-                        `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount remains in your account.`;
+                        `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount has been refunded to your account.`;
                 } else {
                     statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
                 }
@@ -4303,7 +4303,18 @@
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
             const balance = userAccount.balance || 0;
-            withdrawMaxLabel.textContent = balance.toFixed(2);
+
+            // Sum up all pending withdrawal amounts to calculate available balance
+            const withdrawals = allData.withdrawalRequests || {};
+            let pendingTotal = 0;
+            for (const [key, w] of Object.entries(withdrawals)) {
+                if (w.userId === currentUserId && w.status === 'pending') {
+                    pendingTotal += w.amount || 0;
+                }
+            }
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            withdrawMaxLabel.textContent = availableBalance.toFixed(2);
             withdrawModal.classList.add('open');
             withdrawAmountInput.value = '';
         }
@@ -4323,11 +4334,27 @@
             const userAccount = accounts[currentUserId] || { balance: 0 };
             const balance = userAccount.balance || 0;
 
-            if (amount > balance) {
-                showToast('Insufficient balance. You have ZMW ' + balance.toFixed(2), 'error');
+            // Sum up all pending withdrawal amounts to calculate available balance
+            const withdrawals = allData.withdrawalRequests || {};
+            let pendingTotal = 0;
+            for (const [key, w] of Object.entries(withdrawals)) {
+                if (w.userId === currentUserId && w.status === 'pending') {
+                    pendingTotal += w.amount || 0;
+                }
+            }
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            if (amount > availableBalance) {
+                showToast(`Insufficient balance. You have ZMW ${availableBalance.toFixed(2)} available.`, 'error');
                 return;
             }
 
+            // Deduct the amount from the customer's account immediately
+            const newBalance = balance - amount;
+            const accountRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
+            set(accountRef, { balance: newBalance });
+
+            // Create withdrawal request
             if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
             const wId = 'w' + Date.now();
             allData.withdrawalRequests[wId] = {
@@ -4340,6 +4367,7 @@
                 date: new Date().toLocaleString()
             };
 
+            // Create transaction record for the withdrawal (pending)
             if (!allData.transactions) allData.transactions = {};
             const txId = 'tx' + Date.now();
             allData.transactions[txId] = {
@@ -4530,7 +4558,8 @@
             }
         });
 
-        console.log('✅ Customer App — Infinite Carousel: 5s auto‑scroll, current slide 1.08x, adjacent slides peek 20% from edges.');
+        console.log('✅ Customer App — Withdrawals: amount deducted immediately from balance, pending withdrawals block insufficient funds, rejected withdrawals refunded.');
+        console.log('✅ Infinite Carousel: 5s auto‑scroll, current slide 1.08x, adjacent slides peek 20% from edges.');
         console.log('✅ Price display: original price with strikethrough (faded) + new price in bold (black) — shown only inside order flow.');
         console.log('✅ Service grid: only title + subtitle (no price shown).');
         console.log('✅ Referral Promo: checks both referralDiscounts AND referralPromoDiscounts.');
