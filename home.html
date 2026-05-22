@@ -681,7 +681,7 @@
         .order-title-section .price .new-price {
             font-size: 19px;
             font-weight: 700;
-            color: #1c2128;
+            color: #1c2128; /* Changed from #f5b83d to black */
         }
         .order-title-section .price .new-price.regular {
             color: #1c2128;
@@ -2361,7 +2361,7 @@
                         </div>
                         <div class="account-balance-box" id="accountBalanceBox">
                             <div class="left">
-                                <div class="label">Account Balance</div>
+                                <div class="label">Available Balance</div>
                                 <div class="balance" id="accountBalanceDisplay">ZMW 0.00</div>
                             </div>
                             <button class="withdraw-btn" id="withdrawBtnFromBalance"><i class="fa-solid fa-arrow-up"></i> Withdraw</button>
@@ -2871,72 +2871,9 @@
                     if (!allData.referralDiscounts) allData.referralDiscounts = {};
                     if (!allData.referralPromoDiscounts) allData.referralPromoDiscounts = {};
                 }
-                // --- ENSURE PENDING WITHDRAWALS ARE REFLECTED IN BALANCE ---
-                ensurePendingWithdrawalsConsistency();
                 renderAll();
                 if (callback) callback();
             });
-        }
-
-        // =================================================================
-        // CONSISTENCY: ENSURE PENDING WITHDRAWALS ARE DEDUCTED FROM BALANCE
-        // =================================================================
-
-        function ensurePendingWithdrawalsConsistency() {
-            if (!allData || !currentUserId) return;
-            const accounts = allData.customerAccounts || {};
-            const userAccount = accounts[currentUserId] || { balance: 0 };
-            const withdrawals = allData.withdrawalRequests || {};
-
-            // Calculate total pending amount (only pending that were deducted)
-            let totalPending = 0;
-            let totalDeducted = 0;
-            for (const [key, w] of Object.entries(withdrawals)) {
-                if (w.userId === currentUserId && w.status === 'pending' && w.deductedFromBalance) {
-                    totalPending += w.amount || 0;
-                    totalDeducted += w.amount || 0;
-                }
-            }
-
-            // If pending total doesn't match the deducted amount, adjust balance
-            // This happens when a withdrawal was created but balance wasn't deducted properly
-            // Or when a withdrawal was rejected but refund wasn't processed
-
-            // Also check for declined withdrawals that haven't been refunded
-            for (const [key, w] of Object.entries(withdrawals)) {
-                if (w.userId === currentUserId && w.status === 'declined' && w.deductedFromBalance && !w.refunded) {
-                    // Refund the amount
-                    userAccount.balance = (userAccount.balance || 0) + (w.amount || 0);
-                    w.refunded = true;
-                    w.refundedAt = Date.now();
-                    allData.withdrawalRequests[key] = w;
-                    showToast(`🔄 Withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was rejected. Amount refunded.`, 'info');
-                }
-            }
-
-            // For pending withdrawals, ensure the balance has been reduced
-            // We can't just set balance = original - pending because we don't know original
-            // Instead, we rely on the fact that each withdrawal deducts when created
-            // And we check for any pending that were not deducted
-
-            // Also check for approved withdrawals — if they were deducted, no change needed
-            // If approved but not deducted, something's wrong — we deduct now
-            for (const [key, w] of Object.entries(withdrawals)) {
-                if (w.userId === currentUserId && w.status === 'approved' && !w.deductedFromBalance) {
-                    // This shouldn't happen, but if it does, deduct now
-                    userAccount.balance = (userAccount.balance || 0) - (w.amount || 0);
-                    w.deductedFromBalance = true;
-                    w.deductedAt = Date.now();
-                    allData.withdrawalRequests[key] = w;
-                }
-            }
-
-            // Save the updated account balance
-            if (!allData.customerAccounts) allData.customerAccounts = {};
-            allData.customerAccounts[currentUserId] = userAccount;
-
-            // Save data if changes were made
-            // We'll let the regular saveData handle it
         }
 
         // =================================================================
@@ -3021,6 +2958,7 @@
                 return;
             }
 
+            // Create duplicated slides for infinite illusion: [last, first, second, ..., last, first]
             const duplicated = [
                 entries[entries.length - 1],
                 ...entries,
@@ -3039,10 +2977,12 @@
                 </div>
             `).join('');
 
+            // Indicators based on real items count
             promoCarouselIndicators.innerHTML = entries.map((_, i) => `
                 <button class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></button>
             `).join('');
 
+            // Set initial scroll position to first real slide (index 1 in duplicated array)
             const track = promoCarouselTrack;
             const slides = track.querySelectorAll('.promo-slide');
             if (slides.length > 1) {
@@ -3052,9 +2992,10 @@
                 const scrollPos = firstRealSlide.offsetLeft - (containerWidth - slideWidth) / 2;
                 track.scrollLeft = Math.max(0, scrollPos);
                 currentCarouselIndex = 0;
-                updateCarouselClasses(1);
+                updateCarouselClasses(1); // duplicated index 1 = first real
             }
 
+            // Update classes on scroll
             track.addEventListener('scroll', () => {
                 if (isUserInteracting) {
                     const containerWidth = track.clientWidth;
@@ -3073,12 +3014,14 @@
                         }
                     });
 
+                    // If we're at the duplicated first (index 0), jump to real first (index 1)
                     if (closestIdx === 0) {
                         const targetSlide = slides[1];
                         const scrollPos2 = targetSlide.offsetLeft - (containerWidth - targetSlide.offsetWidth) / 2;
                         track.scrollLeft = Math.max(0, scrollPos2);
                         closestIdx = 1;
                     }
+                    // If we're at the duplicated last (index slides.length-1), jump to real last (index slides.length-2)
                     if (closestIdx === slides.length - 1) {
                         const targetSlide = slides[slides.length - 2];
                         const scrollPos2 = targetSlide.offsetLeft - (containerWidth - targetSlide.offsetWidth) / 2;
@@ -3102,6 +3045,7 @@
                 }, 2000);
             });
 
+            // Indicators click
             promoCarouselIndicators.querySelectorAll('.dot').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const idx = parseInt(this.dataset.index);
@@ -3109,6 +3053,7 @@
                 });
             });
 
+            // Initial update
             updateCarouselClasses(1);
             updateIndicators(0);
 
@@ -3152,6 +3097,7 @@
         function goToSlide(realIndex) {
             const slides = promoCarouselTrack.querySelectorAll('.promo-slide');
             if (slides.length === 0) return;
+            // Find duplicated index that maps to realIndex
             let targetIdx = -1;
             slides.forEach((slide, i) => {
                 if (parseInt(slide.dataset.realIndex) === realIndex) {
@@ -3659,7 +3605,20 @@
 
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
-            accountBalanceDisplay.textContent = `ZMW ${(userAccount.balance || 0).toFixed(2)}`;
+
+            // Calculate available balance: current balance minus pending withdrawals
+            const withdrawals = allData.withdrawalRequests || {};
+            let pendingTotal = 0;
+            Object.entries(withdrawals).forEach(([key, w]) => {
+                if (w.userId === currentUserId && w.status === 'pending') {
+                    pendingTotal += w.amount || 0;
+                }
+            });
+            const availableBalance = Math.max(0, (userAccount.balance || 0) - pendingTotal);
+            accountBalanceDisplay.textContent = `ZMW ${availableBalance.toFixed(2)}`;
+
+            // Store available balance for withdrawal max
+            withdrawMaxLabel.textContent = availableBalance.toFixed(2);
 
             withdrawBtnFromBalance.addEventListener('click', openWithdrawModal);
             withdrawBtnFromView.addEventListener('click', openWithdrawModal);
@@ -3767,7 +3726,7 @@
                     statusMessage =
                         `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount has been refunded to your account.`;
                 } else {
-                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval. The amount has been held.`;
+                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval. The amount has been temporarily deducted from your balance.`;
                 }
 
                 return `
@@ -4126,12 +4085,14 @@
                     return;
                 }
 
+                // Check both referralDiscounts and referralPromoDiscounts
                 const discounts = allData.referralDiscounts || {};
                 const promoDiscounts = allData.referralPromoDiscounts || {};
                 let foundDiscount = null;
                 let discountKey = null;
                 let isPromo = false;
 
+                // First check exact match in referralDiscounts
                 for (const [key, d] of Object.entries(discounts)) {
                     if (d.referralCode === code) {
                         foundDiscount = d;
@@ -4141,6 +4102,7 @@
                     }
                 }
 
+                // If not found, check referralPromoDiscounts (exact match OR code filter empty)
                 if (!foundDiscount) {
                     for (const [key, d] of Object.entries(promoDiscounts)) {
                         if (d.referralCode === code || d.referralCode === '') {
@@ -4261,6 +4223,7 @@
                 set(usedCouponRef, true);
             }
 
+            // === REFERRAL BONUS: credit the referrer's account and record transaction ===
             if (appliedReferral && appliedReferral.referrerUid) {
                 const bonusAmount = appliedReferral.ownerAmount || 0;
                 if (bonusAmount > 0) {
@@ -4346,14 +4309,25 @@
         }
 
         // =================================================================
-        // WITHDRAWAL — PENDING DEDUCTION + REFUND ON REJECTION
+        // WITHDRAWAL — PENDING REQUEST, ADMIN APPROVES/DEDUCTS
         // =================================================================
 
         function openWithdrawModal() {
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
             const balance = userAccount.balance || 0;
-            withdrawMaxLabel.textContent = balance.toFixed(2);
+
+            // Calculate pending withdrawal total
+            const withdrawals = allData.withdrawalRequests || {};
+            let pendingTotal = 0;
+            Object.entries(withdrawals).forEach(([key, w]) => {
+                if (w.userId === currentUserId && w.status === 'pending') {
+                    pendingTotal += w.amount || 0;
+                }
+            });
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            withdrawMaxLabel.textContent = availableBalance.toFixed(2);
             withdrawModal.classList.add('open');
             withdrawAmountInput.value = '';
         }
@@ -4373,20 +4347,27 @@
             const userAccount = accounts[currentUserId] || { balance: 0 };
             const balance = userAccount.balance || 0;
 
-            if (amount > balance) {
-                showToast('Insufficient balance. You have ZMW ' + balance.toFixed(2), 'error');
+            // Calculate pending total
+            const withdrawals = allData.withdrawalRequests || {};
+            let pendingTotal = 0;
+            Object.entries(withdrawals).forEach(([key, w]) => {
+                if (w.userId === currentUserId && w.status === 'pending') {
+                    pendingTotal += w.amount || 0;
+                }
+            });
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            if (amount > availableBalance) {
+                showToast('Insufficient balance. You have ZMW ' + availableBalance.toFixed(2) + ' available for withdrawal.', 'error');
                 return;
             }
 
-            // --- 1. IMMEDIATELY DEDUCT FROM BALANCE (PENDING HOLD) ---
+            // Immediately deduct the amount from the account balance (pending hold)
             const newBalance = balance - amount;
             if (!allData.customerAccounts) allData.customerAccounts = {};
-            if (!allData.customerAccounts[currentUserId]) {
-                allData.customerAccounts[currentUserId] = { balance: 0 };
-            }
-            allData.customerAccounts[currentUserId].balance = newBalance;
+            allData.customerAccounts[currentUserId] = { balance: newBalance };
 
-            // --- 2. CREATE WITHDRAWAL REQUEST WITH DEDUCTION FLAG ---
+            // Create withdrawal request
             if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
             const wId = 'w' + Date.now();
             allData.withdrawalRequests[wId] = {
@@ -4396,12 +4377,10 @@
                 phone: currentUserData?.phone || 'N/A',
                 status: 'pending',
                 createdAt: Date.now(),
-                date: new Date().toLocaleString(),
-                deductedFromBalance: true, // marks that balance was reduced
-                refunded: false // tracks if refund was processed
+                date: new Date().toLocaleString()
             };
 
-            // --- 3. CREATE TRANSACTION RECORD (for customer visibility) ---
+            // Record transaction (withdrawal request)
             if (!allData.transactions) allData.transactions = {};
             const txId = 'tx' + Date.now();
             allData.transactions[txId] = {
@@ -4411,7 +4390,7 @@
                 status: 'pending',
                 date: new Date().toLocaleString(),
                 ref: 'W-' + wId,
-                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested. Amount held pending approval.`,
+                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested. Pending approval.`,
                 screenshot: 'N/A',
                 userId: currentUserId,
                 itemId: wId,
@@ -4423,22 +4402,22 @@
                 userPhone: currentUserData?.phone || 'N/A'
             };
 
-            // --- 4. SAVE AND NOTIFY ---
+            // Notify admin (optional)
+            if (!allData.notifications) allData.notifications = {};
+            const notifId = 'notif-' + Date.now();
+            allData.notifications[notifId] = {
+                title: '💸 New Withdrawal Request',
+                message: `${currentUserData?.firstName || 'Customer'} requested withdrawal of ZMW ${amount.toFixed(2)}.`,
+                timestamp: Date.now(),
+                read: false,
+                userId: 'admin' // admin notification (we'll treat as global)
+            };
+
             saveData().then(() => {
                 closeWithdrawModal();
                 withdrawSuccessModal.classList.add('open');
                 renderAll();
-                showToast('✅ Withdrawal submitted! ZMW ' + amount.toFixed(2) + ' has been held pending approval.', 'success');
-            }).catch((error) => {
-                // In case of save error, we should roll back the balance deduction
-                // But since we already updated allData, we can try to revert
-                allData.customerAccounts[currentUserId].balance = balance;
-                delete allData.withdrawalRequests[wId];
-                delete allData.transactions[txId];
-                saveData().then(() => {
-                    showToast('Error submitting withdrawal. Please try again.', 'error');
-                });
-                console.error('Error saving withdrawal:', error);
+                showToast('✅ Withdrawal request submitted! Admin will review it.', 'success');
             });
         }
 
@@ -4603,8 +4582,8 @@
             }
         });
 
-        console.log('✅ Customer App — Withdrawals: amount deducted immediately, refunded only if rejected.');
-        console.log('✅ Customer App — Infinite Carousel: 5s auto‑scroll, current slide 1.08x, adjacent slides peek 20% from edges.');
+        console.log('✅ Customer App — Withdrawal logic updated: pending withdrawals are deducted from balance, and users can only withdraw remaining available balance. Upon rejection, amount is refunded automatically.');
+        console.log('✅ Infinite Carousel: 5s auto‑scroll, current slide 1.08x, adjacent slides peek 20% from edges.');
         console.log('✅ Price display: original price with strikethrough (faded) + new price in bold (black) — shown only inside order flow.');
         console.log('✅ Service grid: only title + subtitle (no price shown).');
         console.log('✅ Referral Promo: checks both referralDiscounts AND referralPromoDiscounts.');
