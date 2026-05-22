@@ -77,6 +77,7 @@
             gap: 1px;
             user-select: none;
             padding: 2px 0;
+            position: relative;
         }
         .nav-item i {
             font-size: 20px;
@@ -90,6 +91,35 @@
         }
         .nav-item:active {
             transform: scale(0.92);
+        }
+
+        /* ── Badge counter on nav items ── */
+        .badge-counter {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            min-width: 18px;
+            height: 18px;
+            background: #f5b83d;
+            color: #1c2128;
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            border: 2px solid #1c2128;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            line-height: 1;
+            pointer-events: none;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .badge-counter.show {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .header {
@@ -2912,27 +2942,28 @@
             }
         }
         /* ── Promo header button (yellow circle) ── */
-.promo-header-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: #f5b83d;
-    color: #1c2128;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 12px rgba(245, 184, 61, 0.3);
-}
-.promo-header-btn:active {
-    transform: scale(0.92);
-}
-.promo-header-btn:hover {
-    box-shadow: 0 6px 20px rgba(245, 184, 61, 0.4);
-}
+        .promo-header-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #f5b83d;
+            color: #1c2128;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(245, 184, 61, 0.3);
+        }
+        .promo-header-btn:active {
+            transform: scale(0.92);
+        }
+        .promo-header-btn:hover {
+            box-shadow: 0 6px 20px rgba(245, 184, 61, 0.4);
+        }
+
         @media (min-width: 401px) and (max-width: 600px) {
             .promo-pic-card {
                 height: 380px;
@@ -3451,11 +3482,18 @@
 
         <!-- ===== BOTTOM NAV ===== -->
         <div class="bottom-nav">
-            <button class="nav-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Home</span></button>
+            <button class="nav-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Home</span>
+                <span class="badge-counter" id="badgeOrders">0</span>
+            </button>
             <button class="nav-item" data-page="services"><i class="fa-solid fa-layer-group"></i><span>Services</span></button>
             <button class="nav-item" data-page="promo-pics"><i class="fa-regular fa-images"></i><span>Promo Pics</span></button>
-            <button class="nav-item" data-page="orders"><i class="fa-solid fa-truck"></i><span>Orders</span></button>
+            <button class="nav-item" data-page="orders"><i class="fa-solid fa-truck"></i><span>Orders</span>
+                <span class="badge-counter" id="badgeOrdersPending">0</span>
+            </button>
             <button class="nav-item" data-page="users"><i class="fa-solid fa-users"></i><span>Users</span></button>
+            <button class="nav-item" data-page="payables"><i class="fa-solid fa-money-bill-wave"></i><span>Payables</span>
+                <span class="badge-counter" id="badgeWithdrawalsPending">0</span>
+            </button>
             <button class="nav-item" data-page="profile"><i class="fa-regular fa-user"></i><span>Profile</span></button>
         </div>
 
@@ -4027,6 +4065,11 @@
         const applyAdjustBtn = document.getElementById('applyAdjustBtn');
         const adjustPreview = document.getElementById('adjustPreview');
 
+        // ─── Badge elements ───
+        const badgeOrders = document.getElementById('badgeOrders');
+        const badgeOrdersPending = document.getElementById('badgeOrdersPending');
+        const badgeWithdrawalsPending = document.getElementById('badgeWithdrawalsPending');
+
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
         // ───────────────────────────────────────────────────────────────────
@@ -4227,6 +4270,9 @@
 
             // ── Account Update Modal user list ──
             renderAccountUpdateUserList();
+
+            // ── Update badges ──
+            updateBadges();
         }
 
         function renderDashboard() {
@@ -4424,6 +4470,9 @@
                     }
                 });
             });
+
+            // Update pending orders badge
+            updateBadges();
         }
 
         function renderUsers(searchTerm = '') {
@@ -5092,6 +5141,9 @@
                     });
                 });
             }
+
+            // Update pending withdrawals badge
+            updateBadges();
         }
 
         // ─── WITHDRAWAL CONFIRMATION MODAL ──────────────────────────────
@@ -6875,6 +6927,36 @@
         });
 
         // ───────────────────────────────────────────────────────────────────
+        // BADGE UPDATES
+        // ───────────────────────────────────────────────────────────────────
+
+        function updateBadges() {
+            // Pending orders
+            const orders = Object.values(allData.orders || {});
+            const pendingOrders = orders.filter(o => o.status === 'pending').length;
+            updateBadgeElement(badgeOrdersPending, pendingOrders);
+
+            // Pending withdrawals
+            const withdrawals = Object.values(allData.withdrawalRequests || {});
+            const pendingWithdrawals = withdrawals.filter(w => w.status === 'pending').length;
+            updateBadgeElement(badgeWithdrawalsPending, pendingWithdrawals);
+
+            // Total orders (optional, on Home tab)
+            const totalOrders = orders.length;
+            updateBadgeElement(badgeOrders, totalOrders);
+        }
+
+        function updateBadgeElement(el, count) {
+            if (count > 0) {
+                el.textContent = count;
+                el.classList.add('show');
+            } else {
+                el.textContent = '0';
+                el.classList.remove('show');
+            }
+        }
+
+        // ───────────────────────────────────────────────────────────────────
         // TOAST
         // ───────────────────────────────────────────────────────────────────
 
@@ -6905,7 +6987,34 @@
                         }
                     }
                     currentAdminData = foundAdmin || null;
+
+                    // ── Load app data ──
                     loadData(() => {
+                        // ── Start listening to users for real‑time updates ──
+                        const usersRef = ref(db, 'users');
+                        onValue(usersRef, (snapshot) => {
+                            const usersData = snapshot.val() || {};
+                            allData.users = usersData;
+                            allUsersCache = usersData;
+                            // Update dashboard and badges
+                            renderDashboard();
+                            updateBadges();
+                            // If on users page, re-render user list
+                            const usersPage = document.getElementById('page-users');
+                            if (usersPage.classList.contains('active')) {
+                                renderUsers(document.getElementById('userSearchInput').value);
+                            }
+                            // Re-render referral sections that depend on user names
+                            renderCustomReferrals();
+                            renderReferralDiscounts();
+                            renderReferralPromoDiscounts();
+                            renderAccounts();
+                            renderWithdrawals();
+                            populateUserSelects();
+                            populateCustomReferralSelect();
+                            renderAccountUpdateUserList();
+                        });
+
                         renderAll();
                         if (allData.hero) {
                             document.getElementById('heroTitle').value = allData.hero.title || '';
@@ -6927,8 +7036,7 @@
             }
         });
 
-        console.log('✅ Admin App — Price adjustment now preserves originalPrice so users see before/after prices.');
-        console.log('✅ Service creation/editing also preserves originalPrice when price changes.');
+        console.log('✅ Admin Dashboard — Customer counter updates in real‑time, badge counters for pending orders & withdrawals.');
     </script>
 </body>
 </html>
