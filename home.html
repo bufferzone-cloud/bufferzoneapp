@@ -266,7 +266,6 @@
             font-weight: 700;
         }
 
-        /* ── PROMO CAROUSEL – INFINITE PEEK STYLE ── */
         .promo-carousel-wrapper {
             position: relative;
             margin: 4px 0 14px 0;
@@ -681,7 +680,7 @@
         .order-title-section .price .new-price {
             font-size: 19px;
             font-weight: 700;
-            color: #1c2128; /* Changed from #f5b83d to black */
+            color: #1c2128;
         }
         .order-title-section .price .new-price.regular {
             color: #1c2128;
@@ -2361,7 +2360,7 @@
                         </div>
                         <div class="account-balance-box" id="accountBalanceBox">
                             <div class="left">
-                                <div class="label">Available Balance</div>
+                                <div class="label">Account Balance</div>
                                 <div class="balance" id="accountBalanceDisplay">ZMW 0.00</div>
                             </div>
                             <button class="withdraw-btn" id="withdrawBtnFromBalance"><i class="fa-solid fa-arrow-up"></i> Withdraw</button>
@@ -3605,23 +3604,53 @@
 
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
 
-            // Calculate available balance: current balance minus pending withdrawals
-            const withdrawals = allData.withdrawalRequests || {};
-            let pendingTotal = 0;
-            Object.entries(withdrawals).forEach(([key, w]) => {
-                if (w.userId === currentUserId && w.status === 'pending') {
-                    pendingTotal += w.amount || 0;
-                }
-            });
-            const availableBalance = Math.max(0, (userAccount.balance || 0) - pendingTotal);
-            accountBalanceDisplay.textContent = `ZMW ${availableBalance.toFixed(2)}`;
+            // Calculate pending withdrawal total for this user
+            const pendingTotal = calculatePendingWithdrawalTotal();
 
-            // Store available balance for withdrawal max
-            withdrawMaxLabel.textContent = availableBalance.toFixed(2);
+            // Available balance = current balance - pending total
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            accountBalanceDisplay.textContent = `ZMW ${balance.toFixed(2)}`;
+            // Show pending info as a subtitle or additional info
+            const balanceBox = document.getElementById('accountBalanceBox');
+            let pendingInfo = balanceBox.querySelector('.pending-info');
+            if (!pendingInfo) {
+                pendingInfo = document.createElement('div');
+                pendingInfo.className = 'pending-info';
+                pendingInfo.style.cssText = 'font-size:9px;color:#f5b83d;margin-top:2px;';
+                balanceBox.querySelector('.left').appendChild(pendingInfo);
+            }
+            if (pendingTotal > 0) {
+                pendingInfo.textContent = `Pending: ZMW ${pendingTotal.toFixed(2)} · Available: ZMW ${availableBalance.toFixed(2)}`;
+                pendingInfo.style.display = 'block';
+            } else {
+                pendingInfo.textContent = `Available: ZMW ${availableBalance.toFixed(2)}`;
+                pendingInfo.style.display = 'block';
+            }
+
+            // Store available balance for withdrawal modal
+            withdrawBtnFromBalance.dataset.availableBalance = availableBalance;
+            withdrawBtnFromView.dataset.availableBalance = availableBalance;
 
             withdrawBtnFromBalance.addEventListener('click', openWithdrawModal);
             withdrawBtnFromView.addEventListener('click', openWithdrawModal);
+        }
+
+        // =================================================================
+        // PENDING WITHDRAWAL TOTAL CALCULATION
+        // =================================================================
+
+        function calculatePendingWithdrawalTotal() {
+            const withdrawals = allData.withdrawalRequests || {};
+            let total = 0;
+            for (const [key, w] of Object.entries(withdrawals)) {
+                if (w.userId === currentUserId && w.status === 'pending') {
+                    total += (w.amount || 0);
+                }
+            }
+            return total;
         }
 
         // =================================================================
@@ -3724,9 +3753,9 @@
                     statusEmoji = '❌';
                     statusColor = '#dc2626';
                     statusMessage =
-                        `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount has been refunded to your account.`;
+                        `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount remains in your account.`;
                 } else {
-                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval. The amount has been temporarily deducted from your balance.`;
+                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
                 }
 
                 return `
@@ -4316,20 +4345,19 @@
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
             const balance = userAccount.balance || 0;
-
-            // Calculate pending withdrawal total
-            const withdrawals = allData.withdrawalRequests || {};
-            let pendingTotal = 0;
-            Object.entries(withdrawals).forEach(([key, w]) => {
-                if (w.userId === currentUserId && w.status === 'pending') {
-                    pendingTotal += w.amount || 0;
-                }
-            });
+            const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
 
             withdrawMaxLabel.textContent = availableBalance.toFixed(2);
             withdrawModal.classList.add('open');
             withdrawAmountInput.value = '';
+            // Show a helpful message if there are pending withdrawals
+            const sub = withdrawModal.querySelector('.sub');
+            if (pendingTotal > 0) {
+                sub.textContent = `You have ZMW ${pendingTotal.toFixed(2)} in pending withdrawals. Available to withdraw: ZMW ${availableBalance.toFixed(2)}`;
+            } else {
+                sub.textContent = `Enter the amount you'd like to withdraw from your account. Max: ZMW ${availableBalance.toFixed(2)}`;
+            }
         }
 
         function closeWithdrawModal() {
@@ -4346,28 +4374,14 @@
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
             const balance = userAccount.balance || 0;
-
-            // Calculate pending total
-            const withdrawals = allData.withdrawalRequests || {};
-            let pendingTotal = 0;
-            Object.entries(withdrawals).forEach(([key, w]) => {
-                if (w.userId === currentUserId && w.status === 'pending') {
-                    pendingTotal += w.amount || 0;
-                }
-            });
+            const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
 
             if (amount > availableBalance) {
-                showToast('Insufficient balance. You have ZMW ' + availableBalance.toFixed(2) + ' available for withdrawal.', 'error');
+                showToast(`Insufficient available balance. You have ZMW ${availableBalance.toFixed(2)} available after accounting for pending withdrawals.`, 'error');
                 return;
             }
 
-            // Immediately deduct the amount from the account balance (pending hold)
-            const newBalance = balance - amount;
-            if (!allData.customerAccounts) allData.customerAccounts = {};
-            allData.customerAccounts[currentUserId] = { balance: newBalance };
-
-            // Create withdrawal request
             if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
             const wId = 'w' + Date.now();
             allData.withdrawalRequests[wId] = {
@@ -4380,7 +4394,6 @@
                 date: new Date().toLocaleString()
             };
 
-            // Record transaction (withdrawal request)
             if (!allData.transactions) allData.transactions = {};
             const txId = 'tx' + Date.now();
             allData.transactions[txId] = {
@@ -4400,17 +4413,6 @@
                     currentUser.email || 'Customer',
                 userEmail: currentUser.email || 'N/A',
                 userPhone: currentUserData?.phone || 'N/A'
-            };
-
-            // Notify admin (optional)
-            if (!allData.notifications) allData.notifications = {};
-            const notifId = 'notif-' + Date.now();
-            allData.notifications[notifId] = {
-                title: '💸 New Withdrawal Request',
-                message: `${currentUserData?.firstName || 'Customer'} requested withdrawal of ZMW ${amount.toFixed(2)}.`,
-                timestamp: Date.now(),
-                read: false,
-                userId: 'admin' // admin notification (we'll treat as global)
             };
 
             saveData().then(() => {
@@ -4582,11 +4584,7 @@
             }
         });
 
-        console.log('✅ Customer App — Withdrawal logic updated: pending withdrawals are deducted from balance, and users can only withdraw remaining available balance. Upon rejection, amount is refunded automatically.');
-        console.log('✅ Infinite Carousel: 5s auto‑scroll, current slide 1.08x, adjacent slides peek 20% from edges.');
-        console.log('✅ Price display: original price with strikethrough (faded) + new price in bold (black) — shown only inside order flow.');
-        console.log('✅ Service grid: only title + subtitle (no price shown).');
-        console.log('✅ Referral Promo: checks both referralDiscounts AND referralPromoDiscounts.');
+        console.log('✅ Customer App — Withdrawal logic: pending amounts are subtracted from available balance. Multiple pending withdrawals allowed up to available balance.');
     </script>
 </body>
 </html>
