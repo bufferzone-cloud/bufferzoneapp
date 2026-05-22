@@ -3089,6 +3089,137 @@
             opacity: 0.5;
             cursor: not-allowed;
         }
+
+        /* ── Manual Deposit User Selector (Phone-style) ── */
+        .user-selector-modal .modal {
+            max-width: 400px;
+        }
+        .user-selector-modal .search-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 14px;
+            transition: border 0.2s;
+        }
+        .user-selector-modal .search-input:focus {
+            outline: none;
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+        .user-selector-modal .user-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #f0f0f0;
+            border-radius: 10px;
+            padding: 6px;
+        }
+        .user-selector-modal .user-list .user-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .user-selector-modal .user-list .user-item:last-child {
+            border-bottom: none;
+        }
+        .user-selector-modal .user-list .user-item:hover {
+            background: #f8f9fc;
+        }
+        .user-selector-modal .user-list .user-item:active {
+            transform: scale(0.98);
+        }
+        .user-selector-modal .user-list .user-item .u-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #1c2128;
+            color: #f5b83d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .user-selector-modal .user-list .user-item .u-info {
+            flex: 1;
+        }
+        .user-selector-modal .user-list .user-item .u-info .u-name {
+            font-weight: 600;
+            font-size: 13px;
+            color: #1c2128;
+        }
+        .user-selector-modal .user-list .user-item .u-info .u-email {
+            font-size: 11px;
+            color: #888;
+        }
+        .user-selector-modal .user-list .user-item .u-info .u-bal {
+            font-size: 11px;
+            color: #f5b83d;
+            font-weight: 600;
+        }
+        .user-selector-modal .user-list .user-item.selected {
+            background: #f0f5ff;
+            border: 2px solid #1c2128;
+        }
+        .user-selector-modal .btn-select-user {
+            width: 100%;
+            padding: 11px;
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: all 0.2s;
+        }
+        .user-selector-modal .btn-select-user:hover {
+            background: #2a2a2a;
+        }
+        .user-selector-modal .btn-select-user:active {
+            transform: scale(0.95);
+        }
+        .user-selector-modal .btn-select-user:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .user-selector-modal .selected-name {
+            font-weight: 600;
+            color: #1c2128;
+            padding: 8px 12px;
+            background: #f8f9fc;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 10px;
+            display: none;
+        }
+        .user-selector-modal .selected-name.show {
+            display: block;
+        }
+
+        /* ── Account Update Search ── */
+        .account-update-search {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 10px;
+            transition: border 0.2s;
+        }
+        .account-update-search:focus {
+            outline: none;
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
     </style>
 </head>
 <body>
@@ -3843,6 +3974,21 @@
         </div>
     </div>
 
+    <!-- ===== USER SELECTOR MODAL (Phone-style) ===== -->
+    <div class="modal-overlay user-selector-modal" id="userSelectorModal">
+        <div class="modal">
+            <button class="close-btn" id="userSelectorCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3><i class="fa-solid fa-user-plus" style="color:#f5b83d;"></i> Select Customer</h3>
+            <p class="sub">Choose a customer to deposit funds to.</p>
+            <input type="text" id="userSelectorSearch" class="search-input" placeholder="Search by name or email..." />
+            <div class="selected-name" id="selectedCustomerName"></div>
+            <div class="user-list" id="userSelectorList">
+                <!-- Rendered by JS -->
+            </div>
+            <button class="btn-select-user" id="userSelectorConfirmBtn" disabled>Select Customer</button>
+        </div>
+    </div>
+
     <!-- ===== ACCOUNT UPDATE MODAL ===== -->
     <div class="account-update-modal-overlay" id="accountUpdateModal">
         <div class="account-update-modal">
@@ -3855,6 +4001,8 @@
                 <button id="deselectAllUsersBtn"><i class="fa-regular fa-square"></i> Deselect All</button>
                 <span style="font-size:12px; color:#888; margin-left:auto;" id="selectedCount">0 selected</span>
             </div>
+
+            <input type="text" id="accountUpdateSearch" class="account-update-search" placeholder="Search users by name or email..." />
 
             <div class="user-checkbox-list" id="userCheckboxList">
                 <!-- Rendered by JS -->
@@ -4035,6 +4183,7 @@
         let pendingWithdrawAction = null;
         let withdrawalsFilter = 'pending';
         let pendingEditCustomerUid = null;
+        let selectedUserId = null;
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -4236,6 +4385,17 @@
         const editEmail = document.getElementById('editEmail');
         const editReferralCode = document.getElementById('editReferralCode');
         const saveEditCustomerBtn = document.getElementById('saveEditCustomerBtn');
+
+        // ─── User Selector DOM ───
+        const userSelectorModal = document.getElementById('userSelectorModal');
+        const userSelectorCloseBtn = document.getElementById('userSelectorCloseBtn');
+        const userSelectorSearch = document.getElementById('userSelectorSearch');
+        const userSelectorList = document.getElementById('userSelectorList');
+        const userSelectorConfirmBtn = document.getElementById('userSelectorConfirmBtn');
+        const selectedCustomerName = document.getElementById('selectedCustomerName');
+
+        // ─── Account Update Search ───
+        const accountUpdateSearch = document.getElementById('accountUpdateSearch');
 
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
@@ -5486,7 +5646,7 @@
             }).join('');
 
             customReferralUserSelect.innerHTML = `<option value="">— Select a user —</option>` + options;
-            depositCustomerSelect.innerHTML = `<option value="">— Select a customer —</option>` + options;
+            // Don't populate depositCustomerSelect here — it's handled by the user selector modal
         }
 
         function populateCustomReferralSelect() {
@@ -5505,10 +5665,18 @@
 
         function renderAccountUpdateUserList() {
             const users = allData.users || {};
-            const entries = Object.entries(users);
+            const searchTerm = accountUpdateSearch.value.trim().toLowerCase();
+            let entries = Object.entries(users);
+            if (searchTerm) {
+                entries = entries.filter(([uid, u]) => {
+                    const name = `${u.firstName || ''} ${u.lastName || ''}`.toLowerCase().trim();
+                    const email = (u.email || '').toLowerCase();
+                    return name.includes(searchTerm) || email.includes(searchTerm);
+                });
+            }
             if (entries.length === 0) {
                 userCheckboxList.innerHTML =
-                    `<div style="text-align:center;padding:20px;color:#888;">No users available.</div>`;
+                    `<div style="text-align:center;padding:20px;color:#888;">No users found.</div>`;
                 return;
             }
             userCheckboxList.innerHTML = entries.map(([uid, u]) => {
@@ -6446,12 +6614,13 @@
         updateFilterButtons();
 
         // ───────────────────────────────────────────────────────────────────
-        // MANUAL DEPOSIT
+        // MANUAL DEPOSIT (User Selector Modal)
         // ───────────────────────────────────────────────────────────────────
 
+        let selectedUserForDeposit = null;
+
         manualDepositBtn.addEventListener('click', function() {
-            manualDepositModal.classList.add('open');
-            populateDepositSelect();
+            openUserSelectorModal();
         });
 
         manualDepositCloseBtn.addEventListener('click', function() {
@@ -6464,18 +6633,111 @@
             if (e.target === this) manualDepositModal.classList.remove('open');
         });
 
-        function populateDepositSelect() {
+        // User Selector Modal
+        userSelectorCloseBtn.addEventListener('click', function() {
+            userSelectorModal.classList.remove('open');
+        });
+        userSelectorModal.addEventListener('click', function(e) {
+            if (e.target === this) userSelectorModal.classList.remove('open');
+        });
+
+        function openUserSelectorModal() {
+            selectedUserForDeposit = null;
+            userSelectorConfirmBtn.disabled = true;
+            selectedCustomerName.classList.remove('show');
+            userSelectorSearch.value = '';
+            renderUserSelectorList();
+            userSelectorModal.classList.add('open');
+        }
+
+        function renderUserSelectorList() {
             const users = allData.users || {};
-            const options = Object.entries(users).map(([uid, u]) => {
+            const searchTerm = userSelectorSearch.value.trim().toLowerCase();
+            let entries = Object.entries(users);
+            if (searchTerm) {
+                entries = entries.filter(([uid, u]) => {
+                    const name = `${u.firstName || ''} ${u.lastName || ''}`.toLowerCase().trim();
+                    const email = (u.email || '').toLowerCase();
+                    return name.includes(searchTerm) || email.includes(searchTerm);
+                });
+            }
+            if (entries.length === 0) {
+                userSelectorList.innerHTML =
+                    `<div style="text-align:center;padding:20px;color:#888;">No users found.</div>`;
+                return;
+            }
+            userSelectorList.innerHTML = entries.map(([uid, u]) => {
                 const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
                 const email = u.email || 'No email';
                 const accounts = allData.customerAccounts || {};
                 const balance = accounts[uid]?.balance || 0;
-                return `<option value="${uid}">${name} (${email}) — ZMW ${balance.toFixed(2)}</option>`;
+                const initial = (u.firstName || 'U').charAt(0).toUpperCase();
+                return `
+                            <div class="user-item" data-uid="${uid}">
+                                <div class="u-avatar">${initial}</div>
+                                <div class="u-info">
+                                    <div class="u-name">${name}</div>
+                                    <div class="u-email">${email}</div>
+                                    <div class="u-bal">ZMW ${balance.toFixed(2)}</div>
+                                </div>
+                            </div>
+                        `;
             }).join('');
-            depositCustomerSelect.innerHTML = `<option value="">— Select a customer —</option>` + options;
+
+            userSelectorList.querySelectorAll('.user-item').forEach(el => {
+                el.addEventListener('click', function() {
+                    userSelectorList.querySelectorAll('.user-item').forEach(item => item.classList.remove('selected'));
+                    this.classList.add('selected');
+                    const uid = this.dataset.uid;
+                    selectedUserForDeposit = uid;
+                    const user = allData.users?.[uid] || {};
+                    const name = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
+                    const email = user.email || 'No email';
+                    selectedCustomerName.textContent = `Selected: ${name} (${email})`;
+                    selectedCustomerName.classList.add('show');
+                    userSelectorConfirmBtn.disabled = false;
+                });
+            });
         }
 
+        userSelectorSearch.addEventListener('input', function() {
+            renderUserSelectorList();
+        });
+
+        userSelectorConfirmBtn.addEventListener('click', function() {
+            if (!selectedUserForDeposit) {
+                showToast('Please select a customer.', 'error');
+                return;
+            }
+            userSelectorModal.classList.remove('open');
+            // Open the manual deposit modal with the selected user
+            manualDepositModal.classList.add('open');
+            // Pre-fill the select with the selected user
+            const select = document.getElementById('depositCustomerSelect');
+            // Add the selected user to the select if not already there
+            let exists = false;
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value === selectedUserForDeposit) {
+                    select.value = selectedUserForDeposit;
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                const user = allData.users?.[selectedUserForDeposit] || {};
+                const name = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
+                const email = user.email || 'No email';
+                const accounts = allData.customerAccounts || {};
+                const balance = accounts[selectedUserForDeposit]?.balance || 0;
+                const option = document.createElement('option');
+                option.value = selectedUserForDeposit;
+                option.textContent = `${name} (${email}) — ZMW ${balance.toFixed(2)}`;
+                select.appendChild(option);
+                select.value = selectedUserForDeposit;
+            }
+        });
+
+        // Override the manual deposit form submission to use the selected user
         manualDepositForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const userId = depositCustomerSelect.value;
@@ -6525,6 +6787,10 @@
         accountUpdateCloseBtn.addEventListener('click', closeAccountUpdateModal);
         accountUpdateModal.addEventListener('click', function(e) {
             if (e.target === this) closeAccountUpdateModal();
+        });
+
+        accountUpdateSearch.addEventListener('input', function() {
+            renderAccountUpdateUserList();
         });
 
         selectAllUsersBtn.addEventListener('click', function() {
@@ -7280,7 +7546,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Enhanced customer select with avatars, edit customer modal, withdrawal timestamps, and consistent newest-first sorting.');
+        console.log('✅ Admin Dashboard — Phone-style user selector for manual deposit, search in account update, edit customer button in user list, withdrawal timestamps, and consistent newest-first sorting.');
     </script>
 </body>
 </html>
