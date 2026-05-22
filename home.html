@@ -266,7 +266,6 @@
             font-weight: 700;
         }
 
-        /* ── PROMO CAROUSEL – INFINITE PEEK STYLE ── */
         .promo-carousel-wrapper {
             position: relative;
             margin: 4px 0 14px 0;
@@ -997,6 +996,7 @@
         .coupon-msg.error {
             color: #dc2626;
         }
+
         .price-breakdown {
             background: #f8f9fc;
             border-radius: 8px;
@@ -1966,9 +1966,6 @@
             cursor: pointer;
             margin-top: 8px;
         }
-        .withdraw-modal .btn-cancel-withdraw:active {
-            transform: scale(0.95);
-        }
 
         .withdraw-success-overlay {
             position: fixed;
@@ -2022,9 +2019,6 @@
             font-weight: 600;
             cursor: pointer;
         }
-        .withdraw-success-modal .btn-ok:active {
-            transform: scale(0.95);
-        }
 
         .toggle-row {
             display: flex;
@@ -2050,9 +2044,6 @@
             background: #1c2128;
             color: white;
             border-color: #1c2128;
-        }
-        .toggle-row .toggle-code-btn:active {
-            transform: scale(0.95);
         }
 
         .code-input-wrap {
@@ -2298,6 +2289,7 @@
 
             <!-- ===== VIEW: ORDER FLOW ===== -->
             <div id="orderFlowView" class="view">
+
                 <div style="display: flex; align-items: center; gap: 10px; padding: 0 0 10px 0;">
                     <button id="backFromOrder" style="background: none; border: none; font-size: 16px; color: #1c2128; cursor: pointer; padding: 3px;">
                         <i class="fa-solid fa-arrow-left"></i>
@@ -2307,19 +2299,23 @@
                 <div id="orderFlowContainer" class="order-flow-container">
                     <!-- Dynamically rendered -->
                 </div>
+
             </div>
 
             <!-- ===== VIEW: ORDERS ===== -->
             <div id="ordersView" class="view">
+
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Your Orders</h3>
                     <p style="color: #888; font-size: 11px;">Track your projects and payments.</p>
                 </div>
                 <div class="order-grid" id="ordersGrid"></div>
+
             </div>
 
             <!-- ===== VIEW: HISTORY ===== -->
             <div id="historyView" class="view">
+
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Transaction History</h3>
                     <p style="color: #888; font-size: 11px;">Tap a transaction to view more details.</p>
@@ -2328,19 +2324,23 @@
                     <!-- Rendered by JS -->
                 </div>
                 <div class="history-list" id="historyList"></div>
+
             </div>
 
             <!-- ===== VIEW: SAMPLES ===== -->
             <div id="samplesView" class="view">
+
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">📁 Work Samples</h3>
                     <p style="color: #888; font-size: 11px;">Browse through our recent projects.</p>
                 </div>
                 <div id="samplesContainer" class="samples-grid"></div>
+
             </div>
 
             <!-- ===== VIEW: ACCOUNT ===== -->
             <div id="accountView" class="view">
+
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">💰 My Account</h3>
                     <p style="color: #888; font-size: 11px;">Manage your balance, referrals, and withdrawals.</p>
@@ -2385,10 +2385,12 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <!-- ===== VIEW: PROFILE ===== -->
             <div id="profileView" class="view">
+
                 <div style="padding: 0 0 13px 0;">
                     <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">My Profile</h3>
                     <p style="color: #888; font-size: 11px;">Your personal information.</p>
@@ -2407,6 +2409,7 @@
                     </div>
                     <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
                 </div>
+
             </div>
 
         </div>
@@ -2537,9 +2540,9 @@
 
     <!-- ===== FIREBASE MODULE ===== -->
     <script type="module">
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // FIREBASE SDK
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
         import { getDatabase, ref, onValue, set, push, get, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
@@ -2556,16 +2559,13 @@
             measurementId: "G-VRQHT301C4"
         };
 
-        const CLOUD_NAME = 'dd3lcymrk';
-        const UPLOAD_PRESET = 'h3eyhc2o';
+        const CLOUDINARY_CLOUD_NAME = 'dd3lcymrk';
+        const CLOUDINARY_UPLOAD_PRESET = 'h3eyhc2o';
+        const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        const auth = getAuth(app);
-
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // STATE
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         let allData = null;
         let currentUser = null;
@@ -2593,9 +2593,9 @@
         let autoScrollTimer = null;
         let isUserInteracting = false;
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // DOM REFS
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         const headerName = document.getElementById('headerName');
         const headerAvatar = document.getElementById('headerAvatar');
@@ -2699,9 +2699,9 @@
         const applyReferralBtn = document.getElementById('applyReferralBtn');
         const referralMsg = document.getElementById('referralMsg');
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // HELPER FUNCTIONS
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function showToast(msg, type = 'info') {
             const toast = document.createElement('div');
@@ -2790,17 +2790,17 @@
             return `ZMW ${curr.toFixed(2)}`;
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // CLOUDINARY UPLOAD
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function setupCloudinaryUpload() {
             uploadArea.addEventListener('click', () => {
                 const options = {
-                    cloudName: CLOUD_NAME,
-                    uploadPreset: UPLOAD_PRESET,
+                    cloudName: CLOUDINARY_CLOUD_NAME,
+                    uploadPreset: CLOUDINARY_UPLOAD_PRESET,
                     sources: ['local', 'url', 'camera'],
-                    maxFileSize: 155000000,
+                    maxFileSize: MAX_FILE_SIZE,
                     resourceType: 'image',
                     clientAllowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
                     maxFiles: 1,
@@ -2829,9 +2829,9 @@
             });
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // LOAD DATA
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function loadData(callback) {
             const dbRef = ref(db, 'bufferzoneAppData');
@@ -2844,41 +2844,72 @@
                         policy: { title: 'BUFFER ZONE PAYMENT POLICY', desc: 'To begin your project, we require a 50% down payment. The remaining balance is due upon project completion and delivery. This ensures commitment from both parties.',
                             tag: '50% upfront required' },
                         ourServicesList: ['Graphic Design', 'Web Development', 'Digital Marketing', 'Branding Design'],
+                        categories: ['graphic', 'dev', 'tech', 'it'],
                         services: {},
                         orders: {},
+                        customers: {},
                         transactions: {},
                         promotions: {},
                         workPosts: {},
                         promoPics: {},
                         disabled: false,
                         notifications: {},
-                        customerAccounts: {},
-                        withdrawalRequests: {},
                         referralPromos: {},
                         customReferrals: {},
                         referralDiscounts: {},
-                        referralPromoDiscounts: {}
+                        referralPromoDiscounts: {},
+                        customerAccounts: {},
+                        withdrawalRequests: {},
+                        signupBonuses: {
+                            withReferral: 0,
+                            withCustomReferral: 0,
+                            withoutReferral: 0
+                        }
                     };
-                    set(dbRef, allData);
+                    set(dbRef, allData).then(() => {
+                        if (callback) callback(allData);
+                    });
                 } else {
                     allData = data;
-                    if (!allData.workPosts) allData.workPosts = {};
-                    if (!allData.promoPics) allData.promoPics = {};
-                    if (!allData.customerAccounts) allData.customerAccounts = {};
-                    if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
-                    if (!allData.referralPromos) allData.referralPromos = {};
-                    if (!allData.customReferrals) allData.customReferrals = {};
-                    if (!allData.referralDiscounts) allData.referralDiscounts = {};
-                    if (!allData.referralPromoDiscounts) allData.referralPromoDiscounts = {};
+                    if (!allData.categories) { allData.categories = ['graphic', 'dev', 'tech', 'it'];
+                        saveData(); }
+                    if (!allData.workPosts) { allData.workPosts = {};
+                        saveData(); }
+                    if (!allData.promoPics) { allData.promoPics = {};
+                        saveData(); }
+                    if (!allData.referralPromos) { allData.referralPromos = {};
+                        saveData(); }
+                    if (!allData.customReferrals) { allData.customReferrals = {};
+                        saveData(); }
+                    if (!allData.referralDiscounts) { allData.referralDiscounts = {};
+                        saveData(); }
+                    if (!allData.referralPromoDiscounts) { allData.referralPromoDiscounts = {};
+                        saveData(); }
+                    if (!allData.customerAccounts) { allData.customerAccounts = {};
+                        saveData(); }
+                    if (!allData.withdrawalRequests) { allData.withdrawalRequests = {};
+                        saveData(); }
+                    if (!allData.signupBonuses) {
+                        allData.signupBonuses = {
+                            withReferral: 0,
+                            withCustomReferral: 0,
+                            withoutReferral: 0
+                        };
+                        saveData();
+                    }
+                    if (callback) callback(data);
                 }
-                renderAll();
-                if (callback) callback();
             });
         }
 
-        // =================================================================
+        function saveData() {
+            const dbRef = ref(db, 'bufferzoneAppData');
+            return set(dbRef, allData);
+        }
+
+        // ───────────────────────────────────────────────────────────────────
         // RENDER FUNCTIONS
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function renderAll() {
             if (!allData) return;
@@ -2934,9 +2965,9 @@
             }
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // PROMO CAROUSEL – INFINITE PEEK STYLE
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function renderPromoCarousel() {
             const promoPics = allData.promoPics || {};
@@ -3154,9 +3185,9 @@
             `).join('');
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // SERVICES
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function renderServices(category = 'all') {
             const container = serviceGridContainer;
@@ -3191,9 +3222,9 @@
             });
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // ORDERS
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function renderOrders() {
             const container = ordersGrid;
@@ -3258,9 +3289,9 @@
             });
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // HISTORY
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function renderHistory() {
             const container = historyList;
@@ -3374,9 +3405,9 @@
             });
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // MARK REMAINING PAYMENT
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function markRemainingAsPaid(orderKey, orderData) {
             if (!orderKey || !orderData) {
@@ -3431,9 +3462,9 @@
             });
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // PROFILE
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function renderProfile() {
             if (currentUserData) {
@@ -3452,9 +3483,9 @@
             }
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // NOTIFICATIONS
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function renderNotifications() {
             const notifications = allData.notifications || {};
@@ -3497,9 +3528,9 @@
             });
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // SAMPLES
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function renderSamples() {
             const container = samplesContainer;
@@ -3579,9 +3610,9 @@
             container.innerHTML = html;
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // ACCOUNT & REFERRAL
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function renderAccountAndReferral() {
             if (!currentUserData) return;
@@ -3611,9 +3642,9 @@
             withdrawBtnFromView.addEventListener('click', openWithdrawModal);
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // TRANSACTION MESSAGES (only non-withdrawal transactions)
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function renderTransactionMessages() {
             const container = transactionMessages;
@@ -3672,9 +3703,9 @@
             }).join('');
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // WITHDRAWALS LIST (color-coded by status, real‑time updates)
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function renderWithdrawalsList() {
             const container = withdrawalsListContainer;
@@ -3731,9 +3762,9 @@
             }).join('');
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // SAVE DATA
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         async function saveData() {
             try {
@@ -3743,9 +3774,9 @@
             }
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // ORDER FLOW
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function openOrderFlow(service) {
             selectedService = service;
@@ -3973,9 +4004,9 @@
             document.querySelector('.order-footer .total-price').textContent = `ZMW ${total.toFixed(2)}`;
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // COUPON
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function applyCoupon() {
             const code = couponInput.value.trim().toUpperCase();
@@ -4041,9 +4072,9 @@
             });
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // REFERRAL CODE IN PAYMENT
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function applyReferral() {
             const code = referralCodeInput.value.trim().toUpperCase();
@@ -4146,9 +4177,9 @@
             });
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // CONFIRM PAYMENT
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function confirmPayment() {
             const screenshotUrl = cloudinaryScreenshotUrlInput.value;
@@ -4295,9 +4326,9 @@
             renderServices('all');
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // WITHDRAWAL — PENDING REQUEST, ADMIN APPROVES/DEDUCTS
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         function openWithdrawModal() {
             const accounts = allData.customerAccounts || {};
@@ -4397,9 +4428,9 @@
             });
         }
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // EVENT BINDINGS
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
@@ -4529,9 +4560,9 @@
             }
         });
 
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
         // AUTH & INIT
-        // =================================================================
+        // ───────────────────────────────────────────────────────────────────
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
