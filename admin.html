@@ -2872,16 +2872,16 @@
             color: #1c2128;
         }
 
-        /* ── USER CARD STYLES ── */
+        /* ── USER CARD STYLES (compact, like account cards) ── */
         .user-card {
             background: #ffffff;
-            border-radius: 16px;
-            padding: 16px 18px;
+            border-radius: 12px;
+            padding: 12px 16px;
             border: 1px solid #f0f0f0;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-bottom: 10px;
             transition: all 0.2s;
             cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
         .user-card:hover {
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
@@ -2892,18 +2892,18 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         .user-card .user-summary .left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             flex: 1;
-            min-width: 180px;
+            min-width: 140px;
         }
         .user-card .user-summary .left .u-avatar {
-            width: 44px;
-            height: 44px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: #1c2128;
             color: #f5b83d;
@@ -2911,78 +2911,67 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 18px;
+            font-size: 14px;
             flex-shrink: 0;
         }
         .user-card .user-summary .left .u-info {
             flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         .user-card .user-summary .left .u-info .u-name {
-            font-weight: 700;
-            font-size: 15px;
+            font-weight: 600;
+            font-size: 14px;
             color: #1c2128;
         }
         .user-card .user-summary .left .u-info .u-email {
             font-size: 12px;
-            color: #888;
-        }
-        .user-card .user-summary .left .u-info .u-meta {
-            font-size: 11px;
-            color: #999;
-            margin-top: 2px;
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-        .user-card .user-summary .left .u-info .u-meta span {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .user-card .user-summary .left .u-info .u-meta .label {
-            color: #bbb;
+            color: #aaa;
             font-weight: 400;
         }
         .user-card .user-summary .right {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         .user-card .user-summary .right .user-status-badge {
             font-size: 10px;
             font-weight: 600;
-            padding: 3px 14px;
+            padding: 2px 10px;
             border-radius: 12px;
+            white-space: nowrap;
         }
         .user-card .user-summary .right .ban-toggle-wrap {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 4px;
         }
         .user-card .user-summary .right .ban-toggle-wrap .toggle-switch {
-            width: 56px;
-            height: 32px;
+            width: 44px;
+            height: 26px;
+            flex-shrink: 0;
         }
         .user-card .user-summary .right .ban-toggle-wrap .toggle-switch .toggle-slider:before {
-            height: 26px;
-            width: 26px;
+            height: 20px;
+            width: 20px;
             left: 3px;
             bottom: 3px;
         }
         .user-card .user-summary .right .ban-toggle-wrap .toggle-switch input:checked+.toggle-slider:before {
-            transform: translateX(24px);
+            transform: translateX(18px);
         }
         .user-card .user-summary .right .ban-toggle-wrap .ban-label {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             color: #555;
-            min-width: 40px;
+            min-width: 28px;
         }
         .user-card .user-summary .right .expand-icon {
-            font-size: 14px;
+            font-size: 12px;
             color: #aaa;
             transition: transform 0.3s;
+            margin-left: 2px;
         }
         .user-card.open .user-summary .right .expand-icon {
             transform: rotate(180deg);
@@ -2990,8 +2979,8 @@
 
         .user-card .user-details {
             display: none;
-            margin-top: 14px;
-            padding-top: 14px;
+            margin-top: 12px;
+            padding-top: 12px;
             border-top: 1px solid #f0f0f0;
         }
         .user-card .user-details.open {
@@ -3000,8 +2989,8 @@
         .user-card .user-details .detail-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px 20px;
-            margin-bottom: 12px;
+            gap: 6px 20px;
+            margin-bottom: 10px;
         }
         @media (max-width: 500px) {
             .user-card .user-details .detail-grid {
@@ -3012,7 +3001,7 @@
         .user-card .user-details .detail-grid .detail-item {
             display: flex;
             justify-content: space-between;
-            padding: 4px 0;
+            padding: 3px 0;
             font-size: 13px;
             border-bottom: 1px solid #f8f8f8;
         }
@@ -3035,10 +3024,10 @@
         }
 
         .user-card .user-details .referral-users {
-            margin-top: 8px;
+            margin-top: 6px;
             background: #f8f9fc;
             border-radius: 10px;
-            padding: 10px 14px;
+            padding: 8px 12px;
             border: 1px solid #f0f0f0;
         }
         .user-card .user-details .referral-users .ref-title {
@@ -3050,12 +3039,12 @@
         .user-card .user-details .referral-users .ref-users-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 4px;
         }
         .user-card .user-details .referral-users .ref-users-list .ref-user-tag {
             background: #fff;
             border: 1px solid #e0e0e0;
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 14px;
             font-size: 11px;
             color: #555;
@@ -3067,13 +3056,13 @@
 
         .user-card .user-details .actions-row {
             display: flex;
-            gap: 10px;
-            margin-top: 12px;
+            gap: 8px;
+            margin-top: 10px;
             flex-wrap: wrap;
             justify-content: flex-end;
         }
         .user-card .user-details .actions-row .btn {
-            padding: 6px 18px;
+            padding: 5px 16px;
             font-size: 11px;
             border-radius: 20px;
         }
@@ -3089,7 +3078,7 @@
         }
         .user-filter-bar input {
             flex: 1;
-            min-width: 130px;
+            min-width: 120px;
             padding: 8px 14px;
             border: 1px solid #ddd;
             border-radius: 24px;
@@ -3109,7 +3098,7 @@
             outline: none;
             background: #fff;
             transition: border 0.2s;
-            min-width: 140px;
+            min-width: 130px;
         }
         .user-filter-bar select:focus {
             border-color: #1c2128;
@@ -3117,85 +3106,27 @@
         }
 
         @media (max-width: 400px) {
-            .work-options-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-            .work-option-card {
-                padding: 12px 8px;
-            }
-            .work-option-card .wo-icon {
-                font-size: 24px;
-            }
-            .work-option-card .wo-label {
-                font-size: 11px;
-            }
-            .work-grid-2x2 {
-                gap: 8px;
-            }
-            .work-post-card {
-                padding: 10px;
-            }
-            .phone-frame {
-                max-width: 160px;
-            }
-            .laptop-frame {
-                max-width: 240px;
-            }
-            .promo-pics-grid {
-                gap: 16px;
-            }
-            .promo-pic-card {
-                height: 350px;
-            }
-            .promo-pic-card .pic-overlay .pic-text {
-                font-size: 14px;
-            }
-            .promo-pics-upload-area {
-                height: 350px;
-                padding: 20px;
-            }
-            .action-row {
-                gap: 8px;
-            }
-            .action-btn {
-                padding: 6px 14px;
-                font-size: 11px;
-            }
-            .action-btn i {
-                font-size: 13px;
-            }
-            .referral-section .form-row-custom {
-                grid-template-columns: 1fr;
-            }
-            .payables-action-row {
-                gap: 8px;
-            }
-            .payables-action-row .p-btn {
-                padding: 6px 14px;
-                font-size: 10px;
-            }
             .user-card .user-summary .left {
-                min-width: 140px;
+                min-width: 100px;
             }
             .user-card .user-summary .left .u-avatar {
-                width: 36px;
-                height: 36px;
-                font-size: 14px;
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
             }
             .user-card .user-summary .left .u-info .u-name {
                 font-size: 13px;
             }
             .user-card .user-summary .right .ban-toggle-wrap .toggle-switch {
-                width: 44px;
-                height: 26px;
+                width: 38px;
+                height: 22px;
             }
             .user-card .user-summary .right .ban-toggle-wrap .toggle-switch .toggle-slider:before {
-                height: 20px;
-                width: 20px;
+                height: 16px;
+                width: 16px;
             }
             .user-card .user-summary .right .ban-toggle-wrap .toggle-switch input:checked+.toggle-slider:before {
-                transform: translateX(18px);
+                transform: translateX(16px);
             }
             .user-card .user-details .detail-grid {
                 grid-template-columns: 1fr;
@@ -3515,14 +3446,14 @@
                 </div>
             </div>
 
-            <!-- ===== THREE ACTION BUTTONS (shown only on dashboard) ===== -->
+            <!-- ===== THREE ACTION BUTTONS ===== -->
             <div class="action-row" id="actionRow">
                 <button class="action-btn promo-btn" id="actionPromoPics"><i class="fa-regular fa-images"></i> Promo Pics</button>
                 <button class="action-btn referral-btn" id="actionReferral"><i class="fa-solid fa-gift"></i> Referral</button>
                 <button class="action-btn payables-btn" id="actionPayables"><i class="fa-solid fa-money-bill-wave"></i> Payables</button>
             </div>
 
-            <!-- ===== BACK BUTTON (shown on sub‑pages) ===== -->
+            <!-- ===== BACK BUTTON ===== -->
             <button class="page-back-btn" id="pageBackBtn" style="display:none;">
                 <i class="fa-solid fa-arrow-left"></i> Back
             </button>
@@ -5065,11 +4996,10 @@
                 });
             });
 
-            // Update pending orders badge
             updateBadges();
         }
 
-        // ── NEW USER RENDER (Card style with full details) ──
+        // ── COMPACT USER CARDS ──
         function renderUsers(searchTerm = '', filter = 'all') {
             const container = document.getElementById('usersList');
             const usersData = allData.users || {};
@@ -5110,7 +5040,6 @@
                 });
             }
 
-            // Sort by name
             entries.sort((a, b) => {
                 const na = `${a[1].firstName || ''} ${a[1].lastName || ''}`.trim();
                 const nb = `${b[1].firstName || ''} ${b[1].lastName || ''}`.trim();
@@ -5133,8 +5062,6 @@
                 const balance = accounts[uid]?.balance || 0;
 
                 // ── Who has used this user's referral? ──
-                // Look for users whose referralCode matches this user's referralCode
-                // (i.e., users who signed up with this user's referral code)
                 const referredUsers = Object.entries(usersData)
                     .filter(([otherUid, other]) =>
                         otherUid !== uid &&
@@ -5161,22 +5088,16 @@
 
                 // ── How much made from all referrals ──
                 let referralEarnings = 0;
-                // From customReferrals where userId matches this user
                 Object.values(customReferrals).forEach(r => {
                     if (r.userId === uid) {
                         referralEarnings += (r.amount || 0);
                     }
                 });
-                // From referralPromos where amount is set (all users get this)
                 Object.values(referralPromos).forEach(r => {
-                    // Assuming each promo applies to all users, but we count it once per user
-                    // Actually, referralPromos are for all users, so we add the amount
-                    // But we don't want to double-count, so we check if the user has any referral usage
                     if (referredUsers.length > 0) {
                         referralEarnings += (r.amount || 0);
                     }
                 });
-                // Also check referralPromoDiscounts for this user's referral code
                 Object.values(allData.referralPromoDiscounts || {}).forEach(r => {
                     if (r.referralCode === referralCode) {
                         referralEarnings += (r.ownerAmount || 0);
@@ -5184,6 +5105,7 @@
                 });
 
                 const initial = (u.firstName || 'U').charAt(0).toUpperCase();
+                const banLabel = isBanned ? 'Off' : 'On';
 
                 return `
                             <div class="user-card" data-uid="${uid}">
@@ -5193,12 +5115,6 @@
                                         <div class="u-info">
                                             <div class="u-name">${name}</div>
                                             <div class="u-email">${email}</div>
-                                            <div class="u-meta">
-                                                <span><span class="label">📱</span> ${phone}</span>
-                                                <span><span class="label">📅</span> Joined ${joinDate}</span>
-                                                <span><span class="label">🏷️</span> ${referralCode}</span>
-                                                <span><span class="label">💰</span> ZMW ${balance.toFixed(2)}</span>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="right">
@@ -5208,7 +5124,7 @@
                                                 <input type="checkbox" ${isBanned ? '' : 'checked'} data-uid="${uid}" class="ban-toggle-input" />
                                                 <span class="toggle-slider"></span>
                                             </label>
-                                            <span class="ban-label">${isBanned ? 'Off' : 'On'}</span>
+                                            <span class="ban-label">${banLabel}</span>
                                         </div>
                                         <i class="fa-solid fa-chevron-down expand-icon"></i>
                                     </div>
@@ -5274,7 +5190,6 @@
             // Toggle expand
             container.querySelectorAll('.user-card').forEach(el => {
                 el.addEventListener('click', function(e) {
-                    // Don't toggle if clicking on the ban toggle or buttons
                     if (e.target.closest('.ban-toggle-wrap') || e.target.closest('.actions-row') ||
                         e.target.closest('.edit-user') || e.target.closest('.delete-user') ||
                         e.target.closest('.ban-toggle-input')) {
@@ -5292,18 +5207,17 @@
                 });
             });
 
-            // Ban toggle (bigger switch)
+            // Ban toggle
             container.querySelectorAll('.ban-toggle-input').forEach(input => {
                 input.addEventListener('change', function(e) {
                     e.stopPropagation();
                     const uid = this.dataset.uid;
-                    const newBanStatus = !this.checked; // checked = active, unchecked = banned
+                    const newBanStatus = !this.checked;
                     const userRef = ref(db, 'users/' + uid);
                     update(userRef, { banned: newBanStatus }).then(() => {
                         const label = this.closest('.ban-toggle-wrap').querySelector('.ban-label');
                         label.textContent = newBanStatus ? 'Off' : 'On';
                         showToast(`User ${newBanStatus ? 'banned' : 'unbanned'}`);
-                        // Re-render users
                         renderUsers(document.getElementById('userSearchInput').value, userFilterSelect.value);
                     }).catch((error) => {
                         showToast('Error updating user status', 'error');
@@ -7948,7 +7862,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Redesigned Users page with cards, bigger ban toggle, referral usage, orders, discount referrals, earnings, join date, email, phone, balance, Edit+Delete buttons, and filter dropdown.');
+        console.log('✅ Admin Dashboard — Compact user cards with name, faint email, large ban toggle, and expandable full details.');
     </script>
 </body>
 </html>
