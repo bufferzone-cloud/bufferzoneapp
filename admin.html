@@ -93,7 +93,6 @@
             transform: scale(0.92);
         }
 
-        /* ── Badge counter on nav items ── */
         .badge-counter {
             position: absolute;
             top: -6px;
@@ -2168,7 +2167,6 @@
             margin-bottom: 8px;
         }
 
-        /* ── Payables: Button row with equal spacing ── */
         .payables-action-row {
             display: flex;
             align-items: center;
@@ -2227,7 +2225,6 @@
             display: block;
         }
 
-        /* ── Account item with expandable transaction history ── */
         .account-item {
             background: #ffffff;
             border-radius: 12px;
@@ -2742,7 +2739,6 @@
             display: block;
         }
 
-        /* ── Services: Price Adjustment ── */
         .price-adjust-box {
             background: #ffffff;
             border-radius: 16px;
@@ -2876,6 +2872,250 @@
             color: #1c2128;
         }
 
+        /* ── USER CARD STYLES ── */
+        .user-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 16px 18px;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .user-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border-color: #ddd;
+        }
+        .user-card .user-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .user-card .user-summary .left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+            min-width: 180px;
+        }
+        .user-card .user-summary .left .u-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #1c2128;
+            color: #f5b83d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .user-card .user-summary .left .u-info {
+            flex: 1;
+        }
+        .user-card .user-summary .left .u-info .u-name {
+            font-weight: 700;
+            font-size: 15px;
+            color: #1c2128;
+        }
+        .user-card .user-summary .left .u-info .u-email {
+            font-size: 12px;
+            color: #888;
+        }
+        .user-card .user-summary .left .u-info .u-meta {
+            font-size: 11px;
+            color: #999;
+            margin-top: 2px;
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .user-card .user-summary .left .u-info .u-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .user-card .user-summary .left .u-info .u-meta .label {
+            color: #bbb;
+            font-weight: 400;
+        }
+        .user-card .user-summary .right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .user-card .user-summary .right .user-status-badge {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 14px;
+            border-radius: 12px;
+        }
+        .user-card .user-summary .right .ban-toggle-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .user-card .user-summary .right .ban-toggle-wrap .toggle-switch {
+            width: 56px;
+            height: 32px;
+        }
+        .user-card .user-summary .right .ban-toggle-wrap .toggle-switch .toggle-slider:before {
+            height: 26px;
+            width: 26px;
+            left: 3px;
+            bottom: 3px;
+        }
+        .user-card .user-summary .right .ban-toggle-wrap .toggle-switch input:checked+.toggle-slider:before {
+            transform: translateX(24px);
+        }
+        .user-card .user-summary .right .ban-toggle-wrap .ban-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #555;
+            min-width: 40px;
+        }
+        .user-card .user-summary .right .expand-icon {
+            font-size: 14px;
+            color: #aaa;
+            transition: transform 0.3s;
+        }
+        .user-card.open .user-summary .right .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .user-card .user-details {
+            display: none;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .user-card .user-details.open {
+            display: block;
+        }
+        .user-card .user-details .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 20px;
+            margin-bottom: 12px;
+        }
+        @media (max-width: 500px) {
+            .user-card .user-details .detail-grid {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+        }
+        .user-card .user-details .detail-grid .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 13px;
+            border-bottom: 1px solid #f8f8f8;
+        }
+        .user-card .user-details .detail-grid .detail-item .label {
+            color: #888;
+        }
+        .user-card .user-details .detail-grid .detail-item .val {
+            font-weight: 500;
+            color: #1c2128;
+        }
+        .user-card .user-details .detail-grid .detail-item .val.highlight {
+            color: #f5b83d;
+            font-weight: 700;
+        }
+        .user-card .user-details .detail-grid .detail-item .val.green {
+            color: #16a34a;
+        }
+        .user-card .user-details .detail-grid .detail-item .val.red {
+            color: #dc2626;
+        }
+
+        .user-card .user-details .referral-users {
+            margin-top: 8px;
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 10px 14px;
+            border: 1px solid #f0f0f0;
+        }
+        .user-card .user-details .referral-users .ref-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1c2128;
+            margin-bottom: 4px;
+        }
+        .user-card .user-details .referral-users .ref-users-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .user-card .user-details .referral-users .ref-users-list .ref-user-tag {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 2px 12px;
+            border-radius: 14px;
+            font-size: 11px;
+            color: #555;
+        }
+        .user-card .user-details .referral-users .ref-users-list .no-ref-users {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .user-card .user-details .actions-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .user-card .user-details .actions-row .btn {
+            padding: 6px 18px;
+            font-size: 11px;
+            border-radius: 20px;
+        }
+
+        /* ── USER FILTER BAR ── */
+        .user-filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+            padding: 0 2px;
+        }
+        .user-filter-bar input {
+            flex: 1;
+            min-width: 130px;
+            padding: 8px 14px;
+            border: 1px solid #ddd;
+            border-radius: 24px;
+            font-size: 13px;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .user-filter-bar input:focus {
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+        .user-filter-bar select {
+            padding: 8px 14px;
+            border: 1px solid #ddd;
+            border-radius: 24px;
+            font-size: 13px;
+            outline: none;
+            background: #fff;
+            transition: border 0.2s;
+            min-width: 140px;
+        }
+        .user-filter-bar select:focus {
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+
         @media (max-width: 400px) {
             .work-options-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -2935,8 +3175,36 @@
                 padding: 6px 14px;
                 font-size: 10px;
             }
+            .user-card .user-summary .left {
+                min-width: 140px;
+            }
+            .user-card .user-summary .left .u-avatar {
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
+            }
+            .user-card .user-summary .left .u-info .u-name {
+                font-size: 13px;
+            }
+            .user-card .user-summary .right .ban-toggle-wrap .toggle-switch {
+                width: 44px;
+                height: 26px;
+            }
+            .user-card .user-summary .right .ban-toggle-wrap .toggle-switch .toggle-slider:before {
+                height: 20px;
+                width: 20px;
+            }
+            .user-card .user-summary .right .ban-toggle-wrap .toggle-switch input:checked+.toggle-slider:before {
+                transform: translateX(18px);
+            }
+            .user-card .user-details .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            .user-filter-bar select {
+                min-width: 100px;
+            }
         }
-        /* ── Promo header button (yellow circle) ── */
+
         .promo-header-btn {
             width: 44px;
             height: 44px;
@@ -2968,7 +3236,6 @@
             }
         }
 
-        /* ── Enhanced Customer Select ── */
         .customer-select-wrapper {
             position: relative;
         }
@@ -3030,7 +3297,6 @@
             font-weight: 600;
         }
 
-        /* ── Edit Customer Modal ── */
         .edit-customer-modal .modal {
             max-width: 480px;
         }
@@ -3090,7 +3356,6 @@
             cursor: not-allowed;
         }
 
-        /* ── Manual Deposit User Selector (Phone-style) ── */
         .user-selector-modal .modal {
             max-width: 400px;
         }
@@ -3205,7 +3470,6 @@
             display: block;
         }
 
-        /* ── Account Update Search ── */
         .account-update-search {
             width: 100%;
             padding: 8px 12px;
@@ -3394,7 +3658,6 @@
                     <p style="font-size:13px; color:#888;">Manage referral promos, custom referrals, and referral discounts.</p>
                 </div>
 
-                <!-- ── SET UP REFERRAL PROMO (All Users) ── -->
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-users"></i> Set Up Referral Promo
@@ -3413,7 +3676,6 @@
                     </div>
                 </div>
 
-                <!-- ── SET UP CUSTOM REFERRAL (Specific User) ── -->
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-user-gear"></i> Set Up Custom Referral
@@ -3442,7 +3704,6 @@
                     </div>
                 </div>
 
-                <!-- ── REFERRAL DISCOUNT ── -->
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-percent"></i> Referral Discount
@@ -3468,7 +3729,6 @@
                     </div>
                 </div>
 
-                <!-- ── REFERRAL PROMOS (NEW) ── -->
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-star"></i> Referral Promos
@@ -3495,7 +3755,6 @@
                     </div>
                 </div>
 
-                <!-- ── SIGNUP BONUSES ── -->
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-gift"></i> Signup Bonuses
@@ -3536,7 +3795,6 @@
                     <p style="font-size:13px; color:#888;">Manage customer accounts and withdrawal requests.</p>
                 </div>
 
-                <!-- Unified button row: Accounts | Withdrawals | Manual Deposit | Account Update -->
                 <div class="payables-action-row">
                     <button class="p-btn toggle active" id="toggleAccounts"><i class="fa-solid fa-wallet"></i> Accounts</button>
                     <button class="p-btn toggle" id="toggleWithdrawals"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
@@ -3544,12 +3802,10 @@
                     <button class="p-btn gold" id="accountUpdateBtn"><i class="fa-solid fa-pen-to-square"></i> Account Update</button>
                 </div>
 
-                <!-- Accounts View -->
                 <div class="payables-view active" id="viewAccounts">
                     <div id="accountsList"></div>
                 </div>
 
-                <!-- Withdrawals View -->
                 <div class="payables-view" id="viewWithdrawals">
                     <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px;">
                         <button class="btn btn-primary btn-sm" id="showApprovedWithdrawals" style="background:#16a34a; color:#fff; border:none; padding:6px 18px; border-radius:20px; font-size:11px; font-weight:600; cursor:pointer;">✅ Approved</button>
@@ -3576,7 +3832,6 @@
                     </div>
                 </div>
 
-                <!-- PRICE ADJUSTMENT (NEW) -->
                 <div class="price-adjust-box" id="priceAdjustBox">
                     <div class="title"><i class="fa-solid fa-calculator"></i> Code Price Adjustment</div>
                     <div class="sub">Apply a flat amount or percentage to all services. Preview the changes before applying.</div>
@@ -3678,7 +3933,16 @@
                 <div class="card">
                     <div class="card-header">
                         <h3>Users</h3>
-                        <input type="text" id="userSearchInput" placeholder="Search users..." style="padding:6px 12px; border:1px solid #ddd; border-radius:20px; font-size:12px; width:140px; outline:none;" />
+                        <div class="user-filter-bar">
+                            <input type="text" id="userSearchInput" placeholder="Search users..." />
+                            <select id="userFilterSelect">
+                                <option value="all">All Users</option>
+                                <option value="active">Active Users</option>
+                                <option value="banned">Banned Users</option>
+                                <option value="high-balance">High Balance (ZMW 200+)</option>
+                                <option value="low-balance">Low Balance (below ZMW 50)</option>
+                            </select>
+                        </div>
                     </div>
                     <div id="usersList"></div>
                 </div>
@@ -4397,6 +4661,9 @@
         // ─── Account Update Search ───
         const accountUpdateSearch = document.getElementById('accountUpdateSearch');
 
+        // ─── Users page filter ───
+        const userFilterSelect = document.getElementById('userFilterSelect');
+
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
         // ───────────────────────────────────────────────────────────────────
@@ -4574,7 +4841,7 @@
             renderServices();
             renderPromotions();
             renderOrders();
-            renderUsers();
+            renderUsers(document.getElementById('userSearchInput').value, userFilterSelect.value);
             renderActivityFeed();
             renderOurServicesList();
             renderWorkPosts();
@@ -4802,112 +5069,264 @@
             updateBadges();
         }
 
-        function renderUsers(searchTerm = '') {
+        // ── NEW USER RENDER (Card style with full details) ──
+        function renderUsers(searchTerm = '', filter = 'all') {
             const container = document.getElementById('usersList');
-            const usersRef = ref(db, 'users');
-            get(usersRef).then((snapshot) => {
-                const usersData = snapshot.val() || {};
-                allData.users = usersData;
-                allUsersCache = usersData;
-                let entries = Object.entries(usersData);
-                if (searchTerm.trim()) {
-                    const term = searchTerm.trim().toLowerCase();
-                    entries = entries.filter(([uid, u]) =>
-                        (u.firstName || '').toLowerCase().includes(term) ||
-                        (u.lastName || '').toLowerCase().includes(term) ||
-                        (u.email || '').toLowerCase().includes(term) ||
-                        (u.phone || '').toLowerCase().includes(term)
+            const usersData = allData.users || {};
+            const accounts = allData.customerAccounts || {};
+            const orders = allData.orders || {};
+            const customReferrals = allData.customReferrals || {};
+            const referralDiscounts = allData.referralDiscounts || {};
+            const referralPromos = allData.referralPromos || {};
+
+            let entries = Object.entries(usersData);
+
+            // Search
+            if (searchTerm.trim()) {
+                const term = searchTerm.trim().toLowerCase();
+                entries = entries.filter(([uid, u]) =>
+                    (u.firstName || '').toLowerCase().includes(term) ||
+                    (u.lastName || '').toLowerCase().includes(term) ||
+                    (u.email || '').toLowerCase().includes(term) ||
+                    (u.phone || '').toLowerCase().includes(term) ||
+                    (u.referralCode || '').toLowerCase().includes(term)
+                );
+            }
+
+            // Filter
+            if (filter === 'banned') {
+                entries = entries.filter(([uid, u]) => u.banned === true);
+            } else if (filter === 'active') {
+                entries = entries.filter(([uid, u]) => u.banned !== true);
+            } else if (filter === 'high-balance') {
+                entries = entries.filter(([uid, u]) => {
+                    const bal = accounts[uid]?.balance || 0;
+                    return bal >= 200;
+                });
+            } else if (filter === 'low-balance') {
+                entries = entries.filter(([uid, u]) => {
+                    const bal = accounts[uid]?.balance || 0;
+                    return bal < 50;
+                });
+            }
+
+            // Sort by name
+            entries.sort((a, b) => {
+                const na = `${a[1].firstName || ''} ${a[1].lastName || ''}`.trim();
+                const nb = `${b[1].firstName || ''} ${b[1].lastName || ''}`.trim();
+                return na.localeCompare(nb);
+            });
+
+            if (entries.length === 0) {
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:20px;">No users found.</div>`;
+                return;
+            }
+
+            container.innerHTML = entries.map(([uid, u]) => {
+                const isBanned = u.banned === true;
+                const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
+                const email = u.email || 'No email';
+                const phone = u.phone || 'No phone';
+                const joinDate = u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A';
+                const referralCode = u.referralCode || '—';
+                const balance = accounts[uid]?.balance || 0;
+
+                // ── Who has used this user's referral? ──
+                // Look for users whose referralCode matches this user's referralCode
+                // (i.e., users who signed up with this user's referral code)
+                const referredUsers = Object.entries(usersData)
+                    .filter(([otherUid, other]) =>
+                        otherUid !== uid &&
+                        other.referralCode &&
+                        other.referralCode === referralCode
+                    )
+                    .map(([otherUid, other]) =>
+                        `${other.firstName || ''} ${other.lastName || ''}`.trim() || otherUid
                     );
-                }
-                if (entries.length === 0) {
-                    container.innerHTML =
-                        `<div class="text-muted text-center" style="padding:20px;">No users found.</div>`;
-                    return;
-                }
-                container.innerHTML = entries.map(([uid, u]) => {
-                    const isBanned = u.banned === true;
-                    const referralCode = u.referralCode || '—';
-                    return `
-                                <div class="customer-item" data-uid="${uid}">
-                                    <div class="user-summary">
-                                        <div class="left">
-                                            <div class="c-avatar">${(u.firstName || 'U').charAt(0)}</div>
-                                            <div>
-                                                <div class="c-name">${u.firstName || ''} ${u.lastName || ''}</div>
-                                                <div class="c-email">${u.email || 'No email'}</div>
-                                                <div style="font-size:11px; color:#f5b83d; font-weight:600;">Code: ${referralCode}</div>
+
+                // ── How many orders does this user have? ──
+                const userOrders = Object.values(orders).filter(o =>
+                    o.customer &&
+                    (o.customer.toLowerCase().includes(email.toLowerCase()) ||
+                        o.customer.toLowerCase().includes(name.toLowerCase()))
+                );
+                const orderCount = userOrders.length;
+
+                // ── Discount referrals ──
+                const userDiscountRefs = Object.values(referralDiscounts).filter(r =>
+                    r.referralCode === referralCode
+                );
+                const discountRefCount = userDiscountRefs.length;
+
+                // ── How much made from all referrals ──
+                let referralEarnings = 0;
+                // From customReferrals where userId matches this user
+                Object.values(customReferrals).forEach(r => {
+                    if (r.userId === uid) {
+                        referralEarnings += (r.amount || 0);
+                    }
+                });
+                // From referralPromos where amount is set (all users get this)
+                Object.values(referralPromos).forEach(r => {
+                    // Assuming each promo applies to all users, but we count it once per user
+                    // Actually, referralPromos are for all users, so we add the amount
+                    // But we don't want to double-count, so we check if the user has any referral usage
+                    if (referredUsers.length > 0) {
+                        referralEarnings += (r.amount || 0);
+                    }
+                });
+                // Also check referralPromoDiscounts for this user's referral code
+                Object.values(allData.referralPromoDiscounts || {}).forEach(r => {
+                    if (r.referralCode === referralCode) {
+                        referralEarnings += (r.ownerAmount || 0);
+                    }
+                });
+
+                const initial = (u.firstName || 'U').charAt(0).toUpperCase();
+
+                return `
+                            <div class="user-card" data-uid="${uid}">
+                                <div class="user-summary">
+                                    <div class="left">
+                                        <div class="u-avatar">${initial}</div>
+                                        <div class="u-info">
+                                            <div class="u-name">${name}</div>
+                                            <div class="u-email">${email}</div>
+                                            <div class="u-meta">
+                                                <span><span class="label">📱</span> ${phone}</span>
+                                                <span><span class="label">📅</span> Joined ${joinDate}</span>
+                                                <span><span class="label">🏷️</span> ${referralCode}</span>
+                                                <span><span class="label">💰</span> ZMW ${balance.toFixed(2)}</span>
                                             </div>
                                         </div>
-                                        <div style="display:flex;align-items:center;gap:10px;">
-                                            <span class="user-status-badge ${isBanned ? 'banned' : 'active'}">${isBanned ? 'Banned' : 'Active'}</span>
-                                            <button class="ban-toggle-btn" data-uid="${uid}" data-banned="${isBanned}">
-                                                <i class="fa-solid ${isBanned ? 'fa-toggle-off' : 'fa-toggle-on'}"></i>
-                                            </button>
-                                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                                        </div>
                                     </div>
-                                    <div class="user-details">
-                                        <div class="detail-row"><span class="label">Phone</span><span class="val">${u.phone || 'No phone'}</span></div>
-                                        <div class="detail-row"><span class="label">Referral Code</span><span class="val" style="font-weight:700;color:#f5b83d;">${referralCode}</span></div>
-                                        <div class="detail-row"><span class="label">Joined</span><span class="val">${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</span></div>
-                                        <div class="actions">
-                                            <button class="btn btn-danger btn-sm delete-user" data-uid="${uid}" style="padding:2px 10px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
+                                    <div class="right">
+                                        <span class="user-status-badge ${isBanned ? 'banned' : 'active'}">${isBanned ? 'Banned' : 'Active'}</span>
+                                        <div class="ban-toggle-wrap">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" ${isBanned ? '' : 'checked'} data-uid="${uid}" class="ban-toggle-input" />
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                            <span class="ban-label">${isBanned ? 'Off' : 'On'}</span>
                                         </div>
+                                        <i class="fa-solid fa-chevron-down expand-icon"></i>
                                     </div>
                                 </div>
-                            `;
-                }).join('');
 
-                container.querySelectorAll('.customer-item').forEach(el => {
-                    el.addEventListener('click', function() {
-                        this.classList.toggle('open');
-                        const details = this.querySelector('.user-details');
-                        if (this.classList.contains('open')) {
-                            details.style.display = 'block';
-                        } else {
-                            details.style.display = 'none';
-                        }
+                                <div class="user-details">
+                                    <div class="detail-grid">
+                                        <div class="detail-item">
+                                            <span class="label">Phone</span>
+                                            <span class="val">${phone}</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">Email</span>
+                                            <span class="val">${email}</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">Joined</span>
+                                            <span class="val">${joinDate}</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">Referral Code</span>
+                                            <span class="val highlight">${referralCode}</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">Account Balance</span>
+                                            <span class="val ${balance > 0 ? 'green' : ''}">ZMW ${balance.toFixed(2)}</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">Orders</span>
+                                            <span class="val">${orderCount}</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">Discount Referrals</span>
+                                            <span class="val">${discountRefCount}</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">Referral Earnings</span>
+                                            <span class="val highlight">ZMW ${referralEarnings.toFixed(2)}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="referral-users">
+                                        <div class="ref-title">👥 Who used your referral code</div>
+                                        <div class="ref-users-list">
+                                            ${referredUsers.length > 0 ?
+                                                referredUsers.map(un => `<span class="ref-user-tag">${un}</span>`).join('') :
+                                                '<span class="no-ref-users">No one has used this referral code yet</span>'
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <div class="actions-row">
+                                        <button class="btn btn-primary btn-sm edit-user" data-uid="${uid}"><i class="fa-regular fa-pen-to-square"></i> Edit</button>
+                                        <button class="btn btn-danger btn-sm delete-user" data-uid="${uid}"><i class="fa-solid fa-trash"></i> Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+            }).join('');
+
+            // ── Event bindings ──
+
+            // Toggle expand
+            container.querySelectorAll('.user-card').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    // Don't toggle if clicking on the ban toggle or buttons
+                    if (e.target.closest('.ban-toggle-wrap') || e.target.closest('.actions-row') ||
+                        e.target.closest('.edit-user') || e.target.closest('.delete-user') ||
+                        e.target.closest('.ban-toggle-input')) {
+                        return;
+                    }
+                    this.classList.toggle('open');
+                    const details = this.querySelector('.user-details');
+                    if (this.classList.contains('open')) {
+                        details.classList.add('open');
+                        details.style.display = 'block';
+                    } else {
+                        details.classList.remove('open');
+                        details.style.display = 'none';
+                    }
+                });
+            });
+
+            // Ban toggle (bigger switch)
+            container.querySelectorAll('.ban-toggle-input').forEach(input => {
+                input.addEventListener('change', function(e) {
+                    e.stopPropagation();
+                    const uid = this.dataset.uid;
+                    const newBanStatus = !this.checked; // checked = active, unchecked = banned
+                    const userRef = ref(db, 'users/' + uid);
+                    update(userRef, { banned: newBanStatus }).then(() => {
+                        const label = this.closest('.ban-toggle-wrap').querySelector('.ban-label');
+                        label.textContent = newBanStatus ? 'Off' : 'On';
+                        showToast(`User ${newBanStatus ? 'banned' : 'unbanned'}`);
+                        // Re-render users
+                        renderUsers(document.getElementById('userSearchInput').value, userFilterSelect.value);
+                    }).catch((error) => {
+                        showToast('Error updating user status', 'error');
                     });
                 });
+            });
 
-                container.querySelectorAll('.ban-toggle-btn').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const uid = this.dataset.uid;
-                        const currentlyBanned = this.dataset.banned === 'true';
-                        const newBanStatus = !currentlyBanned;
-
-                        if (confirm(`Are you sure you want to ${newBanStatus ? 'ban' : 'unban'} this user?`)) {
-                            const userRef = ref(db, 'users/' + uid);
-                            update(userRef, { banned: newBanStatus }).then(() => {
-                                showToast(`User ${newBanStatus ? 'banned' : 'unbanned'}`);
-                                renderUsers(document.getElementById('userSearchInput').value);
-                            }).catch((error) => {
-                                showToast('Error updating user status', 'error');
-                            });
-                        }
-                    });
+            // Edit user
+            container.querySelectorAll('.edit-user').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const uid = this.dataset.uid;
+                    openEditCustomerModal(uid);
                 });
+            });
 
-                container.querySelectorAll('.delete-user').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const uid = this.dataset.uid;
-                        showDeleteConfirmation('user', uid);
-                    });
+            // Delete user
+            container.querySelectorAll('.delete-user').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const uid = this.dataset.uid;
+                    showDeleteConfirmation('user', uid);
                 });
-
-                container.querySelectorAll('.edit-user').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const uid = this.dataset.uid;
-                        openEditCustomerModal(uid);
-                    });
-                });
-            }).catch((error) => {
-                console.error('Error loading users:', error);
-                container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:20px;">Error loading users.</div>`;
             });
         }
 
@@ -5345,7 +5764,6 @@
                 const email = user.email || 'No email';
                 const balance = acc.balance || 0;
 
-                // Gather transactions for this user
                 const userTxs = Object.entries(transactions)
                     .filter(([txId, tx]) => tx.userId === uid)
                     .sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
@@ -5387,7 +5805,6 @@
                         `;
             }).join('');
 
-            // Toggle account transactions
             accountsList.querySelectorAll('.account-item').forEach(el => {
                 el.addEventListener('click', function() {
                     this.classList.toggle('open');
@@ -5483,7 +5900,6 @@
                 });
             }
 
-            // Update pending withdrawals badge
             updateBadges();
         }
 
@@ -5646,7 +6062,6 @@
             }).join('');
 
             customReferralUserSelect.innerHTML = `<option value="">— Select a user —</option>` + options;
-            // Don't populate depositCustomerSelect here — it's handled by the user selector modal
         }
 
         function populateCustomReferralSelect() {
@@ -6060,7 +6475,7 @@
                 const userRef = ref(db, 'users/' + key);
                 set(userRef, null).then(() => {
                     showToast('User deleted');
-                    renderUsers(document.getElementById('userSearchInput').value);
+                    renderUsers(document.getElementById('userSearchInput').value, userFilterSelect.value);
                 });
             } else if (type === 'service') {
                 if (allData.services && allData.services[key]) {
@@ -6710,11 +7125,8 @@
                 return;
             }
             userSelectorModal.classList.remove('open');
-            // Open the manual deposit modal with the selected user
             manualDepositModal.classList.add('open');
-            // Pre-fill the select with the selected user
             const select = document.getElementById('depositCustomerSelect');
-            // Add the selected user to the select if not already there
             let exists = false;
             for (let i = 0; i < select.options.length; i++) {
                 if (select.options[i].value === selectedUserForDeposit) {
@@ -6737,7 +7149,6 @@
             }
         });
 
-        // Override the manual deposit form submission to use the selected user
         manualDepositForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const userId = depositCustomerSelect.value;
@@ -6894,7 +7305,6 @@
             showBackButton();
         });
 
-        // ── Action buttons ──
         actionPromoPics.addEventListener('click', function() {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-promo-pics').classList.add('active');
@@ -6925,7 +7335,6 @@
             showBackButton();
         });
 
-        // ── Back button ──
         pageBackBtn.addEventListener('click', function() {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-dashboard').classList.add('active');
@@ -6946,7 +7355,6 @@
             actionRow.style.display = 'flex';
         }
 
-        // ── Bottom nav ──
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
                 document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -7270,8 +7678,13 @@
             renderOrders(searchTerm, this.value);
         });
 
+        // ── Users page: search + filter ──
         document.getElementById('userSearchInput').addEventListener('input', function() {
-            renderUsers(this.value);
+            renderUsers(this.value, userFilterSelect.value);
+        });
+
+        userFilterSelect.addEventListener('change', function() {
+            renderUsers(document.getElementById('userSearchInput').value, this.value);
         });
 
         document.querySelectorAll('.cat-filter').forEach(btn => {
@@ -7387,7 +7800,6 @@
                 return { key, service: s, orig, newPrice };
             });
 
-            // Render preview
             let previewHtml =
                 `<div style="font-size:11px; color:#888; margin-bottom:6px;">Preview — ${modeLabel} applied to ${adjustedEntries.length} service(s). Click "Apply" to save changes.</div>`;
             previewHtml += adjustedEntries.map(({ key, service, orig, newPrice }) => `
@@ -7402,11 +7814,9 @@
 
             adjustPreview.innerHTML = previewHtml;
 
-            // Ask to apply
             if (confirm(`Apply ${modeLabel} to all ${adjustedEntries.length} services?`)) {
                 adjustedEntries.forEach(({ key, newPrice }) => {
                     if (allData.services && allData.services[key]) {
-                        // If originalPrice doesn't exist, set it to the current price before adjusting
                         if (!allData.services[key].originalPrice) {
                             allData.services[key].originalPrice = allData.services[key].price;
                         }
@@ -7415,7 +7825,6 @@
                 });
                 saveData().then(() => {
                     renderAll();
-                    // Re-render preview with updated prices
                     const updatedEntries = Object.entries(allData.services || {}).map(([key, s]) => {
                         return { key, service: s, orig: s.price || 0, newPrice: s.price || 0 };
                     });
@@ -7441,17 +7850,14 @@
         // ───────────────────────────────────────────────────────────────────
 
         function updateBadges() {
-            // Pending orders
             const orders = Object.values(allData.orders || {});
             const pendingOrders = orders.filter(o => o.status === 'pending').length;
             updateBadgeElement(badgeOrdersPending, pendingOrders);
 
-            // Pending withdrawals
             const withdrawals = Object.values(allData.withdrawalRequests || {});
             const pendingWithdrawals = withdrawals.filter(w => w.status === 'pending').length;
             updateBadgeElement(badgeWithdrawalsPending, pendingWithdrawals);
 
-            // Total orders (optional, on Home tab)
             const totalOrders = orders.length;
             updateBadgeElement(badgeOrders, totalOrders);
         }
@@ -7498,23 +7904,19 @@
                     }
                     currentAdminData = foundAdmin || null;
 
-                    // ── Load app data ──
                     loadData(() => {
-                        // ── Start listening to users for real‑time updates ──
                         const usersRef = ref(db, 'users');
                         onValue(usersRef, (snapshot) => {
                             const usersData = snapshot.val() || {};
                             allData.users = usersData;
                             allUsersCache = usersData;
-                            // Update dashboard and badges
                             renderDashboard();
                             updateBadges();
-                            // If on users page, re-render user list
                             const usersPage = document.getElementById('page-users');
                             if (usersPage.classList.contains('active')) {
-                                renderUsers(document.getElementById('userSearchInput').value);
+                                renderUsers(document.getElementById('userSearchInput').value, userFilterSelect
+                                .value);
                             }
-                            // Re-render referral sections that depend on user names
                             renderCustomReferrals();
                             renderReferralDiscounts();
                             renderReferralPromoDiscounts();
@@ -7546,7 +7948,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Phone-style user selector for manual deposit, search in account update, edit customer button in user list, withdrawal timestamps, and consistent newest-first sorting.');
+        console.log('✅ Admin Dashboard — Redesigned Users page with cards, bigger ban toggle, referral usage, orders, discount referrals, earnings, join date, email, phone, balance, Edit+Delete buttons, and filter dropdown.');
     </script>
 </body>
 </html>
