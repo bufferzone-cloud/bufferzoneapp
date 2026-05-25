@@ -22,6 +22,7 @@
             display: block;
             overflow: hidden;
             height: 100%;
+            zoom: 0.85; /* reduce everything by 15% */
         }
 
         .app-root {
@@ -1718,6 +1719,8 @@
             justify-content: space-between;
             align-items: center;
             color: white;
+            flex-wrap: wrap;
+            gap: 12px;
         }
         .account-balance-box .left .label {
             font-size: 10px;
@@ -1731,7 +1734,13 @@
             font-weight: 800;
             color: #fff;
         }
-        .account-balance-box .withdraw-btn {
+        .account-balance-box .balance-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: flex-end;
+        }
+        .account-balance-box .balance-actions .action-btn {
             background: #f5b83d;
             border: none;
             padding: 8px 18px;
@@ -1744,12 +1753,21 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            width: 100%;
+            justify-content: center;
         }
-        .account-balance-box .withdraw-btn:active {
+        .account-balance-box .balance-actions .action-btn:active {
             transform: scale(0.95);
         }
-        .account-balance-box .withdraw-btn i {
+        .account-balance-box .balance-actions .action-btn i {
             font-size: 14px;
+        }
+        .account-balance-box .balance-actions .action-btn.send-money-btn {
+            background: #2a9d8f;
+            color: white;
+        }
+        .account-balance-box .balance-actions .action-btn.send-money-btn i {
+            color: #fff;
         }
 
         .transaction-msg {
@@ -2121,6 +2139,223 @@
             transform: scale(0.95);
         }
 
+        /* === SEND MONEY MODAL === */
+        .send-money-overlay {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1100;
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        .send-money-overlay.open {
+            display: flex;
+        }
+        .send-money-modal {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            width: 100%;
+            max-width: 480px;
+            max-height: 85vh;
+            padding: 20px 16px 30px 16px;
+            overflow-y: auto;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+            animation: slideUp 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        .send-money-modal .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .send-money-modal .modal-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1c2128;
+        }
+        .send-money-modal .modal-header .close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #888;
+            cursor: pointer;
+        }
+        .send-money-modal .section-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #1c2128;
+            margin: 8px 0 4px 0;
+        }
+        .send-money-modal .transfer-list {
+            max-height: 100px;
+            overflow-y: auto;
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 6px 10px;
+            margin-bottom: 10px;
+            font-size: 11px;
+        }
+        .send-money-modal .transfer-list .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .send-money-modal .transfer-list .item:last-child {
+            border-bottom: none;
+        }
+        .send-money-modal .transfer-list .item .dir {
+            font-weight: 600;
+        }
+        .send-money-modal .transfer-list .item .dir.sent { color: #dc2626; }
+        .send-money-modal .transfer-list .item .dir.received { color: #00a86b; }
+        .send-money-modal .ref-search {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .send-money-modal .ref-search input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        .send-money-modal .ref-search input:focus {
+            outline: none;
+            border-color: #f5b83d;
+        }
+        .send-money-modal .ref-search button {
+            background: #f5b83d;
+            color: #1c2128;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .send-money-modal .recipient-info {
+            background: #f0f9ff;
+            border-radius: 8px;
+            padding: 6px 10px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #1c2128;
+            display: none;
+        }
+        .send-money-modal .recipient-info.show {
+            display: block;
+        }
+        .send-money-modal .amount-section {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin: 6px 0 10px 0;
+        }
+        .send-money-modal .amount-section input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        .send-money-modal .amount-section input:focus {
+            outline: none;
+            border-color: #f5b83d;
+        }
+        .send-money-modal .balance-info {
+            font-size: 11px;
+            color: #555;
+            margin-bottom: 6px;
+        }
+        .send-money-modal .balance-info .avail {
+            font-weight: 600;
+            color: #1c2128;
+        }
+        .send-money-modal .balance-info .avail.insufficient {
+            color: #dc2626;
+        }
+        .send-money-modal .btn-send {
+            width: 100%;
+            padding: 10px;
+            background: #1c2128;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .send-money-modal .btn-send:active {
+            transform: scale(0.95);
+        }
+        .send-money-modal .btn-send:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Wallet payment section in payment modal */
+        .wallet-payment-section {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 8px 0;
+            background: #fafbfc;
+        }
+        .wallet-payment-section .wallet-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .wallet-payment-section .wallet-info .label {
+            font-size: 12px;
+            color: #888;
+        }
+        .wallet-payment-section .wallet-info .balance {
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .wallet-payment-section .wallet-info .balance.positive {
+            color: #00a86b;
+        }
+        .wallet-payment-section .wallet-info .balance.negative {
+            color: #dc2626;
+        }
+        .wallet-payment-section .btn-wallet-pay {
+            width: 100%;
+            margin-top: 6px;
+            padding: 8px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #1c2128;
+            color: white;
+        }
+        .wallet-payment-section .btn-wallet-pay:disabled {
+            background: #ddd;
+            color: #888;
+            cursor: not-allowed;
+        }
+        .wallet-payment-section .btn-wallet-pay:active:not(:disabled) {
+            transform: scale(0.95);
+        }
+        .wallet-payment-section .btn-wallet-pay i {
+            color: #f5b83d;
+        }
+
         @media (max-width: 420px) {
             .app-content {
                 padding: 0 10px 150px 10px;
@@ -2363,7 +2598,10 @@
                                 <div class="label">Account Balance</div>
                                 <div class="balance" id="accountBalanceDisplay">ZMW 0.00</div>
                             </div>
-                            <button class="withdraw-btn" id="withdrawBtnFromBalance"><i class="fa-solid fa-arrow-up"></i> Withdraw</button>
+                            <div class="balance-actions">
+                                <button class="action-btn" id="withdrawBtnFromBalance"><i class="fa-solid fa-arrow-up"></i> Withdraw</button>
+                                <button class="action-btn send-money-btn" id="sendMoneyBtn"><i class="fa-solid fa-paper-plane"></i> Send Money</button>
+                            </div>
                         </div>
                         <div id="transactionMessages">
                             <!-- Rendered by JS (only non-withdrawal transactions) -->
@@ -2444,6 +2682,18 @@
                 </div>
             </div>
 
+            <!-- ===== WALLET PAYMENT SECTION ===== -->
+            <div class="wallet-payment-section" id="walletPaymentSection">
+                <div class="wallet-info">
+                    <span class="label">💼 Buffer Zone Wallet</span>
+                    <span class="balance" id="walletBalanceDisplay">ZMW 0.00</span>
+                </div>
+                <button class="btn-wallet-pay" id="payWithWalletBtn" disabled>
+                    <i class="fa-solid fa-wallet"></i> Pay with Wallet
+                </button>
+                <p style="font-size:9px; color:#888; margin-top:3px;">Pay using your wallet balance (no screenshot needed).</p>
+            </div>
+
             <!-- ===== TOGGLE: PROMO CODE / REFERRAL CODE ===== -->
             <div class="toggle-row">
                 <button class="toggle-code-btn active" id="togglePromoBtn">Promo Code</button>
@@ -2473,7 +2723,7 @@
                 <div class="row"><span class="label" style="font-weight:700;">50% Deposit</span><span class="val" style="font-weight:700;color:#f5b83d;" id="finalDepositVal">ZMW 0.00</span></div>
             </div>
 
-            <div style="margin-bottom:10px;">
+            <div style="margin-bottom:10px;" id="uploadSection">
                 <label style="font-weight:600; font-size:10px; color:#1c2128; display:block; margin-bottom:3px;">Upload transaction screenshot</label>
                 <div class="upload-area" id="uploadArea">
                     <i class="fa-regular fa-image"></i>
@@ -2514,6 +2764,40 @@
             <h3>Withdrawal Submitted</h3>
             <p>Your withdrawal request has been submitted and will be processed within 24 hours.</p>
             <button class="btn-ok" id="withdrawSuccessOkBtn">OK</button>
+        </div>
+    </div>
+
+    <!-- ===== SEND MONEY MODAL ===== -->
+    <div class="send-money-overlay" id="sendMoneyModal">
+        <div class="send-money-modal">
+            <div class="modal-header">
+                <h3>💸 Send Money</h3>
+                <button class="close-btn" id="sendMoneyCloseBtn"><i class="fa-solid fa-times"></i></button>
+            </div>
+
+            <div class="section-title">📋 Recent Transfers</div>
+            <div class="transfer-list" id="transferList">
+                <!-- Rendered by JS -->
+            </div>
+
+            <div class="section-title">🔍 Find Recipient by Referral Code</div>
+            <div class="ref-search">
+                <input type="text" id="sendRecipientCode" placeholder="Enter referral code" />
+                <button id="searchRecipientBtn">Search</button>
+            </div>
+            <div class="recipient-info" id="recipientInfo">
+                <strong>Recipient:</strong> <span id="recipientName">—</span>
+            </div>
+
+            <div class="section-title">💰 Amount</div>
+            <div class="amount-section">
+                <input type="number" id="sendAmountInput" placeholder="Enter amount (ZMW)" step="0.01" />
+                <div class="balance-info">
+                    Available balance: <span class="avail" id="sendAvailableBalance">ZMW 0.00</span>
+                </div>
+            </div>
+
+            <button class="btn-send" id="sendMoneyConfirmBtn" disabled>Send Money</button>
         </div>
     </div>
 
@@ -2591,6 +2875,11 @@
         let currentCarouselIndex = 0;
         let autoScrollTimer = null;
         let isUserInteracting = false;
+
+        // Send money state
+        let sendRecipientUid = null;
+        let sendRecipientName = '';
+        let sendAmount = 0;
 
         // =================================================================
         // DOM REFS
@@ -2677,6 +2966,7 @@
         const accountBalanceDisplay = document.getElementById('accountBalanceDisplay');
         const withdrawBtnFromBalance = document.getElementById('withdrawBtnFromBalance');
         const withdrawBtnFromView = document.getElementById('withdrawBtnFromView');
+        const sendMoneyBtn = document.getElementById('sendMoneyBtn');
         const transactionMessages = document.getElementById('transactionMessages');
         const withdrawalsListContainer = document.getElementById('withdrawalsListContainer');
 
@@ -2688,6 +2978,23 @@
 
         const withdrawSuccessModal = document.getElementById('withdrawSuccessModal');
         const withdrawSuccessOkBtn = document.getElementById('withdrawSuccessOkBtn');
+
+        // ===== Send Money Modal =====
+        const sendMoneyModal = document.getElementById('sendMoneyModal');
+        const sendMoneyCloseBtn = document.getElementById('sendMoneyCloseBtn');
+        const transferList = document.getElementById('transferList');
+        const sendRecipientCode = document.getElementById('sendRecipientCode');
+        const searchRecipientBtn = document.getElementById('searchRecipientBtn');
+        const recipientInfo = document.getElementById('recipientInfo');
+        const recipientName = document.getElementById('recipientName');
+        const sendAmountInput = document.getElementById('sendAmountInput');
+        const sendAvailableBalance = document.getElementById('sendAvailableBalance');
+        const sendMoneyConfirmBtn = document.getElementById('sendMoneyConfirmBtn');
+
+        // ===== Wallet Payment =====
+        const walletPaymentSection = document.getElementById('walletPaymentSection');
+        const walletBalanceDisplay = document.getElementById('walletBalanceDisplay');
+        const payWithWalletBtn = document.getElementById('payWithWalletBtn');
 
         // ===== Toggle buttons in payment modal =====
         const togglePromoBtn = document.getElementById('togglePromoBtn');
@@ -2918,6 +3225,7 @@
             renderAccountAndReferral();
             renderTransactionMessages();
             renderWithdrawalsList();
+            renderSendMoneyTransfers();
 
             if (allData.policy) {
                 const p = allData.policy;
@@ -3636,6 +3944,9 @@
 
             withdrawBtnFromBalance.addEventListener('click', openWithdrawModal);
             withdrawBtnFromView.addEventListener('click', openWithdrawModal);
+
+            // Send Money button
+            sendMoneyBtn.addEventListener('click', openSendMoneyModal);
         }
 
         // =================================================================
@@ -3768,6 +4079,37 @@
                         <div>
                             <span class="status-badge ${statusClass}">${statusDisplay}</span>
                         </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // =================================================================
+        // SEND MONEY TRANSFERS (show recent sent/received)
+        // =================================================================
+
+        function renderSendMoneyTransfers() {
+            if (!transferList) return;
+            const transactions = allData.transactions || {};
+            const entries = Object.entries(transactions)
+                .filter(([key, t]) => t.userId === currentUserId && (t.type === 'Sent Money' || t.type === 'Received Money'))
+                .sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0))
+                .slice(0, 10);
+
+            if (entries.length === 0) {
+                transferList.innerHTML = `<div style="text-align:center;padding:10px;color:#888;">No transfers yet.</div>`;
+                return;
+            }
+
+            transferList.innerHTML = entries.map(([key, t]) => {
+                const dir = t.type === 'Sent Money' ? 'sent' : 'received';
+                const dirClass = dir === 'sent' ? 'sent' : 'received';
+                const sign = dir === 'sent' ? '-' : '+';
+                return `
+                    <div class="item">
+                        <span class="dir ${dirClass}">${dir === 'sent' ? '⬆ Sent' : '⬇ Received'}</span>
+                        <span>${t.userName || 'Unknown'}</span>
+                        <span>${sign}ZMW ${(t.amount || 0).toFixed(2)}</span>
                     </div>
                 `;
             }).join('');
@@ -3983,6 +4325,9 @@
                 referralCodeInput.value = '';
                 referralMsg.textContent = '';
                 referralMsg.className = 'coupon-msg';
+                // Reset wallet payment UI
+                const walletBalance = getAvailableBalance();
+                updateWalletPaymentUI(amount50, walletBalance);
                 const notes = document.getElementById('orderNotes').value.trim();
                 const customizationParts = [];
                 if (selectedSize) customizationParts.push(`Size: ${selectedSize}`);
@@ -4076,6 +4421,10 @@
                 couponInput.disabled = true;
 
                 paymentModal.dataset.appliedPromo = JSON.stringify(appliedPromo);
+
+                // Update wallet payment UI with new deposit amount
+                const walletBalance = getAvailableBalance();
+                updateWalletPaymentUI(depositAmount, walletBalance);
             }).catch((error) => {
                 console.error('Error checking used coupons:', error);
                 couponMsg.textContent = 'Error validating coupon.';
@@ -4181,6 +4530,10 @@
                 applyReferralBtn.disabled = true;
 
                 paymentModal.dataset.appliedReferral = JSON.stringify(appliedReferral);
+
+                // Update wallet payment UI with new deposit amount
+                const walletBalance = getAvailableBalance();
+                updateWalletPaymentUI(depositAmount, walletBalance);
             }).catch((error) => {
                 console.error('Error checking referral:', error);
                 referralMsg.textContent = 'Error validating referral.';
@@ -4189,14 +4542,54 @@
         }
 
         // =================================================================
-        // CONFIRM PAYMENT
+        // GET AVAILABLE BALANCE (excluding pending withdrawals)
         // =================================================================
 
-        function confirmPayment() {
-            const screenshotUrl = cloudinaryScreenshotUrlInput.value;
-            if (!screenshotUrl) {
-                showToast('Please upload a transaction screenshot before confirming.', 'error');
-                return;
+        function getAvailableBalance() {
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+            const pendingTotal = calculatePendingWithdrawalTotal();
+            return Math.max(0, balance - pendingTotal);
+        }
+
+        // =================================================================
+        // WALLET PAYMENT UI UPDATE
+        // =================================================================
+
+        function updateWalletPaymentUI(depositAmount, walletBalance) {
+            const balanceEl = walletBalanceDisplay;
+            const payBtn = payWithWalletBtn;
+
+            balanceEl.textContent = `ZMW ${walletBalance.toFixed(2)}`;
+
+            if (walletBalance >= depositAmount) {
+                balanceEl.className = 'balance positive';
+                payBtn.disabled = false;
+                payBtn.style.background = '#1c2128';
+                payBtn.style.color = 'white';
+                payBtn.innerHTML = `<i class="fa-solid fa-wallet"></i> Pay with Wallet`;
+            } else {
+                balanceEl.className = 'balance negative';
+                payBtn.disabled = true;
+                payBtn.style.background = '#ddd';
+                payBtn.style.color = '#888';
+                payBtn.innerHTML = `<i class="fa-solid fa-wallet"></i> Insufficient Balance`;
+            }
+        }
+
+        // =================================================================
+        // CONFIRM PAYMENT (modified to support wallet payment)
+        // =================================================================
+
+        function confirmPayment(useWallet = false) {
+            if (!useWallet) {
+                // Standard payment with screenshot
+                const screenshotUrl = cloudinaryScreenshotUrlInput.value;
+                if (!screenshotUrl) {
+                    showToast('Please upload a transaction screenshot before confirming.', 'error');
+                    return;
+                }
             }
 
             const dataStr = paymentModal.dataset.orderData;
@@ -4226,6 +4619,23 @@
                 finalAmount = data.total * (1 - discountAppliedVal / 100);
             }
 
+            const depositAmount = finalAmount * 0.5;
+
+            // If paying with wallet, deduct from balance
+            if (useWallet) {
+                const accounts = allData.customerAccounts || {};
+                const userAccount = accounts[currentUserId] || { balance: 0 };
+                const currentBalance = userAccount.balance || 0;
+                const newBalance = currentBalance - depositAmount;
+                if (newBalance < 0) {
+                    showToast('Insufficient wallet balance.', 'error');
+                    return;
+                }
+                // Update balance
+                const accRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
+                set(accRef, { balance: newBalance });
+            }
+
             const orderData = {
                 id: orderId,
                 service: data.service,
@@ -4236,7 +4646,7 @@
                 customization: data.customizationString ||
                     `Size: ${data.size || 'N/A'}, Orientation: ${data.orientation || 'N/A'}, Format: ${data.format || 'N/A'}`,
                 date: new Date().toLocaleDateString(),
-                paymentProof: screenshotUrl,
+                paymentProof: useWallet ? 'Wallet Payment' : cloudinaryScreenshotUrlInput.value,
                 userId: currentUserId,
                 discountApplied: discountAppliedVal,
                 promoCode: promoCodeUsed,
@@ -4295,14 +4705,14 @@
 
             const txData = {
                 type: 'Payment for ' + data.service,
-                amount: finalAmount * 0.5,
-                method: 'Airtel Money',
+                amount: depositAmount,
+                method: useWallet ? 'Wallet Payment' : 'Airtel Money',
                 status: 'pending',
                 date: new Date().toLocaleString(),
                 ref: orderId,
                 detail: '50% down payment for ' + data.service + (discountAppliedVal > 0 ? ` (${discountAppliedVal}% off)` :
                     '') + (data.notes ? ` · Notes: ${data.notes}` : ''),
-                screenshot: screenshotUrl,
+                screenshot: useWallet ? 'Wallet Payment' : cloudinaryScreenshotUrlInput.value,
                 userId: currentUserId,
                 itemId: data.serviceId || 'N/A',
                 itemTitle: data.service,
@@ -4424,6 +4834,199 @@
         }
 
         // =================================================================
+        // SEND MONEY
+        // =================================================================
+
+        function openSendMoneyModal() {
+            sendMoneyModal.classList.add('open');
+            sendRecipientCode.value = '';
+            recipientInfo.classList.remove('show');
+            recipientName.textContent = '—';
+            sendAmountInput.value = '';
+            sendMoneyConfirmBtn.disabled = true;
+            sendRecipientUid = null;
+            sendRecipientName = '';
+            sendAmount = 0;
+
+            // Update available balance display
+            const availBalance = getAvailableBalance();
+            sendAvailableBalance.textContent = `ZMW ${availBalance.toFixed(2)}`;
+            sendAvailableBalance.className = 'avail';
+
+            // Render recent transfers
+            renderSendMoneyTransfers();
+        }
+
+        function closeSendMoneyModal() {
+            sendMoneyModal.classList.remove('open');
+        }
+
+        function searchRecipient() {
+            const code = sendRecipientCode.value.trim().toUpperCase();
+            if (!code) {
+                showToast('Please enter a referral code.', 'error');
+                return;
+            }
+
+            const usersRef = ref(db, 'users');
+            get(usersRef).then((snapshot) => {
+                const users = snapshot.val() || {};
+                let foundUid = null;
+                let foundUser = null;
+                for (const [uid, u] of Object.entries(users)) {
+                    if (u.referralCode === code) {
+                        foundUid = uid;
+                        foundUser = u;
+                        break;
+                    }
+                }
+
+                if (!foundUid) {
+                    recipientInfo.classList.remove('show');
+                    recipientName.textContent = 'Not found';
+                    showToast('No user found with that referral code.', 'error');
+                    return;
+                }
+
+                if (foundUid === currentUserId) {
+                    recipientInfo.classList.remove('show');
+                    recipientName.textContent = 'Cannot send to yourself';
+                    showToast('You cannot send money to yourself.', 'error');
+                    return;
+                }
+
+                // Display recipient name
+                const fullName = `${foundUser.firstName || ''} ${foundUser.lastName || ''}`.trim() || foundUser.email || 'User';
+                recipientName.textContent = fullName;
+                recipientInfo.classList.add('show');
+                sendRecipientUid = foundUid;
+                sendRecipientName = fullName;
+                showToast(`Recipient found: ${fullName}`, 'success');
+                // Enable send button only if amount is valid
+                validateSendAmount();
+            }).catch((error) => {
+                console.error('Error searching recipient:', error);
+                showToast('Error searching recipient.', 'error');
+            });
+        }
+
+        function validateSendAmount() {
+            const amount = parseFloat(sendAmountInput.value);
+            const availBalance = getAvailableBalance();
+            const isValid = sendRecipientUid && amount > 0 && amount <= availBalance;
+            sendMoneyConfirmBtn.disabled = !isValid;
+            if (amount > 0) {
+                if (amount > availBalance) {
+                    sendAvailableBalance.className = 'avail insufficient';
+                } else {
+                    sendAvailableBalance.className = 'avail';
+                }
+            }
+        }
+
+        function confirmSendMoney() {
+            const amount = parseFloat(sendAmountInput.value);
+            if (!sendRecipientUid || !amount || amount <= 0) {
+                showToast('Please enter a valid amount and recipient.', 'error');
+                return;
+            }
+
+            const availBalance = getAvailableBalance();
+            if (amount > availBalance) {
+                showToast(`Insufficient balance. Available: ZMW ${availBalance.toFixed(2)}`, 'error');
+                return;
+            }
+
+            // Show confirmation popup
+            const confirmMsg = `You're sending ZMW ${amount.toFixed(2)} to ${sendRecipientName}. Please confirm.`;
+            if (!confirm(confirmMsg)) {
+                return;
+            }
+
+            // Process transfer
+            const accounts = allData.customerAccounts || {};
+            const senderAccount = accounts[currentUserId] || { balance: 0 };
+            const recipientAccount = accounts[sendRecipientUid] || { balance: 0 };
+
+            // Deduct from sender
+            const senderNewBalance = (senderAccount.balance || 0) - amount;
+            const senderAccRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
+            set(senderAccRef, { balance: senderNewBalance });
+
+            // Add to recipient
+            const recipientNewBalance = (recipientAccount.balance || 0) + amount;
+            const recipientAccRef = ref(db, `bufferzoneAppData/customerAccounts/${sendRecipientUid}`);
+            set(recipientAccRef, { balance: recipientNewBalance });
+
+            // Create transaction for sender
+            const txSenderRef = push(ref(db, 'bufferzoneAppData/transactions'));
+            const senderTx = {
+                type: 'Sent Money',
+                amount: amount,
+                method: 'Wallet Transfer',
+                status: 'completed',
+                date: new Date().toLocaleString(),
+                ref: 'SEND-' + Date.now(),
+                detail: `Sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}`,
+                screenshot: 'Wallet Transfer',
+                userId: currentUserId,
+                itemId: 'send-' + Date.now(),
+                itemTitle: 'Send Money',
+                itemType: 'transfer',
+                userName: sendRecipientName,
+                userEmail: 'N/A',
+                userPhone: 'N/A',
+                timestamp: Date.now()
+            };
+            set(txSenderRef, senderTx);
+
+            // Create transaction for recipient
+            const txRecipientRef = push(ref(db, 'bufferzoneAppData/transactions'));
+            const recipientTx = {
+                type: 'Received Money',
+                amount: amount,
+                method: 'Wallet Transfer',
+                status: 'completed',
+                date: new Date().toLocaleString(),
+                ref: 'RECV-' + Date.now(),
+                detail: `Received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}`,
+                screenshot: 'Wallet Transfer',
+                userId: sendRecipientUid,
+                itemId: 'recv-' + Date.now(),
+                itemTitle: 'Receive Money',
+                itemType: 'transfer',
+                userName: currentUserData?.firstName || 'User',
+                userEmail: currentUser.email || 'N/A',
+                userPhone: currentUserData?.phone || 'N/A',
+                timestamp: Date.now()
+            };
+            set(txRecipientRef, recipientTx);
+
+            // Notifications for both
+            const notifSenderRef = push(ref(db, 'bufferzoneAppData/notifications'));
+            set(notifSenderRef, {
+                title: '💰 Money Sent',
+                message: `You sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}.`,
+                timestamp: Date.now(),
+                read: false,
+                userId: currentUserId
+            });
+
+            const notifRecipientRef = push(ref(db, 'bufferzoneAppData/notifications'));
+            set(notifRecipientRef, {
+                title: '💰 Money Received',
+                message: `You received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}.`,
+                timestamp: Date.now(),
+                read: false,
+                userId: sendRecipientUid
+            });
+
+            showToast(`✅ Sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}`, 'success');
+            closeSendMoneyModal();
+            renderAll();
+        }
+
+        // =================================================================
         // EVENT BINDINGS
         // =================================================================
 
@@ -4517,7 +5120,15 @@
             if (e.key === 'Enter') applyReferral();
         });
 
-        confirmPaymentBtn.addEventListener('click', confirmPayment);
+        confirmPaymentBtn.addEventListener('click', function() {
+            confirmPayment(false);
+        });
+
+        // Wallet payment button
+        payWithWalletBtn.addEventListener('click', function() {
+            if (this.disabled) return;
+            confirmPayment(true);
+        });
 
         setupCloudinaryUpload();
 
@@ -4555,6 +5166,18 @@
             }
         });
 
+        // ===== Send Money =====
+        sendMoneyCloseBtn.addEventListener('click', closeSendMoneyModal);
+        sendMoneyModal.addEventListener('click', function(e) {
+            if (e.target === this) closeSendMoneyModal();
+        });
+        searchRecipientBtn.addEventListener('click', searchRecipient);
+        sendRecipientCode.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') searchRecipient();
+        });
+        sendAmountInput.addEventListener('input', validateSendAmount);
+        sendMoneyConfirmBtn.addEventListener('click', confirmSendMoney);
+
         // =================================================================
         // AUTH & INIT
         // =================================================================
@@ -4584,7 +5207,7 @@
             }
         });
 
-        console.log('✅ Customer App — Withdrawal logic: pending amounts are subtracted from available balance. Multiple pending withdrawals allowed up to available balance.');
+        console.log('✅ Customer App — Send Money & Wallet Payment integrated. Scale reduced by 15%.');
     </script>
 </body>
 </html>
