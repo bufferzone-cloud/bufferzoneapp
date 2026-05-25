@@ -9,6 +9,27 @@
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
     </script>
     <style>
+        /* ── Scale everything down by 25% ── */
+        html {
+            zoom: 0.75;
+            -webkit-zoom: 0.75;
+            -moz-transform: scale(0.75);
+            -moz-transform-origin: 0 0;
+        }
+        /* fallback for Firefox */
+        @-moz-document url-prefix() {
+            html {
+                transform: scale(0.75);
+                transform-origin: 0 0;
+                width: 133.333%;
+                height: 133.333%;
+            }
+            body {
+                width: 75%;
+                margin: 0 auto;
+            }
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -3417,6 +3438,64 @@
             border-color: #1c2128;
             box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
+
+        /* ── CUSTOMER TRANSFERS ── */
+        .transfer-item {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 14px 18px;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s;
+        }
+        .transfer-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .transfer-item .transfer-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .transfer-item .transfer-summary .left {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .transfer-item .transfer-summary .left .sender {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1c2128;
+        }
+        .transfer-item .transfer-summary .left .recipient {
+            font-size: 12px;
+            color: #555;
+        }
+        .transfer-item .transfer-summary .left .detail {
+            font-size: 11px;
+            color: #888;
+        }
+        .transfer-item .transfer-summary .right {
+            text-align: right;
+        }
+        .transfer-item .transfer-summary .right .amount {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1c2128;
+        }
+        .transfer-item .transfer-summary .right .amount.sent {
+            color: #dc2626;
+        }
+        .transfer-item .transfer-summary .right .amount.received {
+            color: #00a86b;
+        }
+        .transfer-item .transfer-summary .right .date {
+            font-size: 10px;
+            color: #aaa;
+            margin-top: 2px;
+        }
     </style>
 </head>
 <body>
@@ -3725,12 +3804,13 @@
 
                 <div style="margin-bottom:12px;">
                     <h2 style="font-size:24px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-money-bill-wave" style="color:#f5b83d;"></i> Payables</h2>
-                    <p style="font-size:13px; color:#888;">Manage customer accounts and withdrawal requests.</p>
+                    <p style="font-size:13px; color:#888;">Manage customer accounts, withdrawals, and customer‑to‑customer transfers.</p>
                 </div>
 
                 <div class="payables-action-row">
                     <button class="p-btn toggle active" id="toggleAccounts"><i class="fa-solid fa-wallet"></i> Accounts</button>
                     <button class="p-btn toggle" id="toggleWithdrawals"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
+                    <button class="p-btn toggle" id="toggleTransfers"><i class="fa-solid fa-arrow-right-arrow-left"></i> Transfers</button>
                     <button class="p-btn gold" id="manualDepositBtn"><i class="fa-solid fa-plus-circle"></i> Manual Deposit</button>
                     <button class="p-btn gold" id="accountUpdateBtn"><i class="fa-solid fa-pen-to-square"></i> Account Update</button>
                 </div>
@@ -3746,6 +3826,10 @@
                         <button class="btn btn-outline btn-sm" id="showPendingWithdrawals" style="background:#f5b83d; color:#1c2128; border:none; padding:6px 18px; border-radius:20px; font-size:11px; font-weight:600; cursor:pointer;">⏳ Pending</button>
                     </div>
                     <div id="withdrawalsList"></div>
+                </div>
+
+                <div class="payables-view" id="viewTransfers">
+                    <div id="transfersList"></div>
                 </div>
 
             </div>
@@ -4512,10 +4596,13 @@
         // ── Payables DOM ──
         const toggleAccounts = document.getElementById('toggleAccounts');
         const toggleWithdrawals = document.getElementById('toggleWithdrawals');
+        const toggleTransfers = document.getElementById('toggleTransfers');
         const viewAccounts = document.getElementById('viewAccounts');
         const viewWithdrawals = document.getElementById('viewWithdrawals');
+        const viewTransfers = document.getElementById('viewTransfers');
         const accountsList = document.getElementById('accountsList');
         const withdrawalsList = document.getElementById('withdrawalsList');
+        const transfersList = document.getElementById('transfersList');
         const manualDepositBtn = document.getElementById('manualDepositBtn');
         const manualDepositModal = document.getElementById('manualDepositModal');
         const manualDepositCloseBtn = document.getElementById('manualDepositCloseBtn');
@@ -4790,6 +4877,7 @@
             // ── Payables renders ──
             renderAccounts();
             renderWithdrawals();
+            renderTransfers();
             populateUserSelects();
 
             // ── Custom referral user select ──
@@ -4953,6 +5041,7 @@
                                 <div class="row"><span class="label">Client Number</span><span class="val">${o.clientNumber || 'N/A'}</span></div>
                                 <div class="row"><span class="label">Customization</span><span class="val">${o.customization || 'None'}</span></div>
                                 <div class="row"><span class="label">Notes</span><span class="val">${o.notes || 'No notes'}</span></div>
+                                <div class="row"><span class="label">Payment Method</span><span class="val">${o.paymentMethod || 'Airtel Money'}</span></div>
                                 <div class="row"><span class="label">Payment Proof</span><span class="val">
                                     ${o.paymentProof ? `<button class="btn-view-proof" data-screenshot="${o.paymentProof}"><i class="fa-regular fa-image"></i> View</button>` : 'No proof'}
                                 </span></div>
@@ -5843,6 +5932,55 @@
             }
 
             updateBadges();
+        }
+
+        function renderTransfers() {
+            const container = transfersList;
+            const transactions = allData.transactions || {};
+            const users = allData.users || {};
+
+            // Filter for customer-to-customer transfers: type includes "sent", "received", "Send Money", "Received Money"
+            const transfers = Object.entries(transactions).filter(([key, t]) => {
+                const type = (t.type || '').toLowerCase();
+                return (type.includes('sent') || type.includes('received') ||
+                    type.includes('send money') || type.includes('receive money')) &&
+                    t.userId && t.otherParty;
+            });
+
+            if (transfers.length === 0) {
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:20px;">No customer‑to‑customer transfers yet.</div>`;
+                return;
+            }
+
+            transfers.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+
+            container.innerHTML = transfers.map(([key, t]) => {
+                const user = users[t.userId] || {};
+                const name = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
+                const isSent = t.type.toLowerCase().includes('sent') ||
+                    (t.type.toLowerCase().includes('send') && t.amount && t.amount < 0);
+                const amountClass = isSent ? 'sent' : 'received';
+                const sign = isSent ? '-' : '+';
+                const otherParty = t.otherParty || 'Unknown';
+                const dateStr = t.date ? new Date(t.date).toLocaleString() : 'N/A';
+
+                return `
+                            <div class="transfer-item">
+                                <div class="transfer-summary">
+                                    <div class="left">
+                                        <div class="sender">${isSent ? '📤 Sent to' : '📥 Received from'}</div>
+                                        <div class="recipient">${otherParty}</div>
+                                        <div class="detail">${t.type || 'Transfer'} &middot; Ref: ${t.ref || 'N/A'}</div>
+                                    </div>
+                                    <div class="right">
+                                        <div class="amount ${amountClass}">${sign}ZMW ${Math.abs(t.amount || 0).toFixed(2)}</div>
+                                        <div class="date">${dateStr}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+            }).join('');
         }
 
         // ─── WITHDRAWAL CONFIRMATION MODAL ──────────────────────────────
@@ -6932,15 +7070,28 @@
         toggleAccounts.addEventListener('click', function() {
             toggleAccounts.classList.add('active');
             toggleWithdrawals.classList.remove('active');
+            toggleTransfers.classList.remove('active');
             viewAccounts.classList.add('active');
             viewWithdrawals.classList.remove('active');
+            viewTransfers.classList.remove('active');
         });
 
         toggleWithdrawals.addEventListener('click', function() {
             toggleWithdrawals.classList.add('active');
             toggleAccounts.classList.remove('active');
+            toggleTransfers.classList.remove('active');
             viewWithdrawals.classList.add('active');
             viewAccounts.classList.remove('active');
+            viewTransfers.classList.remove('active');
+        });
+
+        toggleTransfers.addEventListener('click', function() {
+            toggleTransfers.classList.add('active');
+            toggleAccounts.classList.remove('active');
+            toggleWithdrawals.classList.remove('active');
+            viewTransfers.classList.add('active');
+            viewAccounts.classList.remove('active');
+            viewWithdrawals.classList.remove('active');
         });
 
         // ── Withdrawal filter buttons ──
@@ -7864,6 +8015,7 @@
                             renderReferralPromoDiscounts();
                             renderAccounts();
                             renderWithdrawals();
+                            renderTransfers();
                             populateUserSelects();
                             populateCustomReferralSelect();
                             renderAccountUpdateUserList();
@@ -7890,7 +8042,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Compact, floating user cards with registration & discount referrals, larger ban toggle, and full expandable details.');
+        console.log('✅ Admin Dashboard — Added customer transfers view, payment method in orders, scaled down by 25%.');
     </script>
 </body>
 </html>
