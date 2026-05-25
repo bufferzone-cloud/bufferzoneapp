@@ -99,6 +99,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex: 1;
         }
         .logo-img {
             width: 34px;
@@ -108,22 +109,11 @@
             flex-shrink: 0;
             background: #1c2128;
         }
-        .avatar {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background-color: #1c2128;
-            color: #f5b83d;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
         .header-text {
             display: flex;
             flex-direction: column;
+            flex: 1;
+            text-align: center;
         }
         .header-text span:first-child {
             font-size: 10px;
@@ -148,6 +138,7 @@
             font-size: 15px;
             cursor: pointer;
             position: relative;
+            flex-shrink: 0;
         }
         .notif-badge {
             position: absolute;
@@ -311,8 +302,8 @@
         }
 
         .promo-slide {
-            flex: 0 0 70%;
-            max-width: 70%;
+            flex: 0 0 60%;
+            max-width: 60%;
             scroll-snap-align: center;
             position: relative;
             border-radius: 20px;
@@ -325,8 +316,8 @@
             align-items: center;
             justify-content: center;
             margin: auto 0;
-            transform: scale(0.78);
-            opacity: 0.65;
+            transform: scale(0.85);
+            opacity: 0.7;
             z-index: 1;
             will-change: transform, opacity;
         }
@@ -370,7 +361,7 @@
         }
 
         .promo-slide.active-slide {
-            transform: scale(1.08);
+            transform: scale(1.05);
             opacity: 1;
             z-index: 3;
             box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25);
@@ -378,45 +369,15 @@
 
         .promo-slide.prev-slide,
         .promo-slide.next-slide {
-            transform: scale(0.78);
+            transform: scale(0.85);
             opacity: 0.8;
             z-index: 2;
         }
 
         .promo-slide.far-slide {
-            transform: scale(0.62);
-            opacity: 0.25;
+            transform: scale(0.65);
+            opacity: 0.3;
             z-index: 0;
-        }
-
-        .promo-carousel-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 6px;
-            padding: 0 0 6px 0;
-            transition: all 0.3s;
-        }
-        .promo-carousel-indicators.hidden {
-            display: none;
-        }
-        .promo-carousel-indicators .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #ddd;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            padding: 0;
-        }
-        .promo-carousel-indicators .dot.active {
-            background: #f5b83d;
-            width: 24px;
-            border-radius: 12px;
-        }
-        .promo-carousel-indicators .dot:active {
-            transform: scale(0.85);
         }
 
         .promotions-banner {
@@ -2356,8 +2317,8 @@
                 height: 260px;
             }
             .promo-slide {
-                flex: 0 0 72%;
-                max-width: 72%;
+                flex: 0 0 60%;
+                max-width: 60%;
                 height: 86%;
             }
             .promo-slide .slide-text {
@@ -2365,13 +2326,6 @@
             }
             .promo-slide .slide-text small {
                 font-size: 11px;
-            }
-            .promo-carousel-indicators .dot {
-                width: 6px;
-                height: 6px;
-            }
-            .promo-carousel-indicators .dot.active {
-                width: 18px;
             }
             .account-balance-box .right-btns .btn-action {
                 font-size: 10px;
@@ -2392,8 +2346,8 @@
                 height: 220px;
             }
             .promo-slide {
-                flex: 0 0 76%;
-                max-width: 76%;
+                flex: 0 0 60%;
+                max-width: 60%;
             }
         }
     </style>
@@ -2408,7 +2362,6 @@
             <div class="header">
                 <div class="header-left">
                     <img src="bufferzone.png" alt="Buffer Zone" class="logo-img" onerror="this.style.display='none'" />
-                    <div class="avatar" id="headerAvatar">U</div>
                     <div class="header-text">
                         <span>Welcome back,</span>
                         <span id="headerName">User</span>
@@ -2459,7 +2412,6 @@
                         <!-- Rendered by JS -->
                     </div>
                 </div>
-                <div class="promo-carousel-indicators" id="promoCarouselIndicators"></div>
 
                 <!-- ===== PROMOTIONS BANNER ===== -->
                 <div id="promotionsBanner" class="promotions-banner">
@@ -2893,7 +2845,6 @@
 
         // Carousel
         const promoCarouselTrack = document.getElementById('promoCarouselTrack');
-        const promoCarouselIndicators = document.getElementById('promoCarouselIndicators');
         const promoCarouselWrapper = document.getElementById('promoCarouselWrapper');
 
         // Payment Modal
@@ -3218,17 +3169,14 @@
             carouselItems = entries;
 
             const wrapper = promoCarouselWrapper;
-            const indicators = promoCarouselIndicators;
 
             if (entries.length === 0) {
                 wrapper.classList.add('collapsed');
-                indicators.classList.add('hidden');
                 promoCarouselTrack.innerHTML = '';
                 return;
             }
 
             wrapper.classList.remove('collapsed');
-            indicators.classList.remove('hidden');
 
             // Create duplicated slides for infinite illusion: [last, first, second, ..., last, first]
             const duplicated = [
@@ -3247,11 +3195,6 @@
                         </div>
                     </div>
                 </div>
-            `).join('');
-
-            // Indicators based on real items count
-            promoCarouselIndicators.innerHTML = entries.map((_, i) => `
-                <button class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></button>
             `).join('');
 
             // Set initial scroll position to first real slide (index 1 in duplicated array)
@@ -3303,7 +3246,6 @@
                     if (realIndex !== currentCarouselIndex) {
                         currentCarouselIndex = realIndex;
                         updateCarouselClasses(closestIdx);
-                        updateIndicators(realIndex);
                         resetAutoScroll();
                     }
                 }
@@ -3315,15 +3257,7 @@
                 }, 2000);
             });
 
-            promoCarouselIndicators.querySelectorAll('.dot').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const idx = parseInt(this.dataset.index);
-                    goToSlide(idx);
-                });
-            });
-
             updateCarouselClasses(1);
-            updateIndicators(0);
 
             setTimeout(() => {
                 const slides2 = track.querySelectorAll('.promo-slide');
@@ -3355,13 +3289,6 @@
             });
         }
 
-        function updateIndicators(realIndex) {
-            const dots = promoCarouselIndicators.querySelectorAll('.dot');
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === realIndex);
-            });
-        }
-
         function goToSlide(realIndex) {
             const slides = promoCarouselTrack.querySelectorAll('.promo-slide');
             if (slides.length === 0) return;
@@ -3384,7 +3311,6 @@
 
             currentCarouselIndex = realIndex;
             updateCarouselClasses(targetIdx);
-            updateIndicators(realIndex);
             resetAutoScroll();
         }
 
@@ -5327,7 +5253,7 @@
         });
         observer.observe(paymentModal, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer App — Logo added, Send Money integrated, Wallet Payment added, Promo carousel collapses when empty.');
+        console.log('✅ Customer App — Header centered, avatar removed, carousel 20% peek, indicators removed.');
     </script>
 </body>
 </html>
