@@ -17,12 +17,29 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        html {
+            font-size: 85%;
+            height: 100%;
+            overflow: hidden;
+        }
+
         body {
             background-color: #f8f9fc;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
             overflow: hidden;
-            height: 100%;
-            zoom: 0.85; /* reduce everything by 15% */
+            margin: 0;
+        }
+
+        #app-wrapper {
+            transform: scale(0.85);
+            transform-origin: 0 0;
+            width: 117.6470588235%;
+            height: 100vh;
+            overflow: hidden;
         }
 
         .app-root {
@@ -45,7 +62,7 @@
         }
 
         .bottom-nav {
-            position: fixed;
+            position: sticky;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
@@ -62,6 +79,7 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
             flex-shrink: 0;
             pointer-events: auto;
+            margin: 0 auto;
         }
 
         .nav-item {
@@ -276,6 +294,10 @@
             background: #f8f9fc;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             padding: 0 2%;
+        }
+
+        .promo-carousel-wrapper.collapsed {
+            display: none;
         }
 
         .promo-carousel-track {
@@ -1716,11 +1738,14 @@
             padding: 18px 16px;
             margin: 0 0 12px 0;
             display: flex;
+            flex-direction: column;
+            color: white;
+            gap: 10px;
+        }
+        .account-balance-box .top-row {
+            display: flex;
             justify-content: space-between;
             align-items: center;
-            color: white;
-            flex-wrap: wrap;
-            gap: 12px;
         }
         .account-balance-box .left .label {
             font-size: 10px;
@@ -1734,19 +1759,19 @@
             font-weight: 800;
             color: #fff;
         }
-        .account-balance-box .balance-actions {
+        .account-balance-box .btn-group {
             display: flex;
             flex-direction: column;
             gap: 6px;
             align-items: flex-end;
         }
-        .account-balance-box .balance-actions .action-btn {
+        .account-balance-box .btn-group .action-btn {
             background: #f5b83d;
             border: none;
-            padding: 8px 18px;
+            padding: 6px 16px;
             border-radius: 30px;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 11px;
             color: #1c2128;
             cursor: pointer;
             transition: all 0.2s;
@@ -1756,18 +1781,158 @@
             width: 100%;
             justify-content: center;
         }
-        .account-balance-box .balance-actions .action-btn:active {
+        .account-balance-box .btn-group .action-btn:active {
             transform: scale(0.95);
         }
-        .account-balance-box .balance-actions .action-btn i {
-            font-size: 14px;
+        .account-balance-box .btn-group .action-btn i {
+            font-size: 13px;
         }
-        .account-balance-box .balance-actions .action-btn.send-money-btn {
-            background: #2a9d8f;
+
+        .send-money-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 1100;
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        .send-money-modal-overlay.open {
+            display: flex;
+        }
+        .send-money-modal {
+            background: #ffffff;
+            border-radius: 20px 20px 0 0;
+            width: 100%;
+            max-width: 420px;
+            max-height: 85vh;
+            padding: 20px 16px 30px 16px;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        .send-money-modal .close-btn {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #aaa;
+            cursor: pointer;
+        }
+        .send-money-modal h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-bottom: 4px;
+            clear: both;
+        }
+        .send-money-modal .sub {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 12px;
+        }
+
+        .send-money-transactions {
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 8px;
+            margin-bottom: 12px;
+            background: #fafbfc;
+        }
+        .send-money-transactions .tx-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #f5f5f5;
+            font-size: 12px;
+        }
+        .send-money-transactions .tx-item:last-child {
+            border-bottom: none;
+        }
+        .send-money-transactions .tx-item .tx-type {
+            font-weight: 600;
+        }
+        .send-money-transactions .tx-item .tx-type.sent {
+            color: #dc2626;
+        }
+        .send-money-transactions .tx-item .tx-type.received {
+            color: #00a86b;
+        }
+        .send-money-transactions .tx-item .tx-amount {
+            font-weight: 600;
+        }
+
+        .send-money-form .form-group {
+            margin-bottom: 12px;
+        }
+        .send-money-form .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 3px;
+        }
+        .send-money-form .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+        .send-money-form .form-group input:focus {
+            outline: none;
+            border-color: #f5b83d;
+        }
+        .send-money-form .found-name {
+            font-size: 13px;
+            color: #1c2128;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+        .send-money-form .found-name i {
+            color: #f5b83d;
+            margin-right: 6px;
+        }
+        .send-money-form .available-balance {
+            font-size: 12px;
+            color: #555;
+            margin-top: 3px;
+        }
+        .send-money-form .available-balance strong {
+            color: #1c2128;
+        }
+        .send-money-form .send-btn {
+            width: 100%;
+            padding: 12px;
+            background: #1c2128;
             color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        .account-balance-box .balance-actions .action-btn.send-money-btn i {
-            color: #fff;
+        .send-money-form .send-btn:active {
+            transform: scale(0.95);
+        }
+        .send-money-form .send-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
         }
 
         .transaction-msg {
@@ -1908,7 +2073,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px);
-            z-index: 1100;
+            z-index: 1200;
             display: none;
             align-items: center;
             justify-content: center;
@@ -1995,7 +2160,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px);
-            z-index: 1200;
+            z-index: 1300;
             display: none;
             align-items: center;
             justify-content: center;
@@ -2139,221 +2304,40 @@
             transform: scale(0.95);
         }
 
-        /* === SEND MONEY MODAL === */
-        .send-money-overlay {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
-            z-index: 1100;
-            display: none;
-            align-items: flex-end;
-            justify-content: center;
-        }
-        .send-money-overlay.open {
-            display: flex;
-        }
-        .send-money-modal {
-            background: white;
-            border-radius: 20px 20px 0 0;
-            width: 100%;
-            max-width: 480px;
-            max-height: 85vh;
-            padding: 20px 16px 30px 16px;
-            overflow-y: auto;
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
-            animation: slideUp 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
-        .send-money-modal .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .send-money-modal .modal-header h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1c2128;
-        }
-        .send-money-modal .modal-header .close-btn {
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: #888;
-            cursor: pointer;
-        }
-        .send-money-modal .section-title {
-            font-size: 11px;
-            font-weight: 600;
-            color: #1c2128;
-            margin: 8px 0 4px 0;
-        }
-        .send-money-modal .transfer-list {
-            max-height: 100px;
-            overflow-y: auto;
-            background: #f8f9fc;
-            border-radius: 10px;
-            padding: 6px 10px;
-            margin-bottom: 10px;
-            font-size: 11px;
-        }
-        .send-money-modal .transfer-list .item {
-            display: flex;
-            justify-content: space-between;
-            padding: 4px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .send-money-modal .transfer-list .item:last-child {
-            border-bottom: none;
-        }
-        .send-money-modal .transfer-list .item .dir {
-            font-weight: 600;
-        }
-        .send-money-modal .transfer-list .item .dir.sent { color: #dc2626; }
-        .send-money-modal .transfer-list .item .dir.received { color: #00a86b; }
-        .send-money-modal .ref-search {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-        .send-money-modal .ref-search input {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 13px;
-        }
-        .send-money-modal .ref-search input:focus {
-            outline: none;
-            border-color: #f5b83d;
-        }
-        .send-money-modal .ref-search button {
-            background: #f5b83d;
-            color: #1c2128;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .send-money-modal .recipient-info {
-            background: #f0f9ff;
-            border-radius: 8px;
-            padding: 6px 10px;
-            margin-bottom: 8px;
-            font-size: 13px;
-            color: #1c2128;
-            display: none;
-        }
-        .send-money-modal .recipient-info.show {
-            display: block;
-        }
-        .send-money-modal .amount-section {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin: 6px 0 10px 0;
-        }
-        .send-money-modal .amount-section input {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 13px;
-        }
-        .send-money-modal .amount-section input:focus {
-            outline: none;
-            border-color: #f5b83d;
-        }
-        .send-money-modal .balance-info {
-            font-size: 11px;
-            color: #555;
-            margin-bottom: 6px;
-        }
-        .send-money-modal .balance-info .avail {
-            font-weight: 600;
-            color: #1c2128;
-        }
-        .send-money-modal .balance-info .avail.insufficient {
-            color: #dc2626;
-        }
-        .send-money-modal .btn-send {
-            width: 100%;
-            padding: 10px;
-            background: #1c2128;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        .send-money-modal .btn-send:active {
-            transform: scale(0.95);
-        }
-        .send-money-modal .btn-send:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        /* Wallet payment section in payment modal */
+        /* Wallet payment section */
         .wallet-payment-section {
-            border: 1px solid #eee;
-            border-radius: 10px;
-            padding: 10px;
-            margin: 8px 0;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 12px;
             background: #fafbfc;
         }
-        .wallet-payment-section .wallet-info {
+        .wallet-payment-section .wallet-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #1c2128;
+            margin-bottom: 6px;
         }
-        .wallet-payment-section .wallet-info .label {
-            font-size: 12px;
-            color: #888;
+        .wallet-payment-section .wallet-header i {
+            color: #f5b83d;
         }
-        .wallet-payment-section .wallet-info .balance {
-            font-weight: 700;
+        .wallet-balance-display {
             font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
-        .wallet-payment-section .wallet-info .balance.positive {
+        .wallet-balance-display .sufficient {
             color: #00a86b;
         }
-        .wallet-payment-section .wallet-info .balance.negative {
+        .wallet-balance-display .insufficient {
             color: #dc2626;
         }
-        .wallet-payment-section .btn-wallet-pay {
-            width: 100%;
-            margin-top: 6px;
-            padding: 8px;
-            border-radius: 8px;
-            border: none;
-            font-weight: 700;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: #1c2128;
-            color: white;
-        }
-        .wallet-payment-section .btn-wallet-pay:disabled {
-            background: #ddd;
-            color: #888;
-            cursor: not-allowed;
-        }
-        .wallet-payment-section .btn-wallet-pay:active:not(:disabled) {
-            transform: scale(0.95);
-        }
-        .wallet-payment-section .btn-wallet-pay i {
-            color: #f5b83d;
+        .wallet-payment-section .wallet-note {
+            font-size: 11px;
+            color: #555;
         }
 
         @media (max-width: 420px) {
@@ -2442,229 +2426,234 @@
 </head>
 <body>
 
-    <div class="app-root">
+    <div id="app-wrapper">
+        <div class="app-root">
 
-        <div class="app-content" id="appContent">
+            <div class="app-content" id="appContent">
 
-            <!-- ===== HEADER ===== -->
-            <div class="header">
-                <div class="header-left">
-                    <div class="avatar" id="headerAvatar">U</div>
-                    <div class="header-text">
-                        <span>Welcome back,</span>
-                        <span id="headerName">User</span>
-                    </div>
-                </div>
-                <div class="notif-icon" id="notifIcon">
-                    <i class="fa-regular fa-bell"></i>
-                    <span class="notif-badge" id="notifBadge">0</span>
-                </div>
-            </div>
-
-            <!-- ===== VIEW: HOME ===== -->
-            <div id="homeView" class="view active">
-
-                <!-- ===== HERO ===== -->
-                <div class="hero">
-                    <div class="small-grid-dots">
-                        <div></div><div></div><div></div><div></div>
-                        <div></div><div></div><div></div><div></div>
-                        <div></div><div></div><div></div><div></div>
-                        <div></div><div></div><div></div><div></div>
-                    </div>
-                    <div class="hero-bg-decor"></div>
-                    <div class="hero-content">
-                        <div class="hero-title" id="heroTitle">
-                            WE ARE<br>
-                            <span id="heroTitleSpan">CREATIVE</span>
-                        </div>
-                        <div class="hero-desc" id="heroDesc">
-                            We provide the best ideas to grow your business
-                        </div>
-                        <div class="hero-services">
-                            <div class="hero-services-title">OUR SERVICES</div>
-                            <ul class="service-list" id="ourServicesList">
-                                <!-- Rendered by JS -->
-                            </ul>
+                <!-- ===== HEADER ===== -->
+                <div class="header">
+                    <div class="header-left">
+                        <div class="avatar" id="headerAvatar">U</div>
+                        <div class="header-text">
+                            <span>Welcome back,</span>
+                            <span id="headerName">User</span>
                         </div>
                     </div>
-                    <div class="cta-container">
-                        <div class="btn-get-started" id="heroCtaBtn">GET STARTED</div>
-                        <div class="contact-number">Call to find out more<br><strong id="heroPhone">+123 456 7890</strong></div>
+                    <div class="notif-icon" id="notifIcon">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="notif-badge" id="notifBadge">0</span>
                     </div>
                 </div>
 
-                <!-- ===== PROMO CAROUSEL ===== -->
-                <div class="promo-carousel-wrapper" id="promoCarouselWrapper">
-                    <div class="promo-carousel-track" id="promoCarouselTrack">
-                        <!-- Rendered by JS -->
-                    </div>
-                </div>
-                <div class="promo-carousel-indicators" id="promoCarouselIndicators"></div>
+                <!-- ===== VIEW: HOME ===== -->
+                <div id="homeView" class="view active">
 
-                <!-- ===== PROMOTIONS BANNER ===== -->
-                <div id="promotionsBanner" class="promotions-banner">
-                    <!-- Rendered by JS -->
-                </div>
-
-                <!-- ===== CATEGORY BUTTONS ===== -->
-                <div class="category-row" id="categoryRow">
-                    <button class="cat-btn active" data-cat="all"><i class="fa-solid fa-th-large"></i> All</button>
-                    <button class="cat-btn" data-cat="graphic"><i class="fa-regular fa-lightbulb"></i> Graphic</button>
-                    <button class="cat-btn" data-cat="dev"><i class="fa-solid fa-code"></i> Developer</button>
-                    <button class="cat-btn" data-cat="tech"><i class="fa-solid fa-gear"></i> Technical</button>
-                    <button class="cat-btn" data-cat="it"><i class="fa-solid fa-headset"></i> IT Support</button>
-                </div>
-
-                <!-- ===== SERVICE GRID ===== -->
-                <div id="serviceSection">
-                    <div class="dynamic-header">
-                        <span class="dynamic-title" id="dynamicTitle">RECENT WORK</span>
-                        <div class="dynamic-actions">
-                            <span class="dynamic-back" id="dynamicBack" style="display:none;">← Back</span>
-                            <span class="dynamic-view-all" id="dynamicViewAll">View All</span>
+                    <!-- ===== HERO ===== -->
+                    <div class="hero">
+                        <div class="small-grid-dots">
+                            <div></div><div></div><div></div><div></div>
+                            <div></div><div></div><div></div><div></div>
+                            <div></div><div></div><div></div><div></div>
+                            <div></div><div></div><div></div><div></div>
                         </div>
-                    </div>
-                    <div id="serviceGridContainer" class="service-grid"></div>
-                </div>
-
-            </div>
-
-            <!-- ===== VIEW: ORDER FLOW ===== -->
-            <div id="orderFlowView" class="view">
-                <div style="display: flex; align-items: center; gap: 10px; padding: 0 0 10px 0;">
-                    <button id="backFromOrder" style="background: none; border: none; font-size: 16px; color: #1c2128; cursor: pointer; padding: 3px;">
-                        <i class="fa-solid fa-arrow-left"></i>
-                    </button>
-                    <h3 style="font-weight: 700; font-size: 14px; color: #1c2128;">Customize Order</h3>
-                </div>
-                <div id="orderFlowContainer" class="order-flow-container">
-                    <!-- Dynamically rendered -->
-                </div>
-            </div>
-
-            <!-- ===== VIEW: ORDERS ===== -->
-            <div id="ordersView" class="view">
-                <div style="padding: 0 0 13px 0;">
-                    <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Your Orders</h3>
-                    <p style="color: #888; font-size: 11px;">Track your projects and payments.</p>
-                </div>
-                <div class="order-grid" id="ordersGrid"></div>
-            </div>
-
-            <!-- ===== VIEW: HISTORY ===== -->
-            <div id="historyView" class="view">
-                <div style="padding: 0 0 13px 0;">
-                    <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Transaction History</h3>
-                    <p style="color: #888; font-size: 11px;">Tap a transaction to view more details.</p>
-                </div>
-                <div id="paymentReminderBanner" class="payment-reminder-banner">
-                    <!-- Rendered by JS -->
-                </div>
-                <div class="history-list" id="historyList"></div>
-            </div>
-
-            <!-- ===== VIEW: SAMPLES ===== -->
-            <div id="samplesView" class="view">
-                <div style="padding: 0 0 13px 0;">
-                    <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">📁 Work Samples</h3>
-                    <p style="color: #888; font-size: 11px;">Browse through our recent projects.</p>
-                </div>
-                <div id="samplesContainer" class="samples-grid"></div>
-            </div>
-
-            <!-- ===== VIEW: ACCOUNT ===== -->
-            <div id="accountView" class="view">
-                <div style="padding: 0 0 13px 0;">
-                    <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">💰 My Account</h3>
-                    <p style="color: #888; font-size: 11px;">Manage your balance, referrals, and withdrawals.</p>
-                </div>
-
-                <div class="account-section">
-                    <div class="account-toggle-row">
-                        <button class="toggle-btn active" id="accountTransactionsBtn"><i class="fa-solid fa-receipt"></i> Transactions</button>
-                        <button class="toggle-btn" id="accountWithdrawBtn"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
-                    </div>
-
-                    <!-- Transactions View -->
-                    <div class="account-view active" id="accountTransactionsView">
-                        <div class="referral-code-box" id="referralCodeBox">
-                            <div class="label">Your Referral Code</div>
-                            <div class="code" id="referralCodeDisplay">BZ-XXXXX</div>
-                            <button class="copy-btn" id="copyReferralBtn"><i class="fa-regular fa-copy"></i> Copy</button>
-                        </div>
-                        <div class="account-balance-box" id="accountBalanceBox">
-                            <div class="left">
-                                <div class="label">Account Balance</div>
-                                <div class="balance" id="accountBalanceDisplay">ZMW 0.00</div>
+                        <div class="hero-bg-decor"></div>
+                        <div class="hero-content">
+                            <div class="hero-title" id="heroTitle">
+                                WE ARE<br>
+                                <span id="heroTitleSpan">CREATIVE</span>
                             </div>
-                            <div class="balance-actions">
-                                <button class="action-btn" id="withdrawBtnFromBalance"><i class="fa-solid fa-arrow-up"></i> Withdraw</button>
-                                <button class="action-btn send-money-btn" id="sendMoneyBtn"><i class="fa-solid fa-paper-plane"></i> Send Money</button>
+                            <div class="hero-desc" id="heroDesc">
+                                We provide the best ideas to grow your business
+                            </div>
+                            <div class="hero-services">
+                                <div class="hero-services-title">OUR SERVICES</div>
+                                <ul class="service-list" id="ourServicesList">
+                                    <!-- Rendered by JS -->
+                                </ul>
                             </div>
                         </div>
-                        <div id="transactionMessages">
-                            <!-- Rendered by JS (only non-withdrawal transactions) -->
+                        <div class="cta-container">
+                            <div class="btn-get-started" id="heroCtaBtn">GET STARTED</div>
+                            <div class="contact-number">Call to find out more<br><strong id="heroPhone">+123 456 7890</strong></div>
                         </div>
                     </div>
 
-                    <!-- Withdrawals View -->
-                    <div class="account-view" id="accountWithdrawView">
-                        <div style="text-align:center; padding:20px 0;">
-                            <p style="color:#888; font-size:13px;">Click the "Withdraw" button below to request a withdrawal from your account.</p>
-                            <button class="withdraw-btn" id="withdrawBtnFromView" style="margin-top:12px; background:#f5b83d; border:none; padding:12px 30px; border-radius:30px; font-weight:700; font-size:14px; color:#1c2128; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
-                                <i class="fa-solid fa-arrow-up"></i> Withdraw Funds
-                            </button>
-                        </div>
-                        <!-- Withdrawals list -->
-                        <div id="withdrawalsListContainer">
+                    <!-- ===== PROMO CAROUSEL ===== -->
+                    <div class="promo-carousel-wrapper" id="promoCarouselWrapper">
+                        <div class="promo-carousel-track" id="promoCarouselTrack">
                             <!-- Rendered by JS -->
                         </div>
                     </div>
-                </div>
-            </div>
+                    <div class="promo-carousel-indicators" id="promoCarouselIndicators"></div>
 
-            <!-- ===== VIEW: PROFILE ===== -->
-            <div id="profileView" class="view">
-                <div style="padding: 0 0 13px 0;">
-                    <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">My Profile</h3>
-                    <p style="color: #888; font-size: 11px;">Your personal information.</p>
-                </div>
-                <div class="profile-card">
-                    <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
-                    <div class="profile-name" id="profileName">User</div>
-                    <div class="profile-role" id="profileRole">Customer</div>
-                    <div class="profile-field"><i class="fa-solid fa-user"></i><span class="label">Full Name</span><span class="value" id="profileFullName">User</span></div>
-                    <div class="profile-field"><i class="fa-solid fa-phone"></i><span class="label">Phone</span><span class="value" id="profilePhone">Not set</span></div>
-                    <div class="profile-field"><i class="fa-solid fa-envelope"></i><span class="label">Email</span><span class="value" id="profileEmail">No email</span></div>
-                    <div class="profile-field"><i class="fa-solid fa-calendar"></i><span class="label">Joined</span><span class="value" id="profileJoined">N/A</span></div>
-                    <div class="profile-about">
-                        <h4 style="font-size: 11px; font-weight: 600; color: #1c2128; margin-bottom: 4px;">About</h4>
-                        <p>Passionate about design and technology. Helping brands grow through innovation and strategic design.</p>
+                    <!-- ===== PROMOTIONS BANNER ===== -->
+                    <div id="promotionsBanner" class="promotions-banner">
+                        <!-- Rendered by JS -->
                     </div>
-                    <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+
+                    <!-- ===== CATEGORY BUTTONS ===== -->
+                    <div class="category-row" id="categoryRow">
+                        <button class="cat-btn active" data-cat="all"><i class="fa-solid fa-th-large"></i> All</button>
+                        <button class="cat-btn" data-cat="graphic"><i class="fa-regular fa-lightbulb"></i> Graphic</button>
+                        <button class="cat-btn" data-cat="dev"><i class="fa-solid fa-code"></i> Developer</button>
+                        <button class="cat-btn" data-cat="tech"><i class="fa-solid fa-gear"></i> Technical</button>
+                        <button class="cat-btn" data-cat="it"><i class="fa-solid fa-headset"></i> IT Support</button>
+                    </div>
+
+                    <!-- ===== SERVICE GRID ===== -->
+                    <div id="serviceSection">
+                        <div class="dynamic-header">
+                            <span class="dynamic-title" id="dynamicTitle">RECENT WORK</span>
+                            <div class="dynamic-actions">
+                                <span class="dynamic-back" id="dynamicBack" style="display:none;">← Back</span>
+                                <span class="dynamic-view-all" id="dynamicViewAll">View All</span>
+                            </div>
+                        </div>
+                        <div id="serviceGridContainer" class="service-grid"></div>
+                    </div>
+
                 </div>
+
+                <!-- ===== VIEW: ORDER FLOW ===== -->
+                <div id="orderFlowView" class="view">
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 0 0 10px 0;">
+                        <button id="backFromOrder" style="background: none; border: none; font-size: 16px; color: #1c2128; cursor: pointer; padding: 3px;">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <h3 style="font-weight: 700; font-size: 14px; color: #1c2128;">Customize Order</h3>
+                    </div>
+                    <div id="orderFlowContainer" class="order-flow-container">
+                        <!-- Dynamically rendered -->
+                    </div>
+                </div>
+
+                <!-- ===== VIEW: ORDERS ===== -->
+                <div id="ordersView" class="view">
+                    <div style="padding: 0 0 13px 0;">
+                        <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Your Orders</h3>
+                        <p style="color: #888; font-size: 11px;">Track your projects and payments.</p>
+                    </div>
+                    <div class="order-grid" id="ordersGrid"></div>
+                </div>
+
+                <!-- ===== VIEW: HISTORY ===== -->
+                <div id="historyView" class="view">
+                    <div style="padding: 0 0 13px 0;">
+                        <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;">Transaction History</h3>
+                        <p style="color: #888; font-size: 11px;">Tap a transaction to view more details.</p>
+                    </div>
+                    <div id="paymentReminderBanner" class="payment-reminder-banner">
+                        <!-- Rendered by JS -->
+                    </div>
+                    <div class="history-list" id="historyList"></div>
+                </div>
+
+                <!-- ===== VIEW: SAMPLES ===== -->
+                <div id="samplesView" class="view">
+                    <div style="padding: 0 0 13px 0;">
+                        <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;"><i class="fa-regular fa-folder-open" style="color: #f5b83d; margin-right: 6px;"></i> Work Samples</h3>
+                        <p style="color: #888; font-size: 11px;">Browse through our recent projects.</p>
+                    </div>
+                    <div id="samplesContainer" class="samples-grid"></div>
+                </div>
+
+                <!-- ===== VIEW: ACCOUNT ===== -->
+                <div id="accountView" class="view">
+                    <div style="padding: 0 0 13px 0;">
+                        <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;"><i class="fa-solid fa-wallet" style="color: #f5b83d; margin-right: 6px;"></i> My Account</h3>
+                        <p style="color: #888; font-size: 11px;">Manage your balance, referrals, and withdrawals.</p>
+                    </div>
+
+                    <div class="account-section">
+                        <div class="account-toggle-row">
+                            <button class="toggle-btn active" id="accountTransactionsBtn"><i class="fa-solid fa-receipt"></i> Transactions</button>
+                            <button class="toggle-btn" id="accountWithdrawBtn"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
+                        </div>
+
+                        <!-- Transactions View -->
+                        <div class="account-view active" id="accountTransactionsView">
+                            <div class="referral-code-box" id="referralCodeBox">
+                                <div class="label">Your Referral Code</div>
+                                <div class="code" id="referralCodeDisplay">BZ-XXXXX</div>
+                                <button class="copy-btn" id="copyReferralBtn"><i class="fa-regular fa-copy"></i> Copy</button>
+                            </div>
+                            <div class="account-balance-box" id="accountBalanceBox">
+                                <div class="top-row">
+                                    <div class="left">
+                                        <div class="label">Account Balance</div>
+                                        <div class="balance" id="accountBalanceDisplay">ZMW 0.00</div>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button class="action-btn" id="withdrawBtnFromBalance"><i class="fa-solid fa-arrow-up"></i> Withdraw</button>
+                                        <button class="action-btn" id="sendMoneyBtn"><i class="fa-solid fa-paper-plane"></i> Send Money</button>
+                                    </div>
+                                </div>
+                                <div class="pending-info" style="font-size:10px;color:#f5b83d;margin-top:2px;"></div>
+                            </div>
+                            <div id="transactionMessages">
+                                <!-- Rendered by JS (only non-withdrawal transactions) -->
+                            </div>
+                        </div>
+
+                        <!-- Withdrawals View -->
+                        <div class="account-view" id="accountWithdrawView">
+                            <div style="text-align:center; padding:20px 0;">
+                                <p style="color:#888; font-size:13px;">Click the "Withdraw" button below to request a withdrawal from your account.</p>
+                                <button class="withdraw-btn" id="withdrawBtnFromView" style="margin-top:12px; background:#f5b83d; border:none; padding:12px 30px; border-radius:30px; font-weight:700; font-size:14px; color:#1c2128; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
+                                    <i class="fa-solid fa-arrow-up"></i> Withdraw Funds
+                                </button>
+                            </div>
+                            <!-- Withdrawals list -->
+                            <div id="withdrawalsListContainer">
+                                <!-- Rendered by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== VIEW: PROFILE ===== -->
+                <div id="profileView" class="view">
+                    <div style="padding: 0 0 13px 0;">
+                        <h3 style="font-weight: 700; font-size: 18px; color: #1c2128;"><i class="fa-regular fa-user" style="color: #f5b83d; margin-right: 6px;"></i> My Profile</h3>
+                        <p style="color: #888; font-size: 11px;">Your personal information.</p>
+                    </div>
+                    <div class="profile-card">
+                        <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
+                        <div class="profile-name" id="profileName">User</div>
+                        <div class="profile-role" id="profileRole">Customer</div>
+                        <div class="profile-field"><i class="fa-solid fa-user"></i><span class="label">Full Name</span><span class="value" id="profileFullName">User</span></div>
+                        <div class="profile-field"><i class="fa-solid fa-phone"></i><span class="label">Phone</span><span class="value" id="profilePhone">Not set</span></div>
+                        <div class="profile-field"><i class="fa-solid fa-envelope"></i><span class="label">Email</span><span class="value" id="profileEmail">No email</span></div>
+                        <div class="profile-field"><i class="fa-solid fa-calendar"></i><span class="label">Joined</span><span class="value" id="profileJoined">N/A</span></div>
+                        <div class="profile-about">
+                            <h4 style="font-size: 11px; font-weight: 600; color: #1c2128; margin-bottom: 4px;">About</h4>
+                            <p>Passionate about design and technology. Helping brands grow through innovation and strategic design.</p>
+                        </div>
+                        <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ===== BOTTOM NAV ===== -->
+            <div class="bottom-nav">
+                <button class="nav-item active" data-view="homeView"><i class="fa-solid fa-house"></i><span>Home</span></button>
+                <button class="nav-item" data-view="ordersView"><i class="fa-solid fa-bag-shopping"></i><span>Orders</span></button>
+                <button class="nav-item" data-view="historyView"><i class="fa-solid fa-clock"></i><span>History</span></button>
+                <button class="nav-item" data-view="samplesView"><i class="fa-solid fa-images"></i><span>Samples</span></button>
+                <button class="nav-item" data-view="accountView"><i class="fa-solid fa-wallet"></i><span>Account</span></button>
+                <button class="nav-item" data-view="profileView"><i class="fa-regular fa-user"></i><span>Profile</span></button>
             </div>
 
         </div>
-
-        <!-- ===== BOTTOM NAV ===== -->
-        <div class="bottom-nav">
-            <button class="nav-item active" data-view="homeView"><i class="fa-solid fa-house"></i><span>Home</span></button>
-            <button class="nav-item" data-view="ordersView"><i class="fa-solid fa-bag-shopping"></i><span>Orders</span></button>
-            <button class="nav-item" data-view="historyView"><i class="fa-solid fa-clock"></i><span>History</span></button>
-            <button class="nav-item" data-view="samplesView"><i class="fa-solid fa-images"></i><span>Samples</span></button>
-            <button class="nav-item" data-view="accountView"><i class="fa-solid fa-wallet"></i><span>Account</span></button>
-            <button class="nav-item" data-view="profileView"><i class="fa-regular fa-user"></i><span>Profile</span></button>
-        </div>
-
     </div>
 
     <!-- ===== PAYMENT MODAL ===== -->
     <div class="payment-modal-overlay" id="paymentModal">
         <div class="payment-modal">
             <button class="close-btn" id="paymentCloseBtn"><i class="fa-solid fa-times"></i></button>
-            <h3>💳 Payment Required</h3>
+            <h3><i class="fa-solid fa-credit-card" style="color:#f5b83d;margin-right:6px;"></i> Payment Required</h3>
             <p class="sub">To begin your project, you must pay 50% upfront.</p>
 
             <div class="payment-details">
@@ -2682,17 +2671,21 @@
                 </div>
             </div>
 
-            <!-- ===== WALLET PAYMENT SECTION ===== -->
+            <!-- Wallet Payment Section -->
             <div class="wallet-payment-section" id="walletPaymentSection">
-                <div class="wallet-info">
-                    <span class="label">💼 Buffer Zone Wallet</span>
-                    <span class="balance" id="walletBalanceDisplay">ZMW 0.00</span>
+                <div class="wallet-header">
+                    <i class="fa-solid fa-wallet"></i> Pay with Buffer Zone Wallet
                 </div>
-                <button class="btn-wallet-pay" id="payWithWalletBtn" disabled>
-                    <i class="fa-solid fa-wallet"></i> Pay with Wallet
+                <div class="wallet-balance-display" id="walletBalanceDisplay">
+                    Wallet Balance: <span id="walletBalanceText">ZMW 0.00</span>
+                </div>
+                <div class="wallet-note" id="walletNote">Select this option to pay directly from your wallet (no screenshot needed).</div>
+                <button class="btn-primary" id="payWithWalletBtn" style="margin-top:8px; background:#f5b83d; color:#1c2128; font-weight:700;">
+                    <i class="fa-solid fa-check-circle"></i> Pay with Wallet
                 </button>
-                <p style="font-size:9px; color:#888; margin-top:3px;">Pay using your wallet balance (no screenshot needed).</p>
             </div>
+
+            <div style="text-align:center; font-size:11px; color:#888; margin:6px 0;">— OR —</div>
 
             <!-- ===== TOGGLE: PROMO CODE / REFERRAL CODE ===== -->
             <div class="toggle-row">
@@ -2723,7 +2716,7 @@
                 <div class="row"><span class="label" style="font-weight:700;">50% Deposit</span><span class="val" style="font-weight:700;color:#f5b83d;" id="finalDepositVal">ZMW 0.00</span></div>
             </div>
 
-            <div style="margin-bottom:10px;" id="uploadSection">
+            <div id="uploadSection" style="margin-bottom:10px;">
                 <label style="font-weight:600; font-size:10px; color:#1c2128; display:block; margin-bottom:3px;">Upload transaction screenshot</label>
                 <div class="upload-area" id="uploadArea">
                     <i class="fa-regular fa-image"></i>
@@ -2743,10 +2736,37 @@
         </div>
     </div>
 
+    <!-- ===== SEND MONEY MODAL ===== -->
+    <div class="send-money-modal-overlay" id="sendMoneyModal">
+        <div class="send-money-modal">
+            <button class="close-btn" id="sendMoneyCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3><i class="fa-solid fa-paper-plane" style="color:#f5b83d;margin-right:6px;"></i> Send Money</h3>
+            <p class="sub">Send funds to another user using their referral code.</p>
+
+            <div class="send-money-transactions" id="sendMoneyTxList">
+                <!-- Rendered by JS -->
+            </div>
+
+            <div class="send-money-form">
+                <div class="form-group">
+                    <label>Recipient Referral Code</label>
+                    <input type="text" id="sendRecipientCode" placeholder="Enter referral code (e.g. BZ-XXXXX)" />
+                    <div id="sendRecipientName" class="found-name"></div>
+                </div>
+                <div class="form-group">
+                    <label>Amount (ZMW)</label>
+                    <input type="number" id="sendAmountInput" placeholder="0.00" step="0.01" />
+                    <div class="available-balance" id="sendAvailableBalance">Available: ZMW <strong id="sendAvailBal">0.00</strong></div>
+                </div>
+                <button class="send-btn" id="sendMoneyConfirmBtn"><i class="fa-solid fa-paper-plane"></i> Send Money</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== WITHDRAW MODAL ===== -->
     <div class="withdraw-modal-overlay" id="withdrawModal">
         <div class="withdraw-modal">
-            <h3>💸 Withdraw Funds</h3>
+            <h3><i class="fa-solid fa-arrow-up" style="color:#f5b83d;margin-right:6px;"></i> Withdraw Funds</h3>
             <p class="sub">Enter the amount you'd like to withdraw from your account.</p>
             <div class="form-group">
                 <label>Amount (ZMW) — max: <span id="withdrawMaxLabel">0.00</span></label>
@@ -2764,40 +2784,6 @@
             <h3>Withdrawal Submitted</h3>
             <p>Your withdrawal request has been submitted and will be processed within 24 hours.</p>
             <button class="btn-ok" id="withdrawSuccessOkBtn">OK</button>
-        </div>
-    </div>
-
-    <!-- ===== SEND MONEY MODAL ===== -->
-    <div class="send-money-overlay" id="sendMoneyModal">
-        <div class="send-money-modal">
-            <div class="modal-header">
-                <h3>💸 Send Money</h3>
-                <button class="close-btn" id="sendMoneyCloseBtn"><i class="fa-solid fa-times"></i></button>
-            </div>
-
-            <div class="section-title">📋 Recent Transfers</div>
-            <div class="transfer-list" id="transferList">
-                <!-- Rendered by JS -->
-            </div>
-
-            <div class="section-title">🔍 Find Recipient by Referral Code</div>
-            <div class="ref-search">
-                <input type="text" id="sendRecipientCode" placeholder="Enter referral code" />
-                <button id="searchRecipientBtn">Search</button>
-            </div>
-            <div class="recipient-info" id="recipientInfo">
-                <strong>Recipient:</strong> <span id="recipientName">—</span>
-            </div>
-
-            <div class="section-title">💰 Amount</div>
-            <div class="amount-section">
-                <input type="number" id="sendAmountInput" placeholder="Enter amount (ZMW)" step="0.01" />
-                <div class="balance-info">
-                    Available balance: <span class="avail" id="sendAvailableBalance">ZMW 0.00</span>
-                </div>
-            </div>
-
-            <button class="btn-send" id="sendMoneyConfirmBtn" disabled>Send Money</button>
         </div>
     </div>
 
@@ -2869,17 +2855,13 @@
         let finalDiscountedPrice = 0;
         let orderTotalBeforeDiscount = 0;
         let appliedReferral = null;
+        let walletPaymentSelected = false;
 
         // Carousel state
         let carouselItems = [];
         let currentCarouselIndex = 0;
         let autoScrollTimer = null;
         let isUserInteracting = false;
-
-        // Send money state
-        let sendRecipientUid = null;
-        let sendRecipientName = '';
-        let sendAmount = 0;
 
         // =================================================================
         // DOM REFS
@@ -2944,6 +2926,12 @@
         const fileName = document.getElementById('fileName');
         const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
         const cloudinaryScreenshotUrlInput = document.getElementById('cloudinaryScreenshotUrl');
+        const uploadSection = document.getElementById('uploadSection');
+        const walletPaymentSection = document.getElementById('walletPaymentSection');
+        const walletBalanceDisplay = document.getElementById('walletBalanceDisplay');
+        const walletBalanceText = document.getElementById('walletBalanceText');
+        const walletNote = document.getElementById('walletNote');
+        const payWithWalletBtn = document.getElementById('payWithWalletBtn');
 
         const couponInput = document.getElementById('couponInput');
         const applyCouponBtn = document.getElementById('applyCouponBtn');
@@ -2982,19 +2970,12 @@
         // ===== Send Money Modal =====
         const sendMoneyModal = document.getElementById('sendMoneyModal');
         const sendMoneyCloseBtn = document.getElementById('sendMoneyCloseBtn');
-        const transferList = document.getElementById('transferList');
+        const sendMoneyTxList = document.getElementById('sendMoneyTxList');
         const sendRecipientCode = document.getElementById('sendRecipientCode');
-        const searchRecipientBtn = document.getElementById('searchRecipientBtn');
-        const recipientInfo = document.getElementById('recipientInfo');
-        const recipientName = document.getElementById('recipientName');
+        const sendRecipientName = document.getElementById('sendRecipientName');
         const sendAmountInput = document.getElementById('sendAmountInput');
-        const sendAvailableBalance = document.getElementById('sendAvailableBalance');
+        const sendAvailBal = document.getElementById('sendAvailBal');
         const sendMoneyConfirmBtn = document.getElementById('sendMoneyConfirmBtn');
-
-        // ===== Wallet Payment =====
-        const walletPaymentSection = document.getElementById('walletPaymentSection');
-        const walletBalanceDisplay = document.getElementById('walletBalanceDisplay');
-        const payWithWalletBtn = document.getElementById('payWithWalletBtn');
 
         // ===== Toggle buttons in payment modal =====
         const togglePromoBtn = document.getElementById('togglePromoBtn');
@@ -3225,7 +3206,6 @@
             renderAccountAndReferral();
             renderTransactionMessages();
             renderWithdrawalsList();
-            renderSendMoneyTransfers();
 
             if (allData.policy) {
                 const p = allData.policy;
@@ -3239,6 +3219,12 @@
                 paymentName.textContent = p.name || 'Airtel Mobile Number';
                 paymentAccountName.textContent = p.accountName || 'Jubel Mobela';
             }
+
+            // Update wallet balance display in payment modal
+            updateWalletBalanceDisplay();
+
+            // Send money transaction list
+            renderSendMoneyTransactions();
         }
 
         // =================================================================
@@ -3252,17 +3238,15 @@
 
             carouselItems = entries;
 
+            const wrapper = promoCarouselWrapper;
+
             if (entries.length === 0) {
-                promoCarouselTrack.innerHTML = `
-                    <div style="flex:0 0 100%; max-width:100%; text-align:center; color:#888; font-size:13px; padding:20px; background:#f8f9fc; border-radius:24px; height:100%; display:flex; align-items:center; justify-content:center;">
-                        <div>
-                            <i class="fa-regular fa-images" style="font-size:32px; color:#ddd; display:block; margin-bottom:8px;"></i>
-                            No promo flyers yet
-                        </div>
-                    </div>
-                `;
+                wrapper.classList.add('collapsed');
+                promoCarouselTrack.innerHTML = '';
                 promoCarouselIndicators.innerHTML = '';
                 return;
+            } else {
+                wrapper.classList.remove('collapsed');
             }
 
             // Create duplicated slides for infinite illusion: [last, first, second, ..., last, first]
@@ -3720,7 +3704,8 @@
                     title: 'Payment Complete',
                     message: `Order ${orderData.id} is now fully paid. Thank you!`,
                     timestamp: Date.now(),
-                    read: false
+                    read: false,
+                    userId: currentUserId
                 });
 
                 showToast(`✅ Order ${orderData.id} marked as fully paid!`, 'success');
@@ -3921,21 +3906,16 @@
             const availableBalance = Math.max(0, balance - pendingTotal);
 
             accountBalanceDisplay.textContent = `ZMW ${balance.toFixed(2)}`;
-            // Show pending info as a subtitle or additional info
-            const balanceBox = document.getElementById('accountBalanceBox');
-            let pendingInfo = balanceBox.querySelector('.pending-info');
-            if (!pendingInfo) {
-                pendingInfo = document.createElement('div');
-                pendingInfo.className = 'pending-info';
-                pendingInfo.style.cssText = 'font-size:9px;color:#f5b83d;margin-top:2px;';
-                balanceBox.querySelector('.left').appendChild(pendingInfo);
-            }
-            if (pendingTotal > 0) {
-                pendingInfo.textContent = `Pending: ZMW ${pendingTotal.toFixed(2)} · Available: ZMW ${availableBalance.toFixed(2)}`;
-                pendingInfo.style.display = 'block';
-            } else {
-                pendingInfo.textContent = `Available: ZMW ${availableBalance.toFixed(2)}`;
-                pendingInfo.style.display = 'block';
+            // Show pending info
+            const pendingInfo = document.querySelector('.pending-info');
+            if (pendingInfo) {
+                if (pendingTotal > 0) {
+                    pendingInfo.textContent = `Pending: ZMW ${pendingTotal.toFixed(2)} · Available: ZMW ${availableBalance.toFixed(2)}`;
+                    pendingInfo.style.display = 'block';
+                } else {
+                    pendingInfo.textContent = `Available: ZMW ${availableBalance.toFixed(2)}`;
+                    pendingInfo.style.display = 'block';
+                }
             }
 
             // Store available balance for withdrawal modal
@@ -3945,7 +3925,7 @@
             withdrawBtnFromBalance.addEventListener('click', openWithdrawModal);
             withdrawBtnFromView.addEventListener('click', openWithdrawModal);
 
-            // Send Money button
+            // Send Money
             sendMoneyBtn.addEventListener('click', openSendMoneyModal);
         }
 
@@ -4079,37 +4059,6 @@
                         <div>
                             <span class="status-badge ${statusClass}">${statusDisplay}</span>
                         </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // =================================================================
-        // SEND MONEY TRANSFERS (show recent sent/received)
-        // =================================================================
-
-        function renderSendMoneyTransfers() {
-            if (!transferList) return;
-            const transactions = allData.transactions || {};
-            const entries = Object.entries(transactions)
-                .filter(([key, t]) => t.userId === currentUserId && (t.type === 'Sent Money' || t.type === 'Received Money'))
-                .sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0))
-                .slice(0, 10);
-
-            if (entries.length === 0) {
-                transferList.innerHTML = `<div style="text-align:center;padding:10px;color:#888;">No transfers yet.</div>`;
-                return;
-            }
-
-            transferList.innerHTML = entries.map(([key, t]) => {
-                const dir = t.type === 'Sent Money' ? 'sent' : 'received';
-                const dirClass = dir === 'sent' ? 'sent' : 'received';
-                const sign = dir === 'sent' ? '-' : '+';
-                return `
-                    <div class="item">
-                        <span class="dir ${dirClass}">${dir === 'sent' ? '⬆ Sent' : '⬇ Received'}</span>
-                        <span>${t.userName || 'Unknown'}</span>
-                        <span>${sign}ZMW ${(t.amount || 0).toFixed(2)}</span>
                     </div>
                 `;
             }).join('');
@@ -4325,9 +4274,10 @@
                 referralCodeInput.value = '';
                 referralMsg.textContent = '';
                 referralMsg.className = 'coupon-msg';
-                // Reset wallet payment UI
-                const walletBalance = getAvailableBalance();
-                updateWalletPaymentUI(amount50, walletBalance);
+                walletPaymentSelected = false;
+                updateWalletBalanceDisplay();
+                payWithWalletBtn.disabled = false;
+                uploadSection.style.display = 'block';
                 const notes = document.getElementById('orderNotes').value.trim();
                 const customizationParts = [];
                 if (selectedSize) customizationParts.push(`Size: ${selectedSize}`);
@@ -4421,10 +4371,6 @@
                 couponInput.disabled = true;
 
                 paymentModal.dataset.appliedPromo = JSON.stringify(appliedPromo);
-
-                // Update wallet payment UI with new deposit amount
-                const walletBalance = getAvailableBalance();
-                updateWalletPaymentUI(depositAmount, walletBalance);
             }).catch((error) => {
                 console.error('Error checking used coupons:', error);
                 couponMsg.textContent = 'Error validating coupon.';
@@ -4530,10 +4476,6 @@
                 applyReferralBtn.disabled = true;
 
                 paymentModal.dataset.appliedReferral = JSON.stringify(appliedReferral);
-
-                // Update wallet payment UI with new deposit amount
-                const walletBalance = getAvailableBalance();
-                updateWalletPaymentUI(depositAmount, walletBalance);
             }).catch((error) => {
                 console.error('Error checking referral:', error);
                 referralMsg.textContent = 'Error validating referral.';
@@ -4542,54 +4484,41 @@
         }
 
         // =================================================================
-        // GET AVAILABLE BALANCE (excluding pending withdrawals)
+        // CONFIRM PAYMENT
         // =================================================================
 
-        function getAvailableBalance() {
-            const accounts = allData.customerAccounts || {};
-            const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
-            const pendingTotal = calculatePendingWithdrawalTotal();
-            return Math.max(0, balance - pendingTotal);
-        }
-
-        // =================================================================
-        // WALLET PAYMENT UI UPDATE
-        // =================================================================
-
-        function updateWalletPaymentUI(depositAmount, walletBalance) {
-            const balanceEl = walletBalanceDisplay;
-            const payBtn = payWithWalletBtn;
-
-            balanceEl.textContent = `ZMW ${walletBalance.toFixed(2)}`;
-
-            if (walletBalance >= depositAmount) {
-                balanceEl.className = 'balance positive';
-                payBtn.disabled = false;
-                payBtn.style.background = '#1c2128';
-                payBtn.style.color = 'white';
-                payBtn.innerHTML = `<i class="fa-solid fa-wallet"></i> Pay with Wallet`;
-            } else {
-                balanceEl.className = 'balance negative';
-                payBtn.disabled = true;
-                payBtn.style.background = '#ddd';
-                payBtn.style.color = '#888';
-                payBtn.innerHTML = `<i class="fa-solid fa-wallet"></i> Insufficient Balance`;
-            }
-        }
-
-        // =================================================================
-        // CONFIRM PAYMENT (modified to support wallet payment)
-        // =================================================================
-
-        function confirmPayment(useWallet = false) {
-            if (!useWallet) {
-                // Standard payment with screenshot
-                const screenshotUrl = cloudinaryScreenshotUrlInput.value;
-                if (!screenshotUrl) {
-                    showToast('Please upload a transaction screenshot before confirming.', 'error');
+        function confirmPayment() {
+            if (walletPaymentSelected) {
+                // Pay with wallet
+                const dataStr = paymentModal.dataset.orderData;
+                if (!dataStr) {
+                    showToast('Order data missing.', 'error');
                     return;
                 }
+                const data = JSON.parse(dataStr);
+                const depositAmount = parseFloat(paymentAmount.textContent.replace('ZMW ', ''));
+                const accounts = allData.customerAccounts || {};
+                const userAccount = accounts[currentUserId] || { balance: 0 };
+                const balance = userAccount.balance || 0;
+                if (balance < depositAmount) {
+                    showToast('Insufficient wallet balance.', 'error');
+                    return;
+                }
+                // Deduct from wallet
+                const newBalance = balance - depositAmount;
+                const accRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
+                set(accRef, { balance: newBalance });
+
+                // Create order and transaction
+                createOrderAndTransactions(data, depositAmount, true);
+                return;
+            }
+
+            // Regular payment with screenshot
+            const screenshotUrl = cloudinaryScreenshotUrlInput.value;
+            if (!screenshotUrl) {
+                showToast('Please upload a transaction screenshot before confirming.', 'error');
+                return;
             }
 
             const dataStr = paymentModal.dataset.orderData;
@@ -4599,6 +4528,11 @@
             }
 
             const data = JSON.parse(dataStr);
+            const depositAmount = parseFloat(paymentAmount.textContent.replace('ZMW ', ''));
+            createOrderAndTransactions(data, depositAmount, false, screenshotUrl);
+        }
+
+        function createOrderAndTransactions(data, depositAmount, isWallet, screenshotUrl = '') {
             const orderId = 'ORD-' + String(Object.keys(allData.orders || {}).length + 1).padStart(3, '0');
             const customerName = currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
                 currentUser.email || 'Customer';
@@ -4619,23 +4553,6 @@
                 finalAmount = data.total * (1 - discountAppliedVal / 100);
             }
 
-            const depositAmount = finalAmount * 0.5;
-
-            // If paying with wallet, deduct from balance
-            if (useWallet) {
-                const accounts = allData.customerAccounts || {};
-                const userAccount = accounts[currentUserId] || { balance: 0 };
-                const currentBalance = userAccount.balance || 0;
-                const newBalance = currentBalance - depositAmount;
-                if (newBalance < 0) {
-                    showToast('Insufficient wallet balance.', 'error');
-                    return;
-                }
-                // Update balance
-                const accRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
-                set(accRef, { balance: newBalance });
-            }
-
             const orderData = {
                 id: orderId,
                 service: data.service,
@@ -4646,13 +4563,14 @@
                 customization: data.customizationString ||
                     `Size: ${data.size || 'N/A'}, Orientation: ${data.orientation || 'N/A'}, Format: ${data.format || 'N/A'}`,
                 date: new Date().toLocaleDateString(),
-                paymentProof: useWallet ? 'Wallet Payment' : cloudinaryScreenshotUrlInput.value,
+                paymentProof: isWallet ? 'Wallet' : (screenshotUrl || 'N/A'),
                 userId: currentUserId,
                 discountApplied: discountAppliedVal,
                 promoCode: promoCodeUsed,
                 notes: data.notes || '',
                 remainingPaid: false,
-                createdAt: Date.now()
+                createdAt: Date.now(),
+                paidViaWallet: isWallet
             };
             const orderRef = push(ref(db, 'bufferzoneAppData/orders'));
             set(orderRef, orderData);
@@ -4706,13 +4624,12 @@
             const txData = {
                 type: 'Payment for ' + data.service,
                 amount: depositAmount,
-                method: useWallet ? 'Wallet Payment' : 'Airtel Money',
+                method: isWallet ? 'Buffer Zone Wallet' : 'Airtel Money',
                 status: 'pending',
                 date: new Date().toLocaleString(),
                 ref: orderId,
-                detail: '50% down payment for ' + data.service + (discountAppliedVal > 0 ? ` (${discountAppliedVal}% off)` :
-                    '') + (data.notes ? ` · Notes: ${data.notes}` : ''),
-                screenshot: useWallet ? 'Wallet Payment' : cloudinaryScreenshotUrlInput.value,
+                detail: `${isWallet ? 'Wallet' : '50% down payment'} for ${data.service}${discountAppliedVal > 0 ? ` (${discountAppliedVal}% off)` : ''}${data.notes ? ` · Notes: ${data.notes}` : ''}`,
+                screenshot: isWallet ? 'Wallet' : (screenshotUrl || 'N/A'),
                 userId: currentUserId,
                 itemId: data.serviceId || 'N/A',
                 itemTitle: data.service,
@@ -4733,7 +4650,7 @@
                 userId: currentUserId
             });
 
-            showToast('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.',
+            showToast(`✅ Payment confirmed! Project "${data.service}" has been initiated. We will contact you shortly.`,
                 'success');
             paymentModal.classList.remove('open');
             cloudinaryScreenshotUrlInput.value = '';
@@ -4745,6 +4662,265 @@
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
             document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
             renderServices('all');
+        }
+
+        // =================================================================
+        // WALLET PAYMENT HANDLING
+        // =================================================================
+
+        function updateWalletBalanceDisplay() {
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+
+            // Get the deposit amount from payment modal
+            let depositAmount = 0;
+            const amountText = paymentAmount.textContent;
+            if (amountText) {
+                depositAmount = parseFloat(amountText.replace('ZMW ', '')) || 0;
+            }
+
+            walletBalanceText.textContent = `ZMW ${balance.toFixed(2)}`;
+            const balanceSpan = walletBalanceText;
+            if (balance >= depositAmount && depositAmount > 0) {
+                balanceSpan.style.color = '#00a86b';
+                balanceSpan.className = 'sufficient';
+                walletNote.textContent = 'Sufficient balance. You can pay with your wallet.';
+                payWithWalletBtn.disabled = false;
+                payWithWalletBtn.style.opacity = '1';
+                payWithWalletBtn.style.cursor = 'pointer';
+            } else {
+                balanceSpan.style.color = '#dc2626';
+                balanceSpan.className = 'insufficient';
+                if (depositAmount > 0) {
+                    walletNote.textContent = `Insufficient balance. You need ZMW ${(depositAmount - balance).toFixed(2)} more.`;
+                } else {
+                    walletNote.textContent = 'Please confirm order to see required amount.';
+                }
+                payWithWalletBtn.disabled = true;
+                payWithWalletBtn.style.opacity = '0.5';
+                payWithWalletBtn.style.cursor = 'not-allowed';
+            }
+        }
+
+        function toggleWalletPayment() {
+            walletPaymentSelected = !walletPaymentSelected;
+            if (walletPaymentSelected) {
+                uploadSection.style.display = 'none';
+                payWithWalletBtn.textContent = 'Cancel Wallet Payment';
+                payWithWalletBtn.style.background = '#dc2626';
+                payWithWalletBtn.style.color = 'white';
+                confirmPaymentBtn.style.display = 'none';
+            } else {
+                uploadSection.style.display = 'block';
+                payWithWalletBtn.textContent = 'Pay with Wallet';
+                payWithWalletBtn.style.background = '#f5b83d';
+                payWithWalletBtn.style.color = '#1c2128';
+                confirmPaymentBtn.style.display = 'block';
+            }
+        }
+
+        // =================================================================
+        // SEND MONEY
+        // =================================================================
+
+        function openSendMoneyModal() {
+            sendMoneyModal.classList.add('open');
+            renderSendMoneyTransactions();
+            updateSendMoneyAvailableBalance();
+            sendRecipientCode.value = '';
+            sendRecipientName.innerHTML = '';
+            sendAmountInput.value = '';
+            sendMoneyConfirmBtn.disabled = false;
+        }
+
+        function closeSendMoneyModal() {
+            sendMoneyModal.classList.remove('open');
+        }
+
+        function renderSendMoneyTransactions() {
+            const container = sendMoneyTxList;
+            const transactions = allData.transactions || {};
+            const entries = Object.entries(transactions)
+                .filter(([key, t]) => t.userId === currentUserId && (t.type?.toLowerCase().includes('sent') || t.type
+                    ?.toLowerCase().includes('received')))
+                .sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
+
+            if (entries.length === 0) {
+                container.innerHTML = `<div style="text-align:center;padding:10px;color:#888;font-size:12px;">No sent or received transactions yet.</div>`;
+                return;
+            }
+
+            container.innerHTML = entries.slice(0, 10).map(([key, t]) => {
+                const isSent = t.type?.toLowerCase().includes('sent');
+                const typeClass = isSent ? 'sent' : 'received';
+                const sign = isSent ? '-' : '+';
+                const color = isSent ? '#dc2626' : '#00a86b';
+                return `
+                    <div class="tx-item">
+                        <span class="tx-type ${typeClass}">${escapeHtml(t.type || 'Transaction')}</span>
+                        <span class="tx-amount" style="color:${color};">${sign}ZMW ${(t.amount || 0).toFixed(2)}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateSendMoneyAvailableBalance() {
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+            const pendingTotal = calculatePendingWithdrawalTotal();
+            const availableBalance = Math.max(0, balance - pendingTotal);
+            sendAvailBal.textContent = availableBalance.toFixed(2);
+        }
+
+        // Search recipient by referral code
+        function searchRecipient() {
+            const code = sendRecipientCode.value.trim().toUpperCase();
+            if (!code) {
+                sendRecipientName.innerHTML = '';
+                return;
+            }
+
+            const usersRef = ref(db, 'users');
+            get(usersRef).then((snapshot) => {
+                const users = snapshot.val() || {};
+                let found = null;
+                let foundUid = null;
+                for (const [uid, u] of Object.entries(users)) {
+                    if (u.referralCode === code && uid !== currentUserId) {
+                        found = u;
+                        foundUid = uid;
+                        break;
+                    }
+                }
+                if (found) {
+                    const fullName = `${found.firstName || ''} ${found.lastName || ''}`.trim() || 'User';
+                    sendRecipientName.innerHTML = `<i class="fa-solid fa-user-check" style="color:#00a86b;"></i> Send money to: <strong>${escapeHtml(fullName)}</strong>`;
+                    sendRecipientName.dataset.recipientUid = foundUid;
+                    sendRecipientName.dataset.recipientName = fullName;
+                } else {
+                    sendRecipientName.innerHTML = `<i class="fa-solid fa-user-slash" style="color:#dc2626;"></i> No user found with that referral code.`;
+                    sendRecipientName.dataset.recipientUid = '';
+                }
+            }).catch((error) => {
+                console.error('Error searching recipient:', error);
+                sendRecipientName.innerHTML = `<i class="fa-solid fa-exclamation-circle" style="color:#dc2626;"></i> Error searching. Please try again.`;
+            });
+        }
+
+        function sendMoney() {
+            const recipientCode = sendRecipientCode.value.trim().toUpperCase();
+            if (!recipientCode) {
+                showToast('Please enter a recipient referral code.', 'error');
+                return;
+            }
+            const recipientUid = sendRecipientName.dataset.recipientUid;
+            const recipientName = sendRecipientName.dataset.recipientName || 'User';
+            if (!recipientUid) {
+                showToast('Recipient not found. Please enter a valid referral code.', 'error');
+                return;
+            }
+            const amount = parseFloat(sendAmountInput.value);
+            if (!amount || amount <= 0) {
+                showToast('Please enter a valid amount.', 'error');
+                return;
+            }
+
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+            const pendingTotal = calculatePendingWithdrawalTotal();
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            if (amount > availableBalance) {
+                showToast(`Insufficient available balance. You have ZMW ${availableBalance.toFixed(2)} available.`, 'error');
+                return;
+            }
+
+            // Show confirmation popup
+            if (!confirm(`You are sending ZMW ${amount.toFixed(2)} to ${recipientName}. Please confirm.`)) {
+                return;
+            }
+
+            // Deduct from sender
+            const senderNewBalance = balance - amount;
+            const senderAccRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
+            set(senderAccRef, { balance: senderNewBalance });
+
+            // Add to recipient
+            const recipientAccRef = ref(db, `bufferzoneAppData/customerAccounts/${recipientUid}`);
+            get(recipientAccRef).then((snapshot) => {
+                const recipientBalance = snapshot.val()?.balance || 0;
+                set(recipientAccRef, { balance: recipientBalance + amount });
+            });
+
+            // Record sender transaction
+            const senderTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
+            const senderTxData = {
+                type: 'Sent Money',
+                amount: amount,
+                method: 'Buffer Zone Wallet',
+                status: 'completed',
+                date: new Date().toLocaleString(),
+                ref: 'SEND-' + Date.now(),
+                detail: `Sent ZMW ${amount.toFixed(2)} to ${recipientName}`,
+                screenshot: 'N/A',
+                userId: currentUserId,
+                itemId: 'send-' + Date.now(),
+                itemTitle: 'Send Money',
+                itemType: 'send',
+                userName: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
+                    currentUser.email || 'Customer',
+                userEmail: currentUser.email || 'N/A',
+                userPhone: currentUserData?.phone || 'N/A'
+            };
+            set(senderTxRef, senderTxData);
+
+            // Record recipient transaction
+            const recipientTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
+            const recipientTxData = {
+                type: 'Received Money',
+                amount: amount,
+                method: 'Buffer Zone Wallet',
+                status: 'completed',
+                date: new Date().toLocaleString(),
+                ref: 'RECV-' + Date.now(),
+                detail: `Received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}`,
+                screenshot: 'N/A',
+                userId: recipientUid,
+                itemId: 'recv-' + Date.now(),
+                itemTitle: 'Receive Money',
+                itemType: 'receive',
+                userName: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
+                    currentUser.email || 'Customer',
+                userEmail: currentUser.email || 'N/A',
+                userPhone: currentUserData?.phone || 'N/A'
+            };
+            set(recipientTxRef, recipientTxData);
+
+            // Notifications for both users
+            const senderNotifRef = push(ref(db, 'bufferzoneAppData/notifications'));
+            set(senderNotifRef, {
+                title: 'Money Sent',
+                message: `You sent ZMW ${amount.toFixed(2)} to ${recipientName}.`,
+                timestamp: Date.now(),
+                read: false,
+                userId: currentUserId
+            });
+
+            const recipientNotifRef = push(ref(db, 'bufferzoneAppData/notifications'));
+            set(recipientNotifRef, {
+                title: 'Money Received',
+                message: `You received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}.`,
+                timestamp: Date.now(),
+                read: false,
+                userId: recipientUid
+            });
+
+            showToast(`✅ ZMW ${amount.toFixed(2)} sent to ${recipientName}!`, 'success');
+            closeSendMoneyModal();
+            renderAll();
         }
 
         // =================================================================
@@ -4831,199 +5007,6 @@
                 renderAll();
                 showToast('✅ Withdrawal request submitted! Admin will review it.', 'success');
             });
-        }
-
-        // =================================================================
-        // SEND MONEY
-        // =================================================================
-
-        function openSendMoneyModal() {
-            sendMoneyModal.classList.add('open');
-            sendRecipientCode.value = '';
-            recipientInfo.classList.remove('show');
-            recipientName.textContent = '—';
-            sendAmountInput.value = '';
-            sendMoneyConfirmBtn.disabled = true;
-            sendRecipientUid = null;
-            sendRecipientName = '';
-            sendAmount = 0;
-
-            // Update available balance display
-            const availBalance = getAvailableBalance();
-            sendAvailableBalance.textContent = `ZMW ${availBalance.toFixed(2)}`;
-            sendAvailableBalance.className = 'avail';
-
-            // Render recent transfers
-            renderSendMoneyTransfers();
-        }
-
-        function closeSendMoneyModal() {
-            sendMoneyModal.classList.remove('open');
-        }
-
-        function searchRecipient() {
-            const code = sendRecipientCode.value.trim().toUpperCase();
-            if (!code) {
-                showToast('Please enter a referral code.', 'error');
-                return;
-            }
-
-            const usersRef = ref(db, 'users');
-            get(usersRef).then((snapshot) => {
-                const users = snapshot.val() || {};
-                let foundUid = null;
-                let foundUser = null;
-                for (const [uid, u] of Object.entries(users)) {
-                    if (u.referralCode === code) {
-                        foundUid = uid;
-                        foundUser = u;
-                        break;
-                    }
-                }
-
-                if (!foundUid) {
-                    recipientInfo.classList.remove('show');
-                    recipientName.textContent = 'Not found';
-                    showToast('No user found with that referral code.', 'error');
-                    return;
-                }
-
-                if (foundUid === currentUserId) {
-                    recipientInfo.classList.remove('show');
-                    recipientName.textContent = 'Cannot send to yourself';
-                    showToast('You cannot send money to yourself.', 'error');
-                    return;
-                }
-
-                // Display recipient name
-                const fullName = `${foundUser.firstName || ''} ${foundUser.lastName || ''}`.trim() || foundUser.email || 'User';
-                recipientName.textContent = fullName;
-                recipientInfo.classList.add('show');
-                sendRecipientUid = foundUid;
-                sendRecipientName = fullName;
-                showToast(`Recipient found: ${fullName}`, 'success');
-                // Enable send button only if amount is valid
-                validateSendAmount();
-            }).catch((error) => {
-                console.error('Error searching recipient:', error);
-                showToast('Error searching recipient.', 'error');
-            });
-        }
-
-        function validateSendAmount() {
-            const amount = parseFloat(sendAmountInput.value);
-            const availBalance = getAvailableBalance();
-            const isValid = sendRecipientUid && amount > 0 && amount <= availBalance;
-            sendMoneyConfirmBtn.disabled = !isValid;
-            if (amount > 0) {
-                if (amount > availBalance) {
-                    sendAvailableBalance.className = 'avail insufficient';
-                } else {
-                    sendAvailableBalance.className = 'avail';
-                }
-            }
-        }
-
-        function confirmSendMoney() {
-            const amount = parseFloat(sendAmountInput.value);
-            if (!sendRecipientUid || !amount || amount <= 0) {
-                showToast('Please enter a valid amount and recipient.', 'error');
-                return;
-            }
-
-            const availBalance = getAvailableBalance();
-            if (amount > availBalance) {
-                showToast(`Insufficient balance. Available: ZMW ${availBalance.toFixed(2)}`, 'error');
-                return;
-            }
-
-            // Show confirmation popup
-            const confirmMsg = `You're sending ZMW ${amount.toFixed(2)} to ${sendRecipientName}. Please confirm.`;
-            if (!confirm(confirmMsg)) {
-                return;
-            }
-
-            // Process transfer
-            const accounts = allData.customerAccounts || {};
-            const senderAccount = accounts[currentUserId] || { balance: 0 };
-            const recipientAccount = accounts[sendRecipientUid] || { balance: 0 };
-
-            // Deduct from sender
-            const senderNewBalance = (senderAccount.balance || 0) - amount;
-            const senderAccRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
-            set(senderAccRef, { balance: senderNewBalance });
-
-            // Add to recipient
-            const recipientNewBalance = (recipientAccount.balance || 0) + amount;
-            const recipientAccRef = ref(db, `bufferzoneAppData/customerAccounts/${sendRecipientUid}`);
-            set(recipientAccRef, { balance: recipientNewBalance });
-
-            // Create transaction for sender
-            const txSenderRef = push(ref(db, 'bufferzoneAppData/transactions'));
-            const senderTx = {
-                type: 'Sent Money',
-                amount: amount,
-                method: 'Wallet Transfer',
-                status: 'completed',
-                date: new Date().toLocaleString(),
-                ref: 'SEND-' + Date.now(),
-                detail: `Sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}`,
-                screenshot: 'Wallet Transfer',
-                userId: currentUserId,
-                itemId: 'send-' + Date.now(),
-                itemTitle: 'Send Money',
-                itemType: 'transfer',
-                userName: sendRecipientName,
-                userEmail: 'N/A',
-                userPhone: 'N/A',
-                timestamp: Date.now()
-            };
-            set(txSenderRef, senderTx);
-
-            // Create transaction for recipient
-            const txRecipientRef = push(ref(db, 'bufferzoneAppData/transactions'));
-            const recipientTx = {
-                type: 'Received Money',
-                amount: amount,
-                method: 'Wallet Transfer',
-                status: 'completed',
-                date: new Date().toLocaleString(),
-                ref: 'RECV-' + Date.now(),
-                detail: `Received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}`,
-                screenshot: 'Wallet Transfer',
-                userId: sendRecipientUid,
-                itemId: 'recv-' + Date.now(),
-                itemTitle: 'Receive Money',
-                itemType: 'transfer',
-                userName: currentUserData?.firstName || 'User',
-                userEmail: currentUser.email || 'N/A',
-                userPhone: currentUserData?.phone || 'N/A',
-                timestamp: Date.now()
-            };
-            set(txRecipientRef, recipientTx);
-
-            // Notifications for both
-            const notifSenderRef = push(ref(db, 'bufferzoneAppData/notifications'));
-            set(notifSenderRef, {
-                title: '💰 Money Sent',
-                message: `You sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}.`,
-                timestamp: Date.now(),
-                read: false,
-                userId: currentUserId
-            });
-
-            const notifRecipientRef = push(ref(db, 'bufferzoneAppData/notifications'));
-            set(notifRecipientRef, {
-                title: '💰 Money Received',
-                message: `You received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}.`,
-                timestamp: Date.now(),
-                read: false,
-                userId: sendRecipientUid
-            });
-
-            showToast(`✅ Sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}`, 'success');
-            closeSendMoneyModal();
-            renderAll();
         }
 
         // =================================================================
@@ -5120,14 +5103,35 @@
             if (e.key === 'Enter') applyReferral();
         });
 
-        confirmPaymentBtn.addEventListener('click', function() {
-            confirmPayment(false);
-        });
+        confirmPaymentBtn.addEventListener('click', confirmPayment);
 
-        // Wallet payment button
+        // Wallet payment toggle
         payWithWalletBtn.addEventListener('click', function() {
-            if (this.disabled) return;
-            confirmPayment(true);
+            if (walletPaymentSelected) {
+                // Cancel wallet payment
+                walletPaymentSelected = false;
+                uploadSection.style.display = 'block';
+                payWithWalletBtn.textContent = 'Pay with Wallet';
+                payWithWalletBtn.style.background = '#f5b83d';
+                payWithWalletBtn.style.color = '#1c2128';
+                confirmPaymentBtn.style.display = 'block';
+            } else {
+                // Enable wallet payment
+                const depositAmount = parseFloat(paymentAmount.textContent.replace('ZMW ', ''));
+                const accounts = allData.customerAccounts || {};
+                const userAccount = accounts[currentUserId] || { balance: 0 };
+                const balance = userAccount.balance || 0;
+                if (balance < depositAmount) {
+                    showToast('Insufficient wallet balance.', 'error');
+                    return;
+                }
+                walletPaymentSelected = true;
+                uploadSection.style.display = 'none';
+                payWithWalletBtn.textContent = 'Cancel Wallet Payment';
+                payWithWalletBtn.style.background = '#dc2626';
+                payWithWalletBtn.style.color = 'white';
+                confirmPaymentBtn.style.display = 'none';
+            }
         });
 
         setupCloudinaryUpload();
@@ -5171,12 +5175,10 @@
         sendMoneyModal.addEventListener('click', function(e) {
             if (e.target === this) closeSendMoneyModal();
         });
-        searchRecipientBtn.addEventListener('click', searchRecipient);
-        sendRecipientCode.addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') searchRecipient();
+        sendRecipientCode.addEventListener('input', function() {
+            searchRecipient();
         });
-        sendAmountInput.addEventListener('input', validateSendAmount);
-        sendMoneyConfirmBtn.addEventListener('click', confirmSendMoney);
+        sendMoneyConfirmBtn.addEventListener('click', sendMoney);
 
         // =================================================================
         // AUTH & INIT
@@ -5207,7 +5209,14 @@
             }
         });
 
-        console.log('✅ Customer App — Send Money & Wallet Payment integrated. Scale reduced by 15%.');
+        // Update wallet balance when payment modal opens
+        paymentModal.addEventListener('transitionend', function() {
+            if (this.classList.contains('open')) {
+                updateWalletBalanceDisplay();
+            }
+        });
+
+        console.log('✅ Customer App — All features integrated: scaling, send money, wallet payment, collapsed promo flyers, professional icons.');
     </script>
 </body>
 </html>
