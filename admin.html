@@ -9,6 +9,11 @@
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
     </script>
     <style>
+        /* ─── SCALE EVERYTHING DOWN BY 15% ─── */
+        html {
+            zoom: 0.85;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -39,26 +44,26 @@
         .app-content {
             flex: 1;
             overflow-y: auto;
-            padding: 0 12px 130px 12px;
+            padding: 0 14px 150px 14px;
             -webkit-overflow-scrolling: touch;
         }
 
         .bottom-nav {
             position: fixed;
-            bottom: 16px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             width: 92%;
-            max-width: 380px;
-            height: 56px;
+            max-width: 400px;
+            height: 64px;
             background: #1c2128;
-            border-radius: 28px;
-            padding: 6px 12px;
+            border-radius: 32px;
+            padding: 8px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 500;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
             flex-shrink: 0;
             pointer-events: auto;
         }
@@ -73,15 +78,15 @@
             flex: 1;
             background: none;
             border: none;
-            font-size: 6px;
-            gap: 0px;
+            font-size: 8px;
+            gap: 1px;
             user-select: none;
             padding: 2px 0;
             position: relative;
         }
         .nav-item i {
-            font-size: 16px;
-            margin-bottom: 0px;
+            font-size: 20px;
+            margin-bottom: 1px;
         }
         .nav-item.active {
             color: #f5b83d;
@@ -95,21 +100,21 @@
 
         .badge-counter {
             position: absolute;
-            top: -4px;
-            right: -4px;
-            min-width: 14px;
-            height: 14px;
+            top: -6px;
+            right: -6px;
+            min-width: 18px;
+            height: 18px;
             background: #f5b83d;
             color: #1c2128;
-            font-size: 8px;
+            font-size: 10px;
             font-weight: 700;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 3px;
-            border: 1.5px solid #1c2128;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+            padding: 0 4px;
+            border: 2px solid #1c2128;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
             line-height: 1;
             pointer-events: none;
             opacity: 0;
@@ -125,9 +130,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px 0 4px 0;
+            padding: 14px 0 6px 0;
             transition: all 0.3s ease;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
             position: relative;
         }
@@ -136,20 +141,20 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2px;
+            gap: 4px;
             flex: 0 0 auto;
         }
 
         .header-left .top-row {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             justify-content: center;
         }
 
         .work-avatar {
-            width: 36px;
-            height: 36px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background: #1c2128;
             color: #f5b83d;
@@ -157,11 +162,11 @@
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 11px;
+            font-size: 14px;
             flex-shrink: 0;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 3px 10px rgba(28, 33, 40, 0.25);
+            box-shadow: 0 4px 12px rgba(28, 33, 40, 0.3);
             letter-spacing: 0.5px;
         }
         .work-avatar:active {
@@ -174,12 +179,12 @@
             align-items: center;
         }
         .header-text span:first-child {
-            font-size: 9px;
+            font-size: 11px;
             color: #888;
         }
         .header-text span:last-child {
             font-weight: 700;
-            font-size: 13px;
+            font-size: 16px;
             color: #1c2128;
             letter-spacing: -0.3px;
         }
@@ -189,8 +194,8 @@
             align-items: center;
             justify-content: center;
             flex: 1;
-            gap: 8px;
-            min-width: 60px;
+            gap: 10px;
+            min-width: 80px;
         }
 
         .admin-title {
@@ -198,13 +203,13 @@
             text-align: center;
         }
         .admin-title span:first-child {
-            font-size: 9px;
+            font-size: 11px;
             color: #888;
             display: block;
         }
         .admin-title span:last-child {
             font-weight: 700;
-            font-size: 13px;
+            font-size: 16px;
             color: #1c2128;
         }
 
@@ -218,18 +223,18 @@
         .page-back-btn {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             background: none;
             border: none;
             color: #1c2128;
             font-weight: 600;
-            font-size: 11px;
+            font-size: 13px;
             cursor: pointer;
-            padding: 2px 0 6px 0;
+            padding: 4px 0 8px 0;
             transition: color 0.2s;
         }
         .page-back-btn i {
-            font-size: 12px;
+            font-size: 14px;
         }
         .page-back-btn:hover {
             color: #f5b83d;
@@ -242,32 +247,32 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 2px 0 10px 0;
+            gap: 12px;
+            padding: 4px 0 12px 0;
             flex-wrap: wrap;
             width: 100%;
-            max-width: 480px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
         .action-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             background: #1c2128;
             color: #fff;
-            padding: 6px 16px;
-            border-radius: 24px;
+            padding: 8px 22px;
+            border-radius: 30px;
             font-weight: 600;
-            font-size: 11px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 3px 12px rgba(28, 33, 40, 0.18);
+            box-shadow: 0 4px 14px rgba(28, 33, 40, 0.2);
             border: none;
             white-space: nowrap;
         }
         .action-btn i {
-            font-size: 13px;
+            font-size: 16px;
             color: #f5b83d;
         }
         .action-btn:active {
@@ -275,27 +280,27 @@
         }
 
         .greeting {
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 800;
             color: #1c2128;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
         .greeting-sub {
-            font-size: 11px;
+            font-size: 13px;
             color: #666;
         }
 
         .stat-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 18px;
+            gap: 14px;
+            margin-bottom: 24px;
         }
         .stat-card {
             background: #ffffff;
-            border-radius: 12px;
-            padding: 14px 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            border-radius: 16px;
+            padding: 18px 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
             border: 1px solid #f0f0f0;
             transition: transform 0.15s;
         }
@@ -303,14 +308,14 @@
             transform: scale(0.97);
         }
         .stat-card .stat-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            margin-bottom: 8px;
+            font-size: 18px;
+            margin-bottom: 10px;
         }
         .stat-card .stat-icon.blue {
             background: #e8f0fe;
@@ -329,22 +334,22 @@
             color: #7c3aed;
         }
         .stat-card .stat-value {
-            font-size: 20px;
+            font-size: 26px;
             font-weight: 700;
             color: #1c2128;
         }
         .stat-card .stat-label {
-            font-size: 10px;
+            font-size: 12px;
             color: #888;
-            margin-top: 1px;
+            margin-top: 2px;
         }
 
         .quick-actions {
             display: flex;
-            gap: 8px;
-            margin-bottom: 18px;
+            gap: 10px;
+            margin-bottom: 24px;
             overflow-x: auto;
-            padding-bottom: 3px;
+            padding-bottom: 4px;
             scrollbar-width: none;
         }
         .quick-actions::-webkit-scrollbar {
@@ -354,49 +359,49 @@
             flex-shrink: 0;
             background: #ffffff;
             border: 1px solid #f0f0f0;
-            border-radius: 12px;
-            padding: 10px 14px;
+            border-radius: 14px;
+            padding: 12px 18px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 10px;
+            gap: 10px;
+            font-size: 12px;
             font-weight: 600;
             color: #1c2128;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
         .quick-action-btn:active {
             transform: scale(0.95);
         }
         .quick-action-btn i {
-            font-size: 13px;
+            font-size: 16px;
             color: #1c2128;
         }
 
         .card {
             background: #ffffff;
-            border-radius: 12px;
-            padding: 14px 12px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            border-radius: 16px;
+            padding: 18px 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
             border: 1px solid #f0f0f0;
         }
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 8px;
         }
         .card-header h3 {
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 700;
             color: #1c2128;
         }
         .card-header .see-all {
-            font-size: 10px;
+            font-size: 12px;
             color: #1c2128;
             font-weight: 600;
             cursor: pointer;
@@ -405,21 +410,21 @@
         .activity-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 0;
+            gap: 12px;
+            padding: 10px 0;
             border-bottom: 1px solid #f5f5f5;
         }
         .activity-item:last-child {
             border-bottom: none;
         }
         .activity-item .icon-circle {
-            width: 30px;
-            height: 30px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 14px;
             flex-shrink: 0;
         }
         .activity-item .icon-circle.green {
@@ -443,29 +448,29 @@
         }
         .activity-item .content .title {
             font-weight: 600;
-            font-size: 11px;
+            font-size: 13px;
             color: #1c2128;
         }
         .activity-item .content .desc {
-            font-size: 10px;
+            font-size: 12px;
             color: #888;
         }
         .activity-item .content .time {
-            font-size: 9px;
+            font-size: 11px;
             color: #aaa;
-            margin-top: 1px;
+            margin-top: 2px;
         }
 
         .service-grid-customer {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-top: 2px;
+            gap: 12px;
+            margin-top: 4px;
         }
         .service-card-customer {
             background: #1c2128;
-            border-radius: 10px;
-            padding: 12px 8px;
+            border-radius: 12px;
+            padding: 16px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -478,14 +483,14 @@
             transform: scale(0.95);
         }
         .service-card-customer .icon-wrap {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            margin-bottom: 6px;
+            font-size: 22px;
+            margin-bottom: 8px;
             color: #fff;
         }
         .service-card-customer .icon-wrap.graphic {
@@ -501,30 +506,30 @@
             background: linear-gradient(135deg, #fa709a, #fee140);
         }
         .service-card-customer .title {
-            font-size: 9px;
+            font-size: 11px;
             font-weight: 600;
             color: #fff;
-            margin-bottom: 1px;
+            margin-bottom: 2px;
             line-height: 1.2;
         }
         .service-card-customer .sub {
-            font-size: 8px;
+            font-size: 9px;
             color: #aaa;
             line-height: 1.2;
         }
         .service-card-customer .price {
-            font-size: 9px;
+            font-size: 10px;
             font-weight: 700;
             color: #f5b83d;
-            margin-top: 3px;
+            margin-top: 4px;
         }
 
         .hero-editor {
             background: #1c2128;
-            border-radius: 12px;
-            padding: 14px;
+            border-radius: 14px;
+            padding: 16px;
             color: white;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             position: relative;
             overflow: hidden;
         }
@@ -532,7 +537,7 @@
             content: '';
             position: absolute;
             top: 0;
-            right: -16px;
+            right: -20px;
             height: 100%;
             width: 40%;
             z-index: 0;
@@ -548,11 +553,11 @@
         .hero-editor input,
         .hero-editor textarea {
             width: 100%;
-            padding: 6px 10px;
-            border-radius: 6px;
+            padding: 8px 12px;
+            border-radius: 8px;
             border: none;
-            font-size: 11px;
-            margin-bottom: 4px;
+            font-size: 13px;
+            margin-bottom: 6px;
             background: rgba(255, 255, 255, 0.1);
             color: #fff;
         }
@@ -566,19 +571,19 @@
             background: rgba(255, 255, 255, 0.2);
         }
         .hero-editor textarea {
-            min-height: 32px;
+            min-height: 40px;
             resize: vertical;
         }
         .hero-editor .btn-save-hero {
             background: #f5b83d;
             color: #1c2128;
             border: none;
-            padding: 5px 14px;
-            border-radius: 16px;
+            padding: 6px 16px;
+            border-radius: 20px;
             font-weight: 700;
-            font-size: 10px;
+            font-size: 11px;
             cursor: pointer;
-            margin-top: 3px;
+            margin-top: 4px;
         }
         .hero-editor .btn-save-hero:active {
             transform: scale(0.95);
@@ -586,10 +591,10 @@
 
         .policy-editor {
             background: #1c2128;
-            border-radius: 12px;
-            padding: 14px;
+            border-radius: 14px;
+            padding: 16px;
             color: white;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             position: relative;
             overflow: hidden;
         }
@@ -597,7 +602,7 @@
             content: '';
             position: absolute;
             top: 0;
-            right: -16px;
+            right: -20px;
             height: 100%;
             width: 40%;
             z-index: 0;
@@ -613,11 +618,11 @@
         .policy-editor input,
         .policy-editor textarea {
             width: 100%;
-            padding: 6px 10px;
-            border-radius: 6px;
+            padding: 8px 12px;
+            border-radius: 8px;
             border: none;
-            font-size: 11px;
-            margin-bottom: 4px;
+            font-size: 13px;
+            margin-bottom: 6px;
             background: rgba(255, 255, 255, 0.1);
             color: #fff;
         }
@@ -631,19 +636,19 @@
             background: rgba(255, 255, 255, 0.2);
         }
         .policy-editor textarea {
-            min-height: 32px;
+            min-height: 40px;
             resize: vertical;
         }
         .policy-editor .btn-save-policy {
             background: #f5b83d;
             color: #1c2128;
             border: none;
-            padding: 5px 14px;
-            border-radius: 16px;
+            padding: 6px 16px;
+            border-radius: 20px;
             font-weight: 700;
-            font-size: 10px;
+            font-size: 11px;
             cursor: pointer;
-            margin-top: 3px;
+            margin-top: 4px;
         }
         .policy-editor .btn-save-policy:active {
             transform: scale(0.95);
@@ -651,23 +656,23 @@
 
         .list-editor {
             background: #ffffff;
-            border-radius: 12px;
-            padding: 14px;
+            border-radius: 14px;
+            padding: 16px;
             border: 1px solid #f0f0f0;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
         .list-editor .list-item {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 3px 0;
+            gap: 8px;
+            padding: 4px 0;
         }
         .list-editor .list-item input {
             flex: 1;
-            padding: 5px 8px;
+            padding: 6px 10px;
             border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 11px;
+            border-radius: 8px;
+            font-size: 13px;
         }
         .list-editor .list-item input:focus {
             outline: none;
@@ -676,43 +681,43 @@
         .list-editor .list-item .btn-remove {
             background: #fee2e2;
             border: none;
-            border-radius: 4px;
-            padding: 1px 6px;
+            border-radius: 6px;
+            padding: 2px 8px;
             color: #dc2626;
             cursor: pointer;
-            font-size: 10px;
+            font-size: 12px;
         }
         .list-editor .btn-add {
             background: #f0f0f0;
             border: none;
-            border-radius: 6px;
-            padding: 3px 12px;
-            font-size: 10px;
+            border-radius: 8px;
+            padding: 4px 14px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 4px;
+            margin-top: 6px;
         }
         .list-editor .btn-save-list {
             background: #1c2128;
             color: #fff;
             border: none;
-            border-radius: 6px;
-            padding: 5px 14px;
-            font-size: 10px;
+            border-radius: 8px;
+            padding: 6px 16px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 6px;
+            margin-top: 8px;
         }
 
         .promo-section {
-            padding: 0 0 14px 0;
+            padding: 0 0 16px 0;
         }
         .promo-card {
             background: #ffffff;
-            border-radius: 12px;
-            padding: 12px 14px;
-            margin-bottom: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             border: 1px solid #f0f0f0;
             display: flex;
             justify-content: space-between;
@@ -720,42 +725,42 @@
         }
         .promo-card .left .code {
             font-weight: 700;
-            font-size: 13px;
+            font-size: 16px;
             color: #1c2128;
         }
         .promo-card .left .discount {
-            font-size: 11px;
+            font-size: 13px;
             color: #16a34a;
         }
         .promo-card .left .times {
-            font-size: 9px;
+            font-size: 11px;
             color: #888;
         }
         .promo-card .actions {
             display: flex;
-            gap: 4px;
+            gap: 6px;
         }
 
         .category-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            padding: 10px;
+            gap: 8px;
+            padding: 12px;
             background: #f8f9fc;
-            border-radius: 10px;
-            margin-bottom: 12px;
+            border-radius: 12px;
+            margin-bottom: 16px;
             border: 1px solid #f0f0f0;
         }
         .category-tag {
             background: #ffffff;
             border: 1px solid #e0e0e0;
-            padding: 3px 12px 3px 10px;
-            border-radius: 16px;
-            font-size: 10px;
+            padding: 4px 14px 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
             font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             transition: all 0.2s;
         }
         .category-tag:hover {
@@ -767,7 +772,7 @@
             border: none;
             color: #aaa;
             cursor: pointer;
-            font-size: 9px;
+            font-size: 10px;
             padding: 0;
             transition: color 0.2s;
             display: flex;
@@ -778,13 +783,13 @@
             color: #dc2626;
         }
         .cat-input {
-            padding: 8px 12px;
+            padding: 10px 14px;
             border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 11px;
+            border-radius: 10px;
+            font-size: 13px;
             transition: border 0.2s;
             flex: 1;
-            min-width: 80px;
+            min-width: 100px;
         }
         .cat-input:focus {
             outline: none;
@@ -794,10 +799,10 @@
 
         .order-card {
             background: #ffffff;
-            border-radius: 12px;
-            padding: 12px 14px;
-            margin-bottom: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             border: 1px solid #f0f0f0;
         }
         .order-toggle {
@@ -811,8 +816,8 @@
         }
         .order-details {
             display: none;
-            margin-top: 10px;
-            padding-top: 10px;
+            margin-top: 12px;
+            padding-top: 12px;
             border-top: 1px solid #f0f0f0;
         }
         .order-details.open {
@@ -821,8 +826,8 @@
         .order-details .row {
             display: flex;
             justify-content: space-between;
-            padding: 3px 0;
-            font-size: 11px;
+            padding: 4px 0;
+            font-size: 12px;
             color: #555;
         }
         .order-details .row .label {
@@ -835,9 +840,9 @@
 
         .status-badge {
             display: inline-block;
-            padding: 1px 8px;
-            border-radius: 10px;
-            font-size: 9px;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 10px;
             font-weight: 600;
         }
         .status-badge.progress {
@@ -864,27 +869,27 @@
         .status-btn {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            padding: 3px 12px;
-            border-radius: 16px;
-            font-size: 10px;
+            gap: 6px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 11px;
             font-weight: 600;
             border: none;
             cursor: pointer;
             transition: all 0.25s ease;
             background: #f0f0f0;
             color: #1c2128;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
         }
         .status-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
         .status-btn:active {
             transform: scale(0.94);
         }
         .status-btn i {
-            font-size: 9px;
+            font-size: 10px;
             opacity: 0.6;
         }
 
@@ -921,60 +926,60 @@
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 14px;
+            padding: 16px;
         }
         .status-modal-overlay.open {
             display: flex;
         }
         .status-modal {
             background: #ffffff;
-            border-radius: 16px;
+            border-radius: 20px;
             width: 100%;
-            max-width: 340px;
-            padding: 22px 20px 18px 20px;
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+            max-width: 380px;
+            padding: 28px 24px 22px 24px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
             animation: modalIn 0.25s ease;
             position: relative;
         }
         .status-modal .close-btn {
             position: absolute;
-            top: 10px;
-            right: 14px;
+            top: 12px;
+            right: 16px;
             background: none;
             border: none;
-            font-size: 16px;
+            font-size: 18px;
             color: #999;
             cursor: pointer;
-            padding: 2px;
+            padding: 4px;
             transition: color 0.2s;
         }
         .status-modal .close-btn:hover {
             color: #1c2128;
         }
         .status-modal h3 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             color: #1c2128;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
             text-align: center;
         }
         .status-modal .sub {
             color: #777;
-            font-size: 12px;
+            font-size: 13px;
             text-align: center;
-            margin-bottom: 14px;
+            margin-bottom: 18px;
         }
         .status-modal .status-options {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
         .status-modal .status-option {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
-            border-radius: 10px;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 12px;
             border: 2px solid #f0f0f0;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -982,15 +987,15 @@
         }
         .status-modal .status-option:hover {
             border-color: #d0d0d0;
-            transform: translateX(3px);
+            transform: translateX(4px);
         }
         .status-modal .status-option.selected {
             border-color: #1c2128;
             background: #f8f9fc;
         }
         .status-modal .status-option .dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             flex-shrink: 0;
         }
@@ -1011,13 +1016,13 @@
         }
         .status-modal .status-option .label {
             font-weight: 600;
-            font-size: 12px;
+            font-size: 14px;
             color: #1c2128;
         }
         .status-modal .status-option .check {
             margin-left: auto;
             color: #f5b83d;
-            font-size: 14px;
+            font-size: 16px;
             opacity: 0;
             transition: opacity 0.2s;
         }
@@ -1026,21 +1031,21 @@
         }
         .status-modal .btn-confirm-status {
             width: 100%;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 12px;
             border: none;
             background: #1c2128;
             color: #fff;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
-            margin-top: 12px;
+            margin-top: 16px;
             transition: all 0.2s;
-            box-shadow: 0 3px 10px rgba(28, 33, 40, 0.2);
+            box-shadow: 0 4px 12px rgba(28, 33, 40, 0.2);
         }
         .status-modal .btn-confirm-status:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 5px 16px rgba(28, 33, 40, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(28, 33, 40, 0.3);
         }
         .status-modal .btn-confirm-status:active {
             transform: scale(0.96);
@@ -1051,310 +1056,849 @@
             transform: none;
         }
 
-        .user-card {
+        .customer-item {
             background: #ffffff;
-            border-radius: 10px;
-            padding: 12px 14px;
+            border-radius: 12px;
+            padding: 12px 16px;
             border: 1px solid #f0f0f0;
             margin-bottom: 8px;
-            transition: all 0.2s;
             cursor: pointer;
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s;
         }
-        .user-card:hover {
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        .customer-item:hover {
             border-color: #ddd;
         }
-        .user-card .user-summary {
+        .customer-item .user-summary {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 4px;
         }
-        .user-card .user-summary .left {
+        .customer-item .user-summary .left {
             display: flex;
             align-items: center;
-            gap: 10px;
-            flex: 1;
-            min-width: 120px;
+            gap: 12px;
         }
-        .user-card .user-summary .left .u-avatar {
-            width: 32px;
-            height: 32px;
+        .customer-item .user-summary .c-avatar {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: #1c2128;
-            color: #f5b83d;
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 13px;
+            font-weight: 600;
+            font-size: 14px;
             flex-shrink: 0;
         }
-        .user-card .user-summary .left .u-info {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .user-card .user-summary .left .u-info .u-name {
+        .customer-item .user-summary .c-name {
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             color: #1c2128;
-            letter-spacing: -0.2px;
         }
-        .user-card .user-summary .left .u-info .u-email {
-            font-size: 10px;
-            color: #aaa;
-            font-weight: 400;
-            margin-top: 0px;
+        .customer-item .user-summary .c-email {
+            font-size: 12px;
+            color: #888;
         }
-        .user-card .user-summary .right {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .user-card .user-summary .right .user-status-badge {
-            font-size: 9px;
-            font-weight: 600;
-            padding: 1px 10px;
-            border-radius: 10px;
-            white-space: nowrap;
-        }
-        .user-card .user-summary .right .ban-toggle-wrap {
-            display: flex;
-            align-items: center;
-            gap: 3px;
-        }
-        .user-card .user-summary .right .ban-toggle-wrap .toggle-switch {
-            width: 38px;
-            height: 22px;
-            flex-shrink: 0;
-        }
-        .user-card .user-summary .right .ban-toggle-wrap .toggle-switch .toggle-slider:before {
-            height: 18px;
-            width: 18px;
-            left: 2px;
-            bottom: 2px;
-        }
-        .user-card .user-summary .right .ban-toggle-wrap .toggle-switch input:checked+.toggle-slider:before {
-            transform: translateX(16px);
-        }
-        .user-card .user-summary .right .ban-toggle-wrap .ban-label {
-            font-size: 9px;
-            font-weight: 600;
-            color: #555;
-            min-width: 24px;
-        }
-        .user-card .user-summary .right .expand-icon {
-            font-size: 10px;
-            color: #aaa;
-            transition: transform 0.3s;
-            margin-left: 2px;
-        }
-        .user-card.open .user-summary .right .expand-icon {
-            transform: rotate(180deg);
-        }
-
-        .user-card .user-details {
+        .customer-item .user-details {
             display: none;
             margin-top: 12px;
             padding-top: 12px;
             border-top: 1px solid #f0f0f0;
         }
-        .user-card .user-details.open {
+        .customer-item .user-details.open {
             display: block;
         }
-        .user-card .user-details .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px 16px;
-            margin-bottom: 8px;
-        }
-        @media (max-width: 420px) {
-            .user-card .user-details .detail-grid {
-                grid-template-columns: 1fr;
-                gap: 2px;
-            }
-        }
-        .user-card .user-details .detail-grid .detail-item {
+        .customer-item .user-details .detail-row {
             display: flex;
             justify-content: space-between;
-            padding: 2px 0;
-            font-size: 11px;
-            border-bottom: 1px solid #f8f8f8;
+            padding: 4px 0;
+            font-size: 13px;
+            color: #555;
         }
-        .user-card .user-details .detail-grid .detail-item .label {
+        .customer-item .user-details .detail-row .label {
             color: #888;
         }
-        .user-card .user-details .detail-grid .detail-item .val {
+        .customer-item .user-details .detail-row .val {
             font-weight: 500;
             color: #1c2128;
         }
-        .user-card .user-details .detail-grid .detail-item .val.highlight {
-            color: #f5b83d;
-            font-weight: 700;
+        .customer-item .user-details .actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
         }
-        .user-card .user-details .detail-grid .detail-item .val.green {
-            color: #16a34a;
+        .customer-item .expand-icon {
+            font-size: 12px;
+            color: #aaa;
+            transition: transform 0.3s;
         }
-        .user-card .user-details .detail-grid .detail-item .val.red {
+        .customer-item.open .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .user-status-badge {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 12px;
+        }
+        .user-status-badge.active {
+            background: #e6fffa;
+            color: #00a86b;
+        }
+        .user-status-badge.banned {
+            background: #fee2e2;
             color: #dc2626;
         }
 
-        .user-card .user-details .referral-users {
-            margin-top: 4px;
-            background: #f8f9fc;
-            border-radius: 8px;
-            padding: 6px 12px;
-            border: 1px solid #f0f0f0;
+        .ban-toggle-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
-        .user-card .user-details .referral-users .ref-title {
-            font-size: 10px;
+        .ban-toggle-btn:active {
+            transform: scale(0.9);
+        }
+        .ban-toggle-btn .fa-toggle-on {
+            color: #16a34a;
+        }
+        .ban-toggle-btn .fa-toggle-off {
+            color: #dc2626;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 28px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .3s;
+            border-radius: 34px;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        input:checked+.toggle-slider {
+            background-color: #1c2128;
+        }
+        input:checked+.toggle-slider:before {
+            transform: translateX(20px);
+        }
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
             font-weight: 600;
             color: #1c2128;
-            margin-bottom: 3px;
         }
-        .user-card .user-details .referral-users .ref-users-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 3px;
+
+        .btn {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
-        .user-card .user-details .referral-users .ref-users-list .ref-user-tag {
-            background: #fff;
-            border: 1px solid #e0e0e0;
-            padding: 1px 8px;
+        .btn:active {
+            transform: scale(0.95);
+        }
+        .btn-primary {
+            background: #1c2128;
+            color: #ffffff;
+        }
+        .btn-primary:hover {
+            background: #2a2a2a;
+        }
+        .btn-outline {
+            background: transparent;
+            color: #1c2128;
+            border: 1px solid #ddd;
+        }
+        .btn-outline:hover {
+            border-color: #1c2128;
+            background: #f8f8f8;
+        }
+        .btn-danger {
+            background: #dc2626;
+            color: #ffffff;
+        }
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+        .btn-success {
+            background: #16a34a;
+            color: #ffffff;
+        }
+        .btn-success:hover {
+            background: #15803d;
+        }
+        .btn-warning {
+            background: #f59e0b;
+            color: #1c2128;
+        }
+        .btn-warning:hover {
+            background: #d97706;
+            color: #ffffff;
+        }
+        .btn-sm {
+            padding: 3px 10px;
+            font-size: 9px;
+        }
+
+        .btn-view-proof {
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            padding: 2px 12px;
             border-radius: 12px;
             font-size: 10px;
-            color: #555;
+            font-weight: 600;
+            cursor: pointer;
         }
-        .user-card .user-details .referral-users .ref-users-list .no-ref-users {
-            font-size: 10px;
-            color: #aaa;
+        .btn-view-proof:active {
+            transform: scale(0.95);
+        }
+        .btn-view-proof i {
+            margin-right: 4px;
         }
 
-        .user-card .user-details .actions-row {
-            display: flex;
-            gap: 6px;
+        .text-muted {
+            color: #888;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .mt-8 {
             margin-top: 8px;
-            flex-wrap: wrap;
-            justify-content: flex-end;
         }
-        .user-card .user-details .actions-row .btn {
-            padding: 4px 14px;
-            font-size: 10px;
-            border-radius: 16px;
+        .flex {
+            display: flex;
+        }
+        .gap-8 {
+            gap: 8px;
+        }
+        .gap-12 {
+            gap: 12px;
+        }
+        .w-full {
+            width: 100%;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .justify-between {
+            justify-content: space-between;
         }
 
-        .user-filter-bar {
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1c2128;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: none;
+            white-space: nowrap;
+            max-width: 90%;
+        }
+        .toast.show {
+            opacity: 1;
+        }
+        .toast i {
+            margin-right: 8px;
+            color: #f5b83d;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .modal-overlay.open {
+            display: flex;
+        }
+        .modal {
+            background: #ffffff;
+            border-radius: 18px;
+            width: 100%;
+            max-width: 420px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 24px 22px 20px 22px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+            animation: modalIn 0.25s ease;
+        }
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.92) translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .modal .close-btn {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #999;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .modal .close-btn:hover {
+            color: #1c2128;
+        }
+        .modal h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #1c2128;
+            clear: both;
+        }
+        .modal p.sub {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+        .form-group {
+            margin-bottom: 14px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 12px;
+            color: #222;
+            margin-bottom: 4px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 13px;
+            transition: border 0.2s;
+            background: #ffffff;
+            color: #1c2128;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 50px;
+        }
+        .modal .btn {
+            width: 100%;
+            justify-content: center;
+            padding: 12px;
+            font-size: 14px;
+            border-radius: 10px;
+        }
+        .modal .btn+.btn {
+            margin-top: 8px;
+        }
+        .modal .btn-outline {
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+        }
+
+        .screenshot-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .screenshot-modal-overlay.open {
+            display: flex;
+        }
+        .screenshot-modal-content {
+            background: #fff;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            padding: 24px 24px 20px 20px;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        .screenshot-modal-content .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 22px;
+            color: #888;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .screenshot-modal-content .close-btn:hover {
+            color: #1c2128;
+        }
+        .screenshot-modal-content img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .screenshot-modal-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-bottom: 4px;
+        }
+
+        .delete-confirm-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .delete-confirm-modal-overlay.open {
+            display: flex;
+        }
+        .delete-confirm-modal-content {
+            background: #ffffff;
+            border-radius: 18px;
+            width: 100%;
+            max-width: 360px;
+            padding: 24px 22px 20px 22px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .delete-confirm-modal-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-bottom: 6px;
+        }
+        .delete-confirm-modal-content p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 16px;
+        }
+        .delete-confirm-modal-content .actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .work-page-header {
+            text-align: center;
+            padding: 12px 0 18px 0;
+        }
+        .work-page-header h2 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #1c2128;
+            letter-spacing: -0.5px;
+        }
+        .work-page-header p {
+            font-size: 13px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        .work-options-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        @media (max-width: 480px) {
+            .work-options-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+        .work-option-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 18px 12px;
+            text-align: center;
+            border: 2px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .work-option-card:hover {
+            border-color: #f5b83d;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 184, 61, 0.15);
+        }
+        .work-option-card:active {
+            transform: scale(0.95);
+        }
+        .work-option-card .wo-icon {
+            font-size: 32px;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .work-option-card .wo-label {
+            font-weight: 700;
+            font-size: 13px;
+            color: #1c2128;
+        }
+        .work-option-card .wo-sub {
+            font-size: 10px;
+            color: #888;
+        }
+
+        .work-posts-section {
+            margin-top: 6px;
+        }
+        .work-posts-section .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1c2128;
+            margin: 20px 0 10px 0;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #f0f0f0;
             display: flex;
             align-items: center;
             gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 12px;
-            padding: 0 2px;
         }
-        .user-filter-bar input {
-            flex: 1;
-            min-width: 100px;
-            padding: 6px 12px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
+        .work-posts-section .section-title .badge-count {
             font-size: 11px;
-            outline: none;
-            transition: border 0.2s;
-        }
-        .user-filter-bar input:focus {
-            border-color: #1c2128;
-            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
-        }
-        .user-filter-bar select {
-            padding: 6px 12px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            font-size: 11px;
-            outline: none;
-            background: #fff;
-            transition: border 0.2s;
-            min-width: 110px;
-        }
-        .user-filter-bar select:focus {
-            border-color: #1c2128;
-            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+            background: #f0f0f0;
+            padding: 0 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            color: #555;
         }
 
-        @media (max-width: 380px) {
-            .user-card .user-summary .left {
-                min-width: 80px;
-            }
-            .user-card .user-summary .left .u-avatar {
-                width: 28px;
-                height: 28px;
-                font-size: 11px;
-            }
-            .user-card .user-summary .left .u-info .u-name {
-                font-size: 11px;
-            }
-            .user-card .user-summary .left .u-info .u-email {
-                font-size: 9px;
-            }
-            .user-card .user-summary .right .ban-toggle-wrap .toggle-switch {
-                width: 34px;
-                height: 20px;
-            }
-            .user-card .user-summary .right .ban-toggle-wrap .toggle-switch .toggle-slider:before {
-                height: 16px;
-                width: 16px;
-                left: 2px;
-                bottom: 2px;
-            }
-            .user-card .user-summary .right .ban-toggle-wrap .toggle-switch input:checked+.toggle-slider:before {
-                transform: translateX(14px);
-            }
-            .user-filter-bar select {
-                min-width: 90px;
+        .work-grid-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        @media (max-width: 480px) {
+            .work-grid-2x2 {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
             }
         }
 
-        .promo-header-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: #f5b83d;
-            color: #1c2128;
+        .work-post-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 14px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .work-post-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+        .work-post-card .post-thumb {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f5f5f5;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 15px;
-            flex-shrink: 0;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .work-post-card .post-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .work-post-card .post-thumb .no-image {
+            color: #ccc;
+            font-size: 32px;
+        }
+        .work-post-card .post-type-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(28, 33, 40, 0.8);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 12px;
+            backdrop-filter: blur(4px);
+        }
+        .work-post-card .post-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1c2128;
+            margin-bottom: 2px;
+        }
+        .work-post-card .post-desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+            flex: 1;
+        }
+        .work-post-card .post-meta {
+            font-size: 10px;
+            color: #aaa;
+            margin-top: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .work-post-card .post-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+        .work-post-card .post-actions .btn {
+            padding: 3px 10px;
+            font-size: 9px;
+            border-radius: 8px;
+        }
+        .work-post-card .post-actions .btn-edit-post {
+            background: #f0f0f0;
+            color: #1c2128;
+        }
+        .work-post-card .post-actions .btn-delete-post {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .phone-frame {
+            width: 100%;
+            max-width: 220px;
+            margin: 0 auto;
+            border: 6px solid #1c2128;
+            border-radius: 30px;
+            padding: 6px;
+            background: #fff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            aspect-ratio: 9/19;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .phone-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 18px;
+        }
+        .phone-frame .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 18px;
+            background: #1c2128;
+            border-radius: 0 0 12px 12px;
+        }
+        .phone-frame .placeholder {
+            color: #ccc;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .laptop-frame {
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+            background: #1c2128;
+            border-radius: 12px 12px 0 0;
+            padding: 10px 10px 0 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        .laptop-frame .screen {
+            background: #fff;
+            border-radius: 6px 6px 0 0;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .laptop-frame .screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .laptop-frame .screen .placeholder {
+            color: #ccc;
+            font-size: 28px;
+            text-align: center;
+        }
+        .laptop-frame .base {
+            height: 10px;
+            background: #2a2a2a;
+            border-radius: 0 0 8px 8px;
+            margin: 0 8px;
+            position: relative;
+        }
+        .laptop-frame .base::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 4px;
+            background: #444;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .work-upload-modal .modal {
+            max-width: 480px;
+        }
+        .work-upload-modal .upload-preview {
+            width: 100%;
+            border-radius: 12px;
+            border: 2px dashed #ddd;
+            padding: 20px;
+            text-align: center;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 3px 10px rgba(245, 184, 61, 0.3);
+            transition: all 0.2s;
+            background: #fafafa;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        .promo-header-btn:active {
-            transform: scale(0.92);
+        .work-upload-modal .upload-preview:hover {
+            border-color: #f5b83d;
+            background: #fefaf0;
         }
-        .promo-header-btn:hover {
-            box-shadow: 0 5px 16px rgba(245, 184, 61, 0.4);
+        .work-upload-modal .upload-preview img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+        .work-upload-modal .upload-preview .upload-icon {
+            font-size: 36px;
+            color: #ccc;
+            margin-bottom: 6px;
+        }
+        .work-upload-modal .upload-preview .upload-text {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .work-upload-modal .frame-container {
+            display: flex;
+            justify-content: center;
+            padding: 8px 0;
+        }
+
+        .promo-pics-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 4px 0 20px 0;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .promo-pic-card {
             position: relative;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
             background: #fff;
             transition: transform 0.25s ease, box-shadow 0.25s ease;
             border: none;
             width: 100%;
-            height: 340px;
-            max-width: 640px;
+            height: 450px;
+            max-width: 800px;
             margin: 0 auto;
         }
         .promo-pic-card:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
         }
         .promo-pic-card .pic-image {
             width: 100%;
@@ -1368,46 +1912,46 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 16px 12px 12px 12px;
+            padding: 20px 14px 14px 14px;
             background: linear-gradient(transparent, rgba(0, 0, 0, 0.65));
-            min-height: 48px;
+            min-height: 60px;
             display: flex;
             align-items: flex-end;
         }
         .promo-pic-card .pic-overlay .pic-text {
             color: #fff;
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 700;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             width: 100%;
             word-break: break-word;
             line-height: 1.3;
         }
         .promo-pic-card .pic-overlay .pic-text small {
             font-weight: 400;
-            font-size: 10px;
+            font-size: 12px;
             opacity: 0.8;
             display: block;
-            margin-top: 1px;
+            margin-top: 2px;
         }
         .promo-pic-card .pic-delete-btn {
             position: absolute;
-            top: 8px;
-            right: 8px;
-            width: 28px;
-            height: 28px;
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: rgba(220, 38, 38, 0.85);
             color: #fff;
             border: none;
-            font-size: 12px;
+            font-size: 14px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
             backdrop-filter: blur(4px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         .promo-pic-card .pic-delete-btn:hover {
             background: #dc2626;
@@ -1423,15 +1967,15 @@
             align-items: center;
             justify-content: center;
             border: 2px dashed #ddd;
-            border-radius: 12px;
-            padding: 32px 16px;
+            border-radius: 16px;
+            padding: 40px 20px;
             cursor: pointer;
             transition: all 0.2s;
             background: #fafafa;
-            min-height: 140px;
+            min-height: 180px;
             width: 100%;
-            max-width: 640px;
-            height: 340px;
+            max-width: 800px;
+            height: 450px;
             margin: 0 auto;
         }
         .promo-pics-upload-area:hover {
@@ -1439,101 +1983,101 @@
             background: #fefaf0;
         }
         .promo-pics-upload-area .upload-icon {
-            font-size: 40px;
+            font-size: 48px;
             color: #ccc;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .promo-pics-upload-area .upload-text {
-            font-size: 12px;
+            font-size: 14px;
             color: #888;
             font-weight: 500;
         }
         .promo-pics-upload-area .upload-sub {
-            font-size: 10px;
+            font-size: 11px;
             color: #aaa;
-            margin-top: 3px;
+            margin-top: 4px;
         }
 
         .orders-compact-header {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         .orders-compact-header input,
         .orders-compact-header select {
-            padding: 4px 8px;
-            font-size: 10px;
-            border-radius: 12px;
+            padding: 5px 10px;
+            font-size: 11px;
+            border-radius: 14px;
             border: 1px solid #ddd;
             outline: none;
             background: #fff;
         }
         .orders-compact-header input {
             flex: 1;
-            min-width: 80px;
+            min-width: 100px;
         }
         .orders-compact-header select {
-            min-width: 80px;
+            min-width: 90px;
         }
         .orders-compact-header .btn {
-            padding: 3px 10px;
-            font-size: 9px;
+            padding: 4px 12px;
+            font-size: 10px;
         }
 
         .referral-section {
             background: #ffffff;
-            border-radius: 12px;
-            padding: 14px 12px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            border-radius: 16px;
+            padding: 18px 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
             border: 1px solid #f0f0f0;
         }
         .referral-section .section-title {
-            font-size: 13px;
+            font-size: 16px;
             font-weight: 700;
             color: #1c2128;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         .referral-section .section-title i {
             color: #f5b83d;
         }
         .referral-section .section-title .badge {
-            font-size: 9px;
+            font-size: 11px;
             background: #f5b83d;
             color: #1c2128;
-            padding: 1px 10px;
-            border-radius: 10px;
+            padding: 2px 12px;
+            border-radius: 12px;
             font-weight: 600;
         }
         .referral-section .form-row-custom {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 14px;
         }
         .referral-section .form-row-custom .full-width {
             grid-column: 1 / -1;
         }
         .referral-section .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .referral-section .form-group label {
             display: block;
             font-weight: 600;
-            font-size: 10px;
+            font-size: 12px;
             color: #222;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
         .referral-section .form-group input,
         .referral-section .form-group select {
             width: 100%;
-            padding: 8px 12px;
+            padding: 10px 14px;
             border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 12px;
+            border-radius: 10px;
+            font-size: 13px;
             transition: border 0.2s;
             background: #ffffff;
             color: #1c2128;
@@ -1548,21 +2092,21 @@
             background: #1c2128;
             color: #fff;
             border: none;
-            padding: 8px 22px;
-            border-radius: 24px;
+            padding: 10px 28px;
+            border-radius: 30px;
             font-weight: 600;
-            font-size: 11px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.2s;
-            margin-top: 4px;
+            margin-top: 6px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         .referral-section .btn-post:hover {
             background: #2a2a2a;
-            transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         .referral-section .btn-post:active {
             transform: scale(0.95);
@@ -1573,9 +2117,9 @@
 
         .referral-item {
             background: #f8f9fc;
-            border-radius: 10px;
-            padding: 10px 14px;
-            margin-bottom: 8px;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
             border: 1px solid #f0f0f0;
             display: flex;
             justify-content: space-between;
@@ -1583,17 +2127,17 @@
             transition: all 0.2s;
         }
         .referral-item:hover {
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
         .referral-item .left .code {
             font-weight: 700;
-            font-size: 13px;
+            font-size: 15px;
             color: #1c2128;
         }
         .referral-item .left .detail {
-            font-size: 10px;
+            font-size: 12px;
             color: #555;
-            margin-top: 1px;
+            margin-top: 2px;
         }
         .referral-item .left .detail span {
             font-weight: 600;
@@ -1605,57 +2149,57 @@
         }
         .referral-item .actions {
             display: flex;
-            gap: 6px;
+            gap: 8px;
         }
         .referral-item .actions .btn-sm {
-            padding: 3px 12px;
-            font-size: 9px;
-            border-radius: 14px;
+            padding: 4px 14px;
+            font-size: 10px;
+            border-radius: 16px;
         }
 
         .referral-list-container {
-            margin-top: 4px;
+            margin-top: 6px;
         }
         .referral-list-container .empty-state {
             text-align: center;
-            padding: 18px 0;
+            padding: 24px 0;
             color: #888;
         }
         .referral-list-container .empty-state i {
-            font-size: 26px;
+            font-size: 32px;
             color: #ddd;
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .payables-action-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
         .payables-action-row .p-btn {
-            padding: 6px 16px;
-            border-radius: 24px;
+            padding: 8px 22px;
+            border-radius: 30px;
             border: none;
             font-weight: 600;
-            font-size: 10px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             background: #1c2128;
             color: #fff;
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
         .payables-action-row .p-btn:active {
             transform: scale(0.95);
         }
         .payables-action-row .p-btn i {
-            font-size: 12px;
+            font-size: 14px;
         }
         .payables-action-row .p-btn.gold {
             background: #f5b83d;
@@ -1688,15 +2232,15 @@
 
         .account-item {
             background: #ffffff;
-            border-radius: 10px;
-            padding: 12px 14px;
+            border-radius: 12px;
+            padding: 14px 18px;
             border: 1px solid #f0f0f0;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             transition: all 0.2s;
             cursor: pointer;
         }
         .account-item:hover {
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
         .account-item .account-summary {
             display: flex;
@@ -1705,21 +2249,21 @@
         }
         .account-item .account-summary .left .name {
             font-weight: 600;
-            font-size: 12px;
+            font-size: 14px;
             color: #1c2128;
         }
         .account-item .account-summary .left .email {
-            font-size: 10px;
+            font-size: 12px;
             color: #888;
         }
         .account-item .account-summary .right .balance {
             font-weight: 700;
-            font-size: 14px;
+            font-size: 16px;
             color: #1c2128;
         }
         .account-item .account-summary .right .expand-icon {
-            margin-left: 8px;
-            font-size: 10px;
+            margin-left: 10px;
+            font-size: 12px;
             color: #aaa;
             transition: transform 0.3s;
         }
@@ -1728,8 +2272,8 @@
         }
         .account-item .account-transactions {
             display: none;
-            margin-top: 10px;
-            padding-top: 10px;
+            margin-top: 12px;
+            padding-top: 12px;
             border-top: 1px solid #f0f0f0;
         }
         .account-item .account-transactions.open {
@@ -1738,8 +2282,8 @@
         .account-item .account-transactions .tx-item {
             display: flex;
             justify-content: space-between;
-            padding: 4px 0;
-            font-size: 11px;
+            padding: 6px 0;
+            font-size: 12px;
             border-bottom: 1px solid #f5f5f5;
         }
         .account-item .account-transactions .tx-item:last-child {
@@ -1759,36 +2303,36 @@
         }
         .account-item .account-transactions .tx-empty {
             color: #aaa;
-            font-size: 10px;
-            padding: 6px 0;
+            font-size: 12px;
+            padding: 8px 0;
             text-align: center;
         }
 
         .withdraw-card {
             background: #ffffff;
-            border-radius: 10px;
-            padding: 12px 14px;
+            border-radius: 12px;
+            padding: 16px 18px;
             border: 1px solid #f0f0f0;
-            margin-bottom: 10px;
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             transition: all 0.2s;
         }
         .withdraw-card:hover {
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
         .withdraw-card .row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 3px 0;
+            padding: 4px 0;
         }
         .withdraw-card .row .label {
-            font-size: 10px;
+            font-size: 12px;
             color: #888;
         }
         .withdraw-card .row .value {
             font-weight: 600;
-            font-size: 11px;
+            font-size: 13px;
             color: #1c2128;
         }
         .withdraw-card .row .value.highlight {
@@ -1797,30 +2341,30 @@
         }
         .withdraw-card .row .value .ref-code {
             background: #f0f0f0;
-            padding: 1px 8px;
-            border-radius: 10px;
-            font-size: 10px;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
             font-weight: 600;
         }
         .withdraw-card .actions {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 10px;
+            margin-top: 10px;
             justify-content: flex-end;
         }
         .withdraw-card .actions .btn-approve {
             background: #16a34a;
             color: #fff;
             border: none;
-            padding: 4px 16px;
-            border-radius: 16px;
+            padding: 6px 20px;
+            border-radius: 20px;
             font-weight: 600;
-            font-size: 10px;
+            font-size: 11px;
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
         .withdraw-card .actions .btn-approve:hover {
             background: #15803d;
@@ -1830,15 +2374,15 @@
             background: #dc2626;
             color: #fff;
             border: none;
-            padding: 4px 16px;
-            border-radius: 16px;
+            padding: 6px 20px;
+            border-radius: 20px;
             font-weight: 600;
-            font-size: 10px;
+            font-size: 11px;
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
         .withdraw-card .actions .btn-decline:hover {
             background: #b91c1c;
@@ -1850,13 +2394,13 @@
         }
         .withdraw-card .actions .btn-approve i,
         .withdraw-card .actions .btn-decline i {
-            font-size: 10px;
+            font-size: 12px;
         }
 
         .withdraw-card .status-badge {
-            padding: 3px 12px;
-            border-radius: 16px;
-            font-size: 9px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 10px;
             font-weight: 600;
         }
         .withdraw-card .status-badge.approved {
@@ -1884,18 +2428,18 @@
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 14px;
+            padding: 16px;
         }
         .withdraw-confirm-modal-overlay.open {
             display: flex;
         }
         .withdraw-confirm-modal {
             background: #ffffff;
-            border-radius: 16px;
+            border-radius: 18px;
             width: 100%;
-            max-width: 360px;
-            padding: 22px 20px 16px 20px;
-            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            padding: 28px 24px 20px 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
             animation: modalIn 0.25s ease;
             text-align: center;
         }
@@ -1903,40 +2447,40 @@
             float: right;
             background: none;
             border: none;
-            font-size: 18px;
+            font-size: 20px;
             color: #999;
             cursor: pointer;
-            padding: 2px;
+            padding: 4px;
         }
         .withdraw-confirm-modal .close-btn:hover {
             color: #1c2128;
         }
         .withdraw-confirm-modal h3 {
-            font-size: 17px;
+            font-size: 20px;
             font-weight: 700;
             color: #1c2128;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             clear: both;
         }
         .withdraw-confirm-modal .sub {
-            font-size: 12px;
+            font-size: 14px;
             color: #555;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             line-height: 1.6;
         }
         .withdraw-confirm-modal .details {
             background: #f8f9fc;
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 12px;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 16px;
             text-align: left;
             border: 1px solid #f0f0f0;
         }
         .withdraw-confirm-modal .details .row {
             display: flex;
             justify-content: space-between;
-            padding: 3px 0;
-            font-size: 12px;
+            padding: 4px 0;
+            font-size: 13px;
         }
         .withdraw-confirm-modal .details .row .label {
             color: #888;
@@ -1947,17 +2491,17 @@
         }
         .withdraw-confirm-modal .btn-confirm-withdraw {
             width: 100%;
-            padding: 10px;
-            border-radius: 8px;
+            padding: 12px;
+            border-radius: 10px;
             border: none;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.2s;
-            margin-top: 3px;
+            margin-top: 4px;
         }
         .withdraw-confirm-modal .btn-confirm-withdraw:hover {
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
         .withdraw-confirm-modal .btn-confirm-withdraw:active {
             transform: scale(0.96);
@@ -1972,15 +2516,15 @@
         }
         .withdraw-confirm-modal .btn-cancel-withdraw {
             width: 100%;
-            padding: 10px;
-            border-radius: 8px;
+            padding: 12px;
+            border-radius: 10px;
             border: none;
             background: #f0f0f0;
             color: #555;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
-            margin-top: 6px;
+            margin-top: 8px;
             transition: all 0.2s;
         }
         .withdraw-confirm-modal .btn-cancel-withdraw:hover {
@@ -2002,68 +2546,68 @@
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 14px;
+            padding: 16px;
         }
         .account-update-modal-overlay.open {
             display: flex;
         }
         .account-update-modal {
             background: #ffffff;
-            border-radius: 16px;
+            border-radius: 18px;
             width: 100%;
-            max-width: 440px;
+            max-width: 500px;
             max-height: 90vh;
             overflow-y: auto;
-            padding: 20px 18px 16px 18px;
-            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.2);
+            padding: 24px 22px 20px 22px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
             animation: modalIn 0.25s ease;
         }
         .account-update-modal .close-btn {
             float: right;
             background: none;
             border: none;
-            font-size: 18px;
+            font-size: 20px;
             color: #999;
             cursor: pointer;
-            padding: 2px;
+            padding: 4px;
         }
         .account-update-modal .close-btn:hover {
             color: #1c2128;
         }
         .account-update-modal h3 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
             color: #1c2128;
             clear: both;
         }
         .account-update-modal p.sub {
             color: #777;
-            font-size: 12px;
-            margin-bottom: 12px;
+            font-size: 13px;
+            margin-bottom: 16px;
         }
         .account-update-modal .user-checkbox-list {
-            max-height: 240px;
+            max-height: 300px;
             overflow-y: auto;
             border: 1px solid #f0f0f0;
-            border-radius: 8px;
-            padding: 8px;
-            margin-bottom: 12px;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 14px;
         }
         .account-update-modal .user-checkbox-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 4px 6px;
+            gap: 10px;
+            padding: 6px 8px;
             border-bottom: 1px solid #f5f5f5;
-            font-size: 12px;
+            font-size: 13px;
         }
         .account-update-modal .user-checkbox-item:last-child {
             border-bottom: none;
         }
         .account-update-modal .user-checkbox-item input[type="checkbox"] {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             accent-color: #1c2128;
             cursor: pointer;
         }
@@ -2073,33 +2617,33 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 3px;
+            gap: 4px;
         }
         .account-update-modal .user-checkbox-item .user-info .name {
             font-weight: 500;
             color: #1c2128;
         }
         .account-update-modal .user-checkbox-item .user-info .email {
-            font-size: 10px;
+            font-size: 11px;
             color: #888;
         }
         .account-update-modal .user-checkbox-item .user-info .bal {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
             color: #f5b83d;
         }
         .account-update-modal .select-all-row {
             display: flex;
-            gap: 8px;
-            margin-bottom: 8px;
+            gap: 10px;
+            margin-bottom: 10px;
             align-items: center;
         }
         .account-update-modal .select-all-row button {
-            padding: 3px 12px;
-            border-radius: 14px;
+            padding: 4px 14px;
+            border-radius: 16px;
             border: 1px solid #ddd;
             background: #f8f9fc;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
@@ -2114,22 +2658,22 @@
         }
         .account-update-modal .action-type-row {
             display: flex;
-            gap: 8px;
-            margin-bottom: 10px;
+            gap: 10px;
+            margin-bottom: 12px;
             flex-wrap: wrap;
         }
         .account-update-modal .action-type-row .action-option {
             flex: 1;
-            padding: 6px 10px;
-            border-radius: 8px;
+            padding: 8px 12px;
+            border-radius: 10px;
             border: 2px solid #ddd;
             background: #fafafa;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
             text-align: center;
-            min-width: 80px;
+            min-width: 100px;
         }
         .account-update-modal .action-type-row .action-option:hover {
             border-color: #bbb;
@@ -2139,27 +2683,27 @@
             background: #f8f9fc;
         }
         .account-update-modal .action-type-row .action-option i {
-            margin-right: 3px;
+            margin-right: 4px;
         }
         .account-update-modal .amount-input-row {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             flex-wrap: wrap;
         }
         .account-update-modal .amount-input-row label {
             font-weight: 500;
-            font-size: 12px;
+            font-size: 13px;
             color: #222;
         }
         .account-update-modal .amount-input-row input {
             flex: 1;
-            padding: 6px 10px;
+            padding: 8px 12px;
             border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 12px;
-            min-width: 60px;
+            border-radius: 8px;
+            font-size: 13px;
+            min-width: 80px;
         }
         .account-update-modal .amount-input-row input:focus {
             outline: none;
@@ -2167,13 +2711,13 @@
         }
         .account-update-modal .btn-apply-update {
             width: 100%;
-            padding: 9px;
+            padding: 11px;
             background: #1c2128;
             color: #fff;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -2189,11 +2733,11 @@
         }
         .account-update-modal .wipe-warning {
             background: #fee2e2;
-            border-radius: 6px;
-            padding: 6px 10px;
-            font-size: 11px;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 12px;
             color: #dc2626;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: none;
         }
         .account-update-modal .wipe-warning.show {
@@ -2202,38 +2746,38 @@
 
         .price-adjust-box {
             background: #ffffff;
-            border-radius: 12px;
-            padding: 14px 12px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            border-radius: 16px;
+            padding: 18px 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
             border: 1px solid #f0f0f0;
         }
         .price-adjust-box .title {
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 700;
             color: #1c2128;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         .price-adjust-box .title i {
             color: #f5b83d;
         }
         .price-adjust-box .sub {
-            font-size: 10px;
+            font-size: 12px;
             color: #888;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .price-adjust-box .adjust-options {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .price-adjust-box .adjust-options .opt {
-            padding: 4px 12px;
-            border-radius: 16px;
+            padding: 6px 16px;
+            border-radius: 20px;
             border: 2px solid #ddd;
             background: #fafafa;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
@@ -2251,44 +2795,44 @@
         }
         .price-adjust-box .adjust-val-row {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             align-items: center;
             flex-wrap: wrap;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .price-adjust-box .adjust-val-row label {
             font-weight: 500;
-            font-size: 11px;
+            font-size: 12px;
             color: #222;
         }
         .price-adjust-box .adjust-val-row input {
-            padding: 5px 10px;
+            padding: 6px 12px;
             border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 12px;
-            width: 100px;
+            border-radius: 8px;
+            font-size: 13px;
+            width: 120px;
         }
         .price-adjust-box .adjust-val-row input:focus {
             outline: none;
             border-color: #1c2128;
         }
         .price-adjust-box .btn-apply-adjust {
-            padding: 6px 22px;
-            border-radius: 24px;
+            padding: 8px 28px;
+            border-radius: 30px;
             border: none;
             background: #1c2128;
             color: #fff;
             font-weight: 600;
-            font-size: 11px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         .price-adjust-box .btn-apply-adjust:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         .price-adjust-box .btn-apply-adjust:active {
             transform: scale(0.95);
@@ -2297,20 +2841,20 @@
             color: #f5b83d;
         }
         .price-adjust-box .adjust-preview {
-            margin-top: 8px;
-            padding: 8px 12px;
+            margin-top: 10px;
+            padding: 10px 14px;
             background: #f8f9fc;
-            border-radius: 8px;
+            border-radius: 10px;
             border: 1px solid #f0f0f0;
-            font-size: 11px;
+            font-size: 12px;
             color: #555;
-            max-height: 240px;
+            max-height: 300px;
             overflow-y: auto;
         }
         .price-adjust-box .adjust-preview .preview-item {
             display: flex;
             justify-content: space-between;
-            padding: 3px 0;
+            padding: 4px 0;
             border-bottom: 1px solid #f0f0f0;
         }
         .price-adjust-box .adjust-preview .preview-item:last-child {
@@ -2323,480 +2867,610 @@
             font-weight: 600;
         }
         .price-adjust-box .adjust-preview .preview-item .pprice .old {
-            font-size: 9px;
+            font-size: 10px;
             color: #aaa;
             text-decoration: line-through;
-            margin-right: 4px;
+            margin-right: 6px;
         }
         .price-adjust-box .adjust-preview .preview-item .pprice .new {
             font-weight: 700;
             color: #1c2128;
         }
 
-        /* ── TRANSFER ITEM ── */
-        .transfer-item {
+        /* ── USER CARD STYLES (compact, floating, like account cards) ── */
+        .user-card {
             background: #ffffff;
-            border-radius: 10px;
-            padding: 12px 14px;
+            border-radius: 12px;
+            padding: 14px 18px;
             border: 1px solid #f0f0f0;
-            margin-bottom: 8px;
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+            margin-bottom: 10px;
             transition: all 0.2s;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
-        .transfer-item:hover {
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        .user-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border-color: #ddd;
         }
-        .transfer-item .transfer-summary {
+        .user-card .user-summary {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 4px;
+            gap: 6px;
         }
-        .transfer-item .transfer-summary .left {
+        .user-card .user-summary .left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            min-width: 140px;
+        }
+        .user-card .user-summary .left .u-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #1c2128;
+            color: #f5b83d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .user-card .user-summary .left .u-info {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 1px;
         }
-        .transfer-item .transfer-summary .left .sender {
+        .user-card .user-summary .left .u-info .u-name {
             font-weight: 600;
+            font-size: 15px;
+            color: #1c2128;
+            letter-spacing: -0.2px;
+        }
+        .user-card .user-summary .left .u-info .u-email {
             font-size: 12px;
-            color: #1c2128;
-        }
-        .transfer-item .transfer-summary .left .recipient {
-            font-size: 10px;
-            color: #555;
-        }
-        .transfer-item .transfer-summary .left .detail {
-            font-size: 10px;
-            color: #888;
-        }
-        .transfer-item .transfer-summary .right {
-            text-align: right;
-        }
-        .transfer-item .transfer-summary .right .amount {
-            font-weight: 700;
-            font-size: 14px;
-            color: #1c2128;
-        }
-        .transfer-item .transfer-summary .right .amount.sent {
-            color: #dc2626;
-        }
-        .transfer-item .transfer-summary .right .amount.received {
-            color: #00a86b;
-        }
-        .transfer-item .transfer-summary .right .date {
-            font-size: 9px;
             color: #aaa;
+            font-weight: 400;
             margin-top: 1px;
         }
-
-        .promo-pics-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-            padding: 2px 0 16px 0;
-            max-width: 640px;
-            margin: 0 auto;
+        .user-card .user-summary .right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
-
-        .work-option-card {
-            background: #ffffff;
+        .user-card .user-summary .right .user-status-badge {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 12px;
             border-radius: 12px;
-            padding: 14px 10px;
-            text-align: center;
-            border: 2px solid #f0f0f0;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+            white-space: nowrap;
         }
-        .work-option-card:hover {
-            border-color: #f5b83d;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(245, 184, 61, 0.12);
+        .user-card .user-summary .right .ban-toggle-wrap {
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
-        .work-option-card:active {
-            transform: scale(0.95);
+        .user-card .user-summary .right .ban-toggle-wrap .toggle-switch {
+            width: 48px;
+            height: 28px;
+            flex-shrink: 0;
         }
-        .work-option-card .wo-icon {
-            font-size: 26px;
-            margin-bottom: 4px;
+        .user-card .user-summary .right .ban-toggle-wrap .toggle-switch .toggle-slider:before {
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+        }
+        .user-card .user-summary .right .ban-toggle-wrap .toggle-switch input:checked+.toggle-slider:before {
+            transform: translateX(20px);
+        }
+        .user-card .user-summary .right .ban-toggle-wrap .ban-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #555;
+            min-width: 30px;
+        }
+        .user-card .user-summary .right .expand-icon {
+            font-size: 12px;
+            color: #aaa;
+            transition: transform 0.3s;
+            margin-left: 2px;
+        }
+        .user-card.open .user-summary .right .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .user-card .user-details {
+            display: none;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .user-card .user-details.open {
             display: block;
         }
-        .work-option-card .wo-label {
-            font-weight: 700;
-            font-size: 11px;
-            color: #1c2128;
-        }
-        .work-option-card .wo-sub {
-            font-size: 9px;
-            color: #888;
-        }
-
-        .work-grid-2x2 {
+        .user-card .user-details .detail-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 6px 24px;
+            margin-bottom: 10px;
         }
-        @media (max-width: 420px) {
-            .work-grid-2x2 {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
+        @media (max-width: 500px) {
+            .user-card .user-details .detail-grid {
+                grid-template-columns: 1fr;
+                gap: 4px;
             }
         }
-
-        .work-post-card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 12px;
-            border: 1px solid #f0f0f0;
-            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-        .work-post-card:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-        }
-        .work-post-card .post-thumb {
-            width: 100%;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #f5f5f5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 8px;
-            position: relative;
-        }
-        .work-post-card .post-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .work-post-card .post-thumb .no-image {
-            color: #ccc;
-            font-size: 28px;
-        }
-        .work-post-card .post-type-badge {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            background: rgba(28, 33, 40, 0.8);
-            color: #fff;
-            font-size: 8px;
-            font-weight: 600;
-            padding: 1px 8px;
-            border-radius: 10px;
-            backdrop-filter: blur(4px);
-        }
-        .work-post-card .post-title {
-            font-weight: 700;
-            font-size: 12px;
-            color: #1c2128;
-            margin-bottom: 1px;
-        }
-        .work-post-card .post-desc {
-            font-size: 10px;
-            color: #666;
-            line-height: 1.4;
-            flex: 1;
-        }
-        .work-post-card .post-meta {
-            font-size: 9px;
-            color: #aaa;
-            margin-top: 4px;
+        .user-card .user-details .detail-grid .detail-item {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            padding: 3px 0;
+            font-size: 13px;
+            border-bottom: 1px solid #f8f8f8;
         }
-        .work-post-card .post-actions {
-            display: flex;
-            gap: 4px;
-            margin-top: 6px;
+        .user-card .user-details .detail-grid .detail-item .label {
+            color: #888;
         }
-        .work-post-card .post-actions .btn {
-            padding: 2px 8px;
-            font-size: 8px;
-            border-radius: 6px;
-        }
-        .work-post-card .post-actions .btn-edit-post {
-            background: #f0f0f0;
+        .user-card .user-details .detail-grid .detail-item .val {
+            font-weight: 500;
             color: #1c2128;
         }
-        .work-post-card .post-actions .btn-delete-post {
-            background: #fee2e2;
+        .user-card .user-details .detail-grid .detail-item .val.highlight {
+            color: #f5b83d;
+            font-weight: 700;
+        }
+        .user-card .user-details .detail-grid .detail-item .val.green {
+            color: #16a34a;
+        }
+        .user-card .user-details .detail-grid .detail-item .val.red {
             color: #dc2626;
         }
 
-        .phone-frame {
-            width: 100%;
-            max-width: 180px;
-            margin: 0 auto;
-            border: 5px solid #1c2128;
-            border-radius: 24px;
-            padding: 5px;
-            background: #fff;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-            aspect-ratio: 9/19;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
+        .user-card .user-details .referral-users {
+            margin-top: 6px;
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 8px 14px;
+            border: 1px solid #f0f0f0;
         }
-        .phone-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .user-card .user-details .referral-users .ref-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1c2128;
+            margin-bottom: 4px;
+        }
+        .user-card .user-details .referral-users .ref-users-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .user-card .user-details .referral-users .ref-users-list .ref-user-tag {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 2px 10px;
             border-radius: 14px;
+            font-size: 11px;
+            color: #555;
         }
-        .phone-frame .notch {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 14px;
-            background: #1c2128;
-            border-radius: 0 0 10px 10px;
-        }
-        .phone-frame .placeholder {
-            color: #ccc;
-            font-size: 24px;
-            text-align: center;
+        .user-card .user-details .referral-users .ref-users-list .no-ref-users {
+            font-size: 12px;
+            color: #aaa;
         }
 
-        .laptop-frame {
-            width: 100%;
-            max-width: 260px;
-            margin: 0 auto;
-            background: #1c2128;
-            border-radius: 10px 10px 0 0;
-            padding: 8px 8px 0 8px;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+        .user-card .user-details .actions-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
-        .laptop-frame .screen {
-            background: #fff;
-            border-radius: 5px 5px 0 0;
-            aspect-ratio: 16/10;
-            overflow: hidden;
+        .user-card .user-details .actions-row .btn {
+            padding: 5px 16px;
+            font-size: 11px;
+            border-radius: 20px;
+        }
+
+        /* ── USER FILTER BAR ── */
+        .user-filter-bar {
             display: flex;
             align-items: center;
-            justify-content: center;
-            position: relative;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+            padding: 0 2px;
         }
-        .laptop-frame .screen img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .user-filter-bar input {
+            flex: 1;
+            min-width: 120px;
+            padding: 8px 14px;
+            border: 1px solid #ddd;
+            border-radius: 24px;
+            font-size: 13px;
+            outline: none;
+            transition: border 0.2s;
         }
-        .laptop-frame .screen .placeholder {
-            color: #ccc;
-            font-size: 24px;
-            text-align: center;
+        .user-filter-bar input:focus {
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
-        .laptop-frame .base {
-            height: 8px;
-            background: #2a2a2a;
-            border-radius: 0 0 6px 6px;
-            margin: 0 6px;
-            position: relative;
+        .user-filter-bar select {
+            padding: 8px 14px;
+            border: 1px solid #ddd;
+            border-radius: 24px;
+            font-size: 13px;
+            outline: none;
+            background: #fff;
+            transition: border 0.2s;
+            min-width: 130px;
         }
-        .laptop-frame .base::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 3px;
-            background: #444;
-            border-radius: 0 0 3px 3px;
-        }
-
-        @keyframes modalIn {
-            from {
-                opacity: 0;
-                transform: scale(0.92) translateY(12px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+        .user-filter-bar select:focus {
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
 
-        @media (max-width: 420px) {
-            .app-content {
-                padding: 0 10px 120px 10px;
-            }
-            .bottom-nav {
-                height: 50px;
-                padding: 4px 10px;
-                border-radius: 24px;
-            }
-            .nav-item i {
-                font-size: 14px;
-            }
-            .nav-item {
-                font-size: 5px;
-            }
-            .stat-grid {
-                gap: 8px;
-            }
-            .stat-card {
-                padding: 10px 8px;
-            }
-            .stat-card .stat-value {
-                font-size: 17px;
-            }
-            .stat-card .stat-icon {
-                width: 28px;
-                height: 28px;
-                font-size: 12px;
-            }
-            .work-avatar {
-                width: 32px;
-                height: 32px;
-                font-size: 10px;
-            }
-            .header-text span:last-child {
-                font-size: 11px;
-            }
-            .action-btn {
-                padding: 4px 12px;
-                font-size: 9px;
-            }
-            .action-btn i {
-                font-size: 11px;
-            }
-            .greeting {
-                font-size: 16px;
-            }
-            .greeting-sub {
-                font-size: 10px;
-            }
-            .promo-pic-card {
-                height: 280px;
-            }
-            .promo-pics-upload-area {
-                height: 280px;
-                padding: 24px 12px;
-            }
-            .promo-pics-upload-area .upload-icon {
-                font-size: 32px;
-            }
-            .payables-action-row .p-btn {
-                padding: 4px 12px;
-                font-size: 9px;
-            }
-            .referral-section .form-row-custom {
-                grid-template-columns: 1fr;
+        @media (max-width: 400px) {
+            .user-card .user-summary .left {
+                min-width: 100px;
             }
             .user-card .user-summary .left .u-avatar {
-                width: 28px;
-                height: 28px;
-                font-size: 11px;
+                width: 32px;
+                height: 32px;
+                font-size: 13px;
             }
             .user-card .user-summary .left .u-info .u-name {
-                font-size: 11px;
+                font-size: 13px;
             }
-            .user-card .user-summary .left .u-info .u-email {
-                font-size: 9px;
+            .user-card .user-summary .right .ban-toggle-wrap .toggle-switch {
+                width: 40px;
+                height: 24px;
             }
-            .order-card {
-                padding: 10px 12px;
+            .user-card .user-summary .right .ban-toggle-wrap .toggle-switch .toggle-slider:before {
+                height: 18px;
+                width: 18px;
             }
-            .order-card .order-toggle {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 4px;
+            .user-card .user-summary .right .ban-toggle-wrap .toggle-switch input:checked+.toggle-slider:before {
+                transform: translateX(16px);
             }
-            .order-card .order-toggle>div:last-child {
-                width: 100%;
-                text-align: right;
+            .user-card .user-details .detail-grid {
+                grid-template-columns: 1fr;
             }
-            .order-card .order-toggle>div:first-child {
-                width: 100%;
-            }
-            .order-details .row {
-                font-size: 10px;
-            }
-            .account-item .account-summary {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 4px;
-            }
-            .withdraw-card .row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1px;
-            }
-            .withdraw-card .row .value {
-                font-size: 10px;
-            }
-            .transfer-item .transfer-summary {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 3px;
+            .user-filter-bar select {
+                min-width: 100px;
             }
         }
 
-        @media (max-width: 380px) {
-            .stat-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 6px;
-            }
-            .stat-card .stat-value {
-                font-size: 15px;
-            }
-            .work-options-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 6px;
-            }
-            .work-option-card {
-                padding: 10px 6px;
-            }
-            .work-option-card .wo-icon {
-                font-size: 20px;
-            }
-            .work-option-card .wo-label {
-                font-size: 10px;
-            }
-            .service-grid-customer {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 6px;
-            }
-            .service-card-customer {
-                padding: 8px 4px;
-            }
-            .service-card-customer .icon-wrap {
-                width: 30px;
-                height: 30px;
-                font-size: 14px;
-            }
-            .service-card-customer .title {
-                font-size: 8px;
-            }
-            .service-card-customer .price {
-                font-size: 8px;
-            }
+        .promo-header-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #f5b83d;
+            color: #1c2128;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(245, 184, 61, 0.3);
+        }
+        .promo-header-btn:active {
+            transform: scale(0.92);
+        }
+        .promo-header-btn:hover {
+            box-shadow: 0 6px 20px rgba(245, 184, 61, 0.4);
+        }
+
+        @media (min-width: 401px) and (max-width: 600px) {
             .promo-pic-card {
-                height: 220px;
+                height: 380px;
             }
             .promo-pics-upload-area {
-                height: 220px;
-                padding: 16px 8px;
+                height: 380px;
             }
-            .promo-pics-upload-area .upload-icon {
-                font-size: 28px;
-            }
-            .promo-pics-upload-area .upload-text {
-                font-size: 10px;
-            }
+        }
+
+        .customer-select-wrapper {
+            position: relative;
+        }
+        .customer-select-wrapper select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 13px;
+            background: #ffffff;
+            color: #1c2128;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%23888'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+        }
+        .customer-select-wrapper select:focus {
+            outline: none;
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+        .customer-select-wrapper .customer-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+        }
+        .customer-select-wrapper .customer-option .opt-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #1c2128;
+            color: #f5b83d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        .customer-select-wrapper .customer-option .opt-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .customer-select-wrapper .customer-option .opt-info .opt-name {
+            font-weight: 600;
+            font-size: 13px;
+            color: #1c2128;
+        }
+        .customer-select-wrapper .customer-option .opt-info .opt-email {
+            font-size: 11px;
+            color: #888;
+        }
+        .customer-select-wrapper .customer-option .opt-info .opt-bal {
+            font-size: 11px;
+            color: #f5b83d;
+            font-weight: 600;
+        }
+
+        .edit-customer-modal .modal {
+            max-width: 480px;
+        }
+        .edit-customer-modal .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .edit-customer-modal .form-row .full-width {
+            grid-column: 1 / -1;
+        }
+        .edit-customer-modal .form-group {
+            margin-bottom: 12px;
+        }
+        .edit-customer-modal .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 12px;
+            color: #222;
+            margin-bottom: 4px;
+        }
+        .edit-customer-modal .form-group input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            transition: border 0.2s;
+            background: #ffffff;
+            color: #1c2128;
+        }
+        .edit-customer-modal .form-group input:focus {
+            outline: none;
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+        .edit-customer-modal .btn-save-edit {
+            width: 100%;
+            padding: 11px;
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .edit-customer-modal .btn-save-edit:hover {
+            background: #2a2a2a;
+        }
+        .edit-customer-modal .btn-save-edit:active {
+            transform: scale(0.95);
+        }
+        .edit-customer-modal .btn-save-edit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .user-selector-modal .modal {
+            max-width: 400px;
+        }
+        .user-selector-modal .search-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 14px;
+            transition: border 0.2s;
+        }
+        .user-selector-modal .search-input:focus {
+            outline: none;
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+        .user-selector-modal .user-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #f0f0f0;
+            border-radius: 10px;
+            padding: 6px;
+        }
+        .user-selector-modal .user-list .user-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .user-selector-modal .user-list .user-item:last-child {
+            border-bottom: none;
+        }
+        .user-selector-modal .user-list .user-item:hover {
+            background: #f8f9fc;
+        }
+        .user-selector-modal .user-list .user-item:active {
+            transform: scale(0.98);
+        }
+        .user-selector-modal .user-list .user-item .u-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #1c2128;
+            color: #f5b83d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .user-selector-modal .user-list .user-item .u-info {
+            flex: 1;
+        }
+        .user-selector-modal .user-list .user-item .u-info .u-name {
+            font-weight: 600;
+            font-size: 13px;
+            color: #1c2128;
+        }
+        .user-selector-modal .user-list .user-item .u-info .u-email {
+            font-size: 11px;
+            color: #888;
+        }
+        .user-selector-modal .user-list .user-item .u-info .u-bal {
+            font-size: 11px;
+            color: #f5b83d;
+            font-weight: 600;
+        }
+        .user-selector-modal .user-list .user-item.selected {
+            background: #f0f5ff;
+            border: 2px solid #1c2128;
+        }
+        .user-selector-modal .btn-select-user {
+            width: 100%;
+            padding: 11px;
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: all 0.2s;
+        }
+        .user-selector-modal .btn-select-user:hover {
+            background: #2a2a2a;
+        }
+        .user-selector-modal .btn-select-user:active {
+            transform: scale(0.95);
+        }
+        .user-selector-modal .btn-select-user:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .user-selector-modal .selected-name {
+            font-weight: 600;
+            color: #1c2128;
+            padding: 8px 12px;
+            background: #f8f9fc;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 10px;
+            display: none;
+        }
+        .user-selector-modal .selected-name.show {
+            display: block;
+        }
+
+        .account-update-search {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 10px;
+            transition: border 0.2s;
+        }
+        .account-update-search:focus {
+            outline: none;
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+
+        /* ── CUSTOMER TRANSFERS MODAL ── */
+        .customer-transfer-modal .modal {
+            max-width: 450px;
+        }
+        .customer-transfer-modal .form-group {
+            margin-bottom: 12px;
+        }
+        .customer-transfer-modal .form-group label {
+            font-weight: 600;
+            font-size: 12px;
+            color: #222;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .customer-transfer-modal .form-group select,
+        .customer-transfer-modal .form-group input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            transition: border 0.2s;
+            background: #fff;
+            color: #1c2128;
+        }
+        .customer-transfer-modal .form-group select:focus,
+        .customer-transfer-modal .form-group input:focus {
+            outline: none;
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+        }
+        .customer-transfer-modal .btn-transfer {
+            width: 100%;
+            padding: 10px;
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .customer-transfer-modal .btn-transfer:active {
+            transform: scale(0.95);
+        }
+        .customer-transfer-modal .btn-transfer i {
+            color: #f5b83d;
         }
     </style>
 </head>
@@ -2880,22 +3554,22 @@
                     <div class="card-header">
                         <h3>Quick Stats</h3>
                     </div>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:12px; color:#555;">
-                        <div style="background:#f0f0f0; border-radius:6px; padding:8px; text-align:center;">
-                            <div style="font-size:9px; color:#888;">Pending</div>
-                            <div style="font-size:17px; font-weight:700; color:#f5b83d;" id="statPending">0</div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:13px; color:#555;">
+                        <div style="background:#f0f0f0; border-radius:8px; padding:10px; text-align:center;">
+                            <div style="font-size:10px; color:#888;">Pending</div>
+                            <div style="font-size:20px; font-weight:700; color:#f5b83d;" id="statPending">0</div>
                         </div>
-                        <div style="background:#f0f0f0; border-radius:6px; padding:8px; text-align:center;">
-                            <div style="font-size:9px; color:#888;">In Progress</div>
-                            <div style="font-size:17px; font-weight:700; color:#1a73e8;" id="statProgress">0</div>
+                        <div style="background:#f0f0f0; border-radius:8px; padding:10px; text-align:center;">
+                            <div style="font-size:10px; color:#888;">In Progress</div>
+                            <div style="font-size:20px; font-weight:700; color:#1a73e8;" id="statProgress">0</div>
                         </div>
-                        <div style="background:#f0f0f0; border-radius:6px; padding:8px; text-align:center;">
-                            <div style="font-size:9px; color:#888;">Completed</div>
-                            <div style="font-size:17px; font-weight:700; color:#00a86b;" id="statCompleted">0</div>
+                        <div style="background:#f0f0f0; border-radius:8px; padding:10px; text-align:center;">
+                            <div style="font-size:10px; color:#888;">Completed</div>
+                            <div style="font-size:20px; font-weight:700; color:#00a86b;" id="statCompleted">0</div>
                         </div>
-                        <div style="background:#f0f0f0; border-radius:6px; padding:8px; text-align:center;">
-                            <div style="font-size:9px; color:#888;">Total Revenue</div>
-                            <div style="font-size:17px; font-weight:700; color:#7c3aed;" id="statRevenueDetail">0</div>
+                        <div style="background:#f0f0f0; border-radius:8px; padding:10px; text-align:center;">
+                            <div style="font-size:10px; color:#888;">Total Revenue</div>
+                            <div style="font-size:20px; font-weight:700; color:#7c3aed;" id="statRevenueDetail">0</div>
                         </div>
                     </div>
                 </div>
@@ -2948,13 +3622,13 @@
             <!-- ===== PAGE: PROMO PICS ===== -->
             <div id="page-promo-pics" class="page">
 
-                <div class="card" style="border: none; box-shadow: none; padding: 0 0 6px 0;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                <div class="card" style="border: none; box-shadow: none; padding: 0 0 8px 0;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
                         <div>
-                            <h2 style="font-size:20px; font-weight:800; color:#1c2128;"><i class="fa-regular fa-images" style="color:#f5b83d;"></i> Promo Pics</h2>
-                            <p style="font-size:11px; color:#888;">Upload flyer pictures — each with a text overlay and delete option.</p>
+                            <h2 style="font-size:24px; font-weight:800; color:#1c2128;"><i class="fa-regular fa-images" style="color:#f5b83d;"></i> Promo Pics</h2>
+                            <p style="font-size:13px; color:#888;">Upload flyer pictures — each with a text overlay and delete option.</p>
                         </div>
-                        <button class="btn btn-primary" id="addPromoPicBtn" style="padding:8px 18px; font-size:12px; border-radius:24px;">
+                        <button class="btn btn-primary" id="addPromoPicBtn" style="padding:10px 24px; font-size:14px; border-radius:30px;">
                             <i class="fa-solid fa-cloud-arrow-up"></i> Upload Flyer
                         </button>
                     </div>
@@ -2967,9 +3641,9 @@
             <!-- ===== PAGE: REFERRAL ===== -->
             <div id="page-referral" class="page">
 
-                <div style="margin-bottom:12px;">
-                    <h2 style="font-size:20px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-gift" style="color:#f5b83d;"></i> Referral Management</h2>
-                    <p style="font-size:11px; color:#888;">Manage referral promos, custom referrals, and referral discounts.</p>
+                <div style="margin-bottom:16px;">
+                    <h2 style="font-size:24px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-gift" style="color:#f5b83d;"></i> Referral Management</h2>
+                    <p style="font-size:13px; color:#888;">Manage referral promos, custom referrals, and referral discounts.</p>
                 </div>
 
                 <div class="referral-section">
@@ -2984,8 +3658,8 @@
                         </div>
                     </div>
                     <button class="btn-post" id="postReferralPromo"><i class="fa-solid fa-check"></i> Post Referral Promo</button>
-                    <div style="margin-top:14px;">
-                        <h4 style="font-size:12px; font-weight:600; color:#1c2128; margin-bottom:8px;">Posted Referral Promos</h4>
+                    <div style="margin-top:18px;">
+                        <h4 style="font-size:14px; font-weight:600; color:#1c2128; margin-bottom:10px;">Posted Referral Promos</h4>
                         <div class="referral-list-container" id="referralPromoList"></div>
                     </div>
                 </div>
@@ -3012,8 +3686,8 @@
                         </div>
                     </div>
                     <button class="btn-post" id="postCustomReferral"><i class="fa-solid fa-check"></i> Post Custom Referral</button>
-                    <div style="margin-top:14px;">
-                        <h4 style="font-size:12px; font-weight:600; color:#1c2128; margin-bottom:8px;">Posted Custom Referrals</h4>
+                    <div style="margin-top:18px;">
+                        <h4 style="font-size:14px; font-weight:600; color:#1c2128; margin-bottom:10px;">Posted Custom Referrals</h4>
                         <div class="referral-list-container" id="customReferralList"></div>
                     </div>
                 </div>
@@ -3037,8 +3711,8 @@
                         </div>
                     </div>
                     <button class="btn-post" id="postReferralDiscount"><i class="fa-solid fa-check"></i> Post Referral Discount</button>
-                    <div style="margin-top:14px;">
-                        <h4 style="font-size:12px; font-weight:600; color:#1c2128; margin-bottom:8px;">Posted Referral Discounts</h4>
+                    <div style="margin-top:18px;">
+                        <h4 style="font-size:14px; font-weight:600; color:#1c2128; margin-bottom:10px;">Posted Referral Discounts</h4>
                         <div class="referral-list-container" id="referralDiscountList"></div>
                     </div>
                 </div>
@@ -3063,8 +3737,8 @@
                         </div>
                     </div>
                     <button class="btn-post" id="postReferralPromoDiscount"><i class="fa-solid fa-check"></i> Post Referral Promo</button>
-                    <div style="margin-top:14px;">
-                        <h4 style="font-size:12px; font-weight:600; color:#1c2128; margin-bottom:8px;">Posted Referral Promos</h4>
+                    <div style="margin-top:18px;">
+                        <h4 style="font-size:14px; font-weight:600; color:#1c2128; margin-bottom:10px;">Posted Referral Promos</h4>
                         <div class="referral-list-container" id="referralPromoDiscountList"></div>
                     </div>
                 </div>
@@ -3089,9 +3763,9 @@
                         </div>
                     </div>
                     <button class="btn-post" id="saveSignupBonuses"><i class="fa-solid fa-check"></i> Save Signup Bonuses</button>
-                    <div style="margin-top:14px;">
-                        <h4 style="font-size:12px; font-weight:600; color:#1c2128; margin-bottom:8px;">Current Signup Bonuses</h4>
-                        <div id="signupBonusesDisplay" style="font-size:12px; color:#555; background:#f8f9fc; padding:10px 14px; border-radius:8px; border:1px solid #f0f0f0;">
+                    <div style="margin-top:18px;">
+                        <h4 style="font-size:14px; font-weight:600; color:#1c2128; margin-bottom:10px;">Current Signup Bonuses</h4>
+                        <div id="signupBonusesDisplay" style="font-size:13px; color:#555; background:#f8f9fc; padding:12px 16px; border-radius:10px; border:1px solid #f0f0f0;">
                             With referral: <strong id="displayWithReferral">ZMW 0.00</strong> &middot;
                             With custom: <strong id="displayWithCustom">ZMW 0.00</strong> &middot;
                             Without referral: <strong id="displayWithoutReferral">ZMW 0.00</strong>
@@ -3104,17 +3778,17 @@
             <!-- ===== PAGE: PAYABLES ===== -->
             <div id="page-payables" class="page">
 
-                <div style="margin-bottom:10px;">
-                    <h2 style="font-size:20px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-money-bill-wave" style="color:#f5b83d;"></i> Payables</h2>
-                    <p style="font-size:11px; color:#888;">Manage customer accounts, withdrawals, and customer‑to‑customer transfers.</p>
+                <div style="margin-bottom:12px;">
+                    <h2 style="font-size:24px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-money-bill-wave" style="color:#f5b83d;"></i> Payables</h2>
+                    <p style="font-size:13px; color:#888;">Manage customer accounts, transfers, and withdrawal requests.</p>
                 </div>
 
                 <div class="payables-action-row">
                     <button class="p-btn toggle active" id="toggleAccounts"><i class="fa-solid fa-wallet"></i> Accounts</button>
                     <button class="p-btn toggle" id="toggleWithdrawals"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
-                    <button class="p-btn toggle" id="toggleTransfers"><i class="fa-solid fa-arrow-right-arrow-left"></i> Transfers</button>
                     <button class="p-btn gold" id="manualDepositBtn"><i class="fa-solid fa-plus-circle"></i> Manual Deposit</button>
                     <button class="p-btn gold" id="accountUpdateBtn"><i class="fa-solid fa-pen-to-square"></i> Account Update</button>
+                    <button class="p-btn gold" id="customerTransfersBtn"><i class="fa-solid fa-arrow-right-arrow-left"></i> Customer Transfers</button>
                 </div>
 
                 <div class="payables-view active" id="viewAccounts">
@@ -3122,16 +3796,12 @@
                 </div>
 
                 <div class="payables-view" id="viewWithdrawals">
-                    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
-                        <button class="btn btn-primary btn-sm" id="showApprovedWithdrawals" style="background:#16a34a; color:#fff; border:none; padding:4px 14px; border-radius:16px; font-size:10px; font-weight:600; cursor:pointer;">✅ Approved</button>
-                        <button class="btn btn-danger btn-sm" id="showRejectedWithdrawals" style="background:#dc2626; color:#fff; border:none; padding:4px 14px; border-radius:16px; font-size:10px; font-weight:600; cursor:pointer;">❌ Rejected</button>
-                        <button class="btn btn-outline btn-sm" id="showPendingWithdrawals" style="background:#f5b83d; color:#1c2128; border:none; padding:4px 14px; border-radius:16px; font-size:10px; font-weight:600; cursor:pointer;">⏳ Pending</button>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px;">
+                        <button class="btn btn-primary btn-sm" id="showApprovedWithdrawals" style="background:#16a34a; color:#fff; border:none; padding:6px 18px; border-radius:20px; font-size:11px; font-weight:600; cursor:pointer;">✅ Approved</button>
+                        <button class="btn btn-danger btn-sm" id="showRejectedWithdrawals" style="background:#dc2626; color:#fff; border:none; padding:6px 18px; border-radius:20px; font-size:11px; font-weight:600; cursor:pointer;">❌ Rejected</button>
+                        <button class="btn btn-outline btn-sm" id="showPendingWithdrawals" style="background:#f5b83d; color:#1c2128; border:none; padding:6px 18px; border-radius:20px; font-size:11px; font-weight:600; cursor:pointer;">⏳ Pending</button>
                     </div>
                     <div id="withdrawalsList"></div>
-                </div>
-
-                <div class="payables-view" id="viewTransfers">
-                    <div id="transfersList"></div>
                 </div>
 
             </div>
@@ -3141,7 +3811,7 @@
 
                 <div class="hero-editor">
                     <div class="hero-content">
-                        <h4 style="color:#f5b83d; font-size:11px; font-weight:700; margin-bottom:4px;">HERO SECTION EDITOR</h4>
+                        <h4 style="color:#f5b83d; font-size:13px; font-weight:700; margin-bottom:6px;">HERO SECTION EDITOR</h4>
                         <input type="text" id="heroTitle" placeholder="Hero Title" />
                         <input type="text" id="heroTitleSpan" placeholder="Highlighted word (e.g. CREATIVE)" />
                         <textarea id="heroDesc" rows="2" placeholder="Hero description"></textarea>
@@ -3166,12 +3836,12 @@
                         <button class="btn-apply-adjust" id="applyAdjustBtn"><i class="fa-solid fa-wand-magic-sparkles"></i> Preview & Apply</button>
                     </div>
                     <div class="adjust-preview" id="adjustPreview">
-                        <div style="color:#aaa; text-align:center; padding:10px 0;">Select an adjustment mode and enter a value, then click "Preview & Apply".</div>
+                        <div style="color:#aaa; text-align:center; padding:12px 0;">Select an adjustment mode and enter a value, then click "Preview & Apply".</div>
                     </div>
                 </div>
 
                 <div class="list-editor">
-                    <h4 style="font-size:11px; font-weight:700; color:#1c2128; margin-bottom:6px;">OUR SERVICES LIST</h4>
+                    <h4 style="font-size:13px; font-weight:700; color:#1c2128; margin-bottom:8px;">OUR SERVICES LIST</h4>
                     <div id="ourServicesListContainer"></div>
                     <button class="btn-add" id="addServiceListItem">+ Add Item</button>
                     <button class="btn-save-list" id="saveServiceList">Save List</button>
@@ -3179,7 +3849,7 @@
 
                 <div class="policy-editor">
                     <div class="policy-content">
-                        <h4 style="color:#f5b83d; font-size:11px; font-weight:700; margin-bottom:4px;">PAYMENT POLICY CARD EDITOR</h4>
+                        <h4 style="color:#f5b83d; font-size:13px; font-weight:700; margin-bottom:6px;">PAYMENT POLICY CARD EDITOR</h4>
                         <input type="text" id="policyTitle" placeholder="Policy Title" />
                         <textarea id="policyDesc" rows="3" placeholder="Policy description"></textarea>
                         <input type="text" id="policyTag" placeholder="Policy tag text" />
@@ -3192,7 +3862,7 @@
                         <h3>Categories</h3>
                     </div>
                     <div class="category-container" id="categoryListContainer"></div>
-                    <div style="display:flex;gap:6px;flex-wrap:wrap;padding:6px 0;">
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;padding:8px 0;">
                         <input type="text" id="newCategoryInput" class="cat-input" placeholder="Category name" />
                         <button class="btn btn-primary btn-sm" id="addCategoryBtn">Add</button>
                     </div>
@@ -3203,12 +3873,12 @@
                         <h3>Services</h3>
                         <button class="btn btn-primary btn-sm" id="addServiceBtn"><i class="fa-solid fa-plus"></i> Add</button>
                     </div>
-                    <div style="display:flex; gap:4px; overflow-x:auto; padding-bottom:6px; margin-bottom:10px; scrollbar-width:none;">
-                        <button class="cat-filter active" data-cat="all" style="flex-shrink:0; background:#1c2128; color:#fff; border:none; padding:3px 12px; border-radius:14px; font-size:10px; font-weight:600; cursor:pointer;">All</button>
-                        <button class="cat-filter" data-cat="graphic" style="flex-shrink:0; background:#f0f0f0; border:none; padding:3px 12px; border-radius:14px; font-size:10px; font-weight:600; cursor:pointer;">Graphic</button>
-                        <button class="cat-filter" data-cat="dev" style="flex-shrink:0; background:#f0f0f0; border:none; padding:3px 12px; border-radius:14px; font-size:10px; font-weight:600; cursor:pointer;">Dev</button>
-                        <button class="cat-filter" data-cat="tech" style="flex-shrink:0; background:#f0f0f0; border:none; padding:3px 12px; border-radius:14px; font-size:10px; font-weight:600; cursor:pointer;">Tech</button>
-                        <button class="cat-filter" data-cat="it" style="flex-shrink:0; background:#f0f0f0; border:none; padding:3px 12px; border-radius:14px; font-size:10px; font-weight:600; cursor:pointer;">IT</button>
+                    <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:12px; scrollbar-width:none;">
+                        <button class="cat-filter active" data-cat="all" style="flex-shrink:0; background:#1c2128; color:#fff; border:none; padding:4px 14px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer;">All</button>
+                        <button class="cat-filter" data-cat="graphic" style="flex-shrink:0; background:#f0f0f0; border:none; padding:4px 14px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer;">Graphic</button>
+                        <button class="cat-filter" data-cat="dev" style="flex-shrink:0; background:#f0f0f0; border:none; padding:4px 14px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer;">Dev</button>
+                        <button class="cat-filter" data-cat="tech" style="flex-shrink:0; background:#f0f0f0; border:none; padding:4px 14px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer;">Tech</button>
+                        <button class="cat-filter" data-cat="it" style="flex-shrink:0; background:#f0f0f0; border:none; padding:4px 14px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer;">IT</button>
                     </div>
                     <div id="servicesList"></div>
                 </div>
@@ -3271,30 +3941,30 @@
             <div id="page-profile" class="page">
                 <div class="card">
                     <div class="card-header"><h3>Admin Profile</h3></div>
-                    <div style="display:flex; flex-direction:column; gap:10px;">
+                    <div style="display:flex; flex-direction:column; gap:12px;">
                         <div><strong>Name</strong><br /><span style="color:#555;" id="profileName">Admin User</span></div>
                         <div><strong>Email</strong><br /><span style="color:#555;" id="profileEmail">admin@bufferzone.com</span></div>
                         <div><strong>Phone</strong><br /><span style="color:#555;" id="profilePhone">Not set</span></div>
                         <div><strong>Role</strong><br /><span style="color:#555;">Super Administrator</span></div>
                         <div><strong>Settings</strong><br />
-                            <div class="form-group" style="margin-top:2px;">
+                            <div class="form-group" style="margin-top:4px;">
                                 <label>Agency Name</label>
-                                <input type="text" id="settingsName" style="width:100%; padding:6px 10px; border:1px solid #ddd; border-radius:8px; font-size:12px;" />
+                                <input type="text" id="settingsName" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:10px; font-size:13px;" />
                             </div>
                             <div class="form-group">
                                 <label>Contact Phone</label>
-                                <input type="text" id="settingsPhone" style="width:100%; padding:6px 10px; border:1px solid #ddd; border-radius:8px; font-size:12px;" />
+                                <input type="text" id="settingsPhone" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:10px; font-size:13px;" />
                             </div>
                             <div class="form-group">
                                 <label>Contact Email</label>
-                                <input type="text" id="settingsEmail" style="width:100%; padding:6px 10px; border:1px solid #ddd; border-radius:8px; font-size:12px;" />
+                                <input type="text" id="settingsEmail" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:10px; font-size:13px;" />
                             </div>
                             <button class="btn btn-primary w-full" id="saveSettings"><i class="fa-solid fa-save"></i> Save Settings</button>
                         </div>
-                        <div style="border-top:1px solid #f0f0f0; padding-top:10px; margin-top:2px;">
-                            <button class="btn btn-danger w-full" id="logoutBtn" style="background:#dc2626; color:#fff; border:none; padding:10px; border-radius:8px; font-size:12px; font-weight:600; cursor:pointer;"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+                        <div style="border-top:1px solid #f0f0f0; padding-top:12px; margin-top:4px;">
+                            <button class="btn btn-danger w-full" id="logoutBtn" style="background:#dc2626; color:#fff; border:none; padding:12px; border-radius:10px; font-size:14px; font-weight:600; cursor:pointer;"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
                         </div>
-                        <div style="border-top:1px solid #f0f0f0; padding-top:10px; margin-top:2px;">
+                        <div style="border-top:1px solid #f0f0f0; padding-top:12px; margin-top:4px;">
                             <div class="toggle-label">
                                 <span>App Status</span>
                                 <label class="toggle-switch">
@@ -3303,7 +3973,7 @@
                                 </label>
                                 <span id="appStatusLabel">Active</span>
                             </div>
-                            <p class="text-muted" style="font-size:9px; margin-top:3px;">Toggle to enable or disable the app for users.</p>
+                            <p class="text-muted" style="font-size:10px; margin-top:4px;">Toggle to enable or disable the app for users.</p>
                         </div>
                     </div>
                 </div>
@@ -3505,7 +4175,7 @@
 
     <!-- ===== PROMO PICS UPLOAD MODAL ===== -->
     <div class="modal-overlay" id="promoPicUploadModal">
-        <div class="modal" style="max-width:400px;">
+        <div class="modal" style="max-width:480px;">
             <button class="close-btn" id="promoPicUploadCloseBtn"><i class="fa-solid fa-times"></i></button>
             <h3><i class="fa-regular fa-images" style="color:#f5b83d;"></i> Upload Flyer</h3>
             <p class="sub">Upload a flyer picture and add text to display on the overlay.</p>
@@ -3534,7 +4204,7 @@
 
     <!-- ===== MANUAL DEPOSIT MODAL ===== -->
     <div class="modal-overlay" id="manualDepositModal">
-        <div class="modal" style="max-width:360px;">
+        <div class="modal" style="max-width:400px;">
             <button class="close-btn" id="manualDepositCloseBtn"><i class="fa-solid fa-times"></i></button>
             <h3><i class="fa-solid fa-plus-circle" style="color:#f5b83d;"></i> Manual Deposit</h3>
             <p class="sub">Add funds to a customer's account.</p>
@@ -3553,6 +4223,34 @@
                 </div>
                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Deposit</button>
                 <button type="button" class="btn btn-outline" id="manualDepositCancelBtn">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== CUSTOMER TRANSFER MODAL ===== -->
+    <div class="modal-overlay customer-transfer-modal" id="customerTransferModal">
+        <div class="modal" style="max-width:450px;">
+            <button class="close-btn" id="customerTransferCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3><i class="fa-solid fa-arrow-right-arrow-left" style="color:#f5b83d;"></i> Customer Transfer</h3>
+            <p class="sub">Transfer funds from one customer to another.</p>
+            <form id="customerTransferForm">
+                <div class="form-group">
+                    <label>From Customer</label>
+                    <select id="transferFromSelect" required>
+                        <option value="">— Select sender —</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>To Customer</label>
+                    <select id="transferToSelect" required>
+                        <option value="">— Select recipient —</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Amount (ZMW)</label>
+                    <input type="number" id="transferAmount" placeholder="e.g. 50" step="0.01" required />
+                </div>
+                <button type="submit" class="btn-transfer"><i class="fa-solid fa-check"></i> Transfer</button>
             </form>
         </div>
     </div>
@@ -3582,7 +4280,7 @@
             <div class="select-all-row">
                 <button id="selectAllUsersBtn"><i class="fa-regular fa-square-check"></i> Select All</button>
                 <button id="deselectAllUsersBtn"><i class="fa-regular fa-square"></i> Deselect All</button>
-                <span style="font-size:11px; color:#888; margin-left:auto;" id="selectedCount">0 selected</span>
+                <span style="font-size:12px; color:#888; margin-left:auto;" id="selectedCount">0 selected</span>
             </div>
 
             <input type="text" id="accountUpdateSearch" class="account-update-search" placeholder="Search users by name or email..." />
@@ -3684,7 +4382,7 @@
 
     <!-- ===== EDIT CUSTOMER MODAL ===== -->
     <div class="modal-overlay edit-customer-modal" id="editCustomerModal">
-        <div class="modal" style="max-width:440px;">
+        <div class="modal" style="max-width:480px;">
             <button class="close-btn" id="editCustomerCloseBtn"><i class="fa-solid fa-times"></i></button>
             <h3><i class="fa-solid fa-user-pen" style="color:#f5b83d;"></i> Edit Customer</h3>
             <p class="sub">Update customer details.</p>
@@ -3898,13 +4596,10 @@
         // ── Payables DOM ──
         const toggleAccounts = document.getElementById('toggleAccounts');
         const toggleWithdrawals = document.getElementById('toggleWithdrawals');
-        const toggleTransfers = document.getElementById('toggleTransfers');
         const viewAccounts = document.getElementById('viewAccounts');
         const viewWithdrawals = document.getElementById('viewWithdrawals');
-        const viewTransfers = document.getElementById('viewTransfers');
         const accountsList = document.getElementById('accountsList');
         const withdrawalsList = document.getElementById('withdrawalsList');
-        const transfersList = document.getElementById('transfersList');
         const manualDepositBtn = document.getElementById('manualDepositBtn');
         const manualDepositModal = document.getElementById('manualDepositModal');
         const manualDepositCloseBtn = document.getElementById('manualDepositCloseBtn');
@@ -3912,6 +4607,15 @@
         const depositCustomerSelect = document.getElementById('depositCustomerSelect');
         const depositAmount = document.getElementById('depositAmount');
         const manualDepositCancelBtn = document.getElementById('manualDepositCancelBtn');
+
+        // ── Customer Transfer DOM ──
+        const customerTransfersBtn = document.getElementById('customerTransfersBtn');
+        const customerTransferModal = document.getElementById('customerTransferModal');
+        const customerTransferCloseBtn = document.getElementById('customerTransferCloseBtn');
+        const customerTransferForm = document.getElementById('customerTransferForm');
+        const transferFromSelect = document.getElementById('transferFromSelect');
+        const transferToSelect = document.getElementById('transferToSelect');
+        const transferAmount = document.getElementById('transferAmount');
 
         // ── Account Update DOM ──
         const accountUpdateBtn = document.getElementById('accountUpdateBtn');
@@ -4179,7 +4883,6 @@
             // ── Payables renders ──
             renderAccounts();
             renderWithdrawals();
-            renderTransfers();
             populateUserSelects();
 
             // ── Custom referral user select ──
@@ -4187,6 +4890,9 @@
 
             // ── Account Update Modal user list ──
             renderAccountUpdateUserList();
+
+            // ── Customer Transfer Modal population ──
+            populateCustomerTransferSelects();
 
             // ── Update badges ──
             updateBadges();
@@ -4239,7 +4945,7 @@
             }
             if (filtered.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:16px;">No services in this category.</div>`;
+                    `<div class="text-muted text-center" style="padding:20px;">No services in this category.</div>`;
                 return;
             }
             container.innerHTML = `<div class="service-grid-customer">` + filtered.map(([key, s]) => `
@@ -4276,7 +4982,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:16px;">No promotions yet.</div>`;
+                    `<div class="text-muted text-center" style="padding:20px;">No promotions yet.</div>`;
                 return;
             }
             container.innerHTML = entries.map(([key, p]) => `
@@ -4319,23 +5025,23 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:16px;">No orders found.</div>`;
+                    `<div class="text-muted text-center" style="padding:20px;">No orders found.</div>`;
                 return;
             }
             container.innerHTML = entries.map(([key, o]) => `
                         <div class="order-card">
                             <div class="order-toggle" data-key="${key}">
                                 <div>
-                                    <div style="font-weight:700; font-size:12px; color:#1c2128;">${o.id || 'N/A'}</div>
-                                    <div style="font-size:10px; color:#555;">${o.service || 'N/A'}</div>
-                                    <div style="font-size:10px; color:#888;">${o.customer || 'N/A'}</div>
+                                    <div style="font-weight:700; font-size:14px; color:#1c2128;">${o.id || 'N/A'}</div>
+                                    <div style="font-size:12px; color:#555;">${o.service || 'N/A'}</div>
+                                    <div style="font-size:11px; color:#888;">${o.customer || 'N/A'}</div>
                                 </div>
                                 <div style="text-align:right;">
-                                    <div style="font-weight:700; font-size:12px; color:#1c2128;">ZMW ${(o.amount || 0).toFixed(2)}</div>
+                                    <div style="font-weight:700; font-size:14px; color:#1c2128;">ZMW ${(o.amount || 0).toFixed(2)}</div>
                                     <button class="status-btn ${o.status || 'pending'}" data-key="${key}" data-status="${o.status || 'pending'}">
                                         <i class="fa-solid fa-pen"></i> ${o.status || 'pending'}
                                     </button>
-                                    <div style="font-size:9px; color:#aaa; margin-top:1px;">${o.date || ''}</div>
+                                    <div style="font-size:10px; color:#aaa; margin-top:2px;">${o.date || ''}</div>
                                 </div>
                             </div>
                             <div class="order-details">
@@ -4343,14 +5049,16 @@
                                 <div class="row"><span class="label">Client Number</span><span class="val">${o.clientNumber || 'N/A'}</span></div>
                                 <div class="row"><span class="label">Customization</span><span class="val">${o.customization || 'None'}</span></div>
                                 <div class="row"><span class="label">Notes</span><span class="val">${o.notes || 'No notes'}</span></div>
-                                <div class="row"><span class="label">Payment Method</span><span class="val">${o.paymentMethod || 'Airtel Money'}</span></div>
                                 <div class="row"><span class="label">Payment Proof</span><span class="val">
                                     ${o.paymentProof ? `<button class="btn-view-proof" data-screenshot="${o.paymentProof}"><i class="fa-regular fa-image"></i> View</button>` : 'No proof'}
+                                </span></div>
+                                <div class="row"><span class="label">Payment Method</span><span class="val">
+                                    ${o.paymentMethod ? (o.paymentMethod === 'Buffer Zone Wallet' ? `<span class="status-badge completed">Wallet</span>` : o.paymentMethod) : 'Airtel Money'}
                                 </span></div>
                                 <div class="row"><span class="label">Status</span><span class="val">
                                     <span class="status-badge ${o.status || 'pending'}">${o.status || 'pending'}</span>
                                 </span></div>
-                                <button class="btn btn-danger btn-sm delete-order" data-key="${key}" style="margin-top:6px; padding:2px 10px; border-radius:6px; border:none; background:#dc2626; color:#fff; font-size:9px; cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
+                                <button class="btn btn-danger btn-sm delete-order" data-key="${key}" style="margin-top:8px; padding:3px 12px; border-radius:8px; border:none; background:#dc2626; color:#fff; font-size:10px; cursor:pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
                             </div>
                         </div>
                     `).join('');
@@ -4442,7 +5150,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:16px;">No users found.</div>`;
+                    `<div class="text-muted text-center" style="padding:20px;">No users found.</div>`;
                 return;
             }
 
@@ -4586,7 +5294,7 @@
                                                 '<span class="no-ref-users">No registration referrals yet</span>'
                                             }
                                         </div>
-                                        <div class="ref-title" style="margin-top:4px;">🛒 Discount Referrals (used your code for discount)</div>
+                                        <div class="ref-title" style="margin-top:6px;">🛒 Discount Referrals (used your code for discount)</div>
                                         <div class="ref-users-list">
                                             ${discountReferralUsers.length > 0 ?
                                                 discountReferralUsers.map(un => `<span class="ref-user-tag">${un}</span>`).join('') :
@@ -4688,7 +5396,7 @@
             });
             if (activities.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:16px;">No recent activity.</div>`;
+                    `<div class="text-muted text-center" style="padding:20px;">No recent activity.</div>`;
                 return;
             }
             container.innerHTML = activities.slice(0, 5).map(a => `
@@ -4854,7 +5562,7 @@
 
             if (html === '') {
                 html =
-                    `<div class="text-muted text-center" style="padding:24px 0;">No work posts yet. Click one of the options above to get started!</div>`;
+                    `<div class="text-muted text-center" style="padding:30px 0;">No work posts yet. Click one of the options above to get started!</div>`;
             }
 
             container.innerHTML = html;
@@ -5087,7 +5795,7 @@
 
             if (entries.length === 0) {
                 accountsList.innerHTML =
-                    `<div class="text-muted text-center" style="padding:16px;">No customer accounts yet.</div>`;
+                    `<div class="text-muted text-center" style="padding:20px;">No customer accounts yet.</div>`;
                 return;
             }
 
@@ -5131,7 +5839,7 @@
                                     </div>
                                 </div>
                                 <div class="account-transactions">
-                                    <div style="font-weight:600; font-size:11px; color:#555; margin-bottom:4px;">Transaction History</div>
+                                    <div style="font-weight:600; font-size:12px; color:#555; margin-bottom:6px;">Transaction History</div>
                                     ${txHtml}
                                 </div>
                             </div>
@@ -5168,7 +5876,7 @@
 
             if (entries.length === 0) {
                 withdrawalsList.innerHTML =
-                    `<div class="text-muted text-center" style="padding:16px;">No ${withdrawalsFilter} withdrawal requests.</div>`;
+                    `<div class="text-muted text-center" style="padding:20px;">No ${withdrawalsFilter} withdrawal requests.</div>`;
                 return;
             }
 
@@ -5234,55 +5942,6 @@
             }
 
             updateBadges();
-        }
-
-        function renderTransfers() {
-            const container = transfersList;
-            const transactions = allData.transactions || {};
-            const users = allData.users || {};
-
-            // Filter for customer-to-customer transfers
-            const transfers = Object.entries(transactions).filter(([key, t]) => {
-                const type = (t.type || '').toLowerCase();
-                return (type.includes('sent') || type.includes('received') ||
-                    type.includes('send money') || type.includes('receive money')) &&
-                    t.userId && t.otherParty;
-            });
-
-            if (transfers.length === 0) {
-                container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:16px;">No customer‑to‑customer transfers yet.</div>`;
-                return;
-            }
-
-            transfers.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
-
-            container.innerHTML = transfers.map(([key, t]) => {
-                const user = users[t.userId] || {};
-                const name = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
-                const isSent = t.type.toLowerCase().includes('sent') ||
-                    (t.type.toLowerCase().includes('send') && t.amount && t.amount < 0);
-                const amountClass = isSent ? 'sent' : 'received';
-                const sign = isSent ? '-' : '+';
-                const otherParty = t.otherParty || 'Unknown';
-                const dateStr = t.date ? new Date(t.date).toLocaleString() : 'N/A';
-
-                return `
-                            <div class="transfer-item">
-                                <div class="transfer-summary">
-                                    <div class="left">
-                                        <div class="sender">${isSent ? '📤 Sent to' : '📥 Received from'}</div>
-                                        <div class="recipient">${otherParty}</div>
-                                        <div class="detail">${t.type || 'Transfer'} &middot; Ref: ${t.ref || 'N/A'}</div>
-                                    </div>
-                                    <div class="right">
-                                        <div class="amount ${amountClass}">${sign}ZMW ${Math.abs(t.amount || 0).toFixed(2)}</div>
-                                        <div class="date">${dateStr}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-            }).join('');
         }
 
         // ─── WITHDRAWAL CONFIRMATION MODAL ──────────────────────────────
@@ -5444,6 +6103,7 @@
             }).join('');
 
             customReferralUserSelect.innerHTML = `<option value="">— Select a user —</option>` + options;
+            depositCustomerSelect.innerHTML = `<option value="">— Select a customer —</option>` + options;
         }
 
         function populateCustomReferralSelect() {
@@ -5454,6 +6114,19 @@
                 return `<option value="${uid}">${name} (${code})</option>`;
             }).join('');
             customReferralUserSelect.innerHTML = `<option value="">— Select a user —</option>` + options;
+        }
+
+        function populateCustomerTransferSelects() {
+            const users = allData.users || {};
+            const options = Object.entries(users).map(([uid, u]) => {
+                const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
+                const email = u.email || 'No email';
+                const accounts = allData.customerAccounts || {};
+                const balance = accounts[uid]?.balance || 0;
+                return `<option value="${uid}">${name} (${email}) — Bal: ZMW ${balance.toFixed(2)}</option>`;
+            }).join('');
+            transferFromSelect.innerHTML = `<option value="">— Select sender —</option>` + options;
+            transferToSelect.innerHTML = `<option value="">— Select recipient —</option>` + options;
         }
 
         // ───────────────────────────────────────────────────────────────────
@@ -5473,7 +6146,7 @@
             }
             if (entries.length === 0) {
                 userCheckboxList.innerHTML =
-                    `<div style="text-align:center;padding:16px;color:#888;">No users found.</div>`;
+                    `<div style="text-align:center;padding:20px;color:#888;">No users found.</div>`;
                 return;
             }
             userCheckboxList.innerHTML = entries.map(([uid, u]) => {
@@ -5736,8 +6409,8 @@
                         `;
             } else {
                 workFrameContainer.innerHTML = `
-                            <div style="text-align:center;padding:6px 0;">
-                                ${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="Upload" style="max-width:100%;max-height:180px;border-radius:12px;object-fit:contain;" />` : `<div style="color:#ccc;font-size:40px;"><i class="fa-regular fa-image"></i></div>`}
+                            <div style="text-align:center;padding:8px 0;">
+                                ${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="Upload" style="max-width:100%;max-height:180px;border-radius:12px;object-fit:contain;" />` : `<div style="color:#ccc;font-size:48px;"><i class="fa-regular fa-image"></i></div>`}
                             </div>
                         `;
             }
@@ -5807,6 +6480,88 @@
                 delete allData.promoPics[key];
                 return saveData();
             }
+        }
+
+        // ───────────────────────────────────────────────────────────────────
+        // CUSTOMER TRANSFER
+        // ───────────────────────────────────────────────────────────────────
+
+        function openCustomerTransferModal() {
+            populateCustomerTransferSelects();
+            customerTransferModal.classList.add('open');
+        }
+
+        function closeCustomerTransferModal() {
+            customerTransferModal.classList.remove('open');
+        }
+
+        function executeCustomerTransfer(fromUid, toUid, amount) {
+            if (!allData.customerAccounts) allData.customerAccounts = {};
+            if (!allData.customerAccounts[fromUid]) allData.customerAccounts[fromUid] = { balance: 0 };
+            if (!allData.customerAccounts[toUid]) allData.customerAccounts[toUid] = { balance: 0 };
+
+            const fromBal = allData.customerAccounts[fromUid].balance || 0;
+            const toBal = allData.customerAccounts[toUid].balance || 0;
+
+            if (fromBal < amount) {
+                showToast('Insufficient balance in sender account.', 'error');
+                return;
+            }
+
+            allData.customerAccounts[fromUid].balance = fromBal - amount;
+            allData.customerAccounts[toUid].balance = toBal + amount;
+
+            if (!allData.transactions) allData.transactions = {};
+            const txId1 = 'tx-' + Date.now() + '-1';
+            const txId2 = 'tx-' + Date.now() + '-2';
+            const fromUser = allData.users?.[fromUid] || {};
+            const toUser = allData.users?.[toUid] || {};
+
+            allData.transactions[txId1] = {
+                type: 'Admin Transfer (Sent)',
+                amount: -amount,
+                method: 'Admin',
+                status: 'completed',
+                date: new Date().toLocaleString(),
+                ref: 'ADMIN-TRANSFER-' + Date.now(),
+                detail: `Transferred ZMW ${amount.toFixed(2)} to ${toUser.firstName || ''} ${toUser.lastName || ''}`.trim(),
+                screenshot: 'N/A',
+                userId: fromUid,
+                itemId: 'admin-transfer',
+                itemTitle: 'Transfer',
+                itemType: 'admin',
+                userName: `${fromUser.firstName || ''} ${fromUser.lastName || ''}`.trim() || 'Unknown',
+                userEmail: fromUser.email || 'N/A',
+                userPhone: fromUser.phone || 'N/A',
+                otherParty: `${toUser.firstName || ''} ${toUser.lastName || ''}`.trim() || 'Unknown'
+            };
+
+            allData.transactions[txId2] = {
+                type: 'Admin Transfer (Received)',
+                amount: amount,
+                method: 'Admin',
+                status: 'completed',
+                date: new Date().toLocaleString(),
+                ref: 'ADMIN-TRANSFER-' + Date.now(),
+                detail: `Received ZMW ${amount.toFixed(2)} from ${fromUser.firstName || ''} ${fromUser.lastName || ''}`.trim(),
+                screenshot: 'N/A',
+                userId: toUid,
+                itemId: 'admin-transfer',
+                itemTitle: 'Transfer',
+                itemType: 'admin',
+                userName: `${toUser.firstName || ''} ${toUser.lastName || ''}`.trim() || 'Unknown',
+                userEmail: toUser.email || 'N/A',
+                userPhone: toUser.phone || 'N/A',
+                otherParty: `${fromUser.firstName || ''} ${fromUser.lastName || ''}`.trim() || 'Unknown'
+            };
+
+            saveData().then(() => {
+                renderAll();
+                closeCustomerTransferModal();
+                showToast(`✅ ZMW ${amount.toFixed(2)} transferred from ${fromUser.firstName || 'Unknown'} to ${toUser.firstName || 'Unknown'}`, 'success');
+            }).catch((err) => {
+                showToast('Transfer failed: ' + err.message, 'error');
+            });
         }
 
         // ───────────────────────────────────────────────────────────────────
@@ -6372,28 +7127,15 @@
         toggleAccounts.addEventListener('click', function() {
             toggleAccounts.classList.add('active');
             toggleWithdrawals.classList.remove('active');
-            toggleTransfers.classList.remove('active');
             viewAccounts.classList.add('active');
             viewWithdrawals.classList.remove('active');
-            viewTransfers.classList.remove('active');
         });
 
         toggleWithdrawals.addEventListener('click', function() {
             toggleWithdrawals.classList.add('active');
             toggleAccounts.classList.remove('active');
-            toggleTransfers.classList.remove('active');
             viewWithdrawals.classList.add('active');
             viewAccounts.classList.remove('active');
-            viewTransfers.classList.remove('active');
-        });
-
-        toggleTransfers.addEventListener('click', function() {
-            toggleTransfers.classList.add('active');
-            toggleAccounts.classList.remove('active');
-            toggleWithdrawals.classList.remove('active');
-            viewTransfers.classList.add('active');
-            viewAccounts.classList.remove('active');
-            viewWithdrawals.classList.remove('active');
         });
 
         // ── Withdrawal filter buttons ──
@@ -6473,7 +7215,7 @@
             }
             if (entries.length === 0) {
                 userSelectorList.innerHTML =
-                    `<div style="text-align:center;padding:16px;color:#888;">No users found.</div>`;
+                    `<div style="text-align:center;padding:20px;color:#888;">No users found.</div>`;
                 return;
             }
             userSelectorList.innerHTML = entries.map(([uid, u]) => {
@@ -6583,6 +7325,47 @@
                 depositCustomerSelect.value = '';
                 showToast(`ZMW ${amount.toFixed(2)} deposited successfully`);
             });
+        });
+
+        // ───────────────────────────────────────────────────────────────────
+        // CUSTOMER TRANSFER EVENT BINDINGS
+        // ───────────────────────────────────────────────────────────────────
+
+        customerTransfersBtn.addEventListener('click', openCustomerTransferModal);
+        customerTransferCloseBtn.addEventListener('click', closeCustomerTransferModal);
+        customerTransferModal.addEventListener('click', function(e) {
+            if (e.target === this) closeCustomerTransferModal();
+        });
+
+        customerTransferForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fromUid = transferFromSelect.value;
+            const toUid = transferToSelect.value;
+            const amount = parseFloat(transferAmount.value);
+
+            if (!fromUid || !toUid) {
+                showToast('Please select both sender and recipient.', 'error');
+                return;
+            }
+            if (fromUid === toUid) {
+                showToast('Sender and recipient cannot be the same.', 'error');
+                return;
+            }
+            if (!amount || amount <= 0) {
+                showToast('Please enter a valid amount.', 'error');
+                return;
+            }
+
+            const fromUser = allData.users?.[fromUid] || {};
+            const toUser = allData.users?.[toUid] || {};
+            const fromName = `${fromUser.firstName || ''} ${fromUser.lastName || ''}`.trim() || 'Unknown';
+            const toName = `${toUser.firstName || ''} ${toUser.lastName || ''}`.trim() || 'Unknown';
+
+            if (!confirm(`Transfer ZMW ${amount.toFixed(2)} from ${fromName} to ${toName}?`)) {
+                return;
+            }
+
+            executeCustomerTransfer(fromUid, toUid, amount);
         });
 
         // ───────────────────────────────────────────────────────────────────
@@ -6803,7 +7586,7 @@
                         `;
             } else {
                 workFrameContainer.innerHTML = `
-                            <div style="text-align:center;padding:6px 0;">
+                            <div style="text-align:center;padding:8px 0;">
                                 <img src="${url}" alt="Upload" style="max-width:100%;max-height:180px;border-radius:12px;object-fit:contain;" />
                             </div>
                         `;
@@ -7154,7 +7937,7 @@
                     adjustValue.placeholder = '0';
                 }
                 adjustPreview.innerHTML =
-                    `<div style="color:#aaa; text-align:center; padding:10px 0;">Enter a value and click "Preview & Apply".</div>`;
+                    `<div style="color:#aaa; text-align:center; padding:12px 0;">Enter a value and click "Preview & Apply".</div>`;
             });
         });
 
@@ -7169,7 +7952,7 @@
             const entries = Object.entries(services);
             if (entries.length === 0) {
                 adjustPreview.innerHTML =
-                    `<div style="color:#aaa; text-align:center; padding:10px 0;">No services to adjust.</div>`;
+                    `<div style="color:#aaa; text-align:center; padding:12px 0;">No services to adjust.</div>`;
                 return;
             }
 
@@ -7196,7 +7979,7 @@
             });
 
             let previewHtml =
-                `<div style="font-size:10px; color:#888; margin-bottom:4px;">Preview — ${modeLabel} applied to ${adjustedEntries.length} service(s). Click "Apply" to save changes.</div>`;
+                `<div style="font-size:11px; color:#888; margin-bottom:6px;">Preview — ${modeLabel} applied to ${adjustedEntries.length} service(s). Click "Apply" to save changes.</div>`;
             previewHtml += adjustedEntries.map(({ key, service, orig, newPrice }) => `
                         <div class="preview-item">
                             <span class="pname">${service.title || 'Untitled'}</span>
@@ -7224,7 +8007,7 @@
                         return { key, service: s, orig: s.price || 0, newPrice: s.price || 0 };
                     });
                     let updatedHtml =
-                        `<div style="font-size:10px; color:#16a34a; margin-bottom:4px;">✅ Applied ${modeLabel} to ${updatedEntries.length} service(s).</div>`;
+                        `<div style="font-size:11px; color:#16a34a; margin-bottom:6px;">✅ Applied ${modeLabel} to ${updatedEntries.length} service(s).</div>`;
                     updatedHtml += updatedEntries.map(({ key, service, orig, newPrice }) => `
                                 <div class="preview-item">
                                     <span class="pname">${service.title || 'Untitled'}</span>
@@ -7317,9 +8100,9 @@
                             renderReferralPromoDiscounts();
                             renderAccounts();
                             renderWithdrawals();
-                            renderTransfers();
                             populateUserSelects();
                             populateCustomReferralSelect();
+                            populateCustomerTransferSelects();
                             renderAccountUpdateUserList();
                         });
 
@@ -7344,7 +8127,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Added "Transfers" section to track customer-to-customer money movements. Payment method displayed in order details.');
+        console.log('✅ Admin Dashboard — Added payment method display, Customer Transfers button, and global 15% size reduction via CSS zoom.');
     </script>
 </body>
 </html>
