@@ -21,7 +21,6 @@
         body {
             background: #f4f5f8;
             display: block;
-            overflow: hidden;
             height: 100%;
             color: #1a1d28;
             font-size: 15px;
@@ -49,17 +48,20 @@
         }
 
         .app-content::-webkit-scrollbar {
-            width: 4px;
+            width: 6px;
         }
         .app-content::-webkit-scrollbar-track {
             background: transparent;
         }
         .app-content::-webkit-scrollbar-thumb {
-            background: rgba(245, 176, 66, 0.3);
+            background: rgba(245, 176, 66, 0.4);
             border-radius: 10px;
         }
+        .app-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(245, 176, 66, 0.7);
+        }
 
-        /* ===== FLOATING PILL NAV ===== */
+        /* ===== FLOATING PILL NAV — WHITE with ORANGE/YELLOW icons ===== */
         .bottom-nav {
             position: fixed;
             bottom: 20px;
@@ -68,18 +70,17 @@
             width: 92%;
             max-width: 420px;
             height: 64px;
-            background: #1a1d28;
+            background: #ffffff;
             border-radius: 34px;
             padding: 6px 10px;
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 500;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.10);
             flex-shrink: 0;
             pointer-events: auto;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(245, 176, 66, 0.25);
         }
 
         .nav-item {
@@ -87,7 +88,7 @@
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            color: #888;
+            color: #b0b4c0;
             transition: all 0.25s ease;
             flex: 1;
             background: none;
@@ -103,19 +104,25 @@
             font-size: 18px;
             margin-bottom: 1px;
             transition: all 0.25s ease;
+            color: #f5b83d;
         }
         .nav-item span {
             font-size: 7px;
             font-weight: 600;
             letter-spacing: 0.4px;
             transition: all 0.25s ease;
+            color: #8b8fa3;
         }
         .nav-item.active {
             color: #f5b83d;
         }
         .nav-item.active i {
+            color: #ff6b00;
             transform: scale(1.1);
             filter: drop-shadow(0 0 10px rgba(245, 184, 61, 0.35));
+        }
+        .nav-item.active span {
+            color: #d4952a;
         }
         .nav-item:active {
             transform: scale(0.92);
@@ -226,6 +233,7 @@
         }
         .account-pill i {
             font-size: 15px;
+            color: #f5b83d;
         }
 
         /* ===== SECTIONS ===== */
@@ -1581,6 +1589,7 @@
                 max-width: 360px;
                 bottom: 16px;
                 border-radius: 30px;
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
             }
             .nav-item i {
                 font-size: 16px;
@@ -1715,6 +1724,7 @@
                 height: 52px;
                 padding: 4px 6px;
                 max-width: 320px;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
             }
             .nav-item i {
                 font-size: 14px;
@@ -2064,7 +2074,7 @@
             </div>
         </div>
 
-        <!-- ===== BOTTOM NAV ===== -->
+        <!-- ===== BOTTOM NAV — WHITE PILL with ORANGE/YELLOW icons ===== -->
         <div class="bottom-nav">
             <button class="nav-item active" data-section="home"><i class="fas fa-home"></i><span>Home</span></button>
             <button class="nav-item" data-section="videos"><i class="fas fa-video"></i><span>Videos</span></button>
@@ -3474,7 +3484,7 @@
             return div.innerHTML;
         }
 
-        console.log('✅ UTOM Admin — Global player overlay works on every page, all input boxes styled, sidebar, pill nav, gold theme, 4 dash cards, bank statement account.');
+        console.log('✅ UTOM Admin — White pill nav with orange/yellow icons, fully scrollable pages, global player overlay on all pages, sidebar, gold theme, 4 dash cards, bank statement account.');
     </script>
 </body>
 </html>
