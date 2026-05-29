@@ -659,7 +659,7 @@
             background: #fffdf7;
         }
 
-        /* ===== FORMS ===== */
+        /* ===== FORMS & INPUTS ===== */
         .form-card {
             background: #fff;
             border-radius: 20px;
@@ -1407,6 +1407,169 @@
             }
         }
 
+        /* ===== UPLOAD PROGRESS ===== */
+        .upload-progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 6px;
+        }
+        .upload-progress .bar {
+            flex: 1;
+            height: 4px;
+            background: #e8ecf1;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .upload-progress .bar .fill {
+            height: 100%;
+            background: linear-gradient(135deg, #f5b042, #ff6b00);
+            border-radius: 20px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .upload-progress .percent {
+            font-size: 11px;
+            color: #8b8fa3;
+            min-width: 40px;
+            text-align: right;
+        }
+
+        /* ===== FILE INFO ===== */
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            background: #f5f6f8;
+            border-radius: 40px;
+            margin-top: 6px;
+            font-size: 11px;
+        }
+        .file-info i {
+            background: linear-gradient(135deg, #d4952a, #f5b042);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 14px;
+        }
+        .file-info .fname {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .file-info .ftype {
+            background: #e8ecf1;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #5f6377;
+        }
+
+        /* ===== THUMBNAIL PREVIEW ===== */
+        .thumb-preview {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 6px;
+        }
+        .thumb-preview img {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid #f0e8d8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+        .thumb-preview span {
+            font-size: 11px;
+            color: #8b8fa3;
+        }
+
+        /* ===== GLOBAL PLAYER (ON TOP OF EVERY PAGE) ===== */
+        .global-player {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .global-player.open {
+            display: flex;
+        }
+        .global-player .player-container {
+            width: 100%;
+            max-width: 750px;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+        }
+        .global-player .player-container video,
+        .global-player .player-container iframe {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border: 0;
+            background: #000;
+        }
+        .global-player .player-close {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: #fff;
+            color: #f5b042;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+            border: 1px solid #f0e0c8;
+            transition: all 0.25s ease;
+        }
+        .global-player .player-close:hover {
+            transform: scale(1.05);
+        }
+        .global-player .player-fullscreen {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 16px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.25s ease;
+        }
+        .global-player .player-fullscreen:hover {
+            background: rgba(245, 176, 66, 0.7);
+            transform: scale(1.08);
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 520px) {
             .app-content {
@@ -1562,167 +1725,33 @@
             }
         }
 
-        /* ===== UPLOAD PROGRESS ===== */
-        .upload-progress {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 6px;
-        }
-        .upload-progress .bar {
-            flex: 1;
-            height: 4px;
-            background: #e8ecf1;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        .upload-progress .bar .fill {
-            height: 100%;
-            background: linear-gradient(135deg, #f5b042, #ff6b00);
-            border-radius: 20px;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-        .upload-progress .percent {
-            font-size: 11px;
-            color: #8b8fa3;
-            min-width: 40px;
-            text-align: right;
-        }
-
-        /* ===== FILE INFO ===== */
-        .file-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 14px;
-            background: #f5f6f8;
-            border-radius: 40px;
-            margin-top: 6px;
-            font-size: 11px;
-        }
-        .file-info i {
-            background: linear-gradient(135deg, #d4952a, #f5b042);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 14px;
-        }
-        .file-info .fname {
-            flex: 1;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .file-info .ftype {
-            background: #e8ecf1;
-            padding: 2px 10px;
-            border-radius: 30px;
-            font-size: 10px;
-            font-weight: 700;
-            color: #5f6377;
-        }
-
-        /* ===== THUMBNAIL PREVIEW ===== */
-        .thumb-preview {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 6px;
-        }
-        .thumb-preview img {
-            width: 64px;
-            height: 64px;
-            border-radius: 12px;
-            object-fit: cover;
-            border: 2px solid #f0e8d8;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
-        .thumb-preview span {
-            font-size: 11px;
+        /* ===== MISC HELPERS ===== */
+        .text-muted {
             color: #8b8fa3;
         }
-
-        /* ===== GLOBAL PLAYER ===== */
-        .global-player {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1500;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(10px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        .text-center {
+            text-align: center;
         }
-        .global-player.open {
+        .mt-2 {
+            margin-top: 8px;
+        }
+        .mb-2 {
+            margin-bottom: 8px;
+        }
+        .flex {
             display: flex;
         }
-        .global-player .player-container {
-            width: 100%;
-            max-width: 750px;
-            aspect-ratio: 16/9;
-            background: #000;
-            border-radius: 18px;
-            overflow: hidden;
-            position: relative;
+        .flex-col {
+            flex-direction: column;
         }
-        .global-player .player-container video,
-        .global-player .player-container iframe {
-            width: 100%;
-            height: 100%;
-            display: block;
-            border: 0;
-            background: #000;
-        }
-        .global-player .player-close {
-            position: absolute;
-            top: 14px;
-            right: 16px;
-            background: #fff;
-            color: #f5b042;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
+        .items-center {
             align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            font-weight: 700;
-            font-size: 15px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
-            border: 1px solid #f0e0c8;
-            transition: all 0.25s ease;
         }
-        .global-player .player-close:hover {
-            transform: scale(1.05);
+        .gap-2 {
+            gap: 8px;
         }
-        .global-player .player-fullscreen {
-            position: absolute;
-            bottom: 16px;
-            right: 16px;
-            background: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            font-size: 16px;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.25s ease;
-        }
-        .global-player .player-fullscreen:hover {
-            background: rgba(245, 176, 66, 0.7);
-            transform: scale(1.08);
+        .w-full {
+            width: 100%;
         }
     </style>
 </head>
@@ -2162,7 +2191,7 @@
         </div>
     </div>
 
-    <!-- ===== GLOBAL PLAYER ===== -->
+    <!-- ===== GLOBAL PLAYER (ON TOP OF EVERY PAGE) ===== -->
     <div id="globalPlayer" class="global-player">
         <div class="player-container">
             <span class="player-close" id="closeGlobalPlayer"><i class="fas fa-times"></i></span>
@@ -2403,7 +2432,7 @@
         }
 
         // =================================================================
-        // PLAY VIDEO - GLOBAL PLAYER
+        // PLAY VIDEO - GLOBAL PLAYER (ON TOP OF EVERY PAGE)
         // =================================================================
         function playVideoGlobal(video, startSeconds = 0) {
             const container = document.getElementById('globalPlayerEmbed');
@@ -3522,7 +3551,7 @@
             return div.innerHTML;
         }
 
-        console.log('✅ UTOM Admin — Global player works on all pages, left sidebar, pill nav, gradient gold, 4 dash cards, bank statement account.');
+        console.log('✅ UTOM Admin — Global player on top of every page, left sidebar, pill nav, gradient gold, 4 dash cards, bank statement account, all input CSS included.');
     </script>
 </body>
 </html>
