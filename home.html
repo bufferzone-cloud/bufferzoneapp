@@ -39,7 +39,7 @@
         .app-content {
             flex: 1;
             overflow-y: auto;
-            padding: 0 12px 128px 12px;
+            padding: 0 0 128px 0;
             -webkit-overflow-scrolling: touch;
         }
 
@@ -93,7 +93,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 0 14px 0;
+            padding: 10px 12px 14px 12px;
         }
         .header-left {
             display: flex;
@@ -161,7 +161,7 @@
             padding: 17px 14px;
             color: white;
             position: relative;
-            margin-bottom: 12px;
+            margin: 0 12px 12px 12px;
             overflow: hidden;
             min-height: 179px;
         }
@@ -264,6 +264,7 @@
             font-weight: 700;
         }
 
+        /* PROMO CAROUSEL – edge‑to‑edge, no side gaps */
         .promo-carousel-wrapper {
             position: relative;
             margin: 3px 0 12px 0;
@@ -271,7 +272,7 @@
             border-radius: 20px;
             background: #f8f9fc;
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.08);
-            padding: 0 3%;
+            padding: 0;
             transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             height: 255px;
         }
@@ -320,6 +321,24 @@
             z-index: 1;
             will-change: transform, opacity;
         }
+        /* previous & next flyers touch the edges — no side gap */
+        .promo-slide.prev-slide,
+        .promo-slide.next-slide {
+            transform: scale(0.82);
+            opacity: 0.8;
+            z-index: 2;
+        }
+        .promo-slide.active-slide {
+            transform: scale(1.02);
+            opacity: 1;
+            z-index: 3;
+            box-shadow: 0 10px 41px rgba(0, 0, 0, 0.25);
+        }
+        .promo-slide.far-slide {
+            transform: scale(0.66);
+            opacity: 0.2;
+            z-index: 0;
+        }
 
         .promo-slide img {
             width: 100%;
@@ -359,28 +378,8 @@
             text-shadow: 0 1px 7px rgba(0, 0, 0, 0.3);
         }
 
-        .promo-slide.active-slide {
-            transform: scale(1.02);
-            opacity: 1;
-            z-index: 3;
-            box-shadow: 0 10px 41px rgba(0, 0, 0, 0.25);
-        }
-
-        .promo-slide.prev-slide,
-        .promo-slide.next-slide {
-            transform: scale(0.82);
-            opacity: 0.8;
-            z-index: 2;
-        }
-
-        .promo-slide.far-slide {
-            transform: scale(0.66);
-            opacity: 0.2;
-            z-index: 0;
-        }
-
         .promotions-banner {
-            margin: 0 0 12px 0;
+            margin: 0 12px 12px 12px;
             padding: 9px 12px;
             background: #fef9e7;
             border-radius: 10px;
@@ -410,7 +409,7 @@
         .category-row {
             display: flex;
             gap: 7px;
-            margin-bottom: 14px;
+            margin: 0 12px 14px 12px;
             overflow-x: auto;
             padding-bottom: 3px;
             scrollbar-width: none;
@@ -450,7 +449,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 9px;
+            margin: 0 12px 9px 12px;
         }
         .dynamic-title {
             font-weight: 700;
@@ -482,7 +481,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 9px;
-            margin-bottom: 14px;
+            margin: 0 12px 14px 12px;
         }
         .service-item {
             display: flex;
@@ -504,7 +503,6 @@
             position: relative;
         }
         .service-thumb i {
-            color: white;
             font-size: 17px;
         }
         .service-title {
@@ -520,54 +518,49 @@
             line-height: 1.2;
         }
 
-        .thumb-1 {
-            background: linear-gradient(135deg, #0f0f0f 0%, #3a3a3a 100%);
+        /* ----- NEW STYLES FOR ICON BACKGROUNDS & COLORS ----- */
+        .thumb-all {
+            background: #1c2128;
         }
-        .thumb-2 {
-            background: linear-gradient(135deg, #004d59 0%, #0d2528 100%);
+        .thumb-all i {
+            color: white;
         }
-        .thumb-3 {
-            background: linear-gradient(135deg, #e0e0e0 0%, #b3b3b3 100%);
+        .thumb-graphic {
+            background: #f5b83d;
         }
-        .thumb-4 {
-            background: linear-gradient(135deg, #1a1a1a 0%, #504a4a 100%);
+        .thumb-graphic i {
+            color: #1c2128;
         }
-        .thumb-5 {
-            background: linear-gradient(135deg, #5b4f46 0%, #24201c 100%);
+        .thumb-dev {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .thumb-6 {
-            background: linear-gradient(135deg, #3f3f3f 0%, #1f1f1f 100%);
+        .thumb-dev i {
+            color: #1c2128;
         }
-        .thumb-7 {
-            background: linear-gradient(135deg, #2a3b4c 0%, #1a252f 100%);
+        .thumb-tech {
+            background: #1c2128;
         }
-        .thumb-8 {
-            background: linear-gradient(135deg, #4a3a2a 0%, #2e241a 100%);
+        .thumb-tech i {
+            color: white;
         }
-        .thumb-9 {
-            background: linear-gradient(135deg, #1e4a3a 0%, #0f2a22 100%);
+        .thumb-it {
+            background: #f5b83d;
         }
-        .thumb-10 {
-            background: linear-gradient(135deg, #4a2a3a 0%, #2e1a24 100%);
+        .thumb-it i {
+            color: #1c2128;
         }
-        .thumb-11 {
-            background: linear-gradient(135deg, #3a4a2a 0%, #1f2a15 100%);
+        /* fallback (others) – keep black bg white icon */
+        .service-thumb:not(.thumb-all):not(.thumb-graphic):not(.thumb-dev):not(.thumb-tech):not(.thumb-it) {
+            background: #1c2128;
         }
-        .thumb-12 {
-            background: linear-gradient(135deg, #4a3a4a 0%, #2e1f2e 100%);
-        }
-        .thumb-13 {
-            background: linear-gradient(135deg, #6a4a3a 0%, #3a2a1a 100%);
-        }
-        .thumb-14 {
-            background: linear-gradient(135deg, #2a6a4a 0%, #1a3a2a 100%);
-        }
-        .thumb-15 {
-            background: linear-gradient(135deg, #4a6a3a 0%, #2a3a1a 100%);
+        .service-thumb:not(.thumb-all):not(.thumb-graphic):not(.thumb-dev):not(.thumb-tech):not(.thumb-it) i {
+            color: white;
         }
 
         .order-flow-container {
-            padding: 0 0 14px 0;
+            padding: 0 12px 14px 12px;
         }
 
         .order-policy-panel {
@@ -1197,7 +1190,7 @@
         }
 
         .history-list {
-            padding: 0 0 14px 0;
+            padding: 0 12px 14px 12px;
             display: flex;
             flex-direction: column;
             gap: 9px;
@@ -1278,7 +1271,7 @@
             border: 1px solid #f5b83d;
             border-radius: 9px;
             padding: 9px 12px;
-            margin-bottom: 10px;
+            margin: 0 12px 10px 12px;
             display: none;
             align-items: center;
             gap: 9px;
@@ -1444,7 +1437,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
-            padding: 0 0 14px 0;
+            padding: 0 12px 14px 12px;
         }
         @media (max-width: 420px) {
             .samples-grid {
@@ -1578,7 +1571,7 @@
             background: #ffffff;
             border-radius: 14px;
             padding: 14px;
-            margin-top: 7px;
+            margin: 0 12px 14px 12px;
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.06);
             border: 1px solid #f0f0f0;
         }
@@ -1645,7 +1638,7 @@
         }
 
         .account-section {
-            padding: 0 0 14px 0;
+            padding: 0 12px 14px 12px;
         }
         .account-toggle-row {
             display: flex;
@@ -2268,7 +2261,7 @@
 
         @media (max-width: 420px) {
             .app-content {
-                padding: 0 9px 128px 9px;
+                padding: 0 0 128px 0;
             }
             .service-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -2312,7 +2305,7 @@
                 padding: 7px 10px;
             }
             .promo-carousel-wrapper {
-                padding: 0 3%;
+                padding: 0;
                 height: 221px;
             }
             .promo-slide {
@@ -2341,7 +2334,7 @@
                 font-size: 12px;
             }
             .promo-carousel-wrapper {
-                padding: 0 3%;
+                padding: 0;
                 height: 187px;
             }
             .promo-slide {
@@ -2352,11 +2345,8 @@
     </style>
 </head>
 <body>
-
     <div class="app-root">
-
         <div class="app-content" id="appContent">
-
             <!-- ===== HEADER ===== -->
             <div class="header">
                 <div class="header-left">
@@ -2442,7 +2432,7 @@
 
             <!-- ===== VIEW: ORDER FLOW ===== -->
             <div id="orderFlowView" class="view">
-                <div style="display: flex; align-items: center; gap: 9px; padding: 0 0 9px 0;">
+                <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
                     <button id="backFromOrder" style="background: none; border: none; font-size: 14px; color: #1c2128; cursor: pointer; padding: 3px;">
                         <i class="fa-solid fa-arrow-left"></i>
                     </button>
@@ -2455,7 +2445,7 @@
 
             <!-- ===== VIEW: ORDERS ===== -->
             <div id="ordersView" class="view">
-                <div style="padding: 0 0 11px 0;">
+                <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Your Orders</h3>
                     <p style="color: #888; font-size: 9px;">Track your projects and payments.</p>
                 </div>
@@ -2464,7 +2454,7 @@
 
             <!-- ===== VIEW: HISTORY ===== -->
             <div id="historyView" class="view">
-                <div style="padding: 0 0 11px 0;">
+                <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Transaction History</h3>
                     <p style="color: #888; font-size: 9px;">Tap a transaction to view more details.</p>
                 </div>
@@ -2476,7 +2466,7 @@
 
             <!-- ===== VIEW: SAMPLES ===== -->
             <div id="samplesView" class="view">
-                <div style="padding: 0 0 11px 0;">
+                <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">📁 Work Samples</h3>
                     <p style="color: #888; font-size: 9px;">Browse through our recent projects.</p>
                 </div>
@@ -2485,7 +2475,7 @@
 
             <!-- ===== VIEW: ACCOUNT ===== -->
             <div id="accountView" class="view">
-                <div style="padding: 0 0 11px 0;">
+                <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">💰 My Account</h3>
                     <p style="color: #888; font-size: 9px;">Manage your balance, referrals, and withdrawals.</p>
                 </div>
@@ -2575,7 +2565,7 @@
 
             <!-- ===== VIEW: PROFILE ===== -->
             <div id="profileView" class="view">
-                <div style="padding: 0 0 11px 0;">
+                <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">My Profile</h3>
                     <p style="color: #888; font-size: 9px;">Your personal information.</p>
                 </div>
@@ -3156,7 +3146,7 @@
         }
 
         // =================================================================
-        // PROMO CAROUSEL – INFINITE PEEK STYLE
+        // PROMO CAROUSEL – LOOPING, EDGE‑TO‑EDGE
         // =================================================================
 
         function renderPromoCarousel() {
@@ -3176,15 +3166,9 @@
 
             wrapper.classList.remove('collapsed');
 
-            // Create duplicated slides for infinite illusion: [last, first, second, ..., last, first]
-            const duplicated = [
-                entries[entries.length - 1],
-                ...entries,
-                entries[0]
-            ];
-
-            promoCarouselTrack.innerHTML = duplicated.map(([key, pic], idx) => `
-                <div class="promo-slide" data-key="${key}" data-index="${idx - 1}" data-real-index="${idx - 1 < 0 ? entries.length - 1 : idx - 1 >= entries.length ? 0 : idx - 1}">
+            // Build slides: only real slides (no duplicates)
+            promoCarouselTrack.innerHTML = entries.map(([key, pic], idx) => `
+                <div class="promo-slide" data-key="${key}" data-real-index="${idx}">
                     <img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" />
                     <div class="slide-overlay">
                         <div class="slide-text">
@@ -3195,58 +3179,65 @@
                 </div>
             `).join('');
 
-            // Set initial scroll position to first real slide (index 1 in duplicated array)
+            // Set initial scroll position to first slide
             const track = promoCarouselTrack;
             const slides = track.querySelectorAll('.promo-slide');
-            if (slides.length > 1) {
-                const firstRealSlide = slides[1];
+            if (slides.length > 0) {
+                const firstSlide = slides[0];
                 const containerWidth = track.clientWidth;
-                const slideWidth = firstRealSlide.offsetWidth;
-                const scrollPos = firstRealSlide.offsetLeft - (containerWidth - slideWidth) / 2;
+                const slideWidth = firstSlide.offsetWidth;
+                const scrollPos = firstSlide.offsetLeft - (containerWidth - slideWidth) / 2;
                 track.scrollLeft = Math.max(0, scrollPos);
                 currentCarouselIndex = 0;
-                updateCarouselClasses(1);
+                updateCarouselClasses(0);
             }
 
-            // Update classes on scroll
+            // Scroll listener with looping logic
             track.addEventListener('scroll', () => {
-                if (isUserInteracting) {
-                    const containerWidth = track.clientWidth;
-                    const scrollLeft = track.scrollLeft;
-                    const slides = track.querySelectorAll('.promo-slide');
-                    let closestIdx = 0;
-                    let closestDist = Infinity;
-                    slides.forEach((slide, i) => {
-                        const rect = slide.getBoundingClientRect();
-                        const centerX = rect.left + rect.width / 2;
-                        const containerCenter = track.getBoundingClientRect().left + containerWidth / 2;
-                        const dist = Math.abs(centerX - containerCenter);
-                        if (dist < closestDist) {
-                            closestDist = dist;
-                            closestIdx = i;
-                        }
-                    });
-
-                    if (closestIdx === 0) {
-                        const targetSlide = slides[1];
-                        const scrollPos2 = targetSlide.offsetLeft - (containerWidth - targetSlide.offsetWidth) / 2;
-                        track.scrollLeft = Math.max(0, scrollPos2);
-                        closestIdx = 1;
+                if (!isUserInteracting) return;
+                
+                const containerWidth = track.clientWidth;
+                const scrollLeft = track.scrollLeft;
+                const slides2 = track.querySelectorAll('.promo-slide');
+                let closestIdx = 0;
+                let closestDist = Infinity;
+                slides2.forEach((slide, i) => {
+                    const rect = slide.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const containerCenter = track.getBoundingClientRect().left + containerWidth / 2;
+                    const dist = Math.abs(centerX - containerCenter);
+                    if (dist < closestDist) {
+                        closestDist = dist;
+                        closestIdx = i;
                     }
-                    if (closestIdx === slides.length - 1) {
-                        const targetSlide = slides[slides.length - 2];
-                        const scrollPos2 = targetSlide.offsetLeft - (containerWidth - targetSlide.offsetWidth) / 2;
-                        track.scrollLeft = Math.max(0, scrollPos2);
-                        closestIdx = slides.length - 2;
-                    }
+                });
 
-                    const realIndex = parseInt(slides[closestIdx].dataset.realIndex);
-                    if (realIndex !== currentCarouselIndex) {
-                        currentCarouselIndex = realIndex;
-                        updateCarouselClasses(closestIdx);
-                        resetAutoScroll();
+                // Loop: if at first slide and scrolling left, jump to last
+                if (closestIdx === 0 && track.scrollLeft < 20) {
+                    const lastIdx = slides2.length - 1;
+                    const lastSlide = slides2[lastIdx];
+                    const scrollPos = lastSlide.offsetLeft - (containerWidth - lastSlide.offsetWidth) / 2;
+                    track.scrollLeft = Math.max(0, scrollPos);
+                    closestIdx = lastIdx;
+                }
+                // if at last slide and scrolling right, jump to first
+                if (closestIdx === slides2.length - 1) {
+                    const maxScroll = track.scrollWidth - track.clientWidth;
+                    if (track.scrollLeft >= maxScroll - 20) {
+                        const firstSlide2 = slides2[0];
+                        const scrollPos2 = firstSlide2.offsetLeft - (containerWidth - firstSlide2.offsetWidth) / 2;
+                        track.scrollLeft = Math.max(0, scrollPos2);
+                        closestIdx = 0;
                     }
                 }
+
+                const realIndex = parseInt(slides2[closestIdx].dataset.realIndex);
+                if (realIndex !== currentCarouselIndex) {
+                    currentCarouselIndex = realIndex;
+                    updateCarouselClasses(closestIdx);
+                    resetAutoScroll();
+                }
+                
                 isUserInteracting = true;
                 clearTimeout(track._scrollTimeout);
                 track._scrollTimeout = setTimeout(() => {
@@ -3255,31 +3246,19 @@
                 }, 2000);
             });
 
-            updateCarouselClasses(1);
-
-            setTimeout(() => {
-                const slides2 = track.querySelectorAll('.promo-slide');
-                if (slides2.length > 1) {
-                    const firstReal = slides2[1];
-                    const containerWidth = track.clientWidth;
-                    const slideWidth = firstReal.offsetWidth;
-                    const scrollPos = firstReal.offsetLeft - (containerWidth - slideWidth) / 2;
-                    track.scrollLeft = Math.max(0, scrollPos);
-                }
-            }, 100);
-
+            updateCarouselClasses(0);
             startAutoScroll();
         }
 
-        function updateCarouselClasses(activeDuplicatedIndex) {
+        function updateCarouselClasses(activeIndex) {
             const slides = promoCarouselTrack.querySelectorAll('.promo-slide');
             slides.forEach((slide, i) => {
                 slide.classList.remove('active-slide', 'prev-slide', 'next-slide', 'far-slide');
-                if (i === activeDuplicatedIndex) {
+                if (i === activeIndex) {
                     slide.classList.add('active-slide');
-                } else if (i === activeDuplicatedIndex - 1) {
+                } else if (i === activeIndex - 1 || (activeIndex === 0 && i === slides.length - 1)) {
                     slide.classList.add('prev-slide');
-                } else if (i === activeDuplicatedIndex + 1) {
+                } else if (i === activeIndex + 1 || (activeIndex === slides.length - 1 && i === 0)) {
                     slide.classList.add('next-slide');
                 } else {
                     slide.classList.add('far-slide');
@@ -3346,7 +3325,7 @@
         }
 
         // =================================================================
-        // SERVICES
+        // SERVICES – with new thumb classes
         // =================================================================
 
         function renderServices(category = 'all') {
@@ -3363,15 +3342,25 @@
                 return;
             }
 
-            container.innerHTML = entries.map(([key, s]) => `
-                <div class="service-item" data-id="${key}">
-                    <div class="service-thumb ${s.thumb || 'thumb-1'}">
-                        <i class="fa-solid ${s.icon || 'fa-cube'}"></i>
+            container.innerHTML = entries.map(([key, s]) => {
+                const cat = s.category || 'all';
+                let thumbClass = 'thumb-all';
+                if (cat === 'all') thumbClass = 'thumb-all';
+                else if (cat === 'graphic') thumbClass = 'thumb-graphic';
+                else if (cat === 'dev') thumbClass = 'thumb-dev';
+                else if (cat === 'tech') thumbClass = 'thumb-tech';
+                else if (cat === 'it') thumbClass = 'thumb-it';
+                
+                return `
+                    <div class="service-item" data-id="${key}">
+                        <div class="service-thumb ${thumbClass}">
+                            <i class="fa-solid ${s.icon || 'fa-cube'}"></i>
+                        </div>
+                        <div class="service-title">${escapeHtml(s.title || 'Untitled')}</div>
+                        <div class="service-subtitle">${escapeHtml(s.subtitle || '')}</div>
                     </div>
-                    <div class="service-title">${escapeHtml(s.title || 'Untitled')}</div>
-                    <div class="service-subtitle">${escapeHtml(s.subtitle || '')}</div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
 
             container.querySelectorAll('.service-item').forEach(item => {
                 item.addEventListener('click', function() {
@@ -5250,7 +5239,7 @@
         });
         observer.observe(paymentModal, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer App — Logo added, Send Money integrated, Wallet Payment added, Promo carousel collapses when empty.');
+        console.log('✅ Customer App — Carousel loops, edge-to-edge, service icons updated.');
     </script>
 </body>
 </html>
