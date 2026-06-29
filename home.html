@@ -39,7 +39,7 @@
         .app-content {
             flex: 1;
             overflow-y: auto;
-            padding: 0 12px 128px 12px;
+            padding: 0 0 128px 0;
             -webkit-overflow-scrolling: touch;
         }
 
@@ -93,7 +93,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 0 14px 0;
+            padding: 10px 12px 14px 12px;
         }
         .header-left {
             display: flex;
@@ -161,7 +161,7 @@
             padding: 17px 14px;
             color: white;
             position: relative;
-            margin-bottom: 12px;
+            margin: 0 12px 12px 12px;
             overflow: hidden;
             min-height: 179px;
         }
@@ -264,6 +264,7 @@
             font-weight: 700;
         }
 
+        /* ===== PROMO CAROUSEL – EDGE TO EDGE, NO PADDING ===== */
         .promo-carousel-wrapper {
             position: relative;
             margin: 3px 0 12px 0;
@@ -271,7 +272,7 @@
             border-radius: 20px;
             background: #f8f9fc;
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.08);
-            padding: 0 3%;
+            padding: 0;
             transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             height: 255px;
         }
@@ -359,20 +360,19 @@
             text-shadow: 0 1px 7px rgba(0, 0, 0, 0.3);
         }
 
-        .promo-slide.active-slide {
-            transform: scale(1.02);
-            opacity: 1;
-            z-index: 3;
-            box-shadow: 0 10px 41px rgba(0, 0, 0, 0.25);
-        }
-
+        /* previous & next flyers touch the edges — no side gap */
         .promo-slide.prev-slide,
         .promo-slide.next-slide {
             transform: scale(0.82);
             opacity: 0.8;
             z-index: 2;
         }
-
+        .promo-slide.active-slide {
+            transform: scale(1.02);
+            opacity: 1;
+            z-index: 3;
+            box-shadow: 0 10px 41px rgba(0, 0, 0, 0.25);
+        }
         .promo-slide.far-slide {
             transform: scale(0.66);
             opacity: 0.2;
@@ -380,7 +380,7 @@
         }
 
         .promotions-banner {
-            margin: 0 0 12px 0;
+            margin: 0 12px 12px 12px;
             padding: 9px 12px;
             background: #fef9e7;
             border-radius: 10px;
@@ -410,7 +410,7 @@
         .category-row {
             display: flex;
             gap: 7px;
-            margin-bottom: 14px;
+            margin: 0 12px 14px 12px;
             overflow-x: auto;
             padding-bottom: 3px;
             scrollbar-width: none;
@@ -450,7 +450,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 9px;
+            margin: 0 12px 9px 12px;
         }
         .dynamic-title {
             font-weight: 700;
@@ -482,7 +482,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 9px;
-            margin-bottom: 14px;
+            margin: 0 12px 14px 12px;
         }
         .service-item {
             display: flex;
@@ -521,6 +521,7 @@
             line-height: 1.2;
         }
 
+        /* All service thumbs dark */
         .thumb-1 { background: #1c2128 !important; }
         .thumb-2 { background: #1c2128 !important; }
         .thumb-3 { background: #1c2128 !important; }
@@ -538,7 +539,7 @@
         .thumb-15 { background: #1c2128 !important; }
 
         .order-flow-container {
-            padding: 0 0 14px 0;
+            padding: 0 12px 14px 12px;
         }
 
         .order-policy-panel {
@@ -815,33 +816,29 @@
             color: #f5b83d;
         }
 
-        /* ===== PAYMENT PAGE (instead of modal) ===== */
+        /* ===== PAYMENT PAGE (full page, no floating form) ===== */
         .payment-page-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #f8f9fc;
+            background: #ffffff;
             z-index: 1000;
             display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 14px;
+            overflow-y: auto;
+            padding: 0;
         }
         .payment-page-overlay.open {
-            display: flex;
+            display: block;
         }
         .payment-page {
-            background: #ffffff;
-            border-radius: 16px;
             width: 100%;
-            max-width: 400px;
-            max-height: 95vh;
-            overflow-y: auto;
-            padding: 20px 18px 18px 18px;
-            box-shadow: 0 21px 51px rgba(0, 0, 0, 0.15);
+            max-width: 100%;
+            padding: 20px 12px 30px 12px;
+            background: #ffffff;
             position: relative;
+            min-height: 100vh;
         }
         .payment-page .page-logo {
             display: flex;
@@ -912,10 +909,58 @@
             color: #f5b83d;
         }
 
+        /* ===== PROMO / REFERRAL DROPDOWN STYLE ===== */
+        .toggle-row {
+            display: flex;
+            gap: 7px;
+            margin-bottom: 9px;
+            flex-wrap: wrap;
+        }
+        .toggle-row .toggle-code-btn {
+            flex: 1;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 17px;
+            background: #fafafa;
+            font-size: 9px;
+            font-weight: 600;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            min-width: 68px;
+        }
+        .toggle-row .toggle-code-btn.active {
+            background: #1c2128;
+            color: white;
+            border-color: #1c2128;
+        }
+        .toggle-row .toggle-code-btn:active {
+            transform: scale(0.95);
+        }
+
+        .code-input-wrap {
+            display: none;
+            margin-bottom: 9px;
+        }
+        .code-input-wrap.open {
+            display: block;
+        }
+        .code-input-wrap input {
+            width: 100%;
+            padding: 7px 10px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            font-size: 10px;
+        }
+        .code-input-wrap input:focus {
+            outline: none;
+            border-color: #f5b83d;
+        }
+
         .coupon-section {
             display: flex;
             gap: 7px;
-            margin-bottom: 10px;
             align-items: center;
             flex-wrap: wrap;
         }
@@ -1123,6 +1168,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            padding: 0 12px 14px 12px;
         }
         .order-card {
             background: #ffffff;
@@ -1244,7 +1290,7 @@
         }
 
         .history-list {
-            padding: 0 0 14px 0;
+            padding: 0 12px 14px 12px;
             display: flex;
             flex-direction: column;
             gap: 9px;
@@ -1325,7 +1371,7 @@
             border: 1px solid #f5b83d;
             border-radius: 9px;
             padding: 9px 12px;
-            margin-bottom: 10px;
+            margin: 0 12px 10px 12px;
             display: none;
             align-items: center;
             gap: 9px;
@@ -1491,7 +1537,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
-            padding: 0 0 14px 0;
+            padding: 0 12px 14px 12px;
         }
         @media (max-width: 420px) {
             .samples-grid {
@@ -1625,7 +1671,7 @@
             background: #ffffff;
             border-radius: 14px;
             padding: 14px;
-            margin-top: 7px;
+            margin: 0 12px 14px 12px;
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.06);
             border: 1px solid #f0f0f0;
         }
@@ -1692,7 +1738,7 @@
         }
 
         .account-section {
-            padding: 0 0 14px 0;
+            padding: 0 12px 14px 12px;
         }
         .account-toggle-row {
             display: flex;
@@ -2217,54 +2263,6 @@
             transform: scale(0.95);
         }
 
-        .toggle-row {
-            display: flex;
-            gap: 7px;
-            margin-bottom: 9px;
-            flex-wrap: wrap;
-        }
-        .toggle-row .toggle-code-btn {
-            flex: 1;
-            padding: 5px 10px;
-            border: 1px solid #ddd;
-            border-radius: 17px;
-            background: #fafafa;
-            font-size: 9px;
-            font-weight: 600;
-            color: #555;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-            min-width: 68px;
-        }
-        .toggle-row .toggle-code-btn.active {
-            background: #1c2128;
-            color: white;
-            border-color: #1c2128;
-        }
-        .toggle-row .toggle-code-btn:active {
-            transform: scale(0.95);
-        }
-
-        .code-input-wrap {
-            display: none;
-            margin-bottom: 9px;
-        }
-        .code-input-wrap.open {
-            display: block;
-        }
-        .code-input-wrap input {
-            width: 100%;
-            padding: 7px 10px;
-            border: 1px solid #ddd;
-            border-radius: 9px;
-            font-size: 10px;
-        }
-        .code-input-wrap input:focus {
-            outline: none;
-            border-color: #f5b83d;
-        }
-
         .apply-btn {
             background: #f5b83d;
             color: #1c2128;
@@ -2315,7 +2313,7 @@
 
         @media (max-width: 420px) {
             .app-content {
-                padding: 0 9px 128px 9px;
+                padding: 0 0 128px 0;
             }
             .service-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -2359,7 +2357,7 @@
                 padding: 7px 10px;
             }
             .promo-carousel-wrapper {
-                padding: 0 3%;
+                padding: 0;
                 height: 221px;
             }
             .promo-slide {
@@ -2381,10 +2379,6 @@
             .send-money-section .search-result {
                 font-size: 9px;
             }
-            .payment-page {
-                max-width: 100%;
-                padding: 16px;
-            }
         }
 
         @media (max-width: 380px) {
@@ -2392,7 +2386,7 @@
                 font-size: 12px;
             }
             .promo-carousel-wrapper {
-                padding: 0 3%;
+                padding: 0;
                 height: 187px;
             }
             .promo-slide {
@@ -2403,11 +2397,8 @@
     </style>
 </head>
 <body>
-
     <div class="app-root">
-
         <div class="app-content" id="appContent">
-
             <!-- ===== HEADER ===== -->
             <div class="header">
                 <div class="header-left">
@@ -2493,7 +2484,7 @@
 
             <!-- ===== VIEW: ORDER FLOW ===== -->
             <div id="orderFlowView" class="view">
-                <div style="display: flex; align-items: center; gap: 9px; padding: 0 0 9px 0;">
+                <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
                     <button id="backFromOrder" style="background: none; border: none; font-size: 14px; color: #1c2128; cursor: pointer; padding: 3px;">
                         <i class="fa-solid fa-arrow-left"></i>
                     </button>
@@ -2506,7 +2497,7 @@
 
             <!-- ===== VIEW: ORDERS ===== -->
             <div id="ordersView" class="view">
-                <div style="padding: 0 0 11px 0;">
+                <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Your Orders</h3>
                     <p style="color: #888; font-size: 9px;">Track your projects and payments.</p>
                 </div>
@@ -2515,7 +2506,7 @@
 
             <!-- ===== VIEW: HISTORY ===== -->
             <div id="historyView" class="view">
-                <div style="padding: 0 0 11px 0;">
+                <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Transaction History</h3>
                     <p style="color: #888; font-size: 9px;">Tap a transaction to view more details.</p>
                 </div>
@@ -2527,7 +2518,7 @@
 
             <!-- ===== VIEW: SAMPLES ===== -->
             <div id="samplesView" class="view">
-                <div style="padding: 0 0 11px 0;">
+                <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">📁 Work Samples</h3>
                     <p style="color: #888; font-size: 9px;">Browse through our recent projects.</p>
                 </div>
@@ -2536,7 +2527,7 @@
 
             <!-- ===== VIEW: ACCOUNT ===== -->
             <div id="accountView" class="view">
-                <div style="padding: 0 0 11px 0;">
+                <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">💰 My Account</h3>
                     <p style="color: #888; font-size: 9px;">Manage your balance, referrals, and withdrawals.</p>
                 </div>
@@ -2626,7 +2617,7 @@
 
             <!-- ===== VIEW: PROFILE ===== -->
             <div id="profileView" class="view">
-                <div style="padding: 0 0 11px 0;">
+                <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">My Profile</h3>
                     <p style="color: #888; font-size: 9px;">Your personal information.</p>
                 </div>
@@ -2660,7 +2651,7 @@
 
     </div>
 
-    <!-- ===== PAYMENT PAGE (full page, not modal) ===== -->
+    <!-- ===== PAYMENT PAGE (full page, no floating form) ===== -->
     <div class="payment-page-overlay" id="paymentPage">
         <div class="payment-page">
             <button class="close-btn" id="paymentCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -2698,13 +2689,13 @@
                 </div>
             </div>
 
-            <!-- ===== TOGGLE: PROMO CODE / REFERRAL CODE ===== -->
+            <!-- ===== DROPDOWN: PROMO CODE / REFERRAL CODE ===== -->
             <div class="toggle-row">
                 <button class="toggle-code-btn active" id="togglePromoBtn">Promo Code</button>
                 <button class="toggle-code-btn" id="toggleReferralBtn">Referral Code</button>
             </div>
 
-            <!-- Promo Code Input -->
+            <!-- Promo Code Dropdown -->
             <div class="code-input-wrap open" id="promoCodeWrap">
                 <div class="coupon-section">
                     <input type="text" id="couponInput" placeholder="Enter promo code">
@@ -2713,7 +2704,7 @@
                 <span class="coupon-msg" id="couponMsg"></span>
             </div>
 
-            <!-- Referral Code Input -->
+            <!-- Referral Code Dropdown -->
             <div class="code-input-wrap" id="referralCodeWrap">
                 <input type="text" id="referralCodeInput" placeholder="Enter referral code">
                 <button class="apply-btn" id="applyReferralBtn" style="margin-top:5px;">Apply Referral</button>
@@ -3225,7 +3216,7 @@
         }
 
         // =================================================================
-        // PROMO CAROUSEL – INFINITE PEEK STYLE
+        // PROMO CAROUSEL – INFINITE PEEK STYLE (edge to edge)
         // =================================================================
 
         function renderPromoCarousel() {
@@ -5345,7 +5336,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer App — Dark service backgrounds, promo carousel fixed, payment page added, order success popup.');
+        console.log('✅ Customer App — Dark service backgrounds, promo carousel edge-to-edge, payment page full layout, dropdown promo/referral, order success popup.');
     </script>
 </body>
 </html>
