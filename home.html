@@ -39,7 +39,7 @@
         .app-content {
             flex: 1;
             overflow-y: auto;
-            padding: 0 0 128px 0;
+            padding: 0 12px 128px 12px;
             -webkit-overflow-scrolling: touch;
         }
 
@@ -93,7 +93,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 12px 14px 12px;
+            padding: 10px 0 14px 0;
         }
         .header-left {
             display: flex;
@@ -161,7 +161,7 @@
             padding: 17px 14px;
             color: white;
             position: relative;
-            margin: 0 12px 12px 12px;
+            margin-bottom: 12px;
             overflow: hidden;
             min-height: 179px;
         }
@@ -264,7 +264,6 @@
             font-weight: 700;
         }
 
-        /* PROMO CAROUSEL – edge‑to‑edge, no side gaps */
         .promo-carousel-wrapper {
             position: relative;
             margin: 3px 0 12px 0;
@@ -272,7 +271,7 @@
             border-radius: 20px;
             background: #f8f9fc;
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.08);
-            padding: 0;
+            padding: 0 3%;
             transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             height: 255px;
         }
@@ -321,24 +320,6 @@
             z-index: 1;
             will-change: transform, opacity;
         }
-        /* previous & next flyers touch the edges — no side gap */
-        .promo-slide.prev-slide,
-        .promo-slide.next-slide {
-            transform: scale(0.82);
-            opacity: 0.8;
-            z-index: 2;
-        }
-        .promo-slide.active-slide {
-            transform: scale(1.02);
-            opacity: 1;
-            z-index: 3;
-            box-shadow: 0 10px 41px rgba(0, 0, 0, 0.25);
-        }
-        .promo-slide.far-slide {
-            transform: scale(0.66);
-            opacity: 0.2;
-            z-index: 0;
-        }
 
         .promo-slide img {
             width: 100%;
@@ -378,8 +359,28 @@
             text-shadow: 0 1px 7px rgba(0, 0, 0, 0.3);
         }
 
+        .promo-slide.active-slide {
+            transform: scale(1.02);
+            opacity: 1;
+            z-index: 3;
+            box-shadow: 0 10px 41px rgba(0, 0, 0, 0.25);
+        }
+
+        .promo-slide.prev-slide,
+        .promo-slide.next-slide {
+            transform: scale(0.82);
+            opacity: 0.8;
+            z-index: 2;
+        }
+
+        .promo-slide.far-slide {
+            transform: scale(0.66);
+            opacity: 0.2;
+            z-index: 0;
+        }
+
         .promotions-banner {
-            margin: 0 12px 12px 12px;
+            margin: 0 0 12px 0;
             padding: 9px 12px;
             background: #fef9e7;
             border-radius: 10px;
@@ -409,7 +410,7 @@
         .category-row {
             display: flex;
             gap: 7px;
-            margin: 0 12px 14px 12px;
+            margin-bottom: 14px;
             overflow-x: auto;
             padding-bottom: 3px;
             scrollbar-width: none;
@@ -449,7 +450,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 0 12px 9px 12px;
+            margin-bottom: 9px;
         }
         .dynamic-title {
             font-weight: 700;
@@ -481,7 +482,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 9px;
-            margin: 0 12px 14px 12px;
+            margin-bottom: 14px;
         }
         .service-item {
             display: flex;
@@ -501,8 +502,10 @@
             align-items: center;
             overflow: hidden;
             position: relative;
+            background: #1c2128 !important;
         }
         .service-thumb i {
+            color: white;
             font-size: 17px;
         }
         .service-title {
@@ -518,49 +521,24 @@
             line-height: 1.2;
         }
 
-        /* ----- NEW STYLES FOR ICON BACKGROUNDS & COLORS ----- */
-        .thumb-all {
-            background: #1c2128;
-        }
-        .thumb-all i {
-            color: white;
-        }
-        .thumb-graphic {
-            background: #f5b83d;
-        }
-        .thumb-graphic i {
-            color: #1c2128;
-        }
-        .thumb-dev {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .thumb-dev i {
-            color: #1c2128;
-        }
-        .thumb-tech {
-            background: #1c2128;
-        }
-        .thumb-tech i {
-            color: white;
-        }
-        .thumb-it {
-            background: #f5b83d;
-        }
-        .thumb-it i {
-            color: #1c2128;
-        }
-        /* fallback (others) – keep black bg white icon */
-        .service-thumb:not(.thumb-all):not(.thumb-graphic):not(.thumb-dev):not(.thumb-tech):not(.thumb-it) {
-            background: #1c2128;
-        }
-        .service-thumb:not(.thumb-all):not(.thumb-graphic):not(.thumb-dev):not(.thumb-tech):not(.thumb-it) i {
-            color: white;
-        }
+        .thumb-1 { background: #1c2128 !important; }
+        .thumb-2 { background: #1c2128 !important; }
+        .thumb-3 { background: #1c2128 !important; }
+        .thumb-4 { background: #1c2128 !important; }
+        .thumb-5 { background: #1c2128 !important; }
+        .thumb-6 { background: #1c2128 !important; }
+        .thumb-7 { background: #1c2128 !important; }
+        .thumb-8 { background: #1c2128 !important; }
+        .thumb-9 { background: #1c2128 !important; }
+        .thumb-10 { background: #1c2128 !important; }
+        .thumb-11 { background: #1c2128 !important; }
+        .thumb-12 { background: #1c2128 !important; }
+        .thumb-13 { background: #1c2128 !important; }
+        .thumb-14 { background: #1c2128 !important; }
+        .thumb-15 { background: #1c2128 !important; }
 
         .order-flow-container {
-            padding: 0 12px 14px 12px;
+            padding: 0 0 14px 0;
         }
 
         .order-policy-panel {
@@ -837,64 +815,75 @@
             color: #f5b83d;
         }
 
-        .payment-modal-overlay {
+        /* ===== PAYMENT PAGE (instead of modal) ===== */
+        .payment-page-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
+            background: #f8f9fc;
             z-index: 1000;
             display: none;
             align-items: center;
             justify-content: center;
             padding: 14px;
         }
-        .payment-modal-overlay.open {
+        .payment-page-overlay.open {
             display: flex;
         }
-        .payment-modal {
+        .payment-page {
             background: #ffffff;
             border-radius: 16px;
             width: 100%;
-            max-width: 306px;
-            max-height: 90vh;
+            max-width: 400px;
+            max-height: 95vh;
             overflow-y: auto;
-            padding: 19px 16px 16px 16px;
-            box-shadow: 0 21px 51px rgba(0, 0, 0, 0.3);
-            animation: modalIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            padding: 20px 18px 18px 18px;
+            box-shadow: 0 21px 51px rgba(0, 0, 0, 0.15);
+            position: relative;
         }
-        @keyframes modalIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+        .payment-page .page-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
         }
-        .payment-modal .close-btn {
-            float: right;
+        .payment-page .page-logo img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .payment-page .page-logo span {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1c2128;
+            letter-spacing: 0.5px;
+        }
+        .payment-page .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
             background: none;
             border: none;
-            font-size: 15px;
+            font-size: 18px;
             color: #aaa;
             cursor: pointer;
-            padding: 3px;
+            padding: 4px;
         }
-        .payment-modal .close-btn:hover {
+        .payment-page .close-btn:hover {
             color: #1c2128;
         }
-        .payment-modal h3 {
-            font-size: 14px;
+        .payment-page h3 {
+            font-size: 15px;
             font-weight: 700;
             margin-bottom: 3px;
             color: #1c2128;
-            clear: both;
         }
-        .payment-modal .sub {
+        .payment-page .sub {
             color: #888;
             font-size: 9px;
             margin-bottom: 11px;
@@ -1044,6 +1033,71 @@
             color: #f5b83d;
         }
 
+        /* ===== ORDER SUCCESS POPUP ===== */
+        .order-success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 14px;
+        }
+        .order-success-overlay.open {
+            display: flex;
+        }
+        .order-success-modal {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 320px;
+            padding: 30px 20px 20px 20px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            animation: modalIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .order-success-modal i {
+            font-size: 48px;
+            color: #f5b83d;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .order-success-modal h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-bottom: 6px;
+        }
+        .order-success-modal p {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+        .order-success-modal .btn-ok {
+            padding: 10px 30px;
+            background: #1c2128;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .order-success-modal .btn-ok:active {
+            transform: scale(0.95);
+        }
+
         .view {
             display: none;
         }
@@ -1190,7 +1244,7 @@
         }
 
         .history-list {
-            padding: 0 12px 14px 12px;
+            padding: 0 0 14px 0;
             display: flex;
             flex-direction: column;
             gap: 9px;
@@ -1271,7 +1325,7 @@
             border: 1px solid #f5b83d;
             border-radius: 9px;
             padding: 9px 12px;
-            margin: 0 12px 10px 12px;
+            margin-bottom: 10px;
             display: none;
             align-items: center;
             gap: 9px;
@@ -1437,7 +1491,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
-            padding: 0 12px 14px 12px;
+            padding: 0 0 14px 0;
         }
         @media (max-width: 420px) {
             .samples-grid {
@@ -1571,7 +1625,7 @@
             background: #ffffff;
             border-radius: 14px;
             padding: 14px;
-            margin: 0 12px 14px 12px;
+            margin-top: 7px;
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.06);
             border: 1px solid #f0f0f0;
         }
@@ -1638,7 +1692,7 @@
         }
 
         .account-section {
-            padding: 0 12px 14px 12px;
+            padding: 0 0 14px 0;
         }
         .account-toggle-row {
             display: flex;
@@ -2261,7 +2315,7 @@
 
         @media (max-width: 420px) {
             .app-content {
-                padding: 0 0 128px 0;
+                padding: 0 9px 128px 9px;
             }
             .service-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -2305,7 +2359,7 @@
                 padding: 7px 10px;
             }
             .promo-carousel-wrapper {
-                padding: 0;
+                padding: 0 3%;
                 height: 221px;
             }
             .promo-slide {
@@ -2327,6 +2381,10 @@
             .send-money-section .search-result {
                 font-size: 9px;
             }
+            .payment-page {
+                max-width: 100%;
+                padding: 16px;
+            }
         }
 
         @media (max-width: 380px) {
@@ -2334,7 +2392,7 @@
                 font-size: 12px;
             }
             .promo-carousel-wrapper {
-                padding: 0;
+                padding: 0 3%;
                 height: 187px;
             }
             .promo-slide {
@@ -2345,8 +2403,11 @@
     </style>
 </head>
 <body>
+
     <div class="app-root">
+
         <div class="app-content" id="appContent">
+
             <!-- ===== HEADER ===== -->
             <div class="header">
                 <div class="header-left">
@@ -2432,7 +2493,7 @@
 
             <!-- ===== VIEW: ORDER FLOW ===== -->
             <div id="orderFlowView" class="view">
-                <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
+                <div style="display: flex; align-items: center; gap: 9px; padding: 0 0 9px 0;">
                     <button id="backFromOrder" style="background: none; border: none; font-size: 14px; color: #1c2128; cursor: pointer; padding: 3px;">
                         <i class="fa-solid fa-arrow-left"></i>
                     </button>
@@ -2445,7 +2506,7 @@
 
             <!-- ===== VIEW: ORDERS ===== -->
             <div id="ordersView" class="view">
-                <div style="padding: 0 12px 11px 12px;">
+                <div style="padding: 0 0 11px 0;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Your Orders</h3>
                     <p style="color: #888; font-size: 9px;">Track your projects and payments.</p>
                 </div>
@@ -2454,7 +2515,7 @@
 
             <!-- ===== VIEW: HISTORY ===== -->
             <div id="historyView" class="view">
-                <div style="padding: 0 12px 11px 12px;">
+                <div style="padding: 0 0 11px 0;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Transaction History</h3>
                     <p style="color: #888; font-size: 9px;">Tap a transaction to view more details.</p>
                 </div>
@@ -2466,7 +2527,7 @@
 
             <!-- ===== VIEW: SAMPLES ===== -->
             <div id="samplesView" class="view">
-                <div style="padding: 0 12px 11px 12px;">
+                <div style="padding: 0 0 11px 0;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">📁 Work Samples</h3>
                     <p style="color: #888; font-size: 9px;">Browse through our recent projects.</p>
                 </div>
@@ -2475,7 +2536,7 @@
 
             <!-- ===== VIEW: ACCOUNT ===== -->
             <div id="accountView" class="view">
-                <div style="padding: 0 12px 11px 12px;">
+                <div style="padding: 0 0 11px 0;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">💰 My Account</h3>
                     <p style="color: #888; font-size: 9px;">Manage your balance, referrals, and withdrawals.</p>
                 </div>
@@ -2565,7 +2626,7 @@
 
             <!-- ===== VIEW: PROFILE ===== -->
             <div id="profileView" class="view">
-                <div style="padding: 0 12px 11px 12px;">
+                <div style="padding: 0 0 11px 0;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">My Profile</h3>
                     <p style="color: #888; font-size: 9px;">Your personal information.</p>
                 </div>
@@ -2599,10 +2660,14 @@
 
     </div>
 
-    <!-- ===== PAYMENT MODAL ===== -->
-    <div class="payment-modal-overlay" id="paymentModal">
-        <div class="payment-modal">
+    <!-- ===== PAYMENT PAGE (full page, not modal) ===== -->
+    <div class="payment-page-overlay" id="paymentPage">
+        <div class="payment-page">
             <button class="close-btn" id="paymentCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <div class="page-logo">
+                <img src="bufferzone.png" alt="Buffer Zone" onerror="this.style.display='none'" />
+                <span>Buffer Zone</span>
+            </div>
             <h3>💳 Payment Required</h3>
             <p class="sub">To begin your project, you must pay 50% upfront.</p>
 
@@ -2679,6 +2744,16 @@
             <p style="text-align:center; font-size:8px; color:#888; margin-top:5px;">
                 <i class="fa-regular fa-clock"></i> Project begins after payment confirmation
             </p>
+        </div>
+    </div>
+
+    <!-- ===== ORDER SUCCESS POPUP ===== -->
+    <div class="order-success-overlay" id="orderSuccessPopup">
+        <div class="order-success-modal">
+            <i class="fa-regular fa-circle-check"></i>
+            <h3>🎉 Order Submitted!</h3>
+            <p>Your order has been successfully submitted.<br>You will be contacted by one of our team.<br><br>Thank you for choosing <strong>BUFFER ZONE</strong>.</p>
+            <button class="btn-ok" id="orderSuccessOkBtn">OK</button>
         </div>
     </div>
 
@@ -2835,8 +2910,8 @@
         const promoCarouselTrack = document.getElementById('promoCarouselTrack');
         const promoCarouselWrapper = document.getElementById('promoCarouselWrapper');
 
-        // Payment Modal
-        const paymentModal = document.getElementById('paymentModal');
+        // Payment Page
+        const paymentPage = document.getElementById('paymentPage');
         const paymentCloseBtn = document.getElementById('paymentCloseBtn');
         const paymentAmount = document.getElementById('paymentAmount');
         const paymentNumber = document.getElementById('paymentNumber');
@@ -2858,6 +2933,10 @@
         const finalDepositVal = document.getElementById('finalDepositVal');
 
         const samplesContainer = document.getElementById('samplesContainer');
+
+        // ===== Order Success =====
+        const orderSuccessPopup = document.getElementById('orderSuccessPopup');
+        const orderSuccessOkBtn = document.getElementById('orderSuccessOkBtn');
 
         // ===== Account & Referral =====
         const accountTransactionsBtn = document.getElementById('accountTransactionsBtn');
@@ -2881,7 +2960,7 @@
         const withdrawSuccessModal = document.getElementById('withdrawSuccessModal');
         const withdrawSuccessOkBtn = document.getElementById('withdrawSuccessOkBtn');
 
-        // ===== Toggle buttons in payment modal =====
+        // ===== Toggle buttons in payment page =====
         const togglePromoBtn = document.getElementById('togglePromoBtn');
         const toggleReferralBtn = document.getElementById('toggleReferralBtn');
         const promoCodeWrap = document.getElementById('promoCodeWrap');
@@ -3146,7 +3225,7 @@
         }
 
         // =================================================================
-        // PROMO CAROUSEL – LOOPING, EDGE‑TO‑EDGE
+        // PROMO CAROUSEL – INFINITE PEEK STYLE
         // =================================================================
 
         function renderPromoCarousel() {
@@ -3166,9 +3245,15 @@
 
             wrapper.classList.remove('collapsed');
 
-            // Build slides: only real slides (no duplicates)
-            promoCarouselTrack.innerHTML = entries.map(([key, pic], idx) => `
-                <div class="promo-slide" data-key="${key}" data-real-index="${idx}">
+            // Create duplicated slides for infinite illusion: [last, first, second, ..., last, first]
+            const duplicated = [
+                entries[entries.length - 1],
+                ...entries,
+                entries[0]
+            ];
+
+            promoCarouselTrack.innerHTML = duplicated.map(([key, pic], idx) => `
+                <div class="promo-slide" data-key="${key}" data-index="${idx - 1}" data-real-index="${idx - 1 < 0 ? entries.length - 1 : idx - 1 >= entries.length ? 0 : idx - 1}">
                     <img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" />
                     <div class="slide-overlay">
                         <div class="slide-text">
@@ -3179,65 +3264,58 @@
                 </div>
             `).join('');
 
-            // Set initial scroll position to first slide
+            // Set initial scroll position to first real slide (index 1 in duplicated array)
             const track = promoCarouselTrack;
             const slides = track.querySelectorAll('.promo-slide');
-            if (slides.length > 0) {
-                const firstSlide = slides[0];
+            if (slides.length > 1) {
+                const firstRealSlide = slides[1];
                 const containerWidth = track.clientWidth;
-                const slideWidth = firstSlide.offsetWidth;
-                const scrollPos = firstSlide.offsetLeft - (containerWidth - slideWidth) / 2;
+                const slideWidth = firstRealSlide.offsetWidth;
+                const scrollPos = firstRealSlide.offsetLeft - (containerWidth - slideWidth) / 2;
                 track.scrollLeft = Math.max(0, scrollPos);
                 currentCarouselIndex = 0;
-                updateCarouselClasses(0);
+                updateCarouselClasses(1);
             }
 
-            // Scroll listener with looping logic
+            // Update classes on scroll
             track.addEventListener('scroll', () => {
-                if (!isUserInteracting) return;
-                
-                const containerWidth = track.clientWidth;
-                const scrollLeft = track.scrollLeft;
-                const slides2 = track.querySelectorAll('.promo-slide');
-                let closestIdx = 0;
-                let closestDist = Infinity;
-                slides2.forEach((slide, i) => {
-                    const rect = slide.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const containerCenter = track.getBoundingClientRect().left + containerWidth / 2;
-                    const dist = Math.abs(centerX - containerCenter);
-                    if (dist < closestDist) {
-                        closestDist = dist;
-                        closestIdx = i;
-                    }
-                });
+                if (isUserInteracting) {
+                    const containerWidth = track.clientWidth;
+                    const scrollLeft = track.scrollLeft;
+                    const slides = track.querySelectorAll('.promo-slide');
+                    let closestIdx = 0;
+                    let closestDist = Infinity;
+                    slides.forEach((slide, i) => {
+                        const rect = slide.getBoundingClientRect();
+                        const centerX = rect.left + rect.width / 2;
+                        const containerCenter = track.getBoundingClientRect().left + containerWidth / 2;
+                        const dist = Math.abs(centerX - containerCenter);
+                        if (dist < closestDist) {
+                            closestDist = dist;
+                            closestIdx = i;
+                        }
+                    });
 
-                // Loop: if at first slide and scrolling left, jump to last
-                if (closestIdx === 0 && track.scrollLeft < 20) {
-                    const lastIdx = slides2.length - 1;
-                    const lastSlide = slides2[lastIdx];
-                    const scrollPos = lastSlide.offsetLeft - (containerWidth - lastSlide.offsetWidth) / 2;
-                    track.scrollLeft = Math.max(0, scrollPos);
-                    closestIdx = lastIdx;
-                }
-                // if at last slide and scrolling right, jump to first
-                if (closestIdx === slides2.length - 1) {
-                    const maxScroll = track.scrollWidth - track.clientWidth;
-                    if (track.scrollLeft >= maxScroll - 20) {
-                        const firstSlide2 = slides2[0];
-                        const scrollPos2 = firstSlide2.offsetLeft - (containerWidth - firstSlide2.offsetWidth) / 2;
+                    if (closestIdx === 0) {
+                        const targetSlide = slides[1];
+                        const scrollPos2 = targetSlide.offsetLeft - (containerWidth - targetSlide.offsetWidth) / 2;
                         track.scrollLeft = Math.max(0, scrollPos2);
-                        closestIdx = 0;
+                        closestIdx = 1;
+                    }
+                    if (closestIdx === slides.length - 1) {
+                        const targetSlide = slides[slides.length - 2];
+                        const scrollPos2 = targetSlide.offsetLeft - (containerWidth - targetSlide.offsetWidth) / 2;
+                        track.scrollLeft = Math.max(0, scrollPos2);
+                        closestIdx = slides.length - 2;
+                    }
+
+                    const realIndex = parseInt(slides[closestIdx].dataset.realIndex);
+                    if (realIndex !== currentCarouselIndex) {
+                        currentCarouselIndex = realIndex;
+                        updateCarouselClasses(closestIdx);
+                        resetAutoScroll();
                     }
                 }
-
-                const realIndex = parseInt(slides2[closestIdx].dataset.realIndex);
-                if (realIndex !== currentCarouselIndex) {
-                    currentCarouselIndex = realIndex;
-                    updateCarouselClasses(closestIdx);
-                    resetAutoScroll();
-                }
-                
                 isUserInteracting = true;
                 clearTimeout(track._scrollTimeout);
                 track._scrollTimeout = setTimeout(() => {
@@ -3246,19 +3324,31 @@
                 }, 2000);
             });
 
-            updateCarouselClasses(0);
+            updateCarouselClasses(1);
+
+            setTimeout(() => {
+                const slides2 = track.querySelectorAll('.promo-slide');
+                if (slides2.length > 1) {
+                    const firstReal = slides2[1];
+                    const containerWidth = track.clientWidth;
+                    const slideWidth = firstReal.offsetWidth;
+                    const scrollPos = firstReal.offsetLeft - (containerWidth - slideWidth) / 2;
+                    track.scrollLeft = Math.max(0, scrollPos);
+                }
+            }, 100);
+
             startAutoScroll();
         }
 
-        function updateCarouselClasses(activeIndex) {
+        function updateCarouselClasses(activeDuplicatedIndex) {
             const slides = promoCarouselTrack.querySelectorAll('.promo-slide');
             slides.forEach((slide, i) => {
                 slide.classList.remove('active-slide', 'prev-slide', 'next-slide', 'far-slide');
-                if (i === activeIndex) {
+                if (i === activeDuplicatedIndex) {
                     slide.classList.add('active-slide');
-                } else if (i === activeIndex - 1 || (activeIndex === 0 && i === slides.length - 1)) {
+                } else if (i === activeDuplicatedIndex - 1) {
                     slide.classList.add('prev-slide');
-                } else if (i === activeIndex + 1 || (activeIndex === slides.length - 1 && i === 0)) {
+                } else if (i === activeDuplicatedIndex + 1) {
                     slide.classList.add('next-slide');
                 } else {
                     slide.classList.add('far-slide');
@@ -3325,7 +3415,7 @@
         }
 
         // =================================================================
-        // SERVICES – with new thumb classes
+        // SERVICES – ALL DARK BACKGROUND
         // =================================================================
 
         function renderServices(category = 'all') {
@@ -3343,14 +3433,8 @@
             }
 
             container.innerHTML = entries.map(([key, s]) => {
-                const cat = s.category || 'all';
-                let thumbClass = 'thumb-all';
-                if (cat === 'all') thumbClass = 'thumb-all';
-                else if (cat === 'graphic') thumbClass = 'thumb-graphic';
-                else if (cat === 'dev') thumbClass = 'thumb-dev';
-                else if (cat === 'tech') thumbClass = 'thumb-tech';
-                else if (cat === 'it') thumbClass = 'thumb-it';
-                
+                // All thumb classes are set to dark via CSS
+                const thumbClass = 'thumb-1'; // all dark
                 return `
                     <div class="service-item" data-id="${key}">
                         <div class="service-thumb ${thumbClass}">
@@ -3813,7 +3897,7 @@
             sendAvailBalance.textContent = `ZMW ${availableBalance.toFixed(2)}`;
             updateSendButtonState();
 
-            // Wallet payment section update if modal is open
+            // Wallet payment section update if page is open
             updateWalletPaymentUI();
 
             // Send money tx list
@@ -4220,7 +4304,7 @@
                 if (selectedColorScheme) customizationParts.push(`Color Scheme: ${selectedColorScheme}`);
                 if (selectedRevisions) customizationParts.push(`Revisions: ${selectedRevisions}`);
                 if (selectedDeliverySpeed) customizationParts.push(`Delivery: ${selectedDeliverySpeed}`);
-                paymentModal.dataset.orderData = JSON.stringify({
+                paymentPage.dataset.orderData = JSON.stringify({
                     service: service.title,
                     serviceId: service.id || key,
                     quantity: currentQuantity,
@@ -4234,7 +4318,7 @@
                     notes: notes,
                     customizationString: customizationParts.join(', ')
                 });
-                paymentModal.classList.add('open');
+                paymentPage.classList.add('open');
             });
         }
 
@@ -4282,7 +4366,7 @@
                     return;
                 }
 
-                const orderData = JSON.parse(paymentModal.dataset.orderData || '{}');
+                const orderData = JSON.parse(paymentPage.dataset.orderData || '{}');
                 const total = orderData.total || orderTotalBeforeDiscount;
                 const discountAmount = total * (foundPromo.discount / 100);
                 const finalPrice = total - discountAmount;
@@ -4304,7 +4388,7 @@
                 applyCouponBtn.disabled = true;
                 couponInput.disabled = true;
 
-                paymentModal.dataset.appliedPromo = JSON.stringify(appliedPromo);
+                paymentPage.dataset.appliedPromo = JSON.stringify(appliedPromo);
 
                 // Re-check wallet payment UI
                 updateWalletPaymentUI();
@@ -4378,7 +4462,7 @@
                     return;
                 }
 
-                const orderData = JSON.parse(paymentModal.dataset.orderData || '{}');
+                const orderData = JSON.parse(paymentPage.dataset.orderData || '{}');
                 const total = orderData.total || orderTotalBeforeDiscount;
                 const discountAmount = total * (foundDiscount.discount / 100);
                 const finalPrice = total - discountAmount;
@@ -4409,7 +4493,7 @@
                 referralCodeInput.disabled = true;
                 applyReferralBtn.disabled = true;
 
-                paymentModal.dataset.appliedReferral = JSON.stringify(appliedReferral);
+                paymentPage.dataset.appliedReferral = JSON.stringify(appliedReferral);
 
                 // Re-check wallet payment UI
                 updateWalletPaymentUI();
@@ -4433,7 +4517,7 @@
 
             walletBalanceDisplay.textContent = `ZMW ${availableBalance.toFixed(2)}`;
 
-            // Get the deposit amount from payment modal
+            // Get the deposit amount from payment page
             let depositAmount = 0;
             const amountText = paymentAmount.textContent.replace('ZMW ', '');
             depositAmount = parseFloat(amountText) || 0;
@@ -4475,11 +4559,11 @@
         }
 
         // =================================================================
-        // CONFIRM PAYMENT
+        // CONFIRM PAYMENT (from Payment Page)
         // =================================================================
 
         function confirmPayment() {
-            const dataStr = paymentModal.dataset.orderData;
+            const dataStr = paymentPage.dataset.orderData;
             if (!dataStr) {
                 showToast('Order data missing.', 'error');
                 return;
@@ -4693,7 +4777,8 @@
                 userId: currentUserId
             });
 
-            paymentModal.classList.remove('open');
+            // Close payment page and show success popup
+            paymentPage.classList.remove('open');
             cloudinaryScreenshotUrlInput.value = '';
             fileName.textContent = 'No file chosen';
             uploadArea.style.borderColor = '#ddd';
@@ -4701,12 +4786,33 @@
             payWithWalletCheck.checked = false;
             uploadSection.style.display = 'block';
 
+            // Show order success popup
+            orderSuccessPopup.classList.add('open');
+        }
+
+        // =================================================================
+        // ORDER SUCCESS POPUP HANDLER
+        // =================================================================
+
+        orderSuccessOkBtn.addEventListener('click', function() {
+            orderSuccessPopup.classList.remove('open');
             switchView('homeView');
             selectedService = null;
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
             document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
             renderServices('all');
-        }
+        });
+
+        orderSuccessPopup.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+                switchView('homeView');
+                selectedService = null;
+                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
+                renderServices('all');
+            }
+        });
 
         // =================================================================
         // WITHDRAWAL — PENDING REQUEST, ADMIN APPROVES/DEDUCTS
@@ -5074,9 +5180,9 @@
         sidebarOverlay.addEventListener('click', closeSidebar);
 
         paymentCloseBtn.addEventListener('click', function() {
-            paymentModal.classList.remove('open');
+            paymentPage.classList.remove('open');
         });
-        paymentModal.addEventListener('click', function(e) {
+        paymentPage.addEventListener('click', function(e) {
             if (e.target === this) this.classList.remove('open');
         });
 
@@ -5231,15 +5337,15 @@
             }
         });
 
-        // Listen for changes in payment modal amount to update wallet UI
+        // Listen for changes in payment page amount to update wallet UI
         const observer = new MutationObserver(() => {
-            if (paymentModal.classList.contains('open')) {
+            if (paymentPage.classList.contains('open')) {
                 updateWalletPaymentUI();
             }
         });
-        observer.observe(paymentModal, { attributes: true, attributeFilter: ['class'] });
+        observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer App — Carousel loops, edge-to-edge, service icons updated.');
+        console.log('✅ Customer App — Dark service backgrounds, promo carousel fixed, payment page added, order success popup.');
     </script>
 </body>
 </html>
