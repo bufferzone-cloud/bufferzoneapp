@@ -456,6 +456,261 @@
             margin-top: 1px;
         }
 
+        /* ===== CUSTOMER TRANSACTIONS PAGE ===== */
+        .tx-page-container {
+            padding: 0 0 14px 0;
+        }
+
+        .tx-page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0 14px 0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tx-page-header h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1c2128;
+        }
+        .tx-page-header h2 i {
+            color: #f5b83d;
+        }
+        .tx-page-header .tx-stats {
+            display: flex;
+            gap: 12px;
+            font-size: 10px;
+            color: #555;
+        }
+        .tx-page-header .tx-stats span {
+            background: #f0f0f0;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        .tx-page-header .tx-stats .sent-stat {
+            color: #dc2626;
+        }
+        .tx-page-header .tx-stats .received-stat {
+            color: #00a86b;
+        }
+
+        .tx-filters-bar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+            align-items: center;
+        }
+        .tx-filters-bar input {
+            flex: 1;
+            min-width: 120px;
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 11px;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .tx-filters-bar input:focus {
+            border-color: #1c2128;
+        }
+        .tx-filters-bar select {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 11px;
+            outline: none;
+            background: #fff;
+            min-width: 100px;
+        }
+        .tx-filters-bar select:focus {
+            border-color: #1c2128;
+        }
+        .tx-filters-bar .tx-filter-btn {
+            padding: 4px 14px;
+            border-radius: 16px;
+            border: 1px solid #ddd;
+            background: #fafafa;
+            font-size: 9px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tx-filters-bar .tx-filter-btn.active {
+            background: #1c2128;
+            color: #fff;
+            border-color: #1c2128;
+        }
+        .tx-filters-bar .tx-filter-btn:active {
+            transform: scale(0.95);
+        }
+
+        .tx-summary-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 14px;
+            border: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .tx-summary-card .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .tx-summary-card .stat .label {
+            font-size: 9px;
+            color: #888;
+        }
+        .tx-summary-card .stat .value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1c2128;
+        }
+        .tx-summary-card .stat .value.sent {
+            color: #dc2626;
+        }
+        .tx-summary-card .stat .value.received {
+            color: #00a86b;
+        }
+
+        .tx-list-item {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            border: 1px solid #f0f0f0;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .tx-list-item:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border-color: #ddd;
+        }
+        .tx-list-item .tx-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .tx-list-item .tx-summary .left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 140px;
+        }
+        .tx-list-item .tx-summary .left .tx-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .tx-list-item .tx-summary .left .tx-icon.sent {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        .tx-list-item .tx-summary .left .tx-icon.received {
+            background: #e6fffa;
+            color: #00a86b;
+        }
+        .tx-list-item .tx-summary .left .tx-info {
+            flex: 1;
+        }
+        .tx-list-item .tx-summary .left .tx-info .tx-type {
+            font-weight: 600;
+            font-size: 12px;
+            color: #1c2128;
+        }
+        .tx-list-item .tx-summary .left .tx-info .tx-other {
+            font-size: 10px;
+            color: #888;
+        }
+        .tx-list-item .tx-summary .left .tx-info .tx-date {
+            font-size: 9px;
+            color: #aaa;
+        }
+        .tx-list-item .tx-summary .right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tx-list-item .tx-summary .right .tx-amount {
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .tx-list-item .tx-summary .right .tx-amount.sent {
+            color: #dc2626;
+        }
+        .tx-list-item .tx-summary .right .tx-amount.received {
+            color: #00a86b;
+        }
+        .tx-list-item .tx-summary .right .expand-icon {
+            font-size: 12px;
+            color: #aaa;
+            transition: transform 0.3s;
+        }
+        .tx-list-item.open .tx-summary .right .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .tx-list-item .tx-details {
+            display: none;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .tx-list-item .tx-details.open {
+            display: block;
+        }
+        .tx-list-item .tx-details .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 11px;
+            border-bottom: 1px solid #f8f8f8;
+        }
+        .tx-list-item .tx-details .detail-row:last-child {
+            border-bottom: none;
+        }
+        .tx-list-item .tx-details .detail-row .label {
+            color: #888;
+        }
+        .tx-list-item .tx-details .detail-row .val {
+            font-weight: 500;
+            color: #1c2128;
+        }
+        .tx-list-item .tx-details .detail-row .val.highlight {
+            color: #f5b83d;
+        }
+
+        .tx-empty-state {
+            text-align: center;
+            padding: 40px 0;
+            color: #888;
+        }
+        .tx-empty-state i {
+            font-size: 40px;
+            color: #ddd;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .tx-empty-state p {
+            font-size: 13px;
+        }
+
+        /* ===== END CUSTOMER TRANSACTIONS PAGE ===== */
+
         .service-grid-customer {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -3381,21 +3636,17 @@
             box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
 
-        /* ── CUSTOMER TRANSACTIONS PAGE ── */
-        .customer-tx-page {
-            display: none;
+        /* ── CUSTOMER TRANSACTIONS MODAL (old) ── */
+        .customer-tx-modal .modal {
+            max-width: 460px;
         }
-        .customer-tx-page.open {
-            display: block;
-        }
-
-        .customer-tx-page .tx-filters {
+        .customer-tx-modal .tx-filters {
             display: flex;
             gap: 6px;
             flex-wrap: wrap;
             margin-bottom: 12px;
         }
-        .customer-tx-page .tx-filters .tx-filter-btn {
+        .customer-tx-modal .tx-filters .tx-filter-btn {
             padding: 3px 14px;
             border-radius: 16px;
             border: 1px solid #ddd;
@@ -3405,90 +3656,51 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .customer-tx-page .tx-filters .tx-filter-btn.active {
+        .customer-tx-modal .tx-filters .tx-filter-btn.active {
             background: #1c2128;
             color: #fff;
             border-color: #1c2128;
         }
-        .customer-tx-page .tx-item {
+        .customer-tx-modal .tx-item {
             display: flex;
             justify-content: space-between;
             padding: 6px 0;
             border-bottom: 1px solid #f5f5f5;
             font-size: 10px;
         }
-        .customer-tx-page .tx-item:last-child {
+        .customer-tx-modal .tx-item:last-child {
             border-bottom: none;
         }
-        .customer-tx-page .tx-item .tx-left .tx-type {
+        .customer-tx-modal .tx-item .tx-left .tx-type {
             font-weight: 600;
             color: #1c2128;
         }
-        .customer-tx-page .tx-item .tx-left .tx-with {
+        .customer-tx-modal .tx-item .tx-left .tx-with {
             color: #888;
             font-size: 9px;
         }
-        .customer-tx-page .tx-item .tx-right .tx-amount {
+        .customer-tx-modal .tx-item .tx-right .tx-amount {
             font-weight: 700;
         }
-        .customer-tx-page .tx-item .tx-right .tx-amount.sent {
+        .customer-tx-modal .tx-item .tx-right .tx-amount.sent {
             color: #dc2626;
         }
-        .customer-tx-page .tx-item .tx-right .tx-amount.received {
+        .customer-tx-modal .tx-item .tx-right .tx-amount.received {
             color: #00a86b;
         }
-        .customer-tx-page .tx-item .tx-right .tx-date {
+        .customer-tx-modal .tx-item .tx-right .tx-date {
             font-size: 8px;
             color: #aaa;
             display: block;
             text-align: right;
         }
-        .customer-tx-page .tx-detail-row {
-            display: none;
-            padding: 8px 12px;
-            background: #f8f9fc;
-            border-radius: 8px;
-            margin-top: 4px;
-            margin-bottom: 4px;
-            font-size: 10px;
-            border: 1px solid #f0f0f0;
-        }
-        .customer-tx-page .tx-detail-row.open {
-            display: block;
-        }
-        .customer-tx-page .tx-detail-row .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px 12px;
-        }
-        @media (max-width: 500px) {
-            .customer-tx-page .tx-detail-row .detail-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        .customer-tx-page .tx-detail-row .detail-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 2px 0;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 10px;
-        }
-        .customer-tx-page .tx-detail-row .detail-item:last-child {
-            border-bottom: none;
-        }
-        .customer-tx-page .tx-detail-row .detail-item .label {
+        .customer-tx-modal .empty-tx {
+            text-align: center;
             color: #888;
+            font-size: 10px;
+            padding: 16px 0;
         }
-        .customer-tx-page .tx-detail-row .detail-item .val {
-            font-weight: 500;
-            color: #1c2128;
-        }
-        .customer-tx-page .tx-detail-row .detail-item .val.highlight {
-            color: #f5b83d;
-            font-weight: 700;
-        }
-
-        .customer-tx-page .tx-summary {
+        .customer-tx-modal .tx-summary {
             background: #f8f9fc;
             border-radius: 8px;
             padding: 10px 14px;
@@ -3497,30 +3709,13 @@
             justify-content: space-between;
             font-size: 11px;
         }
-        .customer-tx-page .tx-summary .total-sent {
+        .customer-tx-modal .tx-summary .total-sent {
             color: #dc2626;
             font-weight: 700;
         }
-        .customer-tx-page .tx-summary .total-received {
+        .customer-tx-modal .tx-summary .total-received {
             color: #00a86b;
             font-weight: 700;
-        }
-
-        .customer-tx-page .empty-tx {
-            text-align: center;
-            color: #888;
-            font-size: 10px;
-            padding: 16px 0;
-        }
-
-        .customer-tx-page .tx-expand-icon {
-            font-size: 9px;
-            color: #aaa;
-            transition: transform 0.3s;
-            margin-left: 4px;
-        }
-        .customer-tx-page .tx-item.open .tx-expand-icon {
-            transform: rotate(180deg);
         }
     </style>
 </head>
@@ -3856,30 +4051,6 @@
 
             </div>
 
-            <!-- ===== PAGE: CUSTOMER TRANSACTIONS ===== -->
-            <div id="page-customer-tx" class="page customer-tx-page">
-
-                <div style="margin-bottom:10px;">
-                    <h2 style="font-size:20px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-arrows-left-right" style="color:#f5b83d;"></i> Customer Transactions</h2>
-                    <p style="font-size:11px; color:#888;">All send / receive transactions between customers. Tap a transaction to view sender/recipient details.</p>
-                </div>
-
-                <div class="tx-filters">
-                    <button class="tx-filter-btn active" data-filter="all">All</button>
-                    <button class="tx-filter-btn" data-filter="sent">Sent</button>
-                    <button class="tx-filter-btn" data-filter="received">Received</button>
-                </div>
-
-                <div class="tx-summary" id="txSummary">
-                    <span>Total Sent: <span class="total-sent" id="totalSent">ZMW 0.00</span></span>
-                    <span>Total Received: <span class="total-received" id="totalReceived">ZMW 0.00</span></span>
-                </div>
-
-                <div id="customerTxList">
-                    <!-- Rendered by JS -->
-                </div>
-            </div>
-
             <!-- ===== PAGE: SERVICES ===== -->
             <div id="page-services" class="page">
 
@@ -4011,6 +4182,55 @@
                 </div>
             </div>
 
+            <!-- ===== PAGE: CUSTOMER TRANSACTIONS ===== -->
+            <div id="page-customer-transactions" class="page">
+                <div class="tx-page-container">
+                    <div class="tx-page-header">
+                        <h2><i class="fa-solid fa-arrows-left-right"></i> Customer Transactions</h2>
+                        <div class="tx-stats">
+                            <span class="sent-stat">Sent: <span id="txTotalSent">ZMW 0.00</span></span>
+                            <span class="received-stat">Received: <span id="txTotalReceived">ZMW 0.00</span></span>
+                        </div>
+                    </div>
+
+                    <div class="tx-filters-bar">
+                        <input type="text" id="txSearchInput" placeholder="Search by name, email, or phone..." />
+                        <select id="txTypeFilter">
+                            <option value="all">All Types</option>
+                            <option value="sent">Sent</option>
+                            <option value="received">Received</option>
+                        </select>
+                        <button class="tx-filter-btn active" data-filter="all">All</button>
+                        <button class="tx-filter-btn" data-filter="today">Today</button>
+                        <button class="tx-filter-btn" data-filter="week">This Week</button>
+                        <button class="tx-filter-btn" data-filter="month">This Month</button>
+                    </div>
+
+                    <div class="tx-summary-card">
+                        <div class="stat">
+                            <span class="label">Total Sent</span>
+                            <span class="value sent" id="summaryTotalSent">ZMW 0.00</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Total Received</span>
+                            <span class="value received" id="summaryTotalReceived">ZMW 0.00</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Net Flow</span>
+                            <span class="value" id="summaryNetFlow">ZMW 0.00</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Transactions</span>
+                            <span class="value" id="summaryTxCount">0</span>
+                        </div>
+                    </div>
+
+                    <div id="customerTxList">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+            </div>
+
             <!-- ===== PAGE: PROFILE ===== -->
             <div id="page-profile" class="page">
                 <div class="card">
@@ -4057,14 +4277,16 @@
 
         <!-- ===== BOTTOM NAV ===== -->
         <div class="bottom-nav">
-            <button class="nav-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Home</span>
-            </button>
+            <button class="nav-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Home</span></button>
             <button class="nav-item" data-page="services"><i class="fa-solid fa-layer-group"></i><span>Services</span></button>
             <button class="nav-item" data-page="promo-pics"><i class="fa-regular fa-images"></i><span>Promo Pics</span></button>
             <button class="nav-item" data-page="orders"><i class="fa-solid fa-truck"></i><span>Orders</span>
                 <span class="badge-counter" id="badgeOrdersPending">0</span>
             </button>
             <button class="nav-item" data-page="users"><i class="fa-solid fa-users"></i><span>Users</span></button>
+            <button class="nav-item" data-page="customer-transactions"><i class="fa-solid fa-arrows-left-right"></i><span>Transactions</span>
+                <span class="badge-counter" id="badgeCustomerTx">0</span>
+            </button>
             <button class="nav-item" data-page="payables"><i class="fa-solid fa-money-bill-wave"></i><span>Payables</span>
                 <span class="badge-counter" id="badgeWithdrawalsPending">0</span>
             </button>
@@ -4300,56 +4522,31 @@
         </div>
     </div>
 
-    <!-- ===== WITHDRAWAL CONFIRMATION MODAL ===== -->
-    <div class="withdraw-confirm-modal-overlay" id="withdrawConfirmModal">
-        <div class="withdraw-confirm-modal">
-            <button class="close-btn" id="withdrawConfirmCloseBtn"><i class="fa-solid fa-times"></i></button>
-            <h3 id="withdrawConfirmTitle">Confirm Action</h3>
-            <p class="sub" id="withdrawConfirmSub">Are you sure you want to proceed with this withdrawal action?</p>
-            <div class="details" id="withdrawConfirmDetails">
+    <!-- ===== CUSTOMER TRANSACTIONS MODAL (old, kept for compatibility) ===== -->
+    <div class="modal-overlay customer-tx-modal" id="customerTxModal">
+        <div class="modal">
+            <button class="close-btn" id="customerTxCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3><i class="fa-solid fa-arrows-left-right" style="color:#f5b83d;"></i> Customer Transactions</h3>
+            <p class="sub">All send / receive transactions between customers.</p>
+
+            <div class="tx-filters">
+                <button class="tx-filter-btn active" data-filter="all">All</button>
+                <button class="tx-filter-btn" data-filter="sent">Sent</button>
+                <button class="tx-filter-btn" data-filter="received">Received</button>
+            </div>
+
+            <div class="tx-summary" id="txSummary">
+                <span>Total Sent: <span class="total-sent" id="totalSent">ZMW 0.00</span></span>
+                <span>Total Received: <span class="total-received" id="totalReceived">ZMW 0.00</span></span>
+            </div>
+
+            <div id="customerTxListOld">
                 <!-- Rendered by JS -->
             </div>
-            <button class="btn-confirm-withdraw" id="withdrawConfirmActionBtn">Confirm</button>
-            <button class="btn-cancel-withdraw" id="withdrawConfirmCancelBtn">Cancel</button>
         </div>
     </div>
 
-    <!-- ===== EDIT CUSTOMER MODAL ===== -->
-    <div class="modal-overlay edit-customer-modal" id="editCustomerModal">
-        <div class="modal" style="max-width:460px;">
-            <button class="close-btn" id="editCustomerCloseBtn"><i class="fa-solid fa-times"></i></button>
-            <h3><i class="fa-solid fa-user-pen" style="color:#f5b83d;"></i> Edit Customer</h3>
-            <p class="sub">Update customer details.</p>
-            <form id="editCustomerForm">
-                <input type="hidden" id="editCustomerUid" />
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" id="editFirstName" placeholder="First name" required />
-                    </div>
-                    <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" id="editLastName" placeholder="Last name" required />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Phone</label>
-                    <input type="text" id="editPhone" placeholder="Phone number" />
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="editEmail" placeholder="Email address" required />
-                </div>
-                <div class="form-group">
-                    <label>Referral Code</label>
-                    <input type="text" id="editReferralCode" placeholder="Referral code" />
-                </div>
-                <button type="submit" class="btn-save-edit" id="saveEditCustomerBtn"><i class="fa-solid fa-check"></i> Save Changes</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- ===== USER SELECTOR MODAL ===== -->
+    <!-- ===== USER SELECTOR MODAL (Phone-style) ===== -->
     <div class="modal-overlay user-selector-modal" id="userSelectorModal">
         <div class="modal">
             <button class="close-btn" id="userSelectorCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4457,6 +4654,55 @@
                 </div>
             </div>
             <button class="btn-confirm-status" id="confirmStatusBtn" disabled>Confirm Status</button>
+        </div>
+    </div>
+
+    <!-- ===== WITHDRAWAL CONFIRMATION MODAL ===== -->
+    <div class="withdraw-confirm-modal-overlay" id="withdrawConfirmModal">
+        <div class="withdraw-confirm-modal">
+            <button class="close-btn" id="withdrawConfirmCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3 id="withdrawConfirmTitle">Confirm Action</h3>
+            <p class="sub" id="withdrawConfirmSub">Are you sure you want to proceed with this withdrawal action?</p>
+            <div class="details" id="withdrawConfirmDetails">
+                <!-- Rendered by JS -->
+            </div>
+            <button class="btn-confirm-withdraw" id="withdrawConfirmActionBtn">Confirm</button>
+            <button class="btn-cancel-withdraw" id="withdrawConfirmCancelBtn">Cancel</button>
+        </div>
+    </div>
+
+    <!-- ===== EDIT CUSTOMER MODAL ===== -->
+    <div class="modal-overlay edit-customer-modal" id="editCustomerModal">
+        <div class="modal" style="max-width:460px;">
+            <button class="close-btn" id="editCustomerCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3><i class="fa-solid fa-user-pen" style="color:#f5b83d;"></i> Edit Customer</h3>
+            <p class="sub">Update customer details.</p>
+            <form id="editCustomerForm">
+                <input type="hidden" id="editCustomerUid" />
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="editFirstName" placeholder="First name" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="editLastName" placeholder="Last name" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="editPhone" placeholder="Phone number" />
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="editEmail" placeholder="Email address" required />
+                </div>
+                <div class="form-group">
+                    <label>Referral Code</label>
+                    <input type="text" id="editReferralCode" placeholder="Referral code" />
+                </div>
+                <button type="submit" class="btn-save-edit" id="saveEditCustomerBtn"><i class="fa-solid fa-check"></i> Save Changes</button>
+            </form>
         </div>
     </div>
 
@@ -4656,6 +4902,8 @@
 
         // ── Customer Transactions DOM ──
         const customerTransactionsBtn = document.getElementById('customerTransactionsBtn');
+        const customerTxModal = document.getElementById('customerTxModal');
+        const customerTxCloseBtn = document.getElementById('customerTxCloseBtn');
         const customerTxList = document.getElementById('customerTxList');
         const totalSent = document.getElementById('totalSent');
         const totalReceived = document.getElementById('totalReceived');
@@ -4707,6 +4955,19 @@
         const badgeOrders = document.getElementById('badgeOrders');
         const badgeOrdersPending = document.getElementById('badgeOrdersPending');
         const badgeWithdrawalsPending = document.getElementById('badgeWithdrawalsPending');
+
+        // ─── Customer Transactions page DOM ───
+        const txSearchInput = document.getElementById('txSearchInput');
+        const txTypeFilter = document.getElementById('txTypeFilter');
+        const txFilterBtnsPage = document.querySelectorAll('#page-customer-transactions .tx-filter-btn');
+        const customerTxListContainer = document.getElementById('customerTxList');
+        const summaryTotalSent = document.getElementById('summaryTotalSent');
+        const summaryTotalReceived = document.getElementById('summaryTotalReceived');
+        const summaryNetFlow = document.getElementById('summaryNetFlow');
+        const summaryTxCount = document.getElementById('summaryTxCount');
+        const txTotalSent = document.getElementById('txTotalSent');
+        const txTotalReceived = document.getElementById('txTotalReceived');
+        const badgeCustomerTx = document.getElementById('badgeCustomerTx');
 
         // ─── Edit Customer DOM ───
         const editCustomerModal = document.getElementById('editCustomerModal');
@@ -4934,6 +5195,9 @@
 
             // ── Account Update Modal user list ──
             renderAccountUpdateUserList();
+
+            // ── Customer Transactions page ──
+            renderCustomerTransactionsPage();
 
             // ── Update badges ──
             updateBadges();
@@ -6379,25 +6643,14 @@
         // CUSTOMER TRANSACTIONS PAGE
         // ───────────────────────────────────────────────────────────────────
 
-        function openCustomerTxPage() {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-customer-tx').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            mainHeader.classList.remove('work-active');
-            document.getElementById('appContent').scrollTop = 0;
-            showBackButton();
-            renderCustomerTxList();
-        }
-
-        function renderCustomerTxList(filter = 'all') {
-            const container = customerTxList;
+        function renderCustomerTransactionsPage(filter = 'all', searchTerm = '', typeFilter = 'all') {
+            const container = customerTxListContainer;
             const transactions = allData.transactions || {};
             const users = allData.users || {};
             const accounts = allData.customerAccounts || {};
-            let entries = Object.entries(transactions);
 
-            // Only show customer-to-customer send/receive transactions
-            entries = entries.filter(([key, t]) => {
+            // Only show send/receive transactions between customers
+            let entries = Object.entries(transactions).filter(([key, t]) => {
                 const isSendReceive = t.type?.toLowerCase().includes('sent') ||
                     t.type?.toLowerCase().includes('received') ||
                     t.type?.toLowerCase().includes('send') ||
@@ -6406,129 +6659,460 @@
                 return isSendReceive && hasOtherParty;
             });
 
-            if (filter === 'sent') {
+            // Apply search
+            if (searchTerm.trim()) {
+                const term = searchTerm.trim().toLowerCase();
                 entries = entries.filter(([key, t]) => {
-                    const isSent = t.type?.toLowerCase().includes('sent') || (t.type?.toLowerCase().includes('send') && t
-                        .amount && t.amount < 0);
+                    const senderName = (t.userName || '').toLowerCase();
+                    const recipientName = (t.otherParty || '').toLowerCase();
+                    const senderEmail = (t.userEmail || '').toLowerCase();
+                    const recipientEmail = (t.otherEmail || '').toLowerCase();
+                    const senderPhone = (t.userPhone || '').toLowerCase();
+                    const recipientPhone = (t.otherPhone || '').toLowerCase();
+                    return senderName.includes(term) || recipientName.includes(term) ||
+                        senderEmail.includes(term) || recipientEmail.includes(term) ||
+                        senderPhone.includes(term) || recipientPhone.includes(term);
+                });
+            }
+
+            // Apply type filter
+            if (typeFilter === 'sent') {
+                entries = entries.filter(([key, t]) => {
+                    const isSent = t.type?.toLowerCase().includes('sent') ||
+                        (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
                     return isSent;
                 });
-            } else if (filter === 'received') {
+            } else if (typeFilter === 'received') {
                 entries = entries.filter(([key, t]) => {
-                    const isReceived = t.type?.toLowerCase().includes('received') || (t.type?.toLowerCase().includes(
-                        'receive') && t.amount && t.amount > 0);
+                    const isReceived = t.type?.toLowerCase().includes('received') ||
+                        (t.type?.toLowerCase().includes('receive') && t.amount && t.amount > 0);
                     return isReceived;
+                });
+            }
+
+            // Apply time filter
+            const now = new Date();
+            if (filter === 'today') {
+                const today = now.toDateString();
+                entries = entries.filter(([key, t]) => {
+                    const date = t.date ? new Date(t.date).toDateString() : '';
+                    return date === today;
+                });
+            } else if (filter === 'week') {
+                const weekStart = new Date(now);
+                weekStart.setDate(now.getDate() - now.getDay());
+                weekStart.setHours(0, 0, 0, 0);
+                entries = entries.filter(([key, t]) => {
+                    const date = t.date ? new Date(t.date) : null;
+                    return date && date >= weekStart;
+                });
+            } else if (filter === 'month') {
+                const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+                entries = entries.filter(([key, t]) => {
+                    const date = t.date ? new Date(t.date) : null;
+                    return date && date >= monthStart;
                 });
             }
 
             entries.sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
 
             // Calculate totals
-            let totalSentVal = 0;
-            let totalReceivedVal = 0;
+            let totalSent = 0;
+            let totalReceived = 0;
 
             entries.forEach(([key, t]) => {
-                const isSent = t.type?.toLowerCase().includes('sent') || (t.type?.toLowerCase().includes('send') && t
-                    .amount && t.amount < 0);
+                const isSent = t.type?.toLowerCase().includes('sent') ||
+                    (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
                 if (isSent) {
-                    totalSentVal += Math.abs(t.amount || 0);
+                    totalSent += Math.abs(t.amount || 0);
                 } else {
-                    totalReceivedVal += Math.abs(t.amount || 0);
+                    totalReceived += Math.abs(t.amount || 0);
                 }
             });
 
-            totalSent.textContent = `ZMW ${totalSentVal.toFixed(2)}`;
-            totalReceived.textContent = `ZMW ${totalReceivedVal.toFixed(2)}`;
+            // Update header stats
+            txTotalSent.textContent = `ZMW ${totalSent.toFixed(2)}`;
+            txTotalReceived.textContent = `ZMW ${totalReceived.toFixed(2)}`;
+            summaryTotalSent.textContent = `ZMW ${totalSent.toFixed(2)}`;
+            summaryTotalReceived.textContent = `ZMW ${totalReceived.toFixed(2)}`;
+            summaryNetFlow.textContent = `ZMW ${(totalReceived - totalSent).toFixed(2)}`;
+            summaryTxCount.textContent = entries.length;
+
+            // Update badge
+            badgeCustomerTx.textContent = entries.length > 0 ? entries.length : '0';
+            badgeCustomerTx.classList.toggle('show', entries.length > 0);
 
             if (entries.length === 0) {
-                container.innerHTML = `<div class="empty-tx">No customer-to-customer transactions found.</div>`;
+                container.innerHTML = `
+                            <div class="tx-empty-state">
+                                <i class="fa-regular fa-receipt"></i>
+                                <p>No customer-to-customer transactions found.</p>
+                            </div>
+                        `;
                 return;
             }
 
-            container.innerHTML = entries.slice(0, 30).map(([key, t]) => {
-                const isSent = t.type?.toLowerCase().includes('sent') || (t.type?.toLowerCase().includes('send') && t
-                    .amount && t.amount < 0);
-                const isReceived = t.type?.toLowerCase().includes('received') || (t.type?.toLowerCase().includes(
-                    'receive') && t.amount && t.amount > 0);
+            container.innerHTML = entries.slice(0, 50).map(([key, t]) => {
+                const isSent = t.type?.toLowerCase().includes('sent') ||
+                    (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
+                const isReceived = t.type?.toLowerCase().includes('received') ||
+                    (t.type?.toLowerCase().includes('receive') && t.amount && t.amount > 0);
+
+                const senderUid = t.userId;
+                const recipientUid = t.otherUid || '';
+                const sender = users[senderUid] || {};
+                const recipient = users[recipientUid] || {};
+
+                const senderName = t.userName || `${sender.firstName || ''} ${sender.lastName || ''}`.trim() || 'Unknown';
+                const recipientName = t.otherParty || `${recipient.firstName || ''} ${recipient.lastName || ''}`.trim() || 'Unknown';
+                const senderPhone = t.userPhone || sender.phone || 'N/A';
+                const recipientPhone = t.otherPhone || recipient.phone || 'N/A';
+                const senderEmail = t.userEmail || sender.email || 'N/A';
+                const recipientEmail = t.otherEmail || recipient.email || 'N/A';
+                const senderBalance = accounts[senderUid]?.balance || 0;
+                const recipientBalance = accounts[recipientUid]?.balance || 0;
+
+                const amount = Math.abs(t.amount || 0);
+                const dateStr = t.date ? new Date(t.date).toLocaleString() : (t.timestamp ? new Date(t.timestamp).toLocaleString() : '');
+
+                const iconClass = isSent ? 'sent' : 'received';
+                const icon = isSent ? 'fa-arrow-up' : 'fa-arrow-down';
+                const label = isSent ? 'Sent' : 'Received';
                 const amountClass = isSent ? 'sent' : 'received';
-                const sign = isSent ? '-' : '+';
-                const label = isSent ? 'Sent to' : 'Received from';
-                const otherParty = t.otherParty || t.userName || 'Unknown';
-                const dateStr = t.date ? new Date(t.date).toLocaleString() : (t.timestamp ? new Date(t.timestamp)
-                    .toLocaleString() : '');
-
-                // Get sender and recipient details from the transaction data
-                // For sent transactions: sender = currentUserId, recipient = otherParty
-                // For received transactions: sender = otherParty, recipient = currentUserId
-                const senderUid = isSent ? t.userId : t.otherPartyUid || null;
-                const recipientUid = isReceived ? t.userId : t.otherPartyUid || null;
-
-                const senderUser = senderUid ? users[senderUid] : null;
-                const recipientUser = recipientUid ? users[recipientUid] : null;
-
-                const senderName = senderUser ? `${senderUser.firstName || ''} ${senderUser.lastName || ''}`.trim() || senderUser
-                    .email || 'Unknown' : 'Unknown';
-                const recipientName = recipientUser ? `${recipientUser.firstName || ''} ${recipientUser.lastName || ''}`.trim() ||
-                    recipientUser.email || 'Unknown' : 'Unknown';
-                const senderPhone = senderUser?.phone || 'N/A';
-                const recipientPhone = recipientUser?.phone || 'N/A';
-                const senderBalance = senderUid ? (accounts[senderUid]?.balance || 0) : 0;
-                const recipientBalance = recipientUid ? (accounts[recipientUid]?.balance || 0) : 0;
 
                 return `
-                            <div class="tx-item" data-key="${key}">
-                                <div class="tx-left">
-                                    <div class="tx-type">${isSent ? '📤 Sent' : '📥 Received'}</div>
-                                    <div class="tx-with">${label} ${escapeHtml(otherParty)}</div>
-                                    <div style="font-size:8px; color:#aaa;">${escapeHtml(t.type || '')}</div>
+                            <div class="tx-list-item" data-key="${key}">
+                                <div class="tx-summary">
+                                    <div class="left">
+                                        <div class="tx-icon ${iconClass}">
+                                            <i class="fa-solid ${icon}"></i>
+                                        </div>
+                                        <div class="tx-info">
+                                            <div class="tx-type">${label} — ZMW ${amount.toFixed(2)}</div>
+                                            <div class="tx-other">${isSent ? 'To: ' : 'From: '} ${escapeHtml(recipientName)}</div>
+                                            <div class="tx-date">${dateStr}</div>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <span class="tx-amount ${amountClass}">${isSent ? '-' : '+'}ZMW ${amount.toFixed(2)}</span>
+                                        <i class="fa-solid fa-chevron-down expand-icon"></i>
+                                    </div>
                                 </div>
-                                <div class="tx-right">
-                                    <div class="tx-amount ${amountClass}">${sign}ZMW ${Math.abs(t.amount || 0).toFixed(2)}</div>
-                                    <div class="tx-date">${dateStr}</div>
-                                    <i class="fa-solid fa-chevron-down tx-expand-icon"></i>
-                                </div>
-                            </div>
-                            <div class="tx-detail-row">
-                                <div class="detail-grid">
-                                    <div class="detail-item">
+                                <div class="tx-details">
+                                    <div class="detail-row">
+                                        <span class="label">Transaction Type</span>
+                                        <span class="val">${escapeHtml(t.type || 'Transfer')}</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Amount</span>
+                                        <span class="val highlight">ZMW ${amount.toFixed(2)}</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Date &amp; Time</span>
+                                        <span class="val">${dateStr}</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Reference</span>
+                                        <span class="val">${escapeHtml(t.ref || 'N/A')}</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Method</span>
+                                        <span class="val">${escapeHtml(t.method || 'Buffer Zone Wallet')}</span>
+                                    </div>
+                                    <div class="detail-row">
                                         <span class="label">Sender</span>
                                         <span class="val">${escapeHtml(senderName)}</span>
                                     </div>
-                                    <div class="detail-item">
+                                    <div class="detail-row">
                                         <span class="label">Sender Phone</span>
                                         <span class="val">${escapeHtml(senderPhone)}</span>
                                     </div>
-                                    <div class="detail-item">
+                                    <div class="detail-row">
+                                        <span class="label">Sender Email</span>
+                                        <span class="val">${escapeHtml(senderEmail)}</span>
+                                    </div>
+                                    <div class="detail-row">
                                         <span class="label">Sender Balance</span>
                                         <span class="val highlight">ZMW ${senderBalance.toFixed(2)}</span>
                                     </div>
-                                    <div class="detail-item">
+                                    <div class="detail-row" style="border-top: 1px solid #eee; padding-top: 6px; margin-top: 2px;">
                                         <span class="label">Recipient</span>
                                         <span class="val">${escapeHtml(recipientName)}</span>
                                     </div>
-                                    <div class="detail-item">
+                                    <div class="detail-row">
                                         <span class="label">Recipient Phone</span>
                                         <span class="val">${escapeHtml(recipientPhone)}</span>
                                     </div>
-                                    <div class="detail-item">
+                                    <div class="detail-row">
+                                        <span class="label">Recipient Email</span>
+                                        <span class="val">${escapeHtml(recipientEmail)}</span>
+                                    </div>
+                                    <div class="detail-row">
                                         <span class="label">Recipient Balance</span>
                                         <span class="val highlight">ZMW ${recipientBalance.toFixed(2)}</span>
                                     </div>
+                                    ${t.detail ? `
+                                    <div class="detail-row">
+                                        <span class="label">Note</span>
+                                        <span class="val">${escapeHtml(t.detail)}</span>
+                                    </div>
+                                    ` : ''}
                                 </div>
                             </div>
                         `;
             }).join('');
 
-            // Add click event to toggle details
-            container.querySelectorAll('.tx-item').forEach(el => {
-                el.addEventListener('click', function() {
-                    const detailRow = this.nextElementSibling;
-                    if (detailRow && detailRow.classList.contains('tx-detail-row')) {
-                        this.classList.toggle('open');
-                        detailRow.classList.toggle('open');
+            // Event listeners for expand/collapse
+            container.querySelectorAll('.tx-list-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    this.classList.toggle('open');
+                    const details = this.querySelector('.tx-details');
+                    if (this.classList.contains('open')) {
+                        details.classList.add('open');
+                    } else {
+                        details.classList.remove('open');
                     }
                 });
             });
         }
+
+        // ───────────────────────────────────────────────────────────────────
+        // WORK UPLOAD MODAL
+        // ───────────────────────────────────────────────────────────────────
+
+        function openWorkUploadModal(type, editData = null) {
+            workPostType.value = type;
+            editWorkPostId.value = editData ? editData.key : '';
+            workImageUrl.value = editData?.imageUrl || '';
+            workImagePreview.innerHTML = editData?.imageUrl ?
+                `<img src="${editData.imageUrl}" alt="Uploaded" style="max-height:200px;object-fit:contain;" />` :
+                `<div class="upload-icon"><i class="fa-regular fa-image"></i></div><div class="upload-text">Tap to upload an image</div>`;
+
+            const typeLabels = {
+                app: 'Upload App Screenshot',
+                flyer: 'Post Flyer',
+                website: 'Upload Website Screenshot',
+                logo: 'Post Logo'
+            };
+            const typeSubs = {
+                app: 'Add a new app screenshot with name and functionality.',
+                flyer: 'Post a flyer design with title and description.',
+                website: 'Add a website screenshot with name and description.',
+                logo: 'Post a logo design with title and description.'
+            };
+
+            workUploadTitle.textContent = editData ? `Edit ${typeLabels[type]}` : typeLabels[type];
+            workUploadSub.textContent = editData ? `Update your ${type} post.` : typeSubs[type];
+
+            if (type === 'app' || type === 'website') {
+                workAppFields.style.display = 'block';
+                workFlyerFields.style.display = 'none';
+                workAppName.placeholder = type === 'app' ? 'App Name' : 'Website Name';
+                workAppFunc.placeholder = type === 'app' ? 'Describe what the app does...' : 'Describe the website...';
+                workAppName.value = editData?.title || '';
+                workAppFunc.value = editData?.description || '';
+            } else {
+                workAppFields.style.display = 'none';
+                workFlyerFields.style.display = 'block';
+                workFlyerTitle.placeholder = type === 'flyer' ? 'Flyer Title' : 'Logo Title';
+                workFlyerDesc.placeholder = type === 'flyer' ? 'Describe the flyer design...' : 'Describe the logo design...';
+                workFlyerTitle.value = editData?.title || '';
+                workFlyerDesc.value = editData?.description || '';
+            }
+
+            if (type === 'app') {
+                workFrameContainer.innerHTML = `
+                            <div class="phone-frame">
+                                ${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="App Screenshot" />` : `<div class="placeholder"><i class="fa-regular fa-image"></i><br /><span style="font-size:12px;color:#aaa;">App Screenshot</span></div>`}
+                                <div class="notch"></div>
+                            </div>
+                        `;
+            } else if (type === 'website') {
+                workFrameContainer.innerHTML = `
+                            <div class="laptop-frame">
+                                <div class="screen">
+                                    ${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="Website Screenshot" />` : `<div class="placeholder"><i class="fa-regular fa-image"></i><br /><span style="font-size:12px;color:#aaa;">Website Screenshot</span></div>`}
+                                </div>
+                                <div class="base"></div>
+                            </div>
+                        `;
+            } else {
+                workFrameContainer.innerHTML = `
+                            <div style="text-align:center;padding:6px 0;">
+                                ${editData?.imageUrl ? `<img src="${editData.imageUrl}" alt="Upload" style="max-width:100%;max-height:160px;border-radius:10px;object-fit:contain;" />` : `<div style="color:#ccc;font-size:42px;"><i class="fa-regular fa-image"></i></div>`}
+                            </div>
+                        `;
+            }
+
+            workUploadSubmit.textContent = editData ? 'Update Post' : 'Post';
+            workUploadModal.classList.add('open');
+        }
+
+        function closeWorkUploadModal() {
+            workUploadModal.classList.remove('open');
+        }
+
+        function openEditWorkPost(key) {
+            const posts = allData.workPosts || {};
+            const post = posts[key];
+            if (!post) return;
+            openWorkUploadModal(post.type, { key, ...post });
+        }
+
+        function addWorkPost(data) {
+            const newId = 'wp' + Date.now();
+            if (!allData.workPosts) allData.workPosts = {};
+            const name = currentAdminData?.name || currentUser?.displayName || currentUser?.email || 'Admin';
+            allData.workPosts[newId] = {
+                id: newId,
+                type: data.type,
+                title: data.title,
+                description: data.description,
+                imageUrl: data.imageUrl,
+                createdAt: Date.now(),
+                adminName: name
+            };
+            return saveData();
+        }
+
+        function updateWorkPost(key, data) {
+            if (!allData.workPosts || !allData.workPosts[key]) return;
+            const post = allData.workPosts[key];
+            post.title = data.title;
+            post.description = data.description;
+            if (data.imageUrl) post.imageUrl = data.imageUrl;
+            return saveData();
+        }
+
+        function deleteWorkPost(key) {
+            if (allData.workPosts && allData.workPosts[key]) {
+                delete allData.workPosts[key];
+                return saveData();
+            }
+        }
+
+        function addPromoPic(data) {
+            const newId = 'pp' + Date.now();
+            if (!allData.promoPics) allData.promoPics = {};
+            allData.promoPics[newId] = {
+                id: newId,
+                imageUrl: data.imageUrl,
+                text: data.text || '',
+                subtext: data.subtext || '',
+                createdAt: Date.now()
+            };
+            return saveData();
+        }
+
+        function deletePromoPic(key) {
+            if (allData.promoPics && allData.promoPics[key]) {
+                delete allData.promoPics[key];
+                return saveData();
+            }
+        }
+
+        // ───────────────────────────────────────────────────────────────────
+        // DELETE CONFIRMATION
+        // ───────────────────────────────────────────────────────────────────
+
+        function showDeleteConfirmation(type, key) {
+            const messages = {
+                'promo': 'Are you sure you want to delete this promo coupon?',
+                'order': 'Are you sure you want to delete this order?',
+                'user': 'Are you sure you want to delete this user? (This will permanently remove their account)',
+                'service': 'Are you sure you want to delete this service?',
+                'category': 'Are you sure you want to delete this category? (This will also remove all services under it)',
+                'workPost': 'Are you sure you want to delete this work post?',
+                'promoPic': 'Are you sure you want to delete this flyer?',
+                'referralPromo': 'Are you sure you want to delete this referral promo?',
+                'customReferral': 'Are you sure you want to delete this custom referral?',
+                'referralDiscount': 'Are you sure you want to delete this referral discount?',
+                'referralPromoDiscount': 'Are you sure you want to delete this referral promo discount?'
+            };
+            deleteConfirmText.textContent = messages[type] || 'Are you sure you want to delete this item?';
+            pendingDeleteAction = { type, key };
+            deleteConfirmModal.classList.add('open');
+        }
+
+        document.getElementById('deleteCancelBtn').addEventListener('click', function() {
+            deleteConfirmModal.classList.remove('open');
+            pendingDeleteAction = null;
+        });
+
+        document.getElementById('deleteConfirmBtn').addEventListener('click', function() {
+            if (!pendingDeleteAction) return;
+            const { type, key } = pendingDeleteAction;
+
+            if (type === 'promo') {
+                if (allData.promotions && allData.promotions[key]) {
+                    delete allData.promotions[key];
+                    saveData().then(() => { renderAll();
+                        showToast('Promo deleted'); });
+                }
+            } else if (type === 'order') {
+                if (allData.orders && allData.orders[key]) {
+                    delete allData.orders[key];
+                    saveData().then(() => { renderAll();
+                        showToast('Order deleted'); });
+                }
+            } else if (type === 'user') {
+                const userRef = ref(db, 'users/' + key);
+                set(userRef, null).then(() => {
+                    showToast('User deleted');
+                    renderUsers(document.getElementById('userSearchInput').value, userFilterSelect.value);
+                });
+            } else if (type === 'service') {
+                if (allData.services && allData.services[key]) {
+                    delete allData.services[key];
+                    saveData().then(() => { renderAll();
+                        showToast('Service deleted'); });
+                }
+            } else if (type === 'category') {
+                const cat = key;
+                allData.categories = allData.categories.filter(c => c !== cat);
+                if (allData.services) {
+                    Object.keys(allData.services).forEach(sKey => {
+                        if (allData.services[sKey].category === cat) {
+                            delete allData.services[sKey];
+                        }
+                    });
+                }
+                saveData().then(() => { renderAll();
+                    showToast('Category deleted'); });
+            } else if (type === 'workPost') {
+                deleteWorkPost(key).then(() => { renderAll();
+                    showToast('Work post deleted'); });
+            } else if (type === 'promoPic') {
+                deletePromoPic(key).then(() => { renderAll();
+                    showToast('Flyer deleted'); });
+            } else if (type === 'referralPromo') {
+                if (allData.referralPromos && allData.referralPromos[key]) {
+                    delete allData.referralPromos[key];
+                    saveData().then(() => { renderAll();
+                        showToast('Referral promo deleted'); });
+                }
+            } else if (type === 'customReferral') {
+                if (allData.customReferrals && allData.customReferrals[key]) {
+                    delete allData.customReferrals[key];
+                    saveData().then(() => { renderAll();
+                        showToast('Custom referral deleted'); });
+                }
+            } else if (type === 'referralDiscount') {
+                if (allData.referralDiscounts && allData.referralDiscounts[key]) {
+                    delete allData.referralDiscounts[key];
+                    saveData().then(() => { renderAll();
+                        showToast('Referral discount deleted'); });
+                }
+            } else if (type === 'referralPromoDiscount') {
+                if (allData.referralPromoDiscounts && allData.referralPromoDiscounts[key]) {
+                    delete allData.referralPromoDiscounts[key];
+                    saveData().then(() => { renderAll();
+                        showToast('Referral promo discount deleted'); });
+                }
+            }
+            deleteConfirmModal.classList.remove('open');
+            pendingDeleteAction = null;
+        });
 
         // ───────────────────────────────────────────────────────────────────
         // SERVICE CRUD
@@ -7191,17 +7775,49 @@
         });
 
         // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER TRANSACTIONS EVENT BINDINGS
+        // CUSTOMER TRANSACTIONS PAGE EVENT BINDINGS
         // ───────────────────────────────────────────────────────────────────
 
-        customerTransactionsBtn.addEventListener('click', openCustomerTxPage);
+        // Customer Transactions button in payables
+        customerTransactionsBtn.addEventListener('click', function() {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-customer-transactions').classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.querySelector('.nav-item[data-page="customer-transactions"]').classList.add('active');
+            mainHeader.classList.remove('work-active');
+            document.getElementById('appContent').scrollTop = 0;
+            renderCustomerTransactionsPage();
+            showBackButton();
+        });
 
-        txFilterBtns.forEach(btn => {
+        // Nav item for customer transactions
+        document.querySelector('.nav-item[data-page="customer-transactions"]').addEventListener('click', function() {
+            renderCustomerTransactionsPage();
+        });
+
+        // Search input
+        txSearchInput.addEventListener('input', function() {
+            const filter = document.querySelector('.tx-filter-btn.active')?.dataset.filter || 'all';
+            const typeFilter = txTypeFilter.value;
+            renderCustomerTransactionsPage(filter, this.value, typeFilter);
+        });
+
+        // Type filter
+        txTypeFilter.addEventListener('change', function() {
+            const filter = document.querySelector('.tx-filter-btn.active')?.dataset.filter || 'all';
+            const searchTerm = txSearchInput.value;
+            renderCustomerTransactionsPage(filter, searchTerm, this.value);
+        });
+
+        // Time filter buttons
+        txFilterBtnsPage.forEach(btn => {
             btn.addEventListener('click', function() {
-                txFilterBtns.forEach(b => b.classList.remove('active'));
+                txFilterBtnsPage.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-                customerTxFilter = this.dataset.filter;
-                renderCustomerTxList(customerTxFilter);
+                const filter = this.dataset.filter;
+                const searchTerm = txSearchInput.value;
+                const typeFilter = txTypeFilter.value;
+                renderCustomerTransactionsPage(filter, searchTerm, typeFilter);
             });
         });
 
@@ -7873,7 +8489,20 @@
             const pendingWithdrawals = withdrawals.filter(w => w.status === 'pending').length;
             updateBadgeElement(badgeWithdrawalsPending, pendingWithdrawals);
 
+            // Customer transactions badge
+            const transactions = Object.values(allData.transactions || {});
+            const customerTx = transactions.filter(t => {
+                const isSendReceive = t.type?.toLowerCase().includes('sent') ||
+                    t.type?.toLowerCase().includes('received') ||
+                    t.type?.toLowerCase().includes('send') ||
+                    t.type?.toLowerCase().includes('receive');
+                const hasOtherParty = t.otherParty && t.otherParty.length > 0;
+                return isSendReceive && hasOtherParty;
+            });
+            updateBadgeElement(badgeCustomerTx, customerTx.length);
+
             // Home badge removed
+            updateBadgeElement(badgeOrders, 0);
         }
 
         function updateBadgeElement(el, count) {
@@ -7939,6 +8568,7 @@
                             populateUserSelects();
                             populateCustomReferralSelect();
                             renderAccountUpdateUserList();
+                            renderCustomerTransactionsPage();
                         });
 
                         renderAll();
@@ -7962,7 +8592,21 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Home badge removed, Customer Transactions page added with expandable details (sender/recipient names, phones, balances).');
+        // ───────────────────────────────────────────────────────────────────
+        // OLD CUSTOMER TRANSACTIONS MODAL (kept for compatibility)
+        // ───────────────────────────────────────────────────────────────────
+
+        // Close old modal functionality
+        document.getElementById('customerTxCloseBtn').addEventListener('click', function() {
+            document.getElementById('customerTxModal').classList.remove('open');
+        });
+        document.getElementById('customerTxModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+            }
+        });
+
+        console.log('✅ Admin Dashboard — Added Customer Transactions page with detailed sender/recipient info, phone numbers, wallet balances, and expandable details. Removed badge counter from Home nav button.');
     </script>
 </body>
 </html>
