@@ -456,261 +456,6 @@
             margin-top: 1px;
         }
 
-        /* ===== CUSTOMER TRANSACTIONS PAGE ===== */
-        .tx-page-container {
-            padding: 0 0 14px 0;
-        }
-
-        .tx-page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0 14px 0;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .tx-page-header h2 {
-            font-size: 20px;
-            font-weight: 800;
-            color: #1c2128;
-        }
-        .tx-page-header h2 i {
-            color: #f5b83d;
-        }
-        .tx-page-header .tx-stats {
-            display: flex;
-            gap: 12px;
-            font-size: 10px;
-            color: #555;
-        }
-        .tx-page-header .tx-stats span {
-            background: #f0f0f0;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-weight: 600;
-        }
-        .tx-page-header .tx-stats .sent-stat {
-            color: #dc2626;
-        }
-        .tx-page-header .tx-stats .received-stat {
-            color: #00a86b;
-        }
-
-        .tx-filters-bar {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 14px;
-            align-items: center;
-        }
-        .tx-filters-bar input {
-            flex: 1;
-            min-width: 120px;
-            padding: 6px 12px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            font-size: 11px;
-            outline: none;
-            transition: border 0.2s;
-        }
-        .tx-filters-bar input:focus {
-            border-color: #1c2128;
-        }
-        .tx-filters-bar select {
-            padding: 6px 12px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            font-size: 11px;
-            outline: none;
-            background: #fff;
-            min-width: 100px;
-        }
-        .tx-filters-bar select:focus {
-            border-color: #1c2128;
-        }
-        .tx-filters-bar .tx-filter-btn {
-            padding: 4px 14px;
-            border-radius: 16px;
-            border: 1px solid #ddd;
-            background: #fafafa;
-            font-size: 9px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .tx-filters-bar .tx-filter-btn.active {
-            background: #1c2128;
-            color: #fff;
-            border-color: #1c2128;
-        }
-        .tx-filters-bar .tx-filter-btn:active {
-            transform: scale(0.95);
-        }
-
-        .tx-summary-card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 14px 16px;
-            margin-bottom: 14px;
-            border: 1px solid #f0f0f0;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .tx-summary-card .stat {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .tx-summary-card .stat .label {
-            font-size: 9px;
-            color: #888;
-        }
-        .tx-summary-card .stat .value {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1c2128;
-        }
-        .tx-summary-card .stat .value.sent {
-            color: #dc2626;
-        }
-        .tx-summary-card .stat .value.received {
-            color: #00a86b;
-        }
-
-        .tx-list-item {
-            background: #ffffff;
-            border-radius: 10px;
-            padding: 12px 14px;
-            margin-bottom: 8px;
-            border: 1px solid #f0f0f0;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        .tx-list-item:hover {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            border-color: #ddd;
-        }
-        .tx-list-item .tx-summary {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-        .tx-list-item .tx-summary .left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-            min-width: 140px;
-        }
-        .tx-list-item .tx-summary .left .tx-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-        .tx-list-item .tx-summary .left .tx-icon.sent {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-        .tx-list-item .tx-summary .left .tx-icon.received {
-            background: #e6fffa;
-            color: #00a86b;
-        }
-        .tx-list-item .tx-summary .left .tx-info {
-            flex: 1;
-        }
-        .tx-list-item .tx-summary .left .tx-info .tx-type {
-            font-weight: 600;
-            font-size: 12px;
-            color: #1c2128;
-        }
-        .tx-list-item .tx-summary .left .tx-info .tx-other {
-            font-size: 10px;
-            color: #888;
-        }
-        .tx-list-item .tx-summary .left .tx-info .tx-date {
-            font-size: 9px;
-            color: #aaa;
-        }
-        .tx-list-item .tx-summary .right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .tx-list-item .tx-summary .right .tx-amount {
-            font-weight: 700;
-            font-size: 14px;
-        }
-        .tx-list-item .tx-summary .right .tx-amount.sent {
-            color: #dc2626;
-        }
-        .tx-list-item .tx-summary .right .tx-amount.received {
-            color: #00a86b;
-        }
-        .tx-list-item .tx-summary .right .expand-icon {
-            font-size: 12px;
-            color: #aaa;
-            transition: transform 0.3s;
-        }
-        .tx-list-item.open .tx-summary .right .expand-icon {
-            transform: rotate(180deg);
-        }
-
-        .tx-list-item .tx-details {
-            display: none;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #f0f0f0;
-        }
-        .tx-list-item .tx-details.open {
-            display: block;
-        }
-        .tx-list-item .tx-details .detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 4px 0;
-            font-size: 11px;
-            border-bottom: 1px solid #f8f8f8;
-        }
-        .tx-list-item .tx-details .detail-row:last-child {
-            border-bottom: none;
-        }
-        .tx-list-item .tx-details .detail-row .label {
-            color: #888;
-        }
-        .tx-list-item .tx-details .detail-row .val {
-            font-weight: 500;
-            color: #1c2128;
-        }
-        .tx-list-item .tx-details .detail-row .val.highlight {
-            color: #f5b83d;
-        }
-
-        .tx-empty-state {
-            text-align: center;
-            padding: 40px 0;
-            color: #888;
-        }
-        .tx-empty-state i {
-            font-size: 40px;
-            color: #ddd;
-            display: block;
-            margin-bottom: 10px;
-        }
-        .tx-empty-state p {
-            font-size: 13px;
-        }
-
-        /* ===== END CUSTOMER TRANSACTIONS PAGE ===== */
-
         .service-grid-customer {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -3636,7 +3381,7 @@
             box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
 
-        /* ── CUSTOMER TRANSACTIONS MODAL (old) ── */
+        /* ── CUSTOMER TRANSACTIONS MODAL ── */
         .customer-tx-modal .modal {
             max-width: 460px;
         }
@@ -3661,34 +3406,93 @@
             color: #fff;
             border-color: #1c2128;
         }
+
+        /* Enhanced Customer Transaction Item Styles */
         .customer-tx-modal .tx-item {
+            cursor: pointer;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 8px;
+            background: #ffffff;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .customer-tx-modal .tx-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+            border-color: #e0e0e0;
+        }
+        .customer-tx-modal .tx-summary-row {
             display: flex;
             justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px solid #f5f5f5;
+            align-items: center;
+            width: 100%;
+        }
+        .customer-tx-modal .tx-details {
+            display: none;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        @media (max-width: 480px) {
+            .customer-tx-modal .tx-details {
+                grid-template-columns: 1fr;
+            }
+        }
+        .customer-tx-modal .tx-details.open {
+            display: grid;
+        }
+        .customer-tx-modal .tx-detail-block {
+            background: #f8f9fc;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+        }
+        .customer-tx-modal .tx-detail-block .title {
+            font-weight: 700;
             font-size: 10px;
+            color: #555;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .customer-tx-modal .tx-item:last-child {
-            border-bottom: none;
-        }
-        .customer-tx-modal .tx-item .tx-left .tx-type {
-            font-weight: 600;
+        .customer-tx-modal .tx-detail-block .info {
+            font-size: 11px;
             color: #1c2128;
+            line-height: 1.5;
         }
-        .customer-tx-modal .tx-item .tx-left .tx-with {
+        .customer-tx-modal .tx-detail-block .info .label {
             color: #888;
-            font-size: 9px;
         }
-        .customer-tx-modal .tx-item .tx-right .tx-amount {
+        .customer-tx-modal .tx-detail-block .info .val {
+            font-weight: 600;
+        }
+        .customer-tx-modal .tx-item .expand-icon {
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            color: #aaa;
+            margin-left: 8px;
+        }
+        .customer-tx-modal .tx-item.open .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .customer-tx-modal .tx-item .tx-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .customer-tx-modal .tx-item .tx-amount {
             font-weight: 700;
         }
-        .customer-tx-modal .tx-item .tx-right .tx-amount.sent {
+        .customer-tx-modal .tx-item .tx-amount.sent {
             color: #dc2626;
         }
-        .customer-tx-modal .tx-item .tx-right .tx-amount.received {
+        .customer-tx-modal .tx-item .tx-amount.received {
             color: #00a86b;
         }
-        .customer-tx-modal .tx-item .tx-right .tx-date {
+        .customer-tx-modal .tx-item .tx-date {
             font-size: 8px;
             color: #aaa;
             display: block;
@@ -4182,55 +3986,6 @@
                 </div>
             </div>
 
-            <!-- ===== PAGE: CUSTOMER TRANSACTIONS ===== -->
-            <div id="page-customer-transactions" class="page">
-                <div class="tx-page-container">
-                    <div class="tx-page-header">
-                        <h2><i class="fa-solid fa-arrows-left-right"></i> Customer Transactions</h2>
-                        <div class="tx-stats">
-                            <span class="sent-stat">Sent: <span id="txTotalSent">ZMW 0.00</span></span>
-                            <span class="received-stat">Received: <span id="txTotalReceived">ZMW 0.00</span></span>
-                        </div>
-                    </div>
-
-                    <div class="tx-filters-bar">
-                        <input type="text" id="txSearchInput" placeholder="Search by name, email, or phone..." />
-                        <select id="txTypeFilter">
-                            <option value="all">All Types</option>
-                            <option value="sent">Sent</option>
-                            <option value="received">Received</option>
-                        </select>
-                        <button class="tx-filter-btn active" data-filter="all">All</button>
-                        <button class="tx-filter-btn" data-filter="today">Today</button>
-                        <button class="tx-filter-btn" data-filter="week">This Week</button>
-                        <button class="tx-filter-btn" data-filter="month">This Month</button>
-                    </div>
-
-                    <div class="tx-summary-card">
-                        <div class="stat">
-                            <span class="label">Total Sent</span>
-                            <span class="value sent" id="summaryTotalSent">ZMW 0.00</span>
-                        </div>
-                        <div class="stat">
-                            <span class="label">Total Received</span>
-                            <span class="value received" id="summaryTotalReceived">ZMW 0.00</span>
-                        </div>
-                        <div class="stat">
-                            <span class="label">Net Flow</span>
-                            <span class="value" id="summaryNetFlow">ZMW 0.00</span>
-                        </div>
-                        <div class="stat">
-                            <span class="label">Transactions</span>
-                            <span class="value" id="summaryTxCount">0</span>
-                        </div>
-                    </div>
-
-                    <div id="customerTxList">
-                        <!-- Rendered by JS -->
-                    </div>
-                </div>
-            </div>
-
             <!-- ===== PAGE: PROFILE ===== -->
             <div id="page-profile" class="page">
                 <div class="card">
@@ -4277,16 +4032,15 @@
 
         <!-- ===== BOTTOM NAV ===== -->
         <div class="bottom-nav">
-            <button class="nav-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Home</span></button>
+            <button class="nav-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Home</span>
+                <!-- Home badge counter removed as requested -->
+            </button>
             <button class="nav-item" data-page="services"><i class="fa-solid fa-layer-group"></i><span>Services</span></button>
             <button class="nav-item" data-page="promo-pics"><i class="fa-regular fa-images"></i><span>Promo Pics</span></button>
             <button class="nav-item" data-page="orders"><i class="fa-solid fa-truck"></i><span>Orders</span>
                 <span class="badge-counter" id="badgeOrdersPending">0</span>
             </button>
             <button class="nav-item" data-page="users"><i class="fa-solid fa-users"></i><span>Users</span></button>
-            <button class="nav-item" data-page="customer-transactions"><i class="fa-solid fa-arrows-left-right"></i><span>Transactions</span>
-                <span class="badge-counter" id="badgeCustomerTx">0</span>
-            </button>
             <button class="nav-item" data-page="payables"><i class="fa-solid fa-money-bill-wave"></i><span>Payables</span>
                 <span class="badge-counter" id="badgeWithdrawalsPending">0</span>
             </button>
@@ -4522,7 +4276,7 @@
         </div>
     </div>
 
-    <!-- ===== CUSTOMER TRANSACTIONS MODAL (old, kept for compatibility) ===== -->
+    <!-- ===== CUSTOMER TRANSACTIONS MODAL ===== -->
     <div class="modal-overlay customer-tx-modal" id="customerTxModal">
         <div class="modal">
             <button class="close-btn" id="customerTxCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4540,7 +4294,7 @@
                 <span>Total Received: <span class="total-received" id="totalReceived">ZMW 0.00</span></span>
             </div>
 
-            <div id="customerTxListOld">
+            <div id="customerTxList">
                 <!-- Rendered by JS -->
             </div>
         </div>
@@ -4952,22 +4706,8 @@
         const adjustPreview = document.getElementById('adjustPreview');
 
         // ─── Badge elements ───
-        const badgeOrders = document.getElementById('badgeOrders');
         const badgeOrdersPending = document.getElementById('badgeOrdersPending');
         const badgeWithdrawalsPending = document.getElementById('badgeWithdrawalsPending');
-
-        // ─── Customer Transactions page DOM ───
-        const txSearchInput = document.getElementById('txSearchInput');
-        const txTypeFilter = document.getElementById('txTypeFilter');
-        const txFilterBtnsPage = document.querySelectorAll('#page-customer-transactions .tx-filter-btn');
-        const customerTxListContainer = document.getElementById('customerTxList');
-        const summaryTotalSent = document.getElementById('summaryTotalSent');
-        const summaryTotalReceived = document.getElementById('summaryTotalReceived');
-        const summaryNetFlow = document.getElementById('summaryNetFlow');
-        const summaryTxCount = document.getElementById('summaryTxCount');
-        const txTotalSent = document.getElementById('txTotalSent');
-        const txTotalReceived = document.getElementById('txTotalReceived');
-        const badgeCustomerTx = document.getElementById('badgeCustomerTx');
 
         // ─── Edit Customer DOM ───
         const editCustomerModal = document.getElementById('editCustomerModal');
@@ -5195,9 +4935,6 @@
 
             // ── Account Update Modal user list ──
             renderAccountUpdateUserList();
-
-            // ── Customer Transactions page ──
-            renderCustomerTransactionsPage();
 
             // ── Update badges ──
             updateBadges();
@@ -6640,17 +6377,27 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER TRANSACTIONS PAGE
+        // CUSTOMER TRANSACTIONS MODAL
         // ───────────────────────────────────────────────────────────────────
 
-        function renderCustomerTransactionsPage(filter = 'all', searchTerm = '', typeFilter = 'all') {
-            const container = customerTxListContainer;
+        function openCustomerTxModal() {
+            renderCustomerTxList();
+            customerTxModal.classList.add('open');
+        }
+
+        function closeCustomerTxModal() {
+            customerTxModal.classList.remove('open');
+        }
+
+        function renderCustomerTxList(filter = 'all') {
+            const container = customerTxList;
             const transactions = allData.transactions || {};
             const users = allData.users || {};
             const accounts = allData.customerAccounts || {};
+            let entries = Object.entries(transactions);
 
-            // Only show send/receive transactions between customers
-            let entries = Object.entries(transactions).filter(([key, t]) => {
+            // Only show customer-to-customer send/receive transactions
+            entries = entries.filter(([key, t]) => {
                 const isSendReceive = t.type?.toLowerCase().includes('sent') ||
                     t.type?.toLowerCase().includes('received') ||
                     t.type?.toLowerCase().includes('send') ||
@@ -6659,58 +6406,15 @@
                 return isSendReceive && hasOtherParty;
             });
 
-            // Apply search
-            if (searchTerm.trim()) {
-                const term = searchTerm.trim().toLowerCase();
+            if (filter === 'sent') {
                 entries = entries.filter(([key, t]) => {
-                    const senderName = (t.userName || '').toLowerCase();
-                    const recipientName = (t.otherParty || '').toLowerCase();
-                    const senderEmail = (t.userEmail || '').toLowerCase();
-                    const recipientEmail = (t.otherEmail || '').toLowerCase();
-                    const senderPhone = (t.userPhone || '').toLowerCase();
-                    const recipientPhone = (t.otherPhone || '').toLowerCase();
-                    return senderName.includes(term) || recipientName.includes(term) ||
-                        senderEmail.includes(term) || recipientEmail.includes(term) ||
-                        senderPhone.includes(term) || recipientPhone.includes(term);
-                });
-            }
-
-            // Apply type filter
-            if (typeFilter === 'sent') {
-                entries = entries.filter(([key, t]) => {
-                    const isSent = t.type?.toLowerCase().includes('sent') ||
-                        (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
+                    const isSent = t.type?.toLowerCase().includes('sent') || (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
                     return isSent;
                 });
-            } else if (typeFilter === 'received') {
+            } else if (filter === 'received') {
                 entries = entries.filter(([key, t]) => {
-                    const isReceived = t.type?.toLowerCase().includes('received') ||
-                        (t.type?.toLowerCase().includes('receive') && t.amount && t.amount > 0);
+                    const isReceived = t.type?.toLowerCase().includes('received') || (t.type?.toLowerCase().includes('receive') && t.amount && t.amount > 0);
                     return isReceived;
-                });
-            }
-
-            // Apply time filter
-            const now = new Date();
-            if (filter === 'today') {
-                const today = now.toDateString();
-                entries = entries.filter(([key, t]) => {
-                    const date = t.date ? new Date(t.date).toDateString() : '';
-                    return date === today;
-                });
-            } else if (filter === 'week') {
-                const weekStart = new Date(now);
-                weekStart.setDate(now.getDate() - now.getDay());
-                weekStart.setHours(0, 0, 0, 0);
-                entries = entries.filter(([key, t]) => {
-                    const date = t.date ? new Date(t.date) : null;
-                    return date && date >= weekStart;
-                });
-            } else if (filter === 'month') {
-                const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
-                entries = entries.filter(([key, t]) => {
-                    const date = t.date ? new Date(t.date) : null;
-                    return date && date >= monthStart;
                 });
             }
 
@@ -6721,8 +6425,7 @@
             let totalReceived = 0;
 
             entries.forEach(([key, t]) => {
-                const isSent = t.type?.toLowerCase().includes('sent') ||
-                    (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
+                const isSent = t.type?.toLowerCase().includes('sent') || (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
                 if (isSent) {
                     totalSent += Math.abs(t.amount || 0);
                 } else {
@@ -6730,148 +6433,102 @@
                 }
             });
 
-            // Update header stats
-            txTotalSent.textContent = `ZMW ${totalSent.toFixed(2)}`;
-            txTotalReceived.textContent = `ZMW ${totalReceived.toFixed(2)}`;
-            summaryTotalSent.textContent = `ZMW ${totalSent.toFixed(2)}`;
-            summaryTotalReceived.textContent = `ZMW ${totalReceived.toFixed(2)}`;
-            summaryNetFlow.textContent = `ZMW ${(totalReceived - totalSent).toFixed(2)}`;
-            summaryTxCount.textContent = entries.length;
-
-            // Update badge
-            badgeCustomerTx.textContent = entries.length > 0 ? entries.length : '0';
-            badgeCustomerTx.classList.toggle('show', entries.length > 0);
+            document.getElementById('totalSent').textContent = `ZMW ${totalSent.toFixed(2)}`;
+            document.getElementById('totalReceived').textContent = `ZMW ${totalReceived.toFixed(2)}`;
 
             if (entries.length === 0) {
-                container.innerHTML = `
-                            <div class="tx-empty-state">
-                                <i class="fa-regular fa-receipt"></i>
-                                <p>No customer-to-customer transactions found.</p>
-                            </div>
-                        `;
+                container.innerHTML = `<div class="empty-tx">No customer-to-customer transactions found.</div>`;
                 return;
             }
 
-            container.innerHTML = entries.slice(0, 50).map(([key, t]) => {
-                const isSent = t.type?.toLowerCase().includes('sent') ||
-                    (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
-                const isReceived = t.type?.toLowerCase().includes('received') ||
-                    (t.type?.toLowerCase().includes('receive') && t.amount && t.amount > 0);
+            // Helper to find user UID by email
+            function findUserUidByEmail(email) {
+                if (!email || email === 'N/A') return null;
+                for (const [uid, u] of Object.entries(users)) {
+                    if ((u.email || '').toLowerCase() === email.toLowerCase()) {
+                        return uid;
+                    }
+                }
+                return null;
+            }
 
-                const senderUid = t.userId;
-                const recipientUid = t.otherUid || '';
-                const sender = users[senderUid] || {};
-                const recipient = users[recipientUid] || {};
+            // Helper to get user data
+            function getUserData(uid) {
+                if (!uid) return null;
+                const u = users[uid] || {};
+                const acc = accounts[uid] || {};
+                return {
+                    name: `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown',
+                    phone: u.phone || 'N/A',
+                    email: u.email || 'N/A',
+                    balance: acc.balance || 0
+                };
+            }
 
-                const senderName = t.userName || `${sender.firstName || ''} ${sender.lastName || ''}`.trim() || 'Unknown';
-                const recipientName = t.otherParty || `${recipient.firstName || ''} ${recipient.lastName || ''}`.trim() || 'Unknown';
-                const senderPhone = t.userPhone || sender.phone || 'N/A';
-                const recipientPhone = t.otherPhone || recipient.phone || 'N/A';
-                const senderEmail = t.userEmail || sender.email || 'N/A';
-                const recipientEmail = t.otherEmail || recipient.email || 'N/A';
-                const senderBalance = accounts[senderUid]?.balance || 0;
-                const recipientBalance = accounts[recipientUid]?.balance || 0;
-
-                const amount = Math.abs(t.amount || 0);
+            container.innerHTML = entries.map(([key, t]) => {
+                const isSent = t.type?.toLowerCase().includes('sent') || (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
+                const isReceived = t.type?.toLowerCase().includes('received') || (t.type?.toLowerCase().includes('receive') && t.amount && t.amount > 0);
+                const amountClass = isSent ? 'sent' : 'received';
+                const sign = isSent ? '-' : '+';
+                const label = isSent ? 'Sent to' : 'Received from';
+                const otherParty = t.otherParty || t.userName || 'Unknown';
                 const dateStr = t.date ? new Date(t.date).toLocaleString() : (t.timestamp ? new Date(t.timestamp).toLocaleString() : '');
 
-                const iconClass = isSent ? 'sent' : 'received';
-                const icon = isSent ? 'fa-arrow-up' : 'fa-arrow-down';
-                const label = isSent ? 'Sent' : 'Received';
-                const amountClass = isSent ? 'sent' : 'received';
+                let senderUid = null, receiverUid = null;
+                if (isSent) {
+                    senderUid = t.userId;
+                    receiverUid = findUserUidByEmail(t.userEmail);
+                } else {
+                    receiverUid = t.userId;
+                    senderUid = findUserUidByEmail(t.userEmail);
+                }
+
+                const senderInfo = getUserData(senderUid);
+                const receiverInfo = getUserData(receiverUid);
 
                 return `
-                            <div class="tx-list-item" data-key="${key}">
-                                <div class="tx-summary">
-                                    <div class="left">
-                                        <div class="tx-icon ${iconClass}">
-                                            <i class="fa-solid ${icon}"></i>
-                                        </div>
-                                        <div class="tx-info">
-                                            <div class="tx-type">${label} — ZMW ${amount.toFixed(2)}</div>
-                                            <div class="tx-other">${isSent ? 'To: ' : 'From: '} ${escapeHtml(recipientName)}</div>
-                                            <div class="tx-date">${dateStr}</div>
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        <span class="tx-amount ${amountClass}">${isSent ? '-' : '+'}ZMW ${amount.toFixed(2)}</span>
-                                        <i class="fa-solid fa-chevron-down expand-icon"></i>
-                                    </div>
+                    <div class="tx-item" data-key="${key}">
+                        <div class="tx-summary-row">
+                            <div class="tx-left">
+                                <div class="tx-type">${isSent ? '📤 Sent' : '📥 Received'}</div>
+                                <div class="tx-with">${label} <strong>${escapeHtml(otherParty)}</strong></div>
+                            </div>
+                            <div class="tx-right">
+                                <div>
+                                    <div class="tx-amount ${amountClass}">${sign}ZMW ${Math.abs(t.amount || 0).toFixed(2)}</div>
+                                    <div class="tx-date">${dateStr}</div>
                                 </div>
-                                <div class="tx-details">
-                                    <div class="detail-row">
-                                        <span class="label">Transaction Type</span>
-                                        <span class="val">${escapeHtml(t.type || 'Transfer')}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="label">Amount</span>
-                                        <span class="val highlight">ZMW ${amount.toFixed(2)}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="label">Date &amp; Time</span>
-                                        <span class="val">${dateStr}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="label">Reference</span>
-                                        <span class="val">${escapeHtml(t.ref || 'N/A')}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="label">Method</span>
-                                        <span class="val">${escapeHtml(t.method || 'Buffer Zone Wallet')}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="label">Sender</span>
-                                        <span class="val">${escapeHtml(senderName)}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="label">Sender Phone</span>
-                                        <span class="val">${escapeHtml(senderPhone)}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="label">Sender Email</span>
-                                        <span class="val">${escapeHtml(senderEmail)}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="label">Sender Balance</span>
-                                        <span class="val highlight">ZMW ${senderBalance.toFixed(2)}</span>
-                                    </div>
-                                    <div class="detail-row" style="border-top: 1px solid #eee; padding-top: 6px; margin-top: 2px;">
-                                        <span class="label">Recipient</span>
-                                        <span class="val">${escapeHtml(recipientName)}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="label">Recipient Phone</span>
-                                        <span class="val">${escapeHtml(recipientPhone)}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="label">Recipient Email</span>
-                                        <span class="val">${escapeHtml(recipientEmail)}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="label">Recipient Balance</span>
-                                        <span class="val highlight">ZMW ${recipientBalance.toFixed(2)}</span>
-                                    </div>
-                                    ${t.detail ? `
-                                    <div class="detail-row">
-                                        <span class="label">Note</span>
-                                        <span class="val">${escapeHtml(t.detail)}</span>
-                                    </div>
-                                    ` : ''}
+                                <i class="fa-solid fa-chevron-down expand-icon"></i>
+                            </div>
+                        </div>
+                        <div class="tx-details">
+                            <div class="tx-detail-block">
+                                <div class="title">👤 Sender</div>
+                                <div class="info">
+                                    <div><span class="label">Name:</span> <span class="val">${escapeHtml(senderInfo ? senderInfo.name : 'Unknown')}</span></div>
+                                    <div><span class="label">Phone:</span> <span class="val">${escapeHtml(senderInfo ? senderInfo.phone : 'N/A')}</span></div>
+                                    <div><span class="label">Email:</span> <span class="val">${escapeHtml(senderInfo ? senderInfo.email : 'N/A')}</span></div>
+                                    <div><span class="label">Balance:</span> <span class="val" style="color:#f5b83d;">ZMW ${(senderInfo ? senderInfo.balance : 0).toFixed(2)}</span></div>
                                 </div>
                             </div>
-                        `;
+                            <div class="tx-detail-block">
+                                <div class="title">👤 Receiver</div>
+                                <div class="info">
+                                    <div><span class="label">Name:</span> <span class="val">${escapeHtml(receiverInfo ? receiverInfo.name : 'Unknown')}</span></div>
+                                    <div><span class="label">Phone:</span> <span class="val">${escapeHtml(receiverInfo ? receiverInfo.phone : 'N/A')}</span></div>
+                                    <div><span class="label">Email:</span> <span class="val">${escapeHtml(receiverInfo ? receiverInfo.email : 'N/A')}</span></div>
+                                    <div><span class="label">Balance:</span> <span class="val" style="color:#f5b83d;">ZMW ${(receiverInfo ? receiverInfo.balance : 0).toFixed(2)}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
             }).join('');
 
-            // Event listeners for expand/collapse
-            container.querySelectorAll('.tx-list-item').forEach(item => {
-                item.addEventListener('click', function() {
+            // Add click listeners to toggle expand
+            container.querySelectorAll('.tx-item').forEach(el => {
+                el.addEventListener('click', function() {
                     this.classList.toggle('open');
-                    const details = this.querySelector('.tx-details');
-                    if (this.classList.contains('open')) {
-                        details.classList.add('open');
-                    } else {
-                        details.classList.remove('open');
-                    }
                 });
             });
         }
@@ -7775,49 +7432,21 @@
         });
 
         // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER TRANSACTIONS PAGE EVENT BINDINGS
+        // CUSTOMER TRANSACTIONS EVENT BINDINGS
         // ───────────────────────────────────────────────────────────────────
 
-        // Customer Transactions button in payables
-        customerTransactionsBtn.addEventListener('click', function() {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-customer-transactions').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.querySelector('.nav-item[data-page="customer-transactions"]').classList.add('active');
-            mainHeader.classList.remove('work-active');
-            document.getElementById('appContent').scrollTop = 0;
-            renderCustomerTransactionsPage();
-            showBackButton();
+        customerTransactionsBtn.addEventListener('click', openCustomerTxModal);
+        customerTxCloseBtn.addEventListener('click', closeCustomerTxModal);
+        customerTxModal.addEventListener('click', function(e) {
+            if (e.target === this) closeCustomerTxModal();
         });
 
-        // Nav item for customer transactions
-        document.querySelector('.nav-item[data-page="customer-transactions"]').addEventListener('click', function() {
-            renderCustomerTransactionsPage();
-        });
-
-        // Search input
-        txSearchInput.addEventListener('input', function() {
-            const filter = document.querySelector('.tx-filter-btn.active')?.dataset.filter || 'all';
-            const typeFilter = txTypeFilter.value;
-            renderCustomerTransactionsPage(filter, this.value, typeFilter);
-        });
-
-        // Type filter
-        txTypeFilter.addEventListener('change', function() {
-            const filter = document.querySelector('.tx-filter-btn.active')?.dataset.filter || 'all';
-            const searchTerm = txSearchInput.value;
-            renderCustomerTransactionsPage(filter, searchTerm, this.value);
-        });
-
-        // Time filter buttons
-        txFilterBtnsPage.forEach(btn => {
+        txFilterBtns.forEach(btn => {
             btn.addEventListener('click', function() {
-                txFilterBtnsPage.forEach(b => b.classList.remove('active'));
+                txFilterBtns.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-                const filter = this.dataset.filter;
-                const searchTerm = txSearchInput.value;
-                const typeFilter = txTypeFilter.value;
-                renderCustomerTransactionsPage(filter, searchTerm, typeFilter);
+                customerTxFilter = this.dataset.filter;
+                renderCustomerTxList(customerTxFilter);
             });
         });
 
@@ -8488,21 +8117,6 @@
             const withdrawals = Object.values(allData.withdrawalRequests || {});
             const pendingWithdrawals = withdrawals.filter(w => w.status === 'pending').length;
             updateBadgeElement(badgeWithdrawalsPending, pendingWithdrawals);
-
-            // Customer transactions badge
-            const transactions = Object.values(allData.transactions || {});
-            const customerTx = transactions.filter(t => {
-                const isSendReceive = t.type?.toLowerCase().includes('sent') ||
-                    t.type?.toLowerCase().includes('received') ||
-                    t.type?.toLowerCase().includes('send') ||
-                    t.type?.toLowerCase().includes('receive');
-                const hasOtherParty = t.otherParty && t.otherParty.length > 0;
-                return isSendReceive && hasOtherParty;
-            });
-            updateBadgeElement(badgeCustomerTx, customerTx.length);
-
-            // Home badge removed
-            updateBadgeElement(badgeOrders, 0);
         }
 
         function updateBadgeElement(el, count) {
@@ -8568,7 +8182,6 @@
                             populateUserSelects();
                             populateCustomReferralSelect();
                             renderAccountUpdateUserList();
-                            renderCustomerTransactionsPage();
                         });
 
                         renderAll();
@@ -8592,21 +8205,7 @@
             }
         });
 
-        // ───────────────────────────────────────────────────────────────────
-        // OLD CUSTOMER TRANSACTIONS MODAL (kept for compatibility)
-        // ───────────────────────────────────────────────────────────────────
-
-        // Close old modal functionality
-        document.getElementById('customerTxCloseBtn').addEventListener('click', function() {
-            document.getElementById('customerTxModal').classList.remove('open');
-        });
-        document.getElementById('customerTxModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('open');
-            }
-        });
-
-        console.log('✅ Admin Dashboard — Added Customer Transactions page with detailed sender/recipient info, phone numbers, wallet balances, and expandable details. Removed badge counter from Home nav button.');
+        console.log('✅ Admin Dashboard — Home badge removed, Customer Transactions modal now expands to show sender/receiver names, phones, emails, and wallet balances.');
     </script>
 </body>
 </html>
