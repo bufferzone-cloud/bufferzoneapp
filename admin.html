@@ -3381,145 +3381,23 @@
             box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
 
-        /* ── CUSTOMER TRANSACTIONS MODAL ── */
-        .customer-tx-modal .modal {
-            max-width: 460px;
-        }
-        .customer-tx-modal .tx-filters {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin-bottom: 12px;
-        }
-        .customer-tx-modal .tx-filters .tx-filter-btn {
-            padding: 3px 14px;
-            border-radius: 16px;
-            border: 1px solid #ddd;
-            background: #fafafa;
+        /* ── CUSTOMER TRANSACTIONS PAGE STYLES ── */
+        .page-customer-tx .tx-filter-btn {
+            padding: 3px 12px;
+            border-radius: 12px;
+            border: none;
+            background: #f0f0f0;
             font-size: 9px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
         }
-        .customer-tx-modal .tx-filters .tx-filter-btn.active {
+        .page-customer-tx .tx-filter-btn.active {
             background: #1c2128;
             color: #fff;
-            border-color: #1c2128;
         }
-
-        /* Enhanced Customer Transaction Item Styles */
-        .customer-tx-modal .tx-item {
-            cursor: pointer;
-            padding: 10px 12px;
-            border-radius: 10px;
-            border: 1px solid #f0f0f0;
-            margin-bottom: 8px;
-            background: #ffffff;
-            transition: all 0.2s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-        .customer-tx-modal .tx-item:hover {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.04);
-            border-color: #e0e0e0;
-        }
-        .customer-tx-modal .tx-summary-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-        .customer-tx-modal .tx-details {
-            display: none;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #f0f0f0;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-        @media (max-width: 480px) {
-            .customer-tx-modal .tx-details {
-                grid-template-columns: 1fr;
-            }
-        }
-        .customer-tx-modal .tx-details.open {
-            display: grid;
-        }
-        .customer-tx-modal .tx-detail-block {
-            background: #f8f9fc;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #f0f0f0;
-        }
-        .customer-tx-modal .tx-detail-block .title {
-            font-weight: 700;
-            font-size: 10px;
-            color: #555;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .customer-tx-modal .tx-detail-block .info {
-            font-size: 11px;
-            color: #1c2128;
-            line-height: 1.5;
-        }
-        .customer-tx-modal .tx-detail-block .info .label {
-            color: #888;
-        }
-        .customer-tx-modal .tx-detail-block .info .val {
-            font-weight: 600;
-        }
-        .customer-tx-modal .tx-item .expand-icon {
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            color: #aaa;
-            margin-left: 8px;
-        }
-        .customer-tx-modal .tx-item.open .expand-icon {
-            transform: rotate(180deg);
-        }
-
-        .customer-tx-modal .tx-item .tx-right {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .customer-tx-modal .tx-item .tx-amount {
-            font-weight: 700;
-        }
-        .customer-tx-modal .tx-item .tx-amount.sent {
-            color: #dc2626;
-        }
-        .customer-tx-modal .tx-item .tx-amount.received {
-            color: #00a86b;
-        }
-        .customer-tx-modal .tx-item .tx-date {
-            font-size: 8px;
-            color: #aaa;
-            display: block;
-            text-align: right;
-        }
-        .customer-tx-modal .empty-tx {
-            text-align: center;
-            color: #888;
-            font-size: 10px;
-            padding: 16px 0;
-        }
-        .customer-tx-modal .tx-summary {
-            background: #f8f9fc;
-            border-radius: 8px;
-            padding: 10px 14px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-        }
-        .customer-tx-modal .tx-summary .total-sent {
-            color: #dc2626;
-            font-weight: 700;
-        }
-        .customer-tx-modal .tx-summary .total-received {
-            color: #00a86b;
-            font-weight: 700;
+        .page-customer-tx .tx-filter-btn:hover:not(.active) {
+            background: #e0e0e0;
         }
     </style>
 </head>
@@ -3552,11 +3430,12 @@
                 </div>
             </div>
 
-            <!-- ===== THREE ACTION BUTTONS ===== -->
+            <!-- ===== THREE ACTION BUTTONS (now four) ===== -->
             <div class="action-row" id="actionRow">
                 <button class="action-btn promo-btn" id="actionPromoPics"><i class="fa-regular fa-images"></i> Promo Pics</button>
                 <button class="action-btn referral-btn" id="actionReferral"><i class="fa-solid fa-gift"></i> Referral</button>
                 <button class="action-btn payables-btn" id="actionPayables"><i class="fa-solid fa-money-bill-wave"></i> Payables</button>
+                <button class="action-btn" id="actionCustomerTx"><i class="fa-solid fa-arrows-left-right"></i> Customer Tx</button>
             </div>
 
             <!-- ===== BACK BUTTON ===== -->
@@ -3837,7 +3716,6 @@
                     <button class="p-btn toggle" id="toggleWithdrawals"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
                     <button class="p-btn gold" id="manualDepositBtn"><i class="fa-solid fa-plus-circle"></i> Manual Deposit</button>
                     <button class="p-btn gold" id="accountUpdateBtn"><i class="fa-solid fa-pen-to-square"></i> Account Update</button>
-                    <button class="p-btn gold" id="customerTransactionsBtn"><i class="fa-solid fa-arrows-left-right"></i> Customer Transactions</button>
                 </div>
 
                 <div class="payables-view active" id="viewAccounts">
@@ -3853,6 +3731,23 @@
                     <div id="withdrawalsList"></div>
                 </div>
 
+            </div>
+
+            <!-- ===== PAGE: CUSTOMER TRANSACTIONS (New Page) ===== -->
+            <div id="page-customer-tx" class="page page-customer-tx">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-arrows-left-right" style="color:#f5b83d;"></i> Customer Transactions</h3>
+                        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                            <button class="tx-filter-btn active" data-filter="all">All</button>
+                            <button class="tx-filter-btn" data-filter="sent">Sent</button>
+                            <button class="tx-filter-btn" data-filter="received">Received</button>
+                        </div>
+                    </div>
+                    <div id="customerTxListPage">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
             </div>
 
             <!-- ===== PAGE: SERVICES ===== -->
@@ -4030,11 +3925,9 @@
 
         </div>
 
-        <!-- ===== BOTTOM NAV ===== -->
+        <!-- ===== BOTTOM NAV (Home badge removed) ===== -->
         <div class="bottom-nav">
-            <button class="nav-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Home</span>
-                <!-- Home badge counter removed as requested -->
-            </button>
+            <button class="nav-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Home</span></button>
             <button class="nav-item" data-page="services"><i class="fa-solid fa-layer-group"></i><span>Services</span></button>
             <button class="nav-item" data-page="promo-pics"><i class="fa-regular fa-images"></i><span>Promo Pics</span></button>
             <button class="nav-item" data-page="orders"><i class="fa-solid fa-truck"></i><span>Orders</span>
@@ -4276,30 +4169,6 @@
         </div>
     </div>
 
-    <!-- ===== CUSTOMER TRANSACTIONS MODAL ===== -->
-    <div class="modal-overlay customer-tx-modal" id="customerTxModal">
-        <div class="modal">
-            <button class="close-btn" id="customerTxCloseBtn"><i class="fa-solid fa-times"></i></button>
-            <h3><i class="fa-solid fa-arrows-left-right" style="color:#f5b83d;"></i> Customer Transactions</h3>
-            <p class="sub">All send / receive transactions between customers.</p>
-
-            <div class="tx-filters">
-                <button class="tx-filter-btn active" data-filter="all">All</button>
-                <button class="tx-filter-btn" data-filter="sent">Sent</button>
-                <button class="tx-filter-btn" data-filter="received">Received</button>
-            </div>
-
-            <div class="tx-summary" id="txSummary">
-                <span>Total Sent: <span class="total-sent" id="totalSent">ZMW 0.00</span></span>
-                <span>Total Received: <span class="total-received" id="totalReceived">ZMW 0.00</span></span>
-            </div>
-
-            <div id="customerTxList">
-                <!-- Rendered by JS -->
-            </div>
-        </div>
-    </div>
-
     <!-- ===== USER SELECTOR MODAL (Phone-style) ===== -->
     <div class="modal-overlay user-selector-modal" id="userSelectorModal">
         <div class="modal">
@@ -4510,7 +4379,6 @@
         let withdrawalsFilter = 'pending';
         let pendingEditCustomerUid = null;
         let selectedUserId = null;
-        let customerTxFilter = 'all';
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -4654,15 +4522,6 @@
         const depositAmount = document.getElementById('depositAmount');
         const manualDepositCancelBtn = document.getElementById('manualDepositCancelBtn');
 
-        // ── Customer Transactions DOM ──
-        const customerTransactionsBtn = document.getElementById('customerTransactionsBtn');
-        const customerTxModal = document.getElementById('customerTxModal');
-        const customerTxCloseBtn = document.getElementById('customerTxCloseBtn');
-        const customerTxList = document.getElementById('customerTxList');
-        const totalSent = document.getElementById('totalSent');
-        const totalReceived = document.getElementById('totalReceived');
-        const txFilterBtns = document.querySelectorAll('.tx-filter-btn');
-
         // ── Account Update DOM ──
         const accountUpdateBtn = document.getElementById('accountUpdateBtn');
         const accountUpdateModal = document.getElementById('accountUpdateModal');
@@ -4697,6 +4556,7 @@
         const actionPromoPics = document.getElementById('actionPromoPics');
         const actionReferral = document.getElementById('actionReferral');
         const actionPayables = document.getElementById('actionPayables');
+        const actionCustomerTx = document.getElementById('actionCustomerTx');
 
         // ── Services price adjustment ──
         const adjustOptions = document.getElementById('adjustOptions');
@@ -4734,6 +4594,9 @@
 
         // ─── Users page filter ───
         const userFilterSelect = document.getElementById('userFilterSelect');
+
+        // ─── Customer Transactions Page ───
+        const customerTxListPage = document.getElementById('customerTxListPage');
 
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
@@ -4935,6 +4798,11 @@
 
             // ── Account Update Modal user list ──
             renderAccountUpdateUserList();
+
+            // ── Customer Transactions Page ──
+            if (document.getElementById('page-customer-tx').classList.contains('active')) {
+                renderCustomerTxPage();
+            }
 
             // ── Update badges ──
             updateBadges();
@@ -5205,7 +5073,6 @@
                 const referralCode = u.referralCode || '—';
                 const balance = accounts[uid]?.balance || 0;
 
-                // ── Registration referrals (users who signed up using this user's referral code) ──
                 const referredUsers = Object.entries(usersData)
                     .filter(([otherUid, other]) =>
                         otherUid !== uid &&
@@ -5215,7 +5082,6 @@
                         `${other.firstName || ''} ${other.lastName || ''}`.trim() || otherUid
                     );
 
-                // ── Discount referrals (users who used this user's code for a discount) ──
                 const discountReferralUsers = Object.entries(usersData)
                     .filter(([otherUid, other]) =>
                         otherUid !== uid &&
@@ -5225,7 +5091,6 @@
                         `${other.firstName || ''} ${other.lastName || ''}`.trim() || otherUid
                     );
 
-                // ── How many orders does this user have? ──
                 const userOrders = Object.values(orders).filter(o =>
                     o.customer &&
                     (o.customer.toLowerCase().includes(email.toLowerCase()) ||
@@ -5233,29 +5098,23 @@
                 );
                 const orderCount = userOrders.length;
 
-                // ── Discount referrals count ──
                 const discountRefCount = Object.values(referralDiscounts).filter(r =>
                     r.referralCode === referralCode
                 ).length;
 
-                // ── Registration referrals count ──
                 const registrationRefCount = referredUsers.length;
 
-                // ── How much made from all referrals ──
                 let referralEarnings = 0;
-                // From customReferrals where userId matches this user
                 Object.values(customReferrals).forEach(r => {
                     if (r.userId === uid) {
                         referralEarnings += (r.amount || 0);
                     }
                 });
-                // From referralPromos: each registration referral gives the promo amount
                 Object.values(referralPromos).forEach(r => {
                     if (registrationRefCount > 0) {
                         referralEarnings += (r.amount || 0) * registrationRefCount;
                     }
                 });
-                // From referralPromoDiscounts where referral code matches
                 Object.values(referralPromoDiscounts).forEach(r => {
                     if (r.referralCode === referralCode) {
                         referralEarnings += (r.ownerAmount || 0);
@@ -6377,158 +6236,126 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER TRANSACTIONS MODAL
+        // CUSTOMER TRANSACTIONS PAGE (NEW)
         // ───────────────────────────────────────────────────────────────────
 
-        function openCustomerTxModal() {
-            renderCustomerTxList();
-            customerTxModal.classList.add('open');
-        }
-
-        function closeCustomerTxModal() {
-            customerTxModal.classList.remove('open');
-        }
-
-        function renderCustomerTxList(filter = 'all') {
-            const container = customerTxList;
+        function renderCustomerTxPage(filter = 'all') {
+            const container = customerTxListPage;
             const transactions = allData.transactions || {};
-            const users = allData.users || {};
-            const accounts = allData.customerAccounts || {};
-            let entries = Object.entries(transactions);
-
-            // Only show customer-to-customer send/receive transactions
-            entries = entries.filter(([key, t]) => {
+            let entries = Object.entries(transactions).filter(([key, t]) => {
                 const isSendReceive = t.type?.toLowerCase().includes('sent') ||
                     t.type?.toLowerCase().includes('received') ||
                     t.type?.toLowerCase().includes('send') ||
                     t.type?.toLowerCase().includes('receive');
-                const hasOtherParty = t.otherParty && t.otherParty.length > 0;
-                return isSendReceive && hasOtherParty;
+                return isSendReceive && t.otherParty && t.userId;
             });
 
             if (filter === 'sent') {
-                entries = entries.filter(([key, t]) => {
-                    const isSent = t.type?.toLowerCase().includes('sent') || (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
-                    return isSent;
-                });
+                entries = entries.filter(([key, t]) => t.amount < 0);
             } else if (filter === 'received') {
-                entries = entries.filter(([key, t]) => {
-                    const isReceived = t.type?.toLowerCase().includes('received') || (t.type?.toLowerCase().includes('receive') && t.amount && t.amount > 0);
-                    return isReceived;
-                });
+                entries = entries.filter(([key, t]) => t.amount > 0);
             }
 
             entries.sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
 
-            // Calculate totals
-            let totalSent = 0;
-            let totalReceived = 0;
-
-            entries.forEach(([key, t]) => {
-                const isSent = t.type?.toLowerCase().includes('sent') || (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
-                if (isSent) {
-                    totalSent += Math.abs(t.amount || 0);
-                } else {
-                    totalReceived += Math.abs(t.amount || 0);
-                }
-            });
-
-            document.getElementById('totalSent').textContent = `ZMW ${totalSent.toFixed(2)}`;
-            document.getElementById('totalReceived').textContent = `ZMW ${totalReceived.toFixed(2)}`;
-
             if (entries.length === 0) {
-                container.innerHTML = `<div class="empty-tx">No customer-to-customer transactions found.</div>`;
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:16px;">No customer-to-customer transactions found.</div>`;
                 return;
             }
 
-            // Helper to find user UID by email
-            function findUserUidByEmail(email) {
-                if (!email || email === 'N/A') return null;
+            const users = allData.users || {};
+            const accounts = allData.customerAccounts || {};
+
+            function getUserInfo(uid) {
+                const u = users[uid] || {};
+                const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
+                const phone = u.phone || 'N/A';
+                const bal = accounts[uid]?.balance || 0;
+                return { name, phone, balance: bal };
+            }
+
+            function findUserByName(name) {
                 for (const [uid, u] of Object.entries(users)) {
-                    if ((u.email || '').toLowerCase() === email.toLowerCase()) {
-                        return uid;
+                    const fullName = `${u.firstName || ''} ${u.lastName || ''}`.trim();
+                    if (fullName === name) {
+                        return { uid, ...getUserInfo(uid) };
                     }
                 }
                 return null;
             }
 
-            // Helper to get user data
-            function getUserData(uid) {
-                if (!uid) return null;
-                const u = users[uid] || {};
-                const acc = accounts[uid] || {};
-                return {
-                    name: `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown',
-                    phone: u.phone || 'N/A',
-                    email: u.email || 'N/A',
-                    balance: acc.balance || 0
-                };
-            }
-
-            container.innerHTML = entries.map(([key, t]) => {
-                const isSent = t.type?.toLowerCase().includes('sent') || (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
-                const isReceived = t.type?.toLowerCase().includes('received') || (t.type?.toLowerCase().includes('receive') && t.amount && t.amount > 0);
-                const amountClass = isSent ? 'sent' : 'received';
-                const sign = isSent ? '-' : '+';
-                const label = isSent ? 'Sent to' : 'Received from';
-                const otherParty = t.otherParty || t.userName || 'Unknown';
-                const dateStr = t.date ? new Date(t.date).toLocaleString() : (t.timestamp ? new Date(t.timestamp).toLocaleString() : '');
-
-                let senderUid = null, receiverUid = null;
-                if (isSent) {
-                    senderUid = t.userId;
-                    receiverUid = findUserUidByEmail(t.userEmail);
-                } else {
-                    receiverUid = t.userId;
-                    senderUid = findUserUidByEmail(t.userEmail);
+            let html = '';
+            entries.forEach(([key, t]) => {
+                const isSent = t.amount < 0;
+                const userInfo = getUserInfo(t.userId);
+                let otherInfo = findUserByName(t.otherParty);
+                if (!otherInfo) {
+                    otherInfo = { name: t.otherParty || 'Unknown', phone: 'N/A', balance: 'N/A' };
                 }
 
-                const senderInfo = getUserData(senderUid);
-                const receiverInfo = getUserData(receiverUid);
+                let sender, recipient;
+                if (isSent) {
+                    sender = userInfo;
+                    recipient = otherInfo;
+                } else {
+                    sender = otherInfo;
+                    recipient = userInfo;
+                }
 
-                return `
-                    <div class="tx-item" data-key="${key}">
-                        <div class="tx-summary-row">
-                            <div class="tx-left">
-                                <div class="tx-type">${isSent ? '📤 Sent' : '📥 Received'}</div>
-                                <div class="tx-with">${label} <strong>${escapeHtml(otherParty)}</strong></div>
-                            </div>
-                            <div class="tx-right">
-                                <div>
-                                    <div class="tx-amount ${amountClass}">${sign}ZMW ${Math.abs(t.amount || 0).toFixed(2)}</div>
-                                    <div class="tx-date">${dateStr}</div>
+                const amount = Math.abs(t.amount || 0);
+                const dateStr = t.date ? new Date(t.date).toLocaleString() : (t.timestamp ? new Date(t.timestamp).toLocaleString() : 'N/A');
+
+                html += `
+                    <div class="order-card" data-key="${key}">
+                        <div class="order-toggle">
+                            <div style="flex:1; display:flex; flex-wrap:wrap; align-items:center; gap:4px;">
+                                <div style="font-size:10px; font-weight:500; min-width:80px;">
+                                    ${isSent ? '📤 Sent to' : '📥 Received from'}
                                 </div>
+                                <div style="display:flex; flex-direction:column; flex:1;">
+                                    <div style="font-weight:600; font-size:12px;">${escapeHtml(sender.name)} → ${escapeHtml(recipient.name)}</div>
+                                    <div style="font-size:9px; color:#888;">${escapeHtml(sender.phone)} / ${escapeHtml(recipient.phone)}</div>
+                                    <div style="font-size:9px; color:#f5b83d;">Bal: ZMW ${typeof sender.balance === 'number' ? sender.balance.toFixed(2) : 'N/A'} / ZMW ${typeof recipient.balance === 'number' ? recipient.balance.toFixed(2) : 'N/A'}</div>
+                                </div>
+                            </div>
+                            <div style="text-align:right;">
+                                <div style="font-weight:700; font-size:14px; color:${isSent ? '#dc2626' : '#00a86b'};">
+                                    ${isSent ? '-' : '+'}ZMW ${amount.toFixed(2)}
+                                </div>
+                                <div style="font-size:8px; color:#aaa;">${dateStr}</div>
                                 <i class="fa-solid fa-chevron-down expand-icon"></i>
                             </div>
                         </div>
-                        <div class="tx-details">
-                            <div class="tx-detail-block">
-                                <div class="title">👤 Sender</div>
-                                <div class="info">
-                                    <div><span class="label">Name:</span> <span class="val">${escapeHtml(senderInfo ? senderInfo.name : 'Unknown')}</span></div>
-                                    <div><span class="label">Phone:</span> <span class="val">${escapeHtml(senderInfo ? senderInfo.phone : 'N/A')}</span></div>
-                                    <div><span class="label">Email:</span> <span class="val">${escapeHtml(senderInfo ? senderInfo.email : 'N/A')}</span></div>
-                                    <div><span class="label">Balance:</span> <span class="val" style="color:#f5b83d;">ZMW ${(senderInfo ? senderInfo.balance : 0).toFixed(2)}</span></div>
-                                </div>
-                            </div>
-                            <div class="tx-detail-block">
-                                <div class="title">👤 Receiver</div>
-                                <div class="info">
-                                    <div><span class="label">Name:</span> <span class="val">${escapeHtml(receiverInfo ? receiverInfo.name : 'Unknown')}</span></div>
-                                    <div><span class="label">Phone:</span> <span class="val">${escapeHtml(receiverInfo ? receiverInfo.phone : 'N/A')}</span></div>
-                                    <div><span class="label">Email:</span> <span class="val">${escapeHtml(receiverInfo ? receiverInfo.email : 'N/A')}</span></div>
-                                    <div><span class="label">Balance:</span> <span class="val" style="color:#f5b83d;">ZMW ${(receiverInfo ? receiverInfo.balance : 0).toFixed(2)}</span></div>
-                                </div>
-                            </div>
+                        <div class="order-details">
+                            <div class="row"><span class="label">Sender</span><span class="val">${escapeHtml(sender.name)} (${escapeHtml(sender.phone)}) — Balance: ZMW ${typeof sender.balance === 'number' ? sender.balance.toFixed(2) : 'N/A'}</span></div>
+                            <div class="row"><span class="label">Recipient</span><span class="val">${escapeHtml(recipient.name)} (${escapeHtml(recipient.phone)}) — Balance: ZMW ${typeof recipient.balance === 'number' ? recipient.balance.toFixed(2) : 'N/A'}</span></div>
+                            <div class="row"><span class="label">Amount</span><span class="val">ZMW ${amount.toFixed(2)}</span></div>
+                            <div class="row"><span class="label">Time</span><span class="val">${dateStr}</span></div>
+                            <div class="row"><span class="label">Transaction ID</span><span class="val">${escapeHtml(t.ref || key)}</span></div>
                         </div>
                     </div>
                 `;
-            }).join('');
+            });
 
-            // Add click listeners to toggle expand
-            container.querySelectorAll('.tx-item').forEach(el => {
+            container.innerHTML = html;
+
+            container.querySelectorAll('.order-card .order-toggle').forEach(el => {
                 el.addEventListener('click', function() {
-                    this.classList.toggle('open');
+                    const parent = this.closest('.order-card');
+                    const details = parent.querySelector('.order-details');
+                    details.classList.toggle('open');
+                    parent.classList.toggle('open');
+                });
+            });
+
+            // Filter buttons logic
+            const filters = document.querySelectorAll('#page-customer-tx .tx-filter-btn');
+            filters.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filters.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    renderCustomerTxPage(this.dataset.filter);
                 });
             });
         }
@@ -7432,25 +7259,6 @@
         });
 
         // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER TRANSACTIONS EVENT BINDINGS
-        // ───────────────────────────────────────────────────────────────────
-
-        customerTransactionsBtn.addEventListener('click', openCustomerTxModal);
-        customerTxCloseBtn.addEventListener('click', closeCustomerTxModal);
-        customerTxModal.addEventListener('click', function(e) {
-            if (e.target === this) closeCustomerTxModal();
-        });
-
-        txFilterBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                txFilterBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                customerTxFilter = this.dataset.filter;
-                renderCustomerTxList(customerTxFilter);
-            });
-        });
-
-        // ───────────────────────────────────────────────────────────────────
         // ACCOUNT UPDATE EVENT BINDINGS
         // ───────────────────────────────────────────────────────────────────
 
@@ -7592,6 +7400,17 @@
             mainHeader.classList.remove('work-active');
             document.getElementById('appContent').scrollTop = 0;
             renderAll();
+            showBackButton();
+        });
+
+        // ── New Customer Transactions Page Button ──
+        actionCustomerTx.addEventListener('click', function() {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-customer-tx').classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            mainHeader.classList.remove('work-active');
+            document.getElementById('appContent').scrollTop = 0;
+            renderCustomerTxPage();
             showBackButton();
         });
 
@@ -8205,7 +8024,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Home badge removed, Customer Transactions modal now expands to show sender/receiver names, phones, emails, and wallet balances.');
+        console.log('✅ Admin Dashboard — Home badge removed, Customer Transactions button added to action row, new Customer Transactions page created with dropdown details showing sender/recipient info, phone numbers, and wallet balances.');
     </script>
 </body>
 </html>
