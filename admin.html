@@ -6236,24 +6236,47 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER TRANSACTIONS PAGE (NEW)
+        // CUSTOMER TRANSACTIONS PAGE (NEW IMPROVED VERSION)
         // ───────────────────────────────────────────────────────────────────
+
+        // Helper: get balance for a user at a specific timestamp
+        function getBalanceAtTime(uid, timestamp) {
+            let balance = 0;
+            const txs = Object.values(allData.transactions)
+                .filter(tx => tx.userId === uid && tx.timestamp !== undefined && tx.timestamp <= timestamp)
+                .sort((a, b) => a.timestamp - b.timestamp);
+            for (const tx of txs) {
+                balance += tx.amount || 0;
+            }
+            return balance;
+        }
+
+        function findUserByName(name) {
+            const users = allData.users || {};
+            for (const [uid, u] of Object.entries(users)) {
+                const fullName = `${u.firstName || ''} ${u.lastName || ''}`.trim();
+                if (fullName === name) {
+                    return { uid, name: fullName, phone: u.phone || 'N/A', balance: 0 };
+                }
+            }
+            return null;
+        }
 
         function renderCustomerTxPage(filter = 'all') {
             const container = customerTxListPage;
             const transactions = allData.transactions || {};
+            const users = allData.users || {};
+            const accounts = allData.customerAccounts || {};
+
             let entries = Object.entries(transactions).filter(([key, t]) => {
-                const isSendReceive = t.type?.toLowerCase().includes('sent') ||
-                    t.type?.toLowerCase().includes('received') ||
-                    t.type?.toLowerCase().includes('send') ||
-                    t.type?.toLowerCase().includes('receive');
+                const isSendReceive = t.type === 'Sent Money' || t.type === 'Received Money';
                 return isSendReceive && t.otherParty && t.userId;
             });
 
             if (filter === 'sent') {
-                entries = entries.filter(([key, t]) => t.amount < 0);
+                entries = entries.filter(([key, t]) => t.type === 'Sent Money');
             } else if (filter === 'received') {
-                entries = entries.filter(([key, t]) => t.amount > 0);
+                entries = entries.filter(([key, t]) => t.type === 'Received Money');
             }
 
             entries.sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
@@ -6264,46 +6287,50 @@
                 return;
             }
 
-            const users = allData.users || {};
-            const accounts = allData.customerAccounts || {};
-
-            function getUserInfo(uid) {
-                const u = users[uid] || {};
-                const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
-                const phone = u.phone || 'N/A';
-                const bal = accounts[uid]?.balance || 0;
-                return { name, phone, balance: bal };
-            }
-
-            function findUserByName(name) {
-                for (const [uid, u] of Object.entries(users)) {
-                    const fullName = `${u.firstName || ''} ${u.lastName || ''}`.trim();
-                    if (fullName === name) {
-                        return { uid, ...getUserInfo(uid) };
-                    }
-                }
-                return null;
-            }
-
             let html = '';
             entries.forEach(([key, t]) => {
-                const isSent = t.amount < 0;
-                const userInfo = getUserInfo(t.userId);
-                let otherInfo = findUserByName(t.otherParty);
-                if (!otherInfo) {
-                    otherInfo = { name: t.otherParty || 'Unknown', phone: 'N/A', balance: 'N/A' };
-                }
-
-                let sender, recipient;
-                if (isSent) {
-                    sender = userInfo;
-                    recipient = otherInfo;
-                } else {
-                    sender = otherInfo;
-                    recipient = userInfo;
-                }
-
+                const isSent = t.type === 'Sent Money';
                 const amount = Math.abs(t.amount || 0);
+
+                let senderUid, recipientUid;
+                let senderName, recipientName;
+
+                if (isSent) {
+                    senderUid = t.userId;
+                    const senderUser = users[senderUid] || {};
+                    senderName = `${senderUser.firstName || ''} ${senderUser.lastName || ''}`.trim() || 'Unknown';
+                    const recipientData = findUserByName(t.otherParty);
+                    if (recipientData) {
+                        recipientUid = recipientData.uid;
+                        recipientName = recipientData.name;
+                    } else {
+                        recipientUid = null;
+                        recipientName = t.otherParty || 'Unknown';
+                    }
+                } else { // Received Money
+                    recipientUid = t.userId;
+                    const recipientUser = users[recipientUid] || {};
+                    recipientName = `${recipientUser.firstName || ''} ${recipientUser.lastName || ''}`.trim() || 'Unknown';
+                    const senderData = findUserByName(t.otherParty);
+                    if (senderData) {
+                        senderUid = senderData.uid;
+                        senderName = senderData.name;
+                    } else {
+                        senderUid = null;
+                        senderName = t.otherParty || 'Unknown';
+                    }
+                }
+
+                const senderUserObj = users[senderUid] || {};
+                const recipientUserObj = users[recipientUid] || {};
+
+                const senderPhone = senderUserObj.phone || 'N/A';
+                const recipientPhone = recipientUserObj.phone || 'N/A';
+
+                // Calculate balances AFTER this transaction
+                const senderBalanceAfter = senderUid ? getBalanceAtTime(senderUid, t.timestamp) : 0;
+                const recipientBalanceAfter = recipientUid ? getBalanceAtTime(recipientUid, t.timestamp) : 0;
+
                 const dateStr = t.date ? new Date(t.date).toLocaleString() : (t.timestamp ? new Date(t.timestamp).toLocaleString() : 'N/A');
 
                 html += `
@@ -6314,9 +6341,9 @@
                                     ${isSent ? '📤 Sent to' : '📥 Received from'}
                                 </div>
                                 <div style="display:flex; flex-direction:column; flex:1;">
-                                    <div style="font-weight:600; font-size:12px;">${escapeHtml(sender.name)} → ${escapeHtml(recipient.name)}</div>
-                                    <div style="font-size:9px; color:#888;">${escapeHtml(sender.phone)} / ${escapeHtml(recipient.phone)}</div>
-                                    <div style="font-size:9px; color:#f5b83d;">Bal: ZMW ${typeof sender.balance === 'number' ? sender.balance.toFixed(2) : 'N/A'} / ZMW ${typeof recipient.balance === 'number' ? recipient.balance.toFixed(2) : 'N/A'}</div>
+                                    <div style="font-weight:600; font-size:12px;">${escapeHtml(senderName)} → ${escapeHtml(recipientName)}</div>
+                                    <div style="font-size:9px; color:#888;">${escapeHtml(senderPhone)} / ${escapeHtml(recipientPhone)}</div>
+                                    <div style="font-size:9px; color:#f5b83d;">Bal after: Sender ZMW ${senderBalanceAfter.toFixed(2)} / Recipient ZMW ${recipientBalanceAfter.toFixed(2)}</div>
                                 </div>
                             </div>
                             <div style="text-align:right;">
@@ -6328,8 +6355,8 @@
                             </div>
                         </div>
                         <div class="order-details">
-                            <div class="row"><span class="label">Sender</span><span class="val">${escapeHtml(sender.name)} (${escapeHtml(sender.phone)}) — Balance: ZMW ${typeof sender.balance === 'number' ? sender.balance.toFixed(2) : 'N/A'}</span></div>
-                            <div class="row"><span class="label">Recipient</span><span class="val">${escapeHtml(recipient.name)} (${escapeHtml(recipient.phone)}) — Balance: ZMW ${typeof recipient.balance === 'number' ? recipient.balance.toFixed(2) : 'N/A'}</span></div>
+                            <div class="row"><span class="label">Sender</span><span class="val">${escapeHtml(senderName)} (${escapeHtml(senderPhone)}) — Balance after: ZMW ${senderBalanceAfter.toFixed(2)}</span></div>
+                            <div class="row"><span class="label">Recipient</span><span class="val">${escapeHtml(recipientName)} (${escapeHtml(recipientPhone)}) — Balance after: ZMW ${recipientBalanceAfter.toFixed(2)}</span></div>
                             <div class="row"><span class="label">Amount</span><span class="val">ZMW ${amount.toFixed(2)}</span></div>
                             <div class="row"><span class="label">Time</span><span class="val">${dateStr}</span></div>
                             <div class="row"><span class="label">Transaction ID</span><span class="val">${escapeHtml(t.ref || key)}</span></div>
@@ -8024,7 +8051,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Home badge removed, Customer Transactions button added to action row, new Customer Transactions page created with dropdown details showing sender/recipient info, phone numbers, and wallet balances.');
+        console.log('✅ Admin Dashboard — Home badge removed, Customer Transactions button added to action row, new Customer Transactions page created with dropdown details showing sender/recipient info, phone numbers, and NEW wallet balances after the transaction.');
     </script>
 </body>
 </html>
