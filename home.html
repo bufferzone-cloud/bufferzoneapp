@@ -3514,7 +3514,7 @@
         }
 
         // =================================================================
-        // HISTORY
+        // HISTORY (enhanced with sender/recipient details, phone, and balances)
         // =================================================================
 
         function renderHistory() {
@@ -3570,6 +3570,7 @@
                     `<div class="text-muted text-center" style="padding:17px;">No transactions found.</div>`;
                 return;
             }
+
             container.innerHTML = entries.map(([key, t]) => {
                 const isWithdrawal = t.type?.toLowerCase().includes('withdraw');
                 const isApproved = t.status === 'approved';
@@ -3589,6 +3590,37 @@
                 let statusDisplay = t.status ? t.status.charAt(0).toUpperCase() + t.status.slice(1) : 'N/A';
                 if (isWithdrawal && isApproved) statusDisplay = '✅ Approved';
                 if (isWithdrawal && isDeclined) statusDisplay = '❌ Declined';
+
+                // Enhance send/receive transactions with other party details
+                let otherPartyInfo = '';
+                let isSendReceive = t.type?.toLowerCase().includes('sent') || t.type?.toLowerCase().includes('received');
+                if (isSendReceive) {
+                    // Try to get other party info from UID if available, else use stored data
+                    let otherName = t.otherParty || t.userName || 'Unknown';
+                    let otherPhone = t.userPhone || 'N/A';
+                    let otherBalance = 'N/A';
+
+                    // If we have otherPartyUid, we can get current balance
+                    if (t.otherPartyUid && allData.users && allData.customerAccounts) {
+                        const otherUser = allData.users[t.otherPartyUid];
+                        if (otherUser) {
+                            otherName = `${otherUser.firstName || ''} ${otherUser.lastName || ''}`.trim() || otherName;
+                            otherPhone = otherUser.phone || otherPhone;
+                        }
+                        const otherAcc = allData.customerAccounts[t.otherPartyUid];
+                        if (otherAcc) {
+                            otherBalance = otherAcc.balance || 0;
+                            otherBalance = `ZMW ${otherBalance.toFixed(2)}`;
+                        }
+                    }
+
+                    const direction = t.type?.toLowerCase().includes('sent') ? 'Sent to' : 'Received from';
+                    otherPartyInfo = `
+                        <div style="font-size:9px; color:#555; margin-top:2px;">
+                            ${direction}: <strong>${escapeHtml(otherName)}</strong> (📞 ${escapeHtml(otherPhone)}) &middot; Balance: ${otherBalance}
+                        </div>
+                    `;
+                }
 
                 let detailText = t.detail || '';
                 if (t.type?.toLowerCase().includes('referral') && t.userName) {
@@ -3617,6 +3649,7 @@
                         <div class="h-row"><span class="h-label">Method</span><span class="h-val">${escapeHtml(t.method || 'N/A')}</span></div>
                         <div class="h-row"><span class="h-label">Status</span><span class="h-val">${statusDisplay}</span></div>
                         <div class="h-row"><span class="h-label">Detail</span><span class="h-val">${escapeHtml(detailText)}</span></div>
+                        ${isSendReceive ? `<div class="h-row" style="flex-direction:column; align-items:flex-start; gap:2px;"><span class="h-label" style="margin-bottom:2px;">Other Party</span><div class="h-val" style="text-align:left; width:100%;">${otherPartyInfo}</div></div>` : ''}
                     </div>
                 </div>
                 `;
@@ -3956,11 +3989,27 @@
                         `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral for a service discount.`;
                 }
 
+                // Enhance send/receive transactions
+                let otherInfo = '';
+                if (t.type?.toLowerCase().includes('sent') || t.type?.toLowerCase().includes('received')) {
+                    let otherName = t.otherParty || t.userName || 'Unknown';
+                    let otherPhone = t.userPhone || 'N/A';
+                    if (t.otherPartyUid && allData.users) {
+                        const otherUser = allData.users[t.otherPartyUid];
+                        if (otherUser) {
+                            otherName = `${otherUser.firstName || ''} ${otherUser.lastName || ''}`.trim() || otherName;
+                            otherPhone = otherUser.phone || otherPhone;
+                        }
+                    }
+                    const direction = t.type?.toLowerCase().includes('sent') ? 'Sent to' : 'Received from';
+                    otherInfo = ` ${direction} <strong>${escapeHtml(otherName)}</strong> (📞 ${escapeHtml(otherPhone)})`;
+                }
+
                 return `
                     <div class="transaction-msg">
                         <div class="left">
                             <div class="title">${escapeHtml(title)}</div>
-                            <div class="desc">${escapeHtml(desc)}</div>
+                            <div class="desc">${escapeHtml(desc)}${otherInfo}</div>
                             <div style="font-size:8px;color:#aaa;">${t.date ? new Date(t.date).toLocaleString() : ''}</div>
                         </div>
                         <div class="right">
@@ -4031,7 +4080,7 @@
         }
 
         // =================================================================
-        // SEND MONEY TRANSACTIONS LIST
+        // SEND MONEY TRANSACTIONS LIST (enhanced with phone and balance)
         // =================================================================
 
         function renderSendMoneyTxList() {
@@ -4057,13 +4106,30 @@
                 const amountClass = isSent ? 'sent' : 'received';
                 const sign = isSent ? '-' : '+';
                 const label = isSent ? 'Sent to' : 'Received from';
-                const otherParty = t.otherParty || t.userName || 'Unknown';
+                let otherName = t.otherParty || t.userName || 'Unknown';
+                let otherPhone = t.userPhone || 'N/A';
+                let otherBalance = 'N/A';
+
+                // If we have otherPartyUid, fetch current balance
+                if (t.otherPartyUid && allData.users && allData.customerAccounts) {
+                    const otherUser = allData.users[t.otherPartyUid];
+                    if (otherUser) {
+                        otherName = `${otherUser.firstName || ''} ${otherUser.lastName || ''}`.trim() || otherName;
+                        otherPhone = otherUser.phone || otherPhone;
+                    }
+                    const otherAcc = allData.customerAccounts[t.otherPartyUid];
+                    if (otherAcc) {
+                        otherBalance = otherAcc.balance || 0;
+                        otherBalance = `ZMW ${otherBalance.toFixed(2)}`;
+                    }
+                }
 
                 return `
                     <div class="tx-item">
                         <div class="tx-left">
                             <div class="tx-type">${isSent ? '📤 Sent' : '📥 Received'}</div>
-                            <div class="tx-with">${label} ${escapeHtml(otherParty)}</div>
+                            <div class="tx-with">${label} ${escapeHtml(otherName)}</div>
+                            <div style="font-size:8px; color:#888;">📞 ${escapeHtml(otherPhone)} &middot; Balance: ${otherBalance}</div>
                         </div>
                         <div class="tx-right">
                             <div class="tx-amount ${amountClass}">${sign}ZMW ${Math.abs(t.amount || 0).toFixed(2)}</div>
@@ -5028,7 +5094,7 @@
                 set(recipientAccRef, { balance: currentRecipientBal + amount });
             });
 
-            // Record transaction for sender
+            // Record transaction for sender (including otherPartyUid for better tracking)
             const senderTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
             const senderTxData = {
                 type: 'Sent Money',
@@ -5047,11 +5113,12 @@
                 userEmail: sendRecipientData?.email || 'N/A',
                 userPhone: sendRecipientData?.phone || 'N/A',
                 otherParty: sendRecipientName,
+                otherPartyUid: sendRecipientUid,  // <-- added for enhanced tracking
                 timestamp: Date.now()
             };
             set(senderTxRef, senderTxData);
 
-            // Record transaction for recipient
+            // Record transaction for recipient (including otherPartyUid)
             const recipientTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
             const recipientTxData = {
                 type: 'Received Money',
@@ -5070,6 +5137,7 @@
                 userEmail: currentUser.email || 'N/A',
                 userPhone: currentUserData?.phone || 'N/A',
                 otherParty: currentUserData?.firstName || 'User',
+                otherPartyUid: currentUserId,  // <-- added for enhanced tracking
                 timestamp: Date.now()
             };
             set(recipientTxRef, recipientTxData);
@@ -5336,7 +5404,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer App — Dark service backgrounds, promo carousel edge-to-edge, payment page full layout, dropdown promo/referral, order success popup.');
+        console.log('✅ Customer App — Enhanced transaction history with sender/recipient details, phone numbers, and wallet balances.');
     </script>
 </body>
 </html>
