@@ -6236,31 +6236,8 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER TRANSACTIONS PAGE (NEW IMPROVED VERSION)
+        // CUSTOMER TRANSACTIONS PAGE (NEW) – FULLY REWRITTEN
         // ───────────────────────────────────────────────────────────────────
-
-        // Helper: get balance for a user at a specific timestamp
-        function getBalanceAtTime(uid, timestamp) {
-            let balance = 0;
-            const txs = Object.values(allData.transactions)
-                .filter(tx => tx.userId === uid && tx.timestamp !== undefined && tx.timestamp <= timestamp)
-                .sort((a, b) => a.timestamp - b.timestamp);
-            for (const tx of txs) {
-                balance += tx.amount || 0;
-            }
-            return balance;
-        }
-
-        function findUserByName(name) {
-            const users = allData.users || {};
-            for (const [uid, u] of Object.entries(users)) {
-                const fullName = `${u.firstName || ''} ${u.lastName || ''}`.trim();
-                if (fullName === name) {
-                    return { uid, name: fullName, phone: u.phone || 'N/A', balance: 0 };
-                }
-            }
-            return null;
-        }
 
         function renderCustomerTxPage(filter = 'all') {
             const container = customerTxListPage;
@@ -6268,17 +6245,53 @@
             const users = allData.users || {};
             const accounts = allData.customerAccounts || {};
 
+            // Helper to get user info by UID
+            function getUserInfo(uid) {
+                const u = users[uid] || {};
+                const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
+                const phone = u.phone || 'N/A';
+                const bal = accounts[uid]?.balance || 0;
+                return { name, phone, balance: bal };
+            }
+
+            // Helper to find a user by exact name match (full name or first name)
+            function findUserByName(name) {
+                if (!name) return null;
+                const normalizedSearch = name.trim().toLowerCase();
+                for (const [uid, u] of Object.entries(users)) {
+                    const fullName = `${u.firstName || ''} ${u.lastName || ''}`.trim();
+                    if (fullName.toLowerCase() === normalizedSearch) {
+                        return { uid, ...getUserInfo(uid) };
+                    }
+                    // Also try matching first name only
+                    if ((u.firstName || '').toLowerCase() === normalizedSearch) {
+                        return { uid, ...getUserInfo(uid) };
+                    }
+                    // Also try matching email
+                    if ((u.email || '').toLowerCase() === normalizedSearch) {
+                        return { uid, ...getUserInfo(uid) };
+                    }
+                }
+                return null;
+            }
+
+            // Gather all send/receive transactions
             let entries = Object.entries(transactions).filter(([key, t]) => {
-                const isSendReceive = t.type === 'Sent Money' || t.type === 'Received Money';
+                const isSendReceive = t.type?.toLowerCase().includes('sent') ||
+                    t.type?.toLowerCase().includes('received') ||
+                    t.type?.toLowerCase().includes('send') ||
+                    t.type?.toLowerCase().includes('receive');
                 return isSendReceive && t.otherParty && t.userId;
             });
 
+            // Apply filter
             if (filter === 'sent') {
-                entries = entries.filter(([key, t]) => t.type === 'Sent Money');
+                entries = entries.filter(([key, t]) => (t.amount || 0) < 0);
             } else if (filter === 'received') {
-                entries = entries.filter(([key, t]) => t.type === 'Received Money');
+                entries = entries.filter(([key, t]) => (t.amount || 0) > 0);
             }
 
+            // Sort by newest first
             entries.sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
 
             if (entries.length === 0) {
@@ -6289,49 +6302,28 @@
 
             let html = '';
             entries.forEach(([key, t]) => {
-                const isSent = t.type === 'Sent Money';
+                const isSent = (t.amount || 0) < 0;
                 const amount = Math.abs(t.amount || 0);
+                const dateStr = t.date ? new Date(t.date).toLocaleString() :
+                    (t.timestamp ? new Date(t.timestamp).toLocaleString() : 'N/A');
 
-                let senderUid, recipientUid;
-                let senderName, recipientName;
+                // Get sender and recipient info
+                let sender, recipient;
+                const userInfo = getUserInfo(t.userId);
+                let otherInfo = findUserByName(t.otherParty);
 
-                if (isSent) {
-                    senderUid = t.userId;
-                    const senderUser = users[senderUid] || {};
-                    senderName = `${senderUser.firstName || ''} ${senderUser.lastName || ''}`.trim() || 'Unknown';
-                    const recipientData = findUserByName(t.otherParty);
-                    if (recipientData) {
-                        recipientUid = recipientData.uid;
-                        recipientName = recipientData.name;
-                    } else {
-                        recipientUid = null;
-                        recipientName = t.otherParty || 'Unknown';
-                    }
-                } else { // Received Money
-                    recipientUid = t.userId;
-                    const recipientUser = users[recipientUid] || {};
-                    recipientName = `${recipientUser.firstName || ''} ${recipientUser.lastName || ''}`.trim() || 'Unknown';
-                    const senderData = findUserByName(t.otherParty);
-                    if (senderData) {
-                        senderUid = senderData.uid;
-                        senderName = senderData.name;
-                    } else {
-                        senderUid = null;
-                        senderName = t.otherParty || 'Unknown';
-                    }
+                // If we can't find the other party by name, use the raw string
+                if (!otherInfo) {
+                    otherInfo = { name: t.otherParty || 'Unknown', phone: 'N/A', balance: 'N/A' };
                 }
 
-                const senderUserObj = users[senderUid] || {};
-                const recipientUserObj = users[recipientUid] || {};
-
-                const senderPhone = senderUserObj.phone || 'N/A';
-                const recipientPhone = recipientUserObj.phone || 'N/A';
-
-                // Calculate balances AFTER this transaction
-                const senderBalanceAfter = senderUid ? getBalanceAtTime(senderUid, t.timestamp) : 0;
-                const recipientBalanceAfter = recipientUid ? getBalanceAtTime(recipientUid, t.timestamp) : 0;
-
-                const dateStr = t.date ? new Date(t.date).toLocaleString() : (t.timestamp ? new Date(t.timestamp).toLocaleString() : 'N/A');
+                if (isSent) {
+                    sender = userInfo;
+                    recipient = otherInfo;
+                } else {
+                    sender = otherInfo;
+                    recipient = userInfo;
+                }
 
                 html += `
                     <div class="order-card" data-key="${key}">
@@ -6341,9 +6333,15 @@
                                     ${isSent ? '📤 Sent to' : '📥 Received from'}
                                 </div>
                                 <div style="display:flex; flex-direction:column; flex:1;">
-                                    <div style="font-weight:600; font-size:12px;">${escapeHtml(senderName)} → ${escapeHtml(recipientName)}</div>
-                                    <div style="font-size:9px; color:#888;">${escapeHtml(senderPhone)} / ${escapeHtml(recipientPhone)}</div>
-                                    <div style="font-size:9px; color:#f5b83d;">Bal after: Sender ZMW ${senderBalanceAfter.toFixed(2)} / Recipient ZMW ${recipientBalanceAfter.toFixed(2)}</div>
+                                    <div style="font-weight:600; font-size:12px;">
+                                        ${escapeHtml(sender.name)} → ${escapeHtml(recipient.name)}
+                                    </div>
+                                    <div style="font-size:9px; color:#888;">
+                                        📞 ${escapeHtml(sender.phone)} / ${escapeHtml(recipient.phone)}
+                                    </div>
+                                    <div style="font-size:9px; color:#f5b83d;">
+                                        💰 Bal: ZMW ${typeof sender.balance === 'number' ? sender.balance.toFixed(2) : 'N/A'} → ZMW ${typeof recipient.balance === 'number' ? recipient.balance.toFixed(2) : 'N/A'}
+                                    </div>
                                 </div>
                             </div>
                             <div style="text-align:right;">
@@ -6355,11 +6353,32 @@
                             </div>
                         </div>
                         <div class="order-details">
-                            <div class="row"><span class="label">Sender</span><span class="val">${escapeHtml(senderName)} (${escapeHtml(senderPhone)}) — Balance after: ZMW ${senderBalanceAfter.toFixed(2)}</span></div>
-                            <div class="row"><span class="label">Recipient</span><span class="val">${escapeHtml(recipientName)} (${escapeHtml(recipientPhone)}) — Balance after: ZMW ${recipientBalanceAfter.toFixed(2)}</span></div>
-                            <div class="row"><span class="label">Amount</span><span class="val">ZMW ${amount.toFixed(2)}</span></div>
-                            <div class="row"><span class="label">Time</span><span class="val">${dateStr}</span></div>
-                            <div class="row"><span class="label">Transaction ID</span><span class="val">${escapeHtml(t.ref || key)}</span></div>
+                            <div class="row">
+                                <span class="label">Sender</span>
+                                <span class="val">
+                                    ${escapeHtml(sender.name)} (${escapeHtml(sender.phone)}) 
+                                    — Balance: ZMW ${typeof sender.balance === 'number' ? sender.balance.toFixed(2) : 'N/A'}
+                                </span>
+                            </div>
+                            <div class="row">
+                                <span class="label">Recipient</span>
+                                <span class="val">
+                                    ${escapeHtml(recipient.name)} (${escapeHtml(recipient.phone)}) 
+                                    — Balance: ZMW ${typeof recipient.balance === 'number' ? recipient.balance.toFixed(2) : 'N/A'}
+                                </span>
+                            </div>
+                            <div class="row">
+                                <span class="label">Amount</span>
+                                <span class="val">ZMW ${amount.toFixed(2)}</span>
+                            </div>
+                            <div class="row">
+                                <span class="label">Time</span>
+                                <span class="val">${dateStr}</span>
+                            </div>
+                            <div class="row">
+                                <span class="label">Transaction ID</span>
+                                <span class="val">${escapeHtml(t.ref || key)}</span>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -6367,6 +6386,7 @@
 
             container.innerHTML = html;
 
+            // Toggle expand
             container.querySelectorAll('.order-card .order-toggle').forEach(el => {
                 el.addEventListener('click', function() {
                     const parent = this.closest('.order-card');
@@ -6376,7 +6396,7 @@
                 });
             });
 
-            // Filter buttons logic
+            // Filter buttons
             const filters = document.querySelectorAll('#page-customer-tx .tx-filter-btn');
             filters.forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -8051,7 +8071,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Home badge removed, Customer Transactions button added to action row, new Customer Transactions page created with dropdown details showing sender/recipient info, phone numbers, and NEW wallet balances after the transaction.');
+        console.log('✅ Admin Dashboard — Customer Transactions page now shows SENDER and RECEIVER details with phone numbers and wallet balances, plus the amount sent.');
     </script>
 </body>
 </html>
