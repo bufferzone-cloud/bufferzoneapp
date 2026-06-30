@@ -6236,7 +6236,7 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER TRANSACTIONS PAGE (NEW) – FULLY REWRITTEN
+        // CUSTOMER TRANSACTIONS PAGE (NEW) – FULLY REWRITTEN WITH OTHERPARTYUID
         // ───────────────────────────────────────────────────────────────────
 
         function renderCustomerTxPage(filter = 'all') {
@@ -6254,25 +6254,32 @@
                 return { name, phone, balance: bal };
             }
 
-            // Helper to find a user by exact name match (full name or first name)
-            function findUserByName(name) {
-                if (!name) return null;
-                const normalizedSearch = name.trim().toLowerCase();
-                for (const [uid, u] of Object.entries(users)) {
-                    const fullName = `${u.firstName || ''} ${u.lastName || ''}`.trim();
-                    if (fullName.toLowerCase() === normalizedSearch) {
-                        return { uid, ...getUserInfo(uid) };
-                    }
-                    // Also try matching first name only
-                    if ((u.firstName || '').toLowerCase() === normalizedSearch) {
-                        return { uid, ...getUserInfo(uid) };
-                    }
-                    // Also try matching email
-                    if ((u.email || '').toLowerCase() === normalizedSearch) {
-                        return { uid, ...getUserInfo(uid) };
+            // Helper to find a user by UID or name
+            function findOtherParty(tx) {
+                // If we have otherPartyUid, use that directly
+                if (tx.otherPartyUid) {
+                    const userInfo = getUserInfo(tx.otherPartyUid);
+                    if (userInfo.name !== 'Unknown' || userInfo.phone !== 'N/A') {
+                        return userInfo;
                     }
                 }
-                return null;
+                // Fallback: search by name
+                if (tx.otherParty) {
+                    const normalizedSearch = tx.otherParty.trim().toLowerCase();
+                    for (const [uid, u] of Object.entries(users)) {
+                        const fullName = `${u.firstName || ''} ${u.lastName || ''}`.trim();
+                        if (fullName.toLowerCase() === normalizedSearch) {
+                            return { uid, ...getUserInfo(uid) };
+                        }
+                        if ((u.firstName || '').toLowerCase() === normalizedSearch) {
+                            return { uid, ...getUserInfo(uid) };
+                        }
+                        if ((u.email || '').toLowerCase() === normalizedSearch) {
+                            return { uid, ...getUserInfo(uid) };
+                        }
+                    }
+                }
+                return { name: tx.otherParty || 'Unknown', phone: 'N/A', balance: 'N/A' };
             }
 
             // Gather all send/receive transactions
@@ -6310,12 +6317,7 @@
                 // Get sender and recipient info
                 let sender, recipient;
                 const userInfo = getUserInfo(t.userId);
-                let otherInfo = findUserByName(t.otherParty);
-
-                // If we can't find the other party by name, use the raw string
-                if (!otherInfo) {
-                    otherInfo = { name: t.otherParty || 'Unknown', phone: 'N/A', balance: 'N/A' };
-                }
+                const otherInfo = findOtherParty(t);
 
                 if (isSent) {
                     sender = userInfo;
@@ -8071,7 +8073,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Customer Transactions page now shows SENDER and RECEIVER details with phone numbers and wallet balances, plus the amount sent.');
+        console.log('✅ Admin Dashboard — Customer Transactions page now uses otherPartyUid for accurate sender/recipient details, with phone numbers and wallet balances.');
     </script>
 </body>
 </html>
