@@ -3941,7 +3941,7 @@
 
             </div>
 
-            <!-- ===== PAGE: CUSTOMER TRANSACTIONS (NEW — search + expandable cards) ===== -->
+            <!-- ===== PAGE: CUSTOMER TRANSACTIONS (UPDATED) ===== -->
             <div id="page-customer-tx" class="page page-customer-tx">
                 <div class="card">
                     <div class="card-header">
@@ -6620,7 +6620,6 @@
             // Toggle expand
             container.querySelectorAll('.tx-card').forEach(el => {
                 el.addEventListener('click', function(e) {
-                    // Don't toggle if clicking on the expand icon (it's already part of the card)
                     this.classList.toggle('open');
                     const details = this.querySelector('.tx-details');
                     if (details) {
