@@ -2872,7 +2872,6 @@
             color: #1c2128;
         }
 
-        /* ── USER CARD STYLES (compact, floating, like account cards) ── */
         .user-card {
             background: #ffffff;
             border-radius: 10px;
@@ -3069,7 +3068,6 @@
             border-radius: 16px;
         }
 
-        /* ── USER FILTER BAR ── */
         .user-filter-bar {
             display: flex;
             align-items: center;
@@ -3381,23 +3379,233 @@
             box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
 
-        /* ── CUSTOMER TRANSACTIONS PAGE STYLES ── */
-        .page-customer-tx .tx-filter-btn {
-            padding: 3px 12px;
-            border-radius: 12px;
+        /* ── CUSTOMER TRANSACTIONS PAGE STYLES (UPDATED) ── */
+        .page-customer-tx .tx-search-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .page-customer-tx .tx-search-bar input {
+            flex: 1;
+            padding: 7px 14px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 11px;
+            outline: none;
+            transition: border 0.2s;
+            background: #fafafa;
+            min-width: 100px;
+        }
+        .page-customer-tx .tx-search-bar input:focus {
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+            background: #fff;
+        }
+        .page-customer-tx .tx-search-bar .search-icon {
+            color: #888;
+            font-size: 14px;
+        }
+        .page-customer-tx .tx-search-bar .clear-search {
+            background: none;
             border: none;
-            background: #f0f0f0;
+            color: #aaa;
+            cursor: pointer;
+            font-size: 12px;
+            padding: 2px 6px;
+            display: none;
+        }
+        .page-customer-tx .tx-search-bar .clear-search.show {
+            display: block;
+        }
+        .page-customer-tx .tx-search-bar .clear-search:hover {
+            color: #1c2128;
+        }
+
+        .page-customer-tx .tx-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .page-customer-tx .tx-card:hover {
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            border-color: #ddd;
+        }
+        .page-customer-tx .tx-card .tx-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .page-customer-tx .tx-card .tx-summary .left {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            flex: 1;
+            min-width: 140px;
+        }
+        .page-customer-tx .tx-card .tx-summary .left .tx-flow {
+            font-size: 11px;
+            font-weight: 600;
+            color: #1c2128;
+        }
+        .page-customer-tx .tx-card .tx-summary .left .tx-flow .highlight {
+            font-weight: 700;
+        }
+        .page-customer-tx .tx-card .tx-summary .left .tx-flow .arrow {
+            color: #aaa;
+            margin: 0 4px;
+        }
+        .page-customer-tx .tx-card .tx-summary .left .tx-flow .sent {
+            color: #dc2626;
+        }
+        .page-customer-tx .tx-card .tx-summary .left .tx-flow .received {
+            color: #00a86b;
+        }
+        .page-customer-tx .tx-card .tx-summary .left .tx-meta {
+            font-size: 9px;
+            color: #888;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+        .page-customer-tx .tx-card .tx-summary .left .tx-meta .tx-date {
+            color: #aaa;
+        }
+        .page-customer-tx .tx-card .tx-summary .right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2px;
+        }
+        .page-customer-tx .tx-card .tx-summary .right .tx-amount {
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .page-customer-tx .tx-card .tx-summary .right .tx-amount.negative {
+            color: #dc2626;
+        }
+        .page-customer-tx .tx-card .tx-summary .right .tx-amount.positive {
+            color: #00a86b;
+        }
+        .page-customer-tx .tx-card .tx-summary .right .expand-icon {
+            font-size: 10px;
+            color: #aaa;
+            transition: transform 0.3s ease;
+        }
+        .page-customer-tx .tx-card.open .tx-summary .right .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .page-customer-tx .tx-card .tx-details {
+            display: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .page-customer-tx .tx-card .tx-details.open {
+            display: block;
+        }
+
+        .page-customer-tx .tx-card .tx-details .party-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        @media (max-width: 500px) {
+            .page-customer-tx .tx-card .tx-details .party-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+        }
+
+        .page-customer-tx .tx-card .tx-details .party-box {
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 10px 12px;
+            border: 1px solid #f0f0f0;
+        }
+        .page-customer-tx .tx-card .tx-details .party-box .party-label {
             font-size: 9px;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
+            color: #f5b83d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        .page-customer-tx .tx-filter-btn.active {
-            background: #1c2128;
-            color: #fff;
+        .page-customer-tx .tx-card .tx-details .party-box .party-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+            font-size: 10px;
+            color: #555;
+            border-bottom: 1px solid #f5f5f5;
         }
-        .page-customer-tx .tx-filter-btn:hover:not(.active) {
-            background: #e0e0e0;
+        .page-customer-tx .tx-card .tx-details .party-box .party-row:last-child {
+            border-bottom: none;
+        }
+        .page-customer-tx .tx-card .tx-details .party-box .party-row .plabel {
+            color: #888;
+        }
+        .page-customer-tx .tx-card .tx-details .party-box .party-row .pval {
+            font-weight: 500;
+            color: #1c2128;
+            text-align: right;
+            max-width: 60%;
+            word-break: break-word;
+        }
+        .page-customer-tx .tx-card .tx-details .party-box .party-row .pval.highlight {
+            color: #f5b83d;
+            font-weight: 700;
+        }
+
+        .page-customer-tx .tx-empty-state {
+            text-align: center;
+            padding: 30px 0;
+            color: #888;
+        }
+        .page-customer-tx .tx-empty-state i {
+            font-size: 36px;
+            color: #ddd;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .page-customer-tx .tx-stats-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .page-customer-tx .tx-stats-row .stat-chip {
+            background: #f8f9fc;
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 10px;
+            font-weight: 500;
+            color: #555;
+            border: 1px solid #f0f0f0;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .page-customer-tx .tx-stats-row .stat-chip i {
+            color: #f5b83d;
+        }
+        .page-customer-tx .tx-stats-row .stat-chip strong {
+            color: #1c2128;
         }
     </style>
 </head>
@@ -3430,7 +3638,7 @@
                 </div>
             </div>
 
-            <!-- ===== THREE ACTION BUTTONS (now four) ===== -->
+            <!-- ===== ACTION BUTTONS ===== -->
             <div class="action-row" id="actionRow">
                 <button class="action-btn promo-btn" id="actionPromoPics"><i class="fa-regular fa-images"></i> Promo Pics</button>
                 <button class="action-btn referral-btn" id="actionReferral"><i class="fa-solid fa-gift"></i> Referral</button>
@@ -3733,17 +3941,28 @@
 
             </div>
 
-            <!-- ===== PAGE: CUSTOMER TRANSACTIONS (New Page) ===== -->
+            <!-- ===== PAGE: CUSTOMER TRANSACTIONS (NEW — search + expandable cards) ===== -->
             <div id="page-customer-tx" class="page page-customer-tx">
                 <div class="card">
                     <div class="card-header">
                         <h3><i class="fa-solid fa-arrows-left-right" style="color:#f5b83d;"></i> Customer Transactions</h3>
-                        <div style="display:flex; gap:6px; flex-wrap:wrap;">
-                            <button class="tx-filter-btn active" data-filter="all">All</button>
-                            <button class="tx-filter-btn" data-filter="sent">Sent</button>
-                            <button class="tx-filter-btn" data-filter="received">Received</button>
-                        </div>
+                        <span style="font-size:9px; color:#888;" id="txCountLabel">0 transactions</span>
                     </div>
+
+                    <!-- Search bar -->
+                    <div class="tx-search-bar">
+                        <i class="fa-solid fa-search search-icon"></i>
+                        <input type="text" id="customerTxSearch" placeholder="Search by name, email, phone or referral code..." />
+                        <button class="clear-search" id="clearTxSearch"><i class="fa-solid fa-times"></i></button>
+                    </div>
+
+                    <!-- Stats chips -->
+                    <div class="tx-stats-row" id="txStatsRow">
+                        <span class="stat-chip"><i class="fa-solid fa-arrow-right"></i> Sent: <strong id="txSentCount">0</strong></span>
+                        <span class="stat-chip"><i class="fa-solid fa-arrow-left"></i> Received: <strong id="txReceivedCount">0</strong></span>
+                        <span class="stat-chip"><i class="fa-solid fa-clock"></i> Recent: <strong id="txRecentCount">0</strong></span>
+                    </div>
+
                     <div id="customerTxListPage">
                         <!-- Rendered by JS -->
                     </div>
@@ -3925,7 +4144,7 @@
 
         </div>
 
-        <!-- ===== BOTTOM NAV (Home badge removed) ===== -->
+        <!-- ===== BOTTOM NAV ===== -->
         <div class="bottom-nav">
             <button class="nav-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Home</span></button>
             <button class="nav-item" data-page="services"><i class="fa-solid fa-layer-group"></i><span>Services</span></button>
@@ -4169,7 +4388,7 @@
         </div>
     </div>
 
-    <!-- ===== USER SELECTOR MODAL (Phone-style) ===== -->
+    <!-- ===== USER SELECTOR MODAL ===== -->
     <div class="modal-overlay user-selector-modal" id="userSelectorModal">
         <div class="modal">
             <button class="close-btn" id="userSelectorCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4491,14 +4710,12 @@
         const postReferralDiscountBtn = document.getElementById('postReferralDiscount');
         const referralDiscountList = document.getElementById('referralDiscountList');
 
-        // ── New Referral Promos ──
         const referralPromoDiscountPercent = document.getElementById('referralPromoDiscountPercent');
         const referralPromoOwnerAmount = document.getElementById('referralPromoOwnerAmount');
         const referralPromoCodeFilter = document.getElementById('referralPromoCodeFilter');
         const postReferralPromoDiscountBtn = document.getElementById('postReferralPromoDiscount');
         const referralPromoDiscountList = document.getElementById('referralPromoDiscountList');
 
-        // ── Signup Bonuses ──
         const signupBonusWithReferral = document.getElementById('signupBonusWithReferral');
         const signupBonusWithCustomReferral = document.getElementById('signupBonusWithCustomReferral');
         const signupBonusWithoutReferral = document.getElementById('signupBonusWithoutReferral');
@@ -4538,7 +4755,6 @@
         const accountUpdateAmount = document.getElementById('accountUpdateAmount');
         const applyAccountUpdateBtn = document.getElementById('applyAccountUpdateBtn');
 
-        // ── Withdrawal Confirm DOM ──
         const withdrawConfirmModal = document.getElementById('withdrawConfirmModal');
         const withdrawConfirmCloseBtn = document.getElementById('withdrawConfirmCloseBtn');
         const withdrawConfirmTitle = document.getElementById('withdrawConfirmTitle');
@@ -4547,29 +4763,24 @@
         const withdrawConfirmActionBtn = document.getElementById('withdrawConfirmActionBtn');
         const withdrawConfirmCancelBtn = document.getElementById('withdrawConfirmCancelBtn');
 
-        // ── Withdrawal filter buttons ──
         const showApprovedBtn = document.getElementById('showApprovedWithdrawals');
         const showRejectedBtn = document.getElementById('showRejectedWithdrawals');
         const showPendingBtn = document.getElementById('showPendingWithdrawals');
 
-        // ── Action buttons ──
         const actionPromoPics = document.getElementById('actionPromoPics');
         const actionReferral = document.getElementById('actionReferral');
         const actionPayables = document.getElementById('actionPayables');
         const actionCustomerTx = document.getElementById('actionCustomerTx');
 
-        // ── Services price adjustment ──
         const adjustOptions = document.getElementById('adjustOptions');
         const adjustValue = document.getElementById('adjustValue');
         const adjustLabel = document.getElementById('adjustLabel');
         const applyAdjustBtn = document.getElementById('applyAdjustBtn');
         const adjustPreview = document.getElementById('adjustPreview');
 
-        // ─── Badge elements ───
         const badgeOrdersPending = document.getElementById('badgeOrdersPending');
         const badgeWithdrawalsPending = document.getElementById('badgeWithdrawalsPending');
 
-        // ─── Edit Customer DOM ───
         const editCustomerModal = document.getElementById('editCustomerModal');
         const editCustomerCloseBtn = document.getElementById('editCustomerCloseBtn');
         const editCustomerForm = document.getElementById('editCustomerForm');
@@ -4581,7 +4792,6 @@
         const editReferralCode = document.getElementById('editReferralCode');
         const saveEditCustomerBtn = document.getElementById('saveEditCustomerBtn');
 
-        // ─── User Selector DOM ───
         const userSelectorModal = document.getElementById('userSelectorModal');
         const userSelectorCloseBtn = document.getElementById('userSelectorCloseBtn');
         const userSelectorSearch = document.getElementById('userSelectorSearch');
@@ -4589,14 +4799,17 @@
         const userSelectorConfirmBtn = document.getElementById('userSelectorConfirmBtn');
         const selectedCustomerName = document.getElementById('selectedCustomerName');
 
-        // ─── Account Update Search ───
         const accountUpdateSearch = document.getElementById('accountUpdateSearch');
-
-        // ─── Users page filter ───
         const userFilterSelect = document.getElementById('userFilterSelect');
 
-        // ─── Customer Transactions Page ───
+        // ── Customer Tx Page DOM ──
         const customerTxListPage = document.getElementById('customerTxListPage');
+        const customerTxSearch = document.getElementById('customerTxSearch');
+        const clearTxSearch = document.getElementById('clearTxSearch');
+        const txCountLabel = document.getElementById('txCountLabel');
+        const txSentCount = document.getElementById('txSentCount');
+        const txReceivedCount = document.getElementById('txReceivedCount');
+        const txRecentCount = document.getElementById('txRecentCount');
 
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
@@ -4781,30 +4994,25 @@
             renderWorkPosts();
             renderPromoPics();
 
-            // ── Referral renders ──
             renderReferralPromos();
             renderCustomReferrals();
             renderReferralDiscounts();
             renderReferralPromoDiscounts();
             renderSignupBonuses();
 
-            // ── Payables renders ──
             renderAccounts();
             renderWithdrawals();
             populateUserSelects();
 
-            // ── Custom referral user select ──
             populateCustomReferralSelect();
 
-            // ── Account Update Modal user list ──
             renderAccountUpdateUserList();
 
-            // ── Customer Transactions Page ──
+            // ── Customer Tx Page ──
             if (document.getElementById('page-customer-tx').classList.contains('active')) {
-                renderCustomerTxPage();
+                renderCustomerTxPage(customerTxSearch.value);
             }
 
-            // ── Update badges ──
             updateBadges();
         }
 
@@ -5010,7 +5218,6 @@
             updateBadges();
         }
 
-        // ── COMPACT USER CARDS ──
         function renderUsers(searchTerm = '', filter = 'all') {
             const container = document.getElementById('usersList');
             const usersData = allData.users || {};
@@ -5023,7 +5230,6 @@
 
             let entries = Object.entries(usersData);
 
-            // Search
             if (searchTerm.trim()) {
                 const term = searchTerm.trim().toLowerCase();
                 entries = entries.filter(([uid, u]) =>
@@ -5035,7 +5241,6 @@
                 );
             }
 
-            // Filter
             if (filter === 'banned') {
                 entries = entries.filter(([uid, u]) => u.banned === true);
             } else if (filter === 'active') {
@@ -5213,9 +5418,6 @@
                         `;
             }).join('');
 
-            // ── Event bindings ──
-
-            // Toggle expand
             container.querySelectorAll('.user-card').forEach(el => {
                 el.addEventListener('click', function(e) {
                     if (e.target.closest('.ban-toggle-wrap') || e.target.closest('.actions-row') ||
@@ -5235,7 +5437,6 @@
                 });
             });
 
-            // Ban toggle
             container.querySelectorAll('.ban-toggle-input').forEach(input => {
                 input.addEventListener('change', function(e) {
                     e.stopPropagation();
@@ -5253,7 +5454,6 @@
                 });
             });
 
-            // Edit user
             container.querySelectorAll('.edit-user').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -5262,7 +5462,6 @@
                 });
             });
 
-            // Delete user
             container.querySelectorAll('.delete-user').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -6236,50 +6435,53 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER TRANSACTIONS PAGE (NEW) – FULLY REWRITTEN WITH OTHERPARTYUID
+        // CUSTOMER TRANSACTIONS PAGE (UPDATED: search + expandable cards)
         // ───────────────────────────────────────────────────────────────────
 
-        function renderCustomerTxPage(filter = 'all') {
+        function renderCustomerTxPage(searchTerm = '') {
             const container = customerTxListPage;
             const transactions = allData.transactions || {};
             const users = allData.users || {};
             const accounts = allData.customerAccounts || {};
 
-            // Helper to get user info by UID
+            // Helper: get user info by UID
             function getUserInfo(uid) {
                 const u = users[uid] || {};
                 const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
                 const phone = u.phone || 'N/A';
+                const email = u.email || 'N/A';
+                const refCode = u.referralCode || '—';
                 const bal = accounts[uid]?.balance || 0;
-                return { name, phone, balance: bal };
+                return { name, phone, email, referralCode: refCode, balance: bal };
             }
 
-            // Helper to find a user by UID or name
-            function findOtherParty(tx) {
-                // If we have otherPartyUid, use that directly
+            // Helper: find other party from transaction
+            function getOtherParty(tx) {
+                // If we have otherPartyUid, use it directly
                 if (tx.otherPartyUid) {
-                    const userInfo = getUserInfo(tx.otherPartyUid);
-                    if (userInfo.name !== 'Unknown' || userInfo.phone !== 'N/A') {
-                        return userInfo;
+                    const info = getUserInfo(tx.otherPartyUid);
+                    if (info.name !== 'Unknown' || info.phone !== 'N/A') {
+                        return { uid: tx.otherPartyUid, ...info };
                     }
                 }
                 // Fallback: search by name
                 if (tx.otherParty) {
-                    const normalizedSearch = tx.otherParty.trim().toLowerCase();
+                    const searchName = tx.otherParty.trim().toLowerCase();
                     for (const [uid, u] of Object.entries(users)) {
                         const fullName = `${u.firstName || ''} ${u.lastName || ''}`.trim();
-                        if (fullName.toLowerCase() === normalizedSearch) {
+                        if (fullName.toLowerCase() === searchName) {
                             return { uid, ...getUserInfo(uid) };
                         }
-                        if ((u.firstName || '').toLowerCase() === normalizedSearch) {
+                        if ((u.firstName || '').toLowerCase() === searchName) {
                             return { uid, ...getUserInfo(uid) };
                         }
-                        if ((u.email || '').toLowerCase() === normalizedSearch) {
+                        if ((u.email || '').toLowerCase() === searchName) {
                             return { uid, ...getUserInfo(uid) };
                         }
                     }
                 }
-                return { name: tx.otherParty || 'Unknown', phone: 'N/A', balance: 'N/A' };
+                // If we can't find, return a placeholder
+                return { name: tx.otherParty || 'Unknown', phone: 'N/A', email: 'N/A', referralCode: '—', balance: 'N/A' };
             }
 
             // Gather all send/receive transactions
@@ -6291,19 +6493,46 @@
                 return isSendReceive && t.otherParty && t.userId;
             });
 
-            // Apply filter
-            if (filter === 'sent') {
-                entries = entries.filter(([key, t]) => (t.amount || 0) < 0);
-            } else if (filter === 'received') {
-                entries = entries.filter(([key, t]) => (t.amount || 0) > 0);
+            // Apply search filter
+            if (searchTerm.trim()) {
+                const term = searchTerm.trim().toLowerCase();
+                entries = entries.filter(([key, t]) => {
+                    // Get sender and receiver info
+                    const userInfo = getUserInfo(t.userId);
+                    const otherInfo = getOtherParty(t);
+                    const isSent = (t.amount || 0) < 0;
+                    const sender = isSent ? userInfo : otherInfo;
+                    const receiver = isSent ? otherInfo : userInfo;
+
+                    // Search across all fields
+                    const searchable = [
+                        sender.name, sender.phone, sender.email, sender.referralCode,
+                        receiver.name, receiver.phone, receiver.email, receiver.referralCode,
+                        t.otherParty, t.userName, t.userEmail, t.userPhone
+                    ].join(' ').toLowerCase();
+
+                    return searchable.includes(term);
+                });
             }
 
             // Sort by newest first
             entries.sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
 
+            // Update stats
+            const sentCount = entries.filter(([k, t]) => (t.amount || 0) < 0).length;
+            const receivedCount = entries.filter(([k, t]) => (t.amount || 0) > 0).length;
+            txSentCount.textContent = sentCount;
+            txReceivedCount.textContent = receivedCount;
+            txRecentCount.textContent = entries.length;
+            txCountLabel.textContent = `${entries.length} transactions`;
+
             if (entries.length === 0) {
-                container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:16px;">No customer-to-customer transactions found.</div>`;
+                container.innerHTML = `
+                    <div class="tx-empty-state">
+                        <i class="fa-regular fa-receipt"></i>
+                        ${searchTerm.trim() ? 'No transactions match your search.' : 'No customer-to-customer transactions found.'}
+                    </div>
+                `;
                 return;
             }
 
@@ -6315,71 +6544,71 @@
                     (t.timestamp ? new Date(t.timestamp).toLocaleString() : 'N/A');
 
                 // Get sender and recipient info
-                let sender, recipient;
                 const userInfo = getUserInfo(t.userId);
-                const otherInfo = findOtherParty(t);
+                const otherInfo = getOtherParty(t);
 
+                let sender, receiver;
                 if (isSent) {
                     sender = userInfo;
-                    recipient = otherInfo;
+                    receiver = otherInfo;
                 } else {
                     sender = otherInfo;
-                    recipient = userInfo;
+                    receiver = userInfo;
                 }
 
+                // Build the flow text
+                const flowText = isSent ?
+                    `<span class="sent">${escapeHtml(sender.name)}</span> <span class="arrow">→</span> <span class="received">${escapeHtml(receiver.name)}</span>` :
+                    `<span class="received">${escapeHtml(receiver.name)}</span> <span class="arrow">←</span> <span class="sent">${escapeHtml(sender.name)}</span>`;
+
+                const amountClass = isSent ? 'negative' : 'positive';
+                const amountSign = isSent ? '-' : '+';
+
                 html += `
-                    <div class="order-card" data-key="${key}">
-                        <div class="order-toggle">
-                            <div style="flex:1; display:flex; flex-wrap:wrap; align-items:center; gap:4px;">
-                                <div style="font-size:10px; font-weight:500; min-width:80px;">
-                                    ${isSent ? '📤 Sent to' : '📥 Received from'}
+                    <div class="tx-card" data-key="${key}">
+                        <div class="tx-summary">
+                            <div class="left">
+                                <div class="tx-flow">
+                                    ${flowText}
                                 </div>
-                                <div style="display:flex; flex-direction:column; flex:1;">
-                                    <div style="font-weight:600; font-size:12px;">
-                                        ${escapeHtml(sender.name)} → ${escapeHtml(recipient.name)}
-                                    </div>
-                                    <div style="font-size:9px; color:#888;">
-                                        📞 ${escapeHtml(sender.phone)} / ${escapeHtml(recipient.phone)}
-                                    </div>
-                                    <div style="font-size:9px; color:#f5b83d;">
-                                        💰 Bal: ZMW ${typeof sender.balance === 'number' ? sender.balance.toFixed(2) : 'N/A'} → ZMW ${typeof recipient.balance === 'number' ? recipient.balance.toFixed(2) : 'N/A'}
-                                    </div>
+                                <div class="tx-meta">
+                                    <span class="tx-date">${dateStr}</span>
+                                    <span>${isSent ? 'Sent' : 'Received'}</span>
+                                    ${t.ref ? `<span>#${escapeHtml(t.ref)}</span>` : ''}
                                 </div>
                             </div>
-                            <div style="text-align:right;">
-                                <div style="font-weight:700; font-size:14px; color:${isSent ? '#dc2626' : '#00a86b'};">
-                                    ${isSent ? '-' : '+'}ZMW ${amount.toFixed(2)}
-                                </div>
-                                <div style="font-size:8px; color:#aaa;">${dateStr}</div>
+                            <div class="right">
+                                <div class="tx-amount ${amountClass}">${amountSign}ZMW ${amount.toFixed(2)}</div>
                                 <i class="fa-solid fa-chevron-down expand-icon"></i>
                             </div>
                         </div>
-                        <div class="order-details">
-                            <div class="row">
-                                <span class="label">Sender</span>
-                                <span class="val">
-                                    ${escapeHtml(sender.name)} (${escapeHtml(sender.phone)}) 
-                                    — Balance: ZMW ${typeof sender.balance === 'number' ? sender.balance.toFixed(2) : 'N/A'}
-                                </span>
+
+                        <div class="tx-details">
+                            <div class="party-grid">
+                                <!-- Sender -->
+                                <div class="party-box">
+                                    <div class="party-label"><i class="fa-solid fa-arrow-right" style="color:#dc2626;"></i> Sender</div>
+                                    <div class="party-row"><span class="plabel">Name</span><span class="pval">${escapeHtml(sender.name)}</span></div>
+                                    <div class="party-row"><span class="plabel">Phone</span><span class="pval">${escapeHtml(sender.phone)}</span></div>
+                                    <div class="party-row"><span class="plabel">Email</span><span class="pval">${escapeHtml(sender.email)}</span></div>
+                                    <div class="party-row"><span class="plabel">Referral Code</span><span class="pval highlight">${escapeHtml(sender.referralCode)}</span></div>
+                                    <div class="party-row"><span class="plabel">Wallet Balance</span><span class="pval">ZMW ${typeof sender.balance === 'number' ? sender.balance.toFixed(2) : 'N/A'}</span></div>
+                                </div>
+
+                                <!-- Receiver -->
+                                <div class="party-box">
+                                    <div class="party-label"><i class="fa-solid fa-arrow-left" style="color:#00a86b;"></i> Receiver</div>
+                                    <div class="party-row"><span class="plabel">Name</span><span class="pval">${escapeHtml(receiver.name)}</span></div>
+                                    <div class="party-row"><span class="plabel">Phone</span><span class="pval">${escapeHtml(receiver.phone)}</span></div>
+                                    <div class="party-row"><span class="plabel">Email</span><span class="pval">${escapeHtml(receiver.email)}</span></div>
+                                    <div class="party-row"><span class="plabel">Referral Code</span><span class="pval highlight">${escapeHtml(receiver.referralCode)}</span></div>
+                                    <div class="party-row"><span class="plabel">Wallet Balance</span><span class="pval">ZMW ${typeof receiver.balance === 'number' ? receiver.balance.toFixed(2) : 'N/A'}</span></div>
+                                </div>
                             </div>
-                            <div class="row">
-                                <span class="label">Recipient</span>
-                                <span class="val">
-                                    ${escapeHtml(recipient.name)} (${escapeHtml(recipient.phone)}) 
-                                    — Balance: ZMW ${typeof recipient.balance === 'number' ? recipient.balance.toFixed(2) : 'N/A'}
-                                </span>
-                            </div>
-                            <div class="row">
-                                <span class="label">Amount</span>
-                                <span class="val">ZMW ${amount.toFixed(2)}</span>
-                            </div>
-                            <div class="row">
-                                <span class="label">Time</span>
-                                <span class="val">${dateStr}</span>
-                            </div>
-                            <div class="row">
-                                <span class="label">Transaction ID</span>
-                                <span class="val">${escapeHtml(t.ref || key)}</span>
+
+                            <div style="margin-top:8px; display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-start; font-size:9px; color:#888; border-top:1px solid #f5f5f5; padding-top:6px;">
+                                <span><strong>Ref:</strong> ${escapeHtml(t.ref || key)}</span>
+                                <span><strong>Type:</strong> ${escapeHtml(t.type || 'Transaction')}</span>
                             </div>
                         </div>
                     </div>
@@ -6389,22 +6618,14 @@
             container.innerHTML = html;
 
             // Toggle expand
-            container.querySelectorAll('.order-card .order-toggle').forEach(el => {
-                el.addEventListener('click', function() {
-                    const parent = this.closest('.order-card');
-                    const details = parent.querySelector('.order-details');
-                    details.classList.toggle('open');
-                    parent.classList.toggle('open');
-                });
-            });
-
-            // Filter buttons
-            const filters = document.querySelectorAll('#page-customer-tx .tx-filter-btn');
-            filters.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    filters.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    renderCustomerTxPage(this.dataset.filter);
+            container.querySelectorAll('.tx-card').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    // Don't toggle if clicking on the expand icon (it's already part of the card)
+                    this.classList.toggle('open');
+                    const details = this.querySelector('.tx-details');
+                    if (details) {
+                        details.classList.toggle('open');
+                    }
                 });
             });
         }
@@ -7026,8 +7247,6 @@
             });
         });
 
-        // ─── New Referral Promo Discount ────────────────────────────────
-
         postReferralPromoDiscountBtn.addEventListener('click', function() {
             const discount = parseFloat(referralPromoDiscountPercent.value);
             const ownerAmount = parseFloat(referralPromoOwnerAmount.value);
@@ -7118,7 +7337,6 @@
             viewAccounts.classList.remove('active');
         });
 
-        // ── Withdrawal filter buttons ──
         showApprovedBtn.addEventListener('click', function() {
             withdrawalsFilter = 'approved';
             renderWithdrawals();
@@ -7165,7 +7383,6 @@
             if (e.target === this) manualDepositModal.classList.remove('open');
         });
 
-        // User Selector Modal
         userSelectorCloseBtn.addEventListener('click', function() {
             userSelectorModal.classList.remove('open');
         });
@@ -7452,14 +7669,13 @@
             showBackButton();
         });
 
-        // ── New Customer Transactions Page Button ──
         actionCustomerTx.addEventListener('click', function() {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-customer-tx').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             mainHeader.classList.remove('work-active');
             document.getElementById('appContent').scrollTop = 0;
-            renderCustomerTxPage();
+            renderCustomerTxPage(customerTxSearch.value);
             showBackButton();
         });
 
@@ -7499,6 +7715,10 @@
                     hideBackButton();
                 } else {
                     showBackButton();
+                }
+                // Re-render customer tx if that page is opened
+                if (page === 'customer-tx') {
+                    renderCustomerTxPage(customerTxSearch.value);
                 }
             });
         });
@@ -7806,7 +8026,6 @@
             renderOrders(searchTerm, this.value);
         });
 
-        // ── Users page: search + filter ──
         document.getElementById('userSearchInput').addEventListener('input', function() {
             renderUsers(this.value, userFilterSelect.value);
         });
@@ -7998,6 +8217,27 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
+        // CUSTOMER TX SEARCH HANDLERS
+        // ───────────────────────────────────────────────────────────────────
+
+        customerTxSearch.addEventListener('input', function() {
+            const term = this.value;
+            if (term.trim().length > 0) {
+                clearTxSearch.classList.add('show');
+            } else {
+                clearTxSearch.classList.remove('show');
+            }
+            renderCustomerTxPage(term);
+        });
+
+        clearTxSearch.addEventListener('click', function() {
+            customerTxSearch.value = '';
+            clearTxSearch.classList.remove('show');
+            renderCustomerTxPage('');
+            customerTxSearch.focus();
+        });
+
+        // ───────────────────────────────────────────────────────────────────
         // TOAST
         // ───────────────────────────────────────────────────────────────────
 
@@ -8066,6 +8306,11 @@
                             document.getElementById('policyTag').value = allData.policy.tag || '';
                         }
                         hideBackButton();
+
+                        // Initial render of customer tx if page is active
+                        if (document.getElementById('page-customer-tx').classList.contains('active')) {
+                            renderCustomerTxPage(customerTxSearch.value);
+                        }
                     });
                 });
             } else {
@@ -8073,7 +8318,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Customer Transactions page now uses otherPartyUid for accurate sender/recipient details, with phone numbers and wallet balances.');
+        console.log('✅ Admin Dashboard — Customer Tx page now uses search bar + expandable cards showing sender/receiver details (name, phone, email, referral code, wallet balance).');
     </script>
 </body>
 </html>
