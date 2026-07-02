@@ -4346,6 +4346,225 @@
         let selectedUserId = null;
 
         // ───────────────────────────────────────────────────────────────────
+        // DOM REFS (abbreviated for brevity; most are from original)
+        // ───────────────────────────────────────────────────────────────────
+
+        const adminNameEl = document.getElementById('adminName');
+        const adminNameCenterEl = document.getElementById('adminNameCenter');
+        const profileNameEl = document.getElementById('profileName');
+        const profileEmailEl = document.getElementById('profileEmail');
+        const profilePhoneEl = document.getElementById('profilePhone');
+        const greetingText = document.getElementById('greetingText');
+        const greetingSub = document.getElementById('greetingSub');
+        const mainHeader = document.getElementById('mainHeader');
+        const workAvatarBtn = document.getElementById('workAvatarBtn');
+        const pageBackBtn = document.getElementById('pageBackBtn');
+        const actionRow = document.getElementById('actionRow');
+
+        const modal = document.getElementById('serviceModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalSub = document.getElementById('modalSub');
+        const form = document.getElementById('serviceForm');
+        const editIdInput = document.getElementById('editServiceId');
+        const formTitle = document.getElementById('formTitle');
+        const formSubtitle = document.getElementById('formSubtitle');
+        const formCategory = document.getElementById('formCategory');
+        const formPrice = document.getElementById('formPrice');
+        const formTags = document.getElementById('formTags');
+        const formIcon = document.getElementById('formIcon');
+        const formSpecs = document.getElementById('formSpecs');
+        const formSizes = document.getElementById('formSizes');
+        const formOrientations = document.getElementById('formOrientations');
+        const formFormats = document.getElementById('formFormats');
+        const formColorSchemes = document.getElementById('formColorSchemes');
+        const formRevisions = document.getElementById('formRevisions');
+        const formDeliverySpeeds = document.getElementById('formDeliverySpeeds');
+        const formDefaultSize = document.getElementById('formDefaultSize');
+        const formDefaultOrientation = document.getElementById('formDefaultOrientation');
+        const formDefaultFormat = document.getElementById('formDefaultFormat');
+        const formDefaultColorScheme = document.getElementById('formDefaultColorScheme');
+        const formDefaultRevisions = document.getElementById('formDefaultRevisions');
+        const formDefaultDeliverySpeed = document.getElementById('formDefaultDeliverySpeed');
+        const submitBtn = document.getElementById('modalSubmitBtn');
+        const cancelBtn = document.getElementById('modalCancelBtn');
+        const closeBtn = document.getElementById('modalCloseBtn');
+
+        const promoModal = document.getElementById('promoModal');
+        const promoCloseBtn = document.getElementById('promoCloseBtn');
+        const promoForm = document.getElementById('promoForm');
+        const promoCode = document.getElementById('promoCode');
+        const promoDiscount = document.getElementById('promoDiscount');
+        const promoCancelBtn = document.getElementById('promoCancelBtn');
+
+        const workUploadModal = document.getElementById('workUploadModal');
+        const workUploadCloseBtn = document.getElementById('workUploadCloseBtn');
+        const workUploadForm = document.getElementById('workUploadForm');
+        const workUploadTitle = document.getElementById('workUploadTitle');
+        const workUploadSub = document.getElementById('workUploadSub');
+        const workPostType = document.getElementById('workPostType');
+        const editWorkPostId = document.getElementById('editWorkPostId');
+        const workImagePreview = document.getElementById('workImagePreview');
+        const workImageUrl = document.getElementById('workImageUrl');
+        const workFrameContainer = document.getElementById('workFrameContainer');
+        const workAppFields = document.getElementById('workAppFields');
+        const workFlyerFields = document.getElementById('workFlyerFields');
+        const workAppName = document.getElementById('workAppName');
+        const workAppFunc = document.getElementById('workAppFunc');
+        const workFlyerTitle = document.getElementById('workFlyerTitle');
+        const workFlyerDesc = document.getElementById('workFlyerDesc');
+        const workUploadSubmit = document.getElementById('workUploadSubmit');
+        const workUploadCancelBtn = document.getElementById('workUploadCancelBtn');
+
+        const promoPicUploadModal = document.getElementById('promoPicUploadModal');
+        const promoPicUploadCloseBtn = document.getElementById('promoPicUploadCloseBtn');
+        const promoPicUploadForm = document.getElementById('promoPicUploadForm');
+        const promoPicImagePreview = document.getElementById('promoPicImagePreview');
+        const promoPicImageUrl = document.getElementById('promoPicImageUrl');
+        const promoPicText = document.getElementById('promoPicText');
+        const promoPicSubtext = document.getElementById('promoPicSubtext');
+        const promoPicUploadCancelBtn = document.getElementById('promoPicUploadCancelBtn');
+        const promoPicsGrid = document.getElementById('promoPicsGrid');
+        const addPromoPicBtn = document.getElementById('addPromoPicBtn');
+
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMessage');
+
+        const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+        const deleteConfirmText = document.getElementById('deleteConfirmText');
+        const deleteCancelBtn = document.getElementById('deleteCancelBtn');
+        const deleteConfirmBtn = document.getElementById('deleteConfirmBtn');
+
+        const statusModal = document.getElementById('orderStatusModal');
+        const statusModalCloseBtn = document.getElementById('statusModalCloseBtn');
+        const statusOptionsContainer = document.getElementById('statusOptionsContainer');
+        const confirmStatusBtn = document.getElementById('confirmStatusBtn');
+
+        // ── Referral DOM ──
+        const referralPromoAmount = document.getElementById('referralPromoAmount');
+        const postReferralPromoBtn = document.getElementById('postReferralPromo');
+        const referralPromoList = document.getElementById('referralPromoList');
+
+        const customReferralUserSelect = document.getElementById('customReferralUserSelect');
+        const customReferralCode = document.getElementById('customReferralCode');
+        const customReferralAmount = document.getElementById('customReferralAmount');
+        const postCustomReferralBtn = document.getElementById('postCustomReferral');
+        const customReferralList = document.getElementById('customReferralList');
+
+        const discountReferralCode = document.getElementById('discountReferralCode');
+        const discountPercentage = document.getElementById('discountPercentage');
+        const discountOwnerAmount = document.getElementById('discountOwnerAmount');
+        const postReferralDiscountBtn = document.getElementById('postReferralDiscount');
+        const referralDiscountList = document.getElementById('referralDiscountList');
+
+        // ── New Referral Promos ──
+        const referralPromoDiscountPercent = document.getElementById('referralPromoDiscountPercent');
+        const referralPromoOwnerAmount = document.getElementById('referralPromoOwnerAmount');
+        const referralPromoCodeFilter = document.getElementById('referralPromoCodeFilter');
+        const postReferralPromoDiscountBtn = document.getElementById('postReferralPromoDiscount');
+        const referralPromoDiscountList = document.getElementById('referralPromoDiscountList');
+
+        // ── Signup Bonuses ──
+        const signupBonusWithReferral = document.getElementById('signupBonusWithReferral');
+        const signupBonusWithCustomReferral = document.getElementById('signupBonusWithCustomReferral');
+        const signupBonusWithoutReferral = document.getElementById('signupBonusWithoutReferral');
+        const saveSignupBonusesBtn = document.getElementById('saveSignupBonuses');
+        const displayWithReferral = document.getElementById('displayWithReferral');
+        const displayWithCustom = document.getElementById('displayWithCustom');
+        const displayWithoutReferral = document.getElementById('displayWithoutReferral');
+
+        // ── Payables DOM ──
+        const toggleAccounts = document.getElementById('toggleAccounts');
+        const toggleWithdrawals = document.getElementById('toggleWithdrawals');
+        const viewAccounts = document.getElementById('viewAccounts');
+        const viewWithdrawals = document.getElementById('viewWithdrawals');
+        const accountsList = document.getElementById('accountsList');
+        const withdrawalsList = document.getElementById('withdrawalsList');
+        const manualDepositBtn = document.getElementById('manualDepositBtn');
+        const manualDepositModal = document.getElementById('manualDepositModal');
+        const manualDepositCloseBtn = document.getElementById('manualDepositCloseBtn');
+        const manualDepositForm = document.getElementById('manualDepositForm');
+        const depositCustomerSelect = document.getElementById('depositCustomerSelect');
+        const depositAmount = document.getElementById('depositAmount');
+        const manualDepositCancelBtn = document.getElementById('manualDepositCancelBtn');
+
+        // ── Account Update DOM ──
+        const accountUpdateBtn = document.getElementById('accountUpdateBtn');
+        const accountUpdateModal = document.getElementById('accountUpdateModal');
+        const accountUpdateCloseBtn = document.getElementById('accountUpdateCloseBtn');
+        const userCheckboxList = document.getElementById('userCheckboxList');
+        const selectAllUsersBtn = document.getElementById('selectAllUsersBtn');
+        const deselectAllUsersBtn = document.getElementById('deselectAllUsersBtn');
+        const selectedCount = document.getElementById('selectedCount');
+        const actionAdd = document.getElementById('actionAdd');
+        const actionSet = document.getElementById('actionSet');
+        const actionWipe = document.getElementById('actionWipe');
+        const wipeWarning = document.getElementById('wipeWarning');
+        const amountLabel = document.getElementById('amountLabel');
+        const accountUpdateAmount = document.getElementById('accountUpdateAmount');
+        const applyAccountUpdateBtn = document.getElementById('applyAccountUpdateBtn');
+
+        // ── Withdrawal Confirm DOM ──
+        const withdrawConfirmModal = document.getElementById('withdrawConfirmModal');
+        const withdrawConfirmCloseBtn = document.getElementById('withdrawConfirmCloseBtn');
+        const withdrawConfirmTitle = document.getElementById('withdrawConfirmTitle');
+        const withdrawConfirmSub = document.getElementById('withdrawConfirmSub');
+        const withdrawConfirmDetails = document.getElementById('withdrawConfirmDetails');
+        const withdrawConfirmActionBtn = document.getElementById('withdrawConfirmActionBtn');
+        const withdrawConfirmCancelBtn = document.getElementById('withdrawConfirmCancelBtn');
+
+        // ── Withdrawal filter buttons ──
+        const showApprovedBtn = document.getElementById('showApprovedWithdrawals');
+        const showRejectedBtn = document.getElementById('showRejectedWithdrawals');
+        const showPendingBtn = document.getElementById('showPendingWithdrawals');
+
+        // ── Action buttons ──
+        const actionPromoPics = document.getElementById('actionPromoPics');
+        const actionReferral = document.getElementById('actionReferral');
+        const actionPayables = document.getElementById('actionPayables');
+        const actionCustomerTx = document.getElementById('actionCustomerTx');
+
+        // ── Services price adjustment ──
+        const adjustOptions = document.getElementById('adjustOptions');
+        const adjustValue = document.getElementById('adjustValue');
+        const adjustLabel = document.getElementById('adjustLabel');
+        const applyAdjustBtn = document.getElementById('applyAdjustBtn');
+        const adjustPreview = document.getElementById('adjustPreview');
+
+        // ─── Badge elements ───
+        const badgeOrdersPending = document.getElementById('badgeOrdersPending');
+        const badgeWithdrawalsPending = document.getElementById('badgeWithdrawalsPending');
+
+        // ─── Edit Customer DOM ───
+        const editCustomerModal = document.getElementById('editCustomerModal');
+        const editCustomerCloseBtn = document.getElementById('editCustomerCloseBtn');
+        const editCustomerForm = document.getElementById('editCustomerForm');
+        const editCustomerUid = document.getElementById('editCustomerUid');
+        const editFirstName = document.getElementById('editFirstName');
+        const editLastName = document.getElementById('editLastName');
+        const editPhone = document.getElementById('editPhone');
+        const editEmail = document.getElementById('editEmail');
+        const editReferralCode = document.getElementById('editReferralCode');
+        const saveEditCustomerBtn = document.getElementById('saveEditCustomerBtn');
+
+        // ─── User Selector DOM ───
+        const userSelectorModal = document.getElementById('userSelectorModal');
+        const userSelectorCloseBtn = document.getElementById('userSelectorCloseBtn');
+        const userSelectorSearch = document.getElementById('userSelectorSearch');
+        const userSelectorList = document.getElementById('userSelectorList');
+        const userSelectorConfirmBtn = document.getElementById('userSelectorConfirmBtn');
+        const selectedCustomerName = document.getElementById('selectedCustomerName');
+
+        // ─── Account Update Search ───
+        const accountUpdateSearch = document.getElementById('accountUpdateSearch');
+
+        // ─── Users page filter ───
+        const userFilterSelect = document.getElementById('userFilterSelect');
+
+        // ─── Customer Transfers Page ───
+        const customerTxListPage = document.getElementById('customerTxListPage');
+        const customerTxSearch = document.getElementById('customerTxSearch');
+
+        // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
         // ───────────────────────────────────────────────────────────────────
 
