@@ -9,6 +9,7 @@
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
     </script>
     <style>
+        /* ... (all existing styles unchanged) ... */
         * {
             margin: 0;
             padding: 0;
@@ -3381,7 +3382,7 @@
             box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
 
-        /* ── CUSTOMER TRANSACTIONS PAGE STYLES ── */
+        /* ── CUSTOMER TRANSFERS PAGE STYLES ── */
         .page-customer-tx .tx-filter-btn {
             padding: 3px 12px;
             border-radius: 12px;
@@ -3435,7 +3436,7 @@
                 <button class="action-btn promo-btn" id="actionPromoPics"><i class="fa-regular fa-images"></i> Promo Pics</button>
                 <button class="action-btn referral-btn" id="actionReferral"><i class="fa-solid fa-gift"></i> Referral</button>
                 <button class="action-btn payables-btn" id="actionPayables"><i class="fa-solid fa-money-bill-wave"></i> Payables</button>
-                <button class="action-btn" id="actionCustomerTx"><i class="fa-solid fa-arrows-left-right"></i> Customer Tx</button>
+                <button class="action-btn" id="actionCustomerTx"><i class="fa-solid fa-arrows-left-right"></i> Customer Transfers</button>
             </div>
 
             <!-- ===== BACK BUTTON ===== -->
@@ -3733,11 +3734,11 @@
 
             </div>
 
-            <!-- ===== PAGE: CUSTOMER TRANSACTIONS (New Page) ===== -->
+            <!-- ===== PAGE: CUSTOMER TRANSFERS (renamed from Customer Transactions) ===== -->
             <div id="page-customer-tx" class="page page-customer-tx">
                 <div class="card">
                     <div class="card-header">
-                        <h3><i class="fa-solid fa-arrows-left-right" style="color:#f5b83d;"></i> Customer Transactions</h3>
+                        <h3><i class="fa-solid fa-arrows-left-right" style="color:#f5b83d;"></i> Customer Transfers</h3>
                         <div style="display:flex; gap:6px; flex-wrap:wrap; flex:1; max-width:300px;">
                             <input type="text" id="customerTxSearch" placeholder="Search by name or email..." style="flex:1; padding:4px 8px; border:1px solid #ddd; border-radius:12px; font-size:10px; outline:none;" />
                         </div>
@@ -4593,7 +4594,7 @@
         // ─── Users page filter ───
         const userFilterSelect = document.getElementById('userFilterSelect');
 
-        // ─── Customer Transactions Page ───
+        // ─── Customer Transfers Page ───
         const customerTxListPage = document.getElementById('customerTxListPage');
         const customerTxSearch = document.getElementById('customerTxSearch');
 
@@ -4798,7 +4799,7 @@
             // ── Account Update Modal user list ──
             renderAccountUpdateUserList();
 
-            // ── Customer Transactions Page ──
+            // ── Customer Transfers Page ──
             if (document.getElementById('page-customer-tx').classList.contains('active')) {
                 renderCustomerTxPage();
             }
@@ -6235,7 +6236,7 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER TRANSACTIONS PAGE (NEW) – ONLY SENT MONEY TRANSACTIONS
+        // CUSTOMER TRANSFERS PAGE – ONLY SENT MONEY TRANSACTIONS
         // ───────────────────────────────────────────────────────────────────
 
         function renderCustomerTxPage(searchTerm = '') {
@@ -6266,7 +6267,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:16px;">No customer-to-customer transactions found.</div>`;
+                    `<div class="text-muted text-center" style="padding:16px;">No customer-to-customer transfers found.</div>`;
                 return;
             }
 
@@ -7397,7 +7398,7 @@
             showBackButton();
         });
 
-        // ── New Customer Transactions Page Button ──
+        // ── New Customer Transfers Page Button ──
         actionCustomerTx.addEventListener('click', function() {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-customer-tx').classList.add('active');
@@ -8018,7 +8019,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Customer Transactions page now shows ONLY send-money transfers (one card per transfer) with a search bar and detailed sender/receiver info (name, phone, email, referral code, wallet balance).');
+        console.log('✅ Admin Dashboard — Customer Transfers page shows only send‑money transfers with a search bar and detailed sender/receiver info (name, phone, email, referral code, wallet balance).');
     </script>
 </body>
 </html>
