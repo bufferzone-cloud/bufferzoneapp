@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +9,7 @@
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
     </script>
     <style>
+        /* ----- RESET & BASE ----- */
         * {
             margin: 0;
             padding: 0;
@@ -17,14 +17,12 @@
             font-family: 'Poppins', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
-
         body {
             background-color: #f8f9fc;
             display: block;
             overflow: hidden;
             height: 100%;
         }
-
         .app-root {
             display: flex;
             flex-direction: column;
@@ -36,14 +34,12 @@
             overflow: hidden;
             position: relative;
         }
-
         .app-content {
             flex: 1;
             overflow-y: auto;
             padding: 0 12px 130px 12px;
             -webkit-overflow-scrolling: touch;
         }
-
         .bottom-nav {
             position: fixed;
             bottom: 14px;
@@ -63,7 +59,6 @@
             flex-shrink: 0;
             pointer-events: auto;
         }
-
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -93,7 +88,6 @@
         .nav-item:active {
             transform: scale(0.92);
         }
-
         .badge-counter {
             position: absolute;
             top: -5px;
@@ -122,6 +116,7 @@
             transform: scale(1);
         }
 
+        /* ----- HEADER ----- */
         .header {
             display: flex;
             align-items: center;
@@ -132,7 +127,6 @@
             flex-wrap: wrap;
             position: relative;
         }
-
         .header-left {
             display: flex;
             flex-direction: column;
@@ -140,14 +134,12 @@
             gap: 2px;
             flex: 0 0 auto;
         }
-
         .header-left .top-row {
             display: flex;
             align-items: center;
             gap: 8px;
             justify-content: center;
         }
-
         .work-avatar {
             width: 38px;
             height: 38px;
@@ -168,7 +160,6 @@
         .work-avatar:active {
             transform: scale(0.92);
         }
-
         .header-text {
             display: flex;
             flex-direction: column;
@@ -184,7 +175,6 @@
             color: #1c2128;
             letter-spacing: -0.3px;
         }
-
         .header-center {
             display: flex;
             align-items: center;
@@ -193,7 +183,6 @@
             gap: 8px;
             min-width: 70px;
         }
-
         .admin-title {
             display: none;
             text-align: center;
@@ -208,14 +197,12 @@
             font-size: 14px;
             color: #1c2128;
         }
-
         .header.work-active .admin-title {
             display: block;
         }
         .header.work-active .header-left .work-avatar {
             display: flex;
         }
-
         .page-back-btn {
             display: inline-flex;
             align-items: center;
@@ -239,6 +226,7 @@
             transform: scale(0.95);
         }
 
+        /* ----- ACTION ROW ----- */
         .action-row {
             display: flex;
             align-items: center;
@@ -250,7 +238,6 @@
             max-width: 600px;
             margin: 0 auto;
         }
-
         .action-btn {
             display: inline-flex;
             align-items: center;
@@ -275,6 +262,7 @@
             transform: scale(0.95);
         }
 
+        /* ----- DASHBOARD ----- */
         .greeting {
             font-size: 19px;
             font-weight: 800;
@@ -285,7 +273,6 @@
             font-size: 11px;
             color: #666;
         }
-
         .stat-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -339,7 +326,6 @@
             color: #888;
             margin-top: 1px;
         }
-
         .quick-actions {
             display: flex;
             gap: 8px;
@@ -375,6 +361,7 @@
             color: #1c2128;
         }
 
+        /* ----- CARDS ----- */
         .card {
             background: #ffffff;
             border-radius: 14px;
@@ -402,7 +389,6 @@
             font-weight: 600;
             cursor: pointer;
         }
-
         .activity-item {
             display: flex;
             align-items: center;
@@ -457,6 +443,7 @@
             margin-top: 1px;
         }
 
+        /* ----- SERVICE GRID ----- */
         .service-grid-customer {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -520,6 +507,7 @@
             margin-top: 2px;
         }
 
+        /* ----- HERO / POLICY EDITORS ----- */
         .hero-editor {
             background: #1c2128;
             border-radius: 12px;
@@ -2873,7 +2861,7 @@
             color: #1c2128;
         }
 
-        /* ── USER CARD STYLES (compact, floating, like account cards) ── */
+        /* ----- USER CARDS ----- */
         .user-card {
             background: #ffffff;
             border-radius: 10px;
@@ -3070,7 +3058,6 @@
             border-radius: 16px;
         }
 
-        /* ── USER FILTER BAR ── */
         .user-filter-bar {
             display: flex;
             align-items: center;
@@ -3382,7 +3369,7 @@
             box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
 
-        /* ── CUSTOMER TRANSFERS PAGE STYLES ── */
+        /* ----- CUSTOMER TRANSFERS PAGE ----- */
         .page-customer-tx .tx-filter-btn {
             padding: 3px 12px;
             border-radius: 12px;
@@ -3431,7 +3418,7 @@
                 </div>
             </div>
 
-            <!-- ===== THREE ACTION BUTTONS (now four) ===== -->
+            <!-- ===== ACTION ROW ===== -->
             <div class="action-row" id="actionRow">
                 <button class="action-btn promo-btn" id="actionPromoPics"><i class="fa-regular fa-images"></i> Promo Pics</button>
                 <button class="action-btn referral-btn" id="actionReferral"><i class="fa-solid fa-gift"></i> Referral</button>
@@ -3446,7 +3433,6 @@
 
             <!-- ===== PAGE: DASHBOARD ===== -->
             <div id="page-dashboard" class="page active">
-
                 <div class="greeting" id="greetingText">Good morning, Admin 👋</div>
                 <div class="greeting-sub" id="greetingSub"></div>
 
@@ -3510,17 +3496,14 @@
                     </div>
                     <div id="activityFeed"></div>
                 </div>
-
             </div>
 
             <!-- ===== PAGE: WORK ===== -->
             <div id="page-work" class="page">
-
                 <div class="work-page-header">
                     <h2>📁 Recent Projects</h2>
                     <p>Showcase your work — add new posts or manage existing ones</p>
                 </div>
-
                 <div class="work-options-grid">
                     <div class="work-option-card" data-type="app">
                         <span class="wo-icon">📱</span>
@@ -3543,14 +3526,11 @@
                         <div class="wo-sub">Post a Logo Design</div>
                     </div>
                 </div>
-
                 <div class="work-posts-section" id="workPostsContainer"></div>
-
             </div>
 
             <!-- ===== PAGE: PROMO PICS ===== -->
             <div id="page-promo-pics" class="page">
-
                 <div class="card" style="border: none; box-shadow: none; padding: 0 0 6px 0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
                         <div>
@@ -3562,19 +3542,15 @@
                         </button>
                     </div>
                 </div>
-
                 <div class="promo-pics-grid" id="promoPicsGrid"></div>
-
             </div>
 
             <!-- ===== PAGE: REFERRAL ===== -->
             <div id="page-referral" class="page">
-
                 <div style="margin-bottom:14px;">
                     <h2 style="font-size:20px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-gift" style="color:#f5b83d;"></i> Referral Management</h2>
                     <p style="font-size:11px; color:#888;">Manage referral promos, custom referrals, and referral discounts.</p>
                 </div>
-
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-users"></i> Set Up Referral Promo
@@ -3592,7 +3568,6 @@
                         <div class="referral-list-container" id="referralPromoList"></div>
                     </div>
                 </div>
-
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-user-gear"></i> Set Up Custom Referral
@@ -3620,7 +3595,6 @@
                         <div class="referral-list-container" id="customReferralList"></div>
                     </div>
                 </div>
-
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-percent"></i> Referral Discount
@@ -3645,7 +3619,6 @@
                         <div class="referral-list-container" id="referralDiscountList"></div>
                     </div>
                 </div>
-
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-star"></i> Referral Promos
@@ -3671,7 +3644,6 @@
                         <div class="referral-list-container" id="referralPromoDiscountList"></div>
                     </div>
                 </div>
-
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-gift"></i> Signup Bonuses
@@ -3701,28 +3673,23 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <!-- ===== PAGE: PAYABLES ===== -->
             <div id="page-payables" class="page">
-
                 <div style="margin-bottom:10px;">
                     <h2 style="font-size:20px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-money-bill-wave" style="color:#f5b83d;"></i> Payables</h2>
                     <p style="font-size:11px; color:#888;">Manage customer accounts, transfers, and withdrawal requests.</p>
                 </div>
-
                 <div class="payables-action-row">
                     <button class="p-btn toggle active" id="toggleAccounts"><i class="fa-solid fa-wallet"></i> Accounts</button>
                     <button class="p-btn toggle" id="toggleWithdrawals"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
                     <button class="p-btn gold" id="manualDepositBtn"><i class="fa-solid fa-plus-circle"></i> Manual Deposit</button>
                     <button class="p-btn gold" id="accountUpdateBtn"><i class="fa-solid fa-pen-to-square"></i> Account Update</button>
                 </div>
-
                 <div class="payables-view active" id="viewAccounts">
                     <div id="accountsList"></div>
                 </div>
-
                 <div class="payables-view" id="viewWithdrawals">
                     <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
                         <button class="btn btn-primary btn-sm" id="showApprovedWithdrawals" style="background:#16a34a; color:#fff; border:none; padding:4px 16px; border-radius:16px; font-size:9px; font-weight:600; cursor:pointer;">✅ Approved</button>
@@ -3731,10 +3698,9 @@
                     </div>
                     <div id="withdrawalsList"></div>
                 </div>
-
             </div>
 
-            <!-- ===== PAGE: CUSTOMER TRANSFERS (renamed from Customer Transactions) ===== -->
+            <!-- ===== PAGE: CUSTOMER TRANSFERS ===== -->
             <div id="page-customer-tx" class="page page-customer-tx">
                 <div class="card">
                     <div class="card-header">
@@ -3751,7 +3717,6 @@
 
             <!-- ===== PAGE: SERVICES ===== -->
             <div id="page-services" class="page">
-
                 <div class="hero-editor">
                     <div class="hero-content">
                         <h4 style="color:#f5b83d; font-size:11px; font-weight:700; margin-bottom:4px;">HERO SECTION EDITOR</h4>
@@ -3924,7 +3889,7 @@
 
         </div>
 
-        <!-- ===== BOTTOM NAV (Home badge removed) ===== -->
+        <!-- ===== BOTTOM NAV ===== -->
         <div class="bottom-nav">
             <button class="nav-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Home</span></button>
             <button class="nav-item" data-page="services"><i class="fa-solid fa-layer-group"></i><span>Services</span></button>
@@ -3941,7 +3906,8 @@
 
     </div>
 
-    <!-- ===== SERVICE MODAL ===== -->
+    <!-- ===== MODALS ===== -->
+    <!-- Service Modal -->
     <div class="modal-overlay" id="serviceModal">
         <div class="modal">
             <button class="close-btn" id="modalCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4044,7 +4010,7 @@
         </div>
     </div>
 
-    <!-- ===== PROMO MODAL ===== -->
+    <!-- Promo Modal -->
     <div class="modal-overlay" id="promoModal">
         <div class="modal">
             <button class="close-btn" id="promoCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4065,7 +4031,7 @@
         </div>
     </div>
 
-    <!-- ===== WORK UPLOAD MODAL ===== -->
+    <!-- Work Upload Modal -->
     <div class="modal-overlay work-upload-modal" id="workUploadModal">
         <div class="modal">
             <button class="close-btn" id="workUploadCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4114,7 +4080,7 @@
         </div>
     </div>
 
-    <!-- ===== PROMO PICS UPLOAD MODAL ===== -->
+    <!-- Promo Pic Upload Modal -->
     <div class="modal-overlay" id="promoPicUploadModal">
         <div class="modal" style="max-width:460px;">
             <button class="close-btn" id="promoPicUploadCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4143,7 +4109,7 @@
         </div>
     </div>
 
-    <!-- ===== MANUAL DEPOSIT MODAL ===== -->
+    <!-- Manual Deposit Modal -->
     <div class="modal-overlay" id="manualDepositModal">
         <div class="modal" style="max-width:380px;">
             <button class="close-btn" id="manualDepositCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4168,7 +4134,7 @@
         </div>
     </div>
 
-    <!-- ===== USER SELECTOR MODAL (Phone-style) ===== -->
+    <!-- User Selector Modal -->
     <div class="modal-overlay user-selector-modal" id="userSelectorModal">
         <div class="modal">
             <button class="close-btn" id="userSelectorCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4183,7 +4149,7 @@
         </div>
     </div>
 
-    <!-- ===== ACCOUNT UPDATE MODAL ===== -->
+    <!-- Account Update Modal -->
     <div class="account-update-modal-overlay" id="accountUpdateModal">
         <div class="account-update-modal">
             <button class="close-btn" id="accountUpdateCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4221,7 +4187,7 @@
         </div>
     </div>
 
-    <!-- ===== SCREENSHOT VIEW MODAL ===== -->
+    <!-- Screenshot View Modal -->
     <div class="screenshot-modal-overlay" id="screenshotModal">
         <div class="screenshot-modal-content">
             <button class="close-btn" id="screenshotCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4230,7 +4196,7 @@
         </div>
     </div>
 
-    <!-- ===== DELETE CONFIRMATION MODAL ===== -->
+    <!-- Delete Confirmation Modal -->
     <div class="delete-confirm-modal-overlay" id="deleteConfirmModal">
         <div class="delete-confirm-modal-content">
             <h3>Confirm Deletion</h3>
@@ -4242,7 +4208,7 @@
         </div>
     </div>
 
-    <!-- ===== ORDER STATUS MODAL ===== -->
+    <!-- Order Status Modal -->
     <div class="status-modal-overlay" id="orderStatusModal">
         <div class="status-modal">
             <button class="close-btn" id="statusModalCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4279,7 +4245,7 @@
         </div>
     </div>
 
-    <!-- ===== WITHDRAWAL CONFIRMATION MODAL ===== -->
+    <!-- Withdrawal Confirmation Modal -->
     <div class="withdraw-confirm-modal-overlay" id="withdrawConfirmModal">
         <div class="withdraw-confirm-modal">
             <button class="close-btn" id="withdrawConfirmCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4293,7 +4259,7 @@
         </div>
     </div>
 
-    <!-- ===== EDIT CUSTOMER MODAL ===== -->
+    <!-- Edit Customer Modal -->
     <div class="modal-overlay edit-customer-modal" id="editCustomerModal">
         <div class="modal" style="max-width:460px;">
             <button class="close-btn" id="editCustomerCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4328,7 +4294,7 @@
         </div>
     </div>
 
-    <!-- ===== TOAST ===== -->
+    <!-- Toast -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
     <script type="module">
@@ -4378,225 +4344,6 @@
         let withdrawalsFilter = 'pending';
         let pendingEditCustomerUid = null;
         let selectedUserId = null;
-
-        // ───────────────────────────────────────────────────────────────────
-        // DOM REFS
-        // ───────────────────────────────────────────────────────────────────
-
-        const adminNameEl = document.getElementById('adminName');
-        const adminNameCenterEl = document.getElementById('adminNameCenter');
-        const profileNameEl = document.getElementById('profileName');
-        const profileEmailEl = document.getElementById('profileEmail');
-        const profilePhoneEl = document.getElementById('profilePhone');
-        const greetingText = document.getElementById('greetingText');
-        const greetingSub = document.getElementById('greetingSub');
-        const mainHeader = document.getElementById('mainHeader');
-        const workAvatarBtn = document.getElementById('workAvatarBtn');
-        const pageBackBtn = document.getElementById('pageBackBtn');
-        const actionRow = document.getElementById('actionRow');
-
-        const modal = document.getElementById('serviceModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalSub = document.getElementById('modalSub');
-        const form = document.getElementById('serviceForm');
-        const editIdInput = document.getElementById('editServiceId');
-        const formTitle = document.getElementById('formTitle');
-        const formSubtitle = document.getElementById('formSubtitle');
-        const formCategory = document.getElementById('formCategory');
-        const formPrice = document.getElementById('formPrice');
-        const formTags = document.getElementById('formTags');
-        const formIcon = document.getElementById('formIcon');
-        const formSpecs = document.getElementById('formSpecs');
-        const formSizes = document.getElementById('formSizes');
-        const formOrientations = document.getElementById('formOrientations');
-        const formFormats = document.getElementById('formFormats');
-        const formColorSchemes = document.getElementById('formColorSchemes');
-        const formRevisions = document.getElementById('formRevisions');
-        const formDeliverySpeeds = document.getElementById('formDeliverySpeeds');
-        const formDefaultSize = document.getElementById('formDefaultSize');
-        const formDefaultOrientation = document.getElementById('formDefaultOrientation');
-        const formDefaultFormat = document.getElementById('formDefaultFormat');
-        const formDefaultColorScheme = document.getElementById('formDefaultColorScheme');
-        const formDefaultRevisions = document.getElementById('formDefaultRevisions');
-        const formDefaultDeliverySpeed = document.getElementById('formDefaultDeliverySpeed');
-        const submitBtn = document.getElementById('modalSubmitBtn');
-        const cancelBtn = document.getElementById('modalCancelBtn');
-        const closeBtn = document.getElementById('modalCloseBtn');
-
-        const promoModal = document.getElementById('promoModal');
-        const promoCloseBtn = document.getElementById('promoCloseBtn');
-        const promoForm = document.getElementById('promoForm');
-        const promoCode = document.getElementById('promoCode');
-        const promoDiscount = document.getElementById('promoDiscount');
-        const promoCancelBtn = document.getElementById('promoCancelBtn');
-
-        const workUploadModal = document.getElementById('workUploadModal');
-        const workUploadCloseBtn = document.getElementById('workUploadCloseBtn');
-        const workUploadForm = document.getElementById('workUploadForm');
-        const workUploadTitle = document.getElementById('workUploadTitle');
-        const workUploadSub = document.getElementById('workUploadSub');
-        const workPostType = document.getElementById('workPostType');
-        const editWorkPostId = document.getElementById('editWorkPostId');
-        const workImagePreview = document.getElementById('workImagePreview');
-        const workImageUrl = document.getElementById('workImageUrl');
-        const workFrameContainer = document.getElementById('workFrameContainer');
-        const workAppFields = document.getElementById('workAppFields');
-        const workFlyerFields = document.getElementById('workFlyerFields');
-        const workAppName = document.getElementById('workAppName');
-        const workAppFunc = document.getElementById('workAppFunc');
-        const workFlyerTitle = document.getElementById('workFlyerTitle');
-        const workFlyerDesc = document.getElementById('workFlyerDesc');
-        const workUploadSubmit = document.getElementById('workUploadSubmit');
-        const workUploadCancelBtn = document.getElementById('workUploadCancelBtn');
-
-        const promoPicUploadModal = document.getElementById('promoPicUploadModal');
-        const promoPicUploadCloseBtn = document.getElementById('promoPicUploadCloseBtn');
-        const promoPicUploadForm = document.getElementById('promoPicUploadForm');
-        const promoPicImagePreview = document.getElementById('promoPicImagePreview');
-        const promoPicImageUrl = document.getElementById('promoPicImageUrl');
-        const promoPicText = document.getElementById('promoPicText');
-        const promoPicSubtext = document.getElementById('promoPicSubtext');
-        const promoPicUploadCancelBtn = document.getElementById('promoPicUploadCancelBtn');
-        const promoPicsGrid = document.getElementById('promoPicsGrid');
-        const addPromoPicBtn = document.getElementById('addPromoPicBtn');
-
-        const toast = document.getElementById('toast');
-        const toastMsg = document.getElementById('toastMessage');
-
-        const deleteConfirmModal = document.getElementById('deleteConfirmModal');
-        const deleteConfirmText = document.getElementById('deleteConfirmText');
-        const deleteCancelBtn = document.getElementById('deleteCancelBtn');
-        const deleteConfirmBtn = document.getElementById('deleteConfirmBtn');
-
-        const statusModal = document.getElementById('orderStatusModal');
-        const statusModalCloseBtn = document.getElementById('statusModalCloseBtn');
-        const statusOptionsContainer = document.getElementById('statusOptionsContainer');
-        const confirmStatusBtn = document.getElementById('confirmStatusBtn');
-
-        // ── Referral DOM ──
-        const referralPromoAmount = document.getElementById('referralPromoAmount');
-        const postReferralPromoBtn = document.getElementById('postReferralPromo');
-        const referralPromoList = document.getElementById('referralPromoList');
-
-        const customReferralUserSelect = document.getElementById('customReferralUserSelect');
-        const customReferralCode = document.getElementById('customReferralCode');
-        const customReferralAmount = document.getElementById('customReferralAmount');
-        const postCustomReferralBtn = document.getElementById('postCustomReferral');
-        const customReferralList = document.getElementById('customReferralList');
-
-        const discountReferralCode = document.getElementById('discountReferralCode');
-        const discountPercentage = document.getElementById('discountPercentage');
-        const discountOwnerAmount = document.getElementById('discountOwnerAmount');
-        const postReferralDiscountBtn = document.getElementById('postReferralDiscount');
-        const referralDiscountList = document.getElementById('referralDiscountList');
-
-        // ── New Referral Promos ──
-        const referralPromoDiscountPercent = document.getElementById('referralPromoDiscountPercent');
-        const referralPromoOwnerAmount = document.getElementById('referralPromoOwnerAmount');
-        const referralPromoCodeFilter = document.getElementById('referralPromoCodeFilter');
-        const postReferralPromoDiscountBtn = document.getElementById('postReferralPromoDiscount');
-        const referralPromoDiscountList = document.getElementById('referralPromoDiscountList');
-
-        // ── Signup Bonuses ──
-        const signupBonusWithReferral = document.getElementById('signupBonusWithReferral');
-        const signupBonusWithCustomReferral = document.getElementById('signupBonusWithCustomReferral');
-        const signupBonusWithoutReferral = document.getElementById('signupBonusWithoutReferral');
-        const saveSignupBonusesBtn = document.getElementById('saveSignupBonuses');
-        const displayWithReferral = document.getElementById('displayWithReferral');
-        const displayWithCustom = document.getElementById('displayWithCustom');
-        const displayWithoutReferral = document.getElementById('displayWithoutReferral');
-
-        // ── Payables DOM ──
-        const toggleAccounts = document.getElementById('toggleAccounts');
-        const toggleWithdrawals = document.getElementById('toggleWithdrawals');
-        const viewAccounts = document.getElementById('viewAccounts');
-        const viewWithdrawals = document.getElementById('viewWithdrawals');
-        const accountsList = document.getElementById('accountsList');
-        const withdrawalsList = document.getElementById('withdrawalsList');
-        const manualDepositBtn = document.getElementById('manualDepositBtn');
-        const manualDepositModal = document.getElementById('manualDepositModal');
-        const manualDepositCloseBtn = document.getElementById('manualDepositCloseBtn');
-        const manualDepositForm = document.getElementById('manualDepositForm');
-        const depositCustomerSelect = document.getElementById('depositCustomerSelect');
-        const depositAmount = document.getElementById('depositAmount');
-        const manualDepositCancelBtn = document.getElementById('manualDepositCancelBtn');
-
-        // ── Account Update DOM ──
-        const accountUpdateBtn = document.getElementById('accountUpdateBtn');
-        const accountUpdateModal = document.getElementById('accountUpdateModal');
-        const accountUpdateCloseBtn = document.getElementById('accountUpdateCloseBtn');
-        const userCheckboxList = document.getElementById('userCheckboxList');
-        const selectAllUsersBtn = document.getElementById('selectAllUsersBtn');
-        const deselectAllUsersBtn = document.getElementById('deselectAllUsersBtn');
-        const selectedCount = document.getElementById('selectedCount');
-        const actionAdd = document.getElementById('actionAdd');
-        const actionSet = document.getElementById('actionSet');
-        const actionWipe = document.getElementById('actionWipe');
-        const wipeWarning = document.getElementById('wipeWarning');
-        const amountLabel = document.getElementById('amountLabel');
-        const accountUpdateAmount = document.getElementById('accountUpdateAmount');
-        const applyAccountUpdateBtn = document.getElementById('applyAccountUpdateBtn');
-
-        // ── Withdrawal Confirm DOM ──
-        const withdrawConfirmModal = document.getElementById('withdrawConfirmModal');
-        const withdrawConfirmCloseBtn = document.getElementById('withdrawConfirmCloseBtn');
-        const withdrawConfirmTitle = document.getElementById('withdrawConfirmTitle');
-        const withdrawConfirmSub = document.getElementById('withdrawConfirmSub');
-        const withdrawConfirmDetails = document.getElementById('withdrawConfirmDetails');
-        const withdrawConfirmActionBtn = document.getElementById('withdrawConfirmActionBtn');
-        const withdrawConfirmCancelBtn = document.getElementById('withdrawConfirmCancelBtn');
-
-        // ── Withdrawal filter buttons ──
-        const showApprovedBtn = document.getElementById('showApprovedWithdrawals');
-        const showRejectedBtn = document.getElementById('showRejectedWithdrawals');
-        const showPendingBtn = document.getElementById('showPendingWithdrawals');
-
-        // ── Action buttons ──
-        const actionPromoPics = document.getElementById('actionPromoPics');
-        const actionReferral = document.getElementById('actionReferral');
-        const actionPayables = document.getElementById('actionPayables');
-        const actionCustomerTx = document.getElementById('actionCustomerTx');
-
-        // ── Services price adjustment ──
-        const adjustOptions = document.getElementById('adjustOptions');
-        const adjustValue = document.getElementById('adjustValue');
-        const adjustLabel = document.getElementById('adjustLabel');
-        const applyAdjustBtn = document.getElementById('applyAdjustBtn');
-        const adjustPreview = document.getElementById('adjustPreview');
-
-        // ─── Badge elements ───
-        const badgeOrdersPending = document.getElementById('badgeOrdersPending');
-        const badgeWithdrawalsPending = document.getElementById('badgeWithdrawalsPending');
-
-        // ─── Edit Customer DOM ───
-        const editCustomerModal = document.getElementById('editCustomerModal');
-        const editCustomerCloseBtn = document.getElementById('editCustomerCloseBtn');
-        const editCustomerForm = document.getElementById('editCustomerForm');
-        const editCustomerUid = document.getElementById('editCustomerUid');
-        const editFirstName = document.getElementById('editFirstName');
-        const editLastName = document.getElementById('editLastName');
-        const editPhone = document.getElementById('editPhone');
-        const editEmail = document.getElementById('editEmail');
-        const editReferralCode = document.getElementById('editReferralCode');
-        const saveEditCustomerBtn = document.getElementById('saveEditCustomerBtn');
-
-        // ─── User Selector DOM ───
-        const userSelectorModal = document.getElementById('userSelectorModal');
-        const userSelectorCloseBtn = document.getElementById('userSelectorCloseBtn');
-        const userSelectorSearch = document.getElementById('userSelectorSearch');
-        const userSelectorList = document.getElementById('userSelectorList');
-        const userSelectorConfirmBtn = document.getElementById('userSelectorConfirmBtn');
-        const selectedCustomerName = document.getElementById('selectedCustomerName');
-
-        // ─── Account Update Search ───
-        const accountUpdateSearch = document.getElementById('accountUpdateSearch');
-
-        // ─── Users page filter ───
-        const userFilterSelect = document.getElementById('userFilterSelect');
-
-        // ─── Customer Transfers Page ───
-        const customerTxListPage = document.getElementById('customerTxListPage');
-        const customerTxSearch = document.getElementById('customerTxSearch');
 
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
@@ -5010,7 +4757,6 @@
             updateBadges();
         }
 
-        // ── COMPACT USER CARDS ──
         function renderUsers(searchTerm = '', filter = 'all') {
             const container = document.getElementById('usersList');
             const usersData = allData.users || {};
@@ -6240,7 +5986,7 @@
         // ───────────────────────────────────────────────────────────────────
 
         function renderCustomerTxPage(searchTerm = '') {
-            const container = customerTxListPage;
+            const container = document.getElementById('customerTxListPage');
             const transactions = allData.transactions || {};
             const users = allData.users || {};
             const accounts = allData.customerAccounts || {};
