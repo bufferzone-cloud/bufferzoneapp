@@ -9,7 +9,7 @@
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
     </script>
     <style>
-        /* ----- RESET & BASE ----- */
+        /* ... (all CSS from the original admin code) ... */
         * {
             margin: 0;
             padding: 0;
@@ -17,12 +17,14 @@
             font-family: 'Poppins', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
+
         body {
             background-color: #f8f9fc;
             display: block;
             overflow: hidden;
             height: 100%;
         }
+
         .app-root {
             display: flex;
             flex-direction: column;
@@ -34,12 +36,14 @@
             overflow: hidden;
             position: relative;
         }
+
         .app-content {
             flex: 1;
             overflow-y: auto;
             padding: 0 12px 130px 12px;
             -webkit-overflow-scrolling: touch;
         }
+
         .bottom-nav {
             position: fixed;
             bottom: 14px;
@@ -59,6 +63,7 @@
             flex-shrink: 0;
             pointer-events: auto;
         }
+
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -88,6 +93,7 @@
         .nav-item:active {
             transform: scale(0.92);
         }
+
         .badge-counter {
             position: absolute;
             top: -5px;
@@ -116,7 +122,6 @@
             transform: scale(1);
         }
 
-        /* ----- HEADER ----- */
         .header {
             display: flex;
             align-items: center;
@@ -127,6 +132,7 @@
             flex-wrap: wrap;
             position: relative;
         }
+
         .header-left {
             display: flex;
             flex-direction: column;
@@ -134,12 +140,14 @@
             gap: 2px;
             flex: 0 0 auto;
         }
+
         .header-left .top-row {
             display: flex;
             align-items: center;
             gap: 8px;
             justify-content: center;
         }
+
         .work-avatar {
             width: 38px;
             height: 38px;
@@ -160,6 +168,7 @@
         .work-avatar:active {
             transform: scale(0.92);
         }
+
         .header-text {
             display: flex;
             flex-direction: column;
@@ -175,6 +184,7 @@
             color: #1c2128;
             letter-spacing: -0.3px;
         }
+
         .header-center {
             display: flex;
             align-items: center;
@@ -183,6 +193,7 @@
             gap: 8px;
             min-width: 70px;
         }
+
         .admin-title {
             display: none;
             text-align: center;
@@ -197,12 +208,14 @@
             font-size: 14px;
             color: #1c2128;
         }
+
         .header.work-active .admin-title {
             display: block;
         }
         .header.work-active .header-left .work-avatar {
             display: flex;
         }
+
         .page-back-btn {
             display: inline-flex;
             align-items: center;
@@ -226,7 +239,6 @@
             transform: scale(0.95);
         }
 
-        /* ----- ACTION ROW ----- */
         .action-row {
             display: flex;
             align-items: center;
@@ -238,6 +250,7 @@
             max-width: 600px;
             margin: 0 auto;
         }
+
         .action-btn {
             display: inline-flex;
             align-items: center;
@@ -262,7 +275,6 @@
             transform: scale(0.95);
         }
 
-        /* ----- DASHBOARD ----- */
         .greeting {
             font-size: 19px;
             font-weight: 800;
@@ -273,6 +285,7 @@
             font-size: 11px;
             color: #666;
         }
+
         .stat-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -326,6 +339,7 @@
             color: #888;
             margin-top: 1px;
         }
+
         .quick-actions {
             display: flex;
             gap: 8px;
@@ -361,7 +375,6 @@
             color: #1c2128;
         }
 
-        /* ----- CARDS ----- */
         .card {
             background: #ffffff;
             border-radius: 14px;
@@ -389,6 +402,7 @@
             font-weight: 600;
             cursor: pointer;
         }
+
         .activity-item {
             display: flex;
             align-items: center;
@@ -443,7 +457,6 @@
             margin-top: 1px;
         }
 
-        /* ----- SERVICE GRID ----- */
         .service-grid-customer {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -507,7 +520,6 @@
             margin-top: 2px;
         }
 
-        /* ----- HERO / POLICY EDITORS ----- */
         .hero-editor {
             background: #1c2128;
             border-radius: 12px;
@@ -2861,7 +2873,7 @@
             color: #1c2128;
         }
 
-        /* ----- USER CARDS ----- */
+        /* ── USER CARD STYLES (compact, floating, like account cards) ── */
         .user-card {
             background: #ffffff;
             border-radius: 10px;
@@ -3058,6 +3070,7 @@
             border-radius: 16px;
         }
 
+        /* ── USER FILTER BAR ── */
         .user-filter-bar {
             display: flex;
             align-items: center;
@@ -3369,7 +3382,7 @@
             box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
 
-        /* ----- CUSTOMER TRANSFERS PAGE ----- */
+        /* ── CUSTOMER TRANSFERS PAGE STYLES ── */
         .page-customer-tx .tx-filter-btn {
             padding: 3px 12px;
             border-radius: 12px;
@@ -3418,7 +3431,7 @@
                 </div>
             </div>
 
-            <!-- ===== ACTION ROW ===== -->
+            <!-- ===== THREE ACTION BUTTONS (now four) ===== -->
             <div class="action-row" id="actionRow">
                 <button class="action-btn promo-btn" id="actionPromoPics"><i class="fa-regular fa-images"></i> Promo Pics</button>
                 <button class="action-btn referral-btn" id="actionReferral"><i class="fa-solid fa-gift"></i> Referral</button>
@@ -3433,6 +3446,7 @@
 
             <!-- ===== PAGE: DASHBOARD ===== -->
             <div id="page-dashboard" class="page active">
+
                 <div class="greeting" id="greetingText">Good morning, Admin 👋</div>
                 <div class="greeting-sub" id="greetingSub"></div>
 
@@ -3496,14 +3510,17 @@
                     </div>
                     <div id="activityFeed"></div>
                 </div>
+
             </div>
 
             <!-- ===== PAGE: WORK ===== -->
             <div id="page-work" class="page">
+
                 <div class="work-page-header">
                     <h2>📁 Recent Projects</h2>
                     <p>Showcase your work — add new posts or manage existing ones</p>
                 </div>
+
                 <div class="work-options-grid">
                     <div class="work-option-card" data-type="app">
                         <span class="wo-icon">📱</span>
@@ -3526,11 +3543,14 @@
                         <div class="wo-sub">Post a Logo Design</div>
                     </div>
                 </div>
+
                 <div class="work-posts-section" id="workPostsContainer"></div>
+
             </div>
 
             <!-- ===== PAGE: PROMO PICS ===== -->
             <div id="page-promo-pics" class="page">
+
                 <div class="card" style="border: none; box-shadow: none; padding: 0 0 6px 0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
                         <div>
@@ -3542,15 +3562,19 @@
                         </button>
                     </div>
                 </div>
+
                 <div class="promo-pics-grid" id="promoPicsGrid"></div>
+
             </div>
 
             <!-- ===== PAGE: REFERRAL ===== -->
             <div id="page-referral" class="page">
+
                 <div style="margin-bottom:14px;">
                     <h2 style="font-size:20px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-gift" style="color:#f5b83d;"></i> Referral Management</h2>
                     <p style="font-size:11px; color:#888;">Manage referral promos, custom referrals, and referral discounts.</p>
                 </div>
+
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-users"></i> Set Up Referral Promo
@@ -3568,6 +3592,7 @@
                         <div class="referral-list-container" id="referralPromoList"></div>
                     </div>
                 </div>
+
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-user-gear"></i> Set Up Custom Referral
@@ -3595,6 +3620,7 @@
                         <div class="referral-list-container" id="customReferralList"></div>
                     </div>
                 </div>
+
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-percent"></i> Referral Discount
@@ -3619,6 +3645,7 @@
                         <div class="referral-list-container" id="referralDiscountList"></div>
                     </div>
                 </div>
+
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-star"></i> Referral Promos
@@ -3644,6 +3671,7 @@
                         <div class="referral-list-container" id="referralPromoDiscountList"></div>
                     </div>
                 </div>
+
                 <div class="referral-section">
                     <div class="section-title">
                         <i class="fa-solid fa-gift"></i> Signup Bonuses
@@ -3673,23 +3701,28 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <!-- ===== PAGE: PAYABLES ===== -->
             <div id="page-payables" class="page">
+
                 <div style="margin-bottom:10px;">
                     <h2 style="font-size:20px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-money-bill-wave" style="color:#f5b83d;"></i> Payables</h2>
                     <p style="font-size:11px; color:#888;">Manage customer accounts, transfers, and withdrawal requests.</p>
                 </div>
+
                 <div class="payables-action-row">
                     <button class="p-btn toggle active" id="toggleAccounts"><i class="fa-solid fa-wallet"></i> Accounts</button>
                     <button class="p-btn toggle" id="toggleWithdrawals"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
                     <button class="p-btn gold" id="manualDepositBtn"><i class="fa-solid fa-plus-circle"></i> Manual Deposit</button>
                     <button class="p-btn gold" id="accountUpdateBtn"><i class="fa-solid fa-pen-to-square"></i> Account Update</button>
                 </div>
+
                 <div class="payables-view active" id="viewAccounts">
                     <div id="accountsList"></div>
                 </div>
+
                 <div class="payables-view" id="viewWithdrawals">
                     <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
                         <button class="btn btn-primary btn-sm" id="showApprovedWithdrawals" style="background:#16a34a; color:#fff; border:none; padding:4px 16px; border-radius:16px; font-size:9px; font-weight:600; cursor:pointer;">✅ Approved</button>
@@ -3698,9 +3731,10 @@
                     </div>
                     <div id="withdrawalsList"></div>
                 </div>
+
             </div>
 
-            <!-- ===== PAGE: CUSTOMER TRANSFERS ===== -->
+            <!-- ===== PAGE: CUSTOMER TRANSFERS (renamed from Customer Transactions) ===== -->
             <div id="page-customer-tx" class="page page-customer-tx">
                 <div class="card">
                     <div class="card-header">
@@ -3717,6 +3751,7 @@
 
             <!-- ===== PAGE: SERVICES ===== -->
             <div id="page-services" class="page">
+
                 <div class="hero-editor">
                     <div class="hero-content">
                         <h4 style="color:#f5b83d; font-size:11px; font-weight:700; margin-bottom:4px;">HERO SECTION EDITOR</h4>
@@ -3889,7 +3924,7 @@
 
         </div>
 
-        <!-- ===== BOTTOM NAV ===== -->
+        <!-- ===== BOTTOM NAV (Home badge removed) ===== -->
         <div class="bottom-nav">
             <button class="nav-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Home</span></button>
             <button class="nav-item" data-page="services"><i class="fa-solid fa-layer-group"></i><span>Services</span></button>
@@ -3906,8 +3941,7 @@
 
     </div>
 
-    <!-- ===== MODALS ===== -->
-    <!-- Service Modal -->
+    <!-- ===== SERVICE MODAL ===== -->
     <div class="modal-overlay" id="serviceModal">
         <div class="modal">
             <button class="close-btn" id="modalCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4010,7 +4044,7 @@
         </div>
     </div>
 
-    <!-- Promo Modal -->
+    <!-- ===== PROMO MODAL ===== -->
     <div class="modal-overlay" id="promoModal">
         <div class="modal">
             <button class="close-btn" id="promoCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4031,7 +4065,7 @@
         </div>
     </div>
 
-    <!-- Work Upload Modal -->
+    <!-- ===== WORK UPLOAD MODAL ===== -->
     <div class="modal-overlay work-upload-modal" id="workUploadModal">
         <div class="modal">
             <button class="close-btn" id="workUploadCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4080,7 +4114,7 @@
         </div>
     </div>
 
-    <!-- Promo Pic Upload Modal -->
+    <!-- ===== PROMO PICS UPLOAD MODAL ===== -->
     <div class="modal-overlay" id="promoPicUploadModal">
         <div class="modal" style="max-width:460px;">
             <button class="close-btn" id="promoPicUploadCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4109,7 +4143,7 @@
         </div>
     </div>
 
-    <!-- Manual Deposit Modal -->
+    <!-- ===== MANUAL DEPOSIT MODAL ===== -->
     <div class="modal-overlay" id="manualDepositModal">
         <div class="modal" style="max-width:380px;">
             <button class="close-btn" id="manualDepositCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4134,7 +4168,7 @@
         </div>
     </div>
 
-    <!-- User Selector Modal -->
+    <!-- ===== USER SELECTOR MODAL (Phone-style) ===== -->
     <div class="modal-overlay user-selector-modal" id="userSelectorModal">
         <div class="modal">
             <button class="close-btn" id="userSelectorCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4149,7 +4183,7 @@
         </div>
     </div>
 
-    <!-- Account Update Modal -->
+    <!-- ===== ACCOUNT UPDATE MODAL ===== -->
     <div class="account-update-modal-overlay" id="accountUpdateModal">
         <div class="account-update-modal">
             <button class="close-btn" id="accountUpdateCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4187,7 +4221,7 @@
         </div>
     </div>
 
-    <!-- Screenshot View Modal -->
+    <!-- ===== SCREENSHOT VIEW MODAL ===== -->
     <div class="screenshot-modal-overlay" id="screenshotModal">
         <div class="screenshot-modal-content">
             <button class="close-btn" id="screenshotCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4196,7 +4230,7 @@
         </div>
     </div>
 
-    <!-- Delete Confirmation Modal -->
+    <!-- ===== DELETE CONFIRMATION MODAL ===== -->
     <div class="delete-confirm-modal-overlay" id="deleteConfirmModal">
         <div class="delete-confirm-modal-content">
             <h3>Confirm Deletion</h3>
@@ -4208,7 +4242,7 @@
         </div>
     </div>
 
-    <!-- Order Status Modal -->
+    <!-- ===== ORDER STATUS MODAL ===== -->
     <div class="status-modal-overlay" id="orderStatusModal">
         <div class="status-modal">
             <button class="close-btn" id="statusModalCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4245,7 +4279,7 @@
         </div>
     </div>
 
-    <!-- Withdrawal Confirmation Modal -->
+    <!-- ===== WITHDRAWAL CONFIRMATION MODAL ===== -->
     <div class="withdraw-confirm-modal-overlay" id="withdrawConfirmModal">
         <div class="withdraw-confirm-modal">
             <button class="close-btn" id="withdrawConfirmCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4259,7 +4293,7 @@
         </div>
     </div>
 
-    <!-- Edit Customer Modal -->
+    <!-- ===== EDIT CUSTOMER MODAL ===== -->
     <div class="modal-overlay edit-customer-modal" id="editCustomerModal">
         <div class="modal" style="max-width:460px;">
             <button class="close-btn" id="editCustomerCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4294,7 +4328,7 @@
         </div>
     </div>
 
-    <!-- Toast -->
+    <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
     <script type="module">
@@ -4346,7 +4380,7 @@
         let selectedUserId = null;
 
         // ───────────────────────────────────────────────────────────────────
-        // DOM REFS (abbreviated for brevity; most are from original)
+        // DOM REFS
         // ───────────────────────────────────────────────────────────────────
 
         const adminNameEl = document.getElementById('adminName');
@@ -4976,6 +5010,7 @@
             updateBadges();
         }
 
+        // ── COMPACT USER CARDS ──
         function renderUsers(searchTerm = '', filter = 'all') {
             const container = document.getElementById('usersList');
             const usersData = allData.users || {};
@@ -6205,7 +6240,7 @@
         // ───────────────────────────────────────────────────────────────────
 
         function renderCustomerTxPage(searchTerm = '') {
-            const container = document.getElementById('customerTxListPage');
+            const container = customerTxListPage;
             const transactions = allData.transactions || {};
             const users = allData.users || {};
             const accounts = allData.customerAccounts || {};
