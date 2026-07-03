@@ -3382,8 +3382,8 @@
             box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
 
-        /* ── CUSTOMER TRANSFERS PAGE STYLES ── */
-        .page-customer-tx .tx-filter-btn {
+        /* ── CUSTOMER WALLET PAGE STYLES (enhanced) ── */
+        .page-customer-wallet .wallet-filter-btn {
             padding: 3px 12px;
             border-radius: 12px;
             border: none;
@@ -3393,12 +3393,59 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .page-customer-tx .tx-filter-btn.active {
+        .page-customer-wallet .wallet-filter-btn.active {
             background: #1c2128;
             color: #fff;
         }
-        .page-customer-tx .tx-filter-btn:hover:not(.active) {
+        .page-customer-wallet .wallet-filter-btn:hover:not(.active) {
             background: #e0e0e0;
+        }
+
+        /* Transaction items within user details */
+        .user-card .tx-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 10px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .user-card .tx-item:last-child {
+            border-bottom: none;
+        }
+        .user-card .tx-item .tx-desc {
+            color: #555;
+            flex: 1;
+        }
+        .user-card .tx-item .tx-amount {
+            font-weight: 600;
+            white-space: nowrap;
+            margin-left: 8px;
+        }
+        .user-card .tx-item .tx-amount.positive {
+            color: #16a34a;
+        }
+        .user-card .tx-item .tx-amount.negative {
+            color: #dc2626;
+        }
+        .user-card .tx-empty {
+            color: #aaa;
+            font-size: 10px;
+            padding: 6px 0;
+            text-align: center;
+        }
+
+        /* Status badges reused */
+        .status-badge.approved {
+            background: #e6fffa;
+            color: #00a86b;
+        }
+        .status-badge.declined {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        .status-badge.pending {
+            background: #fff6e0;
+            color: #cc8800;
         }
     </style>
 </head>
@@ -3436,7 +3483,7 @@
                 <button class="action-btn promo-btn" id="actionPromoPics"><i class="fa-regular fa-images"></i> Promo Pics</button>
                 <button class="action-btn referral-btn" id="actionReferral"><i class="fa-solid fa-gift"></i> Referral</button>
                 <button class="action-btn payables-btn" id="actionPayables"><i class="fa-solid fa-money-bill-wave"></i> Payables</button>
-                <button class="action-btn" id="actionCustomerTx"><i class="fa-solid fa-arrows-left-right"></i> Customer Transfers</button>
+                <button class="action-btn" id="actionCustomerWallets"><i class="fa-solid fa-wallet"></i> Customer Wallets</button>
             </div>
 
             <!-- ===== BACK BUTTON ===== -->
@@ -3734,16 +3781,16 @@
 
             </div>
 
-            <!-- ===== PAGE: CUSTOMER TRANSFERS (renamed from Customer Transactions) ===== -->
-            <div id="page-customer-tx" class="page page-customer-tx">
+            <!-- ===== PAGE: CUSTOMER WALLETS (renamed from Customer Transactions) ===== -->
+            <div id="page-customer-wallet" class="page page-customer-wallet">
                 <div class="card">
                     <div class="card-header">
-                        <h3><i class="fa-solid fa-arrows-left-right" style="color:#f5b83d;"></i> Customer Transfers</h3>
+                        <h3><i class="fa-solid fa-wallet" style="color:#f5b83d;"></i> Customer Wallets</h3>
                         <div style="display:flex; gap:6px; flex-wrap:wrap; flex:1; max-width:300px;">
-                            <input type="text" id="customerTxSearch" placeholder="Search by name or email..." style="flex:1; padding:4px 8px; border:1px solid #ddd; border-radius:12px; font-size:10px; outline:none;" />
+                            <input type="text" id="customerWalletSearch" placeholder="Search by name or email..." style="flex:1; padding:4px 8px; border:1px solid #ddd; border-radius:12px; font-size:10px; outline:none;" />
                         </div>
                     </div>
-                    <div id="customerTxListPage">
+                    <div id="customerWalletListPage">
                         <!-- Rendered by JS -->
                     </div>
                 </div>
@@ -4555,7 +4602,7 @@
         const actionPromoPics = document.getElementById('actionPromoPics');
         const actionReferral = document.getElementById('actionReferral');
         const actionPayables = document.getElementById('actionPayables');
-        const actionCustomerTx = document.getElementById('actionCustomerTx');
+        const actionCustomerWallets = document.getElementById('actionCustomerWallets');
 
         // ── Services price adjustment ──
         const adjustOptions = document.getElementById('adjustOptions');
@@ -4594,9 +4641,9 @@
         // ─── Users page filter ───
         const userFilterSelect = document.getElementById('userFilterSelect');
 
-        // ─── Customer Transfers Page ───
-        const customerTxListPage = document.getElementById('customerTxListPage');
-        const customerTxSearch = document.getElementById('customerTxSearch');
+        // ─── Customer Wallets Page ───
+        const customerWalletListPage = document.getElementById('customerWalletListPage');
+        const customerWalletSearch = document.getElementById('customerWalletSearch');
 
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
@@ -4799,9 +4846,9 @@
             // ── Account Update Modal user list ──
             renderAccountUpdateUserList();
 
-            // ── Customer Transfers Page ──
-            if (document.getElementById('page-customer-tx').classList.contains('active')) {
-                renderCustomerTxPage();
+            // ── Customer Wallets Page ──
+            if (document.getElementById('page-customer-wallet').classList.contains('active')) {
+                renderCustomerWalletsPage();
             }
 
             // ── Update badges ──
@@ -6236,96 +6283,155 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER TRANSFERS PAGE – ONLY SENT MONEY TRANSACTIONS
+        // CUSTOMER WALLETS PAGE – NEW IMPLEMENTATION
         // ───────────────────────────────────────────────────────────────────
 
-        function renderCustomerTxPage(searchTerm = '') {
-            const container = customerTxListPage;
-            const transactions = allData.transactions || {};
+        function renderCustomerWalletsPage(searchTerm = '') {
+            const container = document.getElementById('customerWalletListPage');
             const users = allData.users || {};
             const accounts = allData.customerAccounts || {};
+            const transactions = allData.transactions || {};
 
-            // Only show "Sent Money" transactions (each transfer appears once)
-            let entries = Object.entries(transactions).filter(([key, t]) => t.type === 'Sent Money');
+            // Build user list with balances and transactions
+            let userList = Object.entries(users).map(([uid, user]) => {
+                const fullName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
+                const email = user.email || '';
+                const referralCode = user.referralCode || 'N/A';
+                const balance = (accounts[uid]?.balance || 0);
+                // Collect all transactions involving this user (either as main party or other party)
+                const userTxs = Object.entries(transactions).filter(([key, tx]) => {
+                    return tx.userId === uid || tx.otherPartyUid === uid;
+                }).map(([key, tx]) => ({ key, ...tx }));
+                return { uid, fullName, email, referralCode, balance, user, transactions: userTxs };
+            });
 
-            // Search filter (by sender or receiver name/email)
+            // Filter by search term
             if (searchTerm.trim()) {
                 const term = searchTerm.trim().toLowerCase();
-                entries = entries.filter(([key, t]) => {
-                    const sender = users[t.userId] || {};
-                    const receiver = users[t.otherPartyUid] || {};
-                    const senderName = `${sender.firstName || ''} ${sender.lastName || ''}`.trim().toLowerCase();
-                    const receiverName = `${receiver.firstName || ''} ${receiver.lastName || ''}`.trim().toLowerCase();
-                    const senderEmail = (sender.email || '').toLowerCase();
-                    const receiverEmail = (receiver.email || '').toLowerCase();
-                    return senderName.includes(term) || receiverName.includes(term) || senderEmail.includes(term) || receiverEmail.includes(term);
-                });
+                userList = userList.filter(u => 
+                    u.fullName.toLowerCase().includes(term) || 
+                    u.email.toLowerCase().includes(term)
+                );
             }
 
-            // Sort by newest first
-            entries.sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
+            // Sort alphabetically by full name
+            userList.sort((a, b) => a.fullName.localeCompare(b.fullName));
 
-            if (entries.length === 0) {
-                container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:16px;">No customer-to-customer transfers found.</div>`;
+            if (userList.length === 0) {
+                container.innerHTML = `<div class="text-muted text-center" style="padding:16px;">No customers found.</div>`;
                 return;
             }
 
             let html = '';
-            entries.forEach(([key, t]) => {
-                const senderUid = t.userId;
-                const receiverUid = t.otherPartyUid;
-                const amount = Math.abs(t.amount || 0);
-                const dateStr = t.date ? new Date(t.date).toLocaleString() :
-                    (t.timestamp ? new Date(t.timestamp).toLocaleString() : 'N/A');
+            userList.forEach(user => {
+                const { uid, fullName, email, referralCode, balance, transactions: userTxs } = user;
+                // Sort transactions by timestamp descending
+                const sortedTxs = userTxs.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
 
-                const sender = users[senderUid] || {};
-                const receiver = users[receiverUid] || {};
-                const senderAcc = accounts[senderUid] || { balance: 0 };
-                const receiverAcc = accounts[receiverUid] || { balance: 0 };
+                // Build transaction list HTML
+                let txsHtml = '';
+                if (sortedTxs.length === 0) {
+                    txsHtml = `<div class="tx-empty">No transactions for this user.</div>`;
+                } else {
+                    txsHtml = sortedTxs.map(tx => {
+                        // Determine display type and sign
+                        let typeDisplay = tx.type || 'Transaction';
+                        let amountDisplay = tx.amount ? `ZMW ${Math.abs(tx.amount).toFixed(2)}` : '';
+                        let amountClass = '';
+                        let isCredit = false;
+                        
+                        // Determine if credit or debit for this user
+                        if (tx.userId === uid) {
+                            // This user is the main party
+                            if (tx.type === 'Sent Money') {
+                                isCredit = false;
+                                typeDisplay = `Sent Money to ${tx.otherParty || 'Unknown'}`;
+                            } else if (tx.type === 'Received Money') {
+                                isCredit = true;
+                                typeDisplay = `Received Money from ${tx.otherParty || 'Unknown'}`;
+                            } else if (tx.type && tx.type.includes('Manual Deposit')) {
+                                isCredit = true;
+                                typeDisplay = 'Manual Deposit';
+                            } else if (tx.type === 'Withdrawal Approved') {
+                                isCredit = false;
+                                typeDisplay = 'Withdrawal Approved';
+                            } else if (tx.type === 'Withdrawal Declined') {
+                                isCredit = false;
+                                typeDisplay = 'Withdrawal Declined';
+                            } else if (tx.type && tx.type.includes('Referral')) {
+                                isCredit = true;
+                                typeDisplay = 'Referral Bonus';
+                            } else if (tx.type === 'Withdrawal Request') {
+                                isCredit = false; // pending, not yet deducted
+                                typeDisplay = 'Withdrawal Request (Pending)';
+                            } else {
+                                // Default: if amount > 0 credit, else debit
+                                isCredit = (tx.amount || 0) > 0;
+                            }
+                        } else if (tx.otherPartyUid === uid) {
+                            // This user is the other party
+                            if (tx.type === 'Sent Money') {
+                                // They received the money
+                                isCredit = true;
+                                typeDisplay = `Received Money from ${tx.userName || 'Unknown'}`;
+                            } else if (tx.type === 'Received Money') {
+                                // They sent the money (the other party of Received Money is the sender)
+                                isCredit = false;
+                                typeDisplay = `Sent Money to ${tx.userName || 'Unknown'}`;
+                            } else {
+                                isCredit = (tx.amount || 0) > 0;
+                                typeDisplay = tx.type || 'Transaction';
+                            }
+                        } else {
+                            isCredit = (tx.amount || 0) > 0;
+                            typeDisplay = tx.type || 'Transaction';
+                        }
+                        amountDisplay = tx.amount ? `ZMW ${Math.abs(tx.amount).toFixed(2)}` : '';
+                        amountClass = isCredit ? 'positive' : 'negative';
 
-                const senderName = `${sender.firstName || ''} ${sender.lastName || ''}`.trim() || 'Unknown';
-                const receiverName = `${receiver.firstName || ''} ${receiver.lastName || ''}`.trim() || 'Unknown';
-                const senderEmail = sender.email || 'N/A';
-                const receiverEmail = receiver.email || 'N/A';
-                const senderPhone = sender.phone || 'N/A';
-                const receiverPhone = receiver.phone || 'N/A';
-                const senderRef = sender.referralCode || 'N/A';
-                const receiverRef = receiver.referralCode || 'N/A';
-                const senderBal = senderAcc.balance || 0;
-                const receiverBal = receiverAcc.balance || 0;
+                        // Date formatting
+                        const dateStr = tx.date ? new Date(tx.date).toLocaleString() : (tx.timestamp ? new Date(tx.timestamp).toLocaleString() : 'N/A');
 
+                        // Status badge if any
+                        let statusHtml = '';
+                        if (tx.status) {
+                            const statusClass = tx.status === 'approved' ? 'status-badge approved' : (tx.status === 'declined' ? 'status-badge declined' : (tx.status === 'pending' ? 'status-badge pending' : ''));
+                            statusHtml = `<span class="${statusClass}">${tx.status}</span>`;
+                        }
+
+                        return `
+                            <div class="tx-item">
+                                <div class="tx-desc">
+                                    ${typeDisplay}
+                                    ${statusHtml ? `<br>${statusHtml}` : ''}
+                                    <br><small style="color:#aaa;">${dateStr}</small>
+                                </div>
+                                <div class="tx-amount ${amountClass}">${amountDisplay}</div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+
+                // Build user card
                 html += `
-                    <div class="order-card" data-key="${key}">
-                        <div class="order-toggle">
-                            <div style="flex:1; display:flex; flex-wrap:wrap; align-items:center; gap:4px;">
-                                <div style="font-weight:600; font-size:12px;">
-                                    <i class="fa-solid fa-paper-plane" style="color:#4a90d9;"></i> 
-                                    ${escapeHtml(senderName)} sent ZMW ${amount.toFixed(2)} to ${escapeHtml(receiverName)}
+                    <div class="user-card" data-uid="${uid}">
+                        <div class="user-summary">
+                            <div class="left">
+                                <div class="u-avatar">${(fullName.charAt(0) || 'U').toUpperCase()}</div>
+                                <div class="u-info">
+                                    <div class="u-name">${fullName}</div>
+                                    <div class="u-email">${email}</div>
+                                    <div style="font-size:9px; color:#888;">Referral: ${referralCode}</div>
                                 </div>
-                                <div style="font-size:9px; color:#888; width:100%; margin-top:2px;">${dateStr}</div>
                             </div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
+                            <div class="right">
+                                <div style="font-weight:700; font-size:14px; color:#1c2128;">ZMW ${balance.toFixed(2)}</div>
+                                <i class="fa-solid fa-chevron-down expand-icon"></i>
+                            </div>
                         </div>
-                        <div class="order-details">
-                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                                <div style="background:#f8f9fc; padding:10px; border-radius:8px; border:1px solid #f0f0f0;">
-                                    <h4 style="font-size:11px; font-weight:700; color:#1c2128; margin-bottom:6px;">📤 Sender</h4>
-                                    <div style="font-size:10px; line-height:1.8;"><strong>Name:</strong> ${escapeHtml(senderName)}</div>
-                                    <div style="font-size:10px; line-height:1.8;"><strong>Phone:</strong> ${escapeHtml(senderPhone)}</div>
-                                    <div style="font-size:10px; line-height:1.8;"><strong>Email:</strong> ${escapeHtml(senderEmail)}</div>
-                                    <div style="font-size:10px; line-height:1.8;"><strong>Referral Code:</strong> ${escapeHtml(senderRef)}</div>
-                                    <div style="font-size:10px; line-height:1.8;"><strong>Wallet Balance:</strong> ZMW ${senderBal.toFixed(2)}</div>
-                                </div>
-                                <div style="background:#f8f9fc; padding:10px; border-radius:8px; border:1px solid #f0f0f0;">
-                                    <h4 style="font-size:11px; font-weight:700; color:#1c2128; margin-bottom:6px;">📥 Receiver</h4>
-                                    <div style="font-size:10px; line-height:1.8;"><strong>Name:</strong> ${escapeHtml(receiverName)}</div>
-                                    <div style="font-size:10px; line-height:1.8;"><strong>Phone:</strong> ${escapeHtml(receiverPhone)}</div>
-                                    <div style="font-size:10px; line-height:1.8;"><strong>Email:</strong> ${escapeHtml(receiverEmail)}</div>
-                                    <div style="font-size:10px; line-height:1.8;"><strong>Referral Code:</strong> ${escapeHtml(receiverRef)}</div>
-                                    <div style="font-size:10px; line-height:1.8;"><strong>Wallet Balance:</strong> ZMW ${receiverBal.toFixed(2)}</div>
-                                </div>
-                            </div>
+                        <div class="user-details">
+                            <div style="font-weight:600; font-size:11px; color:#1c2128; margin-bottom:6px;">Transaction History</div>
+                            ${txsHtml}
                         </div>
                     </div>
                 `;
@@ -6333,23 +6439,28 @@
 
             container.innerHTML = html;
 
-            // Toggle expand
-            container.querySelectorAll('.order-toggle').forEach(el => {
-                el.addEventListener('click', function() {
-                    const parent = this.closest('.order-card');
-                    const details = parent.querySelector('.order-details');
-                    details.classList.toggle('open');
-                    parent.classList.toggle('open');
+            // Add click to expand/collapse
+            container.querySelectorAll('.user-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    this.classList.toggle('open');
+                    const details = this.querySelector('.user-details');
+                    if (this.classList.contains('open')) {
+                        details.style.display = 'block';
+                        details.classList.add('open');
+                    } else {
+                        details.style.display = 'none';
+                        details.classList.remove('open');
+                    }
                 });
             });
 
             // Search input binding (only once)
-            if (!window._customerTxSearchBound) {
-                window._customerTxSearchBound = true;
-                const searchInput = document.getElementById('customerTxSearch');
+            if (!window._customerWalletSearchBound) {
+                window._customerWalletSearchBound = true;
+                const searchInput = document.getElementById('customerWalletSearch');
                 if (searchInput) {
                     searchInput.addEventListener('input', function() {
-                        renderCustomerTxPage(this.value);
+                        renderCustomerWalletsPage(this.value);
                     });
                 }
             }
@@ -7398,14 +7509,14 @@
             showBackButton();
         });
 
-        // ── New Customer Transfers Page Button ──
-        actionCustomerTx.addEventListener('click', function() {
+        // ── New Customer Wallets Page Button ──
+        actionCustomerWallets.addEventListener('click', function() {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-customer-tx').classList.add('active');
+            document.getElementById('page-customer-wallet').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             mainHeader.classList.remove('work-active');
             document.getElementById('appContent').scrollTop = 0;
-            renderCustomerTxPage();
+            renderCustomerWalletsPage();
             showBackButton();
         });
 
@@ -8019,7 +8130,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Customer Transfers page shows only send‑money transfers with a search bar and detailed sender/receiver info (name, phone, email, referral code, wallet balance).');
+        console.log('✅ Admin Dashboard — Customer Wallets page shows all wallet transactions per customer, sorted alphabetically, expandable cards with name, referral code, and current balance.');
     </script>
 </body>
 </html>
