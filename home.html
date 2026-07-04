@@ -73,7 +73,7 @@
             flex: 1;
             background: none;
             border: 1px solid #f5b83d;
-            /* thin yellow border */
+            /* thin yellow border around the pill shape */
             border-radius: 20px;
             font-size: 6px;
             gap: 1px;
@@ -325,8 +325,7 @@
             opacity: 0.6;
             z-index: 1;
             will-change: transform, opacity;
-            border: 1px solid #f5b83d;
-            /* thin yellow border on all flyers */
+            /* border removed per user request */
         }
 
         .promo-slide img {
@@ -379,7 +378,6 @@
             opacity: 1;
             z-index: 3;
             box-shadow: 0 10px 41px rgba(0, 0, 0, 0.25);
-            border-color: #f5b83d;
         }
         .promo-slide.far-slide {
             transform: scale(0.66);
@@ -530,51 +528,21 @@
         }
 
         /* All service thumbs dark */
-        .thumb-1 {
-            background: #1c2128 !important;
-        }
-        .thumb-2 {
-            background: #1c2128 !important;
-        }
-        .thumb-3 {
-            background: #1c2128 !important;
-        }
-        .thumb-4 {
-            background: #1c2128 !important;
-        }
-        .thumb-5 {
-            background: #1c2128 !important;
-        }
-        .thumb-6 {
-            background: #1c2128 !important;
-        }
-        .thumb-7 {
-            background: #1c2128 !important;
-        }
-        .thumb-8 {
-            background: #1c2128 !important;
-        }
-        .thumb-9 {
-            background: #1c2128 !important;
-        }
-        .thumb-10 {
-            background: #1c2128 !important;
-        }
-        .thumb-11 {
-            background: #1c2128 !important;
-        }
-        .thumb-12 {
-            background: #1c2128 !important;
-        }
-        .thumb-13 {
-            background: #1c2128 !important;
-        }
-        .thumb-14 {
-            background: #1c2128 !important;
-        }
-        .thumb-15 {
-            background: #1c2128 !important;
-        }
+        .thumb-1 { background: #1c2128 !important; }
+        .thumb-2 { background: #1c2128 !important; }
+        .thumb-3 { background: #1c2128 !important; }
+        .thumb-4 { background: #1c2128 !important; }
+        .thumb-5 { background: #1c2128 !important; }
+        .thumb-6 { background: #1c2128 !important; }
+        .thumb-7 { background: #1c2128 !important; }
+        .thumb-8 { background: #1c2128 !important; }
+        .thumb-9 { background: #1c2128 !important; }
+        .thumb-10 { background: #1c2128 !important; }
+        .thumb-11 { background: #1c2128 !important; }
+        .thumb-12 { background: #1c2128 !important; }
+        .thumb-13 { background: #1c2128 !important; }
+        .thumb-14 { background: #1c2128 !important; }
+        .thumb-15 { background: #1c2128 !important; }
 
         .order-flow-container {
             padding: 0 12px 14px 12px;
@@ -1145,14 +1113,8 @@
             animation: modalIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         @keyframes modalIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
         .order-success-modal i {
             font-size: 48px;
@@ -5477,7 +5439,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer App — Enhanced with yellow borders on nav buttons & flyers, plus reverse-direction carousel.');
+        console.log('✅ Customer App — Yellow border on pill-shaped nav buttons only (flyers clean). Reverse-direction carousel active.');
     </script>
 </body>
 </html>
