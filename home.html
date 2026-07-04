@@ -43,6 +43,7 @@
             -webkit-overflow-scrolling: touch;
         }
 
+        /* ----- BOTTOM NAV – yellow border around the entire pill bar ----- */
         .bottom-nav {
             position: fixed;
             bottom: 17px;
@@ -53,6 +54,7 @@
             height: 54px;
             background: #1c2128;
             border-radius: 27px;
+            border: 1px solid #f5b83d;   /* thin yellow border around the whole bar */
             padding: 7px 10px;
             display: flex;
             justify-content: space-between;
@@ -69,17 +71,14 @@
             align-items: center;
             cursor: pointer;
             color: #888;
-            transition: color 0.3s, border-color 0.3s;
+            transition: color 0.3s;
             flex: 1;
             background: none;
-            border: 1px solid #f5b83d;
-            /* thin yellow border around the pill shape */
-            border-radius: 20px;
+            border: none;               /* no border on individual items */
             font-size: 6px;
             gap: 1px;
             user-select: none;
             padding: 2px 0;
-            transition: all 0.3s ease;
         }
         .nav-item i {
             font-size: 15px;
@@ -87,8 +86,6 @@
         }
         .nav-item.active {
             color: #f5b83d;
-            border-color: #f5b83d;
-            background: rgba(245, 184, 61, 0.10);
         }
         .nav-item:active {
             transform: scale(0.92);
@@ -325,7 +322,7 @@
             opacity: 0.6;
             z-index: 1;
             will-change: transform, opacity;
-            /* border removed per user request */
+            /* no border on flyers */
         }
 
         .promo-slide img {
@@ -2645,7 +2642,7 @@
 
         </div>
 
-        <!-- ===== BOTTOM NAV ===== -->
+        <!-- ===== BOTTOM NAV – YELLOW BORDER AROUND THE ENTIRE PILL BAR ===== -->
         <div class="bottom-nav">
             <button class="nav-item active" data-view="homeView"><i class="fa-solid fa-house"></i><span>Home</span></button>
             <button class="nav-item" data-view="ordersView"><i class="fa-solid fa-bag-shopping"></i><span>Orders</span></button>
@@ -5439,7 +5436,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer App — Yellow border on pill-shaped nav buttons only (flyers clean). Reverse-direction carousel active.');
+        console.log('✅ Yellow border around the entire pill-shaped nav bar (not on icons). Flyers have no border. Reverse-direction carousel active.');
     </script>
 </body>
 </html>
