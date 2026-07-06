@@ -305,8 +305,9 @@
         }
 
         .promo-slide {
-            flex: 0 0 60%;
-            max-width: 60%;
+            flex: 0 0 88%;
+            /* wider slide → only ~6% of adjacent slides visible at each edge */
+            max-width: 88%;
             scroll-snap-align: center;
             position: relative;
             border-radius: 17px;
@@ -319,8 +320,8 @@
             align-items: center;
             justify-content: center;
             margin: auto 0;
-            transform: scale(0.82);
-            opacity: 0.6;
+            transform: scale(0.85);
+            opacity: 0.55;
             z-index: 1;
             will-change: transform, opacity;
             /* no border on flyers */
@@ -364,24 +365,23 @@
             text-shadow: 0 1px 7px rgba(0, 0, 0, 0.3);
         }
 
-        /* ----- FLYER VISIBILITY: prev & next = 8% (tiny peek), active = comfortably enlarged ----- */
+        /* ----- FLYER VISIBILITY: tiny edge of prev/next, active slightly enlarged ----- */
         .promo-slide.prev-slide,
         .promo-slide.next-slide {
-            transform: scale(0.08) !important;
-            /* 8% of the flyer is shown (peek at edges) */
-            opacity: 0.25 !important;
+            transform: scale(0.85) !important;
+            opacity: 0.55 !important;
             z-index: 2;
         }
         .promo-slide.active-slide {
             transform: scale(1.08) !important;
-            /* reduced from 1.35, comfortably enlarged */
+            /* slightly larger than the original 1.02 */
             opacity: 1 !important;
             z-index: 3;
             box-shadow: 0 10px 41px rgba(0, 0, 0, 0.25);
         }
         .promo-slide.far-slide {
-            transform: scale(0.02) !important;
-            opacity: 0.02 !important;
+            transform: scale(0.70) !important;
+            opacity: 0.20 !important;
             z-index: 0;
         }
 
@@ -2403,8 +2403,8 @@
                 height: 221px;
             }
             .promo-slide {
-                flex: 0 0 62%;
-                max-width: 62%;
+                flex: 0 0 84%;
+                max-width: 84%;
                 height: 86%;
             }
             .promo-slide .slide-text {
@@ -2432,8 +2432,8 @@
                 height: 187px;
             }
             .promo-slide {
-                flex: 0 0 66%;
-                max-width: 66%;
+                flex: 0 0 80%;
+                max-width: 80%;
             }
         }
     </style>
@@ -5480,7 +5480,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Yellow border around the entire pill-shaped nav bar (not on icons). Flyers have no border. Reverse-direction carousel active. Carousel: prev/next = 8% scale (peek at edges), active = reduced to 1.08 scale. Orders/History/Withdrawals sorted newest first.');
+        console.log('✅ Carousel: prev/next = tiny edge (~6%) via 88% flex-basis, active = 1.08 scale. Orders/History/Withdrawals sorted newest first.');
     </script>
 </body>
 </html>
