@@ -54,7 +54,8 @@
             height: 54px;
             background: #1c2128;
             border-radius: 27px;
-            border: 1px solid #f5b83d;   /* thin yellow border around the whole bar */
+            border: 1px solid #f5b83d;
+            /* thin yellow border around the whole bar */
             padding: 7px 10px;
             display: flex;
             justify-content: space-between;
@@ -74,7 +75,7 @@
             transition: color 0.3s;
             flex: 1;
             background: none;
-            border: none;               /* no border on individual items */
+            border: none;
             font-size: 6px;
             gap: 1px;
             user-select: none;
@@ -363,22 +364,24 @@
             text-shadow: 0 1px 7px rgba(0, 0, 0, 0.3);
         }
 
-        /* previous & next flyers touch the edges — no side gap */
+        /* ----- FLYER VISIBILITY: prev & next = 3% (tiny peek), active = enlarged ----- */
         .promo-slide.prev-slide,
         .promo-slide.next-slide {
-            transform: scale(0.82);
-            opacity: 0.8;
+            transform: scale(0.03) !important;
+            /* only 3% of the flyer is shown */
+            opacity: 0.12 !important;
             z-index: 2;
         }
         .promo-slide.active-slide {
-            transform: scale(1.02);
-            opacity: 1;
+            transform: scale(1.35) !important;
+            /* increased length / size for the showing flyer */
+            opacity: 1 !important;
             z-index: 3;
             box-shadow: 0 10px 41px rgba(0, 0, 0, 0.25);
         }
         .promo-slide.far-slide {
-            transform: scale(0.66);
-            opacity: 0.2;
+            transform: scale(0.01) !important;
+            opacity: 0.02 !important;
             z-index: 0;
         }
 
@@ -525,21 +528,51 @@
         }
 
         /* All service thumbs dark */
-        .thumb-1 { background: #1c2128 !important; }
-        .thumb-2 { background: #1c2128 !important; }
-        .thumb-3 { background: #1c2128 !important; }
-        .thumb-4 { background: #1c2128 !important; }
-        .thumb-5 { background: #1c2128 !important; }
-        .thumb-6 { background: #1c2128 !important; }
-        .thumb-7 { background: #1c2128 !important; }
-        .thumb-8 { background: #1c2128 !important; }
-        .thumb-9 { background: #1c2128 !important; }
-        .thumb-10 { background: #1c2128 !important; }
-        .thumb-11 { background: #1c2128 !important; }
-        .thumb-12 { background: #1c2128 !important; }
-        .thumb-13 { background: #1c2128 !important; }
-        .thumb-14 { background: #1c2128 !important; }
-        .thumb-15 { background: #1c2128 !important; }
+        .thumb-1 {
+            background: #1c2128 !important;
+        }
+        .thumb-2 {
+            background: #1c2128 !important;
+        }
+        .thumb-3 {
+            background: #1c2128 !important;
+        }
+        .thumb-4 {
+            background: #1c2128 !important;
+        }
+        .thumb-5 {
+            background: #1c2128 !important;
+        }
+        .thumb-6 {
+            background: #1c2128 !important;
+        }
+        .thumb-7 {
+            background: #1c2128 !important;
+        }
+        .thumb-8 {
+            background: #1c2128 !important;
+        }
+        .thumb-9 {
+            background: #1c2128 !important;
+        }
+        .thumb-10 {
+            background: #1c2128 !important;
+        }
+        .thumb-11 {
+            background: #1c2128 !important;
+        }
+        .thumb-12 {
+            background: #1c2128 !important;
+        }
+        .thumb-13 {
+            background: #1c2128 !important;
+        }
+        .thumb-14 {
+            background: #1c2128 !important;
+        }
+        .thumb-15 {
+            background: #1c2128 !important;
+        }
 
         .order-flow-container {
             padding: 0 12px 14px 12px;
@@ -1110,8 +1143,14 @@
             animation: modalIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         @keyframes modalIn {
-            from { opacity: 0; transform: scale(0.9) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
         .order-success-modal i {
             font-size: 48px;
@@ -3479,13 +3518,16 @@
         }
 
         // =================================================================
-        // ORDERS
+        // ORDERS  (sorted newest first)
         // =================================================================
 
         function renderOrders() {
             const container = ordersGrid;
             const orders = allData.orders || {};
             const entries = Object.entries(orders).filter(([key, o]) => o.userId === currentUserId);
+            // Sort by createdAt (newest first)
+            entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+
             if (entries.length === 0) {
                 container.innerHTML =
                     `<div class="text-muted text-center" style="padding:17px;">No orders found.</div>`;
@@ -3553,6 +3595,8 @@
             const container = historyList;
             const transactions = allData.transactions || {};
             const entries = Object.entries(transactions).filter(([key, t]) => t.userId === currentUserId);
+            // Already sorted by timestamp (newest first) via the sort below
+            entries.sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
 
             const orders = allData.orders || {};
             let pendingReminder = null;
@@ -5436,7 +5480,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Yellow border around the entire pill-shaped nav bar (not on icons). Flyers have no border. Reverse-direction carousel active.');
+        console.log('✅ Yellow border around the entire pill-shaped nav bar (not on icons). Flyers have no border. Reverse-direction carousel active. Carousel: prev/next = 3% scale, active = enlarged. Orders/History/Withdrawals sorted newest first.');
     </script>
 </body>
 </html>
