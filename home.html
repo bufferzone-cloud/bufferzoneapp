@@ -2032,31 +2032,108 @@
             padding: 10px 0;
         }
 
-        .transaction-msg {
-            background: #f8f9fc;
-            border-radius: 10px;
-            padding: 10px 12px;
-            margin-bottom: 7px;
-            border-left: 4px solid #f5b83d;
+        /* ===== ACCOUNT TRANSACTIONS & WITHDRAWALS – EXPANDABLE CARDS ===== */
+        .account-tx-card,
+        .withdrawal-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 12px 14px;
+            box-shadow: 0 2px 9px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 9px;
+        }
+        .account-tx-card:active,
+        .withdrawal-card:active {
+            transform: scale(0.98);
+        }
+        .account-tx-card .tx-summary,
+        .withdrawal-card .wd-summary {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .transaction-msg .left .title {
-            font-weight: 600;
+        .account-tx-card .tx-summary .left,
+        .withdrawal-card .wd-summary .left {
+            display: flex;
+            align-items: center;
+            gap: 9px;
             font-size: 10px;
             color: #1c2128;
         }
-        .transaction-msg .left .desc {
+        .account-tx-card .tx-summary .left i,
+        .withdrawal-card .wd-summary .left i {
+            font-size: 12px;
+            color: #667eea;
+        }
+        .account-tx-card .tx-summary .right,
+        .withdrawal-card .wd-summary .right {
             font-size: 9px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .account-tx-card .tx-details,
+        .withdrawal-card .wd-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
+            padding: 0 3px;
+            border-top: 1px solid transparent;
+        }
+        .account-tx-card.open .tx-details,
+        .withdrawal-card.open .wd-details {
+            max-height: 250px;
+            padding: 9px 3px 3px 3px;
+            border-top-color: #f0f0f0;
+            margin-top: 7px;
+        }
+        .account-tx-card .tx-details .d-row,
+        .withdrawal-card .wd-details .d-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 10px;
             color: #555;
         }
-        .transaction-msg .right .amount {
-            font-weight: 700;
-            font-size: 12px;
+        .account-tx-card .tx-details .d-row .d-label,
+        .withdrawal-card .wd-details .d-row .d-label {
+            color: #888;
+        }
+        .account-tx-card .tx-details .d-row .d-val,
+        .withdrawal-card .wd-details .d-row .d-val {
+            font-weight: 500;
+            color: #1c2128;
+        }
+        .account-tx-card .expand-icon,
+        .withdrawal-card .expand-icon {
+            transition: transform 0.3s ease;
+            font-size: 9px;
+            color: #aaa;
+        }
+        .account-tx-card.open .expand-icon,
+        .withdrawal-card.open .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .withdrawal-card .status-badge {
+            padding: 2px 10px;
+            border-radius: 14px;
+            font-size: 9px;
+            font-weight: 600;
+        }
+        .withdrawal-card .status-badge.pending {
+            background: #fff6e0;
+            color: #cc8800;
+        }
+        .withdrawal-card .status-badge.approved {
+            background: #e6fffa;
             color: #00a86b;
         }
-        .transaction-msg .right .amount.negative {
+        .withdrawal-card .status-badge.declined {
+            background: #fee2e2;
             color: #dc2626;
         }
 
@@ -2102,64 +2179,6 @@
         }
         .referral-code-box .copy-btn i {
             font-size: 12px;
-        }
-
-        .withdrawal-item {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 12px 14px;
-            margin-bottom: 9px;
-            box-shadow: 0 2px 7px rgba(0, 0, 0, 0.05);
-            border: 1px solid #f0f0f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.2s;
-        }
-        .withdrawal-item .left .amount {
-            font-weight: 700;
-            font-size: 14px;
-            color: #1c2128;
-        }
-        .withdrawal-item .left .date {
-            font-size: 9px;
-            color: #888;
-        }
-        .withdrawal-item .status-badge {
-            padding: 3px 12px;
-            border-radius: 17px;
-            font-size: 9px;
-            font-weight: 600;
-        }
-        .withdrawal-item .status-badge.pending {
-            background: #fff6e0;
-            color: #cc8800;
-        }
-        .withdrawal-item .status-badge.approved {
-            background: #e6fffa;
-            color: #00a86b;
-        }
-        .withdrawal-item .status-badge.declined {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-        .withdrawal-item .status-message {
-            font-size: 9px;
-            color: #555;
-            margin-top: 2px;
-            display: block;
-        }
-
-        .empty-withdrawals {
-            text-align: center;
-            padding: 26px 0;
-            color: #888;
-        }
-        .empty-withdrawals i {
-            font-size: 34px;
-            color: #ddd;
-            display: block;
-            margin-bottom: 7px;
         }
 
         .withdraw-modal-overlay {
@@ -2637,7 +2656,7 @@
                         </div>
 
                         <div id="transactionMessages">
-                            <!-- Rendered by JS (only non-withdrawal transactions) -->
+                            <!-- Rendered by JS (expandable cards) -->
                         </div>
                     </div>
 
@@ -2649,7 +2668,7 @@
                                 <i class="fa-solid fa-arrow-up"></i> Withdraw Funds
                             </button>
                         </div>
-                        <!-- Withdrawals list -->
+                        <!-- Withdrawals list (expandable cards) -->
                         <div id="withdrawalsListContainer">
                             <!-- Rendered by JS -->
                         </div>
@@ -3664,8 +3683,8 @@
                 }
 
                 let statusDisplay = t.status ? t.status.charAt(0).toUpperCase() + t.status.slice(1) : 'N/A';
-                if (isWithdrawal && isApproved) statusDisplay = '✅ Approved';
-                if (isWithdrawal && isDeclined) statusDisplay = '❌ Declined';
+                if (isWithdrawal && isApproved) statusDisplay = 'Approved';
+                if (isWithdrawal && isDeclined) statusDisplay = 'Declined';
 
                 // Enhance send/receive transactions with other party details
                 let otherPartyInfo = '';
@@ -4020,7 +4039,7 @@
         }
 
         // =================================================================
-        // TRANSACTION MESSAGES (only non-withdrawal transactions)
+        // ACCOUNT TRANSACTIONS (expandable cards, newest first)
         // =================================================================
 
         function renderTransactionMessages() {
@@ -4036,7 +4055,7 @@
                 return;
             }
 
-            container.innerHTML = entries.slice(0, 10).map(([key, t]) => {
+            container.innerHTML = entries.map(([key, t]) => {
                 const isCredit = t.amount && t.amount > 0 && (t.type?.toLowerCase().includes('referral') || t.type
                     ?.toLowerCase().includes('received'));
                 let amountDisplay = '';
@@ -4055,12 +4074,12 @@
                 let desc = t.detail || t.message || '';
 
                 if (t.type?.toLowerCase().includes('referral') && t.userName) {
-                    title = `💰 Referral Bonus`;
+                    title = `Referral Bonus`;
                     desc =
                         `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral code.`;
                 }
                 if (t.type?.toLowerCase().includes('discount') && t.userName) {
-                    title = `🎯 Referral Discount`;
+                    title = `Referral Discount`;
                     desc =
                         `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral for a service discount.`;
                 }
@@ -4078,26 +4097,63 @@
                         }
                     }
                     const direction = t.type?.toLowerCase().includes('sent') ? 'Sent to' : 'Received from';
-                    otherInfo = ` ${direction} <strong>${escapeHtml(otherName)}</strong> (📞 ${escapeHtml(otherPhone)})`;
+                    otherInfo = ` ${direction} <strong>${escapeHtml(otherName)}</strong> (${escapeHtml(otherPhone)})`;
+                }
+
+                // Use professional icons based on type
+                let iconClass = 'fa-arrow-right';
+                let iconColor = '#667eea';
+                if (t.type?.toLowerCase().includes('referral')) {
+                    iconClass = 'fa-gift';
+                    iconColor = '#f5b83d';
+                } else if (t.type?.toLowerCase().includes('discount')) {
+                    iconClass = 'fa-percent';
+                    iconColor = '#00a86b';
+                } else if (t.type?.toLowerCase().includes('sent')) {
+                    iconClass = 'fa-paper-plane';
+                    iconColor = '#4a90d9';
+                } else if (t.type?.toLowerCase().includes('received')) {
+                    iconClass = 'fa-inbox';
+                    iconColor = '#00a86b';
+                } else if (t.type?.toLowerCase().includes('payment')) {
+                    iconClass = 'fa-credit-card';
+                    iconColor = '#1c2128';
+                } else {
+                    iconClass = 'fa-arrow-right';
+                    iconColor = '#667eea';
                 }
 
                 return `
-                    <div class="transaction-msg">
+                <div class="account-tx-card" data-key="${key}">
+                    <div class="tx-summary">
                         <div class="left">
-                            <div class="title">${escapeHtml(title)}</div>
-                            <div class="desc">${escapeHtml(desc)}${otherInfo}</div>
-                            <div style="font-size:8px;color:#aaa;">${t.date ? new Date(t.date).toLocaleString() : ''}</div>
+                            <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
+                            <span>${escapeHtml(title)} ${amountDisplay ? 'ZMW ' + t.amount.toFixed(2) : ''}</span>
                         </div>
                         <div class="right">
-                            ${amountDisplay ? `<span class="amount ${amountClass}">${amountDisplay}</span>` : ''}
+                            <span>${escapeHtml(t.date || 'N/A')}</span>
+                            <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                     </div>
+                    <div class="tx-details">
+                        <div class="d-row"><span class="d-label">Reference</span><span class="d-val">${escapeHtml(t.ref || 'N/A')}</span></div>
+                        <div class="d-row"><span class="d-label">Method</span><span class="d-val">${escapeHtml(t.method || 'N/A')}</span></div>
+                        <div class="d-row"><span class="d-label">Status</span><span class="d-val">${escapeHtml(t.status || 'N/A')}</span></div>
+                        <div class="d-row"><span class="d-label">Detail</span><span class="d-val">${escapeHtml(desc)}${otherInfo}</span></div>
+                    </div>
+                </div>
                 `;
             }).join('');
+
+            container.querySelectorAll('.account-tx-card').forEach(el => {
+                el.addEventListener('click', function() {
+                    this.classList.toggle('open');
+                });
+            });
         }
 
         // =================================================================
-        // WITHDRAWALS LIST (color-coded by status, real‑time updates)
+        // WITHDRAWALS LIST (expandable cards, newest first)
         // =================================================================
 
         function renderWithdrawalsList() {
@@ -4124,15 +4180,12 @@
                     .toLocaleString() : 'N/A');
 
                 let statusMessage = '';
-                let statusEmoji = '⏳';
                 let statusColor = '#cc8800';
                 if (w.status === 'approved') {
-                    statusEmoji = '✅';
                     statusColor = '#00a86b';
                     statusMessage =
                         `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was approved. The amount has been deducted from your account.`;
                 } else if (w.status === 'declined') {
-                    statusEmoji = '❌';
                     statusColor = '#dc2626';
                     statusMessage =
                         `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount remains in your account.`;
@@ -4140,19 +4193,45 @@
                     statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
                 }
 
+                // Use professional icons
+                let iconClass = 'fa-clock';
+                let iconColor = '#cc8800';
+                if (w.status === 'approved') {
+                    iconClass = 'fa-check-circle';
+                    iconColor = '#00a86b';
+                } else if (w.status === 'declined') {
+                    iconClass = 'fa-times-circle';
+                    iconColor = '#dc2626';
+                }
+
                 return `
-                    <div class="withdrawal-item">
+                <div class="withdrawal-card" data-key="${key}">
+                    <div class="wd-summary">
                         <div class="left">
-                            <div class="amount" style="color:${statusColor};">${statusEmoji} ZMW ${(w.amount || 0).toFixed(2)}</div>
-                            <div class="date">${dateStr}</div>
-                            <div class="status-message">${statusMessage}</div>
+                            <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
+                            <span>Withdrawal: ZMW ${(w.amount || 0).toFixed(2)}</span>
                         </div>
-                        <div>
+                        <div class="right">
                             <span class="status-badge ${statusClass}">${statusDisplay}</span>
+                            <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                     </div>
+                    <div class="wd-details">
+                        <div class="d-row"><span class="d-label">Amount</span><span class="d-val">ZMW ${(w.amount || 0).toFixed(2)}</span></div>
+                        <div class="d-row"><span class="d-label">Date</span><span class="d-val">${escapeHtml(dateStr)}</span></div>
+                        <div class="d-row"><span class="d-label">Phone</span><span class="d-val">${escapeHtml(w.phone || 'N/A')}</span></div>
+                        <div class="d-row"><span class="d-label">Status</span><span class="d-val">${statusDisplay}</span></div>
+                        <div class="d-row"><span class="d-label">Message</span><span class="d-val">${escapeHtml(statusMessage)}</span></div>
+                    </div>
+                </div>
                 `;
             }).join('');
+
+            container.querySelectorAll('.withdrawal-card').forEach(el => {
+                el.addEventListener('click', function() {
+                    this.classList.toggle('open');
+                });
+            });
         }
 
         // =================================================================
@@ -4203,9 +4282,9 @@
                 return `
                     <div class="tx-item">
                         <div class="tx-left">
-                            <div class="tx-type">${isSent ? '📤 Sent' : '📥 Received'}</div>
+                            <div class="tx-type">${isSent ? 'Sent' : 'Received'}</div>
                             <div class="tx-with">${label} ${escapeHtml(otherName)}</div>
-                            <div style="font-size:8px; color:#888;">📞 ${escapeHtml(otherPhone)} &middot; Balance: ${otherBalance}</div>
+                            <div style="font-size:8px; color:#888;">${escapeHtml(otherPhone)} &middot; Balance: ${otherBalance}</div>
                         </div>
                         <div class="tx-right">
                             <div class="tx-amount ${amountClass}">${sign}ZMW ${Math.abs(t.amount || 0).toFixed(2)}</div>
@@ -5480,7 +5559,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Carousel: prev/next = tiny edge (~6%) via 88% flex-basis, active = 1.08 scale. Orders/History/Withdrawals sorted newest first.');
+        console.log('✅ Carousel: prev/next = tiny edge (~6%), active = 1.08 scale. Orders/History/Withdrawals sorted newest first. Account transactions and withdrawals now use expandable cards with professional icons (no emojis).');
     </script>
 </body>
 </html>
