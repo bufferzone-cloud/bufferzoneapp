@@ -1872,7 +1872,7 @@
 
         .promo-pics-grid {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr 1fr; /* 2 columns */
             gap: 18px;
             padding: 2px 0 18px 0;
             max-width: 800px;
@@ -1888,9 +1888,10 @@
             transition: transform 0.25s ease, box-shadow 0.25s ease;
             border: none;
             width: 100%;
-            height: 400px;
+            aspect-ratio: 1200 / 675; /* 1200x675 */
             max-width: 800px;
             margin: 0 auto;
+            cursor: pointer;
         }
         .promo-pic-card:hover {
             transform: translateY(-6px) scale(1.01);
@@ -1899,7 +1900,7 @@
         .promo-pic-card .pic-image {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             display: block;
             background: #fafafa;
         }
@@ -1913,6 +1914,7 @@
             min-height: 50px;
             display: flex;
             align-items: flex-end;
+            pointer-events: none;
         }
         .promo-pic-card .pic-overlay .pic-text {
             color: #fff;
@@ -1955,6 +1957,27 @@
         }
         .promo-pic-card .pic-delete-btn:active {
             transform: scale(0.9);
+        }
+        .promo-pic-card .pic-edit-click-btn {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(245, 184, 61, 0.9);
+            color: #1c2128;
+            border: none;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .promo-pic-card .pic-edit-click-btn:hover {
+            transform: scale(1.1);
         }
 
         .promo-pics-upload-area {
@@ -3780,6 +3803,120 @@
             color: #aaa;
             margin-top: 1px;
         }
+
+        /* ── NEW: Form Config Modal (Payment settings for each application form) ── */
+        .form-config-modal .modal {
+            max-width: 500px;
+        }
+        .form-config-item {
+            background: #f8f9fc;
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            border: 1px solid #f0f0f0;
+        }
+        .form-config-item .form-config-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+        .form-config-item .form-config-header .name {
+            font-weight: 700;
+            font-size: 13px;
+            color: #1c2128;
+        }
+        .form-config-item .form-config-header .free-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        .form-config-item .form-config-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .form-config-item .form-config-fields .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .form-config-item .form-config-fields .field-group label {
+            font-size: 9px;
+            color: #555;
+            font-weight: 500;
+        }
+        .form-config-item .form-config-fields .field-group input {
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 10px;
+            background: #fff;
+        }
+        .form-config-item .form-config-fields .field-group input:focus {
+            outline: none;
+            border-color: #1c2128;
+        }
+        .form-config-item .form-config-fields .field-group input[type="number"] {
+            width: 80px;
+        }
+
+        /* ── Full-size flyer modal ── */
+        .fullsize-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            z-index: 4000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .fullsize-modal-overlay.open {
+            display: flex;
+        }
+        .fullsize-modal-content {
+            max-width: 1200px;
+            max-height: 90vh;
+            width: 100%;
+            position: relative;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .fullsize-modal-content img {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            object-fit: contain;
+        }
+        .fullsize-modal-content .close-btn {
+            position: absolute;
+            top: -30px;
+            right: 0;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 4px 12px;
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+        }
+        .fullsize-modal-content .close-btn:hover {
+            background: rgba(255,255,255,0.4);
+        }
     </style>
 </head>
 <body>
@@ -3960,13 +4097,16 @@
                         <h2><i class="fa-solid fa-clipboard-list"></i> Applications</h2>
                         <p>Review and manage all form submissions from your flyers.</p>
                     </div>
-                    <button class="btn btn-outline btn-sm" id="refreshApplicationsBtn"><i class="fa-solid fa-rotate"></i> Refresh</button>
+                    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                        <button class="btn btn-outline btn-sm" id="refreshApplicationsBtn"><i class="fa-solid fa-rotate"></i> Refresh</button>
+                        <button class="btn btn-primary btn-sm" id="formConfigBtn" style="background:#f5b83d; color:#1c2128; border:none;"><i class="fa-solid fa-gear"></i> Payment Settings</button>
+                    </div>
                 </div>
 
                 <div class="app-status-tabs" id="appStatusTabs">
-                    <button class="tab-btn active" data-status="pending">⏳ Pending <span class="count" id="pendingCount">0</span></button>
-                    <button class="tab-btn" data-status="approved">✅ Approved <span class="count" id="approvedCount">0</span></button>
-                    <button class="tab-btn" data-status="rejected">❌ Rejected <span class="count" id="rejectedCount">0</span></button>
+                    <button class="tab-btn active" data-status="pending"><i class="fa-regular fa-clock"></i> Pending <span class="count" id="pendingCount">0</span></button>
+                    <button class="tab-btn" data-status="approved"><i class="fa-regular fa-circle-check"></i> Approved <span class="count" id="approvedCount">0</span></button>
+                    <button class="tab-btn" data-status="rejected"><i class="fa-regular fa-circle-xmark"></i> Rejected <span class="count" id="rejectedCount">0</span></button>
                 </div>
 
                 <div id="applicationsList">
@@ -4332,7 +4472,7 @@
 
         </div>
 
-        <!-- ===== BOTTOM NAV (Home badge removed) ===== -->
+        <!-- ===== BOTTOM NAV ===== -->
         <div class="bottom-nav">
             <button class="nav-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Home</span></button>
             <button class="nav-item" data-page="services"><i class="fa-solid fa-layer-group"></i><span>Services</span></button>
@@ -4546,7 +4686,7 @@
                     <input type="text" id="promoPicSubtext" placeholder="e.g. Limited time offer" />
                 </div>
 
-                <!-- === NEW: Click-content configuration === -->
+                <!-- === Click-content configuration === -->
                 <div class="click-config-section">
                     <div class="section-label"><i class="fa-solid fa-mouse-pointer"></i> Click Content (appears when flyer is tapped)</div>
                     <div class="form-group-sm" style="margin-bottom:4px;">
@@ -4581,6 +4721,7 @@
                                 <option value="investor">Apply as Investor</option>
                                 <option value="prize">Apply for Prize</option>
                                 <option value="job">Apply for Job</option>
+                                <option value="referrer">Sign up as Referrer</option>
                             </select>
                             <div class="hint">Choose which form to attach to this flyer, or none.</div>
                         </div>
@@ -4591,6 +4732,17 @@
                 <button type="submit" class="btn btn-primary" style="margin-top:10px;"><i class="fa-solid fa-check"></i> Upload Flyer</button>
                 <button type="button" class="btn btn-outline" id="promoPicUploadCancelBtn">Cancel</button>
             </form>
+        </div>
+    </div>
+
+    <!-- ===== FORM CONFIG MODAL (Payment settings for each form) ===== -->
+    <div class="modal-overlay form-config-modal" id="formConfigModal">
+        <div class="modal" style="max-width:500px;">
+            <button class="close-btn" id="formConfigCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <h3><i class="fa-solid fa-gear" style="color:#f5b83d;"></i> Application Form Payment Settings</h3>
+            <p class="sub">Configure pricing and mobile money details for each application form type.</p>
+            <div id="formConfigList"></div>
+            <button class="btn btn-primary" id="saveFormConfigsBtn"><i class="fa-solid fa-save"></i> Save Settings</button>
         </div>
     </div>
 
@@ -4681,6 +4833,14 @@
         </div>
     </div>
 
+    <!-- ===== FULLSIZE FLYER MODAL ===== -->
+    <div class="fullsize-modal-overlay" id="fullsizeFlyerModal">
+        <div class="fullsize-modal-content">
+            <button class="close-btn" id="fullsizeFlyerCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <img id="fullsizeFlyerImg" src="" alt="Full size flyer" />
+        </div>
+    </div>
+
     <!-- ===== DELETE CONFIRMATION MODAL ===== -->
     <div class="delete-confirm-modal-overlay" id="deleteConfirmModal">
         <div class="delete-confirm-modal-content">
@@ -4697,7 +4857,7 @@
     <div class="status-modal-overlay" id="orderStatusModal">
         <div class="status-modal">
             <button class="close-btn" id="statusModalCloseBtn"><i class="fa-solid fa-times"></i></button>
-            <h3>🔄 Change Order Status</h3>
+            <h3>Change Order Status</h3>
             <p class="sub">Select a new status for this order.</p>
             <div class="status-options" id="statusOptionsContainer">
                 <div class="status-option" data-status="pending">
@@ -4830,6 +4990,7 @@
         let pendingEditCustomerUid = null;
         let selectedUserId = null;
         let applicationsFilter = 'pending';
+        let formConfigs = {}; // will be loaded from allData
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -4929,6 +5090,11 @@
         const approvedCountEl = document.getElementById('approvedCount');
         const rejectedCountEl = document.getElementById('rejectedCount');
         const refreshApplicationsBtn = document.getElementById('refreshApplicationsBtn');
+        const formConfigBtn = document.getElementById('formConfigBtn');
+        const formConfigModal = document.getElementById('formConfigModal');
+        const formConfigCloseBtn = document.getElementById('formConfigCloseBtn');
+        const formConfigList = document.getElementById('formConfigList');
+        const saveFormConfigsBtn = document.getElementById('saveFormConfigsBtn');
 
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMessage');
@@ -5068,6 +5234,11 @@
         const customerWalletListPage = document.getElementById('customerWalletListPage');
         const customerWalletSearch = document.getElementById('customerWalletSearch');
 
+        // ─── Full-size flyer modal ───
+        const fullsizeFlyerModal = document.getElementById('fullsizeFlyerModal');
+        const fullsizeFlyerCloseBtn = document.getElementById('fullsizeFlyerCloseBtn');
+        const fullsizeFlyerImg = document.getElementById('fullsizeFlyerImg');
+
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
         // ───────────────────────────────────────────────────────────────────
@@ -5104,7 +5275,14 @@
                             withCustomReferral: 0,
                             withoutReferral: 0
                         },
-                        applications: {}
+                        applications: {},
+                        formConfigs: {
+                            ambassador: { price: 0, mobileMoneyNumber: '', accountName: '', isFree: true },
+                            investor: { price: 0, mobileMoneyNumber: '', accountName: '', isFree: true },
+                            prize: { price: 0, mobileMoneyNumber: '', accountName: '', isFree: true },
+                            job: { price: 0, mobileMoneyNumber: '', accountName: '', isFree: true },
+                            referrer: { price: 0, mobileMoneyNumber: '', accountName: '', isFree: true }
+                        }
                     };
                     set(dbRef, allData).then(() => {
                         if (callback) callback(allData);
@@ -5139,6 +5317,17 @@
                     }
                     if (!allData.applications) { allData.applications = {};
                         saveData(); }
+                    if (!allData.formConfigs) {
+                        allData.formConfigs = {
+                            ambassador: { price: 0, mobileMoneyNumber: '', accountName: '', isFree: true },
+                            investor: { price: 0, mobileMoneyNumber: '', accountName: '', isFree: true },
+                            prize: { price: 0, mobileMoneyNumber: '', accountName: '', isFree: true },
+                            job: { price: 0, mobileMoneyNumber: '', accountName: '', isFree: true },
+                            referrer: { price: 0, mobileMoneyNumber: '', accountName: '', isFree: true }
+                        };
+                        saveData();
+                    }
+                    formConfigs = allData.formConfigs;
                     if (callback) callback(data);
                 }
             });
@@ -5851,6 +6040,19 @@
                     e.stopPropagation();
                     const key = this.dataset.key;
                     openEditClickContent(key);
+                });
+            });
+
+            // Click on pic to show full-size
+            promoPicsGrid.querySelectorAll('.promo-pic-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // ignore if clicked on buttons
+                    if (e.target.closest('.pic-delete-btn') || e.target.closest('.pic-edit-click-btn')) return;
+                    const img = this.querySelector('.pic-image');
+                    if (img) {
+                        fullsizeFlyerImg.src = img.src;
+                        fullsizeFlyerModal.classList.add('open');
+                    }
                 });
             });
         }
@@ -6725,7 +6927,7 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER WALLETS PAGE – NEW IMPLEMENTATION
+        // CUSTOMER WALLETS PAGE
         // ───────────────────────────────────────────────────────────────────
 
         function renderCustomerWalletsPage(searchTerm = '') {
@@ -7122,6 +7324,7 @@
             const data = allData.applications || {};
             const users = allData.users || {};
             const promoPics = allData.promoPics || {};
+            const formConfigs = allData.formConfigs || {};
             let entries = Object.entries(data);
 
             // Filter by status
@@ -7156,7 +7359,8 @@
                     ambassador: 'Ambassador',
                     investor: 'Investor',
                     prize: 'Prize',
-                    job: 'Job'
+                    job: 'Job',
+                    referrer: 'Referrer'
                 } [app.formType] || app.formType || 'Unknown';
                 const flyer = promoPics[app.flyerId] || {};
                 const flyerText = flyer.text || 'Untitled Flyer';
@@ -7164,6 +7368,12 @@
                 const statusClass = app.status || 'pending';
                 const initial = (userName || 'U').charAt(0).toUpperCase();
                 const dateStr = app.createdAt ? new Date(app.createdAt).toLocaleString() : 'N/A';
+
+                // Get form config for payment details
+                const config = formConfigs[app.formType] || { price: 0, mobileMoneyNumber: '', accountName: '', isFree: true };
+                const priceDisplay = config.isFree ? 'Free' : `ZMW ${config.price.toFixed(2)}`;
+                const mobileNumber = config.mobileMoneyNumber || 'Not set';
+                const accountName = config.accountName || 'Not set';
 
                 // Build detail fields based on form type
                 let detailFields = [];
@@ -7238,6 +7448,14 @@
                             val: `<a href="${fd.qualification}" target="_blank" style="color:#1c2128;font-weight:600;text-decoration:underline;">View</a>`
                         });
                     }
+                } else if (app.formType === 'referrer') {
+                    detailFields = [
+                        { label: 'Name', val: fd.name || 'N/A' },
+                        { label: 'Number', val: fd.number || 'N/A' },
+                        { label: 'Email', val: fd.email || 'N/A' },
+                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
+                        { label: 'Occupation', val: fd.occupation || 'N/A' }
+                    ];
                 } else {
                     // Generic fallback
                     for (const [k, v] of Object.entries(fd)) {
@@ -7246,6 +7464,14 @@
                         }
                     }
                 }
+
+                // Add payment details
+                const paymentDetails = `
+                            <div class="detail-item"><span class="label">Price</span><span class="val highlight">${priceDisplay}</span></div>
+                            <div class="detail-item"><span class="label">Mobile Money Number</span><span class="val">${mobileNumber}</span></div>
+                            <div class="detail-item"><span class="label">Account Name</span><span class="val">${accountName}</span></div>
+                            <div class="detail-item"><span class="label">Payment Proof</span><span class="val">${fd.paymentScreenshot ? `<a href="${fd.paymentScreenshot}" target="_blank" style="color:#1c2128;font-weight:600;text-decoration:underline;">View</a>` : 'Not uploaded'}</span></div>
+                        `;
 
                 const detailHtml = detailFields.map(f =>
                     `<div class="detail-item"><span class="label">${f.label}</span><span class="val">${f.val}</span></div>`
@@ -7274,6 +7500,7 @@
                                 <div class="app-details">
                                     <div class="detail-grid">
                                         ${detailHtml}
+                                        ${paymentDetails}
                                     </div>
                                     ${app.status === 'pending' ? `
                                     <div class="actions">
@@ -7336,6 +7563,107 @@
                 showToast(`Application ${status}`, 'success');
             }).catch((error) => {
                 showToast('Error updating application status', 'error');
+            });
+        }
+
+        // ───────────────────────────────────────────────────────────────────
+        // FORM CONFIG (Payment settings) ADMIN UI
+        // ───────────────────────────────────────────────────────────────────
+
+        function renderFormConfigs() {
+            const configs = allData.formConfigs || {};
+            const container = formConfigList;
+            const formTypes = ['ambassador', 'investor', 'prize', 'job', 'referrer'];
+            const labels = {
+                ambassador: 'Ambassador',
+                investor: 'Investor',
+                prize: 'Prize',
+                job: 'Job',
+                referrer: 'Referrer'
+            };
+
+            container.innerHTML = formTypes.map(type => {
+                const cfg = configs[type] || { price: 0, mobileMoneyNumber: '', accountName: '', isFree: true };
+                return `
+                            <div class="form-config-item" data-type="${type}">
+                                <div class="form-config-header">
+                                    <span class="name">${labels[type]}</span>
+                                    <div class="free-toggle">
+                                        <label class="toggle-switch" style="width:30px;height:18px;">
+                                            <input type="checkbox" ${cfg.isFree ? 'checked' : ''} data-type="${type}" class="free-toggle-input" />
+                                            <span class="toggle-slider" style="height:18px;width:30px;"></span>
+                                        </label>
+                                        <span>Free</span>
+                                    </div>
+                                </div>
+                                <div class="form-config-fields">
+                                    <div class="field-group">
+                                        <label>Price (ZMW)</label>
+                                        <input type="number" value="${cfg.price}" data-type="${type}" class="config-price" step="0.01" min="0" />
+                                    </div>
+                                    <div class="field-group">
+                                        <label>Mobile Money Number</label>
+                                        <input type="text" value="${cfg.mobileMoneyNumber}" data-type="${type}" class="config-mobile" placeholder="e.g. 097..." />
+                                    </div>
+                                    <div class="field-group">
+                                        <label>Account Name</label>
+                                        <input type="text" value="${cfg.accountName}" data-type="${type}" class="config-account" placeholder="e.g. Buffer Zone" />
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+            }).join('');
+
+            // Bind free toggle
+            container.querySelectorAll('.free-toggle-input').forEach(input => {
+                input.addEventListener('change', function() {
+                    const type = this.dataset.type;
+                    const configs = allData.formConfigs;
+                    if (configs[type]) {
+                        configs[type].isFree = this.checked;
+                        // Optionally disable price input if free
+                        const priceInput = container.querySelector(`.config-price[data-type="${type}"]`);
+                        if (priceInput) {
+                            priceInput.disabled = this.checked;
+                        }
+                    }
+                });
+            });
+
+            // Enable/disable price inputs initially
+            container.querySelectorAll('.form-config-item').forEach(item => {
+                const type = item.dataset.type;
+                const isFree = item.querySelector('.free-toggle-input').checked;
+                const priceInput = item.querySelector('.config-price');
+                if (priceInput) {
+                    priceInput.disabled = isFree;
+                }
+            });
+        }
+
+        function saveFormConfigs() {
+            const configs = allData.formConfigs || {};
+            const container = formConfigList;
+            container.querySelectorAll('.form-config-item').forEach(item => {
+                const type = item.dataset.type;
+                const priceInput = item.querySelector('.config-price');
+                const mobileInput = item.querySelector('.config-mobile');
+                const accountInput = item.querySelector('.config-account');
+                const freeToggle = item.querySelector('.free-toggle-input');
+
+                if (configs[type]) {
+                    configs[type].price = parseFloat(priceInput.value) || 0;
+                    configs[type].mobileMoneyNumber = mobileInput.value.trim();
+                    configs[type].accountName = accountInput.value.trim();
+                    configs[type].isFree = freeToggle.checked;
+                }
+            });
+            saveData().then(() => {
+                renderAll();
+                formConfigModal.classList.remove('open');
+                showToast('Payment settings saved!', 'success');
+            }).catch((error) => {
+                showToast('Error saving settings', 'error');
             });
         }
 
@@ -8205,6 +8533,22 @@
         });
 
         // ───────────────────────────────────────────────────────────────────
+        // FORM CONFIG EVENT BINDINGS
+        // ───────────────────────────────────────────────────────────────────
+
+        formConfigBtn.addEventListener('click', function() {
+            renderFormConfigs();
+            formConfigModal.classList.add('open');
+        });
+        formConfigCloseBtn.addEventListener('click', function() {
+            formConfigModal.classList.remove('open');
+        });
+        formConfigModal.addEventListener('click', function(e) {
+            if (e.target === this) formConfigModal.classList.remove('open');
+        });
+        saveFormConfigsBtn.addEventListener('click', saveFormConfigs);
+
+        // ───────────────────────────────────────────────────────────────────
         // EVENT BINDINGS
         // ───────────────────────────────────────────────────────────────────
 
@@ -8478,6 +8822,16 @@
                 resetPromoPicUploadModal();
                 showToast('Flyer uploaded!', 'success');
             });
+        });
+
+        // ── Fullsize flyer modal close ──
+        fullsizeFlyerCloseBtn.addEventListener('click', function() {
+            fullsizeFlyerModal.classList.remove('open');
+        });
+        fullsizeFlyerModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+            }
         });
 
         document.getElementById('addServiceBtn').addEventListener('click', () => {
@@ -8939,7 +9293,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Added click-content configuration for flyers + Applications management.');
+        console.log('✅ Admin Dashboard — Added click-content configuration, referrer form, payment settings, full-size flyer modal, and 2-column grid.');
     </script>
 </body>
 </html>
