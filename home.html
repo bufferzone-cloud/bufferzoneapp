@@ -2318,15 +2318,18 @@
         }
         .flyer-detail-image-wrap {
             width: 100%;
-            aspect-ratio: 4/3;
+            aspect-ratio: 16 / 9; /* 1200x675 */
             overflow: hidden;
             position: relative;
             background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .flyer-detail-image-wrap img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Show full picture */
         }
         .flyer-detail-content {
             padding: 16px 14px 14px 14px;
@@ -3395,7 +3398,14 @@
                         customReferrals: {},
                         referralDiscounts: {},
                         referralPromoDiscounts: {},
-                        applications: {}
+                        applications: {},
+                        formConfigs: {
+                            ambassador: { isFree: true, price: 0, mobileNumber: '', accountName: '' },
+                            investor: { isFree: false, price: 50, mobileNumber: '', accountName: '' },
+                            prize: { isFree: false, price: 20, mobileNumber: '', accountName: '' },
+                            job: { isFree: true, price: 0, mobileNumber: '', accountName: '' },
+                            referrer: { isFree: true, price: 0, mobileNumber: '', accountName: '' }
+                        }
                     };
                     set(dbRef, allData);
                 } else {
@@ -3409,10 +3419,25 @@
                     if (!allData.referralDiscounts) allData.referralDiscounts = {};
                     if (!allData.referralPromoDiscounts) allData.referralPromoDiscounts = {};
                     if (!allData.applications) allData.applications = {};
+                    if (!allData.formConfigs) {
+                        allData.formConfigs = {
+                            ambassador: { isFree: true, price: 0, mobileNumber: '', accountName: '' },
+                            investor: { isFree: false, price: 50, mobileNumber: '', accountName: '' },
+                            prize: { isFree: false, price: 20, mobileNumber: '', accountName: '' },
+                            job: { isFree: true, price: 0, mobileNumber: '', accountName: '' },
+                            referrer: { isFree: true, price: 0, mobileNumber: '', accountName: '' }
+                        };
+                        saveData();
+                    }
                 }
                 renderAll();
                 if (callback) callback();
             });
+        }
+
+        function saveData() {
+            const dbRef = ref(db, 'bufferzoneAppData');
+            return set(dbRef, allData);
         }
 
         // =================================================================
@@ -4474,18 +4499,6 @@
                     </div>
                 `;
             }).join('');
-        }
-
-        // =================================================================
-        // SAVE DATA
-        // =================================================================
-
-        async function saveData() {
-            try {
-                await set(ref(db, 'bufferzoneAppData'), allData);
-            } catch (error) {
-                console.error('Error saving data:', error);
-            }
         }
 
         // =================================================================
@@ -5617,10 +5630,86 @@
                     </div>
                     <div class="form-group"><label>Tell us more about yourself</label><textarea id="f_about" rows="3" placeholder="Write a brief introduction..."></textarea></div>
                 `;
+            } else if (formType === 'referrer') {
+                formHtml += `
+                    <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" /></div>
+                    <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" /></div>
+                    <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" /></div>
+                    <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code (optional)" /></div>
+                    <div class="form-group"><label>Occupation</label><input type="text" id="f_occupation" placeholder="Your occupation" /></div>
+                `;
             }
 
             flyerDetailForm.innerHTML = formHtml;
 
+            // ---- PAYMENT INTEGRATION ----
+            const config = allData.formConfigs?.[formType] || { isFree: true };
+            let requiresPayment = !config.isFree;
+
+            if (requiresPayment) {
+                const paymentHtml = `
+                    <div id="flyerPaymentSection" style="margin-top:10px; border-top:1px solid #f0f0f0; padding-top:12px;">
+                        <h4 style="font-size:11px; font-weight:700; color:#1c2128; margin-bottom:6px;">💳 Payment Required</h4>
+                        <div style="background:#f8f9fc; border-radius:8px; padding:10px; margin-bottom:10px; border:1px solid #f0f0f0;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
+                                <div><span style="font-size:9px; color:#888;">Amount to pay</span><br><span style="font-weight:700;font-size:16px;color:#f5b83d;">ZMW ${config.price || 0}</span></div>
+                                <div><span style="font-size:9px; color:#888;">Mobile Number</span><br><span style="font-weight:600;font-size:12px;">${config.mobileNumber || 'N/A'}</span></div>
+                                <div><span style="font-size:9px; color:#888;">Account Name</span><br><span style="font-weight:600;font-size:12px;">${config.accountName || 'N/A'}</span></div>
+                            </div>
+                        </div>
+                        <label style="font-weight:600; font-size:9px; color:#1c2128; display:block; margin-bottom:4px;">Upload Payment Screenshots (2x2 grid)</label>
+                        <div id="flyerUploadGrid" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                            <div class="upload-area-sm" data-index="0"><i class="fa-regular fa-image"></i><div class="file-label">Tap to upload</div><div class="file-name">-</div><input type="hidden" class="flyer-payment-proof" value="" /></div>
+                            <div class="upload-area-sm" data-index="1"><i class="fa-regular fa-image"></i><div class="file-label">Tap to upload</div><div class="file-name">-</div><input type="hidden" class="flyer-payment-proof" value="" /></div>
+                            <div class="upload-area-sm" data-index="2"><i class="fa-regular fa-image"></i><div class="file-label">Tap to upload</div><div class="file-name">-</div><input type="hidden" class="flyer-payment-proof" value="" /></div>
+                            <div class="upload-area-sm" data-index="3"><i class="fa-regular fa-image"></i><div class="file-label">Tap to upload</div><div class="file-name">-</div><input type="hidden" class="flyer-payment-proof" value="" /></div>
+                        </div>
+                        <p style="font-size:8px; color:#aaa; margin-top:4px;">Upload at least one screenshot to verify payment.</p>
+                    </div>
+                `;
+                flyerDetailForm.insertAdjacentHTML('beforeend', paymentHtml);
+
+                // Setup 2x2 uploads
+                const gridCells = document.querySelectorAll('#flyerUploadGrid .upload-area-sm');
+                gridCells.forEach(cell => {
+                    const input = cell.querySelector('.flyer-payment-proof');
+                    const fileNameEl = cell.querySelector('.file-name');
+                    cell.addEventListener('click', () => {
+                        const options = {
+                            cloudName: CLOUD_NAME,
+                            uploadPreset: UPLOAD_PRESET,
+                            sources: ['local', 'url', 'camera'],
+                            maxFileSize: 155000000,
+                            resourceType: 'image',
+                            clientAllowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+                            maxFiles: 1,
+                            multiple: false,
+                            fieldName: 'file',
+                            language: 'en',
+                            defaultSource: 'local'
+                        };
+                        const widget = cloudinary.openUploadWidget(options, (error, result) => {
+                            if (error) {
+                                console.error('Cloudinary error:', error);
+                                showToast('Upload error: ' + (error.message || 'Unknown'), 'error');
+                                return;
+                            }
+                            if (result.event === 'success') {
+                                const info = result.info;
+                                const url = info.secure_url;
+                                input.value = url;
+                                fileNameEl.textContent = info.original_filename + '.' + info.format;
+                                cell.style.borderColor = '#f5b83d';
+                                cell.style.background = '#fffcf0';
+                                showToast('File uploaded!', 'success');
+                            }
+                        });
+                        widget.open();
+                    });
+                });
+            }
+
+            // Standard uploads (already setup)
             setupFlyerUploads();
 
             flyerDetailApplyBtn.onclick = () => {
@@ -5737,11 +5826,45 @@
                     position: getVal('f_position'),
                     about: getVal('f_about')
                 };
+            } else if (formType === 'referrer') {
+                formData = {
+                    name: getVal('f_name'),
+                    number: getVal('f_number'),
+                    email: getVal('f_email'),
+                    bzCode: getVal('f_bzcode'),
+                    occupation: getVal('f_occupation')
+                };
             }
 
             if (!formData.name && !formData.email) {
                 showToast('Please fill in at least your name and email.', 'error');
                 return;
+            }
+
+            // ---- CHECK PAYMENT ----
+            const config = allData.formConfigs?.[formType] || { isFree: true };
+            let paymentData = null;
+
+            if (!config.isFree) {
+                const screenshotInputs = document.querySelectorAll('#flyerUploadGrid .flyer-payment-proof');
+                const screenshots = [];
+                screenshotInputs.forEach(input => {
+                    if (input.value) {
+                        screenshots.push(input.value);
+                    }
+                });
+
+                if (screenshots.length === 0) {
+                    showToast('Please upload at least one payment screenshot.', 'error');
+                    return;
+                }
+
+                paymentData = {
+                    amount: config.price || 0,
+                    mobileNumber: config.mobileNumber || '',
+                    accountName: config.accountName || '',
+                    screenshots: screenshots
+                };
             }
 
             if (!allData.applications) allData.applications = {};
@@ -5754,7 +5877,8 @@
                 formType: formType,
                 formData: formData,
                 status: 'pending',
-                createdAt: Date.now()
+                createdAt: Date.now(),
+                paymentData: paymentData
             };
 
             saveData().then(() => {
@@ -5797,7 +5921,8 @@
                     ambassador: 'Ambassador',
                     investor: 'Investor',
                     prize: 'Prize',
-                    job: 'Job'
+                    job: 'Job',
+                    referrer: 'Referrer'
                 } [a.formType] || a.formType || 'Unknown';
 
                 let detailRows = '';
@@ -5811,6 +5936,25 @@
                         }
                         detailRows +=
                             `<div class="detail-row"><span class="label">${label}</span><span class="val">${val}</span></div>`;
+                    }
+                }
+
+                // Show payment details if exists
+                if (a.paymentData) {
+                    const pd = a.paymentData;
+                    detailRows +=
+                        `<div class="detail-row"><span class="label">Amount Paid</span><span class="val">ZMW ${pd.amount}</span></div>`;
+                    detailRows +=
+                        `<div class="detail-row"><span class="label">Mobile Number</span><span class="val">${escapeHtml(pd.mobileNumber)}</span></div>`;
+                    detailRows +=
+                        `<div class="detail-row"><span class="label">Account Name</span><span class="val">${escapeHtml(pd.accountName)}</span></div>`;
+                    const screenshots = pd.screenshots || [];
+                    if (screenshots.length > 0) {
+                        const links = screenshots.map((url, i) =>
+                            `<a href="${url}" target="_blank" style="color:#1c2128;text-decoration:underline;">Screenshot ${i+1}</a>`
+                        ).join(', ');
+                        detailRows +=
+                            `<div class="detail-row"><span class="label">Screenshots</span><span class="val">${links}</span></div>`;
                     }
                 }
 
