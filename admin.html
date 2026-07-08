@@ -3447,6 +3447,339 @@
             background: #fff6e0;
             color: #cc8800;
         }
+
+        /* ─── NEW: Application Management Styles ─── */
+        .app-flyer-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+        .app-flyer-actions .btn-sm {
+            font-size: 8px;
+            padding: 2px 12px;
+            border-radius: 12px;
+        }
+
+        .applications-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .applications-header h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1c2128;
+        }
+        .applications-header h2 i {
+            color: #f5b83d;
+        }
+        .applications-header p {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .app-status-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        .app-status-tabs .tab-btn {
+            padding: 4px 16px;
+            border-radius: 20px;
+            border: 2px solid #ddd;
+            background: #fafafa;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #555;
+        }
+        .app-status-tabs .tab-btn:hover {
+            border-color: #bbb;
+        }
+        .app-status-tabs .tab-btn.active {
+            border-color: #1c2128;
+            background: #1c2128;
+            color: #fff;
+        }
+        .app-status-tabs .tab-btn .count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0 6px;
+            border-radius: 8px;
+            font-size: 8px;
+            margin-left: 2px;
+        }
+        .app-status-tabs .tab-btn.active .count {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .app-status-tabs .tab-btn:not(.active) .count {
+            background: #f0f0f0;
+            color: #555;
+        }
+
+        .app-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 14px 16px;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s;
+        }
+        .app-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+        .app-card .app-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .app-card .app-summary .left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 120px;
+        }
+        .app-card .app-summary .left .app-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #1c2128;
+            color: #f5b83d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        .app-card .app-summary .left .app-info .app-name {
+            font-weight: 600;
+            font-size: 12px;
+            color: #1c2128;
+        }
+        .app-card .app-summary .left .app-info .app-email {
+            font-size: 10px;
+            color: #888;
+        }
+        .app-card .app-summary .left .app-info .app-form-type {
+            font-size: 9px;
+            background: #f0f0f0;
+            padding: 0 8px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #555;
+            display: inline-block;
+            margin-top: 1px;
+        }
+        .app-card .app-summary .right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .app-card .app-summary .right .app-status-badge {
+            font-size: 8px;
+            font-weight: 600;
+            padding: 1px 12px;
+            border-radius: 10px;
+        }
+        .app-card .app-summary .right .app-status-badge.pending {
+            background: #fff6e0;
+            color: #cc8800;
+        }
+        .app-card .app-summary .right .app-status-badge.approved {
+            background: #e6fffa;
+            color: #00a86b;
+        }
+        .app-card .app-summary .right .app-status-badge.rejected {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        .app-card .app-summary .right .expand-icon {
+            font-size: 10px;
+            color: #aaa;
+            transition: transform 0.3s;
+        }
+        .app-card.open .app-summary .right .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .app-card .app-details {
+            display: none;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .app-card .app-details.open {
+            display: block;
+        }
+        .app-card .app-details .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 20px;
+            margin-bottom: 8px;
+        }
+        @media (max-width: 500px) {
+            .app-card .app-details .detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .app-card .app-details .detail-grid .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+            font-size: 11px;
+            border-bottom: 1px solid #f8f8f8;
+        }
+        .app-card .app-details .detail-grid .detail-item .label {
+            color: #888;
+        }
+        .app-card .app-details .detail-grid .detail-item .val {
+            font-weight: 500;
+            color: #1c2128;
+        }
+        .app-card .app-details .detail-grid .detail-item .val.highlight {
+            color: #f5b83d;
+            font-weight: 700;
+        }
+        .app-card .app-details .detail-grid .detail-item .val.green {
+            color: #16a34a;
+        }
+        .app-card .app-details .detail-grid .detail-item .val.red {
+            color: #dc2626;
+        }
+        .app-card .app-details .actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+        .app-card .app-details .actions .btn-approve-app {
+            background: #16a34a;
+            color: #fff;
+            border: none;
+            padding: 3px 14px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 9px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .app-card .app-details .actions .btn-approve-app:hover {
+            background: #15803d;
+        }
+        .app-card .app-details .actions .btn-reject-app {
+            background: #dc2626;
+            color: #fff;
+            border: none;
+            padding: 3px 14px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 9px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .app-card .app-details .actions .btn-reject-app:hover {
+            background: #b91c1c;
+        }
+        .app-card .app-details .actions .btn-approve-app:active,
+        .app-card .app-details .actions .btn-reject-app:active {
+            transform: scale(0.95);
+        }
+
+        .app-card .app-details .app-proof-img {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 8px;
+            margin-top: 4px;
+            border: 1px solid #f0f0f0;
+        }
+        .app-card .app-details .app-proof-img-container {
+            margin-top: 4px;
+        }
+        .app-card .app-details .app-proof-img-container .proof-label {
+            font-size: 10px;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .app-empty {
+            text-align: center;
+            padding: 30px 0;
+            color: #888;
+        }
+        .app-empty i {
+            font-size: 32px;
+            color: #ddd;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        /* Flyer click-content configuration in upload modal */
+        .click-config-section {
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-top: 6px;
+            border: 1px solid #f0f0f0;
+        }
+        .click-config-section .section-label {
+            font-weight: 700;
+            font-size: 11px;
+            color: #1c2128;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .click-config-section .section-label i {
+            color: #f5b83d;
+        }
+        .click-config-section .form-group-sm {
+            margin-bottom: 6px;
+        }
+        .click-config-section .form-group-sm label {
+            font-size: 9px;
+            color: #555;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 1px;
+        }
+        .click-config-section .form-group-sm input,
+        .click-config-section .form-group-sm textarea,
+        .click-config-section .form-group-sm select {
+            width: 100%;
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 10px;
+            background: #fff;
+            transition: border 0.2s;
+        }
+        .click-config-section .form-group-sm input:focus,
+        .click-config-section .form-group-sm textarea:focus,
+        .click-config-section .form-group-sm select:focus {
+            outline: none;
+            border-color: #1c2128;
+        }
+        .click-config-section .form-group-sm textarea {
+            min-height: 30px;
+            resize: vertical;
+        }
+        .click-config-section .hint {
+            font-size: 8px;
+            color: #aaa;
+            margin-top: 1px;
+        }
     </style>
 </head>
 <body>
@@ -3604,13 +3937,41 @@
                             <h2 style="font-size:20px; font-weight:800; color:#1c2128;"><i class="fa-regular fa-images" style="color:#f5b83d;"></i> Promo Pics</h2>
                             <p style="font-size:11px; color:#888;">Upload flyer pictures — each with a text overlay and delete option.</p>
                         </div>
-                        <button class="btn btn-primary" id="addPromoPicBtn" style="padding:8px 20px; font-size:12px; border-radius:24px;">
-                            <i class="fa-solid fa-cloud-arrow-up"></i> Upload Flyer
-                        </button>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="btn btn-primary" id="addPromoPicBtn" style="padding:8px 20px; font-size:12px; border-radius:24px;">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> Upload Flyer
+                            </button>
+                            <button class="btn btn-success" id="viewApplicationsBtn" style="padding:8px 20px; font-size:12px; border-radius:24px; background:#f5b83d; color:#1c2128;">
+                                <i class="fa-solid fa-clipboard-list"></i> Applications
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 <div class="promo-pics-grid" id="promoPicsGrid"></div>
+
+            </div>
+
+            <!-- ===== PAGE: APPLICATIONS ===== -->
+            <div id="page-applications" class="page">
+
+                <div class="applications-header">
+                    <div>
+                        <h2><i class="fa-solid fa-clipboard-list"></i> Applications</h2>
+                        <p>Review and manage all form submissions from your flyers.</p>
+                    </div>
+                    <button class="btn btn-outline btn-sm" id="refreshApplicationsBtn"><i class="fa-solid fa-rotate"></i> Refresh</button>
+                </div>
+
+                <div class="app-status-tabs" id="appStatusTabs">
+                    <button class="tab-btn active" data-status="pending">⏳ Pending <span class="count" id="pendingCount">0</span></button>
+                    <button class="tab-btn" data-status="approved">✅ Approved <span class="count" id="approvedCount">0</span></button>
+                    <button class="tab-btn" data-status="rejected">❌ Rejected <span class="count" id="rejectedCount">0</span></button>
+                </div>
+
+                <div id="applicationsList">
+                    <!-- Rendered by JS -->
+                </div>
 
             </div>
 
@@ -4161,9 +4522,9 @@
         </div>
     </div>
 
-    <!-- ===== PROMO PICS UPLOAD MODAL ===== -->
+    <!-- ===== PROMO PICS UPLOAD MODAL (with click-config) ===== -->
     <div class="modal-overlay" id="promoPicUploadModal">
-        <div class="modal" style="max-width:460px;">
+        <div class="modal" style="max-width:480px;">
             <button class="close-btn" id="promoPicUploadCloseBtn"><i class="fa-solid fa-times"></i></button>
             <h3><i class="fa-regular fa-images" style="color:#f5b83d;"></i> Upload Flyer</h3>
             <p class="sub">Upload a flyer picture and add text to display on the overlay.</p>
@@ -4184,7 +4545,50 @@
                     <label>Subtext (optional)</label>
                     <input type="text" id="promoPicSubtext" placeholder="e.g. Limited time offer" />
                 </div>
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Upload Flyer</button>
+
+                <!-- === NEW: Click-content configuration === -->
+                <div class="click-config-section">
+                    <div class="section-label"><i class="fa-solid fa-mouse-pointer"></i> Click Content (appears when flyer is tapped)</div>
+                    <div class="form-group-sm" style="margin-bottom:4px;">
+                        <label style="display:flex;align-items:center;gap:6px;">
+                            <input type="checkbox" id="enableClickContent" checked />
+                            <span style="font-weight:600;font-size:10px;">Enable click content</span>
+                        </label>
+                    </div>
+                    <div id="clickConfigFields">
+                        <div class="form-group-sm">
+                            <label>Title</label>
+                            <input type="text" id="clickTitle" placeholder="e.g. Summer Sale Details" />
+                        </div>
+                        <div class="form-group-sm">
+                            <label>Instructions</label>
+                            <textarea id="clickInstructions" rows="2" placeholder="e.g. Fill out the form below to apply"></textarea>
+                        </div>
+                        <div class="form-group-sm">
+                            <label>Explanation / Description</label>
+                            <textarea id="clickExplanation" rows="2" placeholder="e.g. This limited-time offer is available to all customers..."></textarea>
+                        </div>
+                        <div class="form-group-sm">
+                            <label>Words to bold (comma separated)</label>
+                            <input type="text" id="clickBoldWords" placeholder="e.g. limited, offer, exclusive" />
+                            <div class="hint">Enter words that should appear bold in the explanation.</div>
+                        </div>
+                        <div class="form-group-sm">
+                            <label>Attach Form</label>
+                            <select id="clickFormType">
+                                <option value="none">No Form (just explanation)</option>
+                                <option value="ambassador">Apply as Ambassador</option>
+                                <option value="investor">Apply as Investor</option>
+                                <option value="prize">Apply for Prize</option>
+                                <option value="job">Apply for Job</option>
+                            </select>
+                            <div class="hint">Choose which form to attach to this flyer, or none.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END click-config -->
+
+                <button type="submit" class="btn btn-primary" style="margin-top:10px;"><i class="fa-solid fa-check"></i> Upload Flyer</button>
                 <button type="button" class="btn btn-outline" id="promoPicUploadCancelBtn">Cancel</button>
             </form>
         </div>
@@ -4425,6 +4829,7 @@
         let withdrawalsFilter = 'pending';
         let pendingEditCustomerUid = null;
         let selectedUserId = null;
+        let applicationsFilter = 'pending';
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -4506,6 +4911,24 @@
         const promoPicUploadCancelBtn = document.getElementById('promoPicUploadCancelBtn');
         const promoPicsGrid = document.getElementById('promoPicsGrid');
         const addPromoPicBtn = document.getElementById('addPromoPicBtn');
+        const viewApplicationsBtn = document.getElementById('viewApplicationsBtn');
+
+        // Click-config fields
+        const enableClickContent = document.getElementById('enableClickContent');
+        const clickConfigFields = document.getElementById('clickConfigFields');
+        const clickTitle = document.getElementById('clickTitle');
+        const clickInstructions = document.getElementById('clickInstructions');
+        const clickExplanation = document.getElementById('clickExplanation');
+        const clickBoldWords = document.getElementById('clickBoldWords');
+        const clickFormType = document.getElementById('clickFormType');
+
+        // Applications page
+        const applicationsListEl = document.getElementById('applicationsList');
+        const appStatusTabs = document.getElementById('appStatusTabs');
+        const pendingCountEl = document.getElementById('pendingCount');
+        const approvedCountEl = document.getElementById('approvedCount');
+        const rejectedCountEl = document.getElementById('rejectedCount');
+        const refreshApplicationsBtn = document.getElementById('refreshApplicationsBtn');
 
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMessage');
@@ -4680,7 +5103,8 @@
                             withReferral: 0,
                             withCustomReferral: 0,
                             withoutReferral: 0
-                        }
+                        },
+                        applications: {}
                     };
                     set(dbRef, allData).then(() => {
                         if (callback) callback(allData);
@@ -4713,6 +5137,8 @@
                         };
                         saveData();
                     }
+                    if (!allData.applications) { allData.applications = {};
+                        saveData(); }
                     if (callback) callback(data);
                 }
             });
@@ -4827,6 +5253,7 @@
             renderOurServicesList();
             renderWorkPosts();
             renderPromoPics();
+            renderApplications();
 
             // ── Referral renders ──
             renderReferralPromos();
@@ -5389,26 +5816,41 @@
                 return;
             }
 
-            promoPicsGrid.innerHTML = entries.map(([key, p]) => `
+            promoPicsGrid.innerHTML = entries.map(([key, p]) => {
+                const hasClick = p.clickContent && p.clickContent.enabled;
+                return `
                         <div class="promo-pic-card" data-key="${key}">
                             <img class="pic-image" src="${p.imageUrl}" alt="${p.text || 'Promo'}" loading="lazy" />
                             <div class="pic-overlay">
                                 <div class="pic-text">
                                     ${p.text || 'Promo'}
                                     ${p.subtext ? `<small>${p.subtext}</small>` : ''}
+                                    ${hasClick ? `<small style="font-weight:400;opacity:0.7;font-size:8px;">👆 tap for details</small>` : ''}
                                 </div>
                             </div>
                             <button class="pic-delete-btn" data-key="${key}" title="Delete flyer">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
+                            <button class="pic-edit-click-btn" data-key="${key}" title="Edit click content" style="position:absolute;top:8px;left:8px;width:28px;height:28px;border-radius:50%;background:rgba(245,184,61,0.9);color:#1c2128;border:none;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);box-shadow:0 2px 10px rgba(0,0,0,0.2);">
+                                <i class="fa-solid fa-gear"></i>
+                            </button>
                         </div>
-                    `).join('');
+                    `;
+            }).join('');
 
             promoPicsGrid.querySelectorAll('.pic-delete-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     const key = this.dataset.key;
                     showDeleteConfirmation('promoPic', key);
+                });
+            });
+
+            promoPicsGrid.querySelectorAll('.pic-edit-click-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const key = this.dataset.key;
+                    openEditClickContent(key);
                 });
             });
         }
@@ -6308,8 +6750,8 @@
             // Filter by search term
             if (searchTerm.trim()) {
                 const term = searchTerm.trim().toLowerCase();
-                userList = userList.filter(u => 
-                    u.fullName.toLowerCase().includes(term) || 
+                userList = userList.filter(u =>
+                    u.fullName.toLowerCase().includes(term) ||
                     u.email.toLowerCase().includes(term)
                 );
             }
@@ -6339,7 +6781,7 @@
                         let amountDisplay = tx.amount ? `ZMW ${Math.abs(tx.amount).toFixed(2)}` : '';
                         let amountClass = '';
                         let isCredit = false;
-                        
+
                         // Determine if credit or debit for this user
                         if (tx.userId === uid) {
                             // This user is the main party
@@ -6390,12 +6832,15 @@
                         amountClass = isCredit ? 'positive' : 'negative';
 
                         // Date formatting
-                        const dateStr = tx.date ? new Date(tx.date).toLocaleString() : (tx.timestamp ? new Date(tx.timestamp).toLocaleString() : 'N/A');
+                        const dateStr = tx.date ? new Date(tx.date).toLocaleString() : (tx.timestamp ? new Date(tx
+                            .timestamp).toLocaleString() : 'N/A');
 
                         // Status badge if any
                         let statusHtml = '';
                         if (tx.status) {
-                            const statusClass = tx.status === 'approved' ? 'status-badge approved' : (tx.status === 'declined' ? 'status-badge declined' : (tx.status === 'pending' ? 'status-badge pending' : ''));
+                            const statusClass = tx.status === 'approved' ? 'status-badge approved' : (tx.status ===
+                                'declined' ? 'status-badge declined' : (tx.status === 'pending' ?
+                                'status-badge pending' : ''));
                             statusHtml = `<span class="${statusClass}">${tx.status}</span>`;
                         }
 
@@ -6581,6 +7026,10 @@
             }
         }
 
+        // ───────────────────────────────────────────────────────────────────
+        // PROMO PICS CRUD + CLICK CONTENT
+        // ───────────────────────────────────────────────────────────────────
+
         function addPromoPic(data) {
             const newId = 'pp' + Date.now();
             if (!allData.promoPics) allData.promoPics = {};
@@ -6589,8 +7038,15 @@
                 imageUrl: data.imageUrl,
                 text: data.text || '',
                 subtext: data.subtext || '',
-                createdAt: Date.now()
+                createdAt: Date.now(),
+                clickContent: data.clickContent || { enabled: true }
             };
+            return saveData();
+        }
+
+        function updatePromoPicClickContent(key, clickContent) {
+            if (!allData.promoPics || !allData.promoPics[key]) return;
+            allData.promoPics[key].clickContent = clickContent;
             return saveData();
         }
 
@@ -6599,6 +7055,288 @@
                 delete allData.promoPics[key];
                 return saveData();
             }
+        }
+
+        function openEditClickContent(key) {
+            const pic = allData.promoPics?.[key];
+            if (!pic) {
+                showToast('Flyer not found.', 'error');
+                return;
+            }
+            // Populate the modal with existing click-content
+            const cc = pic.clickContent || { enabled: true };
+            enableClickContent.checked = cc.enabled !== false;
+            clickTitle.value = cc.title || '';
+            clickInstructions.value = cc.instructions || '';
+            clickExplanation.value = cc.explanation || '';
+            clickBoldWords.value = (cc.boldWords || []).join(', ');
+            clickFormType.value = cc.formType || 'none';
+
+            // Store the key being edited
+            promoPicUploadForm.dataset.editKey = key;
+            // Change modal title and button
+            document.querySelector('#promoPicUploadModal h3').textContent = '✏️ Edit Flyer Click Content';
+            document.querySelector('#promoPicUploadModal .sub').textContent =
+            'Configure what appears when users tap this flyer.';
+            const submitBtn = promoPicUploadForm.querySelector('button[type="submit"]');
+            submitBtn.textContent = 'Save Click Content';
+
+            // Show only the click-config section, hide upload fields
+            document.querySelector('#promoPicUploadModal .form-group:first-child').style.display = 'none';
+            document.querySelector('#promoPicUploadModal .form-group:nth-child(2)').style.display = 'none';
+            document.querySelector('#promoPicUploadModal .form-group:nth-child(3)').style.display = 'none';
+
+            promoPicUploadModal.classList.add('open');
+        }
+
+        function resetPromoPicUploadModal() {
+            delete promoPicUploadForm.dataset.editKey;
+            document.querySelector('#promoPicUploadModal h3').textContent = '📤 Upload Flyer';
+            document.querySelector('#promoPicUploadModal .sub').textContent =
+            'Upload a flyer picture and add text to display on the overlay.';
+            const submitBtn = promoPicUploadForm.querySelector('button[type="submit"]');
+            submitBtn.textContent = 'Upload Flyer';
+            // Show all form groups
+            document.querySelector('#promoPicUploadModal .form-group:first-child').style.display = '';
+            document.querySelector('#promoPicUploadModal .form-group:nth-child(2)').style.display = '';
+            document.querySelector('#promoPicUploadModal .form-group:nth-child(3)').style.display = '';
+            // Reset fields
+            enableClickContent.checked = true;
+            clickTitle.value = '';
+            clickInstructions.value = '';
+            clickExplanation.value = '';
+            clickBoldWords.value = '';
+            clickFormType.value = 'none';
+            promoPicImageUrl.value = '';
+            promoPicImagePreview.innerHTML =
+                `<div class="upload-icon"><i class="fa-regular fa-image"></i></div><div class="upload-text">Tap to upload an image</div>`;
+            promoPicText.value = '';
+            promoPicSubtext.value = '';
+        }
+
+        // ───────────────────────────────────────────────────────────────────
+        // APPLICATIONS MANAGEMENT
+        // ───────────────────────────────────────────────────────────────────
+
+        function renderApplications(filter = applicationsFilter) {
+            const data = allData.applications || {};
+            const users = allData.users || {};
+            const promoPics = allData.promoPics || {};
+            let entries = Object.entries(data);
+
+            // Filter by status
+            if (filter !== 'all') {
+                entries = entries.filter(([key, app]) => app.status === filter);
+            }
+
+            entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+
+            // Update counts
+            const allApps = Object.values(allData.applications || {});
+            pendingCountEl.textContent = allApps.filter(a => a.status === 'pending').length;
+            approvedCountEl.textContent = allApps.filter(a => a.status === 'approved').length;
+            rejectedCountEl.textContent = allApps.filter(a => a.status === 'rejected').length;
+
+            if (entries.length === 0) {
+                applicationsListEl.innerHTML = `
+                            <div class="app-empty">
+                                <i class="fa-regular fa-clipboard"></i>
+                                No ${filter} applications found.
+                            </div>
+                        `;
+                return;
+            }
+
+            applicationsListEl.innerHTML = entries.map(([key, app]) => {
+                const user = users[app.userId] || {};
+                const userName = app.formData?.name || `${user.firstName || ''} ${user.lastName || ''}`.trim() ||
+                'Unknown';
+                const userEmail = app.formData?.email || user.email || 'N/A';
+                const formTypeLabel = {
+                    ambassador: 'Ambassador',
+                    investor: 'Investor',
+                    prize: 'Prize',
+                    job: 'Job'
+                } [app.formType] || app.formType || 'Unknown';
+                const flyer = promoPics[app.flyerId] || {};
+                const flyerText = flyer.text || 'Untitled Flyer';
+                const statusLabel = app.status ? app.status.charAt(0).toUpperCase() + app.status.slice(1) : 'Pending';
+                const statusClass = app.status || 'pending';
+                const initial = (userName || 'U').charAt(0).toUpperCase();
+                const dateStr = app.createdAt ? new Date(app.createdAt).toLocaleString() : 'N/A';
+
+                // Build detail fields based on form type
+                let detailFields = [];
+                const fd = app.formData || {};
+                if (app.formType === 'ambassador') {
+                    detailFields = [
+                        { label: 'Name', val: fd.name || 'N/A' },
+                        { label: 'Email', val: fd.email || 'N/A' },
+                        { label: 'Phone', val: fd.number || 'N/A' },
+                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
+                        { label: 'Discount for Customer', val: fd.discountForCustomer ? `${fd.discountForCustomer}%` :
+                                'N/A' },
+                        { label: 'Ambassador Payout', val: fd.ambassadorPayout ? `ZMW ${fd.ambassadorPayout}` : 'N/A' }
+                    ];
+                } else if (app.formType === 'investor') {
+                    detailFields = [
+                        { label: 'Name', val: fd.name || 'N/A' },
+                        { label: 'Email', val: fd.email || 'N/A' },
+                        { label: 'Phone', val: fd.number || 'N/A' },
+                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
+                        { label: 'Investment', val: fd.investmentAmount ? `ZMW ${fd.investmentAmount}` : 'N/A' },
+                        { label: 'Duration', val: fd.durationMonths ? `${fd.durationMonths} months` : 'N/A' },
+                        { label: 'Profit per Month', val: fd.profitPerMonth ? `ZMW ${fd.profitPerMonth}` : 'N/A' }
+                    ];
+                } else if (app.formType === 'prize') {
+                    detailFields = [
+                        { label: 'Name', val: fd.name || 'N/A' },
+                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
+                        { label: 'Email', val: fd.email || 'N/A' },
+                        { label: 'Phone', val: fd.number || 'N/A' },
+                        { label: 'Details', val: fd.details || 'N/A' },
+                    ];
+                    if (fd.proofImage) {
+                        detailFields.push({
+                            label: 'Proof',
+                            val: `<a href="${fd.proofImage}" target="_blank" style="color:#1c2128;font-weight:600;text-decoration:underline;">View Image</a>`
+                        });
+                    }
+                } else if (app.formType === 'job') {
+                    detailFields = [
+                        { label: 'Name', val: fd.name || 'N/A' },
+                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
+                        { label: 'Email', val: fd.email || 'N/A' },
+                        { label: 'Phone', val: fd.phone || 'N/A' },
+                        { label: 'Age', val: fd.age || 'N/A' },
+                        { label: 'Occupation', val: fd.occupation || 'N/A' },
+                        { label: 'Gender', val: fd.gender || 'N/A' },
+                        { label: 'Position', val: fd.position || 'N/A' },
+                        { label: 'About', val: fd.about || 'N/A' },
+                    ];
+                    if (fd.profilePic) {
+                        detailFields.push({
+                            label: 'Profile Pic',
+                            val: `<a href="${fd.profilePic}" target="_blank" style="color:#1c2128;font-weight:600;text-decoration:underline;">View</a>`
+                        });
+                    }
+                    if (fd.nrcFront) {
+                        detailFields.push({
+                            label: 'NRC Front',
+                            val: `<a href="${fd.nrcFront}" target="_blank" style="color:#1c2128;font-weight:600;text-decoration:underline;">View</a>`
+                        });
+                    }
+                    if (fd.nrcBack) {
+                        detailFields.push({
+                            label: 'NRC Back',
+                            val: `<a href="${fd.nrcBack}" target="_blank" style="color:#1c2128;font-weight:600;text-decoration:underline;">View</a>`
+                        });
+                    }
+                    if (fd.qualification) {
+                        detailFields.push({
+                            label: 'Qualification',
+                            val: `<a href="${fd.qualification}" target="_blank" style="color:#1c2128;font-weight:600;text-decoration:underline;">View</a>`
+                        });
+                    }
+                } else {
+                    // Generic fallback
+                    for (const [k, v] of Object.entries(fd)) {
+                        if (k !== 'name' && k !== 'email' && k !== 'number' && k !== 'bzCode') {
+                            detailFields.push({ label: k, val: typeof v === 'string' ? v : JSON.stringify(v) });
+                        }
+                    }
+                }
+
+                const detailHtml = detailFields.map(f =>
+                    `<div class="detail-item"><span class="label">${f.label}</span><span class="val">${f.val}</span></div>`
+                ).join('');
+
+                return `
+                            <div class="app-card" data-key="${key}">
+                                <div class="app-summary">
+                                    <div class="left">
+                                        <div class="app-avatar">${initial}</div>
+                                        <div class="app-info">
+                                            <div class="app-name">${userName}</div>
+                                            <div class="app-email">${userEmail}</div>
+                                            <div>
+                                                <span class="app-form-type">${formTypeLabel}</span>
+                                                <span style="font-size:8px;color:#aaa;margin-left:4px;">on "${flyerText}"</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <span class="app-status-badge ${statusClass}">${statusLabel}</span>
+                                        <span style="font-size:8px;color:#aaa;">${dateStr}</span>
+                                        <i class="fa-solid fa-chevron-down expand-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="app-details">
+                                    <div class="detail-grid">
+                                        ${detailHtml}
+                                    </div>
+                                    ${app.status === 'pending' ? `
+                                    <div class="actions">
+                                        <button class="btn-approve-app" data-key="${key}"><i class="fa-solid fa-check"></i> Approve</button>
+                                        <button class="btn-reject-app" data-key="${key}"><i class="fa-solid fa-times"></i> Reject</button>
+                                    </div>
+                                    ` : `
+                                    <div class="actions">
+                                        <span style="font-size:9px;color:#888;">Status: <strong>${statusLabel}</strong></span>
+                                    </div>
+                                    `}
+                                </div>
+                            </div>
+                        `;
+            }).join('');
+
+            // Bind expand events
+            applicationsListEl.querySelectorAll('.app-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (e.target.closest('.btn-approve-app') || e.target.closest('.btn-reject-app')) return;
+                    this.classList.toggle('open');
+                    const details = this.querySelector('.app-details');
+                    if (this.classList.contains('open')) {
+                        details.classList.add('open');
+                        details.style.display = 'block';
+                    } else {
+                        details.classList.remove('open');
+                        details.style.display = 'none';
+                    }
+                });
+            });
+
+            // Bind approve/reject
+            applicationsListEl.querySelectorAll('.btn-approve-app').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const key = this.dataset.key;
+                    updateApplicationStatus(key, 'approved');
+                });
+            });
+
+            applicationsListEl.querySelectorAll('.btn-reject-app').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const key = this.dataset.key;
+                    updateApplicationStatus(key, 'rejected');
+                });
+            });
+        }
+
+        function updateApplicationStatus(key, status) {
+            if (!allData.applications || !allData.applications[key]) {
+                showToast('Application not found.', 'error');
+                return;
+            }
+            allData.applications[key].status = status;
+            saveData().then(() => {
+                renderApplications(applicationsFilter);
+                renderAll();
+                showToast(`Application ${status}`, 'success');
+            }).catch((error) => {
+                showToast('Error updating application status', 'error');
+            });
         }
 
         // ───────────────────────────────────────────────────────────────────
@@ -7489,6 +8227,16 @@
             showBackButton();
         });
 
+        viewApplicationsBtn.addEventListener('click', function() {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-applications').classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            mainHeader.classList.remove('work-active');
+            document.getElementById('appContent').scrollTop = 0;
+            renderApplications(applicationsFilter);
+            showBackButton();
+        });
+
         actionReferral.addEventListener('click', function() {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-referral').classList.add('active');
@@ -7509,7 +8257,6 @@
             showBackButton();
         });
 
-        // ── New Customer Wallets Page Button ──
         actionCustomerWallets.addEventListener('click', function() {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-customer-wallet').classList.add('active');
@@ -7646,24 +8393,63 @@
             }
         });
 
+        // ── PROMO PIC UPLOAD MODAL ──
+
         addPromoPicBtn.addEventListener('click', () => {
+            resetPromoPicUploadModal();
             promoPicUploadModal.classList.add('open');
         });
 
         promoPicUploadCloseBtn.addEventListener('click', () => {
             promoPicUploadModal.classList.remove('open');
+            resetPromoPicUploadModal();
         });
         promoPicUploadCancelBtn.addEventListener('click', () => {
             promoPicUploadModal.classList.remove('open');
+            resetPromoPicUploadModal();
         });
         promoPicUploadModal.addEventListener('click', (e) => {
-            if (e.target === promoPicUploadModal) promoPicUploadModal.classList.remove('open');
+            if (e.target === promoPicUploadModal) {
+                promoPicUploadModal.classList.remove('open');
+                resetPromoPicUploadModal();
+            }
         });
+
+        // Click-config toggle
+        enableClickContent.addEventListener('change', function() {
+            clickConfigFields.style.opacity = this.checked ? '1' : '0.5';
+            clickConfigFields.querySelectorAll('input, textarea, select').forEach(el => el.disabled = !this.checked);
+        });
+        // Initial state
+        clickConfigFields.querySelectorAll('input, textarea, select').forEach(el => el.disabled = false);
 
         setupCloudinaryUpload(promoPicImagePreview, promoPicImageUrl, promoPicImagePreview);
 
         promoPicUploadForm.addEventListener('submit', function(e) {
             e.preventDefault();
+
+            // Check if we're in edit mode
+            const editKey = this.dataset.editKey;
+            if (editKey) {
+                // Saving click content only
+                const clickContent = {
+                    enabled: enableClickContent.checked,
+                    title: clickTitle.value.trim(),
+                    instructions: clickInstructions.value.trim(),
+                    explanation: clickExplanation.value.trim(),
+                    boldWords: clickBoldWords.value.trim().split(',').map(w => w.trim()).filter(w => w),
+                    formType: clickFormType.value
+                };
+                updatePromoPicClickContent(editKey, clickContent).then(() => {
+                    renderAll();
+                    promoPicUploadModal.classList.remove('open');
+                    resetPromoPicUploadModal();
+                    showToast('Click content updated!', 'success');
+                });
+                return;
+            }
+
+            // Normal upload mode
             const imageUrl = promoPicImageUrl.value;
             const text = promoPicText.value.trim();
             const subtext = promoPicSubtext.value.trim();
@@ -7677,15 +8463,20 @@
                 return;
             }
 
-            addPromoPic({ imageUrl, text, subtext }).then(() => {
+            const clickContent = {
+                enabled: enableClickContent.checked,
+                title: clickTitle.value.trim(),
+                instructions: clickInstructions.value.trim(),
+                explanation: clickExplanation.value.trim(),
+                boldWords: clickBoldWords.value.trim().split(',').map(w => w.trim()).filter(w => w),
+                formType: clickFormType.value
+            };
+
+            addPromoPic({ imageUrl, text, subtext, clickContent }).then(() => {
                 renderAll();
                 promoPicUploadModal.classList.remove('open');
-                promoPicImageUrl.value = '';
-                promoPicImagePreview.innerHTML =
-                    `<div class="upload-icon"><i class="fa-regular fa-image"></i></div><div class="upload-text">Tap to upload an image</div>`;
-                promoPicText.value = '';
-                promoPicSubtext.value = '';
-                showToast('Flyer uploaded!');
+                resetPromoPicUploadModal();
+                showToast('Flyer uploaded!', 'success');
             });
         });
 
@@ -7925,6 +8716,24 @@
         });
 
         // ───────────────────────────────────────────────────────────────────
+        // APPLICATIONS EVENT BINDINGS
+        // ───────────────────────────────────────────────────────────────────
+
+        appStatusTabs.querySelectorAll('.tab-btn').forEach(tab => {
+            tab.addEventListener('click', function() {
+                appStatusTabs.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                applicationsFilter = this.dataset.status;
+                renderApplications(applicationsFilter);
+            });
+        });
+
+        refreshApplicationsBtn.addEventListener('click', function() {
+            renderApplications(applicationsFilter);
+            showToast('Applications refreshed');
+        });
+
+        // ───────────────────────────────────────────────────────────────────
         // SERVICES PRICE ADJUSTMENT
         // ───────────────────────────────────────────────────────────────────
 
@@ -8097,7 +8906,7 @@
                             const usersPage = document.getElementById('page-users');
                             if (usersPage.classList.contains('active')) {
                                 renderUsers(document.getElementById('userSearchInput').value, userFilterSelect
-                                .value);
+                                    .value);
                             }
                             renderCustomReferrals();
                             renderReferralDiscounts();
@@ -8130,7 +8939,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Customer Wallets page shows all wallet transactions per customer, sorted alphabetically, expandable cards with name, referral code, and current balance.');
+        console.log('✅ Admin Dashboard — Added click-content configuration for flyers + Applications management.');
     </script>
 </body>
 </html>
