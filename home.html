@@ -50,7 +50,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 92%;
-            max-width: 450px; /* wider to fit 7 items */
+            max-width: 450px;
             height: 54px;
             background: #1c2128;
             border-radius: 27px;
@@ -523,22 +523,6 @@
             color: #777;
             line-height: 1.2;
         }
-
-        .thumb-1 { background: #1c2128 !important; }
-        .thumb-2 { background: #1c2128 !important; }
-        .thumb-3 { background: #1c2128 !important; }
-        .thumb-4 { background: #1c2128 !important; }
-        .thumb-5 { background: #1c2128 !important; }
-        .thumb-6 { background: #1c2128 !important; }
-        .thumb-7 { background: #1c2128 !important; }
-        .thumb-8 { background: #1c2128 !important; }
-        .thumb-9 { background: #1c2128 !important; }
-        .thumb-10 { background: #1c2128 !important; }
-        .thumb-11 { background: #1c2128 !important; }
-        .thumb-12 { background: #1c2128 !important; }
-        .thumb-13 { background: #1c2128 !important; }
-        .thumb-14 { background: #1c2128 !important; }
-        .thumb-15 { background: #1c2128 !important; }
 
         .order-flow-container {
             padding: 0 12px 14px 12px;
@@ -2318,7 +2302,7 @@
         }
         .flyer-detail-image-wrap {
             width: 100%;
-            aspect-ratio: 16 / 9; /* 1200x675 */
+            aspect-ratio: 16 / 9;
             overflow: hidden;
             position: relative;
             background: #f5f5f5;
@@ -2329,7 +2313,7 @@
         .flyer-detail-image-wrap img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Show full picture */
+            object-fit: contain;
         }
         .flyer-detail-content {
             padding: 16px 14px 14px 14px;
@@ -2426,28 +2410,77 @@
             resize: vertical;
             min-height: 40px;
         }
-        .flyer-detail-form .form-group .upload-area-sm {
+
+        /* ----- NEW: Small square upload boxes for other files ----- */
+        .upload-box-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 8px;
+        }
+        .upload-box-sm {
+            aspect-ratio: 1 / 1;
             border: 2px dashed #ddd;
             border-radius: 8px;
-            padding: 8px;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             transition: all 0.2s;
             background: #fafbfc;
+            padding: 4px;
+            text-align: center;
+            min-height: 60px;
         }
-        .flyer-detail-form .form-group .upload-area-sm:hover {
+        .upload-box-sm:hover {
             border-color: #f5b83d;
             background: #fffcf0;
         }
-        .flyer-detail-form .form-group .upload-area-sm i {
+        .upload-box-sm i {
+            font-size: 20px;
             color: #aaa;
-            font-size: 16px;
         }
-        .flyer-detail-form .form-group .upload-area-sm .file-label {
+        .upload-box-sm .file-label {
+            font-size: 7px;
+            color: #888;
+            margin-top: 2px;
+            line-height: 1.2;
+            word-break: break-all;
+        }
+        .upload-box-sm .file-name {
+            font-weight: 600;
+            color: #1c2128;
+            font-size: 7px;
+            margin-top: 2px;
+            line-height: 1.2;
+            word-break: break-all;
+        }
+
+        /* ----- Payment single upload area ----- */
+        .payment-upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 9px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s;
+            background: #fafbfc;
+            margin-bottom: 10px;
+        }
+        .payment-upload-area:hover {
+            border-color: #f5b83d;
+            background: #fffcf0;
+        }
+        .payment-upload-area i {
+            font-size: 24px;
+            color: #aaa;
+            margin-bottom: 2px;
+        }
+        .payment-upload-area .file-label {
             font-size: 9px;
             color: #888;
         }
-        .flyer-detail-form .form-group .upload-area-sm .file-name {
+        .payment-upload-area .file-name {
             font-weight: 600;
             color: #1c2128;
             font-size: 9px;
@@ -2631,6 +2664,7 @@
             .promo-slide .slide-text small { font-size: 9px; }
             .flyer-detail-content { padding: 12px 10px 10px 10px; }
             .flyer-detail-header-row h2 { font-size: 16px; }
+            .upload-box-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 380px) {
             .promo-slide .slide-text { font-size: 12px; }
@@ -5570,11 +5604,13 @@
                     <div class="form-group"><label>Details</label><textarea id="f_details" rows="2" placeholder="Describe your entry..."></textarea></div>
                     <div class="form-group">
                         <label>Proof Picture</label>
-                        <div class="upload-area-sm" id="flyerProofUpload">
-                            <i class="fa-regular fa-image"></i>
-                            <div class="file-label">Tap to upload proof</div>
-                            <div class="file-name" id="flyerProofFileName">No file chosen</div>
-                            <input type="hidden" id="flyerProofUrl" />
+                        <div class="upload-box-grid">
+                            <div class="upload-box-sm" id="flyerProofUpload">
+                                <i class="fa-regular fa-image"></i>
+                                <div class="file-label">Upload proof</div>
+                                <div class="file-name" id="flyerProofFileName">-</div>
+                                <input type="hidden" id="flyerProofUrl" />
+                            </div>
                         </div>
                     </div>
                 `;
@@ -5588,11 +5624,13 @@
                     <div class="form-group"><label>Occupation</label><input type="text" id="f_occupation" placeholder="Current occupation" /></div>
                     <div class="form-group">
                         <label>Profile Picture</label>
-                        <div class="upload-area-sm" id="flyerProfileUpload">
-                            <i class="fa-regular fa-image"></i>
-                            <div class="file-label">Tap to upload profile pic</div>
-                            <div class="file-name" id="flyerProfileFileName">No file chosen</div>
-                            <input type="hidden" id="flyerProfileUrl" />
+                        <div class="upload-box-grid">
+                            <div class="upload-box-sm" id="flyerProfileUpload">
+                                <i class="fa-regular fa-image"></i>
+                                <div class="file-label">Upload profile pic</div>
+                                <div class="file-name" id="flyerProfileFileName">-</div>
+                                <input type="hidden" id="flyerProfileUrl" />
+                            </div>
                         </div>
                     </div>
                     <div class="form-group"><label>Gender</label>
@@ -5600,29 +5638,35 @@
                     </div>
                     <div class="form-group">
                         <label>NRC Front</label>
-                        <div class="upload-area-sm" id="flyerNrcFrontUpload">
-                            <i class="fa-regular fa-id-card"></i>
-                            <div class="file-label">Tap to upload NRC front</div>
-                            <div class="file-name" id="flyerNrcFrontFileName">No file chosen</div>
-                            <input type="hidden" id="flyerNrcFrontUrl" />
+                        <div class="upload-box-grid">
+                            <div class="upload-box-sm" id="flyerNrcFrontUpload">
+                                <i class="fa-regular fa-id-card"></i>
+                                <div class="file-label">Upload NRC front</div>
+                                <div class="file-name" id="flyerNrcFrontFileName">-</div>
+                                <input type="hidden" id="flyerNrcFrontUrl" />
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>NRC Back</label>
-                        <div class="upload-area-sm" id="flyerNrcBackUpload">
-                            <i class="fa-regular fa-id-card"></i>
-                            <div class="file-label">Tap to upload NRC back</div>
-                            <div class="file-name" id="flyerNrcBackFileName">No file chosen</div>
-                            <input type="hidden" id="flyerNrcBackUrl" />
+                        <div class="upload-box-grid">
+                            <div class="upload-box-sm" id="flyerNrcBackUpload">
+                                <i class="fa-regular fa-id-card"></i>
+                                <div class="file-label">Upload NRC back</div>
+                                <div class="file-name" id="flyerNrcBackFileName">-</div>
+                                <input type="hidden" id="flyerNrcBackUrl" />
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Qualification</label>
-                        <div class="upload-area-sm" id="flyerQualUpload">
-                            <i class="fa-regular fa-certificate"></i>
-                            <div class="file-label">Tap to upload qualification</div>
-                            <div class="file-name" id="flyerQualFileName">No file chosen</div>
-                            <input type="hidden" id="flyerQualUrl" />
+                        <div class="upload-box-grid">
+                            <div class="upload-box-sm" id="flyerQualUpload">
+                                <i class="fa-regular fa-certificate"></i>
+                                <div class="file-label">Upload qualification</div>
+                                <div class="file-name" id="flyerQualFileName">-</div>
+                                <input type="hidden" id="flyerQualUrl" />
+                            </div>
                         </div>
                     </div>
                     <div class="form-group"><label>Position</label>
@@ -5657,24 +5701,24 @@
                                 <div><span style="font-size:9px; color:#888;">Account Name</span><br><span style="font-weight:600;font-size:12px;">${config.accountName || 'N/A'}</span></div>
                             </div>
                         </div>
-                        <label style="font-weight:600; font-size:9px; color:#1c2128; display:block; margin-bottom:4px;">Upload Payment Screenshots (2x2 grid)</label>
-                        <div id="flyerUploadGrid" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                            <div class="upload-area-sm" data-index="0"><i class="fa-regular fa-image"></i><div class="file-label">Tap to upload</div><div class="file-name">-</div><input type="hidden" class="flyer-payment-proof" value="" /></div>
-                            <div class="upload-area-sm" data-index="1"><i class="fa-regular fa-image"></i><div class="file-label">Tap to upload</div><div class="file-name">-</div><input type="hidden" class="flyer-payment-proof" value="" /></div>
-                            <div class="upload-area-sm" data-index="2"><i class="fa-regular fa-image"></i><div class="file-label">Tap to upload</div><div class="file-name">-</div><input type="hidden" class="flyer-payment-proof" value="" /></div>
-                            <div class="upload-area-sm" data-index="3"><i class="fa-regular fa-image"></i><div class="file-label">Tap to upload</div><div class="file-name">-</div><input type="hidden" class="flyer-payment-proof" value="" /></div>
+                        <label style="font-weight:600; font-size:9px; color:#1c2128; display:block; margin-bottom:4px;">Upload Payment Screenshot (Single)</label>
+                        <div class="payment-upload-area" id="flyerPaymentUpload">
+                            <i class="fa-regular fa-image"></i>
+                            <div class="file-label">Tap to upload payment screenshot</div>
+                            <div class="file-name" id="flyerPaymentFileName">No file chosen</div>
+                            <input type="hidden" id="flyerPaymentUrl" />
                         </div>
-                        <p style="font-size:8px; color:#aaa; margin-top:4px;">Upload at least one screenshot to verify payment.</p>
+                        <p style="font-size:8px; color:#aaa; margin-top:4px;">Upload a screenshot of your payment confirmation.</p>
                     </div>
                 `;
                 flyerDetailForm.insertAdjacentHTML('beforeend', paymentHtml);
 
-                // Setup 2x2 uploads
-                const gridCells = document.querySelectorAll('#flyerUploadGrid .upload-area-sm');
-                gridCells.forEach(cell => {
-                    const input = cell.querySelector('.flyer-payment-proof');
-                    const fileNameEl = cell.querySelector('.file-name');
-                    cell.addEventListener('click', () => {
+                // Setup single payment upload
+                const paymentUpload = document.getElementById('flyerPaymentUpload');
+                const paymentFileName = document.getElementById('flyerPaymentFileName');
+                const paymentUrlInput = document.getElementById('flyerPaymentUrl');
+                if (paymentUpload) {
+                    paymentUpload.addEventListener('click', () => {
                         const options = {
                             cloudName: CLOUD_NAME,
                             uploadPreset: UPLOAD_PRESET,
@@ -5697,19 +5741,19 @@
                             if (result.event === 'success') {
                                 const info = result.info;
                                 const url = info.secure_url;
-                                input.value = url;
-                                fileNameEl.textContent = info.original_filename + '.' + info.format;
-                                cell.style.borderColor = '#f5b83d';
-                                cell.style.background = '#fffcf0';
-                                showToast('File uploaded!', 'success');
+                                paymentUrlInput.value = url;
+                                paymentFileName.textContent = info.original_filename + '.' + info.format;
+                                paymentUpload.style.borderColor = '#f5b83d';
+                                paymentUpload.style.background = '#fffcf0';
+                                showToast('Payment screenshot uploaded!', 'success');
                             }
                         });
                         widget.open();
                     });
-                });
+                }
             }
 
-            // Standard uploads (already setup)
+            // Setup other uploads (small square boxes)
             setupFlyerUploads();
 
             flyerDetailApplyBtn.onclick = () => {
@@ -5723,6 +5767,7 @@
         }
 
         function setupFlyerUploads() {
+            // Helper to bind a single upload box (already defined above)
             function setupUpload(triggerId, fileNameId, urlInputId) {
                 const trigger = document.getElementById(triggerId);
                 const fileNameEl = document.getElementById(fileNameId);
@@ -5846,16 +5891,10 @@
             let paymentData = null;
 
             if (!config.isFree) {
-                const screenshotInputs = document.querySelectorAll('#flyerUploadGrid .flyer-payment-proof');
-                const screenshots = [];
-                screenshotInputs.forEach(input => {
-                    if (input.value) {
-                        screenshots.push(input.value);
-                    }
-                });
-
-                if (screenshots.length === 0) {
-                    showToast('Please upload at least one payment screenshot.', 'error');
+                const paymentUrlInput = document.getElementById('flyerPaymentUrl');
+                const screenshot = paymentUrlInput ? paymentUrlInput.value : '';
+                if (!screenshot) {
+                    showToast('Please upload a payment screenshot.', 'error');
                     return;
                 }
 
@@ -5863,7 +5902,7 @@
                     amount: config.price || 0,
                     mobileNumber: config.mobileNumber || '',
                     accountName: config.accountName || '',
-                    screenshots: screenshots
+                    screenshots: [screenshot] // single screenshot
                 };
             }
 
@@ -6214,7 +6253,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code fully integrated with Applications page and Flyer detail view.');
+        console.log('✅ Customer code updated: payment screenshot is a single upload, other form uploads are small square boxes, separate from payment.');
     </script>
 </body>
 </html>
