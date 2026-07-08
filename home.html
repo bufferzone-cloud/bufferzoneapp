@@ -50,7 +50,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 92%;
-            max-width: 420px; /* made a bit wider to fit 7 items */
+            max-width: 450px; /* wider to fit 7 items */
             height: 54px;
             background: #1c2128;
             border-radius: 27px;
@@ -79,7 +79,7 @@
             gap: 0px;
             user-select: none;
             padding: 2px 0;
-            min-width: 32px;
+            min-width: 28px;
         }
         .nav-item i {
             font-size: 14px;
@@ -2328,18 +2328,6 @@
             height: 100%;
             object-fit: cover;
         }
-        .flyer-detail-image-wrap .flyer-detail-badge {
-            position: absolute;
-            bottom: 12px;
-            left: 12px;
-            background: #f5b83d;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 11px;
-            color: #1c2128;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-        }
         .flyer-detail-content {
             padding: 16px 14px 14px 14px;
         }
@@ -2629,99 +2617,22 @@
             text-decoration: underline;
         }
 
-        /* responsive tweaks for nav */
         @media (max-width: 420px) {
-            .bottom-nav {
-                max-width: 400px;
-                padding: 7px 4px;
-                height: 48px;
-            }
-            .nav-item {
-                font-size: 4.5px;
-                min-width: 28px;
-            }
-            .nav-item i {
-                font-size: 12px;
-            }
-            .app-content {
-                padding: 0 0 120px 0;
-            }
-            .service-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 7px;
-            }
-            .hero-title {
-                font-size: 16px;
-            }
-            .nav-item i {
-                font-size: 13px;
-            }
-            .payment-reminder-banner .btn-done-remaining {
-                font-size: 9px;
-                padding: 3px 10px;
-            }
-            .payment-reminder-banner .reminder-text {
-                font-size: 9px;
-            }
-            .promo-slide .slide-text {
-                font-size: 14px;
-            }
-            .promo-slide .slide-text small {
-                font-size: 9px;
-            }
-            .referral-code-box .code {
-                font-size: 20px;
-            }
-            .account-balance-box .left .balance {
-                font-size: 19px;
-            }
-            .account-toggle-row .toggle-btn {
-                font-size: 9px;
-                padding: 7px 10px;
-            }
-            .promo-carousel-wrapper {
-                padding: 0;
-                height: 221px;
-            }
-            .promo-slide {
-                flex: 0 0 84%;
-                max-width: 84%;
-                height: 86%;
-            }
-            .promo-slide .slide-text {
-                font-size: 14px;
-            }
-            .promo-slide .slide-text small {
-                font-size: 9px;
-            }
-            .account-balance-box .right-btns .btn-action {
-                font-size: 9px;
-                padding: 4px 10px;
-                min-width: 68px;
-            }
-            .send-money-section .search-result {
-                font-size: 9px;
-            }
-            .flyer-detail-content {
-                padding: 12px 10px 10px 10px;
-            }
-            .flyer-detail-header-row h2 {
-                font-size: 16px;
-            }
+            .bottom-nav { max-width: 400px; padding: 7px 4px; height: 48px; }
+            .nav-item { font-size: 4.5px; min-width: 26px; }
+            .nav-item i { font-size: 12px; }
+            .app-content { padding: 0 0 120px 0; }
+            .service-grid { grid-template-columns: repeat(3, 1fr); gap: 7px; }
+            .hero-title { font-size: 16px; }
+            .promo-slide .slide-text { font-size: 14px; }
+            .promo-slide .slide-text small { font-size: 9px; }
+            .flyer-detail-content { padding: 12px 10px 10px 10px; }
+            .flyer-detail-header-row h2 { font-size: 16px; }
         }
-
         @media (max-width: 380px) {
-            .promo-slide .slide-text {
-                font-size: 12px;
-            }
-            .promo-carousel-wrapper {
-                padding: 0;
-                height: 187px;
-            }
-            .promo-slide {
-                flex: 0 0 80%;
-                max-width: 80%;
-            }
+            .promo-slide .slide-text { font-size: 12px; }
+            .promo-carousel-wrapper { height: 187px; }
+            .promo-slide { flex: 0 0 80%; max-width: 80%; }
         }
     </style>
 </head>
@@ -2745,7 +2656,6 @@
 
             <!-- ===== VIEW: HOME ===== -->
             <div id="homeView" class="view active">
-
                 <!-- ===== HERO ===== -->
                 <div class="hero">
                     <div class="small-grid-dots">
@@ -2808,7 +2718,6 @@
                     </div>
                     <div id="serviceGridContainer" class="service-grid"></div>
                 </div>
-
             </div>
 
             <!-- ===== VIEW: ORDER FLOW ===== -->
@@ -2821,6 +2730,37 @@
                 </div>
                 <div id="orderFlowContainer" class="order-flow-container">
                     <!-- Dynamically rendered -->
+                </div>
+            </div>
+
+            <!-- ===== VIEW: FLYER DETAIL ===== -->
+            <div id="flyerDetailView" class="view">
+                <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
+                    <button id="backFromFlyerDetail" style="background: none; border: none; font-size: 14px; color: #1c2128; cursor: pointer; padding: 3px;">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <h3 style="font-weight: 700; font-size: 12px; color: #1c2128;">Flyer Details</h3>
+                </div>
+                <div class="flyer-detail-view">
+                    <div class="flyer-detail-container">
+                        <div class="flyer-detail-image-wrap">
+                            <img id="flyerDetailImage" src="" alt="Flyer" />
+                        </div>
+                        <div class="flyer-detail-content">
+                            <div class="flyer-detail-header-row">
+                                <h2 id="flyerDetailTitle">Promo Details</h2>
+                                <button class="flyer-detail-close-btn" id="flyerDetailCloseBtn"><i class="fa-solid fa-times"></i></button>
+                            </div>
+                            <div class="flyer-detail-section">
+                                <div class="flyer-detail-instructions" id="flyerDetailInstructions"></div>
+                                <div class="flyer-detail-explanation" id="flyerDetailExplanation"></div>
+                            </div>
+                            <div class="flyer-detail-form" id="flyerDetailForm"></div>
+                            <div class="flyer-detail-actions">
+                                <button class="btn btn-primary" id="flyerDetailApplyBtn">Apply Now</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -3196,34 +3136,28 @@
 
         // Flyer detail state
         let currentFlyerId = null;
-        let flyerFormUploads = {};
 
         // =================================================================
         // DOM REFS
         // =================================================================
 
         const headerName = document.getElementById('headerName');
-
         const heroTitle = document.getElementById('heroTitle');
         const heroTitleSpan = document.getElementById('heroTitleSpan');
         const heroDesc = document.getElementById('heroDesc');
         const heroCtaBtn = document.getElementById('heroCtaBtn');
         const heroPhone = document.getElementById('heroPhone');
         const ourServicesList = document.getElementById('ourServicesList');
-
         const serviceGridContainer = document.getElementById('serviceGridContainer');
         const dynamicTitle = document.getElementById('dynamicTitle');
         const dynamicBack = document.getElementById('dynamicBack');
         const dynamicViewAll = document.getElementById('dynamicViewAll');
         const categoryRow = document.getElementById('categoryRow');
-
         const orderFlowContainer = document.getElementById('orderFlowContainer');
         const backFromOrder = document.getElementById('backFromOrder');
-
         const ordersGrid = document.getElementById('ordersGrid');
         const historyList = document.getElementById('historyList');
         const paymentReminderBanner = document.getElementById('paymentReminderBanner');
-
         const profileName = document.getElementById('profileName');
         const profileFullName = document.getElementById('profileFullName');
         const profilePhone = document.getElementById('profilePhone');
@@ -3231,23 +3165,16 @@
         const profileJoined = document.getElementById('profileJoined');
         const profileAvatarLarge = document.getElementById('profileAvatarLarge');
         const profileRole = document.getElementById('profileRole');
-
         const logoutBtn = document.getElementById('logoutBtn');
-
         const notifIcon = document.getElementById('notifIcon');
         const notifBadge = document.getElementById('notifBadge');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
         const notifSidebar = document.getElementById('notifSidebar');
         const sidebarClose = document.getElementById('sidebarClose');
         const notifList = document.getElementById('notifList');
-
         const promotionsBanner = document.getElementById('promotionsBanner');
-
-        // Carousel
         const promoCarouselTrack = document.getElementById('promoCarouselTrack');
         const promoCarouselWrapper = document.getElementById('promoCarouselWrapper');
-
-        // Payment Page
         const paymentPage = document.getElementById('paymentPage');
         const paymentCloseBtn = document.getElementById('paymentCloseBtn');
         const paymentAmount = document.getElementById('paymentAmount');
@@ -3259,7 +3186,6 @@
         const fileName = document.getElementById('fileName');
         const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
         const cloudinaryScreenshotUrlInput = document.getElementById('cloudinaryScreenshotUrl');
-
         const couponInput = document.getElementById('couponInput');
         const applyCouponBtn = document.getElementById('applyCouponBtn');
         const couponMsg = document.getElementById('couponMsg');
@@ -3268,14 +3194,9 @@
         const discountVal = document.getElementById('discountVal');
         const finalPriceVal = document.getElementById('finalPriceVal');
         const finalDepositVal = document.getElementById('finalDepositVal');
-
         const samplesContainer = document.getElementById('samplesContainer');
-
-        // ===== Order Success =====
         const orderSuccessPopup = document.getElementById('orderSuccessPopup');
         const orderSuccessOkBtn = document.getElementById('orderSuccessOkBtn');
-
-        // ===== Account & Referral =====
         const accountTransactionsBtn = document.getElementById('accountTransactionsBtn');
         const accountWithdrawBtn = document.getElementById('accountWithdrawBtn');
         const accountTransactionsView = document.getElementById('accountTransactionsView');
@@ -3287,17 +3208,13 @@
         const withdrawBtnFromView = document.getElementById('withdrawBtnFromView');
         const transactionMessages = document.getElementById('transactionMessages');
         const withdrawalsListContainer = document.getElementById('withdrawalsListContainer');
-
         const withdrawModal = document.getElementById('withdrawModal');
         const withdrawAmountInput = document.getElementById('withdrawAmountInput');
         const confirmWithdrawBtn = document.getElementById('confirmWithdrawBtn');
         const cancelWithdrawBtn = document.getElementById('cancelWithdrawBtn');
         const withdrawMaxLabel = document.getElementById('withdrawMaxLabel');
-
         const withdrawSuccessModal = document.getElementById('withdrawSuccessModal');
         const withdrawSuccessOkBtn = document.getElementById('withdrawSuccessOkBtn');
-
-        // ===== Toggle buttons in payment page =====
         const togglePromoBtn = document.getElementById('togglePromoBtn');
         const toggleReferralBtn = document.getElementById('toggleReferralBtn');
         const promoCodeWrap = document.getElementById('promoCodeWrap');
@@ -3305,15 +3222,11 @@
         const referralCodeInput = document.getElementById('referralCodeInput');
         const applyReferralBtn = document.getElementById('applyReferralBtn');
         const referralMsg = document.getElementById('referralMsg');
-
-        // ===== Wallet payment =====
         const payWithWalletCheck = document.getElementById('payWithWalletCheck');
         const walletBalanceDisplay = document.getElementById('walletBalanceDisplay');
         const walletSufficiency = document.getElementById('walletSufficiency');
         const walletStatus = document.getElementById('walletStatus');
         const uploadSection = document.getElementById('uploadSection');
-
-        // ===== Send Money =====
         const sendMoneyBtn = document.getElementById('sendMoneyBtn');
         const sendMoneySection = document.getElementById('sendMoneySection');
         const sendReferralInput = document.getElementById('sendReferralInput');
@@ -3324,9 +3237,6 @@
         const sendBalanceCheck = document.getElementById('sendBalanceCheck');
         const sendMoneyConfirmBtn = document.getElementById('sendMoneyConfirmBtn');
         const sendTxItems = document.getElementById('sendTxItems');
-
-        // ===== Flyer Detail =====
-        const flyerDetailView = document.getElementById('flyerDetailView');
         const flyerDetailImage = document.getElementById('flyerDetailImage');
         const flyerDetailTitle = document.getElementById('flyerDetailTitle');
         const flyerDetailInstructions = document.getElementById('flyerDetailInstructions');
@@ -3335,8 +3245,6 @@
         const flyerDetailApplyBtn = document.getElementById('flyerDetailApplyBtn');
         const flyerDetailCloseBtn = document.getElementById('flyerDetailCloseBtn');
         const backFromFlyerDetail = document.getElementById('backFromFlyerDetail');
-
-        // ===== Applications =====
         const applicationsListEl = document.getElementById('applicationsList');
 
         // =================================================================
@@ -3383,8 +3291,9 @@
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             const navBtn = document.querySelector(`.nav-item[data-view="${viewId}"]`);
             if (navBtn) navBtn.classList.add('active');
-            if (viewId !== 'orderFlowView') {
+            if (viewId !== 'orderFlowView' && viewId !== 'flyerDetailView') {
                 document.getElementById('orderFlowView').classList.remove('active');
+                document.getElementById('flyerDetailView').classList.remove('active');
             }
             document.getElementById('appContent').scrollTop = 0;
         }
@@ -3406,18 +3315,6 @@
             return div.innerHTML;
         }
 
-        function renderPrice(service) {
-            const orig = service.originalPrice;
-            const curr = service.price || 0;
-            if (orig && orig !== curr) {
-                return `
-                    <span class="old-price">ZMW ${orig.toFixed(2)}</span>
-                    <span class="new-price">ZMW ${curr.toFixed(2)}</span>
-                `;
-            }
-            return `<span class="new-price regular">ZMW ${curr.toFixed(2)}</span>`;
-        }
-
         function renderPriceInline(service) {
             const orig = service.originalPrice;
             const curr = service.price || 0;
@@ -3431,7 +3328,7 @@
         }
 
         // =================================================================
-        // CLOUDINARY UPLOAD
+        // CLOUDINARY UPLOAD (payment page)
         // =================================================================
 
         function setupCloudinaryUpload() {
@@ -3702,13 +3599,7 @@
                 slide.addEventListener('click', function() {
                     const key = this.dataset.key;
                     if (key) {
-                        const realIdx = parseInt(this.dataset.realIndex);
-                        if (!isNaN(realIdx) && realIdx >= 0 && realIdx < carouselItems.length) {
-                            const actualKey = carouselItems[realIdx][0];
-                            openFlyerDetail(actualKey);
-                        } else {
-                            openFlyerDetail(key);
-                        }
+                        openFlyerDetail(key);
                     }
                 });
             });
@@ -5602,18 +5493,14 @@
             currentFlyerId = flyerId;
             const cc = flyer.clickContent || { enabled: false };
 
-            // Populate image
             flyerDetailImage.src = flyer.imageUrl || '';
 
-            // Populate title
             flyerDetailTitle.textContent = cc.title || flyer.text || 'Promo Details';
 
-            // Populate instructions
             const instructions = cc.instructions || '';
             flyerDetailInstructions.innerHTML = instructions ? `<strong>Instructions</strong><br>${escapeHtml(instructions)}` :
                 '';
 
-            // Populate explanation with bold words
             let explanationHtml = (cc.explanation || '');
             if (cc.boldWords && cc.boldWords.length > 0) {
                 const words = cc.boldWords.filter(w => w.trim());
@@ -5624,9 +5511,9 @@
             }
             flyerDetailExplanation.innerHTML = explanationHtml ? `<strong>Details</strong><br>${explanationHtml}` : '';
 
-            // Populate form
             const formType = cc.formType || 'none';
             flyerDetailForm.innerHTML = '';
+            flyerDetailApplyBtn.style.display = 'block';
 
             if (formType === 'none') {
                 flyerDetailApplyBtn.textContent = 'Close';
@@ -5642,7 +5529,6 @@
             flyerDetailApplyBtn.disabled = false;
             flyerDetailApplyBtn.className = 'btn btn-primary';
 
-            // Render form fields based on formType
             let formHtml = `<h4 style="font-size:11px;font-weight:700;color:#1c2128;margin-bottom:6px;">Apply as ${formType.charAt(0).toUpperCase() + formType.slice(1)}</h4>`;
 
             const commonFields = `
@@ -5735,15 +5621,12 @@
 
             flyerDetailForm.innerHTML = formHtml;
 
-            // Setup upload widgets for the flyer form fields
             setupFlyerUploads();
 
-            // Apply button action
             flyerDetailApplyBtn.onclick = () => {
                 submitFlyerApplication(flyerId, formType);
             };
 
-            // Show the view
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             flyerDetailView.classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -5751,7 +5634,6 @@
         }
 
         function setupFlyerUploads() {
-            // Helper to set up a single upload field
             function setupUpload(triggerId, fileNameId, urlInputId) {
                 const trigger = document.getElementById(triggerId);
                 const fileNameEl = document.getElementById(fileNameId);
@@ -5857,13 +5739,11 @@
                 };
             }
 
-            // Basic validation: check if at least name and email are present
             if (!formData.name && !formData.email) {
                 showToast('Please fill in at least your name and email.', 'error');
                 return;
             }
 
-            // Save application to allData.applications
             if (!allData.applications) allData.applications = {};
             const appId = 'app_' + Date.now();
             allData.applications[appId] = {
@@ -5920,7 +5800,6 @@
                     job: 'Job'
                 } [a.formType] || a.formType || 'Unknown';
 
-                // Build detail rows from formData
                 let detailRows = '';
                 const fd = a.formData || {};
                 for (const [k, v] of Object.entries(fd)) {
@@ -6070,7 +5949,6 @@
 
         setupCloudinaryUpload();
 
-        // ===== Account Toggle Buttons =====
         accountTransactionsBtn.addEventListener('click', function() {
             accountTransactionsBtn.classList.add('active');
             accountWithdrawBtn.classList.remove('active');
@@ -6085,7 +5963,6 @@
             accountTransactionsView.classList.remove('active');
         });
 
-        // ===== Withdraw =====
         withdrawBtnFromBalance.addEventListener('click', openWithdrawModal);
         withdrawBtnFromView.addEventListener('click', openWithdrawModal);
         cancelWithdrawBtn.addEventListener('click', closeWithdrawModal);
@@ -6104,7 +5981,6 @@
             }
         });
 
-        // ===== Send Money =====
         sendMoneyBtn.addEventListener('click', toggleSendMoneySection);
 
         searchRecipientBtn.addEventListener('click', searchRecipient);
@@ -6131,7 +6007,6 @@
 
         sendMoneyConfirmBtn.addEventListener('click', confirmSendMoney);
 
-        // ===== Wallet Payment Checkbox =====
         payWithWalletCheck.addEventListener('change', function() {
             if (this.checked) {
                 const accounts = allData.customerAccounts || {};
@@ -6195,7 +6070,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Added Applications page, Flyer detail view (burger layout), and application submission flow.');
+        console.log('✅ Customer code fully integrated with Applications page and Flyer detail view.');
     </script>
 </body>
 </html>
