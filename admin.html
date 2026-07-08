@@ -9,7 +9,6 @@
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
     </script>
     <style>
-        /* ... (all CSS from the original admin code) ... */
         * {
             margin: 0;
             padding: 0;
@@ -122,6 +121,7 @@
             transform: scale(1);
         }
 
+        /* Updated Header Styles */
         .header {
             display: flex;
             align-items: center;
@@ -190,12 +190,13 @@
             align-items: center;
             justify-content: center;
             flex: 1;
-            gap: 8px;
+            gap: 4px;
             min-width: 70px;
         }
 
+        /* Always visible and centered */
         .admin-title {
-            display: none;
+            display: block !important;
             text-align: center;
         }
         .admin-title span:first-child {
@@ -209,9 +210,6 @@
             color: #1c2128;
         }
 
-        .header.work-active .admin-title {
-            display: block;
-        }
         .header.work-active .header-left .work-avatar {
             display: flex;
         }
@@ -3988,7 +3986,11 @@
                     </div>
                     <div style="display:flex; gap:8px;">
                         <button class="btn btn-outline btn-sm" id="refreshApplicationsBtn"><i class="fa-solid fa-rotate"></i> Refresh</button>
-                        <button class="btn btn-primary btn-sm" id="configureFormsBtn" style="background:#f5b83d;color:#1c2128;border:none;"><i class="fas fa-cog"></i> Configure Forms</button>
+                        <div style="text-align:center; width:100%; margin-top:8px;">
+                            <button class="btn btn-primary" id="configureFormsBtn" style="background:#f5b83d;color:#1c2128;border:none; padding:10px 24px; font-size:14px; width:100%; max-width:300px;">
+                                <i class="fas fa-cog"></i> Configure Forms
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -7278,7 +7280,7 @@
                     if (fd.proofImage) {
                         detailFields.push({
                             label: 'Proof',
-                            val: `<a href="${fd.proofImage}" target="_blank" style="color:#1c2128;font-weight:600;text-decoration:underline;">View Image</a>`
+                            val: `<div style="display:inline-block; cursor:pointer; margin:2px;" onclick="document.getElementById('screenshotPreview').src='${fd.proofImage}'; document.getElementById('screenshotModal').classList.add('open');"><img src="${fd.proofImage}" style="width:50px; height:50px; object-fit:cover; border-radius:4px; border:1px solid #eee;" /></div>`
                         });
                     }
                 } else if (app.formType === 'job') {
@@ -7296,25 +7298,25 @@
                     if (fd.profilePic) {
                         detailFields.push({
                             label: 'Profile Pic',
-                            val: `<a href="${fd.profilePic}" target="_blank" style="color:#1c2128;font-weight:600;text-decoration:underline;">View</a>`
+                            val: `<div style="display:inline-block; cursor:pointer; margin:2px;" onclick="document.getElementById('screenshotPreview').src='${fd.profilePic}'; document.getElementById('screenshotModal').classList.add('open');"><img src="${fd.profilePic}" style="width:50px; height:50px; object-fit:cover; border-radius:4px; border:1px solid #eee;" /></div>`
                         });
                     }
                     if (fd.nrcFront) {
                         detailFields.push({
                             label: 'NRC Front',
-                            val: `<a href="${fd.nrcFront}" target="_blank" style="color:#1c2128;font-weight:600;text-decoration:underline;">View</a>`
+                            val: `<div style="display:inline-block; cursor:pointer; margin:2px;" onclick="document.getElementById('screenshotPreview').src='${fd.nrcFront}'; document.getElementById('screenshotModal').classList.add('open');"><img src="${fd.nrcFront}" style="width:50px; height:50px; object-fit:cover; border-radius:4px; border:1px solid #eee;" /></div>`
                         });
                     }
                     if (fd.nrcBack) {
                         detailFields.push({
                             label: 'NRC Back',
-                            val: `<a href="${fd.nrcBack}" target="_blank" style="color:#1c2128;font-weight:600;text-decoration:underline;">View</a>`
+                            val: `<div style="display:inline-block; cursor:pointer; margin:2px;" onclick="document.getElementById('screenshotPreview').src='${fd.nrcBack}'; document.getElementById('screenshotModal').classList.add('open');"><img src="${fd.nrcBack}" style="width:50px; height:50px; object-fit:cover; border-radius:4px; border:1px solid #eee;" /></div>`
                         });
                     }
                     if (fd.qualification) {
                         detailFields.push({
                             label: 'Qualification',
-                            val: `<a href="${fd.qualification}" target="_blank" style="color:#1c2128;font-weight:600;text-decoration:underline;">View</a>`
+                            val: `<div style="display:inline-block; cursor:pointer; margin:2px;" onclick="document.getElementById('screenshotPreview').src='${fd.qualification}'; document.getElementById('screenshotModal').classList.add('open');"><img src="${fd.qualification}" style="width:50px; height:50px; object-fit:cover; border-radius:4px; border:1px solid #eee;" /></div>`
                         });
                     }
                 } else if (app.formType === 'referrer') {
@@ -7343,14 +7345,21 @@
                     if (pd.screenshot) {
                         detailFields.push({
                             label: 'Payment Screenshot',
-                            val: `<a href="${pd.screenshot}" target="_blank" style="color:#1c2128;font-weight:600;text-decoration:underline;">View Screenshot</a>`
+                            val: `<button class="btn-view-proof" data-screenshot="${pd.screenshot}" style="padding:2px 10px; font-size:8px; border-radius:10px;"><i class="fa-regular fa-image"></i> View</button>`
                         });
                     }
                 }
 
-                const detailHtml = detailFields.map(f =>
-                    `<div class="detail-item"><span class="label">${f.label}</span><span class="val">${f.val}</span></div>`
-                ).join('');
+                const detailHtml = detailFields.map(f => {
+                    let val = f.val;
+                    // Check if val is an image URL
+                    if (typeof val === 'string' && (val.startsWith('http://') || val.startsWith('https://')) && (val.match(/\.(jpg|jpeg|png|gif|webp|svg|bmp)/i) || val.includes('cloudinary'))) {
+                        val = `<div style="display:inline-block; cursor:pointer; margin:2px;" onclick="document.getElementById('screenshotPreview').src='${val}'; document.getElementById('screenshotModal').classList.add('open');"><img src="${val}" style="width:50px; height:50px; object-fit:cover; border-radius:4px; border:1px solid #eee;" /></div>`;
+                    } else if (f.label === 'Payment Screenshot') {
+                        val = `<button class="btn-view-proof" data-screenshot="${val}" style="padding:2px 10px; font-size:8px; border-radius:10px;"><i class="fa-regular fa-image"></i> View</button>`;
+                    }
+                    return `<div class="detail-item"><span class="label">${f.label}</span><span class="val">${val}</span></div>`;
+                }).join('');
 
                 return `
                             <div class="app-card" data-key="${key}">
@@ -7423,6 +7432,18 @@
                     updateApplicationStatus(key, 'rejected');
                 });
             });
+
+            // Bind screenshot view buttons
+            applicationsListEl.querySelectorAll('.btn-view-proof').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const url = this.dataset.screenshot;
+                    if (url) {
+                        document.getElementById('screenshotPreview').src = url;
+                        document.getElementById('screenshotModal').classList.add('open');
+                    }
+                });
+            });
         }
 
         function updateApplicationStatus(key, status) {
@@ -7460,10 +7481,11 @@
                     <div style="background:#f8f9fc; border:1px solid #f0f0f0; border-radius:10px; padding:12px; margin-bottom:10px;">
                         <div style="font-weight:700; font-size:13px; color:#1c2128; margin-bottom:6px;">${formLabels[key] || key}</div>
                         <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:8px;">
-                            <label style="font-size:10px; font-weight:500; display:flex; align-items:center; gap:6px; cursor:pointer;">
+                            <label class="toggle-switch" style="display:inline-block;">
                                 <input type="checkbox" class="form-config-free" data-type="${key}" ${cfg.isFree ? 'checked' : ''} />
-                                Free Application
+                                <span class="toggle-slider"></span>
                             </label>
+                            <span style="font-size:10px; font-weight:500;">Free Application</span>
                             <div style="display:flex; align-items:center; gap:6px;">
                                 <span style="font-size:10px; color:#555;">Price (ZMW):</span>
                                 <input type="number" class="form-config-price" data-type="${key}" value="${cfg.price || 0}" style="width:80px; padding:4px 8px; border:1px solid #ddd; border-radius:6px; font-size:11px;" />
