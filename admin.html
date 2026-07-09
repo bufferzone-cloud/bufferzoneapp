@@ -121,7 +121,7 @@
             transform: scale(1);
         }
 
-        /* Updated Header Styles */
+        /* ── HEADER: Single centered admin title ── */
         .header {
             display: flex;
             align-items: center;
@@ -170,19 +170,7 @@
         }
 
         .header-text {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .header-text span:first-child {
-            font-size: 9px;
-            color: #888;
-        }
-        .header-text span:last-child {
-            font-weight: 700;
-            font-size: 14px;
-            color: #1c2128;
-            letter-spacing: -0.3px;
+            display: none;
         }
 
         .header-center {
@@ -194,9 +182,7 @@
             min-width: 70px;
         }
 
-        /* Always visible and centered */
         .admin-title {
-            display: block !important;
             text-align: center;
         }
         .admin-title span:first-child {
@@ -3812,15 +3798,11 @@
 
         <div class="app-content" id="appContent">
 
-            <!-- ===== HEADER ===== -->
+            <!-- ===== HEADER: Single centered admin title ===== -->
             <div class="header" id="mainHeader">
                 <div class="header-left">
                     <div class="top-row">
                         <div class="work-avatar" id="workAvatarBtn" title="View Work Page">Work</div>
-                        <div class="header-text" id="headerGreeting">
-                            <span>Admin Panel</span>
-                            <span id="adminName">Buffer Zone</span>
-                        </div>
                     </div>
                 </div>
                 <div class="header-center">
@@ -3984,13 +3966,13 @@
                         <h2><i class="fa-solid fa-clipboard-list"></i> Applications</h2>
                         <p>Review and manage all form submissions from your flyers.</p>
                     </div>
-                    <div style="display:flex; gap:8px;">
-                        <button class="btn btn-outline btn-sm" id="refreshApplicationsBtn"><i class="fa-solid fa-rotate"></i> Refresh</button>
-                        <div style="text-align:center; width:100%; margin-top:8px;">
-                            <button class="btn btn-primary" id="configureFormsBtn" style="background:#f5b83d;color:#1c2128;border:none; padding:10px 24px; font-size:14px; width:100%; max-width:300px;">
-                                <i class="fas fa-cog"></i> Configure Forms
-                            </button>
+                    <div style="display:flex; gap:8px; flex-direction:column; align-items:center;">
+                        <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+                            <button class="btn btn-outline btn-sm" id="refreshApplicationsBtn"><i class="fa-solid fa-rotate"></i> Refresh</button>
                         </div>
+                        <button class="btn btn-primary" id="configureFormsBtn" style="background:#f5b83d;color:#1c2128;border:none; padding:10px 24px; font-size:14px; max-width:300px; width:100%;">
+                            <i class="fas fa-cog"></i> Configure Forms
+                        </button>
                     </div>
                 </div>
 
@@ -4886,7 +4868,6 @@
         // DOM REFS
         // ───────────────────────────────────────────────────────────────────
 
-        const adminNameEl = document.getElementById('adminName');
         const adminNameCenterEl = document.getElementById('adminNameCenter');
         const profileNameEl = document.getElementById('profileName');
         const profileEmailEl = document.getElementById('profileEmail');
@@ -5267,7 +5248,6 @@
                 const email = currentUser.email || 'No email';
                 const phone = currentAdminData?.phone || 'Not set';
 
-                adminNameEl.textContent = name;
                 adminNameCenterEl.textContent = name;
                 profileNameEl.textContent = name;
                 profileEmailEl.textContent = email;
