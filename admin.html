@@ -3447,16 +3447,193 @@
             color: #cc8800;
         }
 
-        .app-flyer-actions {
-            display: flex;
+        /* ─── NEW: 2×2 Image Grid for Applications ─── */
+        .app-image-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 6px;
+            margin: 6px 0 10px 0;
         }
-        .app-flyer-actions .btn-sm {
+        .app-image-grid .img-box {
+            aspect-ratio: 1/1;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid #f0f0f0;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            position: relative;
+        }
+        .app-image-grid .img-box:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        .app-image-grid .img-box:active {
+            transform: scale(0.95);
+        }
+        .app-image-grid .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .app-image-grid .img-box .file-label {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
+            font-size: 7px;
+            padding: 1px 6px;
+            border-radius: 4px;
+            backdrop-filter: blur(2px);
+            pointer-events: none;
+        }
+
+        .app-card .app-details .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 20px;
+            margin-bottom: 8px;
+        }
+        @media (max-width: 500px) {
+            .app-card .app-details .detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .app-card .app-details .detail-grid .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+            font-size: 11px;
+            border-bottom: 1px solid #f8f8f8;
+        }
+        .app-card .app-details .detail-grid .detail-item .label {
+            color: #888;
+        }
+        .app-card .app-details .detail-grid .detail-item .val {
+            font-weight: 500;
+            color: #1c2128;
+        }
+        .app-card .app-details .detail-grid .detail-item .val.highlight {
+            color: #f5b83d;
+            font-weight: 700;
+        }
+        .app-card .app-details .detail-grid .detail-item .val.green {
+            color: #16a34a;
+        }
+        .app-card .app-details .detail-grid .detail-item .val.red {
+            color: #dc2626;
+        }
+
+        .app-card .app-details .actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+        .app-card .app-details .actions .btn-approve-app {
+            background: #16a34a;
+            color: #fff;
+            border: none;
+            padding: 3px 14px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 9px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .app-card .app-details .actions .btn-approve-app:hover {
+            background: #15803d;
+        }
+        .app-card .app-details .actions .btn-reject-app {
+            background: #dc2626;
+            color: #fff;
+            border: none;
+            padding: 3px 14px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 9px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .app-card .app-details .actions .btn-reject-app:hover {
+            background: #b91c1c;
+        }
+        .app-card .app-details .actions .btn-approve-app:active,
+        .app-card .app-details .actions .btn-reject-app:active {
+            transform: scale(0.95);
+        }
+
+        .app-empty {
+            text-align: center;
+            padding: 30px 0;
+            color: #888;
+        }
+        .app-empty i {
+            font-size: 32px;
+            color: #ddd;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .click-config-section {
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-top: 6px;
+            border: 1px solid #f0f0f0;
+        }
+        .click-config-section .section-label {
+            font-weight: 700;
+            font-size: 11px;
+            color: #1c2128;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .click-config-section .section-label i {
+            color: #f5b83d;
+        }
+        .click-config-section .form-group-sm {
+            margin-bottom: 6px;
+        }
+        .click-config-section .form-group-sm label {
+            font-size: 9px;
+            color: #555;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 1px;
+        }
+        .click-config-section .form-group-sm input,
+        .click-config-section .form-group-sm textarea,
+        .click-config-section .form-group-sm select {
+            width: 100%;
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 10px;
+            background: #fff;
+            transition: border 0.2s;
+        }
+        .click-config-section .form-group-sm input:focus,
+        .click-config-section .form-group-sm textarea:focus,
+        .click-config-section .form-group-sm select:focus {
+            outline: none;
+            border-color: #1c2128;
+        }
+        .click-config-section .form-group-sm textarea {
+            min-height: 30px;
+            resize: vertical;
+        }
+        .click-config-section .hint {
             font-size: 8px;
-            padding: 2px 12px;
-            border-radius: 12px;
+            color: #aaa;
+            margin-top: 1px;
         }
 
         .applications-header {
@@ -3622,242 +3799,6 @@
         }
         .app-card .app-details.open {
             display: block;
-        }
-        .app-card .app-details .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px 20px;
-            margin-bottom: 8px;
-        }
-        @media (max-width: 500px) {
-            .app-card .app-details .detail-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        .app-card .app-details .detail-grid .detail-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 2px 0;
-            font-size: 11px;
-            border-bottom: 1px solid #f8f8f8;
-        }
-        .app-card .app-details .detail-grid .detail-item .label {
-            color: #888;
-        }
-        .app-card .app-details .detail-grid .detail-item .val {
-            font-weight: 500;
-            color: #1c2128;
-        }
-        .app-card .app-details .detail-grid .detail-item .val.highlight {
-            color: #f5b83d;
-            font-weight: 700;
-        }
-        .app-card .app-details .detail-grid .detail-item .val.green {
-            color: #16a34a;
-        }
-        .app-card .app-details .detail-grid .detail-item .val.red {
-            color: #dc2626;
-        }
-        .app-card .app-details .actions {
-            display: flex;
-            gap: 6px;
-            margin-top: 6px;
-            flex-wrap: wrap;
-        }
-        .app-card .app-details .actions .btn-approve-app {
-            background: #16a34a;
-            color: #fff;
-            border: none;
-            padding: 3px 14px;
-            border-radius: 14px;
-            font-weight: 600;
-            font-size: 9px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .app-card .app-details .actions .btn-approve-app:hover {
-            background: #15803d;
-        }
-        .app-card .app-details .actions .btn-reject-app {
-            background: #dc2626;
-            color: #fff;
-            border: none;
-            padding: 3px 14px;
-            border-radius: 14px;
-            font-weight: 600;
-            font-size: 9px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .app-card .app-details .actions .btn-reject-app:hover {
-            background: #b91c1c;
-        }
-        .app-card .app-details .actions .btn-approve-app:active,
-        .app-card .app-details .actions .btn-reject-app:active {
-            transform: scale(0.95);
-        }
-
-        .app-card .app-details .app-proof-img {
-            max-width: 100%;
-            max-height: 150px;
-            border-radius: 8px;
-            margin-top: 4px;
-            border: 1px solid #f0f0f0;
-        }
-        .app-card .app-details .app-proof-img-container {
-            margin-top: 4px;
-        }
-        .app-card .app-details .app-proof-img-container .proof-label {
-            font-size: 10px;
-            color: #888;
-            font-weight: 500;
-        }
-
-        .app-empty {
-            text-align: center;
-            padding: 30px 0;
-            color: #888;
-        }
-        .app-empty i {
-            font-size: 32px;
-            color: #ddd;
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .click-config-section {
-            background: #f8f9fc;
-            border-radius: 10px;
-            padding: 12px 14px;
-            margin-top: 6px;
-            border: 1px solid #f0f0f0;
-        }
-        .click-config-section .section-label {
-            font-weight: 700;
-            font-size: 11px;
-            color: #1c2128;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .click-config-section .section-label i {
-            color: #f5b83d;
-        }
-        .click-config-section .form-group-sm {
-            margin-bottom: 6px;
-        }
-        .click-config-section .form-group-sm label {
-            font-size: 9px;
-            color: #555;
-            font-weight: 500;
-            display: block;
-            margin-bottom: 1px;
-        }
-        .click-config-section .form-group-sm input,
-        .click-config-section .form-group-sm textarea,
-        .click-config-section .form-group-sm select {
-            width: 100%;
-            padding: 4px 8px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 10px;
-            background: #fff;
-            transition: border 0.2s;
-        }
-        .click-config-section .form-group-sm input:focus,
-        .click-config-section .form-group-sm textarea:focus,
-        .click-config-section .form-group-sm select:focus {
-            outline: none;
-            border-color: #1c2128;
-        }
-        .click-config-section .form-group-sm textarea {
-            min-height: 30px;
-            resize: vertical;
-        }
-        .click-config-section .hint {
-            font-size: 8px;
-            color: #aaa;
-            margin-top: 1px;
-        }
-
-        /* ===== 2x2 IMAGE GALLERY ===== */
-        .app-image-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            margin: 10px 0 8px 0;
-        }
-        .app-image-grid .img-box {
-            aspect-ratio: 1 / 1;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #e0e0e0;
-            cursor: pointer;
-            background: #fafafa;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-            min-height: 60px;
-        }
-        .app-image-grid .img-box:hover {
-            transform: scale(1.03);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-        }
-        .app-image-grid .img-box:active {
-            transform: scale(0.95);
-        }
-        .app-image-grid .img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .app-image-grid .img-box .img-label {
-            position: absolute;
-            bottom: 2px;
-            left: 2px;
-            right: 2px;
-            background: rgba(0, 0, 0, 0.55);
-            color: #fff;
-            font-size: 7px;
-            font-weight: 600;
-            padding: 1px 4px;
-            border-radius: 4px;
-            text-align: center;
-            backdrop-filter: blur(2px);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .app-image-grid .img-box .no-image-icon {
-            color: #ccc;
-            font-size: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-        }
-        .app-image-grid .img-box .no-image-icon span {
-            font-size: 7px;
-            color: #aaa;
-        }
-        .app-image-grid .img-box .enlarge-hint {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            background: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            font-size: 6px;
-            padding: 0 4px;
-            border-radius: 4px;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        .app-image-grid .img-box:hover .enlarge-hint {
-            opacity: 1;
         }
     </style>
 </head>
@@ -4224,7 +4165,7 @@
 
             </div>
 
-            <!-- ===== PAGE: CUSTOMER WALLETS (renamed from Customer Transactions) ===== -->
+            <!-- ===== PAGE: CUSTOMER WALLETS ===== -->
             <div id="page-customer-wallet" class="page page-customer-wallet">
                 <div class="card">
                     <div class="card-header">
@@ -4414,7 +4355,7 @@
 
         </div>
 
-        <!-- ===== BOTTOM NAV (Home badge removed) ===== -->
+        <!-- ===== BOTTOM NAV ===== -->
         <div class="bottom-nav">
             <button class="nav-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Home</span></button>
             <button class="nav-item" data-page="services"><i class="fa-solid fa-layer-group"></i><span>Services</span></button>
@@ -4702,7 +4643,7 @@
         </div>
     </div>
 
-    <!-- ===== USER SELECTOR MODAL (Phone-style) ===== -->
+    <!-- ===== USER SELECTOR MODAL ===== -->
     <div class="modal-overlay user-selector-modal" id="userSelectorModal">
         <div class="modal">
             <button class="close-btn" id="userSelectorCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -6854,7 +6795,7 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER WALLETS PAGE – NEW IMPLEMENTATION
+        // CUSTOMER WALLETS PAGE
         // ───────────────────────────────────────────────────────────────────
 
         function renderCustomerWalletsPage(searchTerm = '') {
@@ -6863,20 +6804,17 @@
             const accounts = allData.customerAccounts || {};
             const transactions = allData.transactions || {};
 
-            // Build user list with balances and transactions
             let userList = Object.entries(users).map(([uid, user]) => {
                 const fullName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
                 const email = user.email || '';
                 const referralCode = user.referralCode || 'N/A';
                 const balance = (accounts[uid]?.balance || 0);
-                // Collect all transactions involving this user (either as main party or other party)
                 const userTxs = Object.entries(transactions).filter(([key, tx]) => {
                     return tx.userId === uid || tx.otherPartyUid === uid;
                 }).map(([key, tx]) => ({ key, ...tx }));
                 return { uid, fullName, email, referralCode, balance, user, transactions: userTxs };
             });
 
-            // Filter by search term
             if (searchTerm.trim()) {
                 const term = searchTerm.trim().toLowerCase();
                 userList = userList.filter(u =>
@@ -6885,7 +6823,6 @@
                 );
             }
 
-            // Sort alphabetically by full name
             userList.sort((a, b) => a.fullName.localeCompare(b.fullName));
 
             if (userList.length === 0) {
@@ -6896,24 +6833,19 @@
             let html = '';
             userList.forEach(user => {
                 const { uid, fullName, email, referralCode, balance, transactions: userTxs } = user;
-                // Sort transactions by timestamp descending
                 const sortedTxs = userTxs.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
 
-                // Build transaction list HTML
                 let txsHtml = '';
                 if (sortedTxs.length === 0) {
                     txsHtml = `<div class="tx-empty">No transactions for this user.</div>`;
                 } else {
                     txsHtml = sortedTxs.map(tx => {
-                        // Determine display type and sign
                         let typeDisplay = tx.type || 'Transaction';
                         let amountDisplay = tx.amount ? `ZMW ${Math.abs(tx.amount).toFixed(2)}` : '';
                         let amountClass = '';
                         let isCredit = false;
 
-                        // Determine if credit or debit for this user
                         if (tx.userId === uid) {
-                            // This user is the main party
                             if (tx.type === 'Sent Money') {
                                 isCredit = false;
                                 typeDisplay = `Sent Money to ${tx.otherParty || 'Unknown'}`;
@@ -6933,20 +6865,16 @@
                                 isCredit = true;
                                 typeDisplay = 'Referral Bonus';
                             } else if (tx.type === 'Withdrawal Request') {
-                                isCredit = false; // pending, not yet deducted
+                                isCredit = false;
                                 typeDisplay = 'Withdrawal Request (Pending)';
                             } else {
-                                // Default: if amount > 0 credit, else debit
                                 isCredit = (tx.amount || 0) > 0;
                             }
                         } else if (tx.otherPartyUid === uid) {
-                            // This user is the other party
                             if (tx.type === 'Sent Money') {
-                                // They received the money
                                 isCredit = true;
                                 typeDisplay = `Received Money from ${tx.userName || 'Unknown'}`;
                             } else if (tx.type === 'Received Money') {
-                                // They sent the money (the other party of Received Money is the sender)
                                 isCredit = false;
                                 typeDisplay = `Sent Money to ${tx.userName || 'Unknown'}`;
                             } else {
@@ -6960,11 +6888,9 @@
                         amountDisplay = tx.amount ? `ZMW ${Math.abs(tx.amount).toFixed(2)}` : '';
                         amountClass = isCredit ? 'positive' : 'negative';
 
-                        // Date formatting
                         const dateStr = tx.date ? new Date(tx.date).toLocaleString() : (tx.timestamp ? new Date(tx
                             .timestamp).toLocaleString() : 'N/A');
 
-                        // Status badge if any
                         let statusHtml = '';
                         if (tx.status) {
                             const statusClass = tx.status === 'approved' ? 'status-badge approved' : (tx.status ===
@@ -6986,7 +6912,6 @@
                     }).join('');
                 }
 
-                // Build user card
                 html += `
                     <div class="user-card" data-uid="${uid}">
                         <div class="user-summary">
@@ -7013,7 +6938,6 @@
 
             container.innerHTML = html;
 
-            // Add click to expand/collapse
             container.querySelectorAll('.user-card').forEach(card => {
                 card.addEventListener('click', function(e) {
                     this.classList.toggle('open');
@@ -7028,7 +6952,6 @@
                 });
             });
 
-            // Search input binding (only once)
             if (!window._customerWalletSearchBound) {
                 window._customerWalletSearchBound = true;
                 const searchInput = document.getElementById('customerWalletSearch');
@@ -7192,7 +7115,6 @@
                 showToast('Flyer not found.', 'error');
                 return;
             }
-            // Populate the modal with existing click-content
             const cc = pic.clickContent || { enabled: true };
             enableClickContent.checked = cc.enabled !== false;
             clickTitle.value = cc.title || '';
@@ -7201,16 +7123,13 @@
             clickBoldWords.value = (cc.boldWords || []).join(', ');
             clickFormType.value = cc.formType || 'none';
 
-            // Store the key being edited
             promoPicUploadForm.dataset.editKey = key;
-            // Change modal title and button
             document.querySelector('#promoPicUploadModal h3').textContent = '✏️ Edit Flyer Click Content';
             document.querySelector('#promoPicUploadModal .sub').textContent =
             'Configure what appears when users tap this flyer.';
             const submitBtn = promoPicUploadForm.querySelector('button[type="submit"]');
             submitBtn.textContent = 'Save Click Content';
 
-            // Show only the click-config section, hide upload fields
             document.querySelector('#promoPicUploadModal .form-group:first-child').style.display = 'none';
             document.querySelector('#promoPicUploadModal .form-group:nth-child(2)').style.display = 'none';
             document.querySelector('#promoPicUploadModal .form-group:nth-child(3)').style.display = 'none';
@@ -7225,11 +7144,9 @@
             'Upload a flyer picture and add text to display on the overlay.';
             const submitBtn = promoPicUploadForm.querySelector('button[type="submit"]');
             submitBtn.textContent = 'Upload Flyer';
-            // Show all form groups
             document.querySelector('#promoPicUploadModal .form-group:first-child').style.display = '';
             document.querySelector('#promoPicUploadModal .form-group:nth-child(2)').style.display = '';
             document.querySelector('#promoPicUploadModal .form-group:nth-child(3)').style.display = '';
-            // Reset fields
             enableClickContent.checked = true;
             clickTitle.value = '';
             clickInstructions.value = '';
@@ -7244,7 +7161,7 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // APPLICATIONS MANAGEMENT (UPDATED WITH 2x2 IMAGE GRID)
+        // APPLICATIONS MANAGEMENT – MODIFIED WITH 2×2 IMAGE GRID
         // ───────────────────────────────────────────────────────────────────
 
         function renderApplications(filter = applicationsFilter) {
@@ -7253,14 +7170,12 @@
             const promoPics = allData.promoPics || {};
             let entries = Object.entries(data);
 
-            // Filter by status
             if (filter !== 'all') {
                 entries = entries.filter(([key, app]) => app.status === filter);
             }
 
             entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
 
-            // Update counts
             const allApps = Object.values(allData.applications || {});
             pendingCountEl.textContent = allApps.filter(a => a.status === 'pending').length;
             approvedCountEl.textContent = allApps.filter(a => a.status === 'approved').length;
@@ -7295,152 +7210,126 @@
                 const initial = (userName || 'U').charAt(0).toUpperCase();
                 const dateStr = app.createdAt ? new Date(app.createdAt).toLocaleString() : 'N/A';
 
-                // ── Collect all images from the application ──
-                const imageItems = [];
+                // ─── Collect all image URLs from form data ───
                 const fd = app.formData || {};
+                const imageUrls = [];
 
-                // Helper: push image with label
-                function addImage(url, label) {
-                    if (url && typeof url === 'string' && (url.startsWith('http://') || url.startsWith('https://'))) {
-                        imageItems.push({ url, label });
-                    }
-                }
-
-                // Prize form: proofImage
+                // Prize: proofImage
                 if (app.formType === 'prize' && fd.proofImage) {
-                    addImage(fd.proofImage, 'Proof Image');
+                    imageUrls.push({ url: fd.proofImage, label: 'Proof' });
                 }
 
-                // Job form: profilePic, nrcFront, nrcBack, qualification
+                // Job: profilePic, nrcFront, nrcBack, qualification
                 if (app.formType === 'job') {
-                    if (fd.profilePic) addImage(fd.profilePic, 'Profile Pic');
-                    if (fd.nrcFront) addImage(fd.nrcFront, 'NRC Front');
-                    if (fd.nrcBack) addImage(fd.nrcBack, 'NRC Back');
-                    if (fd.qualification) addImage(fd.qualification, 'Qualification');
+                    if (fd.profilePic) imageUrls.push({ url: fd.profilePic, label: 'Profile' });
+                    if (fd.nrcFront) imageUrls.push({ url: fd.nrcFront, label: 'NRC Front' });
+                    if (fd.nrcBack) imageUrls.push({ url: fd.nrcBack, label: 'NRC Back' });
+                    if (fd.qualification) imageUrls.push({ url: fd.qualification, label: 'Qualification' });
                 }
 
-                // Payment data: screenshot
+                // Payment screenshot (if available)
                 if (app.paymentData && app.paymentData.screenshot) {
-                    addImage(app.paymentData.screenshot, 'Payment Screenshot');
+                    imageUrls.push({ url: app.paymentData.screenshot, label: 'Payment' });
+                } else if (app.paymentData && app.paymentData.screenshots && app.paymentData.screenshots.length > 0) {
+                    app.paymentData.screenshots.forEach((url, i) => {
+                        imageUrls.push({ url, label: `Payment ${i+1}` });
+                    });
                 }
 
-                // ── Build the 2x2 image grid HTML ──
-                let imageGridHtml = '';
-                if (imageItems.length > 0) {
-                    const gridItems = imageItems.map(item => `
-                                <div class="img-box" onclick="document.getElementById('screenshotPreview').src='${item.url}'; document.getElementById('screenshotModal').classList.add('open');">
-                                    <img src="${item.url}" alt="${item.label}" loading="lazy" />
-                                    <span class="img-label">${item.label}</span>
-                                    <span class="enlarge-hint">🔍</span>
-                                </div>
-                            `).join('');
-                    // Pad to even number (2-column grid)
-                    const remainder = imageItems.length % 2;
-                    const padding = remainder === 1 ? `<div class="img-box" style="background:transparent;border:none;cursor:default;"></div>` : '';
-                    imageGridHtml = `
-                                <div class="app-image-grid">
-                                    ${gridItems}
-                                    ${padding}
-                                </div>
-                            `;
-                }
-
-                // ── Build detail fields (non-image) ──
+                // ─── Build detail fields (excluding images) ───
                 let detailFields = [];
-                const fdCopy = { ...fd };
-
-                // Remove image fields from detail display (they're shown in the grid)
-                if (app.formType === 'prize') {
-                    delete fdCopy.proofImage;
-                }
-                if (app.formType === 'job') {
-                    delete fdCopy.profilePic;
-                    delete fdCopy.nrcFront;
-                    delete fdCopy.nrcBack;
-                    delete fdCopy.qualification;
-                }
-
-                // Build remaining detail fields
                 if (app.formType === 'ambassador') {
                     detailFields = [
-                        { label: 'Name', val: fdCopy.name || 'N/A' },
-                        { label: 'Email', val: fdCopy.email || 'N/A' },
-                        { label: 'Phone', val: fdCopy.number || 'N/A' },
-                        { label: 'BZ Code', val: fdCopy.bzCode || 'N/A' },
-                        { label: 'Discount for Customer', val: fdCopy.discountForCustomer ? `${fdCopy.discountForCustomer}%` :
+                        { label: 'Name', val: fd.name || 'N/A' },
+                        { label: 'Email', val: fd.email || 'N/A' },
+                        { label: 'Phone', val: fd.number || 'N/A' },
+                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
+                        { label: 'Discount for Customer', val: fd.discountForCustomer ? `${fd.discountForCustomer}%` :
                                 'N/A' },
-                        { label: 'Ambassador Payout', val: fdCopy.ambassadorPayout ? `ZMW ${fdCopy.ambassadorPayout}` :
-                            'N/A' }
+                        { label: 'Ambassador Payout', val: fd.ambassadorPayout ? `ZMW ${fd.ambassadorPayout}` : 'N/A' }
                     ];
                 } else if (app.formType === 'investor') {
                     detailFields = [
-                        { label: 'Name', val: fdCopy.name || 'N/A' },
-                        { label: 'Email', val: fdCopy.email || 'N/A' },
-                        { label: 'Phone', val: fdCopy.number || 'N/A' },
-                        { label: 'BZ Code', val: fdCopy.bzCode || 'N/A' },
-                        { label: 'Investment', val: fdCopy.investmentAmount ? `ZMW ${fdCopy.investmentAmount}` : 'N/A' },
-                        { label: 'Duration', val: fdCopy.durationMonths ? `${fdCopy.durationMonths} months` : 'N/A' },
-                        { label: 'Profit per Month', val: fdCopy.profitPerMonth ? `ZMW ${fdCopy.profitPerMonth}` : 'N/A' }
+                        { label: 'Name', val: fd.name || 'N/A' },
+                        { label: 'Email', val: fd.email || 'N/A' },
+                        { label: 'Phone', val: fd.number || 'N/A' },
+                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
+                        { label: 'Investment', val: fd.investmentAmount ? `ZMW ${fd.investmentAmount}` : 'N/A' },
+                        { label: 'Duration', val: fd.durationMonths ? `${fd.durationMonths} months` : 'N/A' },
+                        { label: 'Profit per Month', val: fd.profitPerMonth ? `ZMW ${fd.profitPerMonth}` : 'N/A' }
                     ];
                 } else if (app.formType === 'prize') {
                     detailFields = [
-                        { label: 'Name', val: fdCopy.name || 'N/A' },
-                        { label: 'BZ Code', val: fdCopy.bzCode || 'N/A' },
-                        { label: 'Email', val: fdCopy.email || 'N/A' },
-                        { label: 'Phone', val: fdCopy.number || 'N/A' },
-                        { label: 'Details', val: fdCopy.details || 'N/A' },
+                        { label: 'Name', val: fd.name || 'N/A' },
+                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
+                        { label: 'Email', val: fd.email || 'N/A' },
+                        { label: 'Phone', val: fd.number || 'N/A' },
+                        { label: 'Details', val: fd.details || 'N/A' },
                     ];
                 } else if (app.formType === 'job') {
                     detailFields = [
-                        { label: 'Name', val: fdCopy.name || 'N/A' },
-                        { label: 'BZ Code', val: fdCopy.bzCode || 'N/A' },
-                        { label: 'Email', val: fdCopy.email || 'N/A' },
-                        { label: 'Phone', val: fdCopy.phone || 'N/A' },
-                        { label: 'Age', val: fdCopy.age || 'N/A' },
-                        { label: 'Occupation', val: fdCopy.occupation || 'N/A' },
-                        { label: 'Gender', val: fdCopy.gender || 'N/A' },
-                        { label: 'Position', val: fdCopy.position || 'N/A' },
-                        { label: 'About', val: fdCopy.about || 'N/A' },
+                        { label: 'Name', val: fd.name || 'N/A' },
+                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
+                        { label: 'Email', val: fd.email || 'N/A' },
+                        { label: 'Phone', val: fd.phone || 'N/A' },
+                        { label: 'Age', val: fd.age || 'N/A' },
+                        { label: 'Occupation', val: fd.occupation || 'N/A' },
+                        { label: 'Gender', val: fd.gender || 'N/A' },
+                        { label: 'Position', val: fd.position || 'N/A' },
+                        { label: 'About', val: fd.about || 'N/A' },
                     ];
                 } else if (app.formType === 'referrer') {
                     detailFields = [
-                        { label: 'Name', val: fdCopy.name || 'N/A' },
-                        { label: 'Number', val: fdCopy.number || 'N/A' },
-                        { label: 'Email', val: fdCopy.email || 'N/A' },
-                        { label: 'BZ Code', val: fdCopy.bzCode || 'N/A' },
-                        { label: 'Occupation', val: fdCopy.occupation || 'N/A' }
+                        { label: 'Name', val: fd.name || 'N/A' },
+                        { label: 'Number', val: fd.number || 'N/A' },
+                        { label: 'Email', val: fd.email || 'N/A' },
+                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
+                        { label: 'Occupation', val: fd.occupation || 'N/A' }
                     ];
                 } else {
-                    // Generic fallback
-                    for (const [k, v] of Object.entries(fdCopy)) {
+                    for (const [k, v] of Object.entries(fd)) {
                         if (k !== 'name' && k !== 'email' && k !== 'number' && k !== 'bzCode') {
                             detailFields.push({ label: k, val: typeof v === 'string' ? v : JSON.stringify(v) });
                         }
                     }
                 }
 
-                // Add payment details if available (excluding screenshot which is in grid)
+                // Add payment details (excluding screenshot)
                 if (app.paymentData) {
                     const pd = app.paymentData;
-                    if (pd.amount !== undefined && pd.amount !== null) {
-                        detailFields.push({ label: 'Amount Paid', val: `ZMW ${pd.amount}` });
-                    }
-                    if (pd.accountName) {
-                        detailFields.push({ label: 'Paid To (Account)', val: pd.accountName });
-                    }
-                    if (pd.mobileNumber) {
-                        detailFields.push({ label: 'Mobile Number', val: pd.mobileNumber });
-                    }
+                    detailFields.push({ label: 'Amount Paid', val: `ZMW ${pd.amount || 0}` });
+                    detailFields.push({ label: 'Paid To (Account)', val: pd.accountName || 'N/A' });
+                    detailFields.push({ label: 'Mobile Number', val: pd.mobileNumber || 'N/A' });
                 }
 
                 const detailHtml = detailFields.map(f => {
                     let val = f.val;
-                    // If val is a URL that looks like an image but wasn't caught, still show as text
-                    if (typeof val === 'string' && val.startsWith('http') && (val.match(/\.(jpg|jpeg|png|gif|webp|svg|bmp)/i) || val.includes('cloudinary'))) {
-                        val = `<a href="${val}" target="_blank" style="color:#1c2128;text-decoration:underline;">View</a>`;
-                    }
                     return `<div class="detail-item"><span class="label">${f.label}</span><span class="val">${val}</span></div>`;
                 }).join('');
+
+                // ─── Build 2×2 image grid ───
+                let imageGridHtml = '';
+                if (imageUrls.length > 0) {
+                    const imageItems = imageUrls.map(({ url, label }) => {
+                        return `
+                            <div class="img-box" onclick="document.getElementById('screenshotPreview').src='${url}'; document.getElementById('screenshotModal').classList.add('open');">
+                                <img src="${url}" alt="${label}" loading="lazy" />
+                                <span class="file-label">${label}</span>
+                            </div>
+                        `;
+                    }).join('');
+                    // Pad to even number for 2-column layout
+                    const remainder = imageUrls.length % 2;
+                    const padded = remainder === 1 ? imageItems + `<div class="img-box" style="opacity:0;pointer-events:none;"></div>` : imageItems;
+                    imageGridHtml = `
+                        <div style="margin:4px 0 10px 0;">
+                            <div style="font-size:10px; font-weight:600; color:#1c2128; margin-bottom:4px;">📎 Attached Files</div>
+                            <div class="app-image-grid">
+                                ${padded}
+                            </div>
+                        </div>
+                    `;
+                }
 
                 return `
                             <div class="app-card" data-key="${key}">
@@ -7482,11 +7371,11 @@
                         `;
             }).join('');
 
-            // Bind expand events
+            // ─── Bind events ───
             applicationsListEl.querySelectorAll('.app-card').forEach(card => {
                 card.addEventListener('click', function(e) {
-                    if (e.target.closest('.btn-approve-app') || e.target.closest('.btn-reject-app') || e.target
-                        .closest('.img-box')) return;
+                    if (e.target.closest('.btn-approve-app') || e.target.closest('.btn-reject-app') ||
+                        e.target.closest('.img-box')) return;
                     this.classList.toggle('open');
                     const details = this.querySelector('.app-details');
                     if (this.classList.contains('open')) {
@@ -7499,7 +7388,6 @@
                 });
             });
 
-            // Bind approve/reject
             applicationsListEl.querySelectorAll('.btn-approve-app').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -7516,8 +7404,18 @@
                 });
             });
 
-            // NOTE: The img-box click handler uses the global onclick attribute defined in the HTML,
-            // so we don't need to bind additional events.
+            // ─── Re-bind image click for enlarge (inline onclick already handles) ───
+            // Also handle any dynamically added view-proof buttons (legacy)
+            applicationsListEl.querySelectorAll('.btn-view-proof').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const url = this.dataset.screenshot;
+                    if (url) {
+                        document.getElementById('screenshotPreview').src = url;
+                        document.getElementById('screenshotModal').classList.add('open');
+                    }
+                });
+            });
         }
 
         function updateApplicationStatus(key, status) {
@@ -8627,11 +8525,6 @@
                     showToast('Work post updated!');
                 });
             } else {
-                addWorkPost(postData).then renderAll();
-                    closeWorkUploadModal();
-                    showToast('Work post updated!');
-                });
-            } else {
                 addWorkPost(postData).then(() => {
                     renderAll();
                     closeWorkUploadModal();
@@ -8643,55 +8536,22 @@
         // ── PROMO PIC UPLOAD MODAL ──
 
         addPromoPicBtn.addEventListener('click', () => {
-            resetProm(() => {
-                    renderAll();
-                    closeWorkUploadModal();
-                    showToast('Work post added!');
-                });
-            }
-        });
-
-        // ── PROMO PIC UPLOAD MODAL ──
-
-        addPromoPicBtn.addEventListener('click', () => {
-            resetPromoPicUploadModaloPicUploadModal();
-            promoPicUploadModal.classList.add('open');
-        });
-
-        promoPicUploadCloseBtn.addEventListener('click', () => {
-            promoPicUploadModal.classList();
+            resetPromoPicUploadModal();
             promoPicUploadModal.classList.add('open');
         });
 
         promoPicUploadCloseBtn.addEventListener('click', () => {
             promoPicUploadModal.classList.remove('open');
-.remove('open');
-            resetPromoPicUpload            resetPromoPicUploadModal();
-        });
-Modal();
+            resetPromoPicUploadModal();
         });
         promoPicUploadCancelBtn.addEventListener('click', () => {
             promoPicUploadModal.classList.remove('open');
             resetPromoPicUploadModal();
         });
-        promoPicUploadModal        promoPicUploadCancelBtn.addEventListener('click', () => {
-            promoPicUploadModal.classList.remove('open');
-            resetPromoPicUploadModal();
-        });
-        promoPicUploadModal.addEventListener('click', (e) =>.addEventListener('click', (e) => {
-            {
+        promoPicUploadModal.addEventListener('click', (e) => {
             if (e.target === promoPicUploadModal) {
                 promoPicUploadModal.classList.remove('open');
-                resetProm if (e.target === promoPicUploadModal) {
-                promoPicUploadModal.classList.remove('open');
-                resetPromoPicoPicUploadModal();
-            }
-        });
-
-        // Click-config toggle
-        enableClickContent.addEventListener('change', function() {
-            clickConfigFields.style.opacity = this.checked ? '1' : '0.5';
-            clickConfigFields.querySelectorAll('input,UploadModal();
+                resetPromoPicUploadModal();
             }
         });
 
@@ -8700,122 +8560,56 @@ Modal();
             clickConfigFields.style.opacity = this.checked ? '1' : '0.5';
             clickConfigFields.querySelectorAll('input, textarea, select').forEach(el => el.disabled = !this.checked);
         });
-        // Initial state
         clickConfigFields.querySelectorAll('input, textarea, select').forEach(el => el.disabled = false);
 
-        textarea, select').forEach(el => el.disabled = !this.checked);
-        });
-        // Initial state
-        clickConfigFields.querySelectorAll('input, textarea, select').forEach(el => el.disabled = false setupCloudinaryUpload(promoPicImagePreview, promoPicImageUrl, promoPicImagePreview);
-
-        promoPicUploadForm.addEventListener('submit', function(e));
-
-        setupCloudinaryUpload(promoPicImagePreview, promoPicImageUrl, promoPicImage {
-            e.preventDefault();
-
-            // Check if we're in edit mode
-            const editKey = this.dataset.editKey;
-            ifPreview);
+        setupCloudinaryUpload(promoPicImagePreview, promoPicImageUrl, promoPicImagePreview);
 
         promoPicUploadForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Check if we're in edit mode
             const editKey = this.dataset.editKey;
-            if (editKey) (editKey) {
-                // Saving click content only
-                const clickContent = {
-                    enabled: enableClickContent.checked,
-                    title: clickTitle.value.trim(),
-                    instructions: {
-                // Saving click content only
+            if (editKey) {
                 const clickContent = {
                     enabled: enableClickContent.checked,
                     title: clickTitle.value.trim(),
                     instructions: clickInstructions.value.trim(),
-                    clickInstructions.value.trim(),
                     explanation: clickExplanation.value.trim(),
-                    boldWords: clickBoldWords.value.trim().split(',').map(w => w.trim()).filter(w explanation: clickExplanation.value.trim(),
-                    boldWords: clickBoldWords.value.trim().split(',').map(w => w),
+                    boldWords: clickBoldWords.value.trim().split(',').map(w => w.trim()).filter(w => w),
                     formType: clickFormType.value
                 };
                 updatePromoPicClickContent(editKey, clickContent).then(() => {
                     renderAll();
-                    promoPicUpload => w.trim()).filter(w => w),
-                    formType: clickFormType.value
-                };
-                updatePromoPicClickContent(editKey, clickContent).then(() => {
-                    renderAll();
-                    promoModal.classList.remove('open');
+                    promoPicUploadModal.classList.remove('open');
                     resetPromoPicUploadModal();
                     showToast('Click content updated!', 'success');
                 });
                 return;
             }
 
-            // Normal upload modePicUploadModal.classList.remove('open');
-                    resetPromoPicUploadModal();
-                    showToast('Click content updated!', 'success');
-                });
-                return;
-            }
-
-            // Normal
             const imageUrl = promoPicImageUrl.value;
             const text = promoPicText.value.trim();
-            const subtext upload mode
-            const imageUrl = promoPicImageUrl.value;
-            const text = promoPicText.value.trim();
-            const subtext = promo = promoPicSubtext.value.trim();
+            const subtext = promoPicSubtext.value.trim();
 
             if (!imageUrl) {
                 showToast('Please upload an image first', 'error');
                 return;
             }
-            if (!PicSubtext.value.trim();
-
-            if (!imageUrl) {
-                showToast('Please upload an image first', 'error');
-                return;
-            }
-            if (!text)text) {
+            if (!text) {
                 showToast('Please enter overlay text', 'error');
                 return;
             }
 
             const clickContent = {
                 enabled: enableClickContent.checked,
-                title: {
-                showToast('Please enter overlay text', 'error');
-                return;
-            }
-
-            const clickContent = {
-                enabled: enableClickContent.checked,
-                title: click clickTitle.value.trim(),
+                title: clickTitle.value.trim(),
                 instructions: clickInstructions.value.trim(),
                 explanation: clickExplanation.value.trim(),
-                boldWords: clickBoldWords.valueTitle.value.trim(),
-                instructions: clickInstructions.value.trim(),
-                explanation: clickExplanation.value.trim(),
-                boldWords: clickBoldWords.value.trim()..trim().split(',').map(w => w.trim()).filter(w => w),
+                boldWords: clickBoldWords.value.trim().split(',').map(w => w.trim()).filter(w => w),
                 formType: clickFormType.value
             };
 
-            addPromoPic({ imageUrl, textsplit(',').map(w => w.trim()).filter(w => w),
-                formType: clickFormType.value
-            };
-
-            addPromoPic({ imageUrl, text, sub, subtext, clickContent }).then(() =>text, clickContent }).then(() => {
-                {
+            addPromoPic({ imageUrl, text, subtext, clickContent }).then(() => {
                 renderAll();
-                promoPicUploadModal.classList.remove('open');
-                resetPromoPicUploadModal();
-                showToast('Flyer uploaded!', 'success');
-            });
-        });
-
-        // ── FORM CONFIGURATION BUTTONS ─ renderAll();
                 promoPicUploadModal.classList.remove('open');
                 resetPromoPicUploadModal();
                 showToast('Flyer uploaded!', 'success');
@@ -8826,22 +8620,10 @@ Modal();
 
         document.getElementById('configureFormsBtn').addEventListener('click', function() {
             renderFormConfigs();
-            document.getElementById('formConfigModal').classList.add('─
-
-        document.getElementById('configureFormsBtn').addEventListener('click', function() {
-            renderFormConfigs();
             document.getElementById('formConfigModal').classList.add('open');
         });
 
         document.getElementById('formConfigCloseBtn').addEventListener('click', function() {
-            document.getElementById('formConfigModal').classList.remove('open');
-        });
-
-        document.getElementById('saveopen');
-        });
-
-        document.getElementById('formConfigCloseBtn').addEventListener('FormConfigsBtn').addEventListener('click', function() {
-            const configs = allData.formConfigs ||click', function() {
             document.getElementById('formConfigModal').classList.remove('open');
         });
 
@@ -8850,36 +8632,17 @@ Modal();
             document.querySelectorAll('.form-config-free').forEach(el => {
                 const type = el.dataset.type;
                 if (!configs[type]) configs[type] = {};
-            document.querySelectorAll('.form-config-free').forEach(el => {
-                const type = el.dataset.type;
-                if (!configs[type]) configs[type] {};
                 configs[type].isFree = el.checked;
             });
             document.querySelectorAll('.form-config-price').forEach(el => {
-                const type = el.dataset.type = {};
-                configs[type].isFree = el.checked;
-            });
-            document.querySelectorAll('.form-config-price').forEach(el => {
-                const type = el.dat;
-                if (!configs[type]) configs[type] = {};
-                configs[type].price = parseFloataset.type;
-                if (!configs[type]) configs[type] = {};
-                configs[type].price = parse(el.value) || 0;
-            });
-            document.querySelectorAll('.form-config-mobile').forEach(el => {
                 const type = el.dataset.type;
-                if (!configs[type]) configsFloat(el.value) || 0;
+                if (!configs[type]) configs[type] = {};
+                configs[type].price = parseFloat(el.value) || 0;
             });
             document.querySelectorAll('.form-config-mobile').forEach(el => {
                 const type = el.dataset.type;
                 if (!configs[type]) configs[type] = {};
-[type] = {};
-                configs                configs[type].mobileNumber = el.value.trim();
-            });
-            document.querySelectorAll('.form-config-account').forEach(el => {
-                const type = el.dataset.type;
-                if (!configs[type]) configs[type] = {};
-                configs[type].[type].mobileNumber = el.value.trim();
+                configs[type].mobileNumber = el.value.trim();
             });
             document.querySelectorAll('.form-config-account').forEach(el => {
                 const type = el.dataset.type;
@@ -8889,42 +8652,18 @@ Modal();
             allData.formConfigs = configs;
             saveData().then(() => {
                 renderAll();
-                document.getElementById('formConfigModalaccountName = el.value.trim();
-            });
-            allData.formConfigs = configs;
-            saveData().then(() => {
-                renderAll();
                 document.getElementById('formConfigModal').classList.remove('open');
-                showToast('Form').classList.remove('open');
                 showToast('Form configurations saved!', 'success');
-            });
-        });
-
-        // ── PROMO PIC ENLARGE MODAL configurations saved!', 'success');
             });
         });
 
         // ── PROMO PIC ENLARGE MODAL ──
 
         document.getElementById('promoPicEnlargeCloseBtn').addEventListener('click', function() {
-            document.getElementById ──
-
-        document.getElementById('promoPicEnlargeCloseBtn').addEventListener('click', function() {
             document.getElementById('promoPicEnlargeModal').classList.remove('open');
         });
         document.getElementById('promoPicEnlargeModal').addEventListener('click', function(e) {
-            if (e.target === this)('promoPicEnlargeModal').classList.remove('open');
-        });
-        document.getElementById('promoPicEnlargeModal').addEventListener('click', function(e) {
-            if (e.target === this.classList.remove('open');
-        });
-
-        // ── Other buttons ──
-
-        document.getElementById('addServiceBtn').addEventListener('click', this) this.classList.remove('open () => {
-            openModal('Add Service', 'Fill in the details to create a new service.', null);
-        });
-        document.getElementById('add');
+            if (e.target === this) this.classList.remove('open');
         });
 
         // ── Other buttons ──
@@ -8936,34 +8675,16 @@ Modal();
             openModal('Add Service', 'Fill in the details to create a new service.', null);
         });
 
-        document.getElementByIdServiceQuick').addEventListener('click', () => {
-            openModal('Add Service', 'Fill in the details to create a new service.', null);
-        });
-
-       ('promoHeaderBtn').addEventListener('click', () => {
+        document.getElementById('promoHeaderBtn').addEventListener('click', () => {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-promotions'). document.getElementById('promoHeaderBtn').addEventListener('click', () => {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-promotions').classListclassList.add('active');
+            document.getElementById('page-promotions').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             mainHeader.classList.remove('work-active');
-.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            mainHeader.classList.remove            showBackButton();
-        });
-
-        document.getElementById('addPromoBtn').addEventListener('click', ()('work-active');
             showBackButton();
         });
 
         document.getElementById('addPromoBtn').addEventListener('click', () => {
- => {
             promoModal.classList.add('open');
-        });
-
-        promoCloseBtn.addEventListener('click', () => promoModal.classList.remove('open'));
-        promoCancelBtn.addEventListener('click', () => promoModal.classList.remove('open'));
-        promoModal.addEventListener('click', (            promoModal.classList.add('open');
         });
 
         promoCloseBtn.addEventListener('click', () => promoModal.classList.remove('open'));
@@ -8971,17 +8692,10 @@ Modal();
         promoModal.addEventListener('click', (e) => { if (e.target === promoModal) promoModal.classList.remove('open'); });
 
         promoForm.addEventListener('submit', (e) => {
-e) => { if (e.target === promoModal) promoModal.classList.remove('open'); });
-
-        promoForm.addEventListener('submit', (e) => {
-                       e.preventDefault();
-            const code = promoCode.value.trim();
-            const discount = promoDiscount.value.trim();
-            if (!code || !discount || parseInt(discount) < 1 e.preventDefault();
+            e.preventDefault();
             const code = promoCode.value.trim();
             const discount = promoDiscount.value.trim();
             if (!code || !discount || parseInt(discount) < 1 || parseInt(discount) > 100) {
-                showToast('Invalid promo || parseInt(discount) > 100) {
                 showToast('Invalid promo code or discount', 'error');
                 return;
             }
@@ -8990,75 +8704,35 @@ e) => { if (e.target === promoModal) promoModal.classList.remove('open'); });
                 promoModal.classList.remove('open');
                 promoCode.value = '';
                 promoDiscount.value = '';
-                showToast('Prom code or discount', 'error');
-                return;
-            }
-            addPromo({ code, discount }).then(() => {
-                renderAll();
-                promoModal.classList.remove('open');
-                promoCode.value = '';
-                promoDiscount.value = '';
-               o coupon created!', 'success');
+                showToast('Promo coupon created!', 'success');
             });
         });
 
         cancelBtn.addEventListener('click', closeModal);
         closeBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click showToast('Promo coupon created!', 'success');
-            });
-        });
-
-        cancelBtn.addEventListener('click', closeModal);
-        closeBtn.addEventListener('click', closeModal);
-        modal.addEventListener('', (e) => { if (e.target === modal) closeModal(); });
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const data = {
-click', (e) => { if (e.target === modal) closeModal(); });
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const data                title: formTitle.value.trim(),
-                subtitle: formSubtitle.value.trim(),
-                category: formCategory.value,
-                price: formPrice.value,
-                = {
                 title: formTitle.value.trim(),
                 subtitle: formSubtitle.value.trim(),
                 category: formCategory.value,
-                price: formPrice.value tags: formTags.value.trim(),
-                icon: formIcon.value.trim() || 'fa-cube',
-                specs: formSpecs.value.trim(),
-                sizes,
+                price: formPrice.value,
                 tags: formTags.value.trim(),
                 icon: formIcon.value.trim() || 'fa-cube',
                 specs: formSpecs.value.trim(),
-                sizes: form: formSizes.value.trim(),
+                sizes: formSizes.value.trim(),
                 orientations: formOrientations.value.trim(),
                 formats: formFormats.value.trim(),
                 colorSchemes: formColorSchemes.value.trim(),
-                revisions: formSizes.value.trim(),
-                orientations: formOrientations.value.trim(),
-                formats: formFormats.value.trim(),
-                colorSchemes: formColorSchemes.value.trim(),
-                revisionsRevisions.value.trim(),
-                deliverySpeeds: formDeliverySpeeds.value.trim(),
-                defaultSize: formDefaultSize.value.trim: formRevisions.value.trim(),
+                revisions: formRevisions.value.trim(),
                 deliverySpeeds: formDeliverySpeeds.value.trim(),
                 defaultSize: formDefaultSize.value.trim(),
-                default(),
                 defaultOrientation: formDefaultOrientation.value.trim(),
                 defaultFormat: formDefaultFormat.value.trim(),
-                defaultColorScheme: formDefaultColorScheme.value.trimOrientation: formDefaultOrientation.value.trim(),
-                defaultFormat: formDefaultFormat.value.trim(),
                 defaultColorScheme: formDefaultColorScheme.value.trim(),
-                defaultRevisions(),
                 defaultRevisions: formDefaultRevisions.value.trim(),
-                defaultDeliverySpeed: formDefaultDeliverySpeed.value.trim()
-            };
-            const editId = editIdInput.value;
-            if (: formDefaultRevisions.value.trim(),
                 defaultDeliverySpeed: formDefaultDeliverySpeed.value.trim()
             };
             const editId = editIdInput.value;
@@ -9067,11 +8741,6 @@ click', (e) => { if (e.target === modal) closeModal(); });
                     renderAll();
                     closeModal();
                     showToast('Service updated');
-editId) {
-                updateService(editId, data).then(() => {
-                    renderAll();
-                    closeModal();
-                    showToast('Service updated');
                 });
             } else {
                 addService(data).then(() => {
@@ -9082,32 +8751,12 @@ editId) {
             }
         });
 
-                });
-            } else {
-                addService(data).then(() => {
-                    renderAll();
-                    closeModal();
-                    showToast('Service added');
-                });
-        document.getElementById('saveHeroBtn').addEventListener('click', () => {
-            allData.hero = {
-                title: document.getElementById('heroTitle').value,
-                titleSpan:            }
-        });
-
         document.getElementById('saveHeroBtn').addEventListener('click', () => {
             allData.hero = {
                 title: document.getElementById('heroTitle').value,
                 titleSpan: document.getElementById('heroTitleSpan').value,
                 desc: document.getElementById('heroDesc').value,
-                cta: document.getElementById document.getElementById('heroTitleSpan').value,
-                desc: document.getElementById('heroDesc').value,
                 cta: document.getElementById('heroCTA').value,
-                phone: document.getElementById('heroPhone').value
-            };
-            saveData().then(() => {
-                renderAll();
-                showToast('Hero('heroCTA').value,
                 phone: document.getElementById('heroPhone').value
             };
             saveData().then(() => {
@@ -9119,26 +8768,10 @@ editId) {
         document.getElementById('savePolicyBtn').addEventListener('click', () => {
             allData.policy = {
                 title: document.getElementById('policyTitle').value,
-                section updated');
-            });
-        });
-
-        document.getElementById('savePolicyBtn').addEventListener('click', () => {
-            allData.policy = {
-                title: document.getElementById('policyTitle').value,
- desc: document.getElementById('policyDesc').value,
-                tag: document.getElementById('policyTag').value
-            };
-                           desc: document.getElementById('policyDesc').value,
+                desc: document.getElementById('policyDesc').value,
                 tag: document.getElementById('policyTag').value
             };
             saveData().then(() => {
-                renderAll();
-                showToast('Policy card updated');
-            });
-        });
-
-        document.getElementById('addServiceListItem').addEventListener('click', saveData().then(() => {
                 renderAll();
                 showToast('Policy card updated');
             });
@@ -9149,95 +8782,46 @@ editId) {
             const newItem = document.createElement('div');
             newItem.className = 'list-item';
             newItem.innerHTML = `
-                        () => {
+                        <input type="text" value="New Service" placeholder="Service name" />
+                        <button class="btn-remove">✕</button>
+                    `;
+            container.appendChild(newItem);
+            container.querySelectorAll('.btn-remove').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.list-item').remove();
+                });
+            });
+        });
+
+        document.getElementById('saveServiceList').addEventListener('click', () => {
             const container = document.getElementById('ourServicesListContainer');
-            const newItem = document.createElement('div');
-            newItem.className = 'list-item';
-            newItem.innerHTML = `
- <input type="text" value="New Service" placeholder="Service name" />
-                        <button class="btn-remove">                        <input type="text" value="New Service" placeholder="Service name" />
-                        <button class="btn-✕</button>
-                    `;
-            container.appendChild(newItem);
-            container.querySelectorAll('.btn-remove').forEach(btn => {
-                btn.addEventListener('click', function()remove">✕</button>
-                    `;
-            container.appendChild(newItem);
-            container.querySelectorAll('.btn-remove').forEach(btn => {
-                btn.addEventListener('click', {
-                    this.closest('.list-item').remove();
-                });
-            });
-        });
-
-        document.getElementById('saveServiceList').addEventListener('click', () => {
-            const container = function() {
-                    this.closest('.list-item').remove();
-                });
-            });
-        });
-
-        document.getElementById('saveServiceList').addEventListener('click', () => {
-            const container document.getElementById('ourServicesListContainer');
             const inputs = container.querySelectorAll('.list-item input');
-            const newList = Array.from = document.getElementById('ourServicesListContainer');
-            const inputs = container.querySelectorAll('.list-item input');
-            const newList = Array.from(inputs).map(inputs).map(input => input.value.trim()).filter(v => v);
+            const newList = Array.from(inputs).map(input => input.value.trim()).filter(v => v);
             allData.ourServicesList = newList;
             saveData().then(() => {
-                render(input => input.value.trim()).filter(v => v);
-            allData.ourServicesList = newList;
-            saveData().then(() => {
-All();
+                renderAll();
                 showToast('Our Services list updated');
             });
         });
 
         document.getElementById('ourServicesListContainer').addEventListener('click', function(e) {
-                           renderAll();
-                showToast('Our Services list updated');
-            });
-        });
-
-        document.getElementById('ourServicesListContainer').addEventListener('click', function(e) {
-            if ( if (e.target.classList.contains('btn-remove')) {
+            if (e.target.classList.contains('btn-remove')) {
                 e.target.closest('.list-item').remove();
             }
         });
 
-        document.getElementByIde.target.classList.contains('btn-remove')) {
-                e.target.closest('.list-item').remove();
-            }
-        });
-
-       ('saveSettings').addEventListener('click', () => {
+        document.getElementById('saveSettings').addEventListener('click', () => {
             const name = document.getElementById('settingsName').value;
             const phone = document.getElementById('settingsPhone').value;
- document.getElementById('saveSettings').addEventListener('click', () => {
-            const name = document.getElementById('settingsName').value;
-            const phone = document.getElementById('settingsPhone').            const email = document.getElementById('settingsEmail').value;
-            showToast(`Settings saved: ${name}`);
-        });
-
-        document.getElementById('disableAppToggle').value;
             const email = document.getElementById('settingsEmail').value;
             showToast(`Settings saved: ${name}`);
         });
 
-        document.getElementById('disableAppToggle').addEventListener('change', functionaddEventListener('change', function() {
+        document.getElementById('disableAppToggle').addEventListener('change', function() {
             allData.disabled = this.checked;
             saveData().then(() => {
                 renderAll();
-                showToast(this() {
-            allData.disabled = this.checked;
-            saveData().then(() => {
-                renderAll();
-                show.checked ? 'App disabled' : 'App enabled');
-            });
-        });
-
-        document.getElementById('refreshOrders').addEventListener('click', () => {
-            const searchToast(this.checked ? 'App disabled' : 'App enabled');
+                showToast(this.checked ? 'App disabled' : 'App enabled');
             });
         });
 
@@ -9246,13 +8830,6 @@ All();
             const statusFilter = document.getElementById('orderStatusFilter').value;
             renderOrders(searchTerm, statusFilter);
             showToast('Orders refreshed');
-       Term = document.getElementById('orderSearchInput').value;
-            const statusFilter = document.getElementById('orderStatusFilter').value;
-            renderOrders(searchTerm, statusFilter);
-            showToast(' });
-
-        document.getElementById('orderSearchInput').addEventListener('input', function() {
-            const statusFilter = document.getElementById('orderOrders refreshed');
         });
 
         document.getElementById('orderSearchInput').addEventListener('input', function() {
@@ -9261,32 +8838,12 @@ All();
         });
 
         document.getElementById('orderStatusFilter').addEventListener('change', function() {
-            const searchTermStatusFilter').value;
-            renderOrders(this.value, statusFilter);
-        });
-
-        document.getElementById('orderStatusFilter').addEventListener('change', function() {
-            const searchTerm = document = document.getElementById('orderSearchInput').value;
+            const searchTerm = document.getElementById('orderSearchInput').value;
             renderOrders(searchTerm, this.value);
         });
 
         // ── Users page: search + filter ──
-        document.getElementById('userSearch.getElementById('orderSearchInput').value;
-            renderOrders(searchTerm, this.value);
-        });
-
-        // ── Users page: search + filter ──
-        document.getElementById('userSearchInput').Input').addEventListener('input', function() {
-            renderUsers(this.value, userFilterSelect.value);
-        });
-
-        userFilterSelect.addEventListener('change', function() {
-            renderUsers(document.getElementById('userSearchInput').value, this.value);
-        });
-
-        document.querySelectorAll('.cat-filter').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.cat-filter').forEach(b =>addEventListener('input', function() {
+        document.getElementById('userSearchInput').addEventListener('input', function() {
             renderUsers(this.value, userFilterSelect.value);
         });
 
@@ -9297,7 +8854,6 @@ All();
         document.querySelectorAll('.cat-filter').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.cat-filter').forEach(b => b.style.background = '#f0f0f0');
-                this.style b.style.background = '#f0f0f0');
                 this.style.background = '#1c2128';
                 this.style.color = '#fff';
                 const cat = this.dataset.cat;
@@ -9307,20 +8863,7 @@ All();
 
         document.getElementById('viewOrdersQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="orders"]').click();
-            mainHeader.classList.background = '#1c2128';
-                this.style.color = '#fff';
-                const cat = this.dataset.cat;
-                renderServices(cat);
-            });
-        });
-
-        document.getElementById('viewOrdersQuick').addEventListener('click', () => {
-            document.querySelector('.nav-item[data-page="orders"]').click();
             mainHeader.classList.remove('work-active');
-            showBackButton();
-        });
-
-        document.getElementById('viewUsersQuick').addEventListener('click', () =>.remove('work-active');
             showBackButton();
         });
 
@@ -9330,35 +8873,15 @@ All();
             showBackButton();
         });
 
-        document.getElementById('viewPromoPicsQuick'). {
-            document.querySelector('.nav-item[data-page="users"]').click();
-            mainHeader.classList.remove('work-active');
-            showBackButton();
-        });
-
         document.getElementById('viewPromoPicsQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="promo-pics"]').click();
             mainHeader.classList.remove('work-active');
-           addEventListener('click', () => {
-            document.querySelector('.nav-item[data-page="promo-pics"]').click();
+            showBackButton();
+        });
+
+        document.getElementById('viewAllActivity').addEventListener('click', () => {
+            document.querySelector('.nav-item[data-page="orders"]').click();
             mainHeader.classList.remove('work-active');
-            showBackButton();
-        });
-
-        document.getElementById('viewAllActivity').addEventListener('click', () => {
-            document.querySelector('.nav-item[data-page="orders showBackButton();
-        });
-
-        document.getElementById('viewAllActivity').addEventListener('click', () => {
-            document.querySelector('.nav-item[data-page=""]').click();
-            mainHeader.classList.remove('workorders"]').click();
-            mainHeader.classList.remove-active');
-            showBackButton();
-        });
-
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            signOut(auth).then(() => {
-                window('work-active');
             showBackButton();
         });
 
@@ -9372,25 +8895,7 @@ All();
         });
 
         document.getElementById('screenshotCloseBtn').addEventListener('click', function() {
-            document.getElementById.location.href = 'login.html';
-            }).catch((error) => {
-                console.error('Logout error:', error);
-                showToast('Error logging out');
-            });
-        });
-
-        document.getElementById('screenshotCloseBtn').addEventListener('click', function() {
             document.getElementById('screenshotModal').classList.remove('open');
-        });
-        document.getElementById('screenshotModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-               ('screenshotModal').classList.remove('open this.classList.remove('open');
-            }
-        });
-
-        // ───────────────────────────────────────────────────────────────────
-        // APPLICATIONS EVENT BINDINGS
-        // ─────────────────────────────────────────────────');
         });
         document.getElementById('screenshotModal').addEventListener('click', function(e) {
             if (e.target === this) {
@@ -9400,27 +8905,11 @@ All();
 
         // ───────────────────────────────────────────────────────────────────
         // APPLICATIONS EVENT BINDINGS
-        // ───────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────
 
         appStatusTabs.querySelectorAll('.tab-btn').forEach(tab => {
             tab.addEventListener('click', function() {
-                appStatusT──────────────────────────────────────────────────
-
-        appStatusTabs.querySelectorAll('.tab-btn').forEach(tab => {
-            tab.addEventListener('click', function() {
-                appabs.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                applicationsFilter = this.dataset.status;
-                renderApplications(applicationsFilter);
-StatusTabs.querySelectorAll('.tab-btn').forEach            });
-        });
-
-        refreshApplicationsBtn.addEventListener('click', function() {
-            renderApplications(applicationsFilter);
-            showToast('Applications refreshed');
-        });
-
-        // ─(t => t.classList.remove('active'));
+                appStatusTabs.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
                 applicationsFilter = this.dataset.status;
                 renderApplications(applicationsFilter);
@@ -9432,36 +8921,21 @@ StatusTabs.querySelectorAll('.tab-btn').forEach            });
             showToast('Applications refreshed');
         });
 
-        //──────────────────────────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────
         // SERVICES PRICE ADJUSTMENT
         // ───────────────────────────────────────────────────────────────────
 
-        let ───────────────────────────────────────────────────────────────────
-        // SERVICES PRICE ADJUSTMENT
-        // ───────────────────────────────────────────────────────────────────
-
-        let currentAdjust currentAdjustMode = 'add-amount';
-
-        adjustOptionsMode = 'add-amount';
+        let currentAdjustMode = 'add-amount';
 
         adjustOptions.querySelectorAll('.opt').forEach(btn => {
-            btn.addEventListener('click', function() {
-                adjustOptions.querySelectorAll('.opt').forEach(o => o.classList.querySelectorAll('.opt').forEach(btn => {
             btn.addEventListener('click', function() {
                 adjustOptions.querySelectorAll('.opt').forEach(o => o.classList.remove('active'));
                 this.classList.add('active');
                 currentAdjustMode = this.dataset.mode;
 
-                if (currentAdjustMode === 'add-amount' || current.remove('active'));
-                this.classList.add('active');
-                currentAdjustMode = this.dataset.mode;
-
-                if (currentAdjustMode === 'add-AdjustMode === 'remove-amount') {
-                    adjustLabel.textContent = 'Amount (ZMW):';
-                    adjustValue.amount' || currentAdjustMode === 'remove-amount') {
+                if (currentAdjustMode === 'add-amount' || currentAdjustMode === 'remove-amount') {
                     adjustLabel.textContent = 'Amount (ZMW):';
                     adjustValue.placeholder = '0.00';
-                } elseplaceholder = '0.00';
                 } else {
                     adjustLabel.textContent = 'Percentage (%):';
                     adjustValue.placeholder = '0';
@@ -9471,43 +8945,18 @@ StatusTabs.querySelectorAll('.tab-btn').forEach            });
             });
         });
 
- {
-                    adjustLabel.textContent = 'Percentage (%):';
-                    adjustValue.placeholder = '0';
-                }
-                adjustPreview.innerHTML =
-                    `<div style="color:#aaa; text-align:center; padding:10px 0;">Enter a value and click "Preview & Apply".</div>`;
-            });
-        });
-
-               applyAdjustBtn.addEventListener('click', function() {
+        applyAdjustBtn.addEventListener('click', function() {
             const val = parseFloat(adjustValue.value);
-            if (!val applyAdjustBtn.addEventListener('click', function() {
-            const val = parseFloat(adjustValue.value);
-            if (!val || || val <= 0) {
+            if (!val || val <= 0) {
                 showToast('Please enter a valid positive value.', 'error');
                 return;
             }
 
             const services = allData.services || {};
             const entries = Object.entries(services);
-            if ( val <= 0) {
-                showToast('Please enter a valid positive value.', 'error');
-                return;
-            }
-
-            const services = allData.services || {};
-            const entries = Object.entries(services);
-            if (entriesentries.length === 0) {
+            if (entries.length === 0) {
                 adjustPreview.innerHTML =
-                    `<div style="color:#aaa; text-align:center; padding:10px 0;">.length === 0) {
-                adjustPreview.innerHTML =
-                    `<div style="color:#aaa; text-align:center; padding:10px 0No services to adjust.</div>`;
-                return;
-            }
-
-            let modeLabel = '';
-            let adjustedEntries = entries.map(([key, s]);">No services to adjust.</div>`;
+                    `<div style="color:#aaa; text-align:center; padding:10px 0;">No services to adjust.</div>`;
                 return;
             }
 
@@ -9518,53 +8967,26 @@ StatusTabs.querySelectorAll('.tab-btn').forEach            });
                 let mode = currentAdjustMode;
 
                 if (mode === 'add-amount') {
-                    newPrice = => {
-                const orig = s.price || 0;
-                let newPrice = orig;
-                let mode = currentAdjustMode;
-
-                if (mode === 'add-amount') {
                     newPrice = orig + val;
                     modeLabel = `+ ZMW ${val.toFixed(2)}`;
                 } else if (mode === 'remove-amount') {
-                    newPrice = Math orig + val;
-                    modeLabel = `+ ZMW ${val.toFixed(2)}`;
-                } else if (mode === 'remove-amount') {
-                    newPrice =.max(0, orig - val);
+                    newPrice = Math.max(0, orig - val);
                     modeLabel = `- ZMW ${val.toFixed(2)}`;
-                } else if (mode === ' Math.max(0, orig - val);
-                    modeLabel = `- ZMW ${val.toFixed(2)}`;
-                } else if (modeadd-percent') {
+                } else if (mode === 'add-percent') {
                     newPrice = orig + (orig * (val / 100));
                     modeLabel = `+ ${val}%`;
-                } else if (mode === 'remove-percent === 'add-percent') {
-                    newPrice = orig + (orig * (val / 100));
-                    modeLabel = `+ ${val}%`;
-                } else if (mode === 'remove') {
-                    newPrice = Math.max(0, orig - (orig * (val / 100)));
-                    modeLabel = `- ${val}%-percent') {
+                } else if (mode === 'remove-percent') {
                     newPrice = Math.max(0, orig - (orig * (val / 100)));
                     modeLabel = `- ${val}%`;
-               `;
                 }
                 return { key, service: s, orig, newPrice };
             });
 
             let previewHtml =
-                `<div style="font-size }
-                return { key, service: s, orig, newPrice };
-            });
-
-            let previewHtml =
-                `<div style="font-size:9px:9px; color:#888; margin-bottom:4px;">Preview —; color:#888; margin-bottom:4px ${modeLabel} applied to ${adjustedEntries.length} service(s). Click "Apply" to save changes.</div>`;
-            previewHtml += adjustedEntries.map(({ key, service, orig, newPrice }) => `
-                        <div class="preview-item">
-                            <span class="pname">${service.title;">Preview — ${modeLabel} applied to ${adjustedEntries.length} service(s). Click "Apply" to save changes.</div>`;
+                `<div style="font-size:9px; color:#888; margin-bottom:4px;">Preview — ${modeLabel} applied to ${adjustedEntries.length} service(s). Click "Apply" to save changes.</div>`;
             previewHtml += adjustedEntries.map(({ key, service, orig, newPrice }) => `
                         <div class="preview-item">
                             <span class="pname">${service.title || 'Untitled'}</span>
-                            <span class="pprice">
-                                <span class="old">ZMW ${orig.toFixed(2)} || 'Untitled'}</span>
                             <span class="pprice">
                                 <span class="old">ZMW ${orig.toFixed(2)}</span>
                                 <span class="new">ZMW ${newPrice.toFixed(2)}</span>
@@ -9574,30 +8996,11 @@ StatusTabs.querySelectorAll('.tab-btn').forEach            });
 
             adjustPreview.innerHTML = previewHtml;
 
-           </span>
-                                <span class="new">ZMW ${newPrice.to if (confirm(`Apply ${modeLabel} to all ${adjustedEntries.length} services?`)) {
-                adjustedEntries.forEach(({ key,Fixed(2)}</span>
-                            </span>
-                        </div>
-                    `).join('');
-
-            adjustPreview.innerHTML = previewHtml;
-
             if (confirm(`Apply ${modeLabel} to all ${adjustedEntries.length} services?`)) {
-                adjustedEntries.forEach(({ key, newPrice }) newPrice }) => {
+                adjustedEntries.forEach(({ key, newPrice }) => {
                     if (allData.services && allData.services[key]) {
                         if (!allData.services[key].originalPrice) {
-                            allData => {
-                    if (allData.services && allData.services[key]) {
-                        if (!allData.services[key].originalPrice) {
-                            allData.services[key.services[key].originalPrice = allData.services[key].price;
-                        }
-                        allData.services[key].price = newPrice;
-                    }
-                });
-                saveData().then(() => {
-                    renderAll();
-                    const updatedEntries = Object.entries].originalPrice = allData.services[key].price;
+                            allData.services[key].originalPrice = allData.services[key].price;
                         }
                         allData.services[key].price = newPrice;
                     }
@@ -9605,37 +9008,21 @@ StatusTabs.querySelectorAll('.tab-btn').forEach            });
                 saveData().then(() => {
                     renderAll();
                     const updatedEntries = Object.entries(allData.services || {}).map(([key, s]) => {
-                        return { key, service: s, orig: s.price || 0, newPrice: s.price ||(allData.services || {}).map(([key, s]) => {
                         return { key, service: s, orig: s.price || 0, newPrice: s.price || 0 };
                     });
                     let updatedHtml =
-                        `<div style="font-size:9px; color 0 };
-                    });
-                    let updatedHtml =
-                        `<div style="font-size:9px; color:#16a34:#16a34a; margin-bottom:4px;">✅ Applied ${modeLabel} to ${updatedEntries.length} service(s).</div>`;
-                    updatedHtml += updatedEntries.map(({ key, service, orig, newPrice }) => `
-                                <diva; margin-bottom:4px;">✅ Applied class="preview-item">
-                                    <span class="pname">${service.title || 'Untitled'}</span>
-                                    <span class="pprice ${modeLabel} to ${updatedEntries.length} service(s).</div>`;
+                        `<div style="font-size:9px; color:#16a34a; margin-bottom:4px;">✅ Applied ${modeLabel} to ${updatedEntries.length} service(s).</div>`;
                     updatedHtml += updatedEntries.map(({ key, service, orig, newPrice }) => `
                                 <div class="preview-item">
                                     <span class="pname">${service.title || 'Untitled'}</span>
-                                    <span class="">
+                                    <span class="pprice">
                                         <span class="old">ZMW ${orig.toFixed(2)}</span>
-                                        <span class="new">ZMW ${newPricepprice">
-                                        <span class="old">ZMW ${orig.toFixed(2)}</span>
-                                        <span class="new">ZMW ${newPrice.toFixed(2.toFixed(2)}</span>
-                                    </span>
-                                </div>
-                            `).join('');
-                    adjustPreview.innerHTML = updatedHtml;
-                    showToast(`✅ Applied ${modeLabel} to all services`, ')}</span>
+                                        <span class="new">ZMW ${newPrice.toFixed(2)}</span>
                                     </span>
                                 </div>
                             `).join('');
                     adjustPreview.innerHTML = updatedHtml;
                     showToast(`✅ Applied ${modeLabel} to all services`, 'success');
-success');
                 });
             }
         });
@@ -9644,32 +9031,13 @@ success');
         // BADGE UPDATES
         // ───────────────────────────────────────────────────────────────────
 
-                });
-            }
-        });
-
-        // ───────────────────────────────────────────────────────────────────
-        // BADGE UPDATES
-        // ───────────────────────────────────────────────────────────────────
-
-        function update        function updateBadges() {
+        function updateBadges() {
             const orders = Object.values(allData.orders || {});
-            const pendingOrders = orders.filter(o => o.status === 'Badges() {
-            const orders = Object.values(allData.orders || {});
-            const pendingOrders = orders.filter(o => o.status === 'pending').pending').length;
+            const pendingOrders = orders.filter(o => o.status === 'pending').length;
             updateBadgeElement(badgeOrdersPending, pendingOrders);
 
             const withdrawals = Object.values(allData.withdrawalRequests || {});
-            const pendingWithdrawals = withdrawals.filter(w => w.statuslength;
-            updateBadgeElement(badgeOrdersPending, pendingOrders);
-
-            const withdrawals = Object.values(allData.withdrawalRequests || {});
-            const pendingWithdrawals = withdrawals.filter(w => w.status === ' === 'pending').length;
-            updateBadgeElement(badgeWithdrawalsPending, pendingWithdrawals);
-        }
-
-        function updateBadgeElement(el, count) {
-            ifpending').length;
+            const pendingWithdrawals = withdrawals.filter(w => w.status === 'pending').length;
             updateBadgeElement(badgeWithdrawalsPending, pendingWithdrawals);
         }
 
@@ -9678,12 +9046,7 @@ success');
                 el.textContent = count;
                 el.classList.add('show');
             } else {
-                el.textContent = '0 (count > 0) {
-                el.textContent = count;
-                el.classList.add('show');
-            } else {
                 el.textContent = '0';
-               ';
                 el.classList.remove('show');
             }
         }
@@ -9693,28 +9056,10 @@ success');
         // ───────────────────────────────────────────────────────────────────
 
         function showToast(msg, type = 'success') {
-            el.classList.remove('show');
-            }
-        }
-
-        // ───────────────────────────────────────────────────────────────────
-        // TOAST
-        // ───────────────────────────────────────────────────────────────────
-
-        function showToast(msg, type = ' toastMsg.textContent = msg;
-            toast.classList.add('show');
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classListsuccess') {
             toastMsg.textContent = msg;
             toast.classList.add('show');
             clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() =>.remove('show');
-            }, 2200);
-        }
-
-        // ───────────────────────────────────────────────────────────────────
-        // AUTH & INIT {
+            toast._timeout = setTimeout(() => {
                 toast.classList.remove('show');
             }, 2200);
         }
@@ -9722,18 +9067,8 @@ success');
         // ───────────────────────────────────────────────────────────────────
         // AUTH & INIT
         // ───────────────────────────────────────────────────────────────────
-        // ───────────────────────────────────────────────────────────────────
-
-       
 
         onAuthStateChanged(auth, (user) => {
-            if (user) {
-                currentUser = user;
-                const adminRef = ref(db, 'admins');
-                get(adminRef).then((snapshot) => {
-                    const admins = snapshot.val() || {};
-                    let foundAdmin = null;
-                    for onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
                 const adminRef = ref(db, 'admins');
@@ -9743,44 +9078,16 @@ success');
                     for (const key in admins) {
                         if (admins[key].uid === user.uid) {
                             foundAdmin = admins[key];
-                            break (const key in admins) {
-                        if (admins[key].uid === user.uid) {
-                            foundAdmin = admins[key];
                             break;
-;
                         }
-                    }
-                    currentAdminData =                        }
                     }
                     currentAdminData = foundAdmin || null;
 
                     loadData(() => {
                         const usersRef = ref(db, 'users');
-                        onValue(usersRef foundAdmin || null;
-
-                    loadData(() => {
-                        const usersRef = ref(db, 'users');
                         onValue(usersRef, (snapshot) => {
                             const usersData = snapshot.val() || {};
-                            allData, (snapshot) => {
-                            const usersData = snapshot.val() || {};
                             allData.users = usersData;
-                            allUsersCache = usersData;
-                            renderDashboard();
-                            updateBadges();
-                            const usersPage = document.getElementById('page-users');
-                            if (usersPage.classList.contains('active')) {
-                                renderUsers(document.getElementById('userSearchInput').value, userFilterSelect
-                                    .value);
-                            }
-                            renderCustomReferrals();
-                            renderReferralDiscounts();
-                            renderReferralPromoDiscounts();
-                            renderAccounts();
-                            renderWithdrawals();
-                            populateUserSelects();
-                            populateCustomReferralSelect();
-                            renderAccount.users = usersData;
                             allUsersCache = usersData;
                             renderDashboard();
                             updateBadges();
@@ -9804,19 +9111,7 @@ success');
                             document.getElementById('heroTitle').value = allData.hero.title || '';
                             document.getElementById('heroTitleSpan').value = allData.hero.titleSpan || '';
                             document.getElementById('heroDesc').value = allData.hero.desc || '';
-                            document.getElementById('heroCTA').value = allData.UpdateUserList();
-                        });
-
-                        renderAll();
-                        if (allData.hero) {
-                            document.getElementById('heroTitle').value = allData.hero.title || '';
-                            document.getElementById('heroTitleSpan').value = allData.hero.titleSpan || '';
-                            document.getElementById('heroDesc').value = allData.hero.desc || '';
-                            document.getElementById('heroCTA').value = allhero.cta || '';
-                            document.getElementById('heroPhone').value = allData.hero.phone || '';
-                        }
-                        if (allData.policy) {
-                            document.getElementById('policyTitle').valueData.hero.cta || '';
+                            document.getElementById('heroCTA').value = allData.hero.cta || '';
                             document.getElementById('heroPhone').value = allData.hero.phone || '';
                         }
                         if (allData.policy) {
@@ -9830,21 +9125,9 @@ success');
             } else {
                 window.location.href = 'login.html';
             }
- = allData.policy.title || '';
-                            document.getElementById('policyDesc').value = allData.policy.desc || '';
-                            document.getElementById('policyTag').value = allData.policy.tag || '';
-                        }
-                        hideBackButton();
-                    });
-                });
-            } else {
-                window.location.href = 'login.html';
-            }
         });
 
-        console        });
-
-        console.log('✅ Admin Dashboard — Applications now show uploaded images as 2x2 square grid. Click any image to enlarge.');
+        console.log('✅ Admin Dashboard — 2×2 image grid for applications, click-to-enlarge, pending/approved/rejected tabs, full management.');
     </script>
 </body>
 </html>
