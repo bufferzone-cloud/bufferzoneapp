@@ -3800,6 +3800,110 @@
         .app-card .app-details.open {
             display: block;
         }
+
+        /* ── Enforce white modals with black text & options ── */
+.modal-overlay .modal,
+.screenshot-modal-content,
+.withdraw-confirm-modal,
+.account-update-modal {
+    background: #ffffff !important;
+    color: #1c2128 !important;
+}
+
+.modal-overlay .modal h3,
+.modal-overlay .modal p.sub,
+.modal-overlay .modal .form-group label,
+.screenshot-modal-content h3 {
+    color: #1c2128 !important;
+}
+
+.modal-overlay .modal input,
+.modal-overlay .modal select,
+.modal-overlay .modal textarea,
+.modal-overlay .modal select option {
+    color: #1c2128 !important;
+    background: #ffffff !important;
+    border-color: #ddd !important;
+}
+
+.modal-overlay .modal select option {
+    background: #ffffff !important;
+}
+
+/* ── Application image boxes: small, hover enlarge, click opens modal ── */
+.app-image-grid .img-box {
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.2s ease;
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fafafa;
+    aspect-ratio: 1/1;
+    border: 1px solid #f0f0f0;
+    position: relative;
+}
+
+.app-image-grid .img-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+.app-image-grid .img-box:active {
+    transform: scale(0.95);
+}
+
+.app-image-grid .img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.app-image-grid .img-box .file-label {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 7px;
+    padding: 1px 8px;
+    border-radius: 4px;
+    backdrop-filter: blur(2px);
+    pointer-events: none;
+}
+
+/* ── Enlarge modal (screenshot viewer) ── */
+#screenshotModal .screenshot-modal-content {
+    background: #ffffff !important;
+    color: #1c2128 !important;
+    border-radius: 18px;
+    padding: 20px 20px 16px 16px;
+    max-width: 90vw;
+    max-height: 90vh;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+}
+
+#screenshotModal .screenshot-modal-content img {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    margin-top: 8px;
+}
+
+#screenshotModal .screenshot-modal-content .close-btn {
+    color: #1c2128 !important;
+    background: transparent !important;
+}
+
+/* ── Ensure form dropdowns and options appear black on white ── */
+#promoPicUploadModal .click-config-section select,
+#promoPicUploadModal .click-config-section option {
+    color: #1c2128 !important;
+    background: #ffffff !important;
+}
     </style>
 </head>
 <body>
