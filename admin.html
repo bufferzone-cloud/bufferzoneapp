@@ -121,7 +121,6 @@
             transform: scale(1);
         }
 
-        /* ── HEADER: Single centered admin title ── */
         .header {
             display: flex;
             align-items: center;
@@ -1854,7 +1853,6 @@
             padding: 6px 0;
         }
 
-        /* --- Updated Promo Pics Grid (2x2, full picture shown) --- */
         .promo-pics-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -2879,7 +2877,6 @@
             color: #1c2128;
         }
 
-        /* ── USER CARD STYLES (compact, floating, like account cards) ── */
         .user-card {
             background: #ffffff;
             border-radius: 10px;
@@ -3076,7 +3073,6 @@
             border-radius: 16px;
         }
 
-        /* ── USER FILTER BAR ── */
         .user-filter-bar {
             display: flex;
             align-items: center;
@@ -3388,7 +3384,6 @@
             box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
 
-        /* ── CUSTOMER WALLET PAGE STYLES (enhanced) ── */
         .page-customer-wallet .wallet-filter-btn {
             padding: 3px 12px;
             border-radius: 12px;
@@ -3407,7 +3402,6 @@
             background: #e0e0e0;
         }
 
-        /* Transaction items within user details */
         .user-card .tx-item {
             display: flex;
             justify-content: space-between;
@@ -3440,7 +3434,6 @@
             text-align: center;
         }
 
-        /* Status badges reused */
         .status-badge.approved {
             background: #e6fffa;
             color: #00a86b;
@@ -3454,7 +3447,6 @@
             color: #cc8800;
         }
 
-        /* ─── NEW: Application Management Styles ─── */
         .app-flyer-actions {
             display: flex;
             gap: 8px;
@@ -3488,7 +3480,6 @@
             color: #888;
         }
 
-        /* Applications status tabs with professional icons */
         .app-status-tabs {
             display: flex;
             gap: 6px;
@@ -3734,7 +3725,6 @@
             margin-bottom: 6px;
         }
 
-        /* Flyer click-content configuration in upload modal */
         .click-config-section {
             background: #f8f9fc;
             border-radius: 10px;
@@ -3789,6 +3779,85 @@
             font-size: 8px;
             color: #aaa;
             margin-top: 1px;
+        }
+
+        /* ===== 2x2 IMAGE GALLERY ===== */
+        .app-image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin: 10px 0 8px 0;
+        }
+        .app-image-grid .img-box {
+            aspect-ratio: 1 / 1;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+            background: #fafafa;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            min-height: 60px;
+        }
+        .app-image-grid .img-box:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+        }
+        .app-image-grid .img-box:active {
+            transform: scale(0.95);
+        }
+        .app-image-grid .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .app-image-grid .img-box .img-label {
+            position: absolute;
+            bottom: 2px;
+            left: 2px;
+            right: 2px;
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
+            font-size: 7px;
+            font-weight: 600;
+            padding: 1px 4px;
+            border-radius: 4px;
+            text-align: center;
+            backdrop-filter: blur(2px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .app-image-grid .img-box .no-image-icon {
+            color: #ccc;
+            font-size: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .app-image-grid .img-box .no-image-icon span {
+            font-size: 7px;
+            color: #aaa;
+        }
+        .app-image-grid .img-box .enlarge-hint {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 6px;
+            padding: 0 4px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .app-image-grid .img-box:hover .enlarge-hint {
+            opacity: 1;
         }
     </style>
 </head>
@@ -4559,7 +4628,7 @@
                     <input type="text" id="promoPicSubtext" placeholder="e.g. Limited time offer" />
                 </div>
 
-                <!-- === NEW: Click-content configuration === -->
+                <!-- === Click-content configuration === -->
                 <div class="click-config-section">
                     <div class="section-label"><i class="fa-solid fa-mouse-pointer"></i> Click Content (appears when flyer is tapped)</div>
                     <div class="form-group-sm" style="margin-bottom:4px;">
@@ -7175,7 +7244,7 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // APPLICATIONS MANAGEMENT
+        // APPLICATIONS MANAGEMENT (UPDATED WITH 2x2 IMAGE GRID)
         // ───────────────────────────────────────────────────────────────────
 
         function renderApplications(filter = applicationsFilter) {
@@ -7226,117 +7295,149 @@
                 const initial = (userName || 'U').charAt(0).toUpperCase();
                 const dateStr = app.createdAt ? new Date(app.createdAt).toLocaleString() : 'N/A';
 
-                // Build detail fields based on form type
-                let detailFields = [];
+                // ── Collect all images from the application ──
+                const imageItems = [];
                 const fd = app.formData || {};
+
+                // Helper: push image with label
+                function addImage(url, label) {
+                    if (url && typeof url === 'string' && (url.startsWith('http://') || url.startsWith('https://'))) {
+                        imageItems.push({ url, label });
+                    }
+                }
+
+                // Prize form: proofImage
+                if (app.formType === 'prize' && fd.proofImage) {
+                    addImage(fd.proofImage, 'Proof Image');
+                }
+
+                // Job form: profilePic, nrcFront, nrcBack, qualification
+                if (app.formType === 'job') {
+                    if (fd.profilePic) addImage(fd.profilePic, 'Profile Pic');
+                    if (fd.nrcFront) addImage(fd.nrcFront, 'NRC Front');
+                    if (fd.nrcBack) addImage(fd.nrcBack, 'NRC Back');
+                    if (fd.qualification) addImage(fd.qualification, 'Qualification');
+                }
+
+                // Payment data: screenshot
+                if (app.paymentData && app.paymentData.screenshot) {
+                    addImage(app.paymentData.screenshot, 'Payment Screenshot');
+                }
+
+                // ── Build the 2x2 image grid HTML ──
+                let imageGridHtml = '';
+                if (imageItems.length > 0) {
+                    const gridItems = imageItems.map(item => `
+                                <div class="img-box" onclick="document.getElementById('screenshotPreview').src='${item.url}'; document.getElementById('screenshotModal').classList.add('open');">
+                                    <img src="${item.url}" alt="${item.label}" loading="lazy" />
+                                    <span class="img-label">${item.label}</span>
+                                    <span class="enlarge-hint">🔍</span>
+                                </div>
+                            `).join('');
+                    // Pad to even number (2-column grid)
+                    const remainder = imageItems.length % 2;
+                    const padding = remainder === 1 ? `<div class="img-box" style="background:transparent;border:none;cursor:default;"></div>` : '';
+                    imageGridHtml = `
+                                <div class="app-image-grid">
+                                    ${gridItems}
+                                    ${padding}
+                                </div>
+                            `;
+                }
+
+                // ── Build detail fields (non-image) ──
+                let detailFields = [];
+                const fdCopy = { ...fd };
+
+                // Remove image fields from detail display (they're shown in the grid)
+                if (app.formType === 'prize') {
+                    delete fdCopy.proofImage;
+                }
+                if (app.formType === 'job') {
+                    delete fdCopy.profilePic;
+                    delete fdCopy.nrcFront;
+                    delete fdCopy.nrcBack;
+                    delete fdCopy.qualification;
+                }
+
+                // Build remaining detail fields
                 if (app.formType === 'ambassador') {
                     detailFields = [
-                        { label: 'Name', val: fd.name || 'N/A' },
-                        { label: 'Email', val: fd.email || 'N/A' },
-                        { label: 'Phone', val: fd.number || 'N/A' },
-                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
-                        { label: 'Discount for Customer', val: fd.discountForCustomer ? `${fd.discountForCustomer}%` :
+                        { label: 'Name', val: fdCopy.name || 'N/A' },
+                        { label: 'Email', val: fdCopy.email || 'N/A' },
+                        { label: 'Phone', val: fdCopy.number || 'N/A' },
+                        { label: 'BZ Code', val: fdCopy.bzCode || 'N/A' },
+                        { label: 'Discount for Customer', val: fdCopy.discountForCustomer ? `${fdCopy.discountForCustomer}%` :
                                 'N/A' },
-                        { label: 'Ambassador Payout', val: fd.ambassadorPayout ? `ZMW ${fd.ambassadorPayout}` : 'N/A' }
+                        { label: 'Ambassador Payout', val: fdCopy.ambassadorPayout ? `ZMW ${fdCopy.ambassadorPayout}` :
+                            'N/A' }
                     ];
                 } else if (app.formType === 'investor') {
                     detailFields = [
-                        { label: 'Name', val: fd.name || 'N/A' },
-                        { label: 'Email', val: fd.email || 'N/A' },
-                        { label: 'Phone', val: fd.number || 'N/A' },
-                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
-                        { label: 'Investment', val: fd.investmentAmount ? `ZMW ${fd.investmentAmount}` : 'N/A' },
-                        { label: 'Duration', val: fd.durationMonths ? `${fd.durationMonths} months` : 'N/A' },
-                        { label: 'Profit per Month', val: fd.profitPerMonth ? `ZMW ${fd.profitPerMonth}` : 'N/A' }
+                        { label: 'Name', val: fdCopy.name || 'N/A' },
+                        { label: 'Email', val: fdCopy.email || 'N/A' },
+                        { label: 'Phone', val: fdCopy.number || 'N/A' },
+                        { label: 'BZ Code', val: fdCopy.bzCode || 'N/A' },
+                        { label: 'Investment', val: fdCopy.investmentAmount ? `ZMW ${fdCopy.investmentAmount}` : 'N/A' },
+                        { label: 'Duration', val: fdCopy.durationMonths ? `${fdCopy.durationMonths} months` : 'N/A' },
+                        { label: 'Profit per Month', val: fdCopy.profitPerMonth ? `ZMW ${fdCopy.profitPerMonth}` : 'N/A' }
                     ];
                 } else if (app.formType === 'prize') {
                     detailFields = [
-                        { label: 'Name', val: fd.name || 'N/A' },
-                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
-                        { label: 'Email', val: fd.email || 'N/A' },
-                        { label: 'Phone', val: fd.number || 'N/A' },
-                        { label: 'Details', val: fd.details || 'N/A' },
+                        { label: 'Name', val: fdCopy.name || 'N/A' },
+                        { label: 'BZ Code', val: fdCopy.bzCode || 'N/A' },
+                        { label: 'Email', val: fdCopy.email || 'N/A' },
+                        { label: 'Phone', val: fdCopy.number || 'N/A' },
+                        { label: 'Details', val: fdCopy.details || 'N/A' },
                     ];
-                    if (fd.proofImage) {
-                        detailFields.push({
-                            label: 'Proof',
-                            val: `<div style="display:inline-block; cursor:pointer; margin:2px;" onclick="document.getElementById('screenshotPreview').src='${fd.proofImage}'; document.getElementById('screenshotModal').classList.add('open');"><img src="${fd.proofImage}" style="width:50px; height:50px; object-fit:cover; border-radius:4px; border:1px solid #eee;" /></div>`
-                        });
-                    }
                 } else if (app.formType === 'job') {
                     detailFields = [
-                        { label: 'Name', val: fd.name || 'N/A' },
-                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
-                        { label: 'Email', val: fd.email || 'N/A' },
-                        { label: 'Phone', val: fd.phone || 'N/A' },
-                        { label: 'Age', val: fd.age || 'N/A' },
-                        { label: 'Occupation', val: fd.occupation || 'N/A' },
-                        { label: 'Gender', val: fd.gender || 'N/A' },
-                        { label: 'Position', val: fd.position || 'N/A' },
-                        { label: 'About', val: fd.about || 'N/A' },
+                        { label: 'Name', val: fdCopy.name || 'N/A' },
+                        { label: 'BZ Code', val: fdCopy.bzCode || 'N/A' },
+                        { label: 'Email', val: fdCopy.email || 'N/A' },
+                        { label: 'Phone', val: fdCopy.phone || 'N/A' },
+                        { label: 'Age', val: fdCopy.age || 'N/A' },
+                        { label: 'Occupation', val: fdCopy.occupation || 'N/A' },
+                        { label: 'Gender', val: fdCopy.gender || 'N/A' },
+                        { label: 'Position', val: fdCopy.position || 'N/A' },
+                        { label: 'About', val: fdCopy.about || 'N/A' },
                     ];
-                    if (fd.profilePic) {
-                        detailFields.push({
-                            label: 'Profile Pic',
-                            val: `<div style="display:inline-block; cursor:pointer; margin:2px;" onclick="document.getElementById('screenshotPreview').src='${fd.profilePic}'; document.getElementById('screenshotModal').classList.add('open');"><img src="${fd.profilePic}" style="width:50px; height:50px; object-fit:cover; border-radius:4px; border:1px solid #eee;" /></div>`
-                        });
-                    }
-                    if (fd.nrcFront) {
-                        detailFields.push({
-                            label: 'NRC Front',
-                            val: `<div style="display:inline-block; cursor:pointer; margin:2px;" onclick="document.getElementById('screenshotPreview').src='${fd.nrcFront}'; document.getElementById('screenshotModal').classList.add('open');"><img src="${fd.nrcFront}" style="width:50px; height:50px; object-fit:cover; border-radius:4px; border:1px solid #eee;" /></div>`
-                        });
-                    }
-                    if (fd.nrcBack) {
-                        detailFields.push({
-                            label: 'NRC Back',
-                            val: `<div style="display:inline-block; cursor:pointer; margin:2px;" onclick="document.getElementById('screenshotPreview').src='${fd.nrcBack}'; document.getElementById('screenshotModal').classList.add('open');"><img src="${fd.nrcBack}" style="width:50px; height:50px; object-fit:cover; border-radius:4px; border:1px solid #eee;" /></div>`
-                        });
-                    }
-                    if (fd.qualification) {
-                        detailFields.push({
-                            label: 'Qualification',
-                            val: `<div style="display:inline-block; cursor:pointer; margin:2px;" onclick="document.getElementById('screenshotPreview').src='${fd.qualification}'; document.getElementById('screenshotModal').classList.add('open');"><img src="${fd.qualification}" style="width:50px; height:50px; object-fit:cover; border-radius:4px; border:1px solid #eee;" /></div>`
-                        });
-                    }
                 } else if (app.formType === 'referrer') {
                     detailFields = [
-                        { label: 'Name', val: fd.name || 'N/A' },
-                        { label: 'Number', val: fd.number || 'N/A' },
-                        { label: 'Email', val: fd.email || 'N/A' },
-                        { label: 'BZ Code', val: fd.bzCode || 'N/A' },
-                        { label: 'Occupation', val: fd.occupation || 'N/A' }
+                        { label: 'Name', val: fdCopy.name || 'N/A' },
+                        { label: 'Number', val: fdCopy.number || 'N/A' },
+                        { label: 'Email', val: fdCopy.email || 'N/A' },
+                        { label: 'BZ Code', val: fdCopy.bzCode || 'N/A' },
+                        { label: 'Occupation', val: fdCopy.occupation || 'N/A' }
                     ];
                 } else {
                     // Generic fallback
-                    for (const [k, v] of Object.entries(fd)) {
+                    for (const [k, v] of Object.entries(fdCopy)) {
                         if (k !== 'name' && k !== 'email' && k !== 'number' && k !== 'bzCode') {
                             detailFields.push({ label: k, val: typeof v === 'string' ? v : JSON.stringify(v) });
                         }
                     }
                 }
 
-                // Add payment details if available
+                // Add payment details if available (excluding screenshot which is in grid)
                 if (app.paymentData) {
                     const pd = app.paymentData;
-                    detailFields.push({ label: 'Amount Paid', val: `ZMW ${pd.amount || 0}` });
-                    detailFields.push({ label: 'Paid To (Account)', val: pd.accountName || 'N/A' });
-                    detailFields.push({ label: 'Mobile Number', val: pd.mobileNumber || 'N/A' });
-                    if (pd.screenshot) {
-                        detailFields.push({
-                            label: 'Payment Screenshot',
-                            val: `<button class="btn-view-proof" data-screenshot="${pd.screenshot}" style="padding:2px 10px; font-size:8px; border-radius:10px;"><i class="fa-regular fa-image"></i> View</button>`
-                        });
+                    if (pd.amount !== undefined && pd.amount !== null) {
+                        detailFields.push({ label: 'Amount Paid', val: `ZMW ${pd.amount}` });
+                    }
+                    if (pd.accountName) {
+                        detailFields.push({ label: 'Paid To (Account)', val: pd.accountName });
+                    }
+                    if (pd.mobileNumber) {
+                        detailFields.push({ label: 'Mobile Number', val: pd.mobileNumber });
                     }
                 }
 
                 const detailHtml = detailFields.map(f => {
                     let val = f.val;
-                    // Check if val is an image URL
-                    if (typeof val === 'string' && (val.startsWith('http://') || val.startsWith('https://')) && (val.match(/\.(jpg|jpeg|png|gif|webp|svg|bmp)/i) || val.includes('cloudinary'))) {
-                        val = `<div style="display:inline-block; cursor:pointer; margin:2px;" onclick="document.getElementById('screenshotPreview').src='${val}'; document.getElementById('screenshotModal').classList.add('open');"><img src="${val}" style="width:50px; height:50px; object-fit:cover; border-radius:4px; border:1px solid #eee;" /></div>`;
-                    } else if (f.label === 'Payment Screenshot') {
-                        val = `<button class="btn-view-proof" data-screenshot="${val}" style="padding:2px 10px; font-size:8px; border-radius:10px;"><i class="fa-regular fa-image"></i> View</button>`;
+                    // If val is a URL that looks like an image but wasn't caught, still show as text
+                    if (typeof val === 'string' && val.startsWith('http') && (val.match(/\.(jpg|jpeg|png|gif|webp|svg|bmp)/i) || val.includes('cloudinary'))) {
+                        val = `<a href="${val}" target="_blank" style="color:#1c2128;text-decoration:underline;">View</a>`;
                     }
                     return `<div class="detail-item"><span class="label">${f.label}</span><span class="val">${val}</span></div>`;
                 }).join('');
@@ -7362,6 +7463,7 @@
                                     </div>
                                 </div>
                                 <div class="app-details">
+                                    ${imageGridHtml}
                                     <div class="detail-grid">
                                         ${detailHtml}
                                     </div>
@@ -7383,7 +7485,8 @@
             // Bind expand events
             applicationsListEl.querySelectorAll('.app-card').forEach(card => {
                 card.addEventListener('click', function(e) {
-                    if (e.target.closest('.btn-approve-app') || e.target.closest('.btn-reject-app')) return;
+                    if (e.target.closest('.btn-approve-app') || e.target.closest('.btn-reject-app') || e.target
+                        .closest('.img-box')) return;
                     this.classList.toggle('open');
                     const details = this.querySelector('.app-details');
                     if (this.classList.contains('open')) {
@@ -7413,17 +7516,8 @@
                 });
             });
 
-            // Bind screenshot view buttons
-            applicationsListEl.querySelectorAll('.btn-view-proof').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const url = this.dataset.screenshot;
-                    if (url) {
-                        document.getElementById('screenshotPreview').src = url;
-                        document.getElementById('screenshotModal').classList.add('open');
-                    }
-                });
-            });
+            // NOTE: The img-box click handler uses the global onclick attribute defined in the HTML,
+            // so we don't need to bind additional events.
         }
 
         function updateApplicationStatus(key, status) {
@@ -8533,6 +8627,11 @@
                     showToast('Work post updated!');
                 });
             } else {
+                addWorkPost(postData).then renderAll();
+                    closeWorkUploadModal();
+                    showToast('Work post updated!');
+                });
+            } else {
                 addWorkPost(postData).then(() => {
                     renderAll();
                     closeWorkUploadModal();
@@ -8544,22 +8643,55 @@
         // ── PROMO PIC UPLOAD MODAL ──
 
         addPromoPicBtn.addEventListener('click', () => {
-            resetPromoPicUploadModal();
+            resetProm(() => {
+                    renderAll();
+                    closeWorkUploadModal();
+                    showToast('Work post added!');
+                });
+            }
+        });
+
+        // ── PROMO PIC UPLOAD MODAL ──
+
+        addPromoPicBtn.addEventListener('click', () => {
+            resetPromoPicUploadModaloPicUploadModal();
+            promoPicUploadModal.classList.add('open');
+        });
+
+        promoPicUploadCloseBtn.addEventListener('click', () => {
+            promoPicUploadModal.classList();
             promoPicUploadModal.classList.add('open');
         });
 
         promoPicUploadCloseBtn.addEventListener('click', () => {
             promoPicUploadModal.classList.remove('open');
-            resetPromoPicUploadModal();
+.remove('open');
+            resetPromoPicUpload            resetPromoPicUploadModal();
+        });
+Modal();
         });
         promoPicUploadCancelBtn.addEventListener('click', () => {
             promoPicUploadModal.classList.remove('open');
             resetPromoPicUploadModal();
         });
-        promoPicUploadModal.addEventListener('click', (e) => {
+        promoPicUploadModal        promoPicUploadCancelBtn.addEventListener('click', () => {
+            promoPicUploadModal.classList.remove('open');
+            resetPromoPicUploadModal();
+        });
+        promoPicUploadModal.addEventListener('click', (e) =>.addEventListener('click', (e) => {
+            {
             if (e.target === promoPicUploadModal) {
                 promoPicUploadModal.classList.remove('open');
-                resetPromoPicUploadModal();
+                resetProm if (e.target === promoPicUploadModal) {
+                promoPicUploadModal.classList.remove('open');
+                resetPromoPicoPicUploadModal();
+            }
+        });
+
+        // Click-config toggle
+        enableClickContent.addEventListener('change', function() {
+            clickConfigFields.style.opacity = this.checked ? '1' : '0.5';
+            clickConfigFields.querySelectorAll('input,UploadModal();
             }
         });
 
@@ -8571,57 +8703,119 @@
         // Initial state
         clickConfigFields.querySelectorAll('input, textarea, select').forEach(el => el.disabled = false);
 
-        setupCloudinaryUpload(promoPicImagePreview, promoPicImageUrl, promoPicImagePreview);
+        textarea, select').forEach(el => el.disabled = !this.checked);
+        });
+        // Initial state
+        clickConfigFields.querySelectorAll('input, textarea, select').forEach(el => el.disabled = false setupCloudinaryUpload(promoPicImagePreview, promoPicImageUrl, promoPicImagePreview);
+
+        promoPicUploadForm.addEventListener('submit', function(e));
+
+        setupCloudinaryUpload(promoPicImagePreview, promoPicImageUrl, promoPicImage {
+            e.preventDefault();
+
+            // Check if we're in edit mode
+            const editKey = this.dataset.editKey;
+            ifPreview);
 
         promoPicUploadForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
             // Check if we're in edit mode
             const editKey = this.dataset.editKey;
-            if (editKey) {
+            if (editKey) (editKey) {
+                // Saving click content only
+                const clickContent = {
+                    enabled: enableClickContent.checked,
+                    title: clickTitle.value.trim(),
+                    instructions: {
                 // Saving click content only
                 const clickContent = {
                     enabled: enableClickContent.checked,
                     title: clickTitle.value.trim(),
                     instructions: clickInstructions.value.trim(),
+                    clickInstructions.value.trim(),
                     explanation: clickExplanation.value.trim(),
-                    boldWords: clickBoldWords.value.trim().split(',').map(w => w.trim()).filter(w => w),
+                    boldWords: clickBoldWords.value.trim().split(',').map(w => w.trim()).filter(w explanation: clickExplanation.value.trim(),
+                    boldWords: clickBoldWords.value.trim().split(',').map(w => w),
                     formType: clickFormType.value
                 };
                 updatePromoPicClickContent(editKey, clickContent).then(() => {
                     renderAll();
-                    promoPicUploadModal.classList.remove('open');
+                    promoPicUpload => w.trim()).filter(w => w),
+                    formType: clickFormType.value
+                };
+                updatePromoPicClickContent(editKey, clickContent).then(() => {
+                    renderAll();
+                    promoModal.classList.remove('open');
                     resetPromoPicUploadModal();
                     showToast('Click content updated!', 'success');
                 });
                 return;
             }
 
-            // Normal upload mode
+            // Normal upload modePicUploadModal.classList.remove('open');
+                    resetPromoPicUploadModal();
+                    showToast('Click content updated!', 'success');
+                });
+                return;
+            }
+
+            // Normal
             const imageUrl = promoPicImageUrl.value;
             const text = promoPicText.value.trim();
-            const subtext = promoPicSubtext.value.trim();
+            const subtext upload mode
+            const imageUrl = promoPicImageUrl.value;
+            const text = promoPicText.value.trim();
+            const subtext = promo = promoPicSubtext.value.trim();
 
             if (!imageUrl) {
                 showToast('Please upload an image first', 'error');
                 return;
             }
-            if (!text) {
+            if (!PicSubtext.value.trim();
+
+            if (!imageUrl) {
+                showToast('Please upload an image first', 'error');
+                return;
+            }
+            if (!text)text) {
                 showToast('Please enter overlay text', 'error');
                 return;
             }
 
             const clickContent = {
                 enabled: enableClickContent.checked,
-                title: clickTitle.value.trim(),
+                title: {
+                showToast('Please enter overlay text', 'error');
+                return;
+            }
+
+            const clickContent = {
+                enabled: enableClickContent.checked,
+                title: click clickTitle.value.trim(),
                 instructions: clickInstructions.value.trim(),
                 explanation: clickExplanation.value.trim(),
-                boldWords: clickBoldWords.value.trim().split(',').map(w => w.trim()).filter(w => w),
+                boldWords: clickBoldWords.valueTitle.value.trim(),
+                instructions: clickInstructions.value.trim(),
+                explanation: clickExplanation.value.trim(),
+                boldWords: clickBoldWords.value.trim()..trim().split(',').map(w => w.trim()).filter(w => w),
                 formType: clickFormType.value
             };
 
-            addPromoPic({ imageUrl, text, subtext, clickContent }).then(() => {
+            addPromoPic({ imageUrl, textsplit(',').map(w => w.trim()).filter(w => w),
+                formType: clickFormType.value
+            };
+
+            addPromoPic({ imageUrl, text, sub, subtext, clickContent }).then(() =>text, clickContent }).then(() => {
+                {
                 renderAll();
+                promoPicUploadModal.classList.remove('open');
+                resetPromoPicUploadModal();
+                showToast('Flyer uploaded!', 'success');
+            });
+        });
+
+        // ── FORM CONFIGURATION BUTTONS ─ renderAll();
                 promoPicUploadModal.classList.remove('open');
                 resetPromoPicUploadModal();
                 showToast('Flyer uploaded!', 'success');
@@ -8632,10 +8826,22 @@
 
         document.getElementById('configureFormsBtn').addEventListener('click', function() {
             renderFormConfigs();
+            document.getElementById('formConfigModal').classList.add('─
+
+        document.getElementById('configureFormsBtn').addEventListener('click', function() {
+            renderFormConfigs();
             document.getElementById('formConfigModal').classList.add('open');
         });
 
         document.getElementById('formConfigCloseBtn').addEventListener('click', function() {
+            document.getElementById('formConfigModal').classList.remove('open');
+        });
+
+        document.getElementById('saveopen');
+        });
+
+        document.getElementById('formConfigCloseBtn').addEventListener('FormConfigsBtn').addEventListener('click', function() {
+            const configs = allData.formConfigs ||click', function() {
             document.getElementById('formConfigModal').classList.remove('open');
         });
 
@@ -8644,17 +8850,36 @@
             document.querySelectorAll('.form-config-free').forEach(el => {
                 const type = el.dataset.type;
                 if (!configs[type]) configs[type] = {};
+            document.querySelectorAll('.form-config-free').forEach(el => {
+                const type = el.dataset.type;
+                if (!configs[type]) configs[type] {};
                 configs[type].isFree = el.checked;
             });
             document.querySelectorAll('.form-config-price').forEach(el => {
-                const type = el.dataset.type;
+                const type = el.dataset.type = {};
+                configs[type].isFree = el.checked;
+            });
+            document.querySelectorAll('.form-config-price').forEach(el => {
+                const type = el.dat;
                 if (!configs[type]) configs[type] = {};
-                configs[type].price = parseFloat(el.value) || 0;
+                configs[type].price = parseFloataset.type;
+                if (!configs[type]) configs[type] = {};
+                configs[type].price = parse(el.value) || 0;
+            });
+            document.querySelectorAll('.form-config-mobile').forEach(el => {
+                const type = el.dataset.type;
+                if (!configs[type]) configsFloat(el.value) || 0;
             });
             document.querySelectorAll('.form-config-mobile').forEach(el => {
                 const type = el.dataset.type;
                 if (!configs[type]) configs[type] = {};
-                configs[type].mobileNumber = el.value.trim();
+[type] = {};
+                configs                configs[type].mobileNumber = el.value.trim();
+            });
+            document.querySelectorAll('.form-config-account').forEach(el => {
+                const type = el.dataset.type;
+                if (!configs[type]) configs[type] = {};
+                configs[type].[type].mobileNumber = el.value.trim();
             });
             document.querySelectorAll('.form-config-account').forEach(el => {
                 const type = el.dataset.type;
@@ -8664,18 +8889,42 @@
             allData.formConfigs = configs;
             saveData().then(() => {
                 renderAll();
+                document.getElementById('formConfigModalaccountName = el.value.trim();
+            });
+            allData.formConfigs = configs;
+            saveData().then(() => {
+                renderAll();
                 document.getElementById('formConfigModal').classList.remove('open');
+                showToast('Form').classList.remove('open');
                 showToast('Form configurations saved!', 'success');
+            });
+        });
+
+        // ── PROMO PIC ENLARGE MODAL configurations saved!', 'success');
             });
         });
 
         // ── PROMO PIC ENLARGE MODAL ──
 
         document.getElementById('promoPicEnlargeCloseBtn').addEventListener('click', function() {
+            document.getElementById ──
+
+        document.getElementById('promoPicEnlargeCloseBtn').addEventListener('click', function() {
             document.getElementById('promoPicEnlargeModal').classList.remove('open');
         });
         document.getElementById('promoPicEnlargeModal').addEventListener('click', function(e) {
-            if (e.target === this) this.classList.remove('open');
+            if (e.target === this)('promoPicEnlargeModal').classList.remove('open');
+        });
+        document.getElementById('promoPicEnlargeModal').addEventListener('click', function(e) {
+            if (e.target === this.classList.remove('open');
+        });
+
+        // ── Other buttons ──
+
+        document.getElementById('addServiceBtn').addEventListener('click', this) this.classList.remove('open () => {
+            openModal('Add Service', 'Fill in the details to create a new service.', null);
+        });
+        document.getElementById('add');
         });
 
         // ── Other buttons ──
@@ -8687,16 +8936,34 @@
             openModal('Add Service', 'Fill in the details to create a new service.', null);
         });
 
-        document.getElementById('promoHeaderBtn').addEventListener('click', () => {
+        document.getElementByIdServiceQuick').addEventListener('click', () => {
+            openModal('Add Service', 'Fill in the details to create a new service.', null);
+        });
+
+       ('promoHeaderBtn').addEventListener('click', () => {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-promotions').classList.add('active');
+            document.getElementById('page-promotions'). document.getElementById('promoHeaderBtn').addEventListener('click', () => {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-promotions').classListclassList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             mainHeader.classList.remove('work-active');
+.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            mainHeader.classList.remove            showBackButton();
+        });
+
+        document.getElementById('addPromoBtn').addEventListener('click', ()('work-active');
             showBackButton();
         });
 
         document.getElementById('addPromoBtn').addEventListener('click', () => {
+ => {
             promoModal.classList.add('open');
+        });
+
+        promoCloseBtn.addEventListener('click', () => promoModal.classList.remove('open'));
+        promoCancelBtn.addEventListener('click', () => promoModal.classList.remove('open'));
+        promoModal.addEventListener('click', (            promoModal.classList.add('open');
         });
 
         promoCloseBtn.addEventListener('click', () => promoModal.classList.remove('open'));
@@ -8704,10 +8971,17 @@
         promoModal.addEventListener('click', (e) => { if (e.target === promoModal) promoModal.classList.remove('open'); });
 
         promoForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+e) => { if (e.target === promoModal) promoModal.classList.remove('open'); });
+
+        promoForm.addEventListener('submit', (e) => {
+                       e.preventDefault();
+            const code = promoCode.value.trim();
+            const discount = promoDiscount.value.trim();
+            if (!code || !discount || parseInt(discount) < 1 e.preventDefault();
             const code = promoCode.value.trim();
             const discount = promoDiscount.value.trim();
             if (!code || !discount || parseInt(discount) < 1 || parseInt(discount) > 100) {
+                showToast('Invalid promo || parseInt(discount) > 100) {
                 showToast('Invalid promo code or discount', 'error');
                 return;
             }
@@ -8716,39 +8990,84 @@
                 promoModal.classList.remove('open');
                 promoCode.value = '';
                 promoDiscount.value = '';
-                showToast('Promo coupon created!', 'success');
+                showToast('Prom code or discount', 'error');
+                return;
+            }
+            addPromo({ code, discount }).then(() => {
+                renderAll();
+                promoModal.classList.remove('open');
+                promoCode.value = '';
+                promoDiscount.value = '';
+               o coupon created!', 'success');
             });
         });
 
         cancelBtn.addEventListener('click', closeModal);
         closeBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        modal.addEventListener('click showToast('Promo coupon created!', 'success');
+            });
+        });
+
+        cancelBtn.addEventListener('click', closeModal);
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('', (e) => { if (e.target === modal) closeModal(); });
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const data = {
-                title: formTitle.value.trim(),
+click', (e) => { if (e.target === modal) closeModal(); });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const data                title: formTitle.value.trim(),
                 subtitle: formSubtitle.value.trim(),
                 category: formCategory.value,
                 price: formPrice.value,
+                = {
+                title: formTitle.value.trim(),
+                subtitle: formSubtitle.value.trim(),
+                category: formCategory.value,
+                price: formPrice.value tags: formTags.value.trim(),
+                icon: formIcon.value.trim() || 'fa-cube',
+                specs: formSpecs.value.trim(),
+                sizes,
                 tags: formTags.value.trim(),
                 icon: formIcon.value.trim() || 'fa-cube',
                 specs: formSpecs.value.trim(),
-                sizes: formSizes.value.trim(),
+                sizes: form: formSizes.value.trim(),
                 orientations: formOrientations.value.trim(),
                 formats: formFormats.value.trim(),
                 colorSchemes: formColorSchemes.value.trim(),
-                revisions: formRevisions.value.trim(),
+                revisions: formSizes.value.trim(),
+                orientations: formOrientations.value.trim(),
+                formats: formFormats.value.trim(),
+                colorSchemes: formColorSchemes.value.trim(),
+                revisionsRevisions.value.trim(),
+                deliverySpeeds: formDeliverySpeeds.value.trim(),
+                defaultSize: formDefaultSize.value.trim: formRevisions.value.trim(),
                 deliverySpeeds: formDeliverySpeeds.value.trim(),
                 defaultSize: formDefaultSize.value.trim(),
+                default(),
                 defaultOrientation: formDefaultOrientation.value.trim(),
                 defaultFormat: formDefaultFormat.value.trim(),
+                defaultColorScheme: formDefaultColorScheme.value.trimOrientation: formDefaultOrientation.value.trim(),
+                defaultFormat: formDefaultFormat.value.trim(),
                 defaultColorScheme: formDefaultColorScheme.value.trim(),
+                defaultRevisions(),
                 defaultRevisions: formDefaultRevisions.value.trim(),
                 defaultDeliverySpeed: formDefaultDeliverySpeed.value.trim()
             };
             const editId = editIdInput.value;
+            if (: formDefaultRevisions.value.trim(),
+                defaultDeliverySpeed: formDefaultDeliverySpeed.value.trim()
+            };
+            const editId = editIdInput.value;
             if (editId) {
+                updateService(editId, data).then(() => {
+                    renderAll();
+                    closeModal();
+                    showToast('Service updated');
+editId) {
                 updateService(editId, data).then(() => {
                     renderAll();
                     closeModal();
@@ -8763,12 +9082,32 @@
             }
         });
 
+                });
+            } else {
+                addService(data).then(() => {
+                    renderAll();
+                    closeModal();
+                    showToast('Service added');
+                });
+        document.getElementById('saveHeroBtn').addEventListener('click', () => {
+            allData.hero = {
+                title: document.getElementById('heroTitle').value,
+                titleSpan:            }
+        });
+
         document.getElementById('saveHeroBtn').addEventListener('click', () => {
             allData.hero = {
                 title: document.getElementById('heroTitle').value,
                 titleSpan: document.getElementById('heroTitleSpan').value,
                 desc: document.getElementById('heroDesc').value,
+                cta: document.getElementById document.getElementById('heroTitleSpan').value,
+                desc: document.getElementById('heroDesc').value,
                 cta: document.getElementById('heroCTA').value,
+                phone: document.getElementById('heroPhone').value
+            };
+            saveData().then(() => {
+                renderAll();
+                showToast('Hero('heroCTA').value,
                 phone: document.getElementById('heroPhone').value
             };
             saveData().then(() => {
@@ -8780,10 +9119,26 @@
         document.getElementById('savePolicyBtn').addEventListener('click', () => {
             allData.policy = {
                 title: document.getElementById('policyTitle').value,
-                desc: document.getElementById('policyDesc').value,
+                section updated');
+            });
+        });
+
+        document.getElementById('savePolicyBtn').addEventListener('click', () => {
+            allData.policy = {
+                title: document.getElementById('policyTitle').value,
+ desc: document.getElementById('policyDesc').value,
+                tag: document.getElementById('policyTag').value
+            };
+                           desc: document.getElementById('policyDesc').value,
                 tag: document.getElementById('policyTag').value
             };
             saveData().then(() => {
+                renderAll();
+                showToast('Policy card updated');
+            });
+        });
+
+        document.getElementById('addServiceListItem').addEventListener('click', saveData().then(() => {
                 renderAll();
                 showToast('Policy card updated');
             });
@@ -8794,46 +9149,95 @@
             const newItem = document.createElement('div');
             newItem.className = 'list-item';
             newItem.innerHTML = `
-                        <input type="text" value="New Service" placeholder="Service name" />
-                        <button class="btn-remove">✕</button>
+                        () => {
+            const container = document.getElementById('ourServicesListContainer');
+            const newItem = document.createElement('div');
+            newItem.className = 'list-item';
+            newItem.innerHTML = `
+ <input type="text" value="New Service" placeholder="Service name" />
+                        <button class="btn-remove">                        <input type="text" value="New Service" placeholder="Service name" />
+                        <button class="btn-✕</button>
                     `;
             container.appendChild(newItem);
             container.querySelectorAll('.btn-remove').forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function()remove">✕</button>
+                    `;
+            container.appendChild(newItem);
+            container.querySelectorAll('.btn-remove').forEach(btn => {
+                btn.addEventListener('click', {
                     this.closest('.list-item').remove();
                 });
             });
         });
 
         document.getElementById('saveServiceList').addEventListener('click', () => {
-            const container = document.getElementById('ourServicesListContainer');
+            const container = function() {
+                    this.closest('.list-item').remove();
+                });
+            });
+        });
+
+        document.getElementById('saveServiceList').addEventListener('click', () => {
+            const container document.getElementById('ourServicesListContainer');
             const inputs = container.querySelectorAll('.list-item input');
-            const newList = Array.from(inputs).map(input => input.value.trim()).filter(v => v);
+            const newList = Array.from = document.getElementById('ourServicesListContainer');
+            const inputs = container.querySelectorAll('.list-item input');
+            const newList = Array.from(inputs).map(inputs).map(input => input.value.trim()).filter(v => v);
             allData.ourServicesList = newList;
             saveData().then(() => {
-                renderAll();
+                render(input => input.value.trim()).filter(v => v);
+            allData.ourServicesList = newList;
+            saveData().then(() => {
+All();
                 showToast('Our Services list updated');
             });
         });
 
         document.getElementById('ourServicesListContainer').addEventListener('click', function(e) {
-            if (e.target.classList.contains('btn-remove')) {
+                           renderAll();
+                showToast('Our Services list updated');
+            });
+        });
+
+        document.getElementById('ourServicesListContainer').addEventListener('click', function(e) {
+            if ( if (e.target.classList.contains('btn-remove')) {
                 e.target.closest('.list-item').remove();
             }
         });
 
-        document.getElementById('saveSettings').addEventListener('click', () => {
+        document.getElementByIde.target.classList.contains('btn-remove')) {
+                e.target.closest('.list-item').remove();
+            }
+        });
+
+       ('saveSettings').addEventListener('click', () => {
             const name = document.getElementById('settingsName').value;
             const phone = document.getElementById('settingsPhone').value;
+ document.getElementById('saveSettings').addEventListener('click', () => {
+            const name = document.getElementById('settingsName').value;
+            const phone = document.getElementById('settingsPhone').            const email = document.getElementById('settingsEmail').value;
+            showToast(`Settings saved: ${name}`);
+        });
+
+        document.getElementById('disableAppToggle').value;
             const email = document.getElementById('settingsEmail').value;
             showToast(`Settings saved: ${name}`);
         });
 
-        document.getElementById('disableAppToggle').addEventListener('change', function() {
+        document.getElementById('disableAppToggle').addEventListener('change', functionaddEventListener('change', function() {
             allData.disabled = this.checked;
             saveData().then(() => {
                 renderAll();
-                showToast(this.checked ? 'App disabled' : 'App enabled');
+                showToast(this() {
+            allData.disabled = this.checked;
+            saveData().then(() => {
+                renderAll();
+                show.checked ? 'App disabled' : 'App enabled');
+            });
+        });
+
+        document.getElementById('refreshOrders').addEventListener('click', () => {
+            const searchToast(this.checked ? 'App disabled' : 'App enabled');
             });
         });
 
@@ -8842,6 +9246,13 @@
             const statusFilter = document.getElementById('orderStatusFilter').value;
             renderOrders(searchTerm, statusFilter);
             showToast('Orders refreshed');
+       Term = document.getElementById('orderSearchInput').value;
+            const statusFilter = document.getElementById('orderStatusFilter').value;
+            renderOrders(searchTerm, statusFilter);
+            showToast(' });
+
+        document.getElementById('orderSearchInput').addEventListener('input', function() {
+            const statusFilter = document.getElementById('orderOrders refreshed');
         });
 
         document.getElementById('orderSearchInput').addEventListener('input', function() {
@@ -8850,12 +9261,32 @@
         });
 
         document.getElementById('orderStatusFilter').addEventListener('change', function() {
-            const searchTerm = document.getElementById('orderSearchInput').value;
+            const searchTermStatusFilter').value;
+            renderOrders(this.value, statusFilter);
+        });
+
+        document.getElementById('orderStatusFilter').addEventListener('change', function() {
+            const searchTerm = document = document.getElementById('orderSearchInput').value;
             renderOrders(searchTerm, this.value);
         });
 
         // ── Users page: search + filter ──
-        document.getElementById('userSearchInput').addEventListener('input', function() {
+        document.getElementById('userSearch.getElementById('orderSearchInput').value;
+            renderOrders(searchTerm, this.value);
+        });
+
+        // ── Users page: search + filter ──
+        document.getElementById('userSearchInput').Input').addEventListener('input', function() {
+            renderUsers(this.value, userFilterSelect.value);
+        });
+
+        userFilterSelect.addEventListener('change', function() {
+            renderUsers(document.getElementById('userSearchInput').value, this.value);
+        });
+
+        document.querySelectorAll('.cat-filter').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.cat-filter').forEach(b =>addEventListener('input', function() {
             renderUsers(this.value, userFilterSelect.value);
         });
 
@@ -8866,7 +9297,17 @@
         document.querySelectorAll('.cat-filter').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.cat-filter').forEach(b => b.style.background = '#f0f0f0');
+                this.style b.style.background = '#f0f0f0');
                 this.style.background = '#1c2128';
+                this.style.color = '#fff';
+                const cat = this.dataset.cat;
+                renderServices(cat);
+            });
+        });
+
+        document.getElementById('viewOrdersQuick').addEventListener('click', () => {
+            document.querySelector('.nav-item[data-page="orders"]').click();
+            mainHeader.classList.background = '#1c2128';
                 this.style.color = '#fff';
                 const cat = this.dataset.cat;
                 renderServices(cat);
@@ -8879,7 +9320,17 @@
             showBackButton();
         });
 
+        document.getElementById('viewUsersQuick').addEventListener('click', () =>.remove('work-active');
+            showBackButton();
+        });
+
         document.getElementById('viewUsersQuick').addEventListener('click', () => {
+            document.querySelector('.nav-item[data-page="users"]').click();
+            mainHeader.classList.remove('work-active');
+            showBackButton();
+        });
+
+        document.getElementById('viewPromoPicsQuick'). {
             document.querySelector('.nav-item[data-page="users"]').click();
             mainHeader.classList.remove('work-active');
             showBackButton();
@@ -8888,12 +9339,26 @@
         document.getElementById('viewPromoPicsQuick').addEventListener('click', () => {
             document.querySelector('.nav-item[data-page="promo-pics"]').click();
             mainHeader.classList.remove('work-active');
+           addEventListener('click', () => {
+            document.querySelector('.nav-item[data-page="promo-pics"]').click();
+            mainHeader.classList.remove('work-active');
             showBackButton();
         });
 
         document.getElementById('viewAllActivity').addEventListener('click', () => {
-            document.querySelector('.nav-item[data-page="orders"]').click();
-            mainHeader.classList.remove('work-active');
+            document.querySelector('.nav-item[data-page="orders showBackButton();
+        });
+
+        document.getElementById('viewAllActivity').addEventListener('click', () => {
+            document.querySelector('.nav-item[data-page=""]').click();
+            mainHeader.classList.remove('workorders"]').click();
+            mainHeader.classList.remove-active');
+            showBackButton();
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            signOut(auth).then(() => {
+                window('work-active');
             showBackButton();
         });
 
@@ -8907,7 +9372,25 @@
         });
 
         document.getElementById('screenshotCloseBtn').addEventListener('click', function() {
+            document.getElementById.location.href = 'login.html';
+            }).catch((error) => {
+                console.error('Logout error:', error);
+                showToast('Error logging out');
+            });
+        });
+
+        document.getElementById('screenshotCloseBtn').addEventListener('click', function() {
             document.getElementById('screenshotModal').classList.remove('open');
+        });
+        document.getElementById('screenshotModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+               ('screenshotModal').classList.remove('open this.classList.remove('open');
+            }
+        });
+
+        // ───────────────────────────────────────────────────────────────────
+        // APPLICATIONS EVENT BINDINGS
+        // ─────────────────────────────────────────────────');
         });
         document.getElementById('screenshotModal').addEventListener('click', function(e) {
             if (e.target === this) {
@@ -8917,11 +9400,27 @@
 
         // ───────────────────────────────────────────────────────────────────
         // APPLICATIONS EVENT BINDINGS
-        // ───────────────────────────────────────────────────────────────────
+        // ───────────────────────────────────
 
         appStatusTabs.querySelectorAll('.tab-btn').forEach(tab => {
             tab.addEventListener('click', function() {
-                appStatusTabs.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+                appStatusT──────────────────────────────────────────────────
+
+        appStatusTabs.querySelectorAll('.tab-btn').forEach(tab => {
+            tab.addEventListener('click', function() {
+                appabs.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                applicationsFilter = this.dataset.status;
+                renderApplications(applicationsFilter);
+StatusTabs.querySelectorAll('.tab-btn').forEach            });
+        });
+
+        refreshApplicationsBtn.addEventListener('click', function() {
+            renderApplications(applicationsFilter);
+            showToast('Applications refreshed');
+        });
+
+        // ─(t => t.classList.remove('active'));
                 this.classList.add('active');
                 applicationsFilter = this.dataset.status;
                 renderApplications(applicationsFilter);
@@ -8933,21 +9432,36 @@
             showToast('Applications refreshed');
         });
 
-        // ───────────────────────────────────────────────────────────────────
+        //──────────────────────────────────────────────────────────────────
         // SERVICES PRICE ADJUSTMENT
         // ───────────────────────────────────────────────────────────────────
 
-        let currentAdjustMode = 'add-amount';
+        let ───────────────────────────────────────────────────────────────────
+        // SERVICES PRICE ADJUSTMENT
+        // ───────────────────────────────────────────────────────────────────
+
+        let currentAdjust currentAdjustMode = 'add-amount';
+
+        adjustOptionsMode = 'add-amount';
 
         adjustOptions.querySelectorAll('.opt').forEach(btn => {
+            btn.addEventListener('click', function() {
+                adjustOptions.querySelectorAll('.opt').forEach(o => o.classList.querySelectorAll('.opt').forEach(btn => {
             btn.addEventListener('click', function() {
                 adjustOptions.querySelectorAll('.opt').forEach(o => o.classList.remove('active'));
                 this.classList.add('active');
                 currentAdjustMode = this.dataset.mode;
 
-                if (currentAdjustMode === 'add-amount' || currentAdjustMode === 'remove-amount') {
+                if (currentAdjustMode === 'add-amount' || current.remove('active'));
+                this.classList.add('active');
+                currentAdjustMode = this.dataset.mode;
+
+                if (currentAdjustMode === 'add-AdjustMode === 'remove-amount') {
+                    adjustLabel.textContent = 'Amount (ZMW):';
+                    adjustValue.amount' || currentAdjustMode === 'remove-amount') {
                     adjustLabel.textContent = 'Amount (ZMW):';
                     adjustValue.placeholder = '0.00';
+                } elseplaceholder = '0.00';
                 } else {
                     adjustLabel.textContent = 'Percentage (%):';
                     adjustValue.placeholder = '0';
@@ -8957,18 +9471,43 @@
             });
         });
 
-        applyAdjustBtn.addEventListener('click', function() {
+ {
+                    adjustLabel.textContent = 'Percentage (%):';
+                    adjustValue.placeholder = '0';
+                }
+                adjustPreview.innerHTML =
+                    `<div style="color:#aaa; text-align:center; padding:10px 0;">Enter a value and click "Preview & Apply".</div>`;
+            });
+        });
+
+               applyAdjustBtn.addEventListener('click', function() {
             const val = parseFloat(adjustValue.value);
-            if (!val || val <= 0) {
+            if (!val applyAdjustBtn.addEventListener('click', function() {
+            const val = parseFloat(adjustValue.value);
+            if (!val || || val <= 0) {
                 showToast('Please enter a valid positive value.', 'error');
                 return;
             }
 
             const services = allData.services || {};
             const entries = Object.entries(services);
-            if (entries.length === 0) {
+            if ( val <= 0) {
+                showToast('Please enter a valid positive value.', 'error');
+                return;
+            }
+
+            const services = allData.services || {};
+            const entries = Object.entries(services);
+            if (entriesentries.length === 0) {
                 adjustPreview.innerHTML =
-                    `<div style="color:#aaa; text-align:center; padding:10px 0;">No services to adjust.</div>`;
+                    `<div style="color:#aaa; text-align:center; padding:10px 0;">.length === 0) {
+                adjustPreview.innerHTML =
+                    `<div style="color:#aaa; text-align:center; padding:10px 0No services to adjust.</div>`;
+                return;
+            }
+
+            let modeLabel = '';
+            let adjustedEntries = entries.map(([key, s]);">No services to adjust.</div>`;
                 return;
             }
 
@@ -8979,26 +9518,53 @@
                 let mode = currentAdjustMode;
 
                 if (mode === 'add-amount') {
+                    newPrice = => {
+                const orig = s.price || 0;
+                let newPrice = orig;
+                let mode = currentAdjustMode;
+
+                if (mode === 'add-amount') {
                     newPrice = orig + val;
                     modeLabel = `+ ZMW ${val.toFixed(2)}`;
                 } else if (mode === 'remove-amount') {
-                    newPrice = Math.max(0, orig - val);
+                    newPrice = Math orig + val;
+                    modeLabel = `+ ZMW ${val.toFixed(2)}`;
+                } else if (mode === 'remove-amount') {
+                    newPrice =.max(0, orig - val);
                     modeLabel = `- ZMW ${val.toFixed(2)}`;
-                } else if (mode === 'add-percent') {
+                } else if (mode === ' Math.max(0, orig - val);
+                    modeLabel = `- ZMW ${val.toFixed(2)}`;
+                } else if (modeadd-percent') {
                     newPrice = orig + (orig * (val / 100));
                     modeLabel = `+ ${val}%`;
-                } else if (mode === 'remove-percent') {
+                } else if (mode === 'remove-percent === 'add-percent') {
+                    newPrice = orig + (orig * (val / 100));
+                    modeLabel = `+ ${val}%`;
+                } else if (mode === 'remove') {
+                    newPrice = Math.max(0, orig - (orig * (val / 100)));
+                    modeLabel = `- ${val}%-percent') {
                     newPrice = Math.max(0, orig - (orig * (val / 100)));
                     modeLabel = `- ${val}%`;
+               `;
                 }
                 return { key, service: s, orig, newPrice };
             });
 
             let previewHtml =
-                `<div style="font-size:9px; color:#888; margin-bottom:4px;">Preview — ${modeLabel} applied to ${adjustedEntries.length} service(s). Click "Apply" to save changes.</div>`;
+                `<div style="font-size }
+                return { key, service: s, orig, newPrice };
+            });
+
+            let previewHtml =
+                `<div style="font-size:9px:9px; color:#888; margin-bottom:4px;">Preview —; color:#888; margin-bottom:4px ${modeLabel} applied to ${adjustedEntries.length} service(s). Click "Apply" to save changes.</div>`;
+            previewHtml += adjustedEntries.map(({ key, service, orig, newPrice }) => `
+                        <div class="preview-item">
+                            <span class="pname">${service.title;">Preview — ${modeLabel} applied to ${adjustedEntries.length} service(s). Click "Apply" to save changes.</div>`;
             previewHtml += adjustedEntries.map(({ key, service, orig, newPrice }) => `
                         <div class="preview-item">
                             <span class="pname">${service.title || 'Untitled'}</span>
+                            <span class="pprice">
+                                <span class="old">ZMW ${orig.toFixed(2)} || 'Untitled'}</span>
                             <span class="pprice">
                                 <span class="old">ZMW ${orig.toFixed(2)}</span>
                                 <span class="new">ZMW ${newPrice.toFixed(2)}</span>
@@ -9008,11 +9574,30 @@
 
             adjustPreview.innerHTML = previewHtml;
 
+           </span>
+                                <span class="new">ZMW ${newPrice.to if (confirm(`Apply ${modeLabel} to all ${adjustedEntries.length} services?`)) {
+                adjustedEntries.forEach(({ key,Fixed(2)}</span>
+                            </span>
+                        </div>
+                    `).join('');
+
+            adjustPreview.innerHTML = previewHtml;
+
             if (confirm(`Apply ${modeLabel} to all ${adjustedEntries.length} services?`)) {
-                adjustedEntries.forEach(({ key, newPrice }) => {
+                adjustedEntries.forEach(({ key, newPrice }) newPrice }) => {
                     if (allData.services && allData.services[key]) {
                         if (!allData.services[key].originalPrice) {
-                            allData.services[key].originalPrice = allData.services[key].price;
+                            allData => {
+                    if (allData.services && allData.services[key]) {
+                        if (!allData.services[key].originalPrice) {
+                            allData.services[key.services[key].originalPrice = allData.services[key].price;
+                        }
+                        allData.services[key].price = newPrice;
+                    }
+                });
+                saveData().then(() => {
+                    renderAll();
+                    const updatedEntries = Object.entries].originalPrice = allData.services[key].price;
                         }
                         allData.services[key].price = newPrice;
                     }
@@ -9020,21 +9605,37 @@
                 saveData().then(() => {
                     renderAll();
                     const updatedEntries = Object.entries(allData.services || {}).map(([key, s]) => {
+                        return { key, service: s, orig: s.price || 0, newPrice: s.price ||(allData.services || {}).map(([key, s]) => {
                         return { key, service: s, orig: s.price || 0, newPrice: s.price || 0 };
                     });
                     let updatedHtml =
-                        `<div style="font-size:9px; color:#16a34a; margin-bottom:4px;">✅ Applied ${modeLabel} to ${updatedEntries.length} service(s).</div>`;
+                        `<div style="font-size:9px; color 0 };
+                    });
+                    let updatedHtml =
+                        `<div style="font-size:9px; color:#16a34:#16a34a; margin-bottom:4px;">✅ Applied ${modeLabel} to ${updatedEntries.length} service(s).</div>`;
+                    updatedHtml += updatedEntries.map(({ key, service, orig, newPrice }) => `
+                                <diva; margin-bottom:4px;">✅ Applied class="preview-item">
+                                    <span class="pname">${service.title || 'Untitled'}</span>
+                                    <span class="pprice ${modeLabel} to ${updatedEntries.length} service(s).</div>`;
                     updatedHtml += updatedEntries.map(({ key, service, orig, newPrice }) => `
                                 <div class="preview-item">
                                     <span class="pname">${service.title || 'Untitled'}</span>
-                                    <span class="pprice">
+                                    <span class="">
                                         <span class="old">ZMW ${orig.toFixed(2)}</span>
-                                        <span class="new">ZMW ${newPrice.toFixed(2)}</span>
+                                        <span class="new">ZMW ${newPricepprice">
+                                        <span class="old">ZMW ${orig.toFixed(2)}</span>
+                                        <span class="new">ZMW ${newPrice.toFixed(2.toFixed(2)}</span>
+                                    </span>
+                                </div>
+                            `).join('');
+                    adjustPreview.innerHTML = updatedHtml;
+                    showToast(`✅ Applied ${modeLabel} to all services`, ')}</span>
                                     </span>
                                 </div>
                             `).join('');
                     adjustPreview.innerHTML = updatedHtml;
                     showToast(`✅ Applied ${modeLabel} to all services`, 'success');
+success');
                 });
             }
         });
@@ -9043,13 +9644,32 @@
         // BADGE UPDATES
         // ───────────────────────────────────────────────────────────────────
 
-        function updateBadges() {
+                });
+            }
+        });
+
+        // ───────────────────────────────────────────────────────────────────
+        // BADGE UPDATES
+        // ───────────────────────────────────────────────────────────────────
+
+        function update        function updateBadges() {
             const orders = Object.values(allData.orders || {});
-            const pendingOrders = orders.filter(o => o.status === 'pending').length;
+            const pendingOrders = orders.filter(o => o.status === 'Badges() {
+            const orders = Object.values(allData.orders || {});
+            const pendingOrders = orders.filter(o => o.status === 'pending').pending').length;
             updateBadgeElement(badgeOrdersPending, pendingOrders);
 
             const withdrawals = Object.values(allData.withdrawalRequests || {});
-            const pendingWithdrawals = withdrawals.filter(w => w.status === 'pending').length;
+            const pendingWithdrawals = withdrawals.filter(w => w.statuslength;
+            updateBadgeElement(badgeOrdersPending, pendingOrders);
+
+            const withdrawals = Object.values(allData.withdrawalRequests || {});
+            const pendingWithdrawals = withdrawals.filter(w => w.status === ' === 'pending').length;
+            updateBadgeElement(badgeWithdrawalsPending, pendingWithdrawals);
+        }
+
+        function updateBadgeElement(el, count) {
+            ifpending').length;
             updateBadgeElement(badgeWithdrawalsPending, pendingWithdrawals);
         }
 
@@ -9058,7 +9678,12 @@
                 el.textContent = count;
                 el.classList.add('show');
             } else {
+                el.textContent = '0 (count > 0) {
+                el.textContent = count;
+                el.classList.add('show');
+            } else {
                 el.textContent = '0';
+               ';
                 el.classList.remove('show');
             }
         }
@@ -9068,10 +9693,28 @@
         // ───────────────────────────────────────────────────────────────────
 
         function showToast(msg, type = 'success') {
-            toastMsg.textContent = msg;
+            el.classList.remove('show');
+            }
+        }
+
+        // ───────────────────────────────────────────────────────────────────
+        // TOAST
+        // ───────────────────────────────────────────────────────────────────
+
+        function showToast(msg, type = ' toastMsg.textContent = msg;
             toast.classList.add('show');
             clearTimeout(toast._timeout);
             toast._timeout = setTimeout(() => {
+                toast.classListsuccess') {
+            toastMsg.textContent = msg;
+            toast.classList.add('show');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() =>.remove('show');
+            }, 2200);
+        }
+
+        // ───────────────────────────────────────────────────────────────────
+        // AUTH & INIT {
                 toast.classList.remove('show');
             }, 2200);
         }
@@ -9079,8 +9722,18 @@
         // ───────────────────────────────────────────────────────────────────
         // AUTH & INIT
         // ───────────────────────────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────
+
+       
 
         onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                const adminRef = ref(db, 'admins');
+                get(adminRef).then((snapshot) => {
+                    const admins = snapshot.val() || {};
+                    let foundAdmin = null;
+                    for onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
                 const adminRef = ref(db, 'admins');
@@ -9090,16 +9743,44 @@
                     for (const key in admins) {
                         if (admins[key].uid === user.uid) {
                             foundAdmin = admins[key];
+                            break (const key in admins) {
+                        if (admins[key].uid === user.uid) {
+                            foundAdmin = admins[key];
                             break;
+;
                         }
+                    }
+                    currentAdminData =                        }
                     }
                     currentAdminData = foundAdmin || null;
 
                     loadData(() => {
                         const usersRef = ref(db, 'users');
+                        onValue(usersRef foundAdmin || null;
+
+                    loadData(() => {
+                        const usersRef = ref(db, 'users');
                         onValue(usersRef, (snapshot) => {
                             const usersData = snapshot.val() || {};
+                            allData, (snapshot) => {
+                            const usersData = snapshot.val() || {};
                             allData.users = usersData;
+                            allUsersCache = usersData;
+                            renderDashboard();
+                            updateBadges();
+                            const usersPage = document.getElementById('page-users');
+                            if (usersPage.classList.contains('active')) {
+                                renderUsers(document.getElementById('userSearchInput').value, userFilterSelect
+                                    .value);
+                            }
+                            renderCustomReferrals();
+                            renderReferralDiscounts();
+                            renderReferralPromoDiscounts();
+                            renderAccounts();
+                            renderWithdrawals();
+                            populateUserSelects();
+                            populateCustomReferralSelect();
+                            renderAccount.users = usersData;
                             allUsersCache = usersData;
                             renderDashboard();
                             updateBadges();
@@ -9123,7 +9804,19 @@
                             document.getElementById('heroTitle').value = allData.hero.title || '';
                             document.getElementById('heroTitleSpan').value = allData.hero.titleSpan || '';
                             document.getElementById('heroDesc').value = allData.hero.desc || '';
-                            document.getElementById('heroCTA').value = allData.hero.cta || '';
+                            document.getElementById('heroCTA').value = allData.UpdateUserList();
+                        });
+
+                        renderAll();
+                        if (allData.hero) {
+                            document.getElementById('heroTitle').value = allData.hero.title || '';
+                            document.getElementById('heroTitleSpan').value = allData.hero.titleSpan || '';
+                            document.getElementById('heroDesc').value = allData.hero.desc || '';
+                            document.getElementById('heroCTA').value = allhero.cta || '';
+                            document.getElementById('heroPhone').value = allData.hero.phone || '';
+                        }
+                        if (allData.policy) {
+                            document.getElementById('policyTitle').valueData.hero.cta || '';
                             document.getElementById('heroPhone').value = allData.hero.phone || '';
                         }
                         if (allData.policy) {
@@ -9137,9 +9830,21 @@
             } else {
                 window.location.href = 'login.html';
             }
+ = allData.policy.title || '';
+                            document.getElementById('policyDesc').value = allData.policy.desc || '';
+                            document.getElementById('policyTag').value = allData.policy.tag || '';
+                        }
+                        hideBackButton();
+                    });
+                });
+            } else {
+                window.location.href = 'login.html';
+            }
         });
 
-        console.log('✅ Admin Dashboard — Full code with 2x2 grid, enlargeable flyers, professional icons, Referrer form, and per-form payment configuration (free/price/mobile/account).');
+        console        });
+
+        console.log('✅ Admin Dashboard — Applications now show uploaded images as 2x2 square grid. Click any image to enlarge.');
     </script>
 </body>
 </html>
