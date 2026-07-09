@@ -3636,6 +3636,24 @@
             margin-top: 1px;
         }
 
+        /* ─── Job Positions Editor inside Click Config ─── */
+        #jobPositionsEditor {
+            margin-top: 8px;
+            border-top: 1px solid #eee;
+            padding-top: 8px;
+        }
+        #jobPositionsEditor .list-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 2px 0;
+        }
+        #jobPositionsEditor .list-item span {
+            flex: 1;
+            font-size: 10px;
+            color: #1c2128;
+        }
+
         .applications-header {
             display: flex;
             justify-content: space-between;
@@ -3802,108 +3820,108 @@
         }
 
         /* ── Enforce white modals with black text & options ── */
-.modal-overlay .modal,
-.screenshot-modal-content,
-.withdraw-confirm-modal,
-.account-update-modal {
-    background: #ffffff !important;
-    color: #1c2128 !important;
-}
+        .modal-overlay .modal,
+        .screenshot-modal-content,
+        .withdraw-confirm-modal,
+        .account-update-modal {
+            background: #ffffff !important;
+            color: #1c2128 !important;
+        }
 
-.modal-overlay .modal h3,
-.modal-overlay .modal p.sub,
-.modal-overlay .modal .form-group label,
-.screenshot-modal-content h3 {
-    color: #1c2128 !important;
-}
+        .modal-overlay .modal h3,
+        .modal-overlay .modal p.sub,
+        .modal-overlay .modal .form-group label,
+        .screenshot-modal-content h3 {
+            color: #1c2128 !important;
+        }
 
-.modal-overlay .modal input,
-.modal-overlay .modal select,
-.modal-overlay .modal textarea,
-.modal-overlay .modal select option {
-    color: #1c2128 !important;
-    background: #ffffff !important;
-    border-color: #ddd !important;
-}
+        .modal-overlay .modal input,
+        .modal-overlay .modal select,
+        .modal-overlay .modal textarea,
+        .modal-overlay .modal select option {
+            color: #1c2128 !important;
+            background: #ffffff !important;
+            border-color: #ddd !important;
+        }
 
-.modal-overlay .modal select option {
-    background: #ffffff !important;
-}
+        .modal-overlay .modal select option {
+            background: #ffffff !important;
+        }
 
-/* ── Application image boxes: small, hover enlarge, click opens modal ── */
-.app-image-grid .img-box {
-    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        /* ── Application image boxes: small, hover enlarge, click opens modal ── */
+        .app-image-grid .img-box {
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 box-shadow 0.2s ease;
-    cursor: pointer;
-    border-radius: 8px;
-    overflow: hidden;
-    background: #fafafa;
-    aspect-ratio: 1/1;
-    border: 1px solid #f0f0f0;
-    position: relative;
-}
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fafafa;
+            aspect-ratio: 1/1;
+            border: 1px solid #f0f0f0;
+            position: relative;
+        }
 
-.app-image-grid .img-box:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-    z-index: 2;
-}
+        .app-image-grid .img-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+            z-index: 2;
+        }
 
-.app-image-grid .img-box:active {
-    transform: scale(0.95);
-}
+        .app-image-grid .img-box:active {
+            transform: scale(0.95);
+        }
 
-.app-image-grid .img-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
+        .app-image-grid .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 
-.app-image-grid .img-box .file-label {
-    position: absolute;
-    bottom: 4px;
-    left: 4px;
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    font-size: 7px;
-    padding: 1px 8px;
-    border-radius: 4px;
-    backdrop-filter: blur(2px);
-    pointer-events: none;
-}
+        .app-image-grid .img-box .file-label {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 7px;
+            padding: 1px 8px;
+            border-radius: 4px;
+            backdrop-filter: blur(2px);
+            pointer-events: none;
+        }
 
-/* ── Enlarge modal (screenshot viewer) ── */
-#screenshotModal .screenshot-modal-content {
-    background: #ffffff !important;
-    color: #1c2128 !important;
-    border-radius: 18px;
-    padding: 20px 20px 16px 16px;
-    max-width: 90vw;
-    max-height: 90vh;
-    text-align: center;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
-}
+        /* ── Enlarge modal (screenshot viewer) ── */
+        #screenshotModal .screenshot-modal-content {
+            background: #ffffff !important;
+            color: #1c2128 !important;
+            border-radius: 18px;
+            padding: 20px 20px 16px 16px;
+            max-width: 90vw;
+            max-height: 90vh;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+        }
 
-#screenshotModal .screenshot-modal-content img {
-    max-width: 100%;
-    max-height: 70vh;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    margin-top: 8px;
-}
+        #screenshotModal .screenshot-modal-content img {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            margin-top: 8px;
+        }
 
-#screenshotModal .screenshot-modal-content .close-btn {
-    color: #1c2128 !important;
-    background: transparent !important;
-}
+        #screenshotModal .screenshot-modal-content .close-btn {
+            color: #1c2128 !important;
+            background: transparent !important;
+        }
 
-/* ── Ensure form dropdowns and options appear black on white ── */
-#promoPicUploadModal .click-config-section select,
-#promoPicUploadModal .click-config-section option {
-    color: #1c2128 !important;
-    background: #ffffff !important;
-}
+        /* ── Ensure form dropdowns and options appear black on white ── */
+        #promoPicUploadModal .click-config-section select,
+        #promoPicUploadModal .click-config-section option {
+            color: #1c2128 !important;
+            background: #ffffff !important;
+        }
     </style>
 </head>
 <body>
@@ -4649,7 +4667,7 @@
         </div>
     </div>
 
-    <!-- ===== PROMO PICS UPLOAD MODAL (with click-config) ===== -->
+    <!-- ===== PROMO PICS UPLOAD MODAL (with click-config + job positions) ===== -->
     <div class="modal-overlay" id="promoPicUploadModal">
         <div class="modal" style="max-width:480px;">
             <button class="close-btn" id="promoPicUploadCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -4712,6 +4730,19 @@
                             </select>
                             <div class="hint">Choose which form to attach to this flyer, or none.</div>
                         </div>
+
+                        <!-- ===== JOB POSITIONS EDITOR ===== -->
+                        <div id="jobPositionsEditor" style="display:none;">
+                            <label style="font-size:10px; font-weight:600; color:#1c2128;">Admin Job Positions (optional)</label>
+                            <div style="display:flex; gap:6px; margin-bottom:6px;">
+                                <input type="text" id="newJobPositionInput" placeholder="e.g. Graphic Designer" style="flex:1; padding:4px 8px; border:1px solid #ddd; border-radius:6px; font-size:10px;" />
+                                <button type="button" id="addJobPositionBtn" class="btn btn-primary btn-sm" style="padding:2px 12px; border-radius:12px;">Add</button>
+                            </div>
+                            <div id="jobPositionsList"></div>
+                            <div class="hint" style="font-size:8px; color:#aaa; margin-top:4px;">These positions are for admin reference only and will not be shown to customers.</div>
+                        </div>
+                        <!-- ===== END JOB POSITIONS EDITOR ===== -->
+
                     </div>
                 </div>
                 <!-- END click-config -->
@@ -4719,23 +4750,6 @@
                 <button type="submit" class="btn btn-primary" style="margin-top:10px;"><i class="fa-solid fa-check"></i> Upload Flyer</button>
                 <button type="button" class="btn btn-outline" id="promoPicUploadCancelBtn">Cancel</button>
             </form>
-        </div>
-    </div>
-
-    <!-- ===== JOB POSITIONS EDITOR MODAL (NEW) ===== -->
-    <div class="modal-overlay" id="jobPositionsModal">
-        <div class="modal" style="max-width:480px;">
-            <button class="close-btn" id="jobPositionsCloseBtn"><i class="fa-solid fa-times"></i></button>
-            <h3><i class="fa-solid fa-briefcase" style="color:#f5b83d;"></i> Edit Job Positions</h3>
-            <p class="sub">Add or remove positions that customers can select when applying for a job.</p>
-            <div id="jobPositionsListContainer" style="margin-bottom:12px;">
-                <!-- Rendered by JS -->
-            </div>
-            <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;">
-                <input type="text" id="newJobPositionInput" class="cat-input" placeholder="e.g. Graphic Designer" style="flex:1; min-width:120px;" />
-                <button class="btn btn-primary btn-sm" id="addJobPositionBtn">Add</button>
-            </div>
-            <button class="btn btn-success" id="saveJobPositionsBtn" style="width:100%;"><i class="fa-solid fa-save"></i> Save Positions</button>
         </div>
     </div>
 
@@ -4994,6 +5008,7 @@
         let pendingEditCustomerUid = null;
         let selectedUserId = null;
         let applicationsFilter = 'pending';
+        let currentJobPositions = []; // holds job positions in the modal
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -5076,7 +5091,7 @@
         const addPromoPicBtn = document.getElementById('addPromoPicBtn');
         const viewApplicationsBtn = document.getElementById('viewApplicationsBtn');
 
-        // Click-config fields
+        // Click-config fields + job positions
         const enableClickContent = document.getElementById('enableClickContent');
         const clickConfigFields = document.getElementById('clickConfigFields');
         const clickTitle = document.getElementById('clickTitle');
@@ -5084,14 +5099,10 @@
         const clickExplanation = document.getElementById('clickExplanation');
         const clickBoldWords = document.getElementById('clickBoldWords');
         const clickFormType = document.getElementById('clickFormType');
-
-        // Job positions modal
-        const jobPositionsModal = document.getElementById('jobPositionsModal');
-        const jobPositionsCloseBtn = document.getElementById('jobPositionsCloseBtn');
-        const jobPositionsListContainer = document.getElementById('jobPositionsListContainer');
+        const jobPositionsEditor = document.getElementById('jobPositionsEditor');
         const newJobPositionInput = document.getElementById('newJobPositionInput');
         const addJobPositionBtn = document.getElementById('addJobPositionBtn');
-        const saveJobPositionsBtn = document.getElementById('saveJobPositionsBtn');
+        const jobPositionsList = document.getElementById('jobPositionsList');
 
         // Applications page
         const applicationsListEl = document.getElementById('applicationsList');
@@ -5282,9 +5293,7 @@
                             prize: { isFree: false, price: 20, mobileNumber: '', accountName: '' },
                             job: { isFree: true, price: 0, mobileNumber: '', accountName: '' },
                             referrer: { isFree: true, price: 0, mobileNumber: '', accountName: '' }
-                        },
-                        // NEW: job positions
-                        jobPositions: ['Graphic Designer', 'Web Developer', 'Digital Marketer', 'Content Creator', 'Sales Executive', 'Support Agent']
+                        }
                     };
                     set(dbRef, allData).then(() => {
                         if (callback) callback(allData);
@@ -5327,10 +5336,6 @@
                             job: { isFree: true, price: 0, mobileNumber: '', accountName: '' },
                             referrer: { isFree: true, price: 0, mobileNumber: '', accountName: '' }
                         };
-                        saveData();
-                    }
-                    if (!allData.jobPositions) {
-                        allData.jobPositions = ['Graphic Designer', 'Web Developer', 'Digital Marketer', 'Content Creator', 'Sales Executive', 'Support Agent'];
                         saveData();
                     }
                     if (callback) callback(data);
@@ -7214,7 +7219,7 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // PROMO PICS CRUD + CLICK CONTENT
+        // PROMO PICS CRUD + CLICK CONTENT + JOB POSITIONS
         // ───────────────────────────────────────────────────────────────────
 
         function addPromoPic(data) {
@@ -7258,6 +7263,15 @@
             clickBoldWords.value = (cc.boldWords || []).join(', ');
             clickFormType.value = cc.formType || 'none';
 
+            // Load job positions
+            currentJobPositions = cc.jobPositions || [];
+            renderJobPositionsList(currentJobPositions);
+            if (clickFormType.value === 'job') {
+                jobPositionsEditor.style.display = 'block';
+            } else {
+                jobPositionsEditor.style.display = 'none';
+            }
+
             promoPicUploadForm.dataset.editKey = key;
             document.querySelector('#promoPicUploadModal h3').textContent = '✏️ Edit Flyer Click Content';
             document.querySelector('#promoPicUploadModal .sub').textContent =
@@ -7270,6 +7284,29 @@
             document.querySelector('#promoPicUploadModal .form-group:nth-child(3)').style.display = 'none';
 
             promoPicUploadModal.classList.add('open');
+        }
+
+        function renderJobPositionsList(positions) {
+            if (!positions || positions.length === 0) {
+                jobPositionsList.innerHTML = `<div style="font-size:9px; color:#aaa;">No custom positions added.</div>`;
+                return;
+            }
+            jobPositionsList.innerHTML = positions.map((p, index) => `
+                <div class="list-item">
+                    <span>${p}</span>
+                    <button class="btn-remove remove-job-position" data-index="${index}" style="background:#fee2e2; border:none; border-radius:4px; padding:0 6px; color:#dc2626; font-size:10px; cursor:pointer;">✕</button>
+                </div>
+            `).join('');
+
+            jobPositionsList.querySelectorAll('.remove-job-position').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    if (index >= 0 && index < currentJobPositions.length) {
+                        currentJobPositions.splice(index, 1);
+                        renderJobPositionsList(currentJobPositions);
+                    }
+                });
+            });
         }
 
         function resetPromoPicUploadModal() {
@@ -7293,59 +7330,11 @@
                 `<div class="upload-icon"><i class="fa-regular fa-image"></i></div><div class="upload-text">Tap to upload an image</div>`;
             promoPicText.value = '';
             promoPicSubtext.value = '';
-        }
 
-        // ───────────────────────────────────────────────────────────────────
-        // JOB POSITIONS EDITOR
-        // ───────────────────────────────────────────────────────────────────
-
-        function renderJobPositions() {
-            const positions = allData.jobPositions || [];
-            const container = jobPositionsListContainer;
-            if (positions.length === 0) {
-                container.innerHTML = `<div class="text-muted text-center" style="padding:12px;">No positions added yet.</div>`;
-                return;
-            }
-            container.innerHTML = positions.map((pos, index) => `
-                        <div style="display:flex; align-items:center; gap:8px; padding:4px 0; border-bottom:1px solid #f0f0f0;">
-                            <span style="flex:1; font-size:13px;">${escapeHtml(pos)}</span>
-                            <button class="btn btn-danger btn-sm delete-job-position" data-index="${index}" style="padding:2px 6px; font-size:10px;">✕</button>
-                        </div>
-                    `).join('');
-
-            container.querySelectorAll('.delete-job-position').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const index = parseInt(this.dataset.index);
-                    const positions = allData.jobPositions || [];
-                    if (index >= 0 && index < positions.length) {
-                        positions.splice(index, 1);
-                        allData.jobPositions = positions;
-                        renderJobPositions();
-                        showToast('Position removed');
-                    }
-                });
-            });
-        }
-
-        function openJobPositionsModal() {
-            renderJobPositions();
-            newJobPositionInput.value = '';
-            jobPositionsModal.classList.add('open');
-        }
-
-        function closeJobPositionsModal() {
-            jobPositionsModal.classList.remove('open');
-        }
-
-        function saveJobPositions() {
-            // Already saved via allData.jobPositions, just save to Firebase
-            saveData().then(() => {
-                renderAll();
-                closeJobPositionsModal();
-                showToast('Job positions saved!', 'success');
-            }).catch((error) => {
-                showToast('Error saving positions: ' + error.message, 'error');
-            });
+            // Reset job positions
+            currentJobPositions = [];
+            jobPositionsList.innerHTML = '';
+            jobPositionsEditor.style.display = 'none';
         }
 
         // ───────────────────────────────────────────────────────────────────
@@ -8752,60 +8741,38 @@
 
         setupCloudinaryUpload(promoPicImagePreview, promoPicImageUrl, promoPicImagePreview);
 
-        // ── Show "Edit Job Positions" button when "Apply for Job" is selected ──
+        // ── Job Positions toggle & add ──
         clickFormType.addEventListener('change', function() {
-            const editBtn = document.querySelector('#promoPicUploadModal .edit-job-positions-btn');
             if (this.value === 'job') {
-                if (!editBtn) {
-                    const btn = document.createElement('button');
-                    btn.className = 'btn btn-warning edit-job-positions-btn';
-                    btn.type = 'button';
-                    btn.style.marginTop = '8px';
-                    btn.textContent = '✏️ Edit Job Positions';
-                    btn.addEventListener('click', openJobPositionsModal);
-                    // Insert after the clickFormType select
-                    const parent = this.closest('.form-group-sm');
-                    parent.appendChild(btn);
-                } else {
-                    editBtn.style.display = 'block';
-                }
+                jobPositionsEditor.style.display = 'block';
+                // Ensure currentJobPositions is an array
+                if (!currentJobPositions) currentJobPositions = [];
+                renderJobPositionsList(currentJobPositions);
             } else {
-                if (editBtn) editBtn.style.display = 'none';
+                jobPositionsEditor.style.display = 'none';
             }
         });
-        // Trigger initial check
-        clickFormType.dispatchEvent(new Event('change'));
 
-        // ── Job positions modal events ──
-        jobPositionsCloseBtn.addEventListener('click', closeJobPositionsModal);
-        jobPositionsModal.addEventListener('click', function(e) {
-            if (e.target === this) closeJobPositionsModal();
-        });
         addJobPositionBtn.addEventListener('click', function() {
-            const val = newJobPositionInput.value.trim();
-            if (!val) {
+            const pos = newJobPositionInput.value.trim();
+            if (!pos) {
                 showToast('Please enter a position name.', 'error');
                 return;
             }
-            const positions = allData.jobPositions || [];
-            if (positions.includes(val)) {
-                showToast('Position already exists.', 'error');
-                return;
-            }
-            positions.push(val);
-            allData.jobPositions = positions;
+            if (!currentJobPositions) currentJobPositions = [];
+            currentJobPositions.push(pos);
+            renderJobPositionsList(currentJobPositions);
             newJobPositionInput.value = '';
-            renderJobPositions();
-            showToast('Position added');
         });
-        newJobPositionInput.addEventListener('keyup', function(e) {
+
+        // Allow Enter key on input to add
+        newJobPositionInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
+                e.preventDefault();
                 addJobPositionBtn.click();
             }
         });
-        saveJobPositionsBtn.addEventListener('click', saveJobPositions);
 
-        // ── PROMO PIC UPLOAD FORM SUBMIT ──
         promoPicUploadForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -8817,7 +8784,8 @@
                     instructions: clickInstructions.value.trim(),
                     explanation: clickExplanation.value.trim(),
                     boldWords: clickBoldWords.value.trim().split(',').map(w => w.trim()).filter(w => w),
-                    formType: clickFormType.value
+                    formType: clickFormType.value,
+                    jobPositions: clickFormType.value === 'job' ? (currentJobPositions || []) : []
                 };
                 updatePromoPicClickContent(editKey, clickContent).then(() => {
                     renderAll();
@@ -8847,7 +8815,8 @@
                 instructions: clickInstructions.value.trim(),
                 explanation: clickExplanation.value.trim(),
                 boldWords: clickBoldWords.value.trim().split(',').map(w => w.trim()).filter(w => w),
-                formType: clickFormType.value
+                formType: clickFormType.value,
+                jobPositions: clickFormType.value === 'job' ? (currentJobPositions || []) : []
             };
 
             addPromoPic({ imageUrl, text, subtext, clickContent }).then(() => {
@@ -9369,7 +9338,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — 2×2 image grid for applications, click-to-enlarge, pending/approved/rejected tabs, full management. Added Job Positions editor.');
+        console.log('✅ Admin Dashboard — job positions editor added for flyer uploads, hidden from customers.');
     </script>
 </body>
 </html>
