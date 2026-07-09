@@ -367,7 +367,7 @@
             text-shadow: 0 1px 7px rgba(0, 0, 0, 0.3);
         }
 
-        /* NEW: tap indicator at bottom‑right */
+        /* tap indicator at bottom‑right */
         .promo-slide .tap-indicator {
             position: absolute;
             bottom: 12px;
@@ -5586,15 +5586,22 @@
             const formType = cc.formType || 'none';
             flyerDetailForm.innerHTML = '';
             flyerDetailApplyBtn.style.display = 'block';
+            flyerDetailApplyBtn.style.display = ''; // reset visibility
 
             if (formType === 'none') {
-                flyerDetailApplyBtn.textContent = 'Close';
-                flyerDetailApplyBtn.disabled = false;
-                flyerDetailApplyBtn.className = 'btn btn-primary';
-                flyerDetailApplyBtn.onclick = () => { switchView('homeView'); };
+                // Hide the apply button entirely
+                flyerDetailApplyBtn.style.display = 'none';
+                // Hide the actions container as well (it only contains the button)
+                const actionsDiv = document.querySelector('.flyer-detail-actions');
+                if (actionsDiv) actionsDiv.style.display = 'none';
                 flyerDetailForm.innerHTML =
                     `<p style="font-size:10px;color:#888;text-align:center;padding:8px;">No form attached to this flyer.</p>`;
                 return;
+            } else {
+                // Ensure actions div is visible
+                const actionsDiv = document.querySelector('.flyer-detail-actions');
+                if (actionsDiv) actionsDiv.style.display = 'flex';
+                flyerDetailApplyBtn.style.display = 'block';
             }
 
             flyerDetailApplyBtn.textContent = 'Apply Now';
