@@ -8538,101 +8538,37 @@
         // ───────────────────────────────────────────────────────────────────
 
         workAvatarBtn.addEventListener('click', function() {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-work').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            mainHeader.classList.add('work-active');
-            document.getElementById('appContent').scrollTop = 0;
-            showBackButton();
+            showPage('work');
         });
 
         actionPromoPics.addEventListener('click', function() {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-promo-pics').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.querySelector('.nav-item[data-page="promo-pics"]').classList.add('active');
-            mainHeader.classList.remove('work-active');
-            document.getElementById('appContent').scrollTop = 0;
-            showBackButton();
+            showPage('promo-pics');
         });
 
         viewApplicationsBtn.addEventListener('click', function() {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-applications').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            mainHeader.classList.remove('work-active');
-            document.getElementById('appContent').scrollTop = 0;
-            renderApplications(applicationsFilter);
-            showBackButton();
+            showPage('applications');
         });
 
         actionReferral.addEventListener('click', function() {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-referral').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            mainHeader.classList.remove('work-active');
-            document.getElementById('appContent').scrollTop = 0;
-            renderAll();
-            showBackButton();
+            showPage('referral');
         });
 
         actionPayables.addEventListener('click', function() {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-payables').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            mainHeader.classList.remove('work-active');
-            document.getElementById('appContent').scrollTop = 0;
-            renderAll();
-            showBackButton();
+            showPage('payables');
         });
 
         actionCustomerWallets.addEventListener('click', function() {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-customer-wallet').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            mainHeader.classList.remove('work-active');
-            document.getElementById('appContent').scrollTop = 0;
-            renderCustomerWalletsPage();
-            showBackButton();
+            showPage('customer-wallet');
         });
 
         pageBackBtn.addEventListener('click', function() {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-dashboard').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.querySelector('.nav-item[data-page="dashboard"]').classList.add('active');
-            mainHeader.classList.remove('work-active');
-            document.getElementById('appContent').scrollTop = 0;
-            hideBackButton();
+            window.history.back();
         });
-
-        function showBackButton() {
-            pageBackBtn.style.display = 'inline-flex';
-            actionRow.style.display = 'none';
-        }
-
-        function hideBackButton() {
-            pageBackBtn.style.display = 'none';
-            actionRow.style.display = 'flex';
-        }
 
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
-                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-                this.classList.add('active');
                 const page = this.dataset.page;
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                const target = document.getElementById('page-' + page);
-                if (target) target.classList.add('active');
-                document.getElementById('appContent').scrollTop = 0;
-                if (page !== 'work') {
-                    mainHeader.classList.remove('work-active');
-                }
-                if (page === 'dashboard') {
-                    hideBackButton();
-                } else {
-                    showBackButton();
-                }
+                showPage(page);
             });
         });
 
@@ -8898,11 +8834,7 @@
         });
 
         document.getElementById('promoHeaderBtn').addEventListener('click', () => {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-promotions').classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            mainHeader.classList.remove('work-active');
-            showBackButton();
+            showPage('promotions');
         });
 
         document.getElementById('addPromoBtn').addEventListener('click', () => {
@@ -9084,27 +9016,19 @@
         });
 
         document.getElementById('viewOrdersQuick').addEventListener('click', () => {
-            document.querySelector('.nav-item[data-page="orders"]').click();
-            mainHeader.classList.remove('work-active');
-            showBackButton();
+            showPage('orders');
         });
 
         document.getElementById('viewUsersQuick').addEventListener('click', () => {
-            document.querySelector('.nav-item[data-page="users"]').click();
-            mainHeader.classList.remove('work-active');
-            showBackButton();
+            showPage('users');
         });
 
         document.getElementById('viewPromoPicsQuick').addEventListener('click', () => {
-            document.querySelector('.nav-item[data-page="promo-pics"]').click();
-            mainHeader.classList.remove('work-active');
-            showBackButton();
+            showPage('promo-pics');
         });
 
         document.getElementById('viewAllActivity').addEventListener('click', () => {
-            document.querySelector('.nav-item[data-page="orders"]').click();
-            mainHeader.classList.remove('work-active');
-            showBackButton();
+            showPage('orders');
         });
 
         document.getElementById('logoutBtn').addEventListener('click', () => {
@@ -9274,6 +9198,136 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
+        // HASH‑BASED ROUTING (the core back‑button fix)
+        // ───────────────────────────────────────────────────────────────────
+
+        function showPage(pageId, params = {}) {
+            // Build the hash
+            let hash = '#' + pageId;
+            if (Object.keys(params).length > 0) {
+                hash += '?' + new URLSearchParams(params).toString();
+            }
+            // Only push if different from current
+            if (window.location.hash !== hash) {
+                window.location.hash = hash;
+            } else {
+                // If same, still ensure the page is shown (e.g., when back button triggers same hash)
+                navigateToPage(pageId, params);
+            }
+        }
+
+        function navigateToPage(pageId, params) {
+            // Hide all pages, show the target
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.classList.add('active');
+            }
+
+            // Update nav items
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            const navItem = document.querySelector(`.nav-item[data-page="${pageId}"]`);
+            if (navItem) navItem.classList.add('active');
+
+            // Special handling for 'work' (no nav item)
+            if (pageId === 'work') {
+                mainHeader.classList.add('work-active');
+            } else {
+                mainHeader.classList.remove('work-active');
+            }
+
+            // Show/hide back button and action row
+            if (pageId === 'dashboard') {
+                hideBackButton();
+            } else {
+                showBackButton();
+            }
+
+            // Scroll to top
+            document.getElementById('appContent').scrollTop = 0;
+
+            // Render content if needed
+            switch (pageId) {
+                case 'dashboard':
+                    renderDashboard();
+                    break;
+                case 'services':
+                    renderServices();
+                    break;
+                case 'promo-pics':
+                    renderPromoPics();
+                    break;
+                case 'orders':
+                    renderOrders(document.getElementById('orderSearchInput').value, document.getElementById('orderStatusFilter')
+                        .value);
+                    break;
+                case 'users':
+                    renderUsers(document.getElementById('userSearchInput').value, userFilterSelect.value);
+                    break;
+                case 'payables':
+                    renderAccounts();
+                    renderWithdrawals();
+                    break;
+                case 'customer-wallet':
+                    renderCustomerWalletsPage();
+                    break;
+                case 'referral':
+                    renderReferralPromos();
+                    renderCustomReferrals();
+                    renderReferralDiscounts();
+                    renderReferralPromoDiscounts();
+                    renderSignupBonuses();
+                    break;
+                case 'applications':
+                    renderApplications(applicationsFilter);
+                    break;
+                case 'promotions':
+                    renderPromotions();
+                    break;
+                case 'profile':
+                    // already rendered on load
+                    break;
+                case 'work':
+                    renderWorkPosts();
+                    break;
+                default:
+                    break;
+            }
+
+            // Update badges after navigation
+            updateBadges();
+        }
+
+        function showBackButton() {
+            pageBackBtn.style.display = 'inline-flex';
+            actionRow.style.display = 'none';
+        }
+
+        function hideBackButton() {
+            pageBackBtn.style.display = 'none';
+            actionRow.style.display = 'flex';
+        }
+
+        // Handle hash changes (back/forward)
+        function handleHashChange() {
+            const hash = window.location.hash;
+            if (!hash || hash === '#') {
+                // Default to dashboard
+                window.location.hash = '#dashboard';
+                return;
+            }
+            const [pageId, query] = hash.slice(1).split('?');
+            const params = query ? new URLSearchParams(query) : new URLSearchParams();
+            const paramObj = {};
+            for (const [key, value] of params.entries()) {
+                paramObj[key] = value;
+            }
+            navigateToPage(pageId, paramObj);
+        }
+
+        window.addEventListener('hashchange', handleHashChange);
+
+        // ───────────────────────────────────────────────────────────────────
         // TOAST
         // ───────────────────────────────────────────────────────────────────
 
@@ -9313,8 +9367,8 @@
                             allUsersCache = usersData;
                             renderDashboard();
                             updateBadges();
-                            const usersPage = document.getElementById('page-users');
-                            if (usersPage.classList.contains('active')) {
+                            // Re‑render active page if needed
+                            if (document.getElementById('page-users').classList.contains('active')) {
                                 renderUsers(document.getElementById('userSearchInput').value, userFilterSelect
                                     .value);
                             }
@@ -9342,6 +9396,14 @@
                             document.getElementById('policyTag').value = allData.policy.tag || '';
                         }
                         hideBackButton();
+
+                        // Set initial hash if none
+                        if (!window.location.hash || window.location.hash === '#') {
+                            window.location.hash = '#dashboard';
+                        } else {
+                            // Ensure the page shown matches the hash
+                            handleHashChange();
+                        }
                     });
                 });
             } else {
@@ -9349,7 +9411,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — job positions are fully managed by admin, customers select from a dropdown. All job application photos (profile, NRC front/back, qualification) appear in a 2×2 grid and enlarge on click.');
+        console.log('✅ Admin Dashboard — Hash routing enabled: back/forward navigation works, no logout.');
     </script>
 </body>
 </html>
