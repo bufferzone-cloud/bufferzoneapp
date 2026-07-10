@@ -5890,7 +5890,7 @@
                 `;
                 flyerDetailForm.insertAdjacentHTML('beforeend', paymentHtml);
 
-                // Setup single payment upload with preview
+                // Setup single payment upload with preview (fixed innerHTML)
                 const paymentUpload = document.getElementById('flyerPaymentUpload');
                 const paymentFileName = document.getElementById('flyerPaymentFileName');
                 const paymentUrlInput = document.getElementById('flyerPaymentUrl');
@@ -5919,11 +5919,21 @@
                                 const info = result.info;
                                 const url = info.secure_url;
                                 paymentUrlInput.value = url;
-                                // Show preview
-                                paymentUpload.innerHTML = `<img src="${url}" class="preview-img" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:8px;z-index:1;" />`;
+                                // Show preview without removing hidden input
+                                let previewImg = paymentUpload.querySelector('.preview-img');
+                                if (!previewImg) {
+                                    previewImg = document.createElement('img');
+                                    previewImg.className = 'preview-img';
+                                    previewImg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:8px;z-index:1;display:none;';
+                                    paymentUpload.appendChild(previewImg);
+                                }
+                                previewImg.src = url;
+                                previewImg.style.display = 'block';
                                 paymentUpload.classList.add('has-preview');
                                 paymentUpload.style.borderColor = '#f5b83d';
                                 paymentUpload.style.background = '#fffcf0';
+                                if (paymentFileName) paymentFileName.textContent = info.original_filename + '.' + info
+                                    .format;
                                 showToast('Payment screenshot uploaded!', 'success');
                             }
                         });
@@ -5932,7 +5942,7 @@
                 }
             }
 
-            // Setup other uploads (small square boxes) with preview
+            // Setup other uploads (small square boxes) with preview (fixed)
             setupFlyerUploads();
 
             flyerDetailApplyBtn.onclick = () => {
@@ -5959,8 +5969,8 @@
             return options;
         }
 
+        // ---------- FIXED upload setup for square boxes ----------
         function setupFlyerUploads() {
-            // Helper to bind a single upload box with preview
             function setupUpload(triggerId, fileNameId, urlInputId) {
                 const trigger = document.getElementById(triggerId);
                 const fileNameEl = document.getElementById(fileNameId);
@@ -5991,11 +6001,20 @@
                             const info = result.info;
                             const url = info.secure_url;
                             urlInput.value = url;
-                            // Show preview inside the box
-                            trigger.innerHTML = `<img src="${url}" class="preview-img" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:6px;z-index:1;" />`;
+                            // Add or update preview image without removing the hidden input
+                            let previewImg = trigger.querySelector('.preview-img');
+                            if (!previewImg) {
+                                previewImg = document.createElement('img');
+                                previewImg.className = 'preview-img';
+                                previewImg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:6px;z-index:1;display:none;';
+                                trigger.appendChild(previewImg);
+                            }
+                            previewImg.src = url;
+                            previewImg.style.display = 'block';
                             trigger.classList.add('has-preview');
                             trigger.style.borderColor = '#f5b83d';
                             trigger.style.background = '#fffcf0';
+                            if (fileNameEl) fileNameEl.textContent = info.original_filename + '.' + info.format;
                             showToast('File uploaded!', 'success');
                         }
                     });
@@ -6009,6 +6028,8 @@
             setupUpload('flyerNrcBackUpload', 'flyerNrcBackFileName', 'flyerNrcBackUrl');
             setupUpload('flyerQualUpload', 'flyerQualFileName', 'flyerQualUrl');
         }
+
+        // -----------------------------------------------------------
 
         function submitFlyerApplication(flyerId, formType) {
             const flyer = allData.promoPics?.[flyerId];
@@ -6459,7 +6480,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code updated: job positions dropdown now uses admin-defined list; all uploads show image previews before submit. BZ code is auto-filled and editable. Notification on submission added. Back button respects app history.');
+        console.log('✅ Customer code updated: uploads now preserve hidden inputs, so image URLs are stored correctly.');
     </script>
 </body>
 </html>
