@@ -3447,7 +3447,7 @@
             color: #cc8800;
         }
 
-        /* ─── NEW: 2×2 Image Grid for Applications ─── */
+        /* ─── 2×2 Image Grid for Applications ─── */
         .app-image-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -3468,8 +3468,9 @@
             position: relative;
         }
         .app-image-grid .img-box:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            transform: scale(1.05);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+            z-index: 2;
         }
         .app-image-grid .img-box:active {
             transform: scale(0.95);
@@ -3875,50 +3876,7 @@
             background: #ffffff !important;
         }
 
-        /* ── Application image boxes: small, hover enlarge, click opens modal ── */
-        .app-image-grid .img-box {
-            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                box-shadow 0.2s ease;
-            cursor: pointer;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #fafafa;
-            aspect-ratio: 1/1;
-            border: 1px solid #f0f0f0;
-            position: relative;
-        }
-
-        .app-image-grid .img-box:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-            z-index: 2;
-        }
-
-        .app-image-grid .img-box:active {
-            transform: scale(0.95);
-        }
-
-        .app-image-grid .img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .app-image-grid .img-box .file-label {
-            position: absolute;
-            bottom: 4px;
-            left: 4px;
-            background: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            font-size: 7px;
-            padding: 1px 8px;
-            border-radius: 4px;
-            backdrop-filter: blur(2px);
-            pointer-events: none;
-        }
-
-        /* ── Enlarge modal (screenshot viewer) ── */
+        /* ── Enlarge modal for application images ── */
         #screenshotModal .screenshot-modal-content {
             background: #ffffff !important;
             color: #1c2128 !important;
@@ -3941,6 +3899,11 @@
         #screenshotModal .screenshot-modal-content .close-btn {
             color: #1c2128 !important;
             background: transparent !important;
+        }
+
+        #promoPicEnlargeModal .screenshot-modal-content {
+            background: #ffffff !important;
+            color: #1c2128 !important;
         }
 
         /* ── Ensure form dropdowns and options appear black on white ── */
@@ -3976,7 +3939,7 @@
                 </div>
             </div>
 
-            <!-- ===== THREE ACTION BUTTONS (now four) ===== -->
+            <!-- ===== THREE ACTION BUTTONS ===== -->
             <div class="action-row" id="actionRow">
                 <button class="action-btn promo-btn" id="actionPromoPics"><i class="fa-regular fa-images"></i> Promo Pics</button>
                 <button class="action-btn referral-btn" id="actionReferral"><i class="fa-solid fa-gift"></i> Referral</button>
@@ -7387,7 +7350,7 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // APPLICATIONS MANAGEMENT – MODIFIED WITH 2×2 IMAGE GRID
+        // APPLICATIONS MANAGEMENT – 2×2 IMAGE GRID WITH ENLARGE
         // ───────────────────────────────────────────────────────────────────
 
         function renderApplications(filter = applicationsFilter) {
@@ -9386,7 +9349,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — job positions are now selectable by customers (dropdown), admin fully controls the list.');
+        console.log('✅ Admin Dashboard — job positions are fully managed by admin, customers select from a dropdown. All job application photos (profile, NRC front/back, qualification) appear in a 2×2 grid and enlarge on click.');
     </script>
 </body>
 </html>
