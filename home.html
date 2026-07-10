@@ -5663,7 +5663,7 @@
                 <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" /></div>
                 <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" /></div>
                 <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" /></div>
-                <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code (optional)" /></div>
+                <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" value="${currentUserData?.referralCode || ''}" readonly style="background:#e9ecef;color:#495057;cursor:not-allowed;" /></div>
             `;
 
             if (formType === 'ambassador') {
@@ -5698,7 +5698,7 @@
             } else if (formType === 'job') {
                 formHtml += `
                     <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" /></div>
-                    <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code (optional)" /></div>
+                    <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" value="${currentUserData?.referralCode || ''}" readonly style="background:#e9ecef;color:#495057;cursor:not-allowed;" /></div>
                     <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" /></div>
                     <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" /></div>
                     <div class="form-group"><label>Age</label><input type="number" id="f_age" placeholder="Your age" /></div>
@@ -5760,10 +5760,7 @@
                 `;
             } else if (formType === 'referrer') {
                 formHtml += `
-                    <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" /></div>
-                    <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" /></div>
-                    <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" /></div>
-                    <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code (optional)" /></div>
+                    ${commonFields}
                     <div class="form-group"><label>Occupation</label><input type="text" id="f_occupation" placeholder="Your occupation" /></div>
                 `;
             }
@@ -6018,6 +6015,17 @@
                 status: 'pending',
                 createdAt: Date.now(),
                 paymentData: paymentData
+            };
+
+            // Add notification for submission
+            if (!allData.notifications) allData.notifications = {};
+            const notifId = 'notif_' + Date.now();
+            allData.notifications[notifId] = {
+                title: 'Application Submitted',
+                message: `Your ${formType} application for "${flyer.text || 'Untitled Flyer'}" has been submitted successfully. We will review it shortly.`,
+                timestamp: Date.now(),
+                read: false,
+                userId: currentUserId
             };
 
             saveData().then(() => {
@@ -6353,7 +6361,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code updated: job positions dropdown now uses admin-defined list; all uploads show image previews before submit.');
+        console.log('✅ Customer code updated: job positions dropdown now uses admin-defined list; all uploads show image previews before submit. BZ code is auto-filled and read-only. Notification on submission added.');
     </script>
 </body>
 </html>
