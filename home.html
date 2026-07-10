@@ -326,8 +326,12 @@
             cursor: pointer;
         }
 
-        .promo-slide.clickable { cursor: pointer; }
-        .promo-slide:not(.clickable) { cursor: default; }
+        .promo-slide.clickable {
+            cursor: pointer;
+        }
+        .promo-slide:not(.clickable) {
+            cursor: default;
+        }
 
         .promo-slide img {
             width: 100%;
@@ -376,7 +380,7 @@
             font-weight: 400;
             opacity: 0.8;
             color: #fff;
-            text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
             pointer-events: none;
         }
 
@@ -1109,8 +1113,14 @@
             animation: modalIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         @keyframes modalIn {
-            from { opacity: 0; transform: scale(0.9) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
         .order-success-modal i {
             font-size: 48px;
@@ -1221,12 +1231,30 @@
             margin-bottom: 2px;
         }
 
-        .status-pending { background: #fff6e0; color: #cc8800; }
-        .status-progress { background: #e0f0ff; color: #0066cc; }
-        .status-completed { background: #e6fffa; color: #00a86b; }
-        .status-review { background: #f0e6ff; color: #7700cc; }
-        .status-cancelled { background: #fee2e2; color: #dc2626; }
-        .status-done { background: #d1fae5; color: #065f46; }
+        .status-pending {
+            background: #fff6e0;
+            color: #cc8800;
+        }
+        .status-progress {
+            background: #e0f0ff;
+            color: #0066cc;
+        }
+        .status-completed {
+            background: #e6fffa;
+            color: #00a86b;
+        }
+        .status-review {
+            background: #f0e6ff;
+            color: #7700cc;
+        }
+        .status-cancelled {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        .status-done {
+            background: #d1fae5;
+            color: #065f46;
+        }
 
         .order-card .order-details-expand {
             max-height: 0;
@@ -2066,9 +2094,18 @@
             font-size: 9px;
             font-weight: 600;
         }
-        .withdrawal-card .status-badge.pending { background: #fff6e0; color: #cc8800; }
-        .withdrawal-card .status-badge.approved { background: #e6fffa; color: #00a86b; }
-        .withdrawal-card .status-badge.declined { background: #fee2e2; color: #dc2626; }
+        .withdrawal-card .status-badge.pending {
+            background: #fff6e0;
+            color: #cc8800;
+        }
+        .withdrawal-card .status-badge.approved {
+            background: #e6fffa;
+            color: #00a86b;
+        }
+        .withdrawal-card .status-badge.declined {
+            background: #fee2e2;
+            color: #dc2626;
+        }
 
         .referral-code-box {
             background: #1c2128;
@@ -2420,7 +2457,7 @@
         .flyer-detail-form .form-group textarea:focus {
             outline: none;
             border-color: #1c2128;
-            box-shadow: 0 0 0 2px rgba(0,0,0,0.05);
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
         }
         .flyer-detail-form .form-group textarea {
             resize: vertical;
@@ -2719,22 +2756,55 @@
         }
 
         @media (max-width: 420px) {
-            .bottom-nav { max-width: 400px; padding: 7px 4px; height: 48px; }
-            .nav-item { font-size: 4.5px; min-width: 26px; }
-            .nav-item i { font-size: 12px; }
-            .app-content { padding: 0 0 120px 0; }
-            .service-grid { grid-template-columns: repeat(3, 1fr); gap: 7px; }
-            .hero-title { font-size: 16px; }
-            .promo-slide .slide-text { font-size: 14px; }
-            .promo-slide .slide-text small { font-size: 9px; }
-            .flyer-detail-content { padding: 12px 10px 10px 10px; }
-            .flyer-detail-header-row h2 { font-size: 16px; }
-            .upload-box-grid { grid-template-columns: repeat(2, 1fr); }
+            .bottom-nav {
+                max-width: 400px;
+                padding: 7px 4px;
+                height: 48px;
+            }
+            .nav-item {
+                font-size: 4.5px;
+                min-width: 26px;
+            }
+            .nav-item i {
+                font-size: 12px;
+            }
+            .app-content {
+                padding: 0 0 120px 0;
+            }
+            .service-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 7px;
+            }
+            .hero-title {
+                font-size: 16px;
+            }
+            .promo-slide .slide-text {
+                font-size: 14px;
+            }
+            .promo-slide .slide-text small {
+                font-size: 9px;
+            }
+            .flyer-detail-content {
+                padding: 12px 10px 10px 10px;
+            }
+            .flyer-detail-header-row h2 {
+                font-size: 16px;
+            }
+            .upload-box-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         @media (max-width: 380px) {
-            .promo-slide .slide-text { font-size: 12px; }
-            .promo-carousel-wrapper { height: 187px; }
-            .promo-slide { flex: 0 0 80%; max-width: 80%; }
+            .promo-slide .slide-text {
+                font-size: 12px;
+            }
+            .promo-carousel-wrapper {
+                height: 187px;
+            }
+            .promo-slide {
+                flex: 0 0 80%;
+                max-width: 80%;
+            }
         }
     </style>
 </head>
@@ -3730,7 +3800,6 @@
                         if (flyer && flyer.clickContent?.enabled) {
                             openFlyerDetail(key);
                         } else {
-                            // Do nothing – or optionally show a small toast
                             showToast('This flyer cannot be enlarged.', 'info');
                         }
                     }
@@ -4002,9 +4071,10 @@
                 let iconColor = '#667eea';
                 let iconClass = 'fa-arrow-right';
                 if (isWithdrawal) {
-                    if (isApproved) { iconColor = '#00a86b'; iconClass = 'fa-check-circle'; }
-                    else if (isDeclined) { iconColor = '#dc2626'; iconClass = 'fa-times-circle'; }
-                    else { iconColor = '#cc8800'; iconClass = 'fa-clock'; }
+                    if (isApproved) { iconColor = '#00a86b'; iconClass = 'fa-check-circle'; } else if (isDeclined) { iconColor
+                            = '#dc2626';
+                        iconClass = 'fa-times-circle'; } else { iconColor = '#cc8800';
+                        iconClass = 'fa-clock'; }
                 } else {
                     iconColor = t.amount && t.amount > 0 ? '#00a86b' : '#cc8800';
                     iconClass = t.amount && t.amount > 0 ? 'fa-arrow-right' : 'fa-arrow-left';
@@ -5657,7 +5727,8 @@
             flyerDetailApplyBtn.disabled = false;
             flyerDetailApplyBtn.className = 'btn btn-primary';
 
-            let formHtml = `<h4 style="font-size:11px;font-weight:700;color:#1c2128;margin-bottom:6px;">Apply as ${formType.charAt(0).toUpperCase() + formType.slice(1)}</h4>`;
+            let formHtml =
+                `<h4 style="font-size:11px;font-weight:700;color:#1c2128;margin-bottom:6px;">Apply as ${formType.charAt(0).toUpperCase() + formType.slice(1)}</h4>`;
 
             const commonFields = `
                 <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" /></div>
