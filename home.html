@@ -3468,7 +3468,32 @@
                 document.getElementById('flyerDetailView').classList.remove('active');
             }
             document.getElementById('appContent').scrollTop = 0;
+            // Push state for back navigation
+            if (viewId !== 'homeView') {
+                window.history.pushState({ view: viewId }, '', '');
+            }
         }
+
+        // Back navigation with history API
+        window.addEventListener('popstate', (event) => {
+            if (event.state && event.state.view) {
+                const viewId = event.state.view;
+                document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+                const target = document.getElementById(viewId);
+                if (target) target.classList.add('active');
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                const navBtn = document.querySelector(`.nav-item[data-view="${viewId}"]`);
+                if (navBtn) navBtn.classList.add('active');
+                if (viewId !== 'orderFlowView' && viewId !== 'flyerDetailView') {
+                    document.getElementById('orderFlowView').classList.remove('active');
+                    document.getElementById('flyerDetailView').classList.remove('active');
+                }
+                document.getElementById('appContent').scrollTop = 0;
+            } else {
+                // fallback to home
+                switchView('homeView');
+            }
+        });
 
         function openSidebar() {
             sidebarOverlay.classList.add('open');
@@ -5731,10 +5756,10 @@
                 `<h4 style="font-size:11px;font-weight:700;color:#1c2128;margin-bottom:6px;">Apply as ${formType.charAt(0).toUpperCase() + formType.slice(1)}</h4>`;
 
             const commonFields = `
-                <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" /></div>
-                <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" /></div>
-                <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" /></div>
-                <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" value="${currentUserData?.referralCode || ''}" readonly style="background:#e9ecef;color:#495057;cursor:not-allowed;" /></div>
+                <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" value="${escapeHtml(currentUserData?.firstName || '')} ${escapeHtml(currentUserData?.lastName || '')}" /></div>
+                <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" value="${escapeHtml(currentUser?.email || '')}" /></div>
+                <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" value="${escapeHtml(currentUserData?.phone || '')}" /></div>
+                <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code" value="${escapeHtml(currentUserData?.referralCode || '')}" /></div>
             `;
 
             if (formType === 'ambassador') {
@@ -5768,10 +5793,10 @@
                 `;
             } else if (formType === 'job') {
                 formHtml += `
-                    <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" /></div>
-                    <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" value="${currentUserData?.referralCode || ''}" readonly style="background:#e9ecef;color:#495057;cursor:not-allowed;" /></div>
-                    <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" /></div>
-                    <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" /></div>
+                    <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" value="${escapeHtml(currentUserData?.firstName || '')} ${escapeHtml(currentUserData?.lastName || '')}" /></div>
+                    <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code" value="${escapeHtml(currentUserData?.referralCode || '')}" /></div>
+                    <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" value="${escapeHtml(currentUser?.email || '')}" /></div>
+                    <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" value="${escapeHtml(currentUserData?.phone || '')}" /></div>
                     <div class="form-group"><label>Age</label><input type="number" id="f_age" placeholder="Your age" /></div>
                     <div class="form-group"><label>Occupation</label><input type="text" id="f_occupation" placeholder="Current occupation" /></div>
                     <div class="form-group">
@@ -5918,6 +5943,8 @@
             flyerDetailView.classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById('appContent').scrollTop = 0;
+            // Push state for back navigation
+            window.history.pushState({ view: 'flyerDetailView' }, '', '');
         }
 
         // Helper to generate job options from admin positions
@@ -6432,7 +6459,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code updated: job positions dropdown now uses admin-defined list; all uploads show image previews before submit. BZ code is auto-filled and read-only. Notification on submission added.');
+        console.log('✅ Customer code updated: job positions dropdown now uses admin-defined list; all uploads show image previews before submit. BZ code is auto-filled and editable. Notification on submission added. Back button respects app history.');
     </script>
 </body>
 </html>
