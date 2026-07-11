@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -3866,7 +3865,7 @@
                     // If it's a video and we haven't played it yet, play it and stop autoscroll
                     if (videoEl && mediaType === 'video') {
                         if (videoEl.paused) {
-                            // stop autoscroll
+                            // stop autoscroll permanently
                             isUserInteracting = true;
                             if (autoScrollTimer) {
                                 clearInterval(autoScrollTimer);
@@ -3929,7 +3928,7 @@
                         slide.classList.add('video-playing');
                         const overlay = slide.querySelector('.video-play-overlay');
                         if (overlay) overlay.style.opacity = '0';
-                        // stop autoscroll
+                        // stop autoscroll permanently
                         isUserInteracting = true;
                         if (autoScrollTimer) {
                             clearInterval(autoScrollTimer);
@@ -3940,12 +3939,7 @@
                         slide.classList.remove('video-playing');
                         const overlay = slide.querySelector('.video-play-overlay');
                         if (overlay) overlay.style.opacity = '1';
-                        // resume autoscroll after a brief delay if not interacting
-                        setTimeout(() => {
-                            if (!isUserInteracting) {
-                                resetAutoScroll();
-                            }
-                        }, 3000);
+                        // Do NOT resume autoscroll automatically – only user interaction will restart it
                     });
                 }
             });
@@ -3996,7 +3990,6 @@
             if (autoScrollTimer) clearInterval(autoScrollTimer);
             autoScrollTimer = setInterval(() => {
                 if (!isUserInteracting && carouselItems.length > 0) {
-                    // Only auto-scroll if no video is playing
                     let videoPlaying = false;
                     const slides = promoCarouselTrack.querySelectorAll('.promo-slide');
                     slides.forEach(s => {
@@ -4022,7 +4015,7 @@
                     if (nextIndex >= carouselItems.length) nextIndex = carouselItems.length - 1;
                     goToSlide(nextIndex);
                 }
-            }, 5000);
+            }, 3000); // changed from 5000 to 3000
         }
 
         function resetAutoScroll() {
@@ -6643,7 +6636,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code updated: videos now strictly fill 1200x675 (16:9) ratio with object-fit:cover. Play/pause/expand logic works. Sound enabled on play. 6% peek preserved. All lists sorted newest first.');
+        console.log('✅ Customer code updated: videos now strictly fill 1200x675 (16:9) ratio with object-fit:cover. Play/pause/expand logic works. Sound enabled on play. 6% peek preserved. All lists sorted newest first. Auto‑scroll interval is 3 seconds, and autoscroll stops permanently when a video is played.');
     </script>
 </body>
 </html>
