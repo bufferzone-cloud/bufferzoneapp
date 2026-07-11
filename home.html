@@ -9,6 +9,7 @@
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
     </script>
     <style>
+        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -43,7 +44,7 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        /* ----- BOTTOM NAV – yellow border around the entire pill bar ----- */
+        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
             position: fixed;
             bottom: 17px;
@@ -92,6 +93,7 @@
             transform: scale(0.92);
         }
 
+        /* ===== HEADER ===== */
         .header {
             display: flex;
             align-items: center;
@@ -158,6 +160,7 @@
             justify-content: center;
         }
 
+        /* ===== HERO ===== */
         .hero {
             background-color: #1c2128;
             border-radius: 14px;
@@ -267,7 +270,9 @@
             font-weight: 700;
         }
 
-        /* ===== PROMO CAROUSEL – EDGE TO EDGE, 6% PEEK (88% slide width) ===== */
+        /* ================================================================
+               PROMO CAROUSEL – EDGE‑TO‑EDGE WITH 6% PEEK (88% slide width)
+               ================================================================ */
         .promo-carousel-wrapper {
             position: relative;
             margin: 3px 0 12px 0;
@@ -307,6 +312,8 @@
             display: none;
         }
 
+        /* ---- Each slide occupies 88% of the container width,
+               leaving 6% peek on each side for prev/next ---- */
         .promo-slide {
             flex: 0 0 88%;
             max-width: 88%;
@@ -314,7 +321,9 @@
             position: relative;
             border-radius: 17px;
             overflow: hidden;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease, box-shadow 0.5s ease;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.5s ease,
+                box-shadow 0.5s ease;
             height: 100%;
             background: #ffffff;
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.12);
@@ -327,7 +336,6 @@
             z-index: 1;
             will-change: transform, opacity;
             cursor: pointer;
-            /* ensure the slide itself matches 16:9 ratio */
             aspect-ratio: 1200 / 675;
         }
 
@@ -415,6 +423,7 @@
             pointer-events: none;
         }
 
+        /* ---- State classes (applied via JS) ---- */
         .promo-slide.prev-slide,
         .promo-slide.next-slide {
             transform: scale(0.85) !important;
@@ -433,6 +442,7 @@
             z-index: 0;
         }
 
+        /* ===== PROMOTIONS BANNER ===== */
         .promotions-banner {
             margin: 0 12px 12px 12px;
             padding: 9px 12px;
@@ -461,6 +471,7 @@
             flex: 1;
         }
 
+        /* ===== CATEGORY ROW ===== */
         .category-row {
             display: flex;
             gap: 7px;
@@ -575,6 +586,7 @@
             line-height: 1.2;
         }
 
+        /* ===== ORDER FLOW ===== */
         .order-flow-container {
             padding: 0 12px 14px 12px;
         }
@@ -853,7 +865,7 @@
             color: #f5b83d;
         }
 
-        /* ===== PAYMENT PAGE (full page, no floating form) ===== */
+        /* ===== PAYMENT PAGE ===== */
         .payment-page-overlay {
             position: fixed;
             top: 0;
@@ -946,7 +958,7 @@
             color: #f5b83d;
         }
 
-        /* ===== PROMO / REFERRAL DROPDOWN STYLE ===== */
+        /* ===== PROMO / REFERRAL DROPDOWN ===== */
         .toggle-row {
             display: flex;
             gap: 7px;
@@ -1193,6 +1205,7 @@
             display: block;
         }
 
+        /* ===== ORDERS ===== */
         .orders-header {
             margin-top: 7px;
             margin-bottom: 14px;
@@ -1332,6 +1345,7 @@
             transform: rotate(180deg);
         }
 
+        /* ===== HISTORY ===== */
         .history-list {
             padding: 0 12px 14px 12px;
             display: flex;
@@ -1484,6 +1498,7 @@
             display: inline-block;
         }
 
+        /* ===== SIDEBAR ===== */
         .sidebar-overlay {
             position: fixed;
             top: 0;
@@ -1576,6 +1591,7 @@
             margin-top: 3px;
         }
 
+        /* ===== SAMPLES ===== */
         .samples-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1710,6 +1726,7 @@
             border-radius: 0 0 3px 3px;
         }
 
+        /* ===== PROFILE ===== */
         .profile-card {
             background: #ffffff;
             border-radius: 14px;
@@ -1780,6 +1797,7 @@
             line-height: 1.6;
         }
 
+        /* ===== ACCOUNT ===== */
         .account-section {
             padding: 0 12px 14px 12px;
         }
@@ -1887,6 +1905,7 @@
             color: #fff;
         }
 
+        /* ===== SEND MONEY ===== */
         .send-money-section {
             background: #ffffff;
             border-radius: 14px;
@@ -2033,7 +2052,7 @@
             padding: 10px 0;
         }
 
-        /* ===== ACCOUNT TRANSACTIONS & WITHDRAWALS – EXPANDABLE CARDS ===== */
+        /* ===== ACCOUNT TRANSACTIONS & WITHDRAWALS ===== */
         .account-tx-card,
         .withdrawal-card {
             background: #ffffff;
@@ -2182,6 +2201,7 @@
             font-size: 12px;
         }
 
+        /* ===== WITHDRAW MODAL ===== */
         .withdraw-modal-overlay {
             position: fixed;
             top: 0;
@@ -2373,7 +2393,7 @@
             transform: scale(0.95);
         }
 
-        /* ===== FLYER DETAIL VIEW – STRICT 1200x675 (16:9) ===== */
+        /* ===== FLYER DETAIL VIEW – 1200x675 (16:9) ===== */
         .flyer-detail-view {
             padding: 0 12px 14px 12px;
         }
@@ -2503,7 +2523,7 @@
             min-height: 40px;
         }
 
-        /* ----- NEW: Small square upload boxes for other files ----- */
+        /* ----- Small square upload boxes ----- */
         .upload-box-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
@@ -2794,6 +2814,7 @@
             text-decoration: underline;
         }
 
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 420px) {
             .bottom-nav {
                 max-width: 400px;
@@ -3137,7 +3158,7 @@
 
     </div>
 
-    <!-- ===== PAYMENT PAGE (full page, no floating form) ===== -->
+    <!-- ===== PAYMENT PAGE ===== -->
     <div class="payment-page-overlay" id="paymentPage">
         <div class="payment-page">
             <button class="close-btn" id="paymentCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -3507,7 +3528,6 @@
             }
         }
 
-        // Back navigation with history API
         window.addEventListener('popstate', (event) => {
             if (event.state && event.state.view) {
                 const viewId = event.state.view;
@@ -3523,7 +3543,6 @@
                 }
                 document.getElementById('appContent').scrollTop = 0;
             } else {
-                // fallback to home
                 switchView('homeView');
             }
         });
@@ -3862,16 +3881,13 @@
                     const videoEl = this.querySelector('video');
                     const playOverlay = this.querySelector('.video-play-overlay');
 
-                    // If it's a video and we haven't played it yet, play it and stop autoscroll
                     if (videoEl && mediaType === 'video') {
                         if (videoEl.paused) {
-                            // stop autoscroll permanently
                             isUserInteracting = true;
                             if (autoScrollTimer) {
                                 clearInterval(autoScrollTimer);
                                 autoScrollTimer = null;
                             }
-                            // Unmute and play with sound
                             videoEl.muted = false;
                             videoEl.play();
                             this.classList.add('video-playing');
@@ -3879,7 +3895,6 @@
                             e.stopPropagation();
                             return;
                         } else {
-                            // Video is playing, expand the flyer detail
                             if (key) {
                                 const flyer = allData.promoPics?.[key];
                                 if (flyer && flyer.clickContent?.enabled) {
@@ -3892,7 +3907,6 @@
                         }
                     }
 
-                    // For images or non‑video: expand
                     if (key) {
                         const flyer = allData.promoPics?.[key];
                         if (flyer && flyer.clickContent?.enabled) {
@@ -3904,13 +3918,11 @@
                 });
             });
 
-            // Also handle video pause/resume events to update overlay and autoscroll
             slides.forEach(slide => {
                 const videoEl = slide.querySelector('video');
                 if (videoEl) {
                     videoEl.addEventListener('click', function(e) {
                         e.stopPropagation();
-                        // Toggle play/pause
                         if (this.paused) {
                             this.muted = false;
                             this.play();
@@ -3928,7 +3940,6 @@
                         slide.classList.add('video-playing');
                         const overlay = slide.querySelector('.video-play-overlay');
                         if (overlay) overlay.style.opacity = '0';
-                        // stop autoscroll permanently
                         isUserInteracting = true;
                         if (autoScrollTimer) {
                             clearInterval(autoScrollTimer);
@@ -3939,7 +3950,6 @@
                         slide.classList.remove('video-playing');
                         const overlay = slide.querySelector('.video-play-overlay');
                         if (overlay) overlay.style.opacity = '1';
-                        // Do NOT resume autoscroll automatically – only user interaction will restart it
                     });
                 }
             });
@@ -4015,7 +4025,7 @@
                     if (nextIndex >= carouselItems.length) nextIndex = carouselItems.length - 1;
                     goToSlide(nextIndex);
                 }
-            }, 3000); // changed from 5000 to 3000
+            }, 3000);
         }
 
         function resetAutoScroll() {
@@ -4216,8 +4226,8 @@
                 let iconColor = '#667eea';
                 let iconClass = 'fa-arrow-right';
                 if (isWithdrawal) {
-                    if (isApproved) { iconColor = '#00a86b'; iconClass = 'fa-check-circle'; } else if (isDeclined) { iconColor
-                            = '#dc2626';
+                    if (isApproved) { iconColor = '#00a86b';
+                        iconClass = 'fa-check-circle'; } else if (isDeclined) { iconColor = '#dc2626';
                         iconClass = 'fa-times-circle'; } else { iconColor = '#cc8800';
                         iconClass = 'fa-clock'; }
                 } else {
@@ -5831,7 +5841,6 @@
 
             const mediaType = flyer.mediaType || 'image';
 
-            // Show correct media in detail view
             const imgEl = document.getElementById('flyerDetailImage');
             const videoEl = document.getElementById('flyerDetailVideo');
 
@@ -5840,7 +5849,6 @@
                 videoEl.src = flyer.imageUrl || '';
                 videoEl.style.display = 'block';
                 videoEl.load();
-                // Hide the apply button if no form
                 const applyBtn = document.getElementById('flyerDetailApplyBtn');
                 if (!cc.formType || cc.formType === 'none') {
                     applyBtn.style.display = 'none';
@@ -5886,19 +5894,16 @@
             const formType = cc.formType || 'none';
             flyerDetailForm.innerHTML = '';
             flyerDetailApplyBtn.style.display = 'block';
-            flyerDetailApplyBtn.style.display = ''; // reset visibility
+            flyerDetailApplyBtn.style.display = '';
 
             if (formType === 'none') {
-                // Hide the apply button entirely
                 flyerDetailApplyBtn.style.display = 'none';
-                // Hide the actions container as well (it only contains the button)
                 const actionsDiv = document.querySelector('.flyer-detail-actions');
                 if (actionsDiv) actionsDiv.style.display = 'none';
                 flyerDetailForm.innerHTML =
                     `<p style="font-size:10px;color:#888;text-align:center;padding:8px;">No form attached to this flyer.</p>`;
                 return;
             } else {
-                // Ensure actions div is visible
                 const actionsDiv = document.querySelector('.flyer-detail-actions');
                 if (actionsDiv) actionsDiv.style.display = 'flex';
                 flyerDetailApplyBtn.style.display = 'block';
@@ -6046,7 +6051,6 @@
                 `;
                 flyerDetailForm.insertAdjacentHTML('beforeend', paymentHtml);
 
-                // Setup single payment upload with preview (fixed innerHTML)
                 const paymentUpload = document.getElementById('flyerPaymentUpload');
                 const paymentFileName = document.getElementById('flyerPaymentFileName');
                 const paymentUrlInput = document.getElementById('flyerPaymentUrl');
@@ -6075,7 +6079,6 @@
                                 const info = result.info;
                                 const url = info.secure_url;
                                 paymentUrlInput.value = url;
-                                // Show preview without removing hidden input
                                 let previewImg = paymentUpload.querySelector('.preview-img');
                                 if (!previewImg) {
                                     previewImg = document.createElement('img');
@@ -6098,7 +6101,6 @@
                 }
             }
 
-            // Setup other uploads (small square boxes) with preview (fixed)
             setupFlyerUploads();
 
             flyerDetailApplyBtn.onclick = () => {
@@ -6109,11 +6111,9 @@
             flyerDetailView.classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById('appContent').scrollTop = 0;
-            // Push state for back navigation
             window.history.pushState({ view: 'flyerDetailView' }, '', '');
         }
 
-        // Helper to generate job options from admin positions
         function generateJobOptions(positions) {
             if (!positions || positions.length === 0) {
                 return `<option value="">No positions available</option>`;
@@ -6125,7 +6125,6 @@
             return options;
         }
 
-        // ---------- FIXED upload setup for square boxes ----------
         function setupFlyerUploads() {
             function setupUpload(triggerId, fileNameId, urlInputId) {
                 const trigger = document.getElementById(triggerId);
@@ -6157,7 +6156,6 @@
                             const info = result.info;
                             const url = info.secure_url;
                             urlInput.value = url;
-                            // Add or update preview image without removing the hidden input
                             let previewImg = trigger.querySelector('.preview-img');
                             if (!previewImg) {
                                 previewImg = document.createElement('img');
@@ -6184,8 +6182,6 @@
             setupUpload('flyerNrcBackUpload', 'flyerNrcBackFileName', 'flyerNrcBackUrl');
             setupUpload('flyerQualUpload', 'flyerQualFileName', 'flyerQualUrl');
         }
-
-        // -----------------------------------------------------------
 
         function submitFlyerApplication(flyerId, formType) {
             const flyer = allData.promoPics?.[flyerId];
@@ -6258,7 +6254,6 @@
                 return;
             }
 
-            // ---- CHECK PAYMENT ----
             const config = allData.formConfigs?.[formType] || { isFree: true };
             let paymentData = null;
 
@@ -6274,7 +6269,7 @@
                     amount: config.price || 0,
                     mobileNumber: config.mobileNumber || '',
                     accountName: config.accountName || '',
-                    screenshots: [screenshot] // single screenshot
+                    screenshots: [screenshot]
                 };
             }
 
@@ -6292,7 +6287,6 @@
                 paymentData: paymentData
             };
 
-            // Add notification for submission
             if (!allData.notifications) allData.notifications = {};
             const notifId = 'notif_' + Date.now();
             allData.notifications[notifId] = {
@@ -6361,7 +6355,6 @@
                     }
                 }
 
-                // Show payment details if exists
                 if (a.paymentData) {
                     const pd = a.paymentData;
                     detailRows +=
@@ -6636,7 +6629,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code updated: videos now strictly fill 1200x675 (16:9) ratio with object-fit:cover. Play/pause/expand logic works. Sound enabled on play. 6% peek preserved. All lists sorted newest first. Auto‑scroll interval is 3 seconds, and autoscroll stops permanently when a video is played.');
+        console.log('✅ Customer code rewritten with flyer carousel layout from first code: 88% slide width (6% peek), active slide scaled 1.08, prev/next scaled 0.85, far slides 0.70. Video support, 16:9 ratio, 3s auto-scroll, play/pause/expand logic intact.');
     </script>
 </body>
 </html>
