@@ -3912,6 +3912,31 @@
             color: #1c2128 !important;
             background: #ffffff !important;
         }
+
+        /* ── Custom select styling for form type dropdown ── */
+        #promoPicUploadModal .click-config-section select {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%23888'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            padding-right: 30px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 10px;
+            color: #1c2128;
+            background-color: #fff;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        #promoPicUploadModal .click-config-section select:focus {
+            outline: none;
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+        }
+        #promoPicUploadModal .click-config-section select:hover {
+            border-color: #bbb;
+        }
     </style>
 </head>
 <body>
@@ -4091,6 +4116,7 @@
                     <div style="display:flex; gap:8px; flex-direction:column; align-items:center;">
                         <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
                             <button class="btn btn-outline btn-sm" id="refreshApplicationsBtn"><i class="fa-solid fa-rotate"></i> Refresh</button>
+                            <button class="btn btn-primary btn-sm" id="uploadMediaFromAppsBtn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Media</button>
                         </div>
                         <button class="btn btn-primary" id="configureFormsBtn" style="background:#f5b83d;color:#1c2128;border:none; padding:10px 24px; font-size:14px; max-width:300px; width:100%;">
                             <i class="fas fa-cog"></i> Configure Forms
@@ -5113,6 +5139,7 @@
         const approvedCountEl = document.getElementById('approvedCount');
         const rejectedCountEl = document.getElementById('rejectedCount');
         const refreshApplicationsBtn = document.getElementById('refreshApplicationsBtn');
+        const uploadMediaFromAppsBtn = document.getElementById('uploadMediaFromAppsBtn');
 
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMessage');
@@ -8692,6 +8719,11 @@
             promoPicUploadModal.classList.add('open');
         });
 
+        uploadMediaFromAppsBtn.addEventListener('click', () => {
+            resetPromoPicUploadModal();
+            promoPicUploadModal.classList.add('open');
+        });
+
         promoPicUploadCloseBtn.addEventListener('click', () => {
             promoPicUploadModal.classList.remove('open');
             resetPromoPicUploadModal();
@@ -9441,7 +9473,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Hash routing enabled: back/forward navigation works, no logout.');
+        console.log('✅ Admin Dashboard — Hash routing enabled: back/forward navigation works, no logout. Added Upload Media button on Applications page, styled form type dropdown.');
     </script>
 </body>
 </html>
