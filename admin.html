@@ -4099,10 +4099,118 @@
                             </button>
                         </div>
                     </div>
+                    <div style="padding:30px 0; text-align:center; border:2px dashed #eee; border-radius:16px; background:#fafafa; margin-top:16px;">
+                        <i class="fa-regular fa-images" style="font-size:48px; color:#ddd; display:block; margin-bottom:12px;"></i>
+                        <h3 style="font-weight:600; color:#888;">No media uploaded yet</h3>
+                        <p style="color:#aaa; font-size:14px;">Click the <strong>"Upload Media"</strong> button above to add your first picture or video.</p>
+                    </div>
                 </div>
 
-                <div class="promo-pics-grid" id="promoPicsGrid"></div>
+            </div>
 
+            <!-- ===== PAGE: PROMO UPLOAD ===== -->
+            <div id="page-promo-upload" class="page">
+                <div class="card" style="border: none; box-shadow: none; padding: 0 0 14px 0;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+                        <div>
+                            <h2 style="font-size:20px; font-weight:800; color:#1c2128;"><i class="fa-regular fa-images" style="color:#f5b83d;"></i> <span id="promoUploadTitle">Upload Media</span></h2>
+                            <p style="font-size:11px; color:#888;">Fill in the details to add a new media file to the promo gallery.</p>
+                        </div>
+                        <button class="btn btn-outline" id="promoUploadCancelBtn" style="padding:8px 20px; font-size:12px; border-radius:24px;">
+                            <i class="fa-solid fa-times"></i> Cancel
+                        </button>
+                    </div>
+
+                    <form id="promoPicUploadForm" style="max-width:800px; margin:0 auto;">
+                        <input type="hidden" id="promoPicMediaType" value="image" />
+
+                        <div class="card" style="padding:20px;">
+                            <div class="form-group">
+                                <label>Media File</label>
+                                <div class="upload-preview" id="promoPicImagePreview" style="min-height:180px; border:2px dashed #ddd; border-radius:12px; padding:20px; text-align:center; cursor:pointer; transition:all 0.2s; background:#fafafa;">
+                                    <div class="upload-icon" style="font-size:40px; color:#ccc; margin-bottom:8px;"><i class="fa-regular fa-image"></i></div>
+                                    <div class="upload-text" style="font-size:12px; color:#888; font-weight:500;">Tap to upload an image or video</div>
+                                </div>
+                                <input type="hidden" id="promoPicImageUrl" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Overlay Text</label>
+                                <input type="text" id="promoPicText" placeholder="e.g. Summer Sale 50% OFF" required style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
+                            </div>
+                            <div class="form-group">
+                                <label>Subtext (optional)</label>
+                                <input type="text" id="promoPicSubtext" placeholder="e.g. Limited time offer" style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
+                            </div>
+
+                            <!-- Click-content configuration -->
+                            <div class="click-config-section" style="background:#f8f9fc; border-radius:12px; padding:16px; margin-top:10px; border:1px solid #f0f0f0;">
+                                <div class="section-label" style="font-weight:700; font-size:13px; color:#1c2128; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
+                                    <i class="fa-solid fa-mouse-pointer" style="color:#f5b83d;"></i> Click Content (appears when flyer is tapped)
+                                </div>
+                                <div class="form-group-sm" style="margin-bottom:8px;">
+                                    <label style="display:flex;align-items:center;gap:8px; font-weight:600; font-size:11px;">
+                                        <input type="checkbox" id="enableClickContent" checked />
+                                        <span>Enable click content</span>
+                                    </label>
+                                </div>
+                                <div id="clickConfigFields">
+                                    <div class="form-group" style="margin-bottom:10px;">
+                                        <label>Title</label>
+                                        <input type="text" id="clickTitle" placeholder="e.g. Summer Sale Details" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:6px; font-size:12px;" />
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:10px;">
+                                        <label>Instructions</label>
+                                        <textarea id="clickInstructions" rows="2" placeholder="e.g. Fill out the form below to apply" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:6px; font-size:12px; resize:vertical;"></textarea>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:10px;">
+                                        <label>Explanation / Description</label>
+                                        <textarea id="clickExplanation" rows="2" placeholder="e.g. This limited-time offer is available to all customers..." style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:6px; font-size:12px; resize:vertical;"></textarea>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:10px;">
+                                        <label>Words to bold (comma separated)</label>
+                                        <input type="text" id="clickBoldWords" placeholder="e.g. limited, offer, exclusive" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:6px; font-size:12px;" />
+                                        <div class="hint" style="font-size:10px; color:#aaa; margin-top:2px;">Enter words that should appear bold in the explanation.</div>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:10px;">
+                                        <label>Attach Form</label>
+                                        <select id="clickFormType" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:6px; font-size:12px; background:#fff;">
+                                            <option value="none">No Form (just explanation)</option>
+                                            <option value="ambassador">Apply as Ambassador</option>
+                                            <option value="investor">Apply as Investor</option>
+                                            <option value="prize">Apply for Prize</option>
+                                            <option value="job">Apply for Job</option>
+                                            <option value="referrer">Apply as Referrer</option>
+                                        </select>
+                                        <div class="hint" style="font-size:10px; color:#aaa; margin-top:2px;">Choose which form to attach to this flyer, or none.</div>
+                                    </div>
+
+                                    <!-- Job Positions Editor -->
+                                    <div id="jobPositionsEditor" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid #eee;">
+                                        <label style="font-size:11px; font-weight:600; color:#1c2128; display:block; margin-bottom:6px;">Job Positions (Admin only — customer selects from these)</label>
+                                        <div style="display:flex; gap:8px; margin-bottom:8px;">
+                                            <input type="text" id="newJobPositionInput" placeholder="e.g. Graphic Designer" style="flex:1; padding:6px 10px; border:1px solid #ddd; border-radius:6px; font-size:11px;" />
+                                            <button type="button" id="addJobPositionBtn" class="btn btn-primary btn-sm" style="padding:4px 14px; border-radius:16px;">Add</button>
+                                        </div>
+                                        <div id="jobPositionsList"></div>
+                                        <div class="hint" style="font-size:9px; color:#aaa; margin-top:4px;">These positions will appear as a dropdown for the customer.</div>
+                                        <div class="customer-preview-select" id="customerPreviewContainer" style="margin-top:8px; background:#fafafa; border:1px dashed #ddd; border-radius:6px; padding:8px 10px;">
+                                            <strong style="font-size:10px; color:#555;">👤 Customer will see:</strong>
+                                            <select id="customerPreviewSelect" disabled style="width:100%; padding:4px 8px; border:1px solid #ccc; border-radius:4px; font-size:10px; background:#fff; margin-top:2px;">
+                                                <option value="">— Select a position —</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="display:flex; gap:10px; margin-top:16px;">
+                                <button type="submit" class="btn btn-primary" style="padding:10px 24px; font-size:14px; border-radius:24px; flex:1;"><i class="fa-solid fa-check"></i> <span id="promoUploadSubmitText">Upload Media</span></button>
+                                <button type="button" class="btn btn-outline" id="promoUploadCancelBtn2" style="padding:10px 24px; font-size:14px; border-radius:24px;">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <!-- ===== PAGE: APPLICATIONS ===== -->
@@ -4683,101 +4791,6 @@
         </div>
     </div>
 
-    <!-- ===== PROMO PICS UPLOAD MODAL (with click-config + job positions + customer preview) ===== -->
-    <div class="modal-overlay" id="promoPicUploadModal">
-        <div class="modal" style="max-width:480px;">
-            <button class="close-btn" id="promoPicUploadCloseBtn"><i class="fa-solid fa-times"></i></button>
-            <h3><i class="fa-regular fa-images" style="color:#f5b83d;"></i> Upload Media</h3>
-            <p class="sub">Upload an image or video to add to the promo gallery.</p>
-            <form id="promoPicUploadForm">
-                <input type="hidden" id="promoPicMediaType" value="image" />
-                <div class="form-group">
-                    <label>Media File</label>
-                    <div class="upload-preview" id="promoPicImagePreview">
-                        <div class="upload-icon"><i class="fa-regular fa-image"></i></div>
-                        <div class="upload-text">Tap to upload an image or video</div>
-                    </div>
-                    <input type="hidden" id="promoPicImageUrl" />
-                </div>
-                <div class="form-group">
-                    <label>Overlay Text</label>
-                    <input type="text" id="promoPicText" placeholder="e.g. Summer Sale 50% OFF" required />
-                </div>
-                <div class="form-group">
-                    <label>Subtext (optional)</label>
-                    <input type="text" id="promoPicSubtext" placeholder="e.g. Limited time offer" />
-                </div>
-
-                <!-- === Click-content configuration === -->
-                <div class="click-config-section">
-                    <div class="section-label"><i class="fa-solid fa-mouse-pointer"></i> Click Content (appears when flyer is tapped)</div>
-                    <div class="form-group-sm" style="margin-bottom:4px;">
-                        <label style="display:flex;align-items:center;gap:6px;">
-                            <input type="checkbox" id="enableClickContent" checked />
-                            <span style="font-weight:600;font-size:10px;">Enable click content</span>
-                        </label>
-                    </div>
-                    <div id="clickConfigFields">
-                        <div class="form-group-sm">
-                            <label>Title</label>
-                            <input type="text" id="clickTitle" placeholder="e.g. Summer Sale Details" />
-                        </div>
-                        <div class="form-group-sm">
-                            <label>Instructions</label>
-                            <textarea id="clickInstructions" rows="2" placeholder="e.g. Fill out the form below to apply"></textarea>
-                        </div>
-                        <div class="form-group-sm">
-                            <label>Explanation / Description</label>
-                            <textarea id="clickExplanation" rows="2" placeholder="e.g. This limited-time offer is available to all customers..."></textarea>
-                        </div>
-                        <div class="form-group-sm">
-                            <label>Words to bold (comma separated)</label>
-                            <input type="text" id="clickBoldWords" placeholder="e.g. limited, offer, exclusive" />
-                            <div class="hint">Enter words that should appear bold in the explanation.</div>
-                        </div>
-                        <div class="form-group-sm">
-                            <label>Attach Form</label>
-                            <select id="clickFormType">
-                                <option value="none">No Form (just explanation)</option>
-                                <option value="ambassador">Apply as Ambassador</option>
-                                <option value="investor">Apply as Investor</option>
-                                <option value="prize">Apply for Prize</option>
-                                <option value="job">Apply for Job</option>
-                                <option value="referrer">Apply as Referrer</option>
-                            </select>
-                            <div class="hint">Choose which form to attach to this flyer, or none.</div>
-                        </div>
-
-                        <!-- ===== JOB POSITIONS EDITOR (Admin) ===== -->
-                        <div id="jobPositionsEditor" style="display:none;">
-                            <label style="font-size:10px; font-weight:600; color:#1c2128;">Job Positions (Admin only — customer selects from these)</label>
-                            <div style="display:flex; gap:6px; margin-bottom:6px;">
-                                <input type="text" id="newJobPositionInput" placeholder="e.g. Graphic Designer" style="flex:1; padding:4px 8px; border:1px solid #ddd; border-radius:6px; font-size:10px;" />
-                                <button type="button" id="addJobPositionBtn" class="btn btn-primary btn-sm" style="padding:2px 12px; border-radius:12px;">Add</button>
-                            </div>
-                            <div id="jobPositionsList"></div>
-                            <div class="hint" style="font-size:8px; color:#aaa; margin-top:4px;">These positions will appear as a dropdown for the customer.</div>
-
-                            <!-- ===== CUSTOMER PREVIEW ===== -->
-                            <div class="customer-preview-select" id="customerPreviewContainer" style="margin-top:8px;">
-                                <strong style="font-size:9px; color:#555;">👤 Customer will see:</strong>
-                                <select id="customerPreviewSelect" disabled>
-                                    <option value="">— Select a position —</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- ===== END JOB POSITIONS EDITOR ===== -->
-
-                    </div>
-                </div>
-                <!-- END click-config -->
-
-                <button type="submit" class="btn btn-primary" style="margin-top:10px;"><i class="fa-solid fa-check"></i> Upload Media</button>
-                <button type="button" class="btn btn-outline" id="promoPicUploadCancelBtn">Cancel</button>
-            </form>
-        </div>
-    </div>
-
     <!-- ===== MANUAL DEPOSIT MODAL ===== -->
     <div class="modal-overlay" id="manualDepositModal">
         <div class="modal" style="max-width:380px;">
@@ -5035,6 +5048,7 @@
         let selectedUserId = null;
         let applicationsFilter = 'pending';
         let currentJobPositions = []; // holds job positions in the modal
+        let editingPromoKey = null; // for promo-upload page
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -5105,17 +5119,16 @@
         const workUploadSubmit = document.getElementById('workUploadSubmit');
         const workUploadCancelBtn = document.getElementById('workUploadCancelBtn');
 
-        const promoPicUploadModal = document.getElementById('promoPicUploadModal');
-        const promoPicUploadCloseBtn = document.getElementById('promoPicUploadCloseBtn');
+        // Promo upload page elements
+        const promoUploadTitle = document.getElementById('promoUploadTitle');
+        const promoUploadCancelBtn = document.getElementById('promoUploadCancelBtn');
+        const promoUploadCancelBtn2 = document.getElementById('promoUploadCancelBtn2');
+        const promoUploadSubmitText = document.getElementById('promoUploadSubmitText');
         const promoPicUploadForm = document.getElementById('promoPicUploadForm');
         const promoPicImagePreview = document.getElementById('promoPicImagePreview');
         const promoPicImageUrl = document.getElementById('promoPicImageUrl');
         const promoPicText = document.getElementById('promoPicText');
         const promoPicSubtext = document.getElementById('promoPicSubtext');
-        const promoPicUploadCancelBtn = document.getElementById('promoPicUploadCancelBtn');
-        const promoPicsGrid = document.getElementById('promoPicsGrid');
-        const addPromoPicBtn = document.getElementById('addPromoPicBtn');
-        const viewApplicationsBtn = document.getElementById('viewApplicationsBtn');
         const promoPicMediaType = document.getElementById('promoPicMediaType');
 
         // Click-config fields + job positions
@@ -5485,7 +5498,6 @@
             renderActivityFeed();
             renderOurServicesList();
             renderWorkPosts();
-            renderPromoPics();
             renderApplications();
 
             // ── Referral renders ──
@@ -6028,84 +6040,6 @@
                             <button class="btn-remove" data-index="${index}">✕</button>
                         </div>
                     `).join('');
-        }
-
-        function renderPromoPics() {
-            const data = allData.promoPics || {};
-            const entries = Object.entries(data);
-            entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
-
-            if (entries.length === 0) {
-                // 🔁 Removed the upload box; only a plain text message remains.
-                promoPicsGrid.innerHTML = `<div class="text-muted text-center" style="padding:30px;">No media yet. Click "Upload Media" to add your first picture or video.</div>`;
-                return;
-            }
-
-            promoPicsGrid.innerHTML = entries.map(([key, p]) => {
-                const hasClick = p.clickContent && p.clickContent.enabled;
-                const mediaType = p.mediaType || 'image';
-                const mediaHtml = mediaType === 'video'
-                    ? `<video class="pic-image" src="${p.imageUrl}" controls style="width:100%;height:100%;object-fit:contain;"></video>`
-                    : `<img class="pic-image" src="${p.imageUrl}" alt="${p.text || 'Promo'}" loading="lazy" />`;
-                return `
-                        <div class="promo-pic-card" data-key="${key}" data-mediatype="${mediaType}">
-                            ${mediaHtml}
-                            <div class="pic-overlay">
-                                <div class="pic-text">
-                                    ${p.text || 'Promo'}
-                                    ${p.subtext ? `<small>${p.subtext}</small>` : ''}
-                                    ${hasClick ? `<small style="font-weight:400;opacity:0.7;font-size:8px;">👆 tap for details</small>` : ''}
-                                </div>
-                            </div>
-                            <button class="pic-delete-btn" data-key="${key}" title="Delete media">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                            <button class="pic-edit-click-btn" data-key="${key}" title="Edit click content" style="position:absolute;top:8px;left:8px;width:28px;height:28px;border-radius:50%;background:rgba(245,184,61,0.9);color:#1c2128;border:none;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);box-shadow:0 2px 10px rgba(0,0,0,0.2);">
-                                <i class="fa-solid fa-gear"></i>
-                            </button>
-                        </div>
-                    `;
-            }).join('');
-
-            promoPicsGrid.querySelectorAll('.pic-delete-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const key = this.dataset.key;
-                    showDeleteConfirmation('promoPic', key);
-                });
-            });
-
-            promoPicsGrid.querySelectorAll('.pic-edit-click-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const key = this.dataset.key;
-                    openEditClickContent(key);
-                });
-            });
-
-            // Enlarge promo pic/video on click
-            promoPicsGrid.querySelectorAll('.promo-pic-card').forEach(card => {
-                card.addEventListener('click', function(e) {
-                    if (e.target.closest('.pic-delete-btn') || e.target.closest('.pic-edit-click-btn')) return;
-                    const mediaType = this.dataset.mediatype || 'image';
-                    const mediaEl = this.querySelector('.pic-image');
-                    const url = mediaEl.src || mediaEl.getAttribute('src') || mediaEl.getAttribute('data-src');
-                    if (mediaType === 'video') {
-                        document.getElementById('promoPicEnlargeImg').style.display = 'none';
-                        const vid = document.getElementById('promoPicEnlargeVideo');
-                        vid.src = url;
-                        vid.style.display = 'block';
-                        vid.load();
-                    } else {
-                        document.getElementById('promoPicEnlargeVideo').style.display = 'none';
-                        document.getElementById('promoPicEnlargeVideo').src = '';
-                        const img = document.getElementById('promoPicEnlargeImg');
-                        img.src = url;
-                        img.style.display = 'block';
-                    }
-                    document.getElementById('promoPicEnlargeModal').classList.add('open');
-                });
-            });
         }
 
         function renderWorkPosts() {
@@ -7262,7 +7196,7 @@
         }
 
         // ───────────────────────────────────────────────────────────────────
-        // PROMO PICS CRUD + CLICK CONTENT + JOB POSITIONS
+        // PROMO PICS CRUD + CLICK CONTENT + JOB POSITIONS (NEW PAGE)
         // ───────────────────────────────────────────────────────────────────
 
         function addPromoPic(data) {
@@ -7280,9 +7214,14 @@
             return saveData();
         }
 
-        function updatePromoPicClickContent(key, clickContent) {
+        function updatePromoPic(key, data) {
             if (!allData.promoPics || !allData.promoPics[key]) return;
-            allData.promoPics[key].clickContent = clickContent;
+            const pic = allData.promoPics[key];
+            pic.imageUrl = data.imageUrl || pic.imageUrl;
+            pic.text = data.text;
+            pic.subtext = data.subtext;
+            pic.clickContent = data.clickContent;
+            pic.mediaType = data.mediaType || pic.mediaType || 'image';
             return saveData();
         }
 
@@ -7294,40 +7233,8 @@
         }
 
         function openEditClickContent(key) {
-            const pic = allData.promoPics?.[key];
-            if (!pic) {
-                showToast('Media not found.', 'error');
-                return;
-            }
-            const cc = pic.clickContent || { enabled: true };
-            enableClickContent.checked = cc.enabled !== false;
-            clickTitle.value = cc.title || '';
-            clickInstructions.value = cc.instructions || '';
-            clickExplanation.value = cc.explanation || '';
-            clickBoldWords.value = (cc.boldWords || []).join(', ');
-            clickFormType.value = cc.formType || 'none';
-
-            // Load job positions
-            currentJobPositions = cc.jobPositions || [];
-            renderJobPositionsList(currentJobPositions);
-            if (clickFormType.value === 'job') {
-                jobPositionsEditor.style.display = 'block';
-            } else {
-                jobPositionsEditor.style.display = 'none';
-            }
-
-            promoPicUploadForm.dataset.editKey = key;
-            document.querySelector('#promoPicUploadModal h3').textContent = '✏️ Edit Media Click Content';
-            document.querySelector('#promoPicUploadModal .sub').textContent =
-            'Configure what appears when users tap this media.';
-            const submitBtn = promoPicUploadForm.querySelector('button[type="submit"]');
-            submitBtn.textContent = 'Save Click Content';
-
-            document.querySelector('#promoPicUploadModal .form-group:first-child').style.display = 'none';
-            document.querySelector('#promoPicUploadModal .form-group:nth-child(2)').style.display = 'none';
-            document.querySelector('#promoPicUploadModal .form-group:nth-child(3)').style.display = 'none';
-
-            promoPicUploadModal.classList.add('open');
+            // Navigate to the new upload page with edit param
+            showPage('promo-upload', { edit: key });
         }
 
         function renderJobPositionsList(positions) {
@@ -7365,34 +7272,64 @@
             }
         }
 
-        function resetPromoPicUploadModal() {
-            delete promoPicUploadForm.dataset.editKey;
-            document.querySelector('#promoPicUploadModal h3').textContent = '📤 Upload Media';
-            document.querySelector('#promoPicUploadModal .sub').textContent =
-            'Upload an image or video to add to the promo gallery.';
-            const submitBtn = promoPicUploadForm.querySelector('button[type="submit"]');
-            submitBtn.textContent = 'Upload Media';
-            document.querySelector('#promoPicUploadModal .form-group:first-child').style.display = '';
-            document.querySelector('#promoPicUploadModal .form-group:nth-child(2)').style.display = '';
-            document.querySelector('#promoPicUploadModal .form-group:nth-child(3)').style.display = '';
+        function resetPromoUploadPage() {
+            editingPromoKey = null;
+            document.getElementById('promoUploadTitle').textContent = 'Upload Media';
+            document.getElementById('promoUploadSubmitText').textContent = 'Upload Media';
+            promoPicImageUrl.value = '';
+            promoPicImagePreview.innerHTML =
+                `<div class="upload-icon" style="font-size:40px; color:#ccc; margin-bottom:8px;"><i class="fa-regular fa-image"></i></div><div class="upload-text" style="font-size:12px; color:#888; font-weight:500;">Tap to upload an image or video</div>`;
+            promoPicText.value = '';
+            promoPicSubtext.value = '';
+            promoPicMediaType.value = 'image';
             enableClickContent.checked = true;
             clickTitle.value = '';
             clickInstructions.value = '';
             clickExplanation.value = '';
             clickBoldWords.value = '';
             clickFormType.value = 'none';
-            promoPicImageUrl.value = '';
-            promoPicImagePreview.innerHTML =
-                `<div class="upload-icon"><i class="fa-regular fa-image"></i></div><div class="upload-text">Tap to upload an image or video</div>`;
-            promoPicText.value = '';
-            promoPicSubtext.value = '';
-            promoPicMediaType.value = 'image';
-
-            // Reset job positions
             currentJobPositions = [];
             jobPositionsList.innerHTML = '';
             jobPositionsEditor.style.display = 'none';
             customerPreviewSelect.innerHTML = `<option value="">— Select a position —</option>`;
+        }
+
+        function loadPromoUploadPage(editKey) {
+            const pic = allData.promoPics?.[editKey];
+            if (!pic) {
+                showToast('Media not found.', 'error');
+                showPage('promo-pics');
+                return;
+            }
+            editingPromoKey = editKey;
+            document.getElementById('promoUploadTitle').textContent = 'Edit Media';
+            document.getElementById('promoUploadSubmitText').textContent = 'Save Changes';
+            promoPicImageUrl.value = pic.imageUrl || '';
+            if (pic.imageUrl) {
+                const isVideo = pic.mediaType === 'video';
+                promoPicImagePreview.innerHTML = isVideo ?
+                    `<video src="${pic.imageUrl}" controls style="max-height:200px;object-fit:contain;width:100%;"></video>` :
+                    `<img src="${pic.imageUrl}" alt="Uploaded" style="max-height:200px;object-fit:contain;" />`;
+            }
+            promoPicText.value = pic.text || '';
+            promoPicSubtext.value = pic.subtext || '';
+            promoPicMediaType.value = pic.mediaType || 'image';
+
+            const cc = pic.clickContent || { enabled: true };
+            enableClickContent.checked = cc.enabled !== false;
+            clickTitle.value = cc.title || '';
+            clickInstructions.value = cc.instructions || '';
+            clickExplanation.value = cc.explanation || '';
+            clickBoldWords.value = (cc.boldWords || []).join(', ');
+            clickFormType.value = cc.formType || 'none';
+
+            currentJobPositions = cc.jobPositions || [];
+            renderJobPositionsList(currentJobPositions);
+            if (clickFormType.value === 'job') {
+                jobPositionsEditor.style.display = 'block';
+            } else {
+                jobPositionsEditor.style.display = 'none';
+            }
         }
 
         // ───────────────────────────────────────────────────────────────────
@@ -8704,31 +8641,22 @@
             }
         });
 
-        // ── PROMO PIC UPLOAD MODAL ──
+        // ── PROMO PICS UPLOAD PAGE NAVIGATION ──
 
-        addPromoPicBtn.addEventListener('click', () => {
-            resetPromoPicUploadModal();
-            promoPicUploadModal.classList.add('open');
-        });
-
-        uploadMediaFromAppsBtn.addEventListener('click', () => {
-            resetPromoPicUploadModal();
-            promoPicUploadModal.classList.add('open');
+        document.getElementById('addPromoPicBtn').addEventListener('click', () => {
+            showPage('promo-upload');
         });
 
-        promoPicUploadCloseBtn.addEventListener('click', () => {
-            promoPicUploadModal.classList.remove('open');
-            resetPromoPicUploadModal();
+        document.getElementById('uploadMediaFromAppsBtn').addEventListener('click', () => {
+            showPage('promo-upload');
         });
-        promoPicUploadCancelBtn.addEventListener('click', () => {
-            promoPicUploadModal.classList.remove('open');
-            resetPromoPicUploadModal();
+
+        // Cancel buttons on upload page
+        document.getElementById('promoUploadCancelBtn').addEventListener('click', () => {
+            showPage('promo-pics');
         });
-        promoPicUploadModal.addEventListener('click', (e) => {
-            if (e.target === promoPicUploadModal) {
-                promoPicUploadModal.classList.remove('open');
-                resetPromoPicUploadModal();
-            }
+        document.getElementById('promoUploadCancelBtn2').addEventListener('click', () => {
+            showPage('promo-pics');
         });
 
         // Click-config toggle
@@ -8738,6 +8666,7 @@
         });
         clickConfigFields.querySelectorAll('input, textarea, select').forEach(el => el.disabled = false);
 
+        // Setup Cloudinary for promo page
         setupCloudinaryUpload(promoPicImagePreview, promoPicImageUrl, promoPicImagePreview, (url, info) => {
             promoPicMediaType.value = info.resource_type || 'image';
         }, { resourceType: 'auto' });
@@ -8765,7 +8694,6 @@
             newJobPositionInput.value = '';
         });
 
-        // Allow Enter key on input to add
         newJobPositionInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
@@ -8773,42 +8701,14 @@
             }
         });
 
-        promoPicUploadForm.addEventListener('submit', function(e) {
+        // ── PROMO UPLOAD FORM SUBMIT ──
+        document.getElementById('promoPicUploadForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
-            const editKey = this.dataset.editKey;
-            if (editKey) {
-                const clickContent = {
-                    enabled: enableClickContent.checked,
-                    title: clickTitle.value.trim(),
-                    instructions: clickInstructions.value.trim(),
-                    explanation: clickExplanation.value.trim(),
-                    boldWords: clickBoldWords.value.trim().split(',').map(w => w.trim()).filter(w => w),
-                    formType: clickFormType.value,
-                    jobPositions: clickFormType.value === 'job' ? (currentJobPositions || []) : []
-                };
-                updatePromoPicClickContent(editKey, clickContent).then(() => {
-                    renderAll();
-                    promoPicUploadModal.classList.remove('open');
-                    resetPromoPicUploadModal();
-                    showToast('Click content updated!', 'success');
-                });
-                return;
-            }
 
             const imageUrl = promoPicImageUrl.value;
             const text = promoPicText.value.trim();
             const subtext = promoPicSubtext.value.trim();
             const mediaType = promoPicMediaType.value || 'image';
-
-            if (!imageUrl) {
-                showToast('Please upload a file first', 'error');
-                return;
-            }
-            if (!text) {
-                showToast('Please enter overlay text', 'error');
-                return;
-            }
 
             const clickContent = {
                 enabled: enableClickContent.checked,
@@ -8820,10 +8720,41 @@
                 jobPositions: clickFormType.value === 'job' ? (currentJobPositions || []) : []
             };
 
+            if (editingPromoKey) {
+                // Update existing
+                const currentPic = allData.promoPics?.[editingPromoKey];
+                if (!currentPic) {
+                    showToast('Media not found.', 'error');
+                    return;
+                }
+                const updateData = {
+                    imageUrl: imageUrl || currentPic.imageUrl,
+                    text: text || currentPic.text,
+                    subtext: subtext || currentPic.subtext,
+                    clickContent: clickContent,
+                    mediaType: mediaType
+                };
+                updatePromoPic(editingPromoKey, updateData).then(() => {
+                    renderAll();
+                    showPage('promo-pics');
+                    showToast('Media updated!', 'success');
+                });
+                return;
+            }
+
+            // New upload
+            if (!imageUrl) {
+                showToast('Please upload a file first', 'error');
+                return;
+            }
+            if (!text) {
+                showToast('Please enter overlay text', 'error');
+                return;
+            }
+
             addPromoPic({ imageUrl, text, subtext, clickContent, mediaType }).then(() => {
                 renderAll();
-                promoPicUploadModal.classList.remove('open');
-                resetPromoPicUploadModal();
+                showPage('promo-pics');
                 showToast('Media uploaded!', 'success');
             });
         });
@@ -9309,7 +9240,15 @@
                     renderServices();
                     break;
                 case 'promo-pics':
-                    renderPromoPics();
+                    // No gallery to render, just a placeholder
+                    break;
+                case 'promo-upload':
+                    const editKey = params.edit || null;
+                    if (editKey) {
+                        loadPromoUploadPage(editKey);
+                    } else {
+                        resetPromoUploadPage();
+                    }
                     break;
                 case 'orders':
                     renderOrders(document.getElementById('orderSearchInput').value, document.getElementById('orderStatusFilter')
@@ -9465,7 +9404,7 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Hash routing enabled: back/forward navigation works, no logout. Added Upload Media button on Applications page, styled form type dropdown.');
+        console.log('✅ Admin Dashboard — Hash routing enabled. Promo upload is now a full page (not a modal).');
     </script>
 </body>
 </html>
