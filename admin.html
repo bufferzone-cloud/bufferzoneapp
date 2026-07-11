@@ -4063,11 +4063,11 @@
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
                         <div>
                             <h2 style="font-size:20px; font-weight:800; color:#1c2128;"><i class="fa-regular fa-images" style="color:#f5b83d;"></i> Promo Pics</h2>
-                            <p style="font-size:11px; color:#888;">Upload flyer pictures — each with a text overlay and delete option.</p>
+                            <p style="font-size:11px; color:#888;">Upload media files (images or videos) — each with a text overlay and delete option.</p>
                         </div>
                         <div style="display:flex;gap:8px;flex-wrap:wrap;">
                             <button class="btn btn-primary" id="addPromoPicBtn" style="padding:8px 20px; font-size:12px; border-radius:24px;">
-                                <i class="fa-solid fa-cloud-arrow-up"></i> Upload Flyer
+                                <i class="fa-solid fa-cloud-arrow-up"></i> Upload Media
                             </button>
                             <button class="btn btn-success" id="viewApplicationsBtn" style="padding:8px 20px; font-size:12px; border-radius:24px; background:#f5b83d; color:#1c2128;">
                                 <i class="fa-solid fa-clipboard-list"></i> Applications
@@ -4661,14 +4661,15 @@
     <div class="modal-overlay" id="promoPicUploadModal">
         <div class="modal" style="max-width:480px;">
             <button class="close-btn" id="promoPicUploadCloseBtn"><i class="fa-solid fa-times"></i></button>
-            <h3><i class="fa-regular fa-images" style="color:#f5b83d;"></i> Upload Flyer</h3>
-            <p class="sub">Upload a flyer picture and add text to display on the overlay.</p>
+            <h3><i class="fa-regular fa-images" style="color:#f5b83d;"></i> Upload Media</h3>
+            <p class="sub">Upload an image or video to add to the promo gallery.</p>
             <form id="promoPicUploadForm">
+                <input type="hidden" id="promoPicMediaType" value="image" />
                 <div class="form-group">
-                    <label>Flyer Image</label>
+                    <label>Media File</label>
                     <div class="upload-preview" id="promoPicImagePreview">
                         <div class="upload-icon"><i class="fa-regular fa-image"></i></div>
-                        <div class="upload-text">Tap to upload an image</div>
+                        <div class="upload-text">Tap to upload an image or video</div>
                     </div>
                     <input type="hidden" id="promoPicImageUrl" />
                 </div>
@@ -4745,7 +4746,7 @@
                 </div>
                 <!-- END click-config -->
 
-                <button type="submit" class="btn btn-primary" style="margin-top:10px;"><i class="fa-solid fa-check"></i> Upload Flyer</button>
+                <button type="submit" class="btn btn-primary" style="margin-top:10px;"><i class="fa-solid fa-check"></i> Upload Media</button>
                 <button type="button" class="btn btn-outline" id="promoPicUploadCancelBtn">Cancel</button>
             </form>
         </div>
@@ -4951,7 +4952,8 @@
     <div class="screenshot-modal-overlay" id="promoPicEnlargeModal">
         <div class="screenshot-modal-content" style="max-width:90vw; background:#fff; padding:16px; border-radius:16px;">
             <button class="close-btn" id="promoPicEnlargeCloseBtn"><i class="fa-solid fa-times"></i></button>
-            <img id="promoPicEnlargeImg" src="" alt="Enlarged Flyer" style="width:100%; height:auto; max-height:90vh; object-fit:contain;" />
+            <img id="promoPicEnlargeImg" src="" alt="Enlarged Media" style="width:100%; height:auto; max-height:90vh; object-fit:contain; display:block;" />
+            <video id="promoPicEnlargeVideo" src="" controls style="width:100%; height:auto; max-height:90vh; object-fit:contain; display:none;"></video>
         </div>
     </div>
 
@@ -5088,6 +5090,7 @@
         const promoPicsGrid = document.getElementById('promoPicsGrid');
         const addPromoPicBtn = document.getElementById('addPromoPicBtn');
         const viewApplicationsBtn = document.getElementById('viewApplicationsBtn');
+        const promoPicMediaType = document.getElementById('promoPicMediaType');
 
         // Click-config fields + job positions
         const enableClickContent = document.getElementById('enableClickContent');
@@ -5351,22 +5354,24 @@
         // CLOUDINARY UPLOAD
         // ───────────────────────────────────────────────────────────────────
 
-        function setupCloudinaryUpload(triggerEl, urlInputEl, previewEl, onSuccess) {
+        function setupCloudinaryUpload(triggerEl, urlInputEl, previewEl, onSuccess, options = {}) {
             triggerEl.addEventListener('click', () => {
-                const options = {
+                const widgetOptions = {
                     cloudName: CLOUDINARY_CLOUD_NAME,
                     uploadPreset: CLOUDINARY_UPLOAD_PRESET,
                     sources: ['local', 'url', 'camera'],
                     maxFileSize: MAX_FILE_SIZE,
-                    resourceType: 'image',
-                    clientAllowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'bmp', 'tiff'],
+                    resourceType: options.resourceType || 'image',
                     maxFiles: 1,
                     multiple: false,
                     fieldName: 'file',
                     language: 'en',
                     defaultSource: 'local'
                 };
-                const widget = cloudinary.openUploadWidget(options, (error, result) => {
+                if (!options.resourceType || options.resourceType === 'image') {
+                    widgetOptions.clientAllowedFormats = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'bmp', 'tiff'];
+                }
+                const widget = cloudinary.openUploadWidget(widgetOptions, (error, result) => {
                     if (error) {
                         console.error('Cloudinary error:', error);
                         showToast('Upload error: ' + (error.message || 'Unknown'), 'error');
@@ -5376,9 +5381,13 @@
                         const info = result.info;
                         const url = info.secure_url;
                         urlInputEl.value = url;
-                        previewEl.innerHTML = `<img src="${url}" alt="Uploaded" style="max-height:200px;object-fit:contain;" />`;
-                        if (onSuccess) onSuccess(url);
-                        showToast('Image uploaded successfully!', 'success');
+                        if (info.resource_type === 'video') {
+                            previewEl.innerHTML = `<video src="${url}" controls style="max-height:200px;object-fit:contain;width:100%;"></video>`;
+                        } else {
+                            previewEl.innerHTML = `<img src="${url}" alt="Uploaded" style="max-height:200px;object-fit:contain;" />`;
+                        }
+                        if (onSuccess) onSuccess(url, info);
+                        showToast('Media uploaded successfully!', 'success');
                     }
                 });
                 widget.open();
@@ -6003,8 +6012,8 @@
                 promoPicsGrid.innerHTML = `
                             <div class="promo-pics-upload-area" id="emptyPromoUpload">
                                 <div class="upload-icon"><i class="fa-regular fa-images"></i></div>
-                                <div class="upload-text">No flyers yet</div>
-                                <div class="upload-sub">Tap "Upload Flyer" to add your first promo picture</div>
+                                <div class="upload-text">No media yet</div>
+                                <div class="upload-sub">Tap "Upload Media" to add your first picture or video</div>
                             </div>
                         `;
                 document.getElementById('emptyPromoUpload')?.addEventListener('click', () => {
@@ -6015,9 +6024,13 @@
 
             promoPicsGrid.innerHTML = entries.map(([key, p]) => {
                 const hasClick = p.clickContent && p.clickContent.enabled;
+                const mediaType = p.mediaType || 'image';
+                const mediaHtml = mediaType === 'video'
+                    ? `<video class="pic-image" src="${p.imageUrl}" controls style="width:100%;height:100%;object-fit:contain;"></video>`
+                    : `<img class="pic-image" src="${p.imageUrl}" alt="${p.text || 'Promo'}" loading="lazy" />`;
                 return `
-                        <div class="promo-pic-card" data-key="${key}">
-                            <img class="pic-image" src="${p.imageUrl}" alt="${p.text || 'Promo'}" loading="lazy" />
+                        <div class="promo-pic-card" data-key="${key}" data-mediatype="${mediaType}">
+                            ${mediaHtml}
                             <div class="pic-overlay">
                                 <div class="pic-text">
                                     ${p.text || 'Promo'}
@@ -6025,7 +6038,7 @@
                                     ${hasClick ? `<small style="font-weight:400;opacity:0.7;font-size:8px;">👆 tap for details</small>` : ''}
                                 </div>
                             </div>
-                            <button class="pic-delete-btn" data-key="${key}" title="Delete flyer">
+                            <button class="pic-delete-btn" data-key="${key}" title="Delete media">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                             <button class="pic-edit-click-btn" data-key="${key}" title="Edit click content" style="position:absolute;top:8px;left:8px;width:28px;height:28px;border-radius:50%;background:rgba(245,184,61,0.9);color:#1c2128;border:none;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);box-shadow:0 2px 10px rgba(0,0,0,0.2);">
@@ -6051,15 +6064,27 @@
                 });
             });
 
-            // Enlarge promo pic on click
+            // Enlarge promo pic/video on click
             promoPicsGrid.querySelectorAll('.promo-pic-card').forEach(card => {
                 card.addEventListener('click', function(e) {
                     if (e.target.closest('.pic-delete-btn') || e.target.closest('.pic-edit-click-btn')) return;
-                    const img = this.querySelector('.pic-image');
-                    if (img) {
-                        document.getElementById('promoPicEnlargeImg').src = img.src;
-                        document.getElementById('promoPicEnlargeModal').classList.add('open');
+                    const mediaType = this.dataset.mediatype || 'image';
+                    const mediaEl = this.querySelector('.pic-image');
+                    const url = mediaEl.src || mediaEl.getAttribute('src') || mediaEl.getAttribute('data-src');
+                    if (mediaType === 'video') {
+                        document.getElementById('promoPicEnlargeImg').style.display = 'none';
+                        const vid = document.getElementById('promoPicEnlargeVideo');
+                        vid.src = url;
+                        vid.style.display = 'block';
+                        vid.load();
+                    } else {
+                        document.getElementById('promoPicEnlargeVideo').style.display = 'none';
+                        document.getElementById('promoPicEnlargeVideo').src = '';
+                        const img = document.getElementById('promoPicEnlargeImg');
+                        img.src = url;
+                        img.style.display = 'block';
                     }
+                    document.getElementById('promoPicEnlargeModal').classList.add('open');
                 });
             });
         }
@@ -7230,7 +7255,8 @@
                 text: data.text || '',
                 subtext: data.subtext || '',
                 createdAt: Date.now(),
-                clickContent: data.clickContent || { enabled: true }
+                clickContent: data.clickContent || { enabled: true },
+                mediaType: data.mediaType || 'image'
             };
             return saveData();
         }
@@ -7251,7 +7277,7 @@
         function openEditClickContent(key) {
             const pic = allData.promoPics?.[key];
             if (!pic) {
-                showToast('Flyer not found.', 'error');
+                showToast('Media not found.', 'error');
                 return;
             }
             const cc = pic.clickContent || { enabled: true };
@@ -7272,9 +7298,9 @@
             }
 
             promoPicUploadForm.dataset.editKey = key;
-            document.querySelector('#promoPicUploadModal h3').textContent = '✏️ Edit Flyer Click Content';
+            document.querySelector('#promoPicUploadModal h3').textContent = '✏️ Edit Media Click Content';
             document.querySelector('#promoPicUploadModal .sub').textContent =
-            'Configure what appears when users tap this flyer.';
+            'Configure what appears when users tap this media.';
             const submitBtn = promoPicUploadForm.querySelector('button[type="submit"]');
             submitBtn.textContent = 'Save Click Content';
 
@@ -7322,11 +7348,11 @@
 
         function resetPromoPicUploadModal() {
             delete promoPicUploadForm.dataset.editKey;
-            document.querySelector('#promoPicUploadModal h3').textContent = '📤 Upload Flyer';
+            document.querySelector('#promoPicUploadModal h3').textContent = '📤 Upload Media';
             document.querySelector('#promoPicUploadModal .sub').textContent =
-            'Upload a flyer picture and add text to display on the overlay.';
+            'Upload an image or video to add to the promo gallery.';
             const submitBtn = promoPicUploadForm.querySelector('button[type="submit"]');
-            submitBtn.textContent = 'Upload Flyer';
+            submitBtn.textContent = 'Upload Media';
             document.querySelector('#promoPicUploadModal .form-group:first-child').style.display = '';
             document.querySelector('#promoPicUploadModal .form-group:nth-child(2)').style.display = '';
             document.querySelector('#promoPicUploadModal .form-group:nth-child(3)').style.display = '';
@@ -7338,9 +7364,10 @@
             clickFormType.value = 'none';
             promoPicImageUrl.value = '';
             promoPicImagePreview.innerHTML =
-                `<div class="upload-icon"><i class="fa-regular fa-image"></i></div><div class="upload-text">Tap to upload an image</div>`;
+                `<div class="upload-icon"><i class="fa-regular fa-image"></i></div><div class="upload-text">Tap to upload an image or video</div>`;
             promoPicText.value = '';
             promoPicSubtext.value = '';
+            promoPicMediaType.value = 'image';
 
             // Reset job positions
             currentJobPositions = [];
@@ -7680,7 +7707,7 @@
                 'service': 'Are you sure you want to delete this service?',
                 'category': 'Are you sure you want to delete this category? (This will also remove all services under it)',
                 'workPost': 'Are you sure you want to delete this work post?',
-                'promoPic': 'Are you sure you want to delete this flyer?',
+                'promoPic': 'Are you sure you want to delete this media?',
                 'referralPromo': 'Are you sure you want to delete this referral promo?',
                 'customReferral': 'Are you sure you want to delete this custom referral?',
                 'referralDiscount': 'Are you sure you want to delete this referral discount?',
@@ -7741,7 +7768,7 @@
                     showToast('Work post deleted'); });
             } else if (type === 'promoPic') {
                 deletePromoPic(key).then(() => { renderAll();
-                    showToast('Flyer deleted'); });
+                    showToast('Media deleted'); });
             } else if (type === 'referralPromo') {
                 if (allData.referralPromos && allData.referralPromos[key]) {
                     delete allData.referralPromos[key];
@@ -8687,7 +8714,9 @@
         });
         clickConfigFields.querySelectorAll('input, textarea, select').forEach(el => el.disabled = false);
 
-        setupCloudinaryUpload(promoPicImagePreview, promoPicImageUrl, promoPicImagePreview);
+        setupCloudinaryUpload(promoPicImagePreview, promoPicImageUrl, promoPicImagePreview, (url, info) => {
+            promoPicMediaType.value = info.resource_type || 'image';
+        }, { resourceType: 'auto' });
 
         // ── Job Positions toggle & add ──
         clickFormType.addEventListener('change', function() {
@@ -8746,9 +8775,10 @@
             const imageUrl = promoPicImageUrl.value;
             const text = promoPicText.value.trim();
             const subtext = promoPicSubtext.value.trim();
+            const mediaType = promoPicMediaType.value || 'image';
 
             if (!imageUrl) {
-                showToast('Please upload an image first', 'error');
+                showToast('Please upload a file first', 'error');
                 return;
             }
             if (!text) {
@@ -8766,11 +8796,11 @@
                 jobPositions: clickFormType.value === 'job' ? (currentJobPositions || []) : []
             };
 
-            addPromoPic({ imageUrl, text, subtext, clickContent }).then(() => {
+            addPromoPic({ imageUrl, text, subtext, clickContent, mediaType }).then(() => {
                 renderAll();
                 promoPicUploadModal.classList.remove('open');
                 resetPromoPicUploadModal();
-                showToast('Flyer uploaded!', 'success');
+                showToast('Media uploaded!', 'success');
             });
         });
 
