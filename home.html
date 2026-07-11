@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -267,7 +268,7 @@
             font-weight: 700;
         }
 
-        /* ===== PROMO CAROUSEL – EDGE TO EDGE, STRICT 1200x675 (16:9) ===== */
+        /* ===== PROMO CAROUSEL – EDGE TO EDGE, 6% PEEK (88% slide width) ===== */
         .promo-carousel-wrapper {
             position: relative;
             margin: 3px 0 12px 0;
@@ -3728,7 +3729,7 @@
         }
 
         // =================================================================
-        // PROMO CAROUSEL – INFINITE PEEK STYLE WITH REVERSE
+        // PROMO CAROUSEL – INFINITE PEEK STYLE WITH REVERSE (6% peek)
         // =================================================================
 
         function renderPromoCarousel() {
@@ -3871,34 +3872,28 @@
                                 clearInterval(autoScrollTimer);
                                 autoScrollTimer = null;
                             }
+                            // Unmute and play with sound
+                            videoEl.muted = false;
                             videoEl.play();
                             this.classList.add('video-playing');
                             if (playOverlay) playOverlay.style.opacity = '0';
-                            // If user clicks again (video is playing), expand the flyer detail
                             e.stopPropagation();
-                            // But we also need to handle the second click to expand
-                            // We'll handle this via a separate event listener for the slide's click if video is playing
+                            return;
                         } else {
-                            // Video is playing, toggle pause or expand
-                            if (videoEl.paused === false) {
-                                // If clicked while playing, we expand the flyer detail
-                                if (key) {
-                                    const flyer = allData.promoPics?.[key];
-                                    if (flyer && flyer.clickContent?.enabled) {
-                                        openFlyerDetail(key);
-                                    } else {
-                                        showToast('This flyer cannot be enlarged.', 'info');
-                                    }
+                            // Video is playing, expand the flyer detail
+                            if (key) {
+                                const flyer = allData.promoPics?.[key];
+                                if (flyer && flyer.clickContent?.enabled) {
+                                    openFlyerDetail(key);
+                                } else {
+                                    showToast('This flyer cannot be enlarged.', 'info');
                                 }
-                            } else {
-                                videoEl.play();
-                                this.classList.add('video-playing');
-                                if (playOverlay) playOverlay.style.opacity = '0';
                             }
+                            return;
                         }
-                        return;
                     }
 
+                    // For images or non‑video: expand
                     if (key) {
                         const flyer = allData.promoPics?.[key];
                         if (flyer && flyer.clickContent?.enabled) {
@@ -3910,7 +3905,7 @@
                 });
             });
 
-            // Also handle video pause when clicking on video itself to stop propagation
+            // Also handle video pause/resume events to update overlay and autoscroll
             slides.forEach(slide => {
                 const videoEl = slide.querySelector('video');
                 if (videoEl) {
@@ -3918,6 +3913,7 @@
                         e.stopPropagation();
                         // Toggle play/pause
                         if (this.paused) {
+                            this.muted = false;
                             this.play();
                             slide.classList.add('video-playing');
                             const overlay = slide.querySelector('.video-play-overlay');
@@ -6647,7 +6643,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code updated: videos now strictly fill 1200x675 (16:9) ratio with object-fit:cover. Play/pause/expand logic works.');
+        console.log('✅ Customer code updated: videos now strictly fill 1200x675 (16:9) ratio with object-fit:cover. Play/pause/expand logic works. Sound enabled on play. 6% peek preserved. All lists sorted newest first.');
     </script>
 </body>
 </html>
