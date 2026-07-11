@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6037,16 +6036,8 @@
             entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
 
             if (entries.length === 0) {
-                promoPicsGrid.innerHTML = `
-                            <div class="promo-pics-upload-area" id="emptyPromoUpload">
-                                <div class="upload-icon"><i class="fa-regular fa-images"></i></div>
-                                <div class="upload-text">No media yet</div>
-                                <div class="upload-sub">Tap "Upload Media" to add your first picture or video</div>
-                            </div>
-                        `;
-                document.getElementById('emptyPromoUpload')?.addEventListener('click', () => {
-                    promoPicUploadModal.classList.add('open');
-                });
+                // 🔁 Removed the upload box; only a plain text message remains.
+                promoPicsGrid.innerHTML = `<div class="text-muted text-center" style="padding:30px;">No media yet. Click "Upload Media" to add your first picture or video.</div>`;
                 return;
             }
 
