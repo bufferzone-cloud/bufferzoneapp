@@ -271,8 +271,8 @@
         }
 
         /* ================================================================
-           PROMO CAROUSEL – EDGE‑TO‑EDGE WITH 10% PEEK (80% slide width)
-           ================================================================ */
+               PROMO CAROUSEL – EDGE‑TO‑EDGE WITH 10% PEEK (80% slide width)
+               ================================================================ */
         .promo-carousel-wrapper {
             position: relative;
             margin: 3px 0 12px 0;
@@ -4097,7 +4097,7 @@
             const container = ordersGrid;
             const orders = allData.orders || {};
             const entries = Object.entries(orders).filter(([key, o]) => o.userId === currentUserId);
-            entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+            entries.sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
 
             if (entries.length === 0) {
                 container.innerHTML =
@@ -4166,7 +4166,7 @@
             const container = historyList;
             const transactions = allData.transactions || {};
             const entries = Object.entries(transactions).filter(([key, t]) => t.userId === currentUserId);
-            entries.sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
+            entries.sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
             const orders = allData.orders || {};
             let pendingReminder = null;
@@ -4334,7 +4334,8 @@
                     itemType: 'service',
                     userName: orderData.customer || currentUserData?.firstName || 'Customer',
                     userEmail: currentUser.email || 'N/A',
-                    userPhone: currentUserData?.phone || 'N/A'
+                    userPhone: currentUserData?.phone || 'N/A',
+                    timestamp: Date.now()
                 };
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 set(txRef, txData);
@@ -4592,7 +4593,7 @@
             const transactions = allData.transactions || {};
             const entries = Object.entries(transactions)
                 .filter(([key, t]) => t.userId === currentUserId && !t.type?.toLowerCase().includes('withdraw'))
-                .sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
+                .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
             if (entries.length === 0) {
                 container.innerHTML =
@@ -4703,7 +4704,7 @@
             const withdrawals = allData.withdrawalRequests || {};
             const entries = Object.entries(withdrawals)
                 .filter(([key, w]) => w.userId === currentUserId)
-                .sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+                .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
             if (entries.length === 0) {
                 container.innerHTML = `
@@ -4786,7 +4787,7 @@
                     const isSend = t.type?.toLowerCase().includes('sent') || t.type?.toLowerCase().includes('received');
                     return t.userId === currentUserId && (isSend || t.type?.toLowerCase().includes('send'));
                 })
-                .sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
+                .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
             if (entries.length === 0) {
                 container.innerHTML = `<div class="empty-tx">No sent or received transactions yet.</div>`;
@@ -5358,7 +5359,8 @@
                     itemType: 'service',
                     userName: customerName,
                     userEmail: currentUser.email || 'N/A',
-                    userPhone: currentUserData?.phone || 'N/A'
+                    userPhone: currentUserData?.phone || 'N/A',
+                    timestamp: Date.now()
                 };
                 set(txRef, txData);
 
@@ -5378,7 +5380,8 @@
                     itemType: 'service',
                     userName: customerName,
                     userEmail: currentUser.email || 'N/A',
-                    userPhone: currentUserData?.phone || 'N/A'
+                    userPhone: currentUserData?.phone || 'N/A',
+                    timestamp: Date.now()
                 };
                 set(orderTxRef, orderTxData);
 
@@ -5408,7 +5411,8 @@
                     itemType: 'service',
                     userName: customerName,
                     userEmail: currentUser.email || 'N/A',
-                    userPhone: currentUserData?.phone || 'N/A'
+                    userPhone: currentUserData?.phone || 'N/A',
+                    timestamp: Date.now()
                 };
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 set(txRef, txData);
@@ -5469,7 +5473,8 @@
                         itemType: 'referral',
                         userName: customerName,
                         userEmail: currentUser.email || 'N/A',
-                        userPhone: currentUserData?.phone || 'N/A'
+                        userPhone: currentUserData?.phone || 'N/A',
+                        timestamp: Date.now()
                     };
                     set(txRef, txData);
 
@@ -5603,7 +5608,7 @@
                     currentUser.email || 'Customer',
                 userEmail: currentUser.email || 'N/A',
                 userPhone: currentUserData?.phone || 'N/A',
-                timestamp: Date.now() // <-- ADDED TIMESTAMP
+                timestamp: Date.now()
             };
 
             saveData().then(() => {
@@ -6316,7 +6321,7 @@
             const apps = allData.applications || {};
             const entries = Object.entries(apps)
                 .filter(([key, a]) => a.userId === currentUserId)
-                .sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+                .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
 
             if (entries.length === 0) {
                 container.innerHTML = `
@@ -6628,7 +6633,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code updated with 80% slide width (10% peek) and withdrawals now include timestamp for correct sorting in history.');
+        console.log('✅ Customer code updated with 80% slide width (10% peek) to guarantee visibility of prev/next flyers on all phone screens.');
     </script>
 </body>
 </html>
