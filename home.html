@@ -271,7 +271,7 @@
         }
 
         /* ================================================================
-               PROMO CAROUSEL – EDGE‑TO‑EDGE WITH 6% PEEK (88% slide width)
+               PROMO CAROUSEL – EDGE‑TO‑EDGE WITH 9% PEEK (82% slide width)
                ================================================================ */
         .promo-carousel-wrapper {
             position: relative;
@@ -312,11 +312,11 @@
             display: none;
         }
 
-        /* ---- Each slide occupies 88% of the container width,
-               leaving 6% peek on each side for prev/next ---- */
+        /* ---- Each slide occupies 82% of the container width,
+               leaving 9% peek on each side for prev/next ---- */
         .promo-slide {
-            flex: 0 0 88%;
-            max-width: 88%;
+            flex: 0 0 82%;
+            max-width: 82%;
             scroll-snap-align: center;
             position: relative;
             border-radius: 17px;
@@ -3522,7 +3522,6 @@
                 document.getElementById('flyerDetailView').classList.remove('active');
             }
             document.getElementById('appContent').scrollTop = 0;
-            // Push state for back navigation
             if (viewId !== 'homeView') {
                 window.history.pushState({ view: viewId }, '', '');
             }
@@ -3747,7 +3746,7 @@
         }
 
         // =================================================================
-        // PROMO CAROUSEL – INFINITE PEEK STYLE WITH REVERSE (6% peek)
+        // PROMO CAROUSEL – INFINITE PEEK STYLE WITH REVERSE (9% peek)
         // =================================================================
 
         function renderPromoCarousel() {
@@ -3873,7 +3872,6 @@
 
             startAutoScroll();
 
-            // Click event for slides – only if clickable
             slides.forEach(slide => {
                 slide.addEventListener('click', function(e) {
                     const key = this.dataset.key;
@@ -6629,7 +6627,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code rewritten with flyer carousel layout from first code: 88% slide width (6% peek), active slide scaled 1.08, prev/next scaled 0.85, far slides 0.70. Video support, 16:9 ratio, 3s auto-scroll, play/pause/expand logic intact.');
+        console.log('✅ Customer code updated with 82% slide width (9% peek) to guarantee visibility of prev/next flyers on all phone screens.');
     </script>
 </body>
 </html>
