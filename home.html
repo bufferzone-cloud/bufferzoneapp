@@ -271,8 +271,8 @@
         }
 
         /* ================================================================
-               PROMO CAROUSEL – EDGE‑TO‑EDGE WITH 9% PEEK (82% slide width)
-               ================================================================ */
+           PROMO CAROUSEL – EDGE‑TO‑EDGE WITH 10% PEEK (80% slide width)
+           ================================================================ */
         .promo-carousel-wrapper {
             position: relative;
             margin: 3px 0 12px 0;
@@ -312,11 +312,11 @@
             display: none;
         }
 
-        /* ---- Each slide occupies 82% of the container width,
-               leaving 9% peek on each side for prev/next ---- */
+        /* ---- Each slide occupies 80% of the container width,
+               leaving 10% peek on each side for prev/next ---- */
         .promo-slide {
-            flex: 0 0 82%;
-            max-width: 82%;
+            flex: 0 0 80%;
+            max-width: 80%;
             scroll-snap-align: center;
             position: relative;
             border-radius: 17px;
@@ -3746,7 +3746,7 @@
         }
 
         // =================================================================
-        // PROMO CAROUSEL – INFINITE PEEK STYLE WITH REVERSE (9% peek)
+        // PROMO CAROUSEL – INFINITE PEEK STYLE WITH REVERSE (10% peek)
         // =================================================================
 
         function renderPromoCarousel() {
@@ -5602,7 +5602,8 @@
                 userName: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
                     currentUser.email || 'Customer',
                 userEmail: currentUser.email || 'N/A',
-                userPhone: currentUserData?.phone || 'N/A'
+                userPhone: currentUserData?.phone || 'N/A',
+                timestamp: Date.now() // <-- ADDED TIMESTAMP
             };
 
             saveData().then(() => {
@@ -6627,7 +6628,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code updated with 82% slide width (9% peek) to guarantee visibility of prev/next flyers on all phone screens.');
+        console.log('✅ Customer code updated with 80% slide width (10% peek) and withdrawals now include timestamp for correct sorting in history.');
     </script>
 </body>
 </html>
