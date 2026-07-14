@@ -9,7 +9,7 @@
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
     </script>
     <style>
-        /* ===== RESET & BASE ===== */
+        /* ── All existing styles (unchanged) ── */
         * {
             margin: 0;
             padding: 0;
@@ -282,7 +282,6 @@
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.08);
             padding: 0;
             transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            /* 1200/675 = 16/9 */
             aspect-ratio: 1200 / 675;
             width: 100%;
             max-height: 80vh;
@@ -312,8 +311,6 @@
             display: none;
         }
 
-        /* ---- Each slide occupies 80% of the container width,
-               leaving 10% peek on each side for prev/next ---- */
         .promo-slide {
             flex: 0 0 80%;
             max-width: 80%;
@@ -385,7 +382,6 @@
             text-shadow: 0 1px 7px rgba(0, 0, 0, 0.3);
         }
 
-        /* Video play overlay */
         .promo-slide .video-play-overlay {
             position: absolute;
             top: 50%;
@@ -410,7 +406,6 @@
             pointer-events: none;
         }
 
-        /* tap indicator at bottom‑right */
         .promo-slide .tap-indicator {
             position: absolute;
             bottom: 12px;
@@ -423,7 +418,6 @@
             pointer-events: none;
         }
 
-        /* ---- State classes (applied via JS) ---- */
         .promo-slide.prev-slide,
         .promo-slide.next-slide {
             transform: scale(0.85) !important;
@@ -3305,6 +3299,8 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
         import { getDatabase, ref, onValue, set, push, get, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+        // NEW: Import Messaging
+        import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-messaging.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBy8ZAMagjX627gcfe0NuRaC1WfC736en0",
@@ -3319,10 +3315,13 @@
 
         const CLOUD_NAME = 'dd3lcymrk';
         const UPLOAD_PRESET = 'h3eyhc2o';
+        // VAPID key from admin
+        const VAPID_KEY = "BOkohCEBQhlS69mnlH-6VGDpBz8cMDscxyE_NpwedsBG_1pC5wSh5HwXPpIwKTMk2YiELQOYDhCTxvDWHmS88aw";
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
         const auth = getAuth(app);
+        const messaging = getMessaging(app);
 
         // =================================================================
         // STATE
@@ -3612,6 +3611,102 @@
                 });
                 widget.open();
             });
+        }
+
+        // =================================================================
+        // FCM – REQUEST PERMISSION, GET TOKEN, STORE IN DB
+        // =================================================================
+
+        async function setupFCM() {
+            try {
+                const permission = await Notification.requestPermission();
+                if (permission === 'granted') {
+                    console.log('✅ Notification permission granted.');
+                    const token = await getToken(messaging, { vapidKey: VAPID_KEY });
+                    console.log('🔔 FCM Token:', token);
+                    // Store token in user's record
+                    if (currentUserId) {
+                        const userTokenRef = ref(db, `users/${currentUserId}/fcmToken`);
+                        await set(userTokenRef, token);
+                    }
+                } else {
+                    console.warn('❌ Notification permission denied.');
+                }
+            } catch (error) {
+                console.error('Error getting FCM token:', error);
+            }
+
+            // Handle foreground messages
+            onMessage(messaging, (payload) => {
+                console.log('📩 Foreground message received:', payload);
+                const title = payload.notification?.title || payload.data?.title || 'New Notification';
+                const body = payload.notification?.body || payload.data?.body || '';
+                // Show toast for foreground messages
+                showToast(`${title}: ${body}`, 'info');
+                // Also update in-app notifications
+                renderNotifications();
+            });
+        }
+
+        // =================================================================
+        // SEND PUSH NOTIFICATION VIA CLOUD FUNCTION
+        // =================================================================
+
+        /**
+         * Call the deployed Cloud Function to send a push notification to a specific user.
+         * The function expects: { recipient, title, body, icon, clickUrl }
+         */
+        async function sendPushNotificationToUser(userId, title, message, clickUrl = '') {
+            const functionUrl = 'https://us-central1-bufferzone-63501.cloudfunctions.net/sendPushNotification';
+            // Adjust URL to your actual Cloud Function endpoint
+
+            const payload = {
+                recipient: userId,
+                title: title,
+                body: message,
+                icon: 'https://your-domain.com/logo.png', // Replace with your actual logo URL
+                clickUrl: clickUrl || ''
+            };
+
+            try {
+                const response = await fetch(functionUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errText = await response.text();
+                    console.warn(`Push send warning: ${response.status} - ${errText}`);
+                    // We don't block the flow – just log
+                } else {
+                    const result = await response.json();
+                    console.log('✅ Push notification sent:', result);
+                }
+            } catch (error) {
+                console.error('Error sending push notification:', error);
+            }
+        }
+
+        // =================================================================
+        // WRAPPER: CREATE IN-APP NOTIFICATION + PUSH
+        // =================================================================
+
+        function createNotification(userId, title, message, clickUrl = '') {
+            if (!allData.notifications) allData.notifications = {};
+            const notifId = 'notif_' + Date.now();
+            allData.notifications[notifId] = {
+                title: title,
+                message: message,
+                timestamp: Date.now(),
+                read: false,
+                userId: userId
+            };
+            saveData().then(() => {
+                renderNotifications();
+                // Also send push
+                sendPushNotificationToUser(userId, title, message, clickUrl);
+            }).catch(err => console.error('Error saving notification:', err));
         }
 
         // =================================================================
@@ -4340,13 +4435,12 @@
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 set(txRef, txData);
 
-                const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
-                set(notifRef, {
-                    title: 'Payment Complete',
-                    message: `Order ${orderData.id} is now fully paid. Thank you!`,
-                    timestamp: Date.now(),
-                    read: false
-                });
+                // In-app + push notification
+                createNotification(
+                    currentUserId,
+                    'Payment Complete',
+                    `Order ${orderData.id} is now fully paid. Thank you!`
+                );
 
                 showToast(`✅ Order ${orderData.id} marked as fully paid!`, 'success');
 
@@ -5385,6 +5479,13 @@
                 };
                 set(orderTxRef, orderTxData);
 
+                // In-app + push notification for order placed
+                createNotification(
+                    currentUserId,
+                    'Order Placed',
+                    `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.${data.notes ? ` Notes: "${data.notes}"` : ''}`
+                );
+
                 showToast('✅ Payment confirmed via Buffer Zone Wallet! Project "' + data.service + '" has been initiated.',
                     'success');
 
@@ -5416,6 +5517,13 @@
                 };
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 set(txRef, txData);
+
+                // In-app + push notification for payment submitted
+                createNotification(
+                    currentUserId,
+                    'Payment Submitted',
+                    `Your 50% deposit for "${data.service}" has been submitted. We will verify it shortly.`
+                );
 
                 showToast('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.',
                     'success');
@@ -5478,25 +5586,23 @@
                     };
                     set(txRef, txData);
 
-                    const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
-                    set(notifRef, {
-                        title: '💰 Referral Bonus',
-                        message: `You received ZMW ${bonusAmount.toFixed(2)} from ${customerName} who used your referral code.`,
-                        timestamp: Date.now(),
-                        read: false,
-                        userId: appliedReferral.referrerUid
-                    });
+                    // In-app + push for referral bonus to the referrer
+                    createNotification(
+                        appliedReferral.referrerUid,
+                        '💰 Referral Bonus',
+                        `You received ZMW ${bonusAmount.toFixed(2)} from ${customerName} who used your referral code.`
+                    );
                 }
             }
 
-            const notifRef = push(ref(db, 'bufferzoneAppData/notifications'));
-            set(notifRef, {
-                title: 'Order Placed',
-                message: `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.${data.notes ? ` Notes: "${data.notes}"` : ''}`,
-                timestamp: Date.now(),
-                read: false,
-                userId: currentUserId
-            });
+            // In-app + push for order placed (already done above for wallet, but for non-wallet we also need it)
+            if (!payWithWallet) {
+                createNotification(
+                    currentUserId,
+                    'Order Placed',
+                    `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.${data.notes ? ` Notes: "${data.notes}"` : ''}`
+                );
+            }
 
             paymentPage.classList.remove('open');
             cloudinaryScreenshotUrlInput.value = '';
@@ -5612,6 +5718,13 @@
             };
 
             saveData().then(() => {
+                // In-app + push notification for withdrawal request
+                createNotification(
+                    currentUserId,
+                    'Withdrawal Request',
+                    `Your withdrawal of ZMW ${amount.toFixed(2)} has been submitted and is pending admin approval.`
+                );
+
                 closeWithdrawModal();
                 withdrawSuccessModal.classList.add('open');
                 renderAll();
@@ -5799,23 +5912,18 @@
             };
             set(recipientTxRef, recipientTxData);
 
-            const senderNotifRef = push(ref(db, 'bufferzoneAppData/notifications'));
-            set(senderNotifRef, {
-                title: '💰 Money Sent',
-                message: `You sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}.`,
-                timestamp: Date.now(),
-                read: false,
-                userId: currentUserId
-            });
+            // In-app + push notifications for both parties
+            createNotification(
+                currentUserId,
+                '💰 Money Sent',
+                `You sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}.`
+            );
 
-            const recipientNotifRef = push(ref(db, 'bufferzoneAppData/notifications'));
-            set(recipientNotifRef, {
-                title: '💰 Money Received',
-                message: `You received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}.`,
-                timestamp: Date.now(),
-                read: false,
-                userId: sendRecipientUid
-            });
+            createNotification(
+                sendRecipientUid,
+                '💰 Money Received',
+                `You received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}.`
+            );
 
             showToast(`✅ ZMW ${amount.toFixed(2)} sent to ${sendRecipientName}!`, 'success');
 
@@ -6291,15 +6399,12 @@
                 paymentData: paymentData
             };
 
-            if (!allData.notifications) allData.notifications = {};
-            const notifId = 'notif_' + Date.now();
-            allData.notifications[notifId] = {
-                title: 'Application Submitted',
-                message: `Your ${formType} application for "${flyer.text || 'Untitled Flyer'}" has been submitted successfully. We will review it shortly.`,
-                timestamp: Date.now(),
-                read: false,
-                userId: currentUserId
-            };
+            // In-app + push notification for application submitted
+            createNotification(
+                currentUserId,
+                'Application Submitted',
+                `Your ${formType} application for "${flyer.text || 'Untitled Flyer'}" has been submitted successfully. We will review it shortly.`
+            );
 
             saveData().then(() => {
                 showToast('✅ Application submitted successfully!', 'success');
@@ -6619,6 +6724,8 @@
                         return;
                     }
                     currentUserData = data || {};
+                    // Setup FCM after user is loaded
+                    setupFCM();
                     loadData();
                 });
             } else {
