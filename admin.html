@@ -9,6 +9,7 @@
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
     </script>
     <style>
+        /* ── all existing styles (unchanged) ── */
         * {
             margin: 0;
             padding: 0;
@@ -4013,6 +4014,69 @@
         #promoPicUploadModal .click-config-section select:hover {
             border-color: #bbb;
         }
+
+        /* ── NEW: Notifications page styles ── */
+        #page-notifications .notif-preview {
+            background: #f8f9fc;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        #page-notifications .notif-preview img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        #page-notifications .notif-preview .content {
+            flex: 1;
+        }
+        #page-notifications .notif-preview .content .title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1c2128;
+        }
+        #page-notifications .notif-preview .content .body {
+            font-size: 12px;
+            color: #555;
+            margin-top: 2px;
+            line-height: 1.4;
+        }
+        #page-notifications .notif-preview .content .body b {
+            color: #1c2128;
+        }
+        #page-notifications .form-group .hint {
+            font-size: 9px;
+            color: #aaa;
+            margin-top: 2px;
+        }
+        #page-notifications .send-progress {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        #page-notifications .send-progress .spinner {
+            border: 3px solid #f0f0f0;
+            border-top: 3px solid #f5b83d;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #page-notifications .send-progress p {
+            margin-top: 8px;
+            font-size: 11px;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -4086,6 +4150,8 @@
                     <button class="quick-action-btn" id="viewOrdersQuick"><i class="fa-solid fa-truck"></i> Orders</button>
                     <button class="quick-action-btn" id="viewUsersQuick"><i class="fa-solid fa-users"></i> Users</button>
                     <button class="quick-action-btn" id="viewPromoPicsQuick"><i class="fa-regular fa-images"></i> Promo Pics</button>
+                    <!-- NEW: Notifications button -->
+                    <button class="quick-action-btn" id="viewNotificationsQuick"><i class="fa-solid fa-bell"></i> Notifications</button>
                 </div>
 
                 <div class="card">
@@ -4673,6 +4739,68 @@
                 </div>
             </div>
 
+            <!-- ===== NEW PAGE: NOTIFICATIONS ===== -->
+            <div id="page-notifications" class="page">
+
+                <div class="card" style="border:none; box-shadow:none; padding:0 0 14px 0;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+                        <div>
+                            <h2 style="font-size:20px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-bell" style="color:#f5b83d;"></i> Send Push Notifications</h2>
+                            <p style="font-size:11px; color:#888;">Send instant push notifications to all users or a specific user. Bold words will appear in <b>bold</b> on the device.</p>
+                        </div>
+                    </div>
+
+                    <form id="notificationForm" style="max-width:800px; margin:0 auto;">
+                        <div class="form-group">
+                            <label>Recipient</label>
+                            <select id="notifRecipient" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:8px; font-size:12px;">
+                                <option value="all">All Users</option>
+                                <option value="specific">Specific User</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="notifUserSelectGroup" style="display:none;">
+                            <label>Select User</label>
+                            <select id="notifUserSelect" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:8px; font-size:12px;">
+                                <option value="">— Select a user —</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Notification Title</label>
+                            <input type="text" id="notifTitle" placeholder="e.g. Special Offer!" required style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea id="notifBody" rows="3" placeholder="Write your message here. Words you want to show bold should be wrapped in ** like **this**." required style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px; resize:vertical;"></textarea>
+                            <div class="hint">Use **bold** to make words bold in the notification.</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Logo URL (optional)</label>
+                            <input type="url" id="notifIcon" placeholder="https://yourdomain.com/logo.png" style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
+                            <div class="hint">Leave blank to use default buffer zone logo.</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Click URL (optional)</label>
+                            <input type="url" id="notifClickUrl" placeholder="https://yourdomain.com/promo" style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
+                            <div class="hint">When user taps the notification, they will be taken to this URL.</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="sendNotifBtn" style="padding:12px 28px; font-size:14px; border-radius:24px; width:100%;"><i class="fa-solid fa-paper-plane"></i> Send Notification</button>
+                    </form>
+
+                    <div class="send-progress" id="notifProgress">
+                        <div class="spinner"></div>
+                        <p>Sending notifications...</p>
+                    </div>
+
+                    <div class="notif-preview" id="notifPreview" style="display:none;">
+                        <img id="notifPreviewIcon" src="" alt="logo" />
+                        <div class="content">
+                            <div class="title" id="notifPreviewTitle">Title</div>
+                            <div class="body" id="notifPreviewBody">Body</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- ===== BOTTOM NAV ===== -->
@@ -5081,6 +5209,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
         import { getDatabase, ref, set, onValue, get, push, remove, update } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+        import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-messaging.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBy8ZAMagjX627gcfe0NuRaC1WfC736en0",
@@ -5096,6 +5225,10 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
         const auth = getAuth(app);
+        const messaging = getMessaging(app);
+
+        // ── VAPID key (provided) ──
+        const VAPID_KEY = "BOkohCEBQhlS69mnlH-6VGDpBz8cMDscxyE_NpwedsBG_1pC5wSh5HwXPpIwKTMk2YiELQOYDhCTxvDWHmS88aw";
 
         // ───────────────────────────────────────────────────────────────────
         // CLOUDINARY CONFIG
@@ -5366,6 +5499,22 @@
         const customerWalletListPage = document.getElementById('customerWalletListPage');
         const customerWalletSearch = document.getElementById('customerWalletSearch');
 
+        // ─── NEW: Notifications DOM ───
+        const notifForm = document.getElementById('notificationForm');
+        const notifRecipient = document.getElementById('notifRecipient');
+        const notifUserSelectGroup = document.getElementById('notifUserSelectGroup');
+        const notifUserSelect = document.getElementById('notifUserSelect');
+        const notifTitle = document.getElementById('notifTitle');
+        const notifBody = document.getElementById('notifBody');
+        const notifIcon = document.getElementById('notifIcon');
+        const notifClickUrl = document.getElementById('notifClickUrl');
+        const sendNotifBtn = document.getElementById('sendNotifBtn');
+        const notifProgress = document.getElementById('notifProgress');
+        const notifPreview = document.getElementById('notifPreview');
+        const notifPreviewIcon = document.getElementById('notifPreviewIcon');
+        const notifPreviewTitle = document.getElementById('notifPreviewTitle');
+        const notifPreviewBody = document.getElementById('notifPreviewBody');
+
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
         // ───────────────────────────────────────────────────────────────────
@@ -5580,7 +5729,7 @@
             renderOurServicesList();
             renderWorkPosts();
             renderApplications();
-            renderPromoPics(); // <-- added
+            renderPromoPics();
 
             // ── Referral renders ──
             renderReferralPromos();
@@ -9191,6 +9340,11 @@
             showPage('promo-pics');
         });
 
+        // ─── NEW: Notifications button ───
+        document.getElementById('viewNotificationsQuick').addEventListener('click', () => {
+            showPage('notifications');
+        });
+
         document.getElementById('viewAllActivity').addEventListener('click', () => {
             showPage('orders');
         });
@@ -9462,6 +9616,9 @@
                 case 'work':
                     renderWorkPosts();
                     break;
+                case 'notifications':
+                    // just show page, no extra rendering needed
+                    break;
                 default:
                     break;
             }
@@ -9583,7 +9740,158 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Hash routing enabled. Promo pics grid + large curved upload preview implemented.');
+        // ───────────────────────────────────────────────────────────────────
+        // FCM: REQUEST PERMISSION & GET TOKEN (for admin – not used for sending)
+        // ───────────────────────────────────────────────────────────────────
+
+        async function requestNotificationPermission() {
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') {
+                console.log('✅ Notification permission granted.');
+                try {
+                    const token = await getToken(messaging, { vapidKey: VAPID_KEY });
+                    console.log('🔔 FCM Token:', token);
+                    // You can store this token in the admin's record if needed
+                } catch (err) {
+                    console.error('Error getting token:', err);
+                }
+            } else {
+                console.warn('❌ Notification permission denied.');
+            }
+        }
+
+        // Call it on load – but it's not required for sending, just for receiving foreground messages (optional)
+        requestNotificationPermission();
+
+        // ───────────────────────────────────────────────────────────────────
+        // SEND NOTIFICATION – via Cloud Function (required)
+        // ───────────────────────────────────────────────────────────────────
+
+        /**
+         * This function sends a push notification by calling a Firebase Cloud Function.
+         * You must deploy the following Cloud Function (see separate file) to make this work.
+         * 
+         * The function expects:
+         *   - recipient: 'all' or a specific user UID
+         *   - title, body, icon, clickUrl
+         * 
+         * It will look up the user's FCM token from the database.
+         */
+        async function sendNotificationToUsers(recipient, title, body, icon, clickUrl) {
+            const functionUrl = 'https://us-central1-bufferzone-63501.cloudfunctions.net/sendPushNotification';
+            // Adjust the URL to your actual Cloud Function endpoint
+
+            const payload = {
+                recipient,
+                title,
+                body,
+                icon: icon || 'https://your-domain.com/logo.png', // Replace with your actual logo URL
+                clickUrl: clickUrl || ''
+            };
+
+            try {
+                const response = await fetch(functionUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errText = await response.text();
+                    throw new Error(`Server responded with ${response.status}: ${errText}`);
+                }
+
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error('Error sending notification:', error);
+                throw error;
+            }
+        }
+
+        // ───────────────────────────────────────────────────────────────────
+        // NOTIFICATION FORM HANDLING
+        // ───────────────────────────────────────────────────────────────────
+
+        notifRecipient.addEventListener('change', function() {
+            if (this.value === 'specific') {
+                notifUserSelectGroup.style.display = 'block';
+                // Populate user list
+                const users = allData.users || {};
+                const options = Object.entries(users).map(([uid, u]) => {
+                    const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
+                    return `<option value="${uid}">${name} (${u.email || 'No email'})</option>`;
+                }).join('');
+                notifUserSelect.innerHTML = `<option value="">— Select a user —</option>` + options;
+            } else {
+                notifUserSelectGroup.style.display = 'none';
+            }
+        });
+
+        // Preview as user types
+        notifTitle.addEventListener('input', updatePreview);
+        notifBody.addEventListener('input', updatePreview);
+        notifIcon.addEventListener('input', updatePreview);
+
+        function updatePreview() {
+            const title = notifTitle.value.trim();
+            const body = notifBody.value.trim();
+            const icon = notifIcon.value.trim();
+
+            if (title || body) {
+                notifPreview.style.display = 'flex';
+                notifPreviewTitle.textContent = title || 'Title';
+                // Convert **bold** to <b>bold</b>
+                const formattedBody = body.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+                notifPreviewBody.innerHTML = formattedBody || 'Body';
+                notifPreviewIcon.src = icon || 'https://via.placeholder.com/48?text=Logo';
+            } else {
+                notifPreview.style.display = 'none';
+            }
+        }
+
+        notifForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const recipient = notifRecipient.value;
+            const title = notifTitle.value.trim();
+            const body = notifBody.value.trim();
+            const icon = notifIcon.value.trim();
+            const clickUrl = notifClickUrl.value.trim();
+
+            if (!title || !body) {
+                showToast('Please fill in title and message.', 'error');
+                return;
+            }
+
+            // Show progress
+            notifProgress.style.display = 'block';
+            sendNotifBtn.disabled = true;
+
+            try {
+                const result = await sendNotificationToUsers(recipient, title, body, icon, clickUrl);
+                if (result.success) {
+                    showToast(`✅ Notification sent successfully! (${result.sentCount} devices)`, 'success');
+                } else {
+                    showToast('⚠️ Notification sent but some devices may not have received it.', 'warning');
+                }
+                // Reset form
+                notifForm.reset();
+                notifPreview.style.display = 'none';
+                notifRecipient.value = 'all';
+                notifUserSelectGroup.style.display = 'none';
+            } catch (error) {
+                showToast(`❌ Error: ${error.message}`, 'error');
+            } finally {
+                notifProgress.style.display = 'none';
+                sendNotifBtn.disabled = false;
+            }
+        });
+
+        console.log('✅ Admin Dashboard — Hash routing enabled. Notifications page included.');
+        console.log('🔔 To send notifications, deploy the Cloud Function (see separate file).');
     </script>
 </body>
 </html>
