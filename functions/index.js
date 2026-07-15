@@ -6,6 +6,7 @@ admin.initializeApp();
 exports.sendPushNotification = functions.https.onCall(async (data, context) => {
   const { recipient, title, body, icon, clickUrl } = data;
 
+  // Determine target tokens
   const usersRef = admin.database().ref('users');
   const snapshot = await usersRef.once('value');
   const users = snapshot.val() || {};
@@ -18,6 +19,7 @@ exports.sendPushNotification = functions.https.onCall(async (data, context) => {
       }
     }
   } else {
+    // specific user
     if (users[recipient] && users[recipient].fcmToken) {
       tokens.push(users[recipient].fcmToken);
     }
@@ -31,13 +33,15 @@ exports.sendPushNotification = functions.https.onCall(async (data, context) => {
     notification: {
       title: title,
       body: body,
-      icon: icon || 'https://bufferzone-cloud.github.io/bufferzoneapp/bufferzone.png',
+      icon: icon || 'https://github.com/bufferzone-cloud/bufferzoneapp/logo.png',
     },
     data: {
       clickUrl: clickUrl || '',
+      boldWords: '', // optional: you can pass bold words as data
     },
   };
 
+  // Send to all tokens
   const response = await admin.messaging().sendEachForMulticast({
     tokens: tokens,
     ...payload,
