@@ -3381,6 +3381,234 @@
             margin-right: 6px;
         }
 
+        /* ===== WITHDRAWAL STATUS POPUP ===== */
+        .withdrawal-status-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 3200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .withdrawal-status-overlay.open {
+            display: flex;
+        }
+        .withdrawal-status-modal {
+            background: #ffffff;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 400px;
+            padding: 0 0 20px 0;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+            animation: modalIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
+            position: relative;
+        }
+        .withdrawal-status-modal .ws-logo-wrap {
+            background: #1c2128;
+            padding: 14px 0 10px 0;
+            text-align: center;
+            border-bottom: 3px solid #f5b83d;
+        }
+        .withdrawal-status-modal .ws-logo-wrap .logo-text {
+            color: #f5b83d;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        .withdrawal-status-modal .ws-body {
+            padding: 18px 20px 12px 20px;
+            text-align: center;
+        }
+        .withdrawal-status-modal .ws-icon {
+            font-size: 56px;
+            line-height: 1;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .withdrawal-status-modal .ws-icon .check-mark {
+            color: #00a86b;
+            font-size: 56px;
+            font-weight: 900;
+            display: inline-block;
+        }
+        .withdrawal-status-modal .ws-icon .x-mark {
+            color: #dc2626;
+            font-size: 56px;
+            font-weight: 900;
+            display: inline-block;
+        }
+        .withdrawal-status-modal .ws-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #1c2128;
+            margin: 4px 0 6px 0;
+            letter-spacing: 0.5px;
+        }
+        .withdrawal-status-modal .ws-title.approved {
+            color: #00a86b;
+        }
+        .withdrawal-status-modal .ws-title.rejected {
+            color: #dc2626;
+        }
+        .withdrawal-status-modal .ws-message {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        .withdrawal-status-modal .ws-details-box {
+            background: #f8f9fc;
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin: 8px 0 12px 0;
+            text-align: left;
+            border: 1px solid #f0f0f0;
+        }
+        .withdrawal-status-modal .ws-details-box .detail-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .withdrawal-status-modal .ws-details-box .detail-line:last-child {
+            border-bottom: none;
+        }
+        .withdrawal-status-modal .ws-details-box .detail-line .dl-label {
+            color: #888;
+        }
+        .withdrawal-status-modal .ws-details-box .detail-line .dl-value {
+            font-weight: 600;
+            color: #1c2128;
+        }
+        .withdrawal-status-modal .ws-btn {
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .withdrawal-status-modal .ws-btn:active {
+            transform: scale(0.95);
+        }
+        .withdrawal-status-modal .ws-btn i {
+            color: #f5b83d;
+        }
+
+        /* ===== REFERRAL RECEIVED POPUP ===== */
+        .referral-received-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 3300;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .referral-received-overlay.open {
+            display: flex;
+        }
+        .referral-received-modal {
+            background: #ffffff;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 400px;
+            padding: 28px 22px 22px 22px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+            animation: modalIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-align: center;
+        }
+        .referral-received-modal .rr-icon {
+            font-size: 48px;
+            color: #f5b83d;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .referral-received-modal h3 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1c2128;
+            margin-bottom: 6px;
+        }
+        .referral-received-modal p {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .referral-received-modal .rr-amount {
+            font-size: 22px;
+            font-weight: 900;
+            color: #f5b83d;
+            display: block;
+            margin: 2px 0 10px 0;
+        }
+        .referral-received-modal .rr-btn {
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            padding: 10px 40px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .referral-received-modal .rr-btn:active {
+            transform: scale(0.95);
+        }
+        .referral-received-modal .rr-btn i {
+            color: #f5b83d;
+            margin-right: 6px;
+        }
+
+        /* ===== IMAGE VIEWER MODAL ===== */
+        .image-viewer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 9998;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            cursor: zoom-out;
+        }
+        .image-viewer-overlay.open {
+            display: flex;
+        }
+        .image-viewer-overlay img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+        }
+
         @media (max-width: 420px) {
             .bottom-nav {
                 max-width: 400px;
@@ -3967,6 +4195,46 @@
         </div>
     </div>
 
+    <!-- ===== WITHDRAWAL STATUS POPUP ===== -->
+    <div class="withdrawal-status-overlay" id="withdrawalStatusPopup">
+        <div class="withdrawal-status-modal">
+            <div class="ws-logo-wrap">
+                <div class="logo-text">BUFFER ZONE</div>
+            </div>
+            <div class="ws-body">
+                <div class="ws-icon" id="wsIcon">
+                    <span class="check-mark" id="wsCheck" style="display:none;">✓</span>
+                    <span class="x-mark" id="wsX" style="display:none;">✗</span>
+                </div>
+                <div class="ws-title" id="wsTitle">WITHDRAWAL STATUS</div>
+                <div class="ws-message" id="wsMessage">Your withdrawal has been approved.</div>
+                <div class="ws-details-box" id="wsDetailsBox">
+                    <div class="detail-line"><span class="dl-label">Amount</span><span class="dl-value" id="wsAmount">ZMW 0.00</span></div>
+                    <div class="detail-line"><span class="dl-label">Date</span><span class="dl-value" id="wsDate">—</span></div>
+                    <div class="detail-line"><span class="dl-label">Phone</span><span class="dl-value" id="wsPhone">—</span></div>
+                    <div class="detail-line"><span class="dl-label">Status</span><span class="dl-value" id="wsStatus">Approved</span></div>
+                </div>
+                <button class="ws-btn" id="wsBtn"><i class="fa-solid fa-arrow-right"></i> Go to Account</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== REFERRAL RECEIVED POPUP ===== -->
+    <div class="referral-received-overlay" id="referralReceivedPopup">
+        <div class="referral-received-modal">
+            <span class="rr-icon"><i class="fa-solid fa-gift"></i></span>
+            <h3>🎉 Referral Reward!</h3>
+            <p>You have received money from a referral! The following amount has been added to your account:</p>
+            <span class="rr-amount" id="rrAmount">ZMW 0.00</span>
+            <button class="rr-btn" id="rrBtn"><i class="fa-regular fa-circle-check"></i> OK</button>
+        </div>
+    </div>
+
+    <!-- ===== IMAGE VIEWER MODAL ===== -->
+    <div class="image-viewer-overlay" id="imageViewer">
+        <img id="imageViewerImg" src="" alt="Screenshot" />
+    </div>
+
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <div class="sidebar" id="notifSidebar">
         <div class="sidebar-header">
@@ -4112,7 +4380,9 @@
         // ===== POPUP TRACKING =====
         const shownPopups = {
             applications: {}, // appId -> true
-            orderComplete: {} // orderId -> true
+            orderComplete: {}, // orderId -> true
+            withdrawalStatus: {}, // withdrawalId -> true
+            referralReceived: {} // transactionId -> true
         };
 
         const headerName = document.getElementById('headerName');
@@ -4277,6 +4547,24 @@
         const ocRemainingAmount = document.getElementById('ocRemainingAmount');
         const ocOkBtn = document.getElementById('ocOkBtn');
 
+        const withdrawalStatusPopup = document.getElementById('withdrawalStatusPopup');
+        const wsCheck = document.getElementById('wsCheck');
+        const wsX = document.getElementById('wsX');
+        const wsTitle = document.getElementById('wsTitle');
+        const wsMessage = document.getElementById('wsMessage');
+        const wsBtn = document.getElementById('wsBtn');
+        const wsAmount = document.getElementById('wsAmount');
+        const wsDate = document.getElementById('wsDate');
+        const wsPhone = document.getElementById('wsPhone');
+        const wsStatus = document.getElementById('wsStatus');
+
+        const referralReceivedPopup = document.getElementById('referralReceivedPopup');
+        const rrAmount = document.getElementById('rrAmount');
+        const rrBtn = document.getElementById('rrBtn');
+
+        const imageViewer = document.getElementById('imageViewer');
+        const imageViewerImg = document.getElementById('imageViewerImg');
+
         // ===== PAYMENT PAGE EXTRA DETAILS =====
         const paymentCustomerName = document.getElementById('paymentCustomerName');
         const paymentServiceName = document.getElementById('paymentServiceName');
@@ -4332,13 +4620,6 @@
             if (viewId !== 'homeView') {
                 window.history.pushState({ view: viewId }, '', '');
             }
-            // Check for popups when switching to relevant views
-            if (viewId === 'applicationsView') {
-                checkApplicationPopups();
-            }
-            if (viewId === 'ordersView') {
-                checkOrderCompletePopups();
-            }
         }
 
         window.addEventListener('popstate', (event) => {
@@ -4355,12 +4636,6 @@
                     document.getElementById('flyerDetailView').classList.remove('active');
                 }
                 document.getElementById('appContent').scrollTop = 0;
-                if (viewId === 'applicationsView') {
-                    checkApplicationPopups();
-                }
-                if (viewId === 'ordersView') {
-                    checkOrderCompletePopups();
-                }
             } else {
                 switchView('homeView');
             }
@@ -4558,14 +4833,9 @@
                     }
                 }
                 renderAll();
-                // Check for popups after data loads
+                // Check for popups immediately after data loads
                 setTimeout(() => {
-                    if (document.getElementById('applicationsView').classList.contains('active')) {
-                        checkApplicationPopups();
-                    }
-                    if (document.getElementById('ordersView').classList.contains('active')) {
-                        checkOrderCompletePopups();
-                    }
+                    checkAllPopups();
                 }, 500);
                 if (callback) callback();
             });
@@ -4573,7 +4843,10 @@
 
         function saveData() {
             const dbRef = ref(db, 'bufferzoneAppData');
-            return set(dbRef, allData);
+            return set(dbRef, allData).then(() => {
+                // After saving, check for popups again (in case status changed)
+                setTimeout(() => checkAllPopups(), 300);
+            });
         }
 
         function renderAll() {
@@ -4616,6 +4889,7 @@
             renderTransactionMessages();
             renderWithdrawalsList();
             renderApplications();
+            renderWithdrawHistory(); // for the withdraw page
 
             if (allData.policy) {
                 const p = allData.policy;
@@ -5008,6 +5282,18 @@
                     `;
                 }
 
+                // Screenshot view button
+                let screenshotBtnHtml = '';
+                if (o.paymentProof && o.paymentProof !== 'Wallet Payment' && o.paymentProof !== 'N/A') {
+                    screenshotBtnHtml = `
+                        <div class="detail-row" style="border-bottom:none; padding-top:6px;">
+                            <button class="view-screenshot-btn" data-url="${o.paymentProof}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
+                                <i class="fa-regular fa-image" style="color:#f5b83d;"></i> View Screenshot
+                            </button>
+                        </div>
+                    `;
+                }
+
                 return `
                 <div class="order-card">
                     <div class="order-summary" data-key="${key}">
@@ -5030,6 +5316,7 @@
                         ${customizationHtml}
                         ${o.notes ? `<div class="detail-row"><span class="label">Notes</span><span class="val">${escapeHtml(o.notes)}</span></div>` : ''}
                         ${o.promoCode ? `<div class="detail-row"><span class="label">Promo</span><span class="val">${escapeHtml(o.promoCode)} (${o.discountApplied || 0}% off)</span></div>` : ''}
+                        ${screenshotBtnHtml}
                         ${actionHtml}
                     </div>
                 </div>
@@ -5049,6 +5336,14 @@
                     const orderKey = this.dataset.key;
                     const order = allData.orders[orderKey];
                     if (order) openReceiptModal(order, orderKey);
+                });
+            });
+
+            container.querySelectorAll('.view-screenshot-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const url = this.dataset.url;
+                    if (url) openImageViewer(url);
                 });
             });
         }
@@ -7264,16 +7559,63 @@
         }
 
         // ===== APPLICATION POPUP FUNCTIONS =====
-        function checkApplicationPopups() {
+        function checkAllPopups() {
+            if (!currentUserId || !allData) return;
+
+            // Application status popups
             const apps = allData.applications || {};
-            const entries = Object.entries(apps)
+            const appEntries = Object.entries(apps)
                 .filter(([key, a]) => a.userId === currentUserId)
                 .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
 
-            for (const [key, app] of entries) {
+            for (const [key, app] of appEntries) {
                 const status = app.status || 'pending';
                 if ((status === 'approved' || status === 'rejected') && !shownPopups.applications[key]) {
                     showApplicationPopup(key, app);
+                    return; // show one at a time
+                }
+            }
+
+            // Order complete popups
+            const orders = allData.orders || {};
+            const orderEntries = Object.entries(orders)
+                .filter(([key, o]) => o.userId === currentUserId)
+                .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
+
+            for (const [key, order] of orderEntries) {
+                if (order.status === 'completed' && !shownPopups.orderComplete[key]) {
+                    const remainingAmount = (order.amount || 0) * 0.5;
+                    if (remainingAmount > 0) {
+                        showOrderCompletePopup(key, order, remainingAmount);
+                        return;
+                    }
+                }
+            }
+
+            // Withdrawal status popups
+            const withdrawals = allData.withdrawalRequests || {};
+            const wdEntries = Object.entries(withdrawals)
+                .filter(([key, w]) => w.userId === currentUserId)
+                .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
+
+            for (const [key, w] of wdEntries) {
+                const status = w.status || 'pending';
+                if ((status === 'approved' || status === 'declined') && !shownPopups.withdrawalStatus[key]) {
+                    showWithdrawalStatusPopup(key, w);
+                    return;
+                }
+            }
+
+            // Referral received popups (money from referrals)
+            const transactions = allData.transactions || {};
+            const txEntries = Object.entries(transactions)
+                .filter(([key, t]) => t.userId === currentUserId)
+                .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
+
+            for (const [key, t] of txEntries) {
+                const isReferral = t.type?.toLowerCase().includes('referral') && t.amount && t.amount > 0;
+                if (isReferral && !shownPopups.referralReceived[key]) {
+                    showReferralReceivedPopup(key, t);
                     return;
                 }
             }
@@ -7282,7 +7624,6 @@
         function showApplicationPopup(appId, app) {
             const isApproved = app.status === 'approved';
 
-            // Set the popup content
             if (isApproved) {
                 appStatusCheck.style.display = 'inline';
                 appStatusX.style.display = 'none';
@@ -7297,7 +7638,6 @@
                 appStatusMessage.textContent = 'Your application has been rejected.';
             }
 
-            // Fill in user details from the application form data
             const fd = app.formData || {};
             const customerName = currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
                 currentUser.email || '—';
@@ -7317,13 +7657,9 @@
             asFlyer.textContent = app.flyerTitle || 'Untitled';
             asDate.textContent = app.createdAt ? new Date(app.createdAt).toLocaleDateString() : 'N/A';
 
-            // Store the appId to mark as seen after button click
             appStatusBtn.dataset.appId = appId;
 
-            // Show the popup
             appStatusPopup.classList.add('open');
-
-            // Mark as seen immediately so it doesn't show again while open
             shownPopups.applications[appId] = true;
         }
 
@@ -7339,25 +7675,6 @@
             }
         });
 
-        // ===== ORDER COMPLETE POPUP FUNCTIONS =====
-        function checkOrderCompletePopups() {
-            const orders = allData.orders || {};
-            const entries = Object.entries(orders)
-                .filter(([key, o]) => o.userId === currentUserId)
-                .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
-
-            for (const [key, order] of entries) {
-                if (order.status === 'completed' && !shownPopups.orderComplete[key]) {
-                    // Check if the order has a remaining balance (50%)
-                    const remainingAmount = (order.amount || 0) * 0.5;
-                    if (remainingAmount > 0) {
-                        showOrderCompletePopup(key, order, remainingAmount);
-                        return;
-                    }
-                }
-            }
-        }
-
         function showOrderCompletePopup(orderId, order, remainingAmount) {
             ocRemainingAmount.textContent = `ZMW ${remainingAmount.toFixed(2)}`;
             ocOkBtn.dataset.orderId = orderId;
@@ -7367,9 +7684,8 @@
 
         ocOkBtn.addEventListener('click', function() {
             orderCompletePopup.classList.remove('open');
-            // Navigate to orders view or stay
             if (document.getElementById('ordersView').classList.contains('active')) {
-                // Stay on orders view
+                // stay
             } else {
                 switchView('ordersView');
             }
@@ -7379,11 +7695,81 @@
             if (e.target === this) {
                 this.classList.remove('open');
                 if (document.getElementById('ordersView').classList.contains('active')) {
-                    // Stay on orders view
+                    // stay
                 } else {
                     switchView('ordersView');
                 }
             }
+        });
+
+        function showWithdrawalStatusPopup(wdId, wd) {
+            const isApproved = wd.status === 'approved';
+
+            if (isApproved) {
+                wsCheck.style.display = 'inline';
+                wsX.style.display = 'none';
+                wsTitle.textContent = 'WITHDRAWAL APPROVED';
+                wsTitle.className = 'ws-title approved';
+                wsMessage.textContent = 'Your withdrawal has been approved and the funds have been transferred to your mobile number.';
+            } else {
+                wsCheck.style.display = 'none';
+                wsX.style.display = 'inline';
+                wsTitle.textContent = 'WITHDRAWAL DECLINED';
+                wsTitle.className = 'ws-title rejected';
+                wsMessage.textContent = 'Your withdrawal request has been declined. Please contact support for more information.';
+            }
+
+            wsAmount.textContent = `ZMW ${(wd.amount || 0).toFixed(2)}`;
+            wsDate.textContent = wd.date ? new Date(wd.date).toLocaleString() : (wd.createdAt ? new Date(wd.createdAt).toLocaleString() : 'N/A');
+            wsPhone.textContent = wd.phone || 'N/A';
+            wsStatus.textContent = wd.status ? wd.status.charAt(0).toUpperCase() + wd.status.slice(1) : 'N/A';
+
+            wsBtn.dataset.wdId = wdId;
+            withdrawalStatusPopup.classList.add('open');
+            shownPopups.withdrawalStatus[wdId] = true;
+        }
+
+        wsBtn.addEventListener('click', function() {
+            withdrawalStatusPopup.classList.remove('open');
+            switchView('accountView');
+        });
+
+        withdrawalStatusPopup.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+                switchView('accountView');
+            }
+        });
+
+        function showReferralReceivedPopup(txId, tx) {
+            const amount = tx.amount || 0;
+            rrAmount.textContent = `ZMW ${amount.toFixed(2)}`;
+            rrBtn.dataset.txId = txId;
+            referralReceivedPopup.classList.add('open');
+            shownPopups.referralReceived[txId] = true;
+        }
+
+        rrBtn.addEventListener('click', function() {
+            referralReceivedPopup.classList.remove('open');
+            // Maybe go to account view
+            switchView('accountView');
+        });
+
+        referralReceivedPopup.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+                switchView('accountView');
+            }
+        });
+
+        function openImageViewer(url) {
+            imageViewerImg.src = url;
+            imageViewer.classList.add('open');
+        }
+
+        imageViewer.addEventListener('click', function() {
+            this.classList.remove('open');
+            imageViewerImg.src = '';
         });
 
         function renderApplications() {
@@ -7447,6 +7833,18 @@
                     }
                 }
 
+                // Screenshot view button for application payment screenshots
+                let screenshotBtnHtml = '';
+                if (a.paymentData && a.paymentData.screenshots && a.paymentData.screenshots.length > 0) {
+                    screenshotBtnHtml = `
+                        <div class="detail-row" style="border-bottom:none; padding-top:6px;">
+                            <button class="view-screenshot-btn" data-url="${a.paymentData.screenshots[0]}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
+                                <i class="fa-regular fa-image" style="color:#f5b83d;"></i> View Screenshot
+                            </button>
+                        </div>
+                    `;
+                }
+
                 return `
                 <div class="app-card" data-key="${key}">
                     <div class="app-summary">
@@ -7464,6 +7862,7 @@
                     </div>
                     <div class="app-details-expand">
                         ${detailRows || '<p style="font-size:10px;color:#888;text-align:center;padding:4px;">No additional details</p>'}
+                        ${screenshotBtnHtml}
                     </div>
                 </div>
                 `;
@@ -7472,6 +7871,14 @@
             container.querySelectorAll('.app-card').forEach(el => {
                 el.addEventListener('click', function() {
                     this.classList.toggle('open');
+                });
+            });
+
+            container.querySelectorAll('.view-screenshot-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const url = this.dataset.url;
+                    if (url) openImageViewer(url);
                 });
             });
         }
@@ -7794,11 +8201,12 @@
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
         console.log('✅ Customer code updated with all requested features:');
-        console.log('  • Current date & time in withdraw request');
-        console.log('  • CSS for apply referral code button');
-        console.log('  • More details on payment page (without changing workflow)');
+        console.log('  • Pop-ups appear immediately on any page (global check)');
+        console.log('  • Added "View Screenshot" button in order and application dropdowns');
         console.log('  • One-time application status popup (approved ✓ / rejected ✗) with logo, user details, and button');
         console.log('  • One-time order complete popup with remaining 50% amount');
+        console.log('  • One-time withdrawal status popup (approved/rejected) with details');
+        console.log('  • One-time referral money received popup with amount');
         console.log('  • Logout button is now a rectangle (not triangle)');
     </script>
 </body>
