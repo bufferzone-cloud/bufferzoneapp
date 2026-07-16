@@ -8,10 +8,91 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
     </script>
-    <!-- added html2canvas for receipt download -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+    </script>
     <style>
-        /* ── All existing styles (unchanged) ── */
+        /* ── CSS Variables for Light/Dark Mode ── */
+        :root {
+            --bg-body: #f8f9fc;
+            --bg-app: #ffffff;
+            --bg-card: #ffffff;
+            --bg-input: #fafbfc;
+            --bg-hero: #1c2128;
+            --bg-nav: #1c2128;
+            --text-primary: #1c2128;
+            --text-secondary: #888;
+            --text-light: #ffffff;
+            --border-color: #f0f0f0;
+            --border-light: #eee;
+            --shadow-color: rgba(0, 0, 0, 0.06);
+            --shadow-dark: rgba(0, 0, 0, 0.15);
+            --accent: #f5b83d;
+            --accent-light: #fef9e7;
+            --status-pending-bg: #fff6e0;
+            --status-pending-text: #cc8800;
+            --status-progress-bg: #e0f0ff;
+            --status-progress-text: #0066cc;
+            --status-completed-bg: #e6fffa;
+            --status-completed-text: #00a86b;
+            --status-review-bg: #f0e6ff;
+            --status-review-text: #7700cc;
+            --status-cancelled-bg: #fee2e2;
+            --status-cancelled-text: #dc2626;
+            --status-done-bg: #d1fae5;
+            --status-done-text: #065f46;
+            --receipt-bg: #ffffff;
+            --receipt-text: #1c2128;
+            --receipt-border: #eee;
+            --toggle-track: #e0e0e0;
+            --toggle-track-active: #f5b83d;
+            --toggle-knob: #ffffff;
+            --profile-avatar-bg: #1c2128;
+            --profile-avatar-text: #f5b83d;
+            --input-border: #ddd;
+            --input-focus: #f5b83d;
+        }
+
+        body.dark-mode {
+            --bg-body: #121212;
+            --bg-app: #1a1a2e;
+            --bg-card: #2a2a3e;
+            --bg-input: #2a2a3e;
+            --bg-hero: #0f0f1a;
+            --bg-nav: #0f0f1a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #aaa;
+            --text-light: #ffffff;
+            --border-color: #3a3a4e;
+            --border-light: #3a3a4e;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --shadow-dark: rgba(0, 0, 0, 0.5);
+            --accent: #f5b83d;
+            --accent-light: #2a2a1a;
+            --status-pending-bg: #3a2a1a;
+            --status-pending-text: #f5b83d;
+            --status-progress-bg: #1a2a3a;
+            --status-progress-text: #66aaff;
+            --status-completed-bg: #1a2a2a;
+            --status-completed-text: #66ddaa;
+            --status-review-bg: #2a1a3a;
+            --status-review-text: #bb88ff;
+            --status-cancelled-bg: #3a1a1a;
+            --status-cancelled-text: #ff6666;
+            --status-done-bg: #1a3a2a;
+            --status-done-text: #66ddaa;
+            --receipt-bg: #2a2a3e;
+            --receipt-text: #f0f0f0;
+            --receipt-border: #3a3a4e;
+            --toggle-track: #3a3a4e;
+            --toggle-track-active: #f5b83d;
+            --toggle-knob: #ffffff;
+            --profile-avatar-bg: #2a2a3e;
+            --profile-avatar-text: #f5b83d;
+            --input-border: #3a3a4e;
+            --input-focus: #f5b83d;
+        }
+
+        /* ── All existing styles (unchanged) with variables applied ── */
         * {
             margin: 0;
             padding: 0;
@@ -21,10 +102,11 @@
         }
 
         body {
-            background-color: #f8f9fc;
+            background-color: var(--bg-body);
             display: block;
             overflow: hidden;
             height: 100%;
+            transition: background-color 0.3s ease;
         }
 
         .app-root {
@@ -34,9 +116,10 @@
             width: 100%;
             max-width: 100vw;
             margin: 0 auto;
-            background-color: #ffffff;
+            background-color: var(--bg-app);
             overflow: hidden;
             position: relative;
+            transition: background-color 0.3s ease;
         }
 
         .app-content {
@@ -55,9 +138,9 @@
             width: 92%;
             max-width: 450px;
             height: 54px;
-            background: #1c2128;
+            background: var(--bg-nav);
             border-radius: 27px;
-            border: 1px solid #f5b83d;
+            border: 1px solid var(--accent);
             padding: 7px 6px;
             display: flex;
             justify-content: space-between;
@@ -66,6 +149,7 @@
             box-shadow: 0 7px 26px rgba(0, 0, 0, 0.25);
             flex-shrink: 0;
             pointer-events: auto;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .nav-item {
@@ -89,7 +173,7 @@
             margin-bottom: 1px;
         }
         .nav-item.active {
-            color: #f5b83d;
+            color: var(--accent);
         }
         .nav-item:active {
             transform: scale(0.92);
@@ -113,7 +197,9 @@
             border-radius: 50%;
             object-fit: cover;
             flex-shrink: 0;
-            background: #1c2128;
+            background: var(--bg-nav);
+            border: 2px solid var(--accent);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .header-text {
             display: flex;
@@ -123,34 +209,36 @@
         }
         .header-text span:first-child {
             font-size: 9px;
-            color: #888;
+            color: var(--text-secondary);
         }
         .header-text span:last-child {
             font-weight: 700;
             font-size: 11px;
-            color: #1c2128;
+            color: var(--text-primary);
             letter-spacing: 0.5px;
+            transition: color 0.3s ease;
         }
         .notif-icon {
             width: 29px;
             height: 29px;
-            background-color: #fff;
+            background-color: var(--bg-card);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            color: #1c2128;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            color: var(--text-primary);
             font-size: 13px;
             cursor: pointer;
             position: relative;
             flex-shrink: 0;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
         }
         .notif-badge {
             position: absolute;
             top: -2px;
             right: -2px;
-            background: #f5b83d;
+            background: var(--accent);
             color: #1c2128;
             border-radius: 50%;
             width: 13px;
@@ -164,7 +252,7 @@
 
         /* ===== HERO ===== */
         .hero {
-            background-color: #1c2128;
+            background-color: var(--bg-hero);
             border-radius: 14px;
             padding: 17px 14px;
             color: white;
@@ -172,6 +260,7 @@
             margin: 0 12px 12px 12px;
             overflow: hidden;
             min-height: 179px;
+            transition: background-color 0.3s ease;
         }
         .hero-bg-decor {
             position: absolute;
@@ -180,10 +269,11 @@
             height: 100%;
             width: 50%;
             z-index: 0;
-            background: radial-gradient(circle at 100% 100%, #f5b83d 0%, #f5b83d 45%, transparent 45%);
+            background: radial-gradient(circle at 100% 100%, var(--accent) 0%, var(--accent) 45%, transparent 45%);
             opacity: 0.9;
             border-top-left-radius: 100%;
             border-bottom-left-radius: 100%;
+            transition: background 0.3s ease;
         }
         .small-grid-dots {
             display: grid;
@@ -210,7 +300,7 @@
             margin-bottom: 5px;
         }
         .hero-title span {
-            color: #f5b83d;
+            color: var(--accent);
         }
         .hero-desc {
             font-size: 9px;
@@ -224,7 +314,7 @@
         .hero-services-title {
             font-size: 9px;
             font-weight: 600;
-            color: #f5b83d;
+            color: var(--accent);
             margin-bottom: 3px;
         }
         .service-list {
@@ -239,7 +329,7 @@
             gap: 5px;
         }
         .service-list li i {
-            color: #f5b83d;
+            color: var(--accent);
             font-size: 9px;
         }
 
@@ -251,9 +341,9 @@
             z-index: 1;
         }
         .btn-get-started {
-            background-color: #1c2128;
-            color: #f5b83d;
-            border: 1px solid #f5b83d;
+            background-color: var(--bg-hero);
+            color: var(--accent);
+            border: 1px solid var(--accent);
             padding: 5px 12px;
             border-radius: 14px;
             font-size: 7px;
@@ -261,6 +351,7 @@
             cursor: pointer;
             margin-bottom: 3px;
             display: inline-block;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         .contact-number {
             font-size: 7px;
@@ -280,10 +371,10 @@
             margin: 3px 0 12px 0;
             overflow: hidden;
             border-radius: 20px;
-            background: #f8f9fc;
-            box-shadow: 0 3px 17px rgba(0, 0, 0, 0.08);
+            background: var(--bg-body);
+            box-shadow: 0 3px 17px var(--shadow-color);
             padding: 0;
-            transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s ease, box-shadow 0.3s ease;
             aspect-ratio: 1200 / 675;
             width: 100%;
             max-height: 80vh;
@@ -324,8 +415,8 @@
                 opacity 0.5s ease,
                 box-shadow 0.5s ease;
             height: 100%;
-            background: #ffffff;
-            box-shadow: 0 3px 17px rgba(0, 0, 0, 0.12);
+            background: var(--bg-card);
+            box-shadow: 0 3px 17px var(--shadow-color);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -336,6 +427,10 @@
             will-change: transform, opacity;
             cursor: pointer;
             aspect-ratio: 1200 / 675;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.5s ease,
+                box-shadow 0.5s ease,
+                background-color 0.3s ease;
         }
 
         .promo-slide.clickable {
@@ -351,7 +446,8 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            background-color: #ffffff;
+            background-color: var(--bg-card);
+            border-radius: 17px;
         }
 
         .promo-slide .slide-overlay {
@@ -442,19 +538,20 @@
         .promotions-banner {
             margin: 0 12px 12px 12px;
             padding: 9px 12px;
-            background: #fef9e7;
+            background: var(--accent-light);
             border-radius: 10px;
-            border: 1px solid #f5b83d;
+            border: 1px solid var(--accent);
             display: none;
             flex-wrap: wrap;
             align-items: center;
             gap: 7px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .promotions-banner.show {
             display: flex;
         }
         .promotions-banner .tag {
-            background: #f5b83d;
+            background: var(--accent);
             color: #fff;
             padding: 2px 9px;
             border-radius: 10px;
@@ -463,8 +560,9 @@
         }
         .promotions-banner .msg {
             font-size: 9px;
-            color: #1c2128;
+            color: var(--text-primary);
             flex: 1;
+            transition: color 0.3s ease;
         }
 
         /* ===== CATEGORY ROW ===== */
@@ -482,15 +580,15 @@
 
         .cat-btn {
             flex-shrink: 0;
-            background: white;
-            border: 1px solid #f0f0f0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
             border-radius: 17px;
             padding: 6px 14px;
             font-size: 10px;
             font-weight: 600;
             color: #555;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
             display: flex;
             align-items: center;
             gap: 5px;
@@ -499,12 +597,12 @@
             transform: scale(0.95);
         }
         .cat-btn.active {
-            background: #1c2128;
+            background: var(--bg-nav);
             color: white;
-            border-color: #1c2128;
+            border-color: var(--bg-nav);
         }
         .cat-btn.active i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .dynamic-header {
@@ -516,7 +614,8 @@
         .dynamic-title {
             font-weight: 700;
             font-size: 11px;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .dynamic-actions {
             display: flex;
@@ -525,16 +624,17 @@
         }
         .dynamic-back {
             font-size: 8px;
-            color: #888;
+            color: var(--text-secondary);
             cursor: pointer;
             font-weight: 500;
+            transition: color 0.3s ease;
         }
         .dynamic-back:hover {
-            color: #1c2128;
+            color: var(--text-primary);
         }
         .dynamic-view-all {
             font-size: 9px;
-            color: #f5b83d;
+            color: var(--accent);
             font-weight: 600;
             cursor: pointer;
         }
@@ -563,7 +663,8 @@
             align-items: center;
             overflow: hidden;
             position: relative;
-            background: #1c2128 !important;
+            background: var(--bg-nav) !important;
+            transition: background-color 0.3s ease;
         }
         .service-thumb i {
             color: white;
@@ -572,14 +673,16 @@
         .service-title {
             font-size: 8px;
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-primary);
             margin-bottom: 2px;
             line-height: 1.2;
+            transition: color 0.3s ease;
         }
         .service-subtitle {
             font-size: 6px;
-            color: #777;
+            color: var(--text-secondary);
             line-height: 1.2;
+            transition: color 0.3s ease;
         }
 
         /* ===== ORDER FLOW ===== */
@@ -588,7 +691,7 @@
         }
 
         .order-policy-panel {
-            background-color: #1c2128;
+            background-color: var(--bg-hero);
             border-radius: 14px;
             padding: 14px 15px;
             color: white;
@@ -599,6 +702,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            transition: background-color 0.3s ease;
         }
         .order-policy-panel::after {
             content: '';
@@ -608,10 +712,11 @@
             height: 100%;
             width: 50%;
             z-index: 0;
-            background: radial-gradient(circle at 100% 100%, #f5b83d 0%, #f5b83d 45%, transparent 45%);
+            background: radial-gradient(circle at 100% 100%, var(--accent) 0%, var(--accent) 45%, transparent 45%);
             opacity: 0.9;
             border-top-left-radius: 100%;
             border-bottom-left-radius: 100%;
+            transition: background 0.3s ease;
         }
         .order-policy-content {
             position: relative;
@@ -624,7 +729,7 @@
             margin-bottom: 5px;
         }
         .order-policy-content h2 span {
-            color: #f5b83d;
+            color: var(--accent);
         }
         .order-policy-content p {
             font-size: 9px;
@@ -635,7 +740,7 @@
         .order-policy-content .policy-tag {
             display: inline-block;
             background: rgba(245, 184, 61, 0.15);
-            color: #f5b83d;
+            color: var(--accent);
             padding: 2px 10px;
             border-radius: 17px;
             font-size: 8px;
@@ -652,19 +757,22 @@
         .order-title-section h2 {
             font-size: 17px;
             font-weight: 800;
-            color: #1c2128;
+            color: var(--text-primary);
             letter-spacing: -0.5px;
+            transition: color 0.3s ease;
         }
         .order-title-section p {
             font-size: 9px;
-            color: #888;
+            color: var(--text-secondary);
             line-height: 1.4;
+            transition: color 0.3s ease;
         }
         .order-title-section .price {
             font-size: 16px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-primary);
             margin-top: 4px;
+            transition: color 0.3s ease;
         }
         .order-title-section .price .old-price {
             font-size: 12px;
@@ -677,10 +785,11 @@
         .order-title-section .price .new-price {
             font-size: 16px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .order-title-section .price .new-price.regular {
-            color: #1c2128;
+            color: var(--text-primary);
         }
 
         .order-tags {
@@ -690,18 +799,19 @@
             margin-bottom: 14px;
         }
         .order-tags .tag {
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 3px 9px;
             font-size: 8px;
             color: #555;
-            background: #fafafa;
+            background: var(--bg-card);
             display: flex;
             align-items: center;
             gap: 4px;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
         .order-tags .tag i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .order-specs {
@@ -710,22 +820,26 @@
         .order-specs h4 {
             font-size: 9px;
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-primary);
             margin-bottom: 7px;
+            transition: color 0.3s ease;
         }
         .spec-row {
             display: flex;
             justify-content: space-between;
             padding: 5px 0;
-            border-bottom: 1px solid #f5f5f5;
+            border-bottom: 1px solid var(--border-color);
             font-size: 9px;
+            transition: border-color 0.3s ease;
         }
         .spec-row .label {
-            color: #888;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
         .spec-row .value {
-            color: #1c2128;
+            color: var(--text-primary);
             font-weight: 500;
+            transition: color 0.3s ease;
         }
 
         .order-customize {
@@ -734,8 +848,9 @@
         .order-customize h4 {
             font-size: 9px;
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-primary);
             margin-bottom: 7px;
+            transition: color 0.3s ease;
         }
         .customize-group {
             margin-bottom: 9px;
@@ -743,8 +858,9 @@
         .customize-group .group-label {
             font-size: 9px;
             font-weight: 500;
-            color: #888;
+            color: var(--text-secondary);
             margin-bottom: 4px;
+            transition: color 0.3s ease;
         }
         .customize-options {
             display: flex;
@@ -753,13 +869,13 @@
         }
         .customize-btn {
             padding: 4px 11px;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--border-color);
             border-radius: 14px;
-            background: white;
+            background: var(--bg-card);
             font-size: 9px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
             display: flex;
             align-items: center;
             gap: 4px;
@@ -769,12 +885,12 @@
             transform: scale(0.95);
         }
         .customize-btn.active {
-            background: #1c2128;
+            background: var(--bg-nav);
             color: white;
-            border-color: #1c2128;
+            border-color: var(--bg-nav);
         }
         .customize-btn.active i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .quantity-selector {
@@ -786,11 +902,11 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            border: 1px solid #ddd;
-            background: white;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
             cursor: pointer;
             font-size: 9px;
-            transition: all 0.2s;
+            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease;
         }
         .quantity-selector button:active {
             transform: scale(0.9);
@@ -800,23 +916,26 @@
             font-size: 11px;
             min-width: 14px;
             text-align: center;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
 
         .order-notes textarea {
             width: 100%;
             padding: 9px;
-            border: 1px solid #eee;
+            border: 1px solid var(--border-light);
             border-radius: 9px;
             font-size: 9px;
             resize: vertical;
             min-height: 41px;
-            background: #fafbfc;
-            transition: border 0.2s;
+            background: var(--bg-input);
+            transition: border 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
             font-family: 'Poppins', sans-serif;
+            color: var(--text-primary);
         }
         .order-notes textarea:focus {
             outline: none;
-            border-color: #1c2128;
+            border-color: var(--text-primary);
         }
         .order-notes textarea::placeholder {
             color: #bbb;
@@ -828,20 +947,23 @@
             justify-content: space-between;
             align-items: center;
             padding-top: 11px;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--border-color);
             margin-top: 7px;
+            transition: border-color 0.3s ease;
         }
         .order-footer .total-label {
             font-size: 9px;
-            color: #888;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
         .order-footer .total-price {
             font-size: 14px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .btn-confirm-order {
-            background: #1c2128;
+            background: var(--bg-nav);
             color: white;
             border: none;
             padding: 9px 16px;
@@ -852,13 +974,13 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            transition: all 0.2s;
+            transition: all 0.2s, background-color 0.3s ease;
         }
         .btn-confirm-order:active {
             transform: scale(0.95);
         }
         .btn-confirm-order i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         /* ===== PAYMENT PAGE ===== */
@@ -868,11 +990,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #ffffff;
+            background: var(--bg-app);
             z-index: 1000;
             display: none;
             overflow-y: auto;
             padding: 0;
+            transition: background-color 0.3s ease;
         }
         .payment-page-overlay.open {
             display: block;
@@ -881,9 +1004,10 @@
             width: 100%;
             max-width: 100%;
             padding: 20px 12px 30px 12px;
-            background: #ffffff;
+            background: var(--bg-app);
             position: relative;
             min-height: 100vh;
+            transition: background-color 0.3s ease;
         }
         .payment-page .page-logo {
             display: flex;
@@ -891,19 +1015,23 @@
             gap: 10px;
             margin-bottom: 14px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.3s ease;
         }
         .payment-page .page-logo img {
             width: 36px;
             height: 36px;
             border-radius: 50%;
             object-fit: cover;
+            border: 2px solid var(--accent);
+            transition: border-color 0.3s ease;
         }
         .payment-page .page-logo span {
             font-weight: 700;
             font-size: 16px;
-            color: #1c2128;
+            color: var(--text-primary);
             letter-spacing: 0.5px;
+            transition: color 0.3s ease;
         }
         .payment-page .close-btn {
             position: absolute;
@@ -917,31 +1045,35 @@
             padding: 4px;
         }
         .payment-page .close-btn:hover {
-            color: #1c2128;
+            color: var(--text-primary);
         }
         .payment-page h3 {
             font-size: 15px;
             font-weight: 700;
             margin-bottom: 3px;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .payment-page .sub {
-            color: #888;
+            color: var(--text-secondary);
             font-size: 9px;
             margin-bottom: 11px;
+            transition: color 0.3s ease;
         }
         .payment-details {
-            background: #f8f9fc;
+            background: var(--bg-body);
             border-radius: 9px;
             padding: 11px;
             margin-bottom: 11px;
-            border: 1px solid #eee;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .payment-details .number {
             font-size: 14px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-primary);
             margin: 3px 0;
+            transition: color 0.3s ease;
         }
         .payment-details .name {
             font-weight: 600;
@@ -951,7 +1083,7 @@
         .payment-details .amount-large {
             font-size: 19px;
             font-weight: 800;
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         /* ===== PROMO / REFERRAL DROPDOWN ===== */
@@ -964,21 +1096,21 @@
         .toggle-row .toggle-code-btn {
             flex: 1;
             padding: 5px 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 17px;
-            background: #fafafa;
+            background: var(--bg-card);
             font-size: 9px;
             font-weight: 600;
             color: #555;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
             text-align: center;
             min-width: 68px;
         }
         .toggle-row .toggle-code-btn.active {
-            background: #1c2128;
+            background: var(--bg-nav);
             color: white;
-            border-color: #1c2128;
+            border-color: var(--bg-nav);
         }
         .toggle-row .toggle-code-btn:active {
             transform: scale(0.95);
@@ -994,13 +1126,16 @@
         .code-input-wrap input {
             width: 100%;
             padding: 7px 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 9px;
             font-size: 10px;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
         .code-input-wrap input:focus {
             outline: none;
-            border-color: #f5b83d;
+            border-color: var(--accent);
         }
 
         .coupon-section {
@@ -1012,17 +1147,20 @@
         .coupon-section input {
             flex: 1;
             padding: 7px 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 9px;
             font-size: 10px;
             min-width: 68px;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
         .coupon-section input:focus {
             outline: none;
-            border-color: #f5b83d;
+            border-color: var(--accent);
         }
         .coupon-section .apply-btn {
-            background: #f5b83d;
+            background: var(--accent);
             color: #1c2128;
             border: none;
             padding: 7px 12px;
@@ -1030,6 +1168,7 @@
             font-weight: 700;
             font-size: 9px;
             cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         .coupon-section .apply-btn:disabled {
             background: #ddd;
@@ -1049,11 +1188,12 @@
             color: #dc2626;
         }
         .price-breakdown {
-            background: #f8f9fc;
+            background: var(--bg-body);
             border-radius: 7px;
             padding: 9px;
             margin-bottom: 10px;
             font-size: 10px;
+            transition: background-color 0.3s ease;
         }
         .price-breakdown .row {
             display: flex;
@@ -1061,29 +1201,31 @@
             padding: 3px 0;
         }
         .price-breakdown .row .label {
-            color: #888;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
         .price-breakdown .row .val {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .price-breakdown .row .val.discounted {
             color: #00a86b;
         }
 
         .upload-area {
-            border: 2px dashed #ddd;
+            border: 2px dashed var(--border-color);
             border-radius: 9px;
             padding: 14px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.25s;
-            background: #fafbfc;
+            transition: all 0.25s, background-color 0.3s ease, border-color 0.3s ease;
+            background: var(--bg-input);
             margin-bottom: 11px;
         }
         .upload-area:hover {
-            border-color: #f5b83d;
-            background: #fffcf0;
+            border-color: var(--accent);
+            background: var(--accent-light);
         }
         .upload-area i {
             font-size: 19px;
@@ -1092,12 +1234,14 @@
         }
         .upload-area p {
             font-size: 9px;
-            color: #888;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
         .upload-area .file-name {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-primary);
             margin-top: 3px;
+            transition: color 0.3s ease;
         }
         .upload-area.hidden {
             display: none !important;
@@ -1106,21 +1250,21 @@
         .btn-primary {
             width: 100%;
             padding: 9px;
-            background: #1c2128;
+            background: var(--bg-nav);
             color: white;
             border: none;
             border-radius: 9px;
             font-size: 11px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.25s;
-            box-shadow: 0 3px 14px rgba(0, 0, 0, 0.1);
+            transition: all 0.25s, background-color 0.3s ease;
+            box-shadow: 0 3px 14px var(--shadow-color);
         }
         .btn-primary:active {
             transform: scale(0.96);
         }
         .btn-primary i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         /* ===== ORDER SUCCESS POPUP ===== */
@@ -1142,14 +1286,15 @@
             display: flex;
         }
         .order-success-modal {
-            background: white;
+            background: var(--bg-card);
             border-radius: 20px;
             width: 100%;
             max-width: 320px;
             padding: 30px 20px 20px 20px;
             text-align: center;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 25px 60px var(--shadow-dark);
             animation: modalIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         @keyframes modalIn {
             from {
@@ -1163,32 +1308,34 @@
         }
         .order-success-modal i {
             font-size: 48px;
-            color: #f5b83d;
+            color: var(--accent);
             margin-bottom: 10px;
             display: block;
         }
         .order-success-modal h3 {
             font-size: 18px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-primary);
             margin-bottom: 6px;
+            transition: color 0.3s ease;
         }
         .order-success-modal p {
             font-size: 12px;
-            color: #555;
+            color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 18px;
+            transition: color 0.3s ease;
         }
         .order-success-modal .btn-ok {
             padding: 10px 30px;
-            background: #1c2128;
+            background: var(--bg-nav);
             color: white;
             border: none;
             border-radius: 30px;
             font-weight: 600;
             font-size: 13px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s, background-color 0.3s ease;
         }
         .order-success-modal .btn-ok:active {
             transform: scale(0.95);
@@ -1208,12 +1355,14 @@
         }
         .orders-header h3 {
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-primary);
             font-size: 15px;
+            transition: color 0.3s ease;
         }
         .orders-header p {
-            color: #888;
+            color: var(--text-secondary);
             font-size: 9px;
+            transition: color 0.3s ease;
         }
 
         .order-grid {
@@ -1223,12 +1372,12 @@
             padding: 0 12px 14px 12px;
         }
         .order-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 14px;
             padding: 12px 14px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-            border: 1px solid #f0f0f0;
-            transition: all 0.2s;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             cursor: default;
         }
         .order-card .order-summary {
@@ -1240,7 +1389,8 @@
         .order-card .order-summary .left .order-id {
             font-weight: 700;
             font-size: 12px;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .order-card .order-summary .left .order-service {
             font-size: 10px;
@@ -1248,11 +1398,12 @@
         }
         .order-card .order-summary .left .order-meta {
             font-size: 9px;
-            color: #888;
+            color: var(--text-secondary);
             margin-top: 2px;
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
+            transition: color 0.3s ease;
         }
         .order-card .order-summary .right {
             text-align: right;
@@ -1260,7 +1411,8 @@
         .order-card .order-summary .right .order-amount {
             font-weight: 700;
             font-size: 12px;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .order-card .order-summary .right .order-status {
             font-size: 9px;
@@ -1272,34 +1424,34 @@
         }
 
         .status-pending {
-            background: #fff6e0;
-            color: #cc8800;
+            background: var(--status-pending-bg);
+            color: var(--status-pending-text);
         }
         .status-progress {
-            background: #e0f0ff;
-            color: #0066cc;
+            background: var(--status-progress-bg);
+            color: var(--status-progress-text);
         }
         .status-completed {
-            background: #e6fffa;
-            color: #00a86b;
+            background: var(--status-completed-bg);
+            color: var(--status-completed-text);
         }
         .status-review {
-            background: #f0e6ff;
-            color: #7700cc;
+            background: var(--status-review-bg);
+            color: var(--status-review-text);
         }
         .status-cancelled {
-            background: #fee2e2;
-            color: #dc2626;
+            background: var(--status-cancelled-bg);
+            color: var(--status-cancelled-text);
         }
         .status-done {
-            background: #d1fae5;
-            color: #065f46;
+            background: var(--status-done-bg);
+            color: var(--status-done-text);
         }
 
         .order-card .order-details-expand {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease, border-color 0.3s ease;
             padding: 0 3px;
             border-top: 1px solid transparent;
             margin-top: 0;
@@ -1307,7 +1459,7 @@
         .order-card.open .order-details-expand {
             max-height: 400px;
             padding: 10px 3px 3px 3px;
-            border-top-color: #f0f0f0;
+            border-top-color: var(--border-color);
             margin-top: 9px;
         }
         .order-card .order-details-expand .detail-row {
@@ -1316,20 +1468,23 @@
             padding: 3px 0;
             font-size: 10px;
             color: #555;
-            border-bottom: 1px solid #f5f5f5;
+            border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.3s ease;
         }
         .order-card .order-details-expand .detail-row:last-child {
             border-bottom: none;
         }
         .order-card .order-details-expand .detail-row .label {
-            color: #888;
+            color: var(--text-secondary);
             flex-shrink: 0;
+            transition: color 0.3s ease;
         }
         .order-card .order-details-expand .detail-row .val {
             font-weight: 500;
-            color: #1c2128;
+            color: var(--text-primary);
             text-align: right;
             margin-left: 10px;
+            transition: color 0.3s ease;
         }
         .order-card .expand-icon {
             transition: transform 0.3s ease;
@@ -1349,13 +1504,13 @@
             gap: 9px;
         }
         .history-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 12px 14px;
-            box-shadow: 0 2px 9px rgba(0, 0, 0, 0.05);
-            border: 1px solid #f0f0f0;
+            box-shadow: 0 2px 9px var(--shadow-color);
+            border: 1px solid var(--border-color);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .history-card:active {
             transform: scale(0.98);
@@ -1370,7 +1525,8 @@
             align-items: center;
             gap: 9px;
             font-size: 10px;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .history-card .history-summary .left i {
             font-size: 12px;
@@ -1378,22 +1534,23 @@
         }
         .history-card .history-summary .right {
             font-size: 9px;
-            color: #888;
+            color: var(--text-secondary);
             display: flex;
             align-items: center;
             gap: 7px;
+            transition: color 0.3s ease;
         }
         .history-card .history-details {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease, border-color 0.3s ease;
             padding: 0 3px;
             border-top: 1px solid transparent;
         }
         .history-card.open .history-details {
             max-height: 250px;
             padding: 9px 3px 3px 3px;
-            border-top-color: #f0f0f0;
+            border-top-color: var(--border-color);
             margin-top: 7px;
         }
         .history-card .history-details .h-row {
@@ -1404,11 +1561,13 @@
             color: #555;
         }
         .history-card .history-details .h-row .h-label {
-            color: #888;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
         .history-card .history-details .h-row .h-val {
             font-weight: 500;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .history-card .expand-icon {
             transition: transform 0.3s ease;
@@ -1420,8 +1579,8 @@
         }
 
         .payment-reminder-banner {
-            background: #fff8ed;
-            border: 1px solid #f5b83d;
+            background: var(--accent-light);
+            border: 1px solid var(--accent);
             border-radius: 9px;
             padding: 9px 12px;
             margin: 0 12px 10px 12px;
@@ -1429,30 +1588,32 @@
             align-items: center;
             gap: 9px;
             flex-wrap: wrap;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .payment-reminder-banner.show {
             display: flex;
         }
         .payment-reminder-banner i {
-            color: #f5b83d;
+            color: var(--accent);
             font-size: 17px;
             flex-shrink: 0;
         }
         .payment-reminder-banner .reminder-text {
             font-size: 10px;
-            color: #1c2128;
+            color: var(--text-primary);
             font-weight: 500;
             flex: 1;
             min-width: 102px;
+            transition: color 0.3s ease;
         }
         .payment-reminder-banner .reminder-amount {
             font-weight: 700;
-            color: #f5b83d;
+            color: var(--accent);
             font-size: 12px;
             flex-shrink: 0;
         }
         .payment-reminder-banner .btn-done-remaining {
-            background: #1c2128;
+            background: var(--bg-nav);
             color: white;
             border: none;
             padding: 5px 14px;
@@ -1460,29 +1621,29 @@
             font-size: 9px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.25s;
+            transition: all 0.25s, background-color 0.3s ease;
             display: flex;
             align-items: center;
             gap: 5px;
             flex-shrink: 0;
         }
         .payment-reminder-banner .btn-done-remaining:hover {
-            background: #f5b83d;
+            background: var(--accent);
             color: #1c2128;
         }
         .payment-reminder-banner .btn-done-remaining:active {
             transform: scale(0.95);
         }
         .payment-reminder-banner .btn-done-remaining i {
-            color: #f5b83d;
+            color: var(--accent);
             font-size: 10px;
         }
         .payment-reminder-banner .btn-done-remaining:hover i {
             color: #1c2128;
         }
         .payment-reminder-banner .done-badge {
-            background: #d1fae5;
-            color: #065f46;
+            background: var(--status-done-bg);
+            color: var(--status-done-text);
             padding: 3px 12px;
             border-radius: 14px;
             font-size: 9px;
@@ -1514,10 +1675,10 @@
             right: -300px;
             width: 238px;
             height: 100%;
-            background: white;
+            background: var(--bg-card);
             z-index: 2001;
-            box-shadow: -4px 0 26px rgba(0, 0, 0, 0.15);
-            transition: right 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: -4px 0 26px var(--shadow-dark);
+            transition: right 0.3s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease, box-shadow 0.3s ease;
             padding: 14px 12px;
             overflow-y: auto;
         }
@@ -1530,29 +1691,33 @@
             align-items: center;
             margin-bottom: 14px;
             padding-bottom: 9px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.3s ease;
         }
         .sidebar-header h3 {
             font-weight: 700;
             font-size: 13px;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .sidebar-close {
             font-size: 16px;
-            color: #888;
+            color: var(--text-secondary);
             cursor: pointer;
             background: none;
             border: none;
+            transition: color 0.3s ease;
         }
         .sidebar-close:hover {
-            color: #1c2128;
+            color: var(--text-primary);
         }
         .notification-item {
             display: flex;
             align-items: flex-start;
             gap: 9px;
             padding: 9px 0;
-            border-bottom: 1px solid #f5f5f5;
+            border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.3s ease;
         }
         .notification-item:last-child {
             border-bottom: none;
@@ -1561,7 +1726,7 @@
             width: 5px;
             height: 5px;
             border-radius: 50%;
-            background: #f5b83d;
+            background: var(--accent);
             margin-top: 3px;
             flex-shrink: 0;
         }
@@ -1574,7 +1739,8 @@
         .notif-content .title {
             font-weight: 600;
             font-size: 9px;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .notif-content .desc {
             font-size: 8px;
@@ -1602,18 +1768,18 @@
         }
 
         .sample-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 14px;
             padding: 12px;
-            border: 1px solid #f0f0f0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px var(--shadow-color);
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
         }
         .sample-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 7px 21px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 7px 21px var(--shadow-color);
         }
         .sample-card .sample-frame {
             width: 100%;
@@ -1635,8 +1801,9 @@
         .sample-card .sample-title {
             font-weight: 700;
             font-size: 12px;
-            color: #1c2128;
+            color: var(--text-primary);
             margin-bottom: 2px;
+            transition: color 0.3s ease;
         }
         .sample-card .sample-desc {
             font-size: 10px;
@@ -1653,11 +1820,11 @@
         }
 
         .phone-frame-sample {
-            border: 5px solid #1c2128;
+            border: 5px solid var(--bg-nav);
             border-radius: 26px;
             padding: 5px;
             background: #fff;
-            box-shadow: 0 7px 26px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 7px 26px var(--shadow-color);
             aspect-ratio: 9/19;
             display: flex;
             align-items: center;
@@ -1667,6 +1834,7 @@
             width: 100%;
             max-width: 187px;
             margin: 0 auto;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .phone-frame-sample .notch {
             position: absolute;
@@ -1675,18 +1843,20 @@
             transform: translateX(-50%);
             width: 68px;
             height: 15px;
-            background: #1c2128;
+            background: var(--bg-nav);
             border-radius: 0 0 10px 10px;
+            transition: background-color 0.3s ease;
         }
 
         .laptop-frame-sample {
-            background: #1c2128;
+            background: var(--bg-nav);
             border-radius: 10px 10px 0 0;
             padding: 9px 9px 0 9px;
-            box-shadow: 0 7px 26px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 7px 26px var(--shadow-color);
             width: 100%;
             max-width: 272px;
             margin: 0 auto;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         .laptop-frame-sample .screen {
             background: #fff;
@@ -1724,73 +1894,195 @@
 
         /* ===== PROFILE ===== */
         .profile-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 14px;
             padding: 14px;
             margin: 0 12px 14px 12px;
-            box-shadow: 0 3px 17px rgba(0, 0, 0, 0.06);
-            border: 1px solid #f0f0f0;
+            box-shadow: 0 3px 17px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .profile-avatar-large {
             width: 61px;
             height: 61px;
             border-radius: 50%;
-            background-color: #1c2128;
-            color: #f5b83d;
+            background-color: var(--profile-avatar-bg);
+            color: var(--profile-avatar-text);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
             font-size: 24px;
             margin: 0 auto 11px auto;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         .profile-name {
             text-align: center;
             font-size: 15px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-primary);
             margin-bottom: 1px;
+            transition: color 0.3s ease;
         }
         .profile-role {
             text-align: center;
             font-size: 9px;
-            color: #888;
+            color: var(--text-secondary);
             margin-bottom: 14px;
+            transition: color 0.3s ease;
         }
         .profile-field {
             display: flex;
             align-items: center;
             gap: 9px;
             padding: 9px 0;
-            border-bottom: 1px solid #f5f5f5;
+            border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.3s ease;
         }
         .profile-field:last-child {
             border-bottom: none;
         }
         .profile-field i {
             width: 17px;
-            color: #f5b83d;
+            color: var(--accent);
             font-size: 13px;
         }
         .profile-field .label {
             font-size: 9px;
-            color: #888;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
         .profile-field .value {
             font-size: 10px;
             font-weight: 500;
-            color: #1c2128;
+            color: var(--text-primary);
             margin-left: auto;
+            transition: color 0.3s ease;
         }
         .profile-about {
             margin-top: 14px;
             padding-top: 11px;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--border-color);
+            transition: border-color 0.3s ease;
         }
         .profile-about p {
             font-size: 9px;
             color: #555;
             line-height: 1.6;
+        }
+
+        /* ===== Dark Mode Toggle (iOS style) ===== */
+        .dark-mode-toggle-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0 6px 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 10px;
+            transition: border-color 0.3s ease;
+        }
+        .dark-mode-toggle-wrapper .label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+        .dark-mode-toggle-wrapper .label i {
+            color: var(--accent);
+            font-size: 14px;
+        }
+        .ios-toggle {
+            position: relative;
+            width: 46px;
+            height: 28px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        .ios-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .ios-toggle .toggle-track {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 46px;
+            height: 28px;
+            background: var(--toggle-track);
+            border-radius: 14px;
+            transition: background 0.3s ease;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+        }
+        .ios-toggle .toggle-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            background: var(--toggle-knob);
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.3s ease, box-shadow 0.3s ease;
+        }
+        .ios-toggle.active .toggle-track {
+            background: var(--toggle-track-active);
+        }
+        .ios-toggle.active .toggle-knob {
+            transform: translateX(18px);
+        }
+
+        /* ===== Profile Contact Section ===== */
+        .profile-contact {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+            transition: border-color 0.3s ease;
+        }
+        .profile-contact .contact-title {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s ease;
+        }
+        .profile-contact .contact-title i {
+            color: var(--accent);
+        }
+        .profile-contact .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 0;
+            font-size: 10px;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+        .profile-contact .contact-item i {
+            width: 18px;
+            text-align: center;
+            color: var(--accent);
+            font-size: 13px;
+        }
+        .profile-contact .contact-item a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .profile-contact .contact-item a:hover {
+            color: var(--accent);
+        }
+        .profile-contact .contact-item .label-text {
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
 
         /* ===== ACCOUNT ===== */
@@ -1807,12 +2099,12 @@
             flex: 1;
             padding: 9px 14px;
             border-radius: 26px;
-            border: 2px solid #ddd;
-            background: #fff;
+            border: 2px solid var(--border-color);
+            background: var(--bg-card);
             font-weight: 600;
             font-size: 11px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
             color: #555;
             text-align: center;
             display: flex;
@@ -1821,18 +2113,18 @@
             gap: 5px;
         }
         .account-toggle-row .toggle-btn.active {
-            border-color: #1c2128;
-            background: #1c2128;
+            border-color: var(--bg-nav);
+            background: var(--bg-nav);
             color: #fff;
         }
         .account-toggle-row .toggle-btn:active {
             transform: scale(0.95);
         }
         .account-toggle-row .toggle-btn i {
-            color: #f5b83d;
+            color: var(--accent);
         }
         .account-toggle-row .toggle-btn.active i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .account-view {
@@ -1843,7 +2135,7 @@
         }
 
         .account-balance-box {
-            background: linear-gradient(135deg, #1c2128 0%, #2a2a2a 100%);
+            background: linear-gradient(135deg, var(--bg-nav) 0%, #2a2a2a 100%);
             border-radius: 14px;
             padding: 15px 14px;
             margin: 0 0 10px 0;
@@ -1851,10 +2143,11 @@
             justify-content: space-between;
             align-items: center;
             color: white;
+            transition: background 0.3s ease;
         }
         .account-balance-box .left .label {
             font-size: 9px;
-            color: #f5b83d;
+            color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
@@ -1871,7 +2164,7 @@
             align-items: stretch;
         }
         .account-balance-box .right-btns .btn-action {
-            background: #f5b83d;
+            background: var(--accent);
             border: none;
             padding: 5px 14px;
             border-radius: 26px;
@@ -1879,7 +2172,7 @@
             font-size: 9px;
             color: #1c2128;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s, background-color 0.3s ease, color 0.3s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -1903,12 +2196,13 @@
 
         /* ===== SEND MONEY ===== */
         .send-money-section {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 14px;
             padding: 14px;
             margin: 10px 0 14px 0;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--border-color);
             display: none;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .send-money-section.open {
             display: block;
@@ -1916,13 +2210,15 @@
         .send-money-section h4 {
             font-size: 12px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-primary);
             margin-bottom: 3px;
+            transition: color 0.3s ease;
         }
         .send-money-section .sub {
             font-size: 9px;
-            color: #888;
+            color: var(--text-secondary);
             margin-bottom: 10px;
+            transition: color 0.3s ease;
         }
         .send-money-section .form-group {
             margin-bottom: 10px;
@@ -1930,36 +2226,41 @@
         .send-money-section .form-group label {
             font-size: 9px;
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-primary);
             display: block;
             margin-bottom: 3px;
+            transition: color 0.3s ease;
         }
         .send-money-section .form-group input {
             width: 100%;
             padding: 7px 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 9px;
             font-size: 10px;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
         .send-money-section .form-group input:focus {
             outline: none;
-            border-color: #f5b83d;
+            border-color: var(--accent);
         }
         .send-money-section .search-result {
             padding: 7px 10px;
-            background: #f8f9fc;
+            background: var(--bg-body);
             border-radius: 7px;
             font-size: 10px;
-            color: #1c2128;
+            color: var(--text-primary);
             min-height: 31px;
             display: flex;
             align-items: center;
             gap: 5px;
             flex-wrap: wrap;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         .send-money-section .search-result .name {
             font-weight: 700;
-            color: #f5b83d;
+            color: var(--accent);
         }
         .send-money-section .search-result .not-found {
             color: #dc2626;
@@ -1967,12 +2268,14 @@
         }
         .send-money-section .balance-check {
             font-size: 9px;
-            color: #888;
+            color: var(--text-secondary);
             margin-top: 2px;
+            transition: color 0.3s ease;
         }
         .send-money-section .balance-check .avail {
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .send-money-section .balance-check .insufficient {
             color: #dc2626;
@@ -2004,27 +2307,31 @@
 
         .send-money-tx-list {
             margin-top: 10px;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--border-color);
             padding-top: 10px;
+            transition: border-color 0.3s ease;
         }
         .send-money-tx-list .tx-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 5px 0;
-            border-bottom: 1px solid #f5f5f5;
+            border-bottom: 1px solid var(--border-color);
             font-size: 9px;
+            transition: border-color 0.3s ease;
         }
         .send-money-tx-list .tx-item:last-child {
             border-bottom: none;
         }
         .send-money-tx-list .tx-item .tx-left .tx-type {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .send-money-tx-list .tx-item .tx-left .tx-with {
-            color: #888;
+            color: var(--text-secondary);
             font-size: 9px;
+            transition: color 0.3s ease;
         }
         .send-money-tx-list .tx-item .tx-right .tx-amount {
             font-weight: 700;
@@ -2043,21 +2350,22 @@
         }
         .send-money-tx-list .empty-tx {
             text-align: center;
-            color: #888;
+            color: var(--text-secondary);
             font-size: 9px;
             padding: 10px 0;
+            transition: color 0.3s ease;
         }
 
         /* ===== ACCOUNT TRANSACTIONS & WITHDRAWALS ===== */
         .account-tx-card,
         .withdrawal-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 12px 14px;
-            box-shadow: 0 2px 9px rgba(0, 0, 0, 0.05);
-            border: 1px solid #f0f0f0;
+            box-shadow: 0 2px 9px var(--shadow-color);
+            border: 1px solid var(--border-color);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 9px;
         }
         .account-tx-card:active,
@@ -2076,7 +2384,8 @@
             align-items: center;
             gap: 9px;
             font-size: 10px;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .account-tx-card .tx-summary .left i,
         .withdrawal-card .wd-summary .left i {
@@ -2086,16 +2395,17 @@
         .account-tx-card .tx-summary .right,
         .withdrawal-card .wd-summary .right {
             font-size: 9px;
-            color: #888;
+            color: var(--text-secondary);
             display: flex;
             align-items: center;
             gap: 7px;
+            transition: color 0.3s ease;
         }
         .account-tx-card .tx-details,
         .withdrawal-card .wd-details {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease, border-color 0.3s ease;
             padding: 0 3px;
             border-top: 1px solid transparent;
         }
@@ -2103,7 +2413,7 @@
         .withdrawal-card.open .wd-details {
             max-height: 250px;
             padding: 9px 3px 3px 3px;
-            border-top-color: #f0f0f0;
+            border-top-color: var(--border-color);
             margin-top: 7px;
         }
         .account-tx-card .tx-details .d-row,
@@ -2116,12 +2426,14 @@
         }
         .account-tx-card .tx-details .d-row .d-label,
         .withdrawal-card .wd-details .d-row .d-label {
-            color: #888;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
         .account-tx-card .tx-details .d-row .d-val,
         .withdrawal-card .wd-details .d-row .d-val {
             font-weight: 500;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .account-tx-card .expand-icon,
         .withdrawal-card .expand-icon {
@@ -2141,29 +2453,30 @@
             font-weight: 600;
         }
         .withdrawal-card .status-badge.pending {
-            background: #fff6e0;
-            color: #cc8800;
+            background: var(--status-pending-bg);
+            color: var(--status-pending-text);
         }
         .withdrawal-card .status-badge.approved {
-            background: #e6fffa;
-            color: #00a86b;
+            background: var(--status-completed-bg);
+            color: var(--status-completed-text);
         }
         .withdrawal-card .status-badge.declined {
-            background: #fee2e2;
-            color: #dc2626;
+            background: var(--status-cancelled-bg);
+            color: var(--status-cancelled-text);
         }
 
         .referral-code-box {
-            background: #1c2128;
+            background: var(--bg-nav);
             border-radius: 14px;
             padding: 17px 14px;
             margin: 14px 0 10px 0;
             text-align: center;
             color: white;
+            transition: background-color 0.3s ease;
         }
         .referral-code-box .label {
             font-size: 9px;
-            color: #f5b83d;
+            color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
@@ -2171,13 +2484,13 @@
         .referral-code-box .code {
             font-size: 27px;
             font-weight: 800;
-            color: #f5b83d;
+            color: var(--accent);
             letter-spacing: 2px;
             margin: 5px 0;
             word-break: break-all;
         }
         .referral-code-box .copy-btn {
-            background: #f5b83d;
+            background: var(--accent);
             border: none;
             padding: 5px 17px;
             border-radius: 26px;
@@ -2185,7 +2498,7 @@
             font-size: 10px;
             color: #1c2128;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s, background-color 0.3s ease, color 0.3s ease;
             display: inline-flex;
             align-items: center;
             gap: 7px;
@@ -2216,23 +2529,26 @@
             display: flex;
         }
         .withdraw-modal {
-            background: white;
+            background: var(--bg-card);
             border-radius: 15px;
             width: 100%;
             max-width: 289px;
             padding: 20px 17px 17px 17px;
-            box-shadow: 0 21px 51px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 21px 51px var(--shadow-dark);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         .withdraw-modal h3 {
             font-size: 15px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-primary);
             margin-bottom: 3px;
+            transition: color 0.3s ease;
         }
         .withdraw-modal .sub {
             font-size: 10px;
-            color: #888;
+            color: var(--text-secondary);
             margin-bottom: 12px;
+            transition: color 0.3s ease;
         }
         .withdraw-modal .form-group {
             margin-bottom: 12px;
@@ -2247,24 +2563,28 @@
         .withdraw-modal .form-group input {
             width: 100%;
             padding: 9px 12px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 9px;
             font-size: 11px;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
         .withdraw-modal .form-group input:focus {
             outline: none;
-            border-color: #1c2128;
+            border-color: var(--text-primary);
         }
         .withdraw-modal .btn-withdraw {
             width: 100%;
             padding: 9px;
-            background: #1c2128;
+            background: var(--bg-nav);
             color: white;
             border: none;
             border-radius: 9px;
             font-weight: 700;
             font-size: 12px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         .withdraw-modal .btn-withdraw:active {
             transform: scale(0.95);
@@ -2303,46 +2623,50 @@
             display: flex;
         }
         .withdraw-success-modal {
-            background: white;
+            background: var(--bg-card);
             border-radius: 15px;
             width: 100%;
             max-width: 289px;
             padding: 24px 17px 17px 17px;
             text-align: center;
-            box-shadow: 0 21px 51px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 21px 51px var(--shadow-dark);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         .withdraw-success-modal i {
             font-size: 41px;
-            color: #f5b83d;
+            color: var(--accent);
             margin-bottom: 9px;
         }
         .withdraw-success-modal h3 {
             font-size: 15px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-primary);
             margin-bottom: 3px;
+            transition: color 0.3s ease;
         }
         .withdraw-success-modal p {
             font-size: 11px;
-            color: #555;
+            color: var(--text-secondary);
             line-height: 1.6;
+            transition: color 0.3s ease;
         }
         .withdraw-success-modal .btn-ok {
             margin-top: 14px;
             padding: 9px 26px;
-            background: #1c2128;
+            background: var(--bg-nav);
             color: white;
             border: none;
             border-radius: 26px;
             font-weight: 600;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         .withdraw-success-modal .btn-ok:active {
             transform: scale(0.95);
         }
 
         .apply-btn {
-            background: #f5b83d;
+            background: var(--accent);
             color: #1c2128;
             border: none;
             padding: 7px 12px;
@@ -2350,7 +2674,7 @@
             font-weight: 700;
             font-size: 9px;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.25s ease, background-color 0.3s ease;
             box-shadow: 0 3px 10px rgba(245, 184, 61, 0.3);
         }
         .apply-btn:hover {
@@ -2379,7 +2703,7 @@
             font-size: 10px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s, background-color 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2394,11 +2718,12 @@
             padding: 0 12px 14px 12px;
         }
         .flyer-detail-container {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.10);
-            border: 1px solid #f0f0f0;
+            box-shadow: 0 8px 28px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .flyer-detail-image-wrap {
             width: 100%;
@@ -2409,6 +2734,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 20px 20px 0 0;
         }
         .flyer-detail-image-wrap img {
             width: 100%;
@@ -2422,6 +2748,7 @@
             object-fit: cover;
             display: none;
             background: #000;
+            border-radius: 20px 20px 0 0;
         }
         .flyer-detail-content {
             padding: 16px 14px 14px 14px;
@@ -2435,20 +2762,22 @@
         .flyer-detail-header-row h2 {
             font-size: 18px;
             font-weight: 800;
-            color: #1c2128;
+            color: var(--text-primary);
             margin: 0;
             flex: 1;
+            transition: color 0.3s ease;
         }
         .flyer-detail-close-btn {
             background: none;
             border: none;
             font-size: 18px;
-            color: #888;
+            color: var(--text-secondary);
             cursor: pointer;
             padding: 4px;
+            transition: color 0.3s ease;
         }
         .flyer-detail-close-btn:hover {
-            color: #1c2128;
+            color: var(--text-primary);
         }
         .flyer-detail-section {
             margin-bottom: 14px;
@@ -2456,18 +2785,20 @@
         .flyer-detail-section-title {
             font-size: 11px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-primary);
             margin-bottom: 4px;
+            transition: color 0.3s ease;
         }
         .flyer-detail-instructions {
             font-size: 10px;
             color: #555;
             line-height: 1.5;
-            background: #f8f9fc;
+            background: var(--bg-body);
             padding: 8px 10px;
             border-radius: 8px;
             margin-bottom: 6px;
-            border: 1px solid #f0f0f0;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .flyer-detail-explanation {
             font-size: 10px;
@@ -2476,15 +2807,17 @@
             margin-bottom: 10px;
         }
         .flyer-detail-explanation strong {
-            color: #1c2128;
+            color: var(--text-primary);
             font-weight: 700;
+            transition: color 0.3s ease;
         }
 
         /* flyer form styling */
         .flyer-detail-form {
             margin-top: 10px;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--border-color);
             padding-top: 12px;
+            transition: border-color 0.3s ease;
         }
         .flyer-detail-form .form-group {
             margin-bottom: 10px;
@@ -2493,25 +2826,27 @@
             display: block;
             font-weight: 600;
             font-size: 9px;
-            color: #222;
+            color: var(--text-primary);
             margin-bottom: 2px;
+            transition: color 0.3s ease;
         }
         .flyer-detail-form .form-group input,
         .flyer-detail-form .form-group select,
         .flyer-detail-form .form-group textarea {
             width: 100%;
             padding: 6px 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             font-size: 10px;
-            background: #ffffff;
-            transition: border 0.2s;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            transition: border 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
         .flyer-detail-form .form-group input:focus,
         .flyer-detail-form .form-group select:focus,
         .flyer-detail-form .form-group textarea:focus {
             outline: none;
-            border-color: #1c2128;
+            border-color: var(--text-primary);
             box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
         }
         .flyer-detail-form .form-group textarea {
@@ -2527,23 +2862,23 @@
         }
         .upload-box-sm {
             aspect-ratio: 1 / 1;
-            border: 2px dashed #ddd;
+            border: 2px dashed var(--border-color);
             border-radius: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s;
-            background: #fafbfc;
+            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease;
+            background: var(--bg-input);
             padding: 4px;
             text-align: center;
             min-height: 60px;
             position: relative;
         }
         .upload-box-sm:hover {
-            border-color: #f5b83d;
-            background: #fffcf0;
+            border-color: var(--accent);
+            background: var(--accent-light);
         }
         .upload-box-sm i {
             font-size: 20px;
@@ -2551,18 +2886,20 @@
         }
         .upload-box-sm .file-label {
             font-size: 7px;
-            color: #888;
+            color: var(--text-secondary);
             margin-top: 2px;
             line-height: 1.2;
             word-break: break-all;
+            transition: color 0.3s ease;
         }
         .upload-box-sm .file-name {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-primary);
             font-size: 7px;
             margin-top: 2px;
             line-height: 1.2;
             word-break: break-all;
+            transition: color 0.3s ease;
         }
         .upload-box-sm .preview-img {
             position: absolute;
@@ -2576,8 +2913,8 @@
             z-index: 1;
         }
         .upload-box-sm.has-preview {
-            border-color: #f5b83d;
-            background: #fffcf0;
+            border-color: var(--accent);
+            background: var(--accent-light);
         }
         .upload-box-sm.has-preview i,
         .upload-box-sm.has-preview .file-label,
@@ -2590,20 +2927,20 @@
 
         /* ----- Payment single upload area ----- */
         .payment-upload-area {
-            border: 2px dashed #ddd;
+            border: 2px dashed var(--border-color);
             border-radius: 9px;
             padding: 10px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.25s;
-            background: #fafbfc;
+            transition: all 0.25s, background-color 0.3s ease, border-color 0.3s ease;
+            background: var(--bg-input);
             margin-bottom: 10px;
             position: relative;
             min-height: 60px;
         }
         .payment-upload-area:hover {
-            border-color: #f5b83d;
-            background: #fffcf0;
+            border-color: var(--accent);
+            background: var(--accent-light);
         }
         .payment-upload-area i {
             font-size: 24px;
@@ -2612,13 +2949,15 @@
         }
         .payment-upload-area .file-label {
             font-size: 9px;
-            color: #888;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
         .payment-upload-area .file-name {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-primary);
             font-size: 9px;
             margin-top: 2px;
+            transition: color 0.3s ease;
         }
         .payment-upload-area .preview-img {
             position: absolute;
@@ -2632,8 +2971,8 @@
             z-index: 1;
         }
         .payment-upload-area.has-preview {
-            border-color: #f5b83d;
-            background: #fffcf0;
+            border-color: var(--accent);
+            background: var(--accent-light);
         }
         .payment-upload-area.has-preview i,
         .payment-upload-area.has-preview .file-label,
@@ -2646,9 +2985,10 @@
 
         .flyer-detail-actions {
             padding: 12px 14px 14px 14px;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--border-color);
             display: flex;
             gap: 8px;
+            transition: border-color 0.3s ease;
         }
         .flyer-detail-actions .btn {
             flex: 1;
@@ -2658,11 +2998,11 @@
             font-size: 11px;
             border: none;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s, background-color 0.3s ease;
             text-align: center;
         }
         .flyer-detail-actions .btn-primary {
-            background: #f5b83d;
+            background: var(--accent);
             color: #1c2128;
         }
         .flyer-detail-actions .btn-primary:active {
@@ -2688,20 +3028,22 @@
         .applications-header h3 {
             font-weight: 700;
             font-size: 15px;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .applications-header p {
-            color: #888;
+            color: var(--text-secondary);
             font-size: 9px;
+            transition: color 0.3s ease;
         }
 
         .app-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 14px;
             padding: 12px 14px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-            border: 1px solid #f0f0f0;
-            transition: all 0.2s;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 10px;
             cursor: pointer;
         }
@@ -2723,18 +3065,20 @@
         }
         .app-card .app-summary .left .app-icon {
             font-size: 14px;
-            color: #f5b83d;
+            color: var(--accent);
             width: 24px;
             text-align: center;
         }
         .app-card .app-summary .left .app-info .app-title {
             font-weight: 600;
             font-size: 12px;
-            color: #1c2128;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
         .app-card .app-summary .left .app-info .app-sub {
             font-size: 9px;
-            color: #888;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
         .app-card .app-summary .right {
             text-align: right;
@@ -2749,16 +3093,16 @@
             border-radius: 12px;
         }
         .app-card .app-summary .right .app-status.pending {
-            background: #fff6e0;
-            color: #cc8800;
+            background: var(--status-pending-bg);
+            color: var(--status-pending-text);
         }
         .app-card .app-summary .right .app-status.approved {
-            background: #e6fffa;
-            color: #00a86b;
+            background: var(--status-completed-bg);
+            color: var(--status-completed-text);
         }
         .app-card .app-summary .right .app-status.rejected {
-            background: #fee2e2;
-            color: #dc2626;
+            background: var(--status-cancelled-bg);
+            color: var(--status-cancelled-text);
         }
         .app-card .app-summary .right .expand-icon {
             transition: transform 0.3s ease;
@@ -2773,7 +3117,7 @@
         .app-card .app-details-expand {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease, border-color 0.3s ease;
             padding: 0 3px;
             border-top: 1px solid transparent;
             margin-top: 0;
@@ -2781,7 +3125,7 @@
         .app-card.open .app-details-expand {
             max-height: 400px;
             padding: 10px 3px 3px 3px;
-            border-top-color: #f0f0f0;
+            border-top-color: var(--border-color);
             margin-top: 9px;
         }
         .app-card .app-details-expand .detail-row {
@@ -2790,27 +3134,31 @@
             padding: 3px 0;
             font-size: 10px;
             color: #555;
-            border-bottom: 1px solid #f5f5f5;
+            border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.3s ease;
         }
         .app-card .app-details-expand .detail-row:last-child {
             border-bottom: none;
         }
         .app-card .app-details-expand .detail-row .label {
-            color: #888;
+            color: var(--text-secondary);
             flex-shrink: 0;
+            transition: color 0.3s ease;
         }
         .app-card .app-details-expand .detail-row .val {
             font-weight: 500;
-            color: #1c2128;
+            color: var(--text-primary);
             text-align: right;
             margin-left: 10px;
+            transition: color 0.3s ease;
         }
         .app-card .app-details-expand .detail-row .val a {
-            color: #1c2128;
+            color: var(--text-primary);
             text-decoration: underline;
+            transition: color 0.3s ease;
         }
 
-        /* ===== RECEIPT MODAL STYLES (ADDED) ===== */
+        /* ===== RECEIPT MODAL STYLES ===== */
         #receiptModal {
             display: none;
             position: fixed;
@@ -2818,7 +3166,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
             z-index: 9999;
             overflow-y: auto;
             padding: 20px;
@@ -2835,20 +3183,22 @@
             margin: auto;
         }
         .receipt-card {
-            background: #ffffff;
+            background: var(--receipt-bg);
             border-radius: 0;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 40px var(--shadow-dark);
             font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         .receipt-header {
-            background: #1c2128;
+            background: var(--bg-nav);
             padding: 18px 20px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             position: relative;
-            border-bottom: 4px solid #f5b83d;
+            border-bottom: 4px solid var(--accent);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .receipt-header h2 {
             color: white;
@@ -2865,7 +3215,7 @@
             letter-spacing: 2px;
         }
         .receipt-header .invoice-title {
-            color: #f5b83d;
+            color: var(--accent);
             font-weight: 800;
             margin: 0;
             font-size: 22px;
@@ -2886,13 +3236,14 @@
             margin: 0 0 4px 0;
             font-size: 11px;
             font-weight: 700;
-            color: #1c2128;
-            border-left: 3px solid #f5b83d;
+            color: var(--receipt-text);
+            border-left: 3px solid var(--accent);
             padding-left: 8px;
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
         .receipt-addresses .address-right h4 {
             border-left: none;
-            border-right: 3px solid #f5b83d;
+            border-right: 3px solid var(--accent);
             padding-left: 0;
             padding-right: 8px;
             text-align: right;
@@ -2905,11 +3256,12 @@
         }
         .receipt-addresses .name {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--receipt-text);
             font-size: 12px;
+            transition: color 0.3s ease;
         }
         .receipt-table-header {
-            background: #f5b83d;
+            background: var(--accent);
             display: flex;
             justify-content: space-between;
             padding: 7px 20px;
@@ -2933,8 +3285,9 @@
             display: flex;
             justify-content: space-between;
             padding: 8px 20px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--receipt-border);
             font-size: 11px;
+            transition: border-color 0.3s ease;
         }
         .receipt-item-row > div {
             text-align: center;
@@ -2963,7 +3316,7 @@
             padding: 2px 0;
         }
         .receipt-totals-box .total-row {
-            background: #f5b83d;
+            background: var(--accent);
             margin-top: 6px;
             padding: 6px 10px;
             border-radius: 4px;
@@ -2972,15 +3325,17 @@
         }
         .receipt-footer {
             padding: 12px 20px 20px 20px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid var(--receipt-border);
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
+            transition: border-color 0.3s ease;
         }
         .receipt-footer .thanks {
             font-size: 10px;
             font-weight: 600;
-            color: #1c2128;
+            color: var(--receipt-text);
+            transition: color 0.3s ease;
         }
         .receipt-footer .footnote {
             font-size: 8px;
@@ -2989,15 +3344,17 @@
         }
         .receipt-footer .signature-area {
             text-align: right;
-            border-top: 2px solid #1c2128;
+            border-top: 2px solid var(--text-primary);
             padding-top: 4px;
             width: 130px;
+            transition: border-color 0.3s ease;
         }
         .receipt-footer .signature-area .sign-name {
             font-weight: 800;
             font-size: 15px;
-            color: #1c2128;
+            color: var(--text-primary);
             letter-spacing: 0.5px;
+            transition: color 0.3s ease;
         }
         .receipt-footer .signature-area .sign-label {
             font-size: 8px;
@@ -3005,14 +3362,15 @@
             text-transform: uppercase;
         }
         .receipt-bottom-bar {
-            background: #1c2128;
+            background: var(--bg-nav);
             height: 10px;
             width: 100%;
+            transition: background-color 0.3s ease;
         }
         .receipt-download-btn {
             margin-top: 15px;
             width: 100%;
-            background: #1c2128;
+            background: var(--bg-nav);
             color: white;
             border: none;
             padding: 12px;
@@ -3024,14 +3382,14 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-            transition: all 0.2s;
+            box-shadow: 0 4px 14px var(--shadow-color);
+            transition: all 0.2s, background-color 0.3s ease, box-shadow 0.3s ease;
         }
         .receipt-download-btn:active {
             transform: scale(0.98);
         }
         .receipt-download-btn i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         /* ===== RESPONSIVE ===== */
@@ -3168,10 +3526,10 @@
             <!-- ===== VIEW: ORDER FLOW ===== -->
             <div id="orderFlowView" class="view">
                 <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
-                    <button id="backFromOrder" style="background: none; border: none; font-size: 14px; color: #1c2128; cursor: pointer; padding: 3px;">
+                    <button id="backFromOrder" style="background: none; border: none; font-size: 14px; color: var(--text-primary); cursor: pointer; padding: 3px; transition: color 0.3s ease;">
                         <i class="fa-solid fa-arrow-left"></i>
                     </button>
-                    <h3 style="font-weight: 700; font-size: 12px; color: #1c2128;">Customize Order</h3>
+                    <h3 style="font-weight: 700; font-size: 12px; color: var(--text-primary); transition: color 0.3s ease;">Customize Order</h3>
                 </div>
                 <div id="orderFlowContainer" class="order-flow-container">
                     <!-- Dynamically rendered -->
@@ -3181,10 +3539,10 @@
             <!-- ===== VIEW: FLYER DETAIL ===== -->
             <div id="flyerDetailView" class="view">
                 <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
-                    <button id="backFromFlyerDetail" style="background: none; border: none; font-size: 14px; color: #1c2128; cursor: pointer; padding: 3px;">
+                    <button id="backFromFlyerDetail" style="background: none; border: none; font-size: 14px; color: var(--text-primary); cursor: pointer; padding: 3px; transition: color 0.3s ease;">
                         <i class="fa-solid fa-arrow-left"></i>
                     </button>
-                    <h3 style="font-weight: 700; font-size: 12px; color: #1c2128;">Flyer Details</h3>
+                    <h3 style="font-weight: 700; font-size: 12px; color: var(--text-primary); transition: color 0.3s ease;">Flyer Details</h3>
                 </div>
                 <div class="flyer-detail-view">
                     <div class="flyer-detail-container">
@@ -3213,8 +3571,8 @@
             <!-- ===== VIEW: ORDERS ===== -->
             <div id="ordersView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
-                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Your Orders</h3>
-                    <p style="color: #888; font-size: 9px;">Track your projects and payments.</p>
+                    <h3 style="font-weight: 700; font-size: 15px; color: var(--text-primary); transition: color 0.3s ease;">Your Orders</h3>
+                    <p style="color: var(--text-secondary); font-size: 9px; transition: color 0.3s ease;">Track your projects and payments.</p>
                 </div>
                 <div class="order-grid" id="ordersGrid"></div>
             </div>
@@ -3222,8 +3580,8 @@
             <!-- ===== VIEW: HISTORY ===== -->
             <div id="historyView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
-                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Transaction History</h3>
-                    <p style="color: #888; font-size: 9px;">Tap a transaction to view more details.</p>
+                    <h3 style="font-weight: 700; font-size: 15px; color: var(--text-primary); transition: color 0.3s ease;">Transaction History</h3>
+                    <p style="color: var(--text-secondary); font-size: 9px; transition: color 0.3s ease;">Tap a transaction to view more details.</p>
                 </div>
                 <div id="paymentReminderBanner" class="payment-reminder-banner">
                     <!-- Rendered by JS -->
@@ -3234,8 +3592,8 @@
             <!-- ===== VIEW: SAMPLES ===== -->
             <div id="samplesView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
-                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">📁 Work Samples</h3>
-                    <p style="color: #888; font-size: 9px;">Browse through our recent projects.</p>
+                    <h3 style="font-weight: 700; font-size: 15px; color: var(--text-primary); transition: color 0.3s ease;">📁 Work Samples</h3>
+                    <p style="color: var(--text-secondary); font-size: 9px; transition: color 0.3s ease;">Browse through our recent projects.</p>
                 </div>
                 <div id="samplesContainer" class="samples-grid"></div>
             </div>
@@ -3243,8 +3601,8 @@
             <!-- ===== VIEW: APPLICATIONS ===== -->
             <div id="applicationsView" class="view">
                 <div class="applications-header">
-                    <h3>📋 My Applications</h3>
-                    <p>Track the status of your form submissions.</p>
+                    <h3 style="color: var(--text-primary); transition: color 0.3s ease;">📋 My Applications</h3>
+                    <p style="color: var(--text-secondary); transition: color 0.3s ease;">Track the status of your form submissions.</p>
                 </div>
                 <div id="applicationsList">
                     <!-- Rendered by JS -->
@@ -3254,8 +3612,8 @@
             <!-- ===== VIEW: ACCOUNT ===== -->
             <div id="accountView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
-                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">💰 My Account</h3>
-                    <p style="color: #888; font-size: 9px;">Manage your balance, referrals, and withdrawals.</p>
+                    <h3 style="font-weight: 700; font-size: 15px; color: var(--text-primary); transition: color 0.3s ease;">💰 My Account</h3>
+                    <p style="color: var(--text-secondary); font-size: 9px; transition: color 0.3s ease;">Manage your balance, referrals, and withdrawals.</p>
                 </div>
 
                 <div class="account-section">
@@ -3296,7 +3654,7 @@
                             <div class="form-group">
                                 <label>Recipient</label>
                                 <div class="search-result" id="recipientSearchResult">
-                                    <span style="color:#888;">Enter a referral code and click Search.</span>
+                                    <span style="color:var(--text-secondary);">Enter a referral code and click Search.</span>
                                 </div>
                             </div>
 
@@ -3313,7 +3671,7 @@
                             </button>
 
                             <div class="send-money-tx-list" id="sendMoneyTxList">
-                                <div style="font-weight:600; font-size:10px; color:#1c2128; margin-bottom:5px;">📋 Recent Sent &amp; Received</div>
+                                <div style="font-weight:600; font-size:10px; color:var(--text-primary); margin-bottom:5px; transition:color 0.3s ease;">📋 Recent Sent &amp; Received</div>
                                 <div id="sendTxItems">
                                     <!-- Rendered by JS -->
                                 </div>
@@ -3328,8 +3686,8 @@
                     <!-- Withdrawals View -->
                     <div class="account-view" id="accountWithdrawView">
                         <div style="text-align:center; padding:17px 0;">
-                            <p style="color:#888; font-size:11px;">Click the "Withdraw" button below to request a withdrawal from your account.</p>
-                            <button class="withdraw-btn" id="withdrawBtnFromView" style="margin-top:10px; background:#f5b83d; border:none; padding:10px 26px; border-radius:26px; font-weight:700; font-size:12px; color:#1c2128; cursor:pointer; display:inline-flex; align-items:center; gap:7px;">
+                            <p style="color:var(--text-secondary); font-size:11px; transition:color 0.3s ease;">Click the "Withdraw" button below to request a withdrawal from your account.</p>
+                            <button class="withdraw-btn" id="withdrawBtnFromView" style="margin-top:10px; background:var(--accent); border:none; padding:10px 26px; border-radius:26px; font-weight:700; font-size:12px; color:#1c2128; cursor:pointer; display:inline-flex; align-items:center; gap:7px; transition:background-color 0.3s ease;">
                                 <i class="fa-solid fa-arrow-up"></i> Withdraw Funds
                             </button>
                         </div>
@@ -3344,8 +3702,8 @@
             <!-- ===== VIEW: PROFILE ===== -->
             <div id="profileView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
-                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">My Profile</h3>
-                    <p style="color: #888; font-size: 9px;">Your personal information.</p>
+                    <h3 style="font-weight: 700; font-size: 15px; color: var(--text-primary); transition: color 0.3s ease;">My Profile</h3>
+                    <p style="color: var(--text-secondary); font-size: 9px; transition: color 0.3s ease;">Your personal information.</p>
                 </div>
                 <div class="profile-card">
                     <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
@@ -3356,9 +3714,37 @@
                     <div class="profile-field"><i class="fa-solid fa-envelope"></i><span class="label">Email</span><span class="value" id="profileEmail">No email</span></div>
                     <div class="profile-field"><i class="fa-solid fa-calendar"></i><span class="label">Joined</span><span class="value" id="profileJoined">N/A</span></div>
                     <div class="profile-about">
-                        <h4 style="font-size: 9px; font-weight: 600; color: #1c2128; margin-bottom: 3px;">About</h4>
+                        <h4 style="font-size: 9px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; transition: color 0.3s ease;">About</h4>
                         <p>Passionate about design and technology. Helping brands grow through innovation and strategic design.</p>
                     </div>
+
+                    <!-- Dark Mode Toggle (iOS style) -->
+                    <div class="dark-mode-toggle-wrapper">
+                        <span class="label"><i class="fa-solid fa-moon"></i> Dark Mode</span>
+                        <label class="ios-toggle" id="darkModeToggle">
+                            <input type="checkbox" id="darkModeCheck" />
+                            <span class="toggle-track"></span>
+                            <span class="toggle-knob"></span>
+                        </label>
+                    </div>
+
+                    <!-- Contact Section -->
+                    <div class="profile-contact">
+                        <div class="contact-title"><i class="fa-regular fa-address-book"></i> Contact Us</div>
+                        <div class="contact-item">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <span><span class="label-text">WhatsApp:</span> <a href="https://wa.me/260768658484" target="_blank" rel="noopener noreferrer">0768658484</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fa-brands fa-facebook"></i>
+                            <span><span class="label-text">Facebook:</span> <a href="https://facebook.com/BufferZONE" target="_blank" rel="noopener noreferrer">Buffer ZONE</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <span><span class="label-text">SMS/CALLS:</span> <a href="tel:+260976760537">0976760537</a></span>
+                        </div>
+                    </div>
+
                     <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
                 </div>
             </div>
@@ -3397,18 +3783,18 @@
                         <div style="font-size:9px; color:#555;" id="paymentAccountName">Jubel Mobela</div>
                     </div>
                     <div style="text-align:right;">
-                        <div style="font-size:9px; color:#888;">Amount to pay</div>
+                        <div style="font-size:9px; color:var(--text-secondary); transition:color 0.3s ease;">Amount to pay</div>
                         <div class="amount-large" id="paymentAmount">ZMW 350.00</div>
-                        <div style="font-size:9px; color:#888;">50% of total</div>
+                        <div style="font-size:9px; color:var(--text-secondary); transition:color 0.3s ease;">50% of total</div>
                     </div>
                 </div>
             </div>
 
             <!-- ===== PAY WITH BUFFER ZONE WALLET ===== -->
-            <div id="walletPaymentSection" style="margin-bottom:10px; padding:9px; border-radius:9px; border:1px solid #e0e0e0; background:#fafbfc;">
+            <div id="walletPaymentSection" style="margin-bottom:10px; padding:9px; border-radius:9px; border:1px solid var(--border-color); background:var(--bg-body); transition:background-color 0.3s ease, border-color 0.3s ease;">
                 <div style="display:flex; align-items:center; gap:7px; flex-wrap:wrap;">
                     <input type="checkbox" id="payWithWalletCheck" />
-                    <label for="payWithWalletCheck" style="font-weight:600; font-size:10px; color:#1c2128; cursor:pointer;">Pay with Buffer Zone Wallet</label>
+                    <label for="payWithWalletCheck" style="font-weight:600; font-size:10px; color:var(--text-primary); cursor:pointer; transition:color 0.3s ease;">Pay with Buffer Zone Wallet</label>
                 </div>
                 <div id="walletStatus" style="font-size:9px; margin-top:3px; padding:3px 7px; border-radius:5px;">
                     Wallet balance: <span id="walletBalanceDisplay">ZMW 0.00</span>
@@ -3442,11 +3828,11 @@
                 <div class="row"><span class="label">Original Price</span><span class="val" id="origPriceVal">ZMW 0.00</span></div>
                 <div class="row"><span class="label">Discount</span><span class="val discounted" id="discountVal">- ZMW 0.00</span></div>
                 <div class="row"><span class="label">Final Price</span><span class="val" id="finalPriceVal">ZMW 0.00</span></div>
-                <div class="row"><span class="label" style="font-weight:700;">50% Deposit</span><span class="val" style="font-weight:700;color:#f5b83d;" id="finalDepositVal">ZMW 0.00</span></div>
+                <div class="row"><span class="label" style="font-weight:700;">50% Deposit</span><span class="val" style="font-weight:700;color:var(--accent);" id="finalDepositVal">ZMW 0.00</span></div>
             </div>
 
             <div style="margin-bottom:9px;" id="uploadSection">
-                <label style="font-weight:600; font-size:9px; color:#1c2128; display:block; margin-bottom:3px;">Upload transaction screenshot</label>
+                <label style="font-weight:600; font-size:9px; color:var(--text-primary); display:block; margin-bottom:3px; transition:color 0.3s ease;">Upload transaction screenshot</label>
                 <div class="upload-area" id="uploadArea">
                     <i class="fa-regular fa-image"></i>
                     <p>Tap to upload receipt or screenshot</p>
@@ -3459,7 +3845,7 @@
             <button class="btn-primary" id="confirmPaymentBtn">
                 <i class="fa-regular fa-circle-check"></i> Confirm Payment & Start Project
             </button>
-            <p style="text-align:center; font-size:8px; color:#888; margin-top:5px;">
+            <p style="text-align:center; font-size:8px; color:var(--text-secondary); margin-top:5px; transition:color 0.3s ease;">
                 <i class="fa-regular fa-clock"></i> Project begins after payment confirmation
             </p>
         </div>
@@ -3511,7 +3897,7 @@
         </div>
     </div>
 
-    <!-- ===== RECEIPT MODAL (ADDED) ===== -->
+    <!-- ===== RECEIPT MODAL ===== -->
     <div id="receiptModal">
         <div class="receipt-wrapper">
             <div id="receiptContainer" class="receipt-card">
@@ -3533,6 +3919,7 @@
                         <h4>INVOICE TO</h4>
                         <p class="name" id="recCustName">Customer Name</p>
                         <p id="recCustPhone">+000 123 456 789</p>
+                        <p id="recCustEmail">customer@email.com</p>
                         <p>Customer</p>
                     </div>
                     <div class="address-right">
@@ -3571,7 +3958,9 @@
                 <div class="receipt-footer">
                     <div>
                         <div class="thanks">Thanks for your business!</div>
-                        <div class="footnote">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</div>
+                        <div class="footnote" id="recFootnote">
+                            We truly appreciate your trust and support. It has been a pleasure working with you, and we look forward to bringing your next project to life with creativity, professionalism, quality, innovation, and exceptional service every step of the way.
+                        </div>
                     </div>
                     <div class="signature-area">
                         <div class="sign-name" id="recSignName">Jubel Mobela</div>
@@ -3604,7 +3993,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
         import { getDatabase, ref, onValue, set, push, get, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
-        // NEW: Import Messaging
         import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-messaging.js";
 
         const firebaseConfig = {
@@ -3620,7 +4008,6 @@
 
         const CLOUD_NAME = 'dd3lcymrk';
         const UPLOAD_PRESET = 'h3eyhc2o';
-        // VAPID key from admin
         const VAPID_KEY = "BOkohCEBQhlS69mnlH-6VGDpBz8cMDscxyE_NpwedsBG_1pC5wSh5HwXPpIwKTMk2YiELQOYDhCTxvDWHmS88aw";
 
         const app = initializeApp(firebaseConfig);
@@ -3666,6 +4053,9 @@
 
         // Flyer detail state
         let currentFlyerId = null;
+
+        // Dark mode state
+        let darkModeEnabled = false;
 
         // =================================================================
         // DOM REFS
@@ -3784,11 +4174,17 @@
         const recOrderId = document.getElementById('recOrderId');
         const recCustName = document.getElementById('recCustName');
         const recCustPhone = document.getElementById('recCustPhone');
+        const recCustEmail = document.getElementById('recCustEmail');
         const recItemsBody = document.getElementById('recItemsBody');
         const recSubtotal = document.getElementById('recSubtotal');
         const recDiscount = document.getElementById('recDiscount');
         const recTotalDisplay = document.getElementById('recTotalDisplay');
         const recSignName = document.getElementById('recSignName');
+        const recFootnote = document.getElementById('recFootnote');
+
+        // Dark mode toggle refs
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeCheck = document.getElementById('darkModeCheck');
 
         // =================================================================
         // HELPER FUNCTIONS
@@ -3801,7 +4197,7 @@
                 bottom: 77px;
                 left: 50%;
                 transform: translateX(-50%);
-                background: #1c2128;
+                background: var(--bg-nav);
                 color: #ffffff;
                 padding: 10px 20px;
                 border-radius: 10px;
@@ -3814,9 +4210,10 @@
                 pointer-events: none;
                 white-space: nowrap;
                 max-width: 90%;
+                transition: background-color 0.3s ease;
             `;
             const icon = type === 'success' ? 'fa-check-circle' : (type === 'error' ? 'fa-exclamation-circle' : 'fa-bell');
-            toast.innerHTML = `<i class="fas ${icon}" style="color: #f5b83d; margin-right: 7px;"></i> ${msg}`;
+            toast.innerHTML = `<i class="fas ${icon}" style="color: var(--accent); margin-right: 7px;"></i> ${msg}`;
             document.body.appendChild(toast);
             requestAnimationFrame(() => {
                 toast.style.opacity = '1';
@@ -3893,6 +4290,58 @@
         }
 
         // =================================================================
+        // DARK MODE TOGGLE
+        // =================================================================
+
+        function toggleDarkMode(enable) {
+            darkModeEnabled = enable;
+            if (enable) {
+                document.body.classList.add('dark-mode');
+                darkModeCheck.checked = true;
+                darkModeToggle.classList.add('active');
+                // Save preference
+                if (currentUserId) {
+                    const prefRef = ref(db, `users/${currentUserId}/darkMode`);
+                    set(prefRef, true);
+                }
+            } else {
+                document.body.classList.remove('dark-mode');
+                darkModeCheck.checked = false;
+                darkModeToggle.classList.remove('active');
+                if (currentUserId) {
+                    const prefRef = ref(db, `users/${currentUserId}/darkMode`);
+                    set(prefRef, false);
+                }
+            }
+        }
+
+        function loadDarkModePreference() {
+            if (!currentUserId) return;
+            const prefRef = ref(db, `users/${currentUserId}/darkMode`);
+            get(prefRef).then((snapshot) => {
+                const val = snapshot.val();
+                if (val === true) {
+                    toggleDarkMode(true);
+                } else {
+                    // Check system preference
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    if (prefersDark) {
+                        toggleDarkMode(true);
+                    } else {
+                        toggleDarkMode(false);
+                    }
+                }
+            }).catch(() => {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (prefersDark) {
+                    toggleDarkMode(true);
+                } else {
+                    toggleDarkMode(false);
+                }
+            });
+        }
+
+        // =================================================================
         // CLOUDINARY UPLOAD (payment page)
         // =================================================================
 
@@ -3922,8 +4371,8 @@
                         cloudinaryScreenshotUrl = info.secure_url;
                         cloudinaryScreenshotUrlInput.value = info.secure_url;
                         fileName.textContent = info.original_filename + '.' + info.format;
-                        uploadArea.style.borderColor = '#f5b83d';
-                        uploadArea.style.background = '#fffcf0';
+                        uploadArea.style.borderColor = 'var(--accent)';
+                        uploadArea.style.background = 'var(--accent-light)';
                         showToast('Screenshot uploaded!', 'success');
                     }
                 });
@@ -3942,7 +4391,6 @@
                     console.log('✅ Notification permission granted.');
                     const token = await getToken(messaging, { vapidKey: VAPID_KEY });
                     console.log('🔔 FCM Token:', token);
-                    // Store token in user's record
                     if (currentUserId) {
                         const userTokenRef = ref(db, `users/${currentUserId}/fcmToken`);
                         await set(userTokenRef, token);
@@ -3954,14 +4402,11 @@
                 console.error('Error getting FCM token:', error);
             }
 
-            // Handle foreground messages
             onMessage(messaging, (payload) => {
                 console.log('📩 Foreground message received:', payload);
                 const title = payload.notification?.title || payload.data?.title || 'New Notification';
                 const body = payload.notification?.body || payload.data?.body || '';
-                // Show toast for foreground messages
                 showToast(`${title}: ${body}`, 'info');
-                // Also update in-app notifications
                 renderNotifications();
             });
         }
@@ -3970,19 +4415,14 @@
         // SEND PUSH NOTIFICATION VIA CLOUD FUNCTION
         // =================================================================
 
-        /**
-         * Call the deployed Cloud Function to send a push notification to a specific user.
-         * The function expects: { recipient, title, body, icon, clickUrl }
-         */
         async function sendPushNotificationToUser(userId, title, message, clickUrl = '') {
             const functionUrl = 'https://us-central1-bufferzone-63501.cloudfunctions.net/sendPushNotification';
-            // Adjust URL to your actual Cloud Function endpoint
 
             const payload = {
                 recipient: userId,
                 title: title,
                 body: message,
-                icon: 'https://your-domain.com/logo.png', // Replace with your actual logo URL
+                icon: 'https://your-domain.com/logo.png',
                 clickUrl: clickUrl || ''
             };
 
@@ -3996,7 +4436,6 @@
                 if (!response.ok) {
                     const errText = await response.text();
                     console.warn(`Push send warning: ${response.status} - ${errText}`);
-                    // We don't block the flow – just log
                 } else {
                     const result = await response.json();
                     console.log('✅ Push notification sent:', result);
@@ -4022,7 +4461,6 @@
             };
             saveData().then(() => {
                 renderNotifications();
-                // Also send push
                 sendPushNotificationToUser(userId, title, message, clickUrl);
             }).catch(err => console.error('Error saving notification:', err));
         }
@@ -4089,6 +4527,7 @@
                     }
                 }
                 renderAll();
+                loadDarkModePreference();
                 if (callback) callback();
             });
         }
@@ -4107,10 +4546,10 @@
 
             if (allData.disabled === true) {
                 document.body.innerHTML = `
-                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
-                        <i class="fa-solid fa-triangle-exclamation" style="font-size:41px; color:#f5b83d; margin-bottom:14px;"></i>
-                        <h1 style="font-size:20px; font-weight:700; color:#1c2128;">App Under Maintenance</h1>
-                        <p style="color:#888; text-align:center; max-width:272px; margin-top:7px;">We are currently performing updates. Please check back later.</p>
+                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:var(--bg-body); padding:20px; transition:background-color 0.3s ease;">
+                        <i class="fa-solid fa-triangle-exclamation" style="font-size:41px; color:var(--accent); margin-bottom:14px;"></i>
+                        <h1 style="font-size:20px; font-weight:700; color:var(--text-primary); transition:color 0.3s ease;">App Under Maintenance</h1>
+                        <p style="color:var(--text-secondary); text-align:center; max-width:272px; margin-top:7px; transition:color 0.3s ease;">We are currently performing updates. Please check back later.</p>
                     </div>
                 `;
                 return;
@@ -4146,12 +4585,14 @@
 
             if (allData.policy) {
                 const p = allData.policy;
-                document.querySelector('.order-policy-content h2').innerHTML =
-                    `${p.title || 'BUFFER ZONE'}<br><span>${p.tag || ''}</span>`;
-                document.querySelector('.order-policy-content p').textContent =
-                    p.desc || 'To begin your project, we require a 50% down payment.';
-                document.querySelector('.order-policy-content .policy-tag').innerHTML =
-                    `<i class="fa-regular fa-circle-check"></i> ${p.tag || '50% upfront required'}`;
+                const policyEl = document.querySelector('.order-policy-content h2');
+                if (policyEl) {
+                    policyEl.innerHTML = `${p.title || 'BUFFER ZONE'}<br><span>${p.tag || ''}</span>`;
+                }
+                const policyDesc = document.querySelector('.order-policy-content p');
+                if (policyDesc) policyDesc.textContent = p.desc || 'To begin your project, we require a 50% down payment.';
+                const policyTag = document.querySelector('.order-policy-content .policy-tag');
+                if (policyTag) policyTag.innerHTML = `<i class="fa-regular fa-circle-check"></i> ${p.tag || '50% upfront required'}`;
                 paymentNumber.textContent = p.number || '0976760537';
                 paymentName.textContent = p.name || 'Airtel Mobile Number';
                 paymentAccountName.textContent = p.accountName || 'Jubel Mobela';
@@ -4189,9 +4630,9 @@
                 const isClickable = pic.clickContent?.enabled === true;
                 const mediaType = pic.mediaType || 'image';
                 const mediaHtml = mediaType === 'video'
-                    ? `<video src="${pic.imageUrl}" muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>
+                    ? `<video src="${pic.imageUrl}" muted playsinline style="width:100%;height:100%;object-fit:cover;border-radius:17px;"></video>
                        <div class="video-play-overlay"><i class="fa-solid fa-play"></i></div>`
-                    : `<img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />`;
+                    : `<img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:17px;" />`;
                 return `
                 <div class="promo-slide ${isClickable ? 'clickable' : ''}" data-key="${key}" data-index="${idx - 1}" data-real-index="${idx - 1 < 0 ? entries.length - 1 : idx - 1 >= entries.length ? 0 : idx - 1}" data-mediatype="${mediaType}">
                     ${mediaHtml}
@@ -4476,7 +4917,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:17px;">No services available.</div>`;
+                    `<div class="text-muted text-center" style="padding:17px; color:var(--text-secondary); transition:color 0.3s ease;">No services available.</div>`;
                 return;
             }
 
@@ -4514,7 +4955,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:17px;">No orders found.</div>`;
+                    `<div class="text-muted text-center" style="padding:17px; color:var(--text-secondary); transition:color 0.3s ease;">No orders found.</div>`;
                 return;
             }
             container.innerHTML = entries.map(([key, o]) => {
@@ -4536,13 +4977,12 @@
                 const statusClass = o.status ? `status-${o.status}` : 'status-pending';
                 const statusDisplay = o.status ? o.status.charAt(0).toUpperCase() + o.status.slice(1) : 'Pending';
 
-                // View Receipt button (added for completed orders)
                 let actionHtml = '';
                 if (o.status === 'completed' || o.status === 'done') {
                     actionHtml = `
                         <div class="detail-row" style="border-bottom:none; padding-top:6px;">
-                            <button class="view-receipt-btn" data-key="${key}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
-                                <i class="fa-regular fa-file-lines" style="color:#f5b83d;"></i> View Receipt
+                            <button class="view-receipt-btn" data-key="${key}" style="background:transparent; color:var(--text-primary); border:1px solid var(--accent); padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%; transition:color 0.3s ease, border-color 0.3s ease;">
+                                <i class="fa-regular fa-file-lines" style="color:var(--accent);"></i> View Receipt
                             </button>
                         </div>
                     `;
@@ -4557,7 +4997,7 @@
                             <div class="order-meta">
                                 <span>${escapeHtml(o.customer || 'N/A')}</span>
                                 <span>${escapeHtml(o.date || 'N/A')}</span>
-                                ${o.discountApplied ? `<span style="background:#fef9e7;color:#f5b83d;padding:0 5px;border-radius:7px;font-size:9px;">${o.discountApplied}% OFF</span>` : ''}
+                                ${o.discountApplied ? `<span style="background:var(--accent-light);color:var(--accent);padding:0 5px;border-radius:7px;font-size:9px;transition:background-color 0.3s ease,color 0.3s ease;">${o.discountApplied}% OFF</span>` : ''}
                             </div>
                         </div>
                         <div class="right">
@@ -4583,7 +5023,6 @@
                 });
             });
 
-            // Add event listeners for View Receipt buttons
             container.querySelectorAll('.view-receipt-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -4649,7 +5088,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:17px;">No transactions found.</div>`;
+                    `<div class="text-muted text-center" style="padding:17px; color:var(--text-secondary); transition:color 0.3s ease;">No transactions found.</div>`;
                 return;
             }
 
@@ -4776,7 +5215,6 @@
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 set(txRef, txData);
 
-                // In-app + push notification
                 createNotification(
                     currentUserId,
                     'Payment Complete',
@@ -4815,6 +5253,11 @@
                 profileAvatarLarge.textContent = initial;
                 headerName.textContent = fullName;
                 profileRole.textContent = currentUserData.role || 'Customer';
+
+                // Sync dark mode toggle with user preference
+                if (currentUserData.darkMode === true) {
+                    toggleDarkMode(true);
+                }
             }
         }
 
@@ -4830,7 +5273,7 @@
 
             if (entries.length === 0) {
                 notifList.innerHTML =
-                    `<div style="text-align:center;padding:26px;color:#888;"><i class="fa-regular fa-bell-slash" style="font-size:27px;color:#ddd;display:block;margin-bottom:7px;"></i>No notifications</div>`;
+                    `<div style="text-align:center;padding:26px;color:var(--text-secondary); transition:color 0.3s ease;"><i class="fa-regular fa-bell-slash" style="font-size:27px;color:#ddd;display:block;margin-bottom:7px;"></i>No notifications</div>`;
                 notifBadge.textContent = '0';
                 notifBadge.style.display = 'none';
                 return;
@@ -4887,9 +5330,9 @@
                 if (items.length === 0) continue;
 
                 html += `
-                    <div style="font-size:14px;font-weight:700;color:#1c2128;margin:17px 0 9px 0;padding-bottom:5px;border-bottom:2px solid #f0f0f0;display:flex;align-items:center;gap:7px;">
+                    <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin:17px 0 9px 0;padding-bottom:5px;border-bottom:2px solid var(--border-color);display:flex;align-items:center;gap:7px;transition:color 0.3s ease,border-color 0.3s ease;">
                         ${typeLabels[type] || type}
-                        <span style="font-size:9px;background:#f0f0f0;padding:0 9px;border-radius:10px;font-weight:600;color:#555;">${items.length}</span>
+                        <span style="font-size:9px;background:var(--bg-body);padding:0 9px;border-radius:10px;font-weight:600;color:var(--text-secondary);transition:background-color 0.3s ease,color 0.3s ease;">${items.length}</span>
                     </div>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
                 `;
@@ -4916,7 +5359,7 @@
                         `;
                     } else {
                         frameHtml = `
-                            <div style="width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:#f5f5f5;display:flex;align-items:center;justify-content:center;position:relative;">
+                            <div style="width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:var(--bg-body);display:flex;align-items:center;justify-content:center;position:relative;transition:background-color 0.3s ease;">
                                 ${imgHtml}
                             </div>
                         `;
@@ -4940,7 +5383,7 @@
 
             if (html === '') {
                 html =
-                    `<div style="text-align:center;padding:26px 0;color:#888;">No samples available yet. Check back soon!</div>`;
+                    `<div style="text-align:center;padding:26px 0;color:var(--text-secondary); transition:color 0.3s ease;">No samples available yet. Check back soon!</div>`;
             }
             container.innerHTML = html;
         }
@@ -4982,7 +5425,7 @@
             if (!pendingInfo) {
                 pendingInfo = document.createElement('div');
                 pendingInfo.className = 'pending-info';
-                pendingInfo.style.cssText = 'font-size:8px;color:#f5b83d;margin-top:2px;';
+                pendingInfo.style.cssText = 'font-size:8px;color:var(--accent);margin-top:2px;transition:color 0.3s ease;';
                 balanceBox.querySelector('.left').appendChild(pendingInfo);
             }
             if (pendingTotal > 0) {
@@ -5032,7 +5475,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div style="text-align:center;padding:14px;color:#888;font-size:10px;">No transactions yet.</div>`;
+                    `<div style="text-align:center;padding:14px;color:var(--text-secondary);font-size:10px;transition:color 0.3s ease;">No transactions yet.</div>`;
                 return;
             }
 
@@ -5083,7 +5526,7 @@
                 let iconColor = '#667eea';
                 if (t.type?.toLowerCase().includes('referral')) {
                     iconClass = 'fa-gift';
-                    iconColor = '#f5b83d';
+                    iconColor = 'var(--accent)';
                 } else if (t.type?.toLowerCase().includes('discount')) {
                     iconClass = 'fa-percent';
                     iconColor = '#00a86b';
@@ -5095,7 +5538,7 @@
                     iconColor = '#00a86b';
                 } else if (t.type?.toLowerCase().includes('payment')) {
                     iconClass = 'fa-credit-card';
-                    iconColor = '#1c2128';
+                    iconColor = 'var(--text-primary)';
                 } else {
                     iconClass = 'fa-arrow-right';
                     iconColor = '#667eea';
@@ -5143,7 +5586,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML = `
-                    <div class="empty-withdrawals" style="text-align:center;padding:14px;color:#888;">
+                    <div class="empty-withdrawals" style="text-align:center;padding:14px;color:var(--text-secondary); transition:color 0.3s ease;">
                         <i class="fa-regular fa-receipt" style="font-size:20px;color:#ddd;display:block;margin-bottom:4px;"></i>
                         No withdrawal requests yet.
                     </div>
@@ -5225,7 +5668,7 @@
                 .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
             if (entries.length === 0) {
-                container.innerHTML = `<div class="empty-tx">No sent or received transactions yet.</div>`;
+                container.innerHTML = `<div class="empty-tx" style="color:var(--text-secondary); transition:color 0.3s ease;">No sent or received transactions yet.</div>`;
                 return;
             }
 
@@ -5255,13 +5698,13 @@
                 return `
                     <div class="tx-item">
                         <div class="tx-left">
-                            <div class="tx-type">${isSent ? 'Sent' : 'Received'}</div>
-                            <div class="tx-with">${label} ${escapeHtml(otherName)}</div>
-                            <div style="font-size:8px; color:#888;">${escapeHtml(otherPhone)} &middot; Balance: ${otherBalance}</div>
+                            <div class="tx-type" style="color:var(--text-primary); transition:color 0.3s ease;">${isSent ? 'Sent' : 'Received'}</div>
+                            <div class="tx-with" style="color:var(--text-secondary); transition:color 0.3s ease;">${label} ${escapeHtml(otherName)}</div>
+                            <div style="font-size:8px; color:var(--text-secondary); transition:color 0.3s ease;">${escapeHtml(otherPhone)} &middot; Balance: ${otherBalance}</div>
                         </div>
                         <div class="tx-right">
                             <div class="tx-amount ${amountClass}">${sign}ZMW ${Math.abs(t.amount || 0).toFixed(2)}</div>
-                            <div class="tx-date">${t.date ? new Date(t.date).toLocaleString() : ''}</div>
+                            <div class="tx-date" style="color:#aaa;">${t.date ? new Date(t.date).toLocaleString() : ''}</div>
                         </div>
                     </div>
                 `;
@@ -5348,7 +5791,7 @@
 
                 <div class="order-specs">
                     <h4>SPECIFICATIONS</h4>
-                    ${specsHtml || '<p class="text-muted">No specifications available.</p>'}
+                    ${specsHtml || '<p class="text-muted" style="color:var(--text-secondary); transition:color 0.3s ease;">No specifications available.</p>'}
                 </div>
 
                 <div class="order-customize">
@@ -5370,8 +5813,8 @@
                 </div>
 
                 <div class="order-notes" style="margin-top:3px;">
-                    <h4 style="font-size:9px; font-weight:600; color:#1c2128; margin-bottom:4px;">📝 Add Extra Notes (Optional)</h4>
-                    <textarea id="orderNotes" placeholder="Tell us more about your requirements, special instructions, or any additional details..." style="width:100%; padding:9px; border:1px solid #eee; border-radius:9px; font-size:9px; resize:vertical; min-height:41px; background:#fafbfc; transition:border 0.2s; font-family:'Poppins',sans-serif;"></textarea>
+                    <h4 style="font-size:9px; font-weight:600; color:var(--text-primary); margin-bottom:4px; transition:color 0.3s ease;">📝 Add Extra Notes (Optional)</h4>
+                    <textarea id="orderNotes" placeholder="Tell us more about your requirements, special instructions, or any additional details..." style="width:100%; padding:9px; border:1px solid var(--border-light); border-radius:9px; font-size:9px; resize:vertical; min-height:41px; background:var(--bg-input); transition:border 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; font-family:'Poppins',sans-serif; color:var(--text-primary);"></textarea>
                     <p style="font-size:7px; color:#aaa; margin-top:3px;">These notes will be attached to your order for the team to review.</p>
                 </div>
 
@@ -5472,7 +5915,7 @@
                 if (selectedDeliverySpeed) customizationParts.push(`Delivery: ${selectedDeliverySpeed}`);
                 paymentPage.dataset.orderData = JSON.stringify({
                     service: service.title,
-                    serviceId: service.id || key,
+                    serviceId: key || 'N/A',
                     quantity: currentQuantity,
                     total: total,
                     size: selectedSize,
@@ -5712,7 +6155,7 @@
                     uploadSection.style.display = 'block';
                 }
             } else {
-                walletStatusEl.style.color = '#888';
+                walletStatusEl.style.color = 'var(--text-secondary)';
                 walletSufficiency.textContent = '';
                 payWithWalletCheckEl.disabled = true;
                 payWithWalletCheckEl.style.cursor = 'not-allowed';
@@ -5820,7 +6263,6 @@
                 };
                 set(orderTxRef, orderTxData);
 
-                // In-app + push notification for order placed
                 createNotification(
                     currentUserId,
                     'Order Placed',
@@ -5859,7 +6301,6 @@
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 set(txRef, txData);
 
-                // In-app + push notification for payment submitted
                 createNotification(
                     currentUserId,
                     'Payment Submitted',
@@ -5927,7 +6368,6 @@
                     };
                     set(txRef, txData);
 
-                    // In-app + push for referral bonus to the referrer
                     createNotification(
                         appliedReferral.referrerUid,
                         '💰 Referral Bonus',
@@ -5936,7 +6376,6 @@
                 }
             }
 
-            // In-app + push for order placed (already done above for wallet, but for non-wallet we also need it)
             if (!payWithWallet) {
                 createNotification(
                     currentUserId,
@@ -5948,8 +6387,8 @@
             paymentPage.classList.remove('open');
             cloudinaryScreenshotUrlInput.value = '';
             fileName.textContent = 'No file chosen';
-            uploadArea.style.borderColor = '#ddd';
-            uploadArea.style.background = '#fafbfc';
+            uploadArea.style.borderColor = 'var(--border-color)';
+            uploadArea.style.background = 'var(--bg-input)';
             payWithWalletCheck.checked = false;
             uploadSection.style.display = 'block';
 
@@ -6059,7 +6498,6 @@
             };
 
             saveData().then(() => {
-                // In-app + push notification for withdrawal request
                 createNotification(
                     currentUserId,
                     'Withdrawal Request',
@@ -6095,7 +6533,7 @@
         function searchRecipient() {
             const code = sendReferralInput.value.trim().toUpperCase();
             if (!code) {
-                recipientSearchResult.innerHTML = `<span style="color:#888;">Please enter a referral code.</span>`;
+                recipientSearchResult.innerHTML = `<span style="color:var(--text-secondary); transition:color 0.3s ease;">Please enter a referral code.</span>`;
                 return;
             }
 
@@ -6113,7 +6551,7 @@
                 }
 
                 if (!foundUid) {
-                    recipientSearchResult.innerHTML = `<span class="not-found">❌ No user found with that referral code.</span>`;
+                    recipientSearchResult.innerHTML = `<span class="not-found" style="color:#dc2626;">❌ No user found with that referral code.</span>`;
                     sendRecipientUid = null;
                     sendRecipientName = '';
                     sendRecipientData = null;
@@ -6137,13 +6575,13 @@
                 sendRecipientData = foundUser;
 
                 recipientSearchResult.innerHTML = `
-                    <span>Send money to: <span class="name">${escapeHtml(fullName)}</span></span>
-                    <span style="font-size:9px; color:#888;">(${code})</span>
+                    <span>Send money to: <span class="name" style="color:var(--accent);">${escapeHtml(fullName)}</span></span>
+                    <span style="font-size:9px; color:var(--text-secondary); transition:color 0.3s ease;">(${code})</span>
                 `;
                 updateSendButtonState();
             }).catch((error) => {
                 console.error('Error searching recipient:', error);
-                recipientSearchResult.innerHTML = `<span class="not-found">Error searching. Please try again.</span>`;
+                recipientSearchResult.innerHTML = `<span class="not-found" style="color:#dc2626;">Error searching. Please try again.</span>`;
                 sendRecipientUid = null;
                 sendRecipientName = '';
                 sendRecipientData = null;
@@ -6253,7 +6691,6 @@
             };
             set(recipientTxRef, recipientTxData);
 
-            // In-app + push notifications for both parties
             createNotification(
                 currentUserId,
                 '💰 Money Sent',
@@ -6270,7 +6707,7 @@
 
             sendAmountInput.value = '';
             sendReferralInput.value = '';
-            recipientSearchResult.innerHTML = `<span style="color:#888;">Enter a referral code and click Search.</span>`;
+            recipientSearchResult.innerHTML = `<span style="color:var(--text-secondary); transition:color 0.3s ease;">Enter a referral code and click Search.</span>`;
             sendRecipientUid = null;
             sendRecipientName = '';
             sendRecipientData = null;
@@ -6354,7 +6791,7 @@
                 const actionsDiv = document.querySelector('.flyer-detail-actions');
                 if (actionsDiv) actionsDiv.style.display = 'none';
                 flyerDetailForm.innerHTML =
-                    `<p style="font-size:10px;color:#888;text-align:center;padding:8px;">No form attached to this flyer.</p>`;
+                    `<p style="font-size:10px;color:var(--text-secondary);text-align:center;padding:8px;transition:color 0.3s ease;">No form attached to this flyer.</p>`;
                 return;
             } else {
                 const actionsDiv = document.querySelector('.flyer-detail-actions');
@@ -6367,7 +6804,7 @@
             flyerDetailApplyBtn.className = 'btn btn-primary';
 
             let formHtml =
-                `<h4 style="font-size:11px;font-weight:700;color:#1c2128;margin-bottom:6px;">Apply as ${formType.charAt(0).toUpperCase() + formType.slice(1)}</h4>`;
+                `<h4 style="font-size:11px;font-weight:700;color:var(--text-primary);margin-bottom:6px;transition:color 0.3s ease;">Apply as ${formType.charAt(0).toUpperCase() + formType.slice(1)}</h4>`;
 
             const commonFields = `
                 <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" value="${escapeHtml(currentUserData?.firstName || '')} ${escapeHtml(currentUserData?.lastName || '')}" /></div>
@@ -6477,22 +6914,21 @@
 
             flyerDetailForm.innerHTML = formHtml;
 
-            // ---- PAYMENT INTEGRATION ----
             const config = allData.formConfigs?.[formType] || { isFree: true };
             let requiresPayment = !config.isFree;
 
             if (requiresPayment) {
                 const paymentHtml = `
-                    <div id="flyerPaymentSection" style="margin-top:10px; border-top:1px solid #f0f0f0; padding-top:12px;">
-                        <h4 style="font-size:11px; font-weight:700; color:#1c2128; margin-bottom:6px;">💳 Payment Required</h4>
-                        <div style="background:#f8f9fc; border-radius:8px; padding:10px; margin-bottom:10px; border:1px solid #f0f0f0;">
+                    <div id="flyerPaymentSection" style="margin-top:10px; border-top:1px solid var(--border-color); padding-top:12px; transition:border-color 0.3s ease;">
+                        <h4 style="font-size:11px; font-weight:700; color:var(--text-primary); margin-bottom:6px; transition:color 0.3s ease;">💳 Payment Required</h4>
+                        <div style="background:var(--bg-body); border-radius:8px; padding:10px; margin-bottom:10px; border:1px solid var(--border-color); transition:background-color 0.3s ease, border-color 0.3s ease;">
                             <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
-                                <div><span style="font-size:9px; color:#888;">Amount to pay</span><br><span style="font-weight:700;font-size:16px;color:#f5b83d;">ZMW ${config.price || 0}</span></div>
-                                <div><span style="font-size:9px; color:#888;">Mobile Number</span><br><span style="font-weight:600;font-size:12px;">${config.mobileNumber || 'N/A'}</span></div>
-                                <div><span style="font-size:9px; color:#888;">Account Name</span><br><span style="font-weight:600;font-size:12px;">${config.accountName || 'N/A'}</span></div>
+                                <div><span style="font-size:9px; color:var(--text-secondary); transition:color 0.3s ease;">Amount to pay</span><br><span style="font-weight:700;font-size:16px;color:var(--accent);">ZMW ${config.price || 0}</span></div>
+                                <div><span style="font-size:9px; color:var(--text-secondary); transition:color 0.3s ease;">Mobile Number</span><br><span style="font-weight:600;font-size:12px; color:var(--text-primary); transition:color 0.3s ease;">${config.mobileNumber || 'N/A'}</span></div>
+                                <div><span style="font-size:9px; color:var(--text-secondary); transition:color 0.3s ease;">Account Name</span><br><span style="font-weight:600;font-size:12px; color:var(--text-primary); transition:color 0.3s ease;">${config.accountName || 'N/A'}</span></div>
                             </div>
                         </div>
-                        <label style="font-weight:600; font-size:9px; color:#1c2128; display:block; margin-bottom:4px;">Upload Payment Screenshot (Single)</label>
+                        <label style="font-weight:600; font-size:9px; color:var(--text-primary); display:block; margin-bottom:4px; transition:color 0.3s ease;">Upload Payment Screenshot (Single)</label>
                         <div class="payment-upload-area" id="flyerPaymentUpload">
                             <i class="fa-regular fa-image"></i>
                             <div class="file-label">Tap to upload payment screenshot</div>
@@ -6542,8 +6978,8 @@
                                 previewImg.src = url;
                                 previewImg.style.display = 'block';
                                 paymentUpload.classList.add('has-preview');
-                                paymentUpload.style.borderColor = '#f5b83d';
-                                paymentUpload.style.background = '#fffcf0';
+                                paymentUpload.style.borderColor = 'var(--accent)';
+                                paymentUpload.style.background = 'var(--accent-light)';
                                 if (paymentFileName) paymentFileName.textContent = info.original_filename + '.' + info
                                     .format;
                                 showToast('Payment screenshot uploaded!', 'success');
@@ -6619,8 +7055,8 @@
                             previewImg.src = url;
                             previewImg.style.display = 'block';
                             trigger.classList.add('has-preview');
-                            trigger.style.borderColor = '#f5b83d';
-                            trigger.style.background = '#fffcf0';
+                            trigger.style.borderColor = 'var(--accent)';
+                            trigger.style.background = 'var(--accent-light)';
                             if (fileNameEl) fileNameEl.textContent = info.original_filename + '.' + info.format;
                             showToast('File uploaded!', 'success');
                         }
@@ -6740,7 +7176,6 @@
                 paymentData: paymentData
             };
 
-            // In-app + push notification for application submitted
             createNotification(
                 currentUserId,
                 'Application Submitted',
@@ -6771,7 +7206,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML = `
-                    <div class="text-muted text-center" style="padding:20px;color:#888;">
+                    <div class="text-muted text-center" style="padding:20px;color:var(--text-secondary); transition:color 0.3s ease;">
                         <i class="fa-regular fa-clipboard" style="font-size:28px;color:#ddd;display:block;margin-bottom:6px;"></i>
                         No applications yet.
                     </div>
@@ -6798,7 +7233,7 @@
                         let label = k.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
                         let val = v;
                         if (val.startsWith('http')) {
-                            val = `<a href="${val}" target="_blank" style="color:#1c2128;text-decoration:underline;">View</a>`;
+                            val = `<a href="${val}" target="_blank" style="color:var(--text-primary);text-decoration:underline;transition:color 0.3s ease;">View</a>`;
                         }
                         detailRows +=
                             `<div class="detail-row"><span class="label">${label}</span><span class="val">${val}</span></div>`;
@@ -6816,7 +7251,7 @@
                     const screenshots = pd.screenshots || [];
                     if (screenshots.length > 0) {
                         const links = screenshots.map((url, i) =>
-                            `<a href="${url}" target="_blank" style="color:#1c2128;text-decoration:underline;">Screenshot ${i+1}</a>`
+                            `<a href="${url}" target="_blank" style="color:var(--text-primary);text-decoration:underline;transition:color 0.3s ease;">Screenshot ${i+1}</a>`
                         ).join(', ');
                         detailRows +=
                             `<div class="detail-row"><span class="label">Screenshots</span><span class="val">${links}</span></div>`;
@@ -6839,7 +7274,7 @@
                         </div>
                     </div>
                     <div class="app-details-expand">
-                        ${detailRows || '<p style="font-size:10px;color:#888;text-align:center;padding:4px;">No additional details</p>'}
+                        ${detailRows || '<p style="font-size:10px;color:var(--text-secondary);text-align:center;padding:4px;transition:color 0.3s ease;">No additional details</p>'}
                     </div>
                 </div>
                 `;
@@ -6853,25 +7288,26 @@
         }
 
         // =================================================================
-        // RECEIPT MODAL LOGIC (ADDED)
+        // RECEIPT MODAL LOGIC
         // =================================================================
 
         function openReceiptModal(order, key) {
             const customerName = order.customer || currentUserData?.firstName + ' ' + currentUserData?.lastName || 'Customer';
             const customerPhone = order.clientNumber || currentUserData?.phone || 'N/A';
-            
+            const customerEmail = currentUser?.email || 'N/A';
+
             recOrderId.textContent = order.id || 'N/A';
             recCustName.textContent = customerName;
             recCustPhone.textContent = 'Phone: ' + customerPhone;
+            recCustEmail.textContent = 'Email: ' + customerEmail;
 
             const serviceTitle = order.service || 'Design Service';
             const qty = order.quantity || 1;
             const totalPrice = order.amount || 0;
-            // Since we don't have exact line items in the database structure, we reverse engineer the unit price
             const unitPrice = qty > 0 ? (totalPrice / qty) : totalPrice;
-            
+
             let discountVal = 0;
-            if(order.discountApplied && typeof order.discountApplied === 'number') {
+            if (order.discountApplied && typeof order.discountApplied === 'number') {
                 discountVal = totalPrice * (order.discountApplied / 100);
             }
 
@@ -6891,6 +7327,9 @@
             recTotalDisplay.textContent = `ZMW ${subtotal.toFixed(2)}`;
             recSignName.textContent = 'Jubel Mobela';
 
+            // Update footnote with the new message
+            recFootnote.textContent = 'We truly appreciate your trust and support. It has been a pleasure working with you, and we look forward to bringing your next project to life with creativity, professionalism, quality, innovation, and exceptional service every step of the way.';
+
             receiptModal.classList.add('open');
         }
 
@@ -6902,7 +7341,7 @@
             const receiptEl = document.getElementById('receiptContainer');
             downloadReceiptBtn.disabled = true;
             downloadReceiptBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generating...`;
-            
+
             html2canvas(receiptEl, {
                 scale: 2,
                 backgroundColor: '#ffffff',
@@ -7081,10 +7520,10 @@
             const amount = parseFloat(this.value) || 0;
             if (amount > availableBalance) {
                 sendBalanceCheck.innerHTML =
-                    `Available: <span class="avail">ZMW ${availableBalance.toFixed(2)}</span> <span class="insufficient">⚠️ Amount exceeds available balance</span>`;
+                    `Available: <span class="avail" style="color:var(--text-primary); transition:color 0.3s ease;">ZMW ${availableBalance.toFixed(2)}</span> <span class="insufficient" style="color:#dc2626;">⚠️ Amount exceeds available balance</span>`;
             } else {
                 sendBalanceCheck.innerHTML =
-                    `Available: <span class="avail">ZMW ${availableBalance.toFixed(2)}</span>`;
+                    `Available: <span class="avail" style="color:var(--text-primary); transition:color 0.3s ease;">ZMW ${availableBalance.toFixed(2)}</span>`;
             }
         });
 
@@ -7110,17 +7549,28 @@
                 uploadSection.style.display = 'none';
                 cloudinaryScreenshotUrlInput.value = '';
                 fileName.textContent = 'No file chosen';
-                uploadArea.style.borderColor = '#ddd';
-                uploadArea.style.background = '#fafbfc';
+                uploadArea.style.borderColor = 'var(--border-color)';
+                uploadArea.style.background = 'var(--bg-input)';
             } else {
                 uploadSection.style.display = 'block';
             }
         });
 
-        // Added Receipt Event Listeners
+        // Dark Mode Toggle
+        darkModeToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const isChecked = darkModeCheck.checked;
+            toggleDarkMode(!isChecked);
+        });
+
+        darkModeCheck.addEventListener('change', function() {
+            toggleDarkMode(this.checked);
+        });
+
+        // Receipt Event Listeners
         closeReceiptBtn.addEventListener('click', closeReceiptModal);
         receiptModal.addEventListener('click', function(e) {
-            if(e.target === this) closeReceiptModal();
+            if (e.target === this) closeReceiptModal();
         });
         downloadReceiptBtn.addEventListener('click', downloadReceipt);
 
@@ -7137,16 +7587,15 @@
                     const data = snapshot.val();
                     if (data && data.banned === true) {
                         document.body.innerHTML = `
-                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
+                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:var(--bg-body); padding:20px; transition:background-color 0.3s ease;">
                                 <i class="fa-solid fa-ban" style="font-size:41px; color:#dc2626; margin-bottom:14px;"></i>
-                                <h1 style="font-size:20px; font-weight:700; color:#1c2128;">Account Banned</h1>
-                                <p style="color:#888; text-align:center; max-width:272px; margin-top:7px;">Your account has been banned. Please contact support for assistance.</p>
+                                <h1 style="font-size:20px; font-weight:700; color:var(--text-primary); transition:color 0.3s ease;">Account Banned</h1>
+                                <p style="color:var(--text-secondary); text-align:center; max-width:272px; margin-top:7px; transition:color 0.3s ease;">Your account has been banned. Please contact support for assistance.</p>
                             </div>
                         `;
                         return;
                     }
                     currentUserData = data || {};
-                    // Setup FCM after user is loaded
                     setupFCM();
                     loadData();
                 });
@@ -7162,8 +7611,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code updated with 80% slide width (10% peek) to guarantee visibility of prev/next flyers on all phone screens, and endless loop with reverse direction.');
-        console.log('✅ Receipt system added.');
+        console.log('✅ Customer code updated with dark mode, contact section, 1200x675 flyers with curved edges, new receipt message, and customer email on invoice.');
     </script>
 </body>
 </html>
