@@ -268,7 +268,7 @@
             position: relative;
             margin: 3px 0 12px 0;
             overflow: hidden;
-            border-radius: 20px;
+            border-radius: 24px;
             background: #f8f9fc;
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.08);
             padding: 0;
@@ -305,7 +305,7 @@
             max-width: 80%;
             scroll-snap-align: center;
             position: relative;
-            border-radius: 20px;
+            border-radius: 28px;
             overflow: hidden;
             transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 opacity 0.5s ease,
@@ -323,7 +323,7 @@
             will-change: transform, opacity;
             cursor: pointer;
             aspect-ratio: 1200 / 675;
-            border-radius: 20px;
+            border-radius: 28px;
         }
         .promo-slide.clickable {
             cursor: pointer;
@@ -338,6 +338,7 @@
             object-fit: cover;
             display: block;
             background-color: #ffffff;
+            border-radius: 28px;
         }
         .promo-slide .slide-overlay {
             position: absolute;
@@ -350,7 +351,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            border-radius: 0 0 20px 20px;
+            border-radius: 0 0 28px 28px;
         }
         .promo-slide .slide-text {
             color: #fff;
@@ -2272,6 +2273,7 @@
             font-size: 9px;
             color: #aaa;
         }
+
         .withdraw-page .amount-options {
             display: flex;
             gap: 8px;
@@ -2432,7 +2434,7 @@
         }
         .flyer-detail-container {
             background: #ffffff;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.10);
             border: 1px solid #f0f0f0;
@@ -2446,14 +2448,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 20px;
+            border-radius: 24px;
         }
         .flyer-detail-image-wrap img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            border-radius: 20px;
+            border-radius: 24px;
         }
         .flyer-detail-image-wrap video {
             width: 100%;
@@ -2461,7 +2463,7 @@
             object-fit: cover;
             display: none;
             background: #000;
-            border-radius: 20px;
+            border-radius: 24px;
         }
         .flyer-detail-content {
             padding: 16px 14px 14px 14px;
@@ -3374,17 +3376,17 @@
                     </div>
                     <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
 
-                    <!-- ===== CONTACT US SECTION ADDED ===== -->
+                    <!-- ===== CONTACT US SECTION — RED STYLED ===== -->
                     <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #f0f0f0;">
                         <h4 style="font-size: 10px; font-weight: 700; color: #1c2128; margin-bottom: 6px;">📞 Contact Us</h4>
                         <div style="display: flex; flex-direction: column; gap: 5px;">
-                            <a href="https://wa.me/260768658484" target="_blank" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: #25D366; color: white; border-radius: 8px; text-decoration: none; font-size: 10px; font-weight: 600;">
+                            <a href="https://wa.me/260768658484" target="_blank" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: #dc2626; color: white; border-radius: 8px; text-decoration: none; font-size: 10px; font-weight: 600;">
                                 <i class="fa-brands fa-whatsapp" style="font-size: 14px;"></i> WhatsApp: 0768658484
                             </a>
-                            <a href="https://facebook.com/BufferZone" target="_blank" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: #1877F2; color: white; border-radius: 8px; text-decoration: none; font-size: 10px; font-weight: 600;">
+                            <a href="https://facebook.com/BufferZone" target="_blank" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: #dc2626; color: white; border-radius: 8px; text-decoration: none; font-size: 10px; font-weight: 600;">
                                 <i class="fa-brands fa-facebook" style="font-size: 14px;"></i> Facebook: Buffer ZONE
                             </a>
-                            <a href="tel:+260976760537" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: #1c2128; color: white; border-radius: 8px; text-decoration: none; font-size: 10px; font-weight: 600;">
+                            <a href="tel:+260976760537" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: #dc2626; color: white; border-radius: 8px; text-decoration: none; font-size: 10px; font-weight: 600;">
                                 <i class="fa-solid fa-phone" style="font-size: 14px;"></i> SMS/CALLS: 0976760537
                             </a>
                         </div>
@@ -3524,9 +3526,7 @@
             </div>
 
             <div class="amount-options" id="wdAmountOptions">
-                <button class="opt-btn" data-pct="25">25%</button>
-                <button class="opt-btn" data-pct="50">50%</button>
-                <button class="opt-btn" data-pct="100">100%</button>
+                <!-- Dynamic content populated by JS with actual ZMW amounts -->
             </div>
 
             <div class="custom-amount">
@@ -5916,6 +5916,25 @@
             document.querySelectorAll('#wdAmountOptions .opt-btn').forEach(b => b.classList.remove('active'));
             wdSubmitBtn.disabled = false;
 
+            // Update amount options with actual ZMW values
+            const optsContainer = document.getElementById('wdAmountOptions');
+            const pcts = [25, 50, 100];
+            optsContainer.innerHTML = pcts.map(pct => {
+                const amount = (availableBalance * (pct / 100)).toFixed(2);
+                return `<button class="opt-btn" data-pct="${pct}" data-amount="${amount}">ZMW ${amount}</button>`;
+            }).join('');
+
+            // Re-bind click events for amount option buttons
+            optsContainer.querySelectorAll('.opt-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    optsContainer.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    wdCustomAmount.value = this.dataset.amount;
+                    wdCustomHint.className = 'hint';
+                    wdCustomHint.textContent = `Maximum: ZMW ${availableBalance.toFixed(2)}`;
+                });
+            });
+
             renderWithdrawHistory();
 
             withdrawPage.classList.add('open');
@@ -7016,23 +7035,6 @@
             if (e.target === this) closeWithdrawPage();
         });
 
-        document.querySelectorAll('#wdAmountOptions .opt-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('#wdAmountOptions .opt-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                const pct = parseFloat(this.dataset.pct) / 100;
-                const accounts = allData.customerAccounts || {};
-                const userAccount = accounts[currentUserId] || { balance: 0 };
-                const balance = userAccount.balance || 0;
-                const pendingTotal = calculatePendingWithdrawalTotal();
-                const availableBalance = Math.max(0, balance - pendingTotal);
-                const amount = (availableBalance * pct).toFixed(2);
-                wdCustomAmount.value = amount;
-                wdCustomHint.className = 'hint';
-                wdCustomHint.textContent = `Maximum: ZMW ${availableBalance.toFixed(2)}`;
-            });
-        });
-
         wdCustomAmount.addEventListener('input', function() {
             const val = parseFloat(this.value) || 0;
             const accounts = allData.customerAccounts || {};
@@ -7156,9 +7158,10 @@
 
         console.log('✅ Customer code updated with 80% slide width (10% peek) to guarantee visibility of prev/next flyers on all phone screens, and endless loop with reverse direction.');
         console.log('✅ Receipt system added.');
-        console.log('✅ Withdraw popup changed to full page with 25%/50%/100% options, custom amount, and history dropdowns.');
-        console.log('✅ Profile contact section added: WhatsApp (opens app), Facebook, SMS/CALLS.');
-        console.log('✅ Flyers: 1200x675 with curved edges.');
+        console.log('✅ Withdraw popup changed to full page with 25%/50%/100% options showing actual ZMW amounts, custom amount, and history dropdowns.');
+        console.log('✅ Profile contact section added: WhatsApp (opens app), Facebook, SMS/CALLS — all styled red.');
+        console.log('✅ Logout button styled red.');
+        console.log('✅ Flyers: 1200x675 with more curved edges (border-radius: 28px).');
         console.log('✅ Invoice: lorem ipsum replaced with appreciation text, customer email added, all sizes reduced by 20%.');
     </script>
 </body>
