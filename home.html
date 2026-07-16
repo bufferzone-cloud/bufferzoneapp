@@ -16,83 +16,102 @@
             --bg-body: #f8f9fc;
             --bg-app: #ffffff;
             --bg-card: #ffffff;
-            --bg-input: #fafbfc;
             --bg-hero: #1c2128;
             --bg-nav: #1c2128;
+            --bg-input: #fafbfc;
+            --bg-policy: #1c2128;
             --text-primary: #1c2128;
-            --text-secondary: #888;
-            --text-light: #ffffff;
+            --text-secondary: #555;
+            --text-muted: #888;
+            --text-white: #ffffff;
             --border-color: #f0f0f0;
-            --border-light: #eee;
+            --border-light: #ddd;
             --shadow-color: rgba(0, 0, 0, 0.06);
-            --shadow-dark: rgba(0, 0, 0, 0.15);
+            --shadow-strong: rgba(0, 0, 0, 0.15);
             --accent: #f5b83d;
-            --accent-light: #fef9e7;
-            --status-pending-bg: #fff6e0;
-            --status-pending-text: #cc8800;
-            --status-progress-bg: #e0f0ff;
-            --status-progress-text: #0066cc;
-            --status-completed-bg: #e6fffa;
-            --status-completed-text: #00a86b;
-            --status-review-bg: #f0e6ff;
-            --status-review-text: #7700cc;
-            --status-cancelled-bg: #fee2e2;
-            --status-cancelled-text: #dc2626;
-            --status-done-bg: #d1fae5;
-            --status-done-text: #065f46;
+            --accent-dark: #1c2128;
+            --status-bg: #f8f9fc;
+            --input-bg: #fafbfc;
+            --hero-text: #ffffff;
+            --hero-desc: #ddd;
+            --hero-service: #f0f0f0;
+            --toggle-bg: #ddd;
+            --toggle-active: #f5b83d;
+            --wallet-bg: #fafbfc;
             --receipt-bg: #ffffff;
             --receipt-text: #1c2128;
+            --receipt-muted: #555;
             --receipt-border: #eee;
-            --toggle-track: #e0e0e0;
-            --toggle-track-active: #f5b83d;
-            --toggle-knob: #ffffff;
-            --profile-avatar-bg: #1c2128;
-            --profile-avatar-text: #f5b83d;
-            --input-border: #ddd;
-            --input-focus: #f5b83d;
+            --notif-dot: #f5b83d;
+            --sidebar-bg: #ffffff;
+            --overlay-bg: rgba(0, 0, 0, 0.5);
+            --promo-shadow: rgba(0, 0, 0, 0.12);
+            --promo-shadow-active: rgba(0, 0, 0, 0.25);
+            --badge-bg: #fef9e7;
+            --badge-text: #f5b83d;
+            --success-bg: #e6fffa;
+            --success-text: #00a86b;
+            --error-bg: #fee2e2;
+            --error-text: #dc2626;
+            --warning-bg: #fff6e0;
+            --warning-text: #cc8800;
+            --hero-decor-opacity: 0.9;
+            --grid-dot-opacity: 0.2;
+            --scrollbar-thumb: #ccc;
+            --scrollbar-track: #f0f0f0;
         }
 
-        body.dark-mode {
+        /* Dark Mode */
+        html.dark {
             --bg-body: #121212;
-            --bg-app: #1a1a2e;
-            --bg-card: #2a2a3e;
-            --bg-input: #2a2a3e;
-            --bg-hero: #0f0f1a;
-            --bg-nav: #0f0f1a;
+            --bg-app: #1e1e1e;
+            --bg-card: #2d2d2d;
+            --bg-hero: #1a1a2e;
+            --bg-nav: #1a1a2e;
+            --bg-input: #2d2d2d;
+            --bg-policy: #1a1a2e;
             --text-primary: #f0f0f0;
-            --text-secondary: #aaa;
-            --text-light: #ffffff;
-            --border-color: #3a3a4e;
-            --border-light: #3a3a4e;
-            --shadow-color: rgba(0, 0, 0, 0.3);
-            --shadow-dark: rgba(0, 0, 0, 0.5);
+            --text-secondary: #bbb;
+            --text-muted: #888;
+            --text-white: #ffffff;
+            --border-color: #333;
+            --border-light: #444;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --shadow-strong: rgba(0, 0, 0, 0.6);
             --accent: #f5b83d;
-            --accent-light: #2a2a1a;
-            --status-pending-bg: #3a2a1a;
-            --status-pending-text: #f5b83d;
-            --status-progress-bg: #1a2a3a;
-            --status-progress-text: #66aaff;
-            --status-completed-bg: #1a2a2a;
-            --status-completed-text: #66ddaa;
-            --status-review-bg: #2a1a3a;
-            --status-review-text: #bb88ff;
-            --status-cancelled-bg: #3a1a1a;
-            --status-cancelled-text: #ff6666;
-            --status-done-bg: #1a3a2a;
-            --status-done-text: #66ddaa;
-            --receipt-bg: #2a2a3e;
-            --receipt-text: #f0f0f0;
-            --receipt-border: #3a3a4e;
-            --toggle-track: #3a3a4e;
-            --toggle-track-active: #f5b83d;
-            --toggle-knob: #ffffff;
-            --profile-avatar-bg: #2a2a3e;
-            --profile-avatar-text: #f5b83d;
-            --input-border: #3a3a4e;
-            --input-focus: #f5b83d;
+            --accent-dark: #f5b83d;
+            --status-bg: #2d2d2d;
+            --input-bg: #2d2d2d;
+            --hero-text: #ffffff;
+            --hero-desc: #ccc;
+            --hero-service: #e0e0e0;
+            --toggle-bg: #555;
+            --toggle-active: #f5b83d;
+            --wallet-bg: #2d2d2d;
+            --receipt-bg: #ffffff;
+            --receipt-text: #1c2128;
+            --receipt-muted: #555;
+            --receipt-border: #eee;
+            --notif-dot: #f5b83d;
+            --sidebar-bg: #2d2d2d;
+            --overlay-bg: rgba(0, 0, 0, 0.7);
+            --promo-shadow: rgba(0, 0, 0, 0.4);
+            --promo-shadow-active: rgba(0, 0, 0, 0.6);
+            --badge-bg: #3d3d1e;
+            --badge-text: #f5b83d;
+            --success-bg: #1a3d3d;
+            --success-text: #4ade80;
+            --error-bg: #3d1a1a;
+            --error-text: #f87171;
+            --warning-bg: #3d3d1e;
+            --warning-text: #fbbf24;
+            --hero-decor-opacity: 0.6;
+            --grid-dot-opacity: 0.15;
+            --scrollbar-thumb: #555;
+            --scrollbar-track: #222;
         }
 
-        /* ── All existing styles (unchanged) with variables applied ── */
+        /* ── Reset & Base ── */
         * {
             margin: 0;
             padding: 0;
@@ -129,6 +148,18 @@
             -webkit-overflow-scrolling: touch;
         }
 
+        /* ===== SCROLLBAR ===== */
+        .app-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .app-content::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+        }
+        .app-content::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 4px;
+        }
+
         /* ===== BOTTOM NAV ===== */
         .bottom-nav {
             position: fixed;
@@ -146,10 +177,10 @@
             justify-content: space-between;
             align-items: center;
             z-index: 500;
-            box-shadow: 0 7px 26px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 7px 26px var(--shadow-strong);
             flex-shrink: 0;
             pointer-events: auto;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .nav-item {
@@ -198,8 +229,7 @@
             object-fit: cover;
             flex-shrink: 0;
             background: var(--bg-nav);
-            border: 2px solid var(--accent);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background 0.3s ease;
         }
         .header-text {
             display: flex;
@@ -209,7 +239,7 @@
         }
         .header-text span:first-child {
             font-size: 9px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
         }
         .header-text span:last-child {
             font-weight: 700;
@@ -232,7 +262,7 @@
             cursor: pointer;
             position: relative;
             flex-shrink: 0;
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
         }
         .notif-badge {
             position: absolute;
@@ -255,7 +285,7 @@
             background-color: var(--bg-hero);
             border-radius: 14px;
             padding: 17px 14px;
-            color: white;
+            color: var(--hero-text);
             position: relative;
             margin: 0 12px 12px 12px;
             overflow: hidden;
@@ -270,10 +300,10 @@
             width: 50%;
             z-index: 0;
             background: radial-gradient(circle at 100% 100%, var(--accent) 0%, var(--accent) 45%, transparent 45%);
-            opacity: 0.9;
+            opacity: var(--hero-decor-opacity);
             border-top-left-radius: 100%;
             border-bottom-left-radius: 100%;
-            transition: background 0.3s ease;
+            transition: opacity 0.3s ease;
         }
         .small-grid-dots {
             display: grid;
@@ -287,7 +317,7 @@
         .small-grid-dots div {
             width: 3px;
             height: 3px;
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, var(--grid-dot-opacity));
         }
         .hero-content {
             position: relative;
@@ -304,9 +334,10 @@
         }
         .hero-desc {
             font-size: 9px;
-            color: #ddd;
+            color: var(--hero-desc);
             margin-bottom: 10px;
             max-width: 70%;
+            transition: color 0.3s ease;
         }
         .hero-services {
             margin-bottom: 12px;
@@ -320,7 +351,7 @@
         .service-list {
             list-style: none;
             font-size: 9px;
-            color: #f0f0f0;
+            color: var(--hero-service);
         }
         .service-list li {
             margin-bottom: 2px;
@@ -351,11 +382,11 @@
             cursor: pointer;
             margin-bottom: 3px;
             display: inline-block;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease;
         }
         .contact-number {
             font-size: 7px;
-            color: #fff;
+            color: var(--hero-text);
             margin-top: 3px;
         }
         .contact-number strong {
@@ -374,7 +405,7 @@
             background: var(--bg-body);
             box-shadow: 0 3px 17px var(--shadow-color);
             padding: 0;
-            transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s ease, box-shadow 0.3s ease;
+            transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.3s ease, box-shadow 0.3s ease;
             aspect-ratio: 1200 / 675;
             width: 100%;
             max-height: 80vh;
@@ -416,7 +447,7 @@
                 box-shadow 0.5s ease;
             height: 100%;
             background: var(--bg-card);
-            box-shadow: 0 3px 17px var(--shadow-color);
+            box-shadow: 0 3px 17px var(--promo-shadow);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -427,10 +458,7 @@
             will-change: transform, opacity;
             cursor: pointer;
             aspect-ratio: 1200 / 675;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                opacity 0.5s ease,
-                box-shadow 0.5s ease,
-                background-color 0.3s ease;
+            transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
         }
 
         .promo-slide.clickable {
@@ -447,7 +475,6 @@
             object-fit: cover;
             display: block;
             background-color: var(--bg-card);
-            border-radius: 17px;
         }
 
         .promo-slide .slide-overlay {
@@ -526,7 +553,7 @@
             transform: scale(1.08) !important;
             opacity: 1 !important;
             z-index: 3;
-            box-shadow: 0 10px 41px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 10px 41px var(--promo-shadow-active);
         }
         .promo-slide.far-slide {
             transform: scale(0.70) !important;
@@ -538,14 +565,14 @@
         .promotions-banner {
             margin: 0 12px 12px 12px;
             padding: 9px 12px;
-            background: var(--accent-light);
+            background: var(--badge-bg);
             border-radius: 10px;
             border: 1px solid var(--accent);
             display: none;
             flex-wrap: wrap;
             align-items: center;
             gap: 7px;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
         .promotions-banner.show {
             display: flex;
@@ -586,9 +613,9 @@
             padding: 6px 14px;
             font-size: 10px;
             font-weight: 600;
-            color: #555;
+            color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            transition: all 0.2s, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
             display: flex;
             align-items: center;
             gap: 5px;
@@ -624,7 +651,7 @@
         }
         .dynamic-back {
             font-size: 8px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             cursor: pointer;
             font-weight: 500;
             transition: color 0.3s ease;
@@ -664,7 +691,7 @@
             overflow: hidden;
             position: relative;
             background: var(--bg-nav) !important;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s ease;
         }
         .service-thumb i {
             color: white;
@@ -680,7 +707,7 @@
         }
         .service-subtitle {
             font-size: 6px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             line-height: 1.2;
             transition: color 0.3s ease;
         }
@@ -691,7 +718,7 @@
         }
 
         .order-policy-panel {
-            background-color: var(--bg-hero);
+            background-color: var(--bg-policy);
             border-radius: 14px;
             padding: 14px 15px;
             color: white;
@@ -713,10 +740,10 @@
             width: 50%;
             z-index: 0;
             background: radial-gradient(circle at 100% 100%, var(--accent) 0%, var(--accent) 45%, transparent 45%);
-            opacity: 0.9;
+            opacity: var(--hero-decor-opacity);
             border-top-left-radius: 100%;
             border-bottom-left-radius: 100%;
-            transition: background 0.3s ease;
+            transition: opacity 0.3s ease;
         }
         .order-policy-content {
             position: relative;
@@ -763,7 +790,7 @@
         }
         .order-title-section p {
             font-size: 9px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             line-height: 1.4;
             transition: color 0.3s ease;
         }
@@ -776,11 +803,12 @@
         }
         .order-title-section .price .old-price {
             font-size: 12px;
-            color: #999;
+            color: var(--text-muted);
             text-decoration: line-through;
             opacity: 0.5;
             font-weight: 400;
             margin-right: 5px;
+            transition: color 0.3s ease;
         }
         .order-title-section .price .new-price {
             font-size: 16px;
@@ -803,12 +831,12 @@
             border-radius: 14px;
             padding: 3px 9px;
             font-size: 8px;
-            color: #555;
+            color: var(--text-secondary);
             background: var(--bg-card);
             display: flex;
             align-items: center;
             gap: 4px;
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            transition: all 0.3s ease;
         }
         .order-tags .tag i {
             color: var(--accent);
@@ -833,7 +861,7 @@
             transition: border-color 0.3s ease;
         }
         .spec-row .label {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             transition: color 0.3s ease;
         }
         .spec-row .value {
@@ -858,7 +886,7 @@
         .customize-group .group-label {
             font-size: 9px;
             font-weight: 500;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             margin-bottom: 4px;
             transition: color 0.3s ease;
         }
@@ -875,11 +903,11 @@
             font-size: 9px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            transition: all 0.2s, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
             display: flex;
             align-items: center;
             gap: 4px;
-            color: #555;
+            color: var(--text-secondary);
         }
         .customize-btn:active {
             transform: scale(0.95);
@@ -906,7 +934,8 @@
             background: var(--bg-card);
             cursor: pointer;
             font-size: 9px;
-            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease;
+            transition: all 0.2s, background 0.3s ease, border-color 0.3s ease;
+            color: var(--text-primary);
         }
         .quantity-selector button:active {
             transform: scale(0.9);
@@ -923,22 +952,22 @@
         .order-notes textarea {
             width: 100%;
             padding: 9px;
-            border: 1px solid var(--border-light);
+            border: 1px solid var(--border-color);
             border-radius: 9px;
             font-size: 9px;
             resize: vertical;
             min-height: 41px;
             background: var(--bg-input);
-            transition: border 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            transition: border 0.2s, background 0.3s ease, color 0.3s ease;
             font-family: 'Poppins', sans-serif;
             color: var(--text-primary);
         }
         .order-notes textarea:focus {
             outline: none;
-            border-color: var(--text-primary);
+            border-color: var(--bg-nav);
         }
         .order-notes textarea::placeholder {
-            color: #bbb;
+            color: var(--text-muted);
             font-size: 9px;
         }
 
@@ -953,7 +982,7 @@
         }
         .order-footer .total-label {
             font-size: 9px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             transition: color 0.3s ease;
         }
         .order-footer .total-price {
@@ -974,7 +1003,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            transition: all 0.2s, background-color 0.3s ease;
+            transition: all 0.2s, background 0.3s ease;
         }
         .btn-confirm-order:active {
             transform: scale(0.95);
@@ -995,7 +1024,7 @@
             display: none;
             overflow-y: auto;
             padding: 0;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s ease;
         }
         .payment-page-overlay.open {
             display: block;
@@ -1007,7 +1036,7 @@
             background: var(--bg-app);
             position: relative;
             min-height: 100vh;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s ease;
         }
         .payment-page .page-logo {
             display: flex;
@@ -1023,8 +1052,6 @@
             height: 36px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--accent);
-            transition: border-color 0.3s ease;
         }
         .payment-page .page-logo span {
             font-weight: 700;
@@ -1040,9 +1067,10 @@
             background: none;
             border: none;
             font-size: 18px;
-            color: #aaa;
+            color: var(--text-muted);
             cursor: pointer;
             padding: 4px;
+            transition: color 0.3s ease;
         }
         .payment-page .close-btn:hover {
             color: var(--text-primary);
@@ -1055,18 +1083,18 @@
             transition: color 0.3s ease;
         }
         .payment-page .sub {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 9px;
             margin-bottom: 11px;
             transition: color 0.3s ease;
         }
         .payment-details {
-            background: var(--bg-body);
+            background: var(--status-bg);
             border-radius: 9px;
             padding: 11px;
             margin-bottom: 11px;
             border: 1px solid var(--border-color);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
         .payment-details .number {
             font-size: 14px;
@@ -1077,8 +1105,9 @@
         }
         .payment-details .name {
             font-weight: 600;
-            color: #333;
+            color: var(--text-secondary);
             font-size: 11px;
+            transition: color 0.3s ease;
         }
         .payment-details .amount-large {
             font-size: 19px;
@@ -1101,9 +1130,9 @@
             background: var(--bg-card);
             font-size: 9px;
             font-weight: 600;
-            color: #555;
+            color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            transition: all 0.2s, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
             text-align: center;
             min-width: 68px;
         }
@@ -1131,7 +1160,7 @@
             font-size: 10px;
             background: var(--bg-input);
             color: var(--text-primary);
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         .code-input-wrap input:focus {
             outline: none;
@@ -1153,7 +1182,7 @@
             min-width: 68px;
             background: var(--bg-input);
             color: var(--text-primary);
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         .coupon-section input:focus {
             outline: none;
@@ -1168,12 +1197,22 @@
             font-weight: 700;
             font-size: 9px;
             cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: all 0.25s ease;
+            box-shadow: 0 3px 10px rgba(245, 184, 61, 0.3);
+        }
+        .coupon-section .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 17px rgba(245, 184, 61, 0.4);
+        }
+        .coupon-section .apply-btn:active {
+            transform: scale(0.95);
         }
         .coupon-section .apply-btn:disabled {
-            background: #ddd;
-            color: #888;
+            background: var(--border-light);
+            color: var(--text-muted);
             cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
         }
         .coupon-msg {
             font-size: 9px;
@@ -1182,18 +1221,18 @@
             display: block;
         }
         .coupon-msg.success {
-            color: #00a86b;
+            color: var(--success-text);
         }
         .coupon-msg.error {
-            color: #dc2626;
+            color: var(--error-text);
         }
         .price-breakdown {
-            background: var(--bg-body);
+            background: var(--status-bg);
             border-radius: 7px;
             padding: 9px;
             margin-bottom: 10px;
             font-size: 10px;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s ease;
         }
         .price-breakdown .row {
             display: flex;
@@ -1201,7 +1240,7 @@
             padding: 3px 0;
         }
         .price-breakdown .row .label {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             transition: color 0.3s ease;
         }
         .price-breakdown .row .val {
@@ -1210,7 +1249,7 @@
             transition: color 0.3s ease;
         }
         .price-breakdown .row .val.discounted {
-            color: #00a86b;
+            color: var(--success-text);
         }
 
         .upload-area {
@@ -1219,22 +1258,23 @@
             padding: 14px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.25s, background-color 0.3s ease, border-color 0.3s ease;
+            transition: all 0.25s, background 0.3s ease, border-color 0.3s ease;
             background: var(--bg-input);
             margin-bottom: 11px;
         }
         .upload-area:hover {
             border-color: var(--accent);
-            background: var(--accent-light);
+            background: var(--badge-bg);
         }
         .upload-area i {
             font-size: 19px;
-            color: #aaa;
+            color: var(--text-muted);
             margin-bottom: 3px;
+            transition: color 0.3s ease;
         }
         .upload-area p {
             font-size: 9px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             transition: color 0.3s ease;
         }
         .upload-area .file-name {
@@ -1257,7 +1297,7 @@
             font-size: 11px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.25s, background-color 0.3s ease;
+            transition: all 0.25s, background 0.3s ease;
             box-shadow: 0 3px 14px var(--shadow-color);
         }
         .btn-primary:active {
@@ -1274,13 +1314,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: var(--overlay-bg);
             backdrop-filter: blur(6px);
             z-index: 2000;
             display: none;
             align-items: center;
             justify-content: center;
             padding: 14px;
+            transition: background 0.3s ease;
         }
         .order-success-overlay.open {
             display: flex;
@@ -1292,9 +1333,9 @@
             max-width: 320px;
             padding: 30px 20px 20px 20px;
             text-align: center;
-            box-shadow: 0 25px 60px var(--shadow-dark);
+            box-shadow: 0 25px 60px var(--shadow-strong);
             animation: modalIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease;
         }
         @keyframes modalIn {
             from {
@@ -1335,7 +1376,7 @@
             font-weight: 600;
             font-size: 13px;
             cursor: pointer;
-            transition: all 0.2s, background-color 0.3s ease;
+            transition: all 0.2s, background 0.3s ease;
         }
         .order-success-modal .btn-ok:active {
             transform: scale(0.95);
@@ -1360,7 +1401,7 @@
             transition: color 0.3s ease;
         }
         .orders-header p {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 9px;
             transition: color 0.3s ease;
         }
@@ -1377,7 +1418,7 @@
             padding: 12px 14px;
             box-shadow: 0 2px 10px var(--shadow-color);
             border: 1px solid var(--border-color);
-            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.2s, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             cursor: default;
         }
         .order-card .order-summary {
@@ -1394,11 +1435,12 @@
         }
         .order-card .order-summary .left .order-service {
             font-size: 10px;
-            color: #555;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
         .order-card .order-summary .left .order-meta {
             font-size: 9px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             margin-top: 2px;
             display: flex;
             flex-wrap: wrap;
@@ -1424,34 +1466,34 @@
         }
 
         .status-pending {
-            background: var(--status-pending-bg);
-            color: var(--status-pending-text);
+            background: var(--warning-bg);
+            color: var(--warning-text);
         }
         .status-progress {
-            background: var(--status-progress-bg);
-            color: var(--status-progress-text);
+            background: #e0f0ff;
+            color: #0066cc;
         }
         .status-completed {
-            background: var(--status-completed-bg);
-            color: var(--status-completed-text);
+            background: var(--success-bg);
+            color: var(--success-text);
         }
         .status-review {
-            background: var(--status-review-bg);
-            color: var(--status-review-text);
+            background: #f0e6ff;
+            color: #7700cc;
         }
         .status-cancelled {
-            background: var(--status-cancelled-bg);
-            color: var(--status-cancelled-text);
+            background: var(--error-bg);
+            color: var(--error-text);
         }
         .status-done {
-            background: var(--status-done-bg);
-            color: var(--status-done-text);
+            background: var(--success-bg);
+            color: var(--success-text);
         }
 
         .order-card .order-details-expand {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease, border-color 0.3s ease;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
             padding: 0 3px;
             border-top: 1px solid transparent;
             margin-top: 0;
@@ -1461,21 +1503,22 @@
             padding: 10px 3px 3px 3px;
             border-top-color: var(--border-color);
             margin-top: 9px;
+            transition: border-top-color 0.3s ease;
         }
         .order-card .order-details-expand .detail-row {
             display: flex;
             justify-content: space-between;
             padding: 3px 0;
             font-size: 10px;
-            color: #555;
+            color: var(--text-secondary);
             border-bottom: 1px solid var(--border-color);
-            transition: border-color 0.3s ease;
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
         .order-card .order-details-expand .detail-row:last-child {
             border-bottom: none;
         }
         .order-card .order-details-expand .detail-row .label {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             flex-shrink: 0;
             transition: color 0.3s ease;
         }
@@ -1489,8 +1532,9 @@
         .order-card .expand-icon {
             transition: transform 0.3s ease;
             font-size: 10px;
-            color: #aaa;
+            color: var(--text-muted);
             margin-left: 7px;
+            transition: transform 0.3s ease, color 0.3s ease;
         }
         .order-card.open .expand-icon {
             transform: rotate(180deg);
@@ -1510,7 +1554,7 @@
             box-shadow: 0 2px 9px var(--shadow-color);
             border: 1px solid var(--border-color);
             cursor: pointer;
-            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.2s, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .history-card:active {
             transform: scale(0.98);
@@ -1534,7 +1578,7 @@
         }
         .history-card .history-summary .right {
             font-size: 9px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             display: flex;
             align-items: center;
             gap: 7px;
@@ -1543,7 +1587,7 @@
         .history-card .history-details {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease, border-color 0.3s ease;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
             padding: 0 3px;
             border-top: 1px solid transparent;
         }
@@ -1552,16 +1596,18 @@
             padding: 9px 3px 3px 3px;
             border-top-color: var(--border-color);
             margin-top: 7px;
+            transition: border-top-color 0.3s ease;
         }
         .history-card .history-details .h-row {
             display: flex;
             justify-content: space-between;
             padding: 3px 0;
             font-size: 10px;
-            color: #555;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
         .history-card .history-details .h-row .h-label {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             transition: color 0.3s ease;
         }
         .history-card .history-details .h-row .h-val {
@@ -1572,14 +1618,15 @@
         .history-card .expand-icon {
             transition: transform 0.3s ease;
             font-size: 9px;
-            color: #aaa;
+            color: var(--text-muted);
+            transition: transform 0.3s ease, color 0.3s ease;
         }
         .history-card.open .expand-icon {
             transform: rotate(180deg);
         }
 
         .payment-reminder-banner {
-            background: var(--accent-light);
+            background: var(--badge-bg);
             border: 1px solid var(--accent);
             border-radius: 9px;
             padding: 9px 12px;
@@ -1588,7 +1635,7 @@
             align-items: center;
             gap: 9px;
             flex-wrap: wrap;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
         .payment-reminder-banner.show {
             display: flex;
@@ -1621,7 +1668,7 @@
             font-size: 9px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.25s, background-color 0.3s ease;
+            transition: all 0.25s, background 0.3s ease;
             display: flex;
             align-items: center;
             gap: 5px;
@@ -1642,14 +1689,15 @@
             color: #1c2128;
         }
         .payment-reminder-banner .done-badge {
-            background: var(--status-done-bg);
-            color: var(--status-done-text);
+            background: var(--success-bg);
+            color: var(--success-text);
             padding: 3px 12px;
             border-radius: 14px;
             font-size: 9px;
             font-weight: 600;
             display: none;
             flex-shrink: 0;
+            transition: background 0.3s ease, color 0.3s ease;
         }
         .payment-reminder-banner .done-badge.show {
             display: inline-block;
@@ -1662,9 +1710,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: var(--overlay-bg);
             z-index: 2000;
             display: none;
+            transition: background 0.3s ease;
         }
         .sidebar-overlay.open {
             display: block;
@@ -1675,10 +1724,10 @@
             right: -300px;
             width: 238px;
             height: 100%;
-            background: var(--bg-card);
+            background: var(--sidebar-bg);
             z-index: 2001;
-            box-shadow: -4px 0 26px var(--shadow-dark);
-            transition: right 0.3s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: -4px 0 26px var(--shadow-strong);
+            transition: right 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
             padding: 14px 12px;
             overflow-y: auto;
         }
@@ -1702,7 +1751,7 @@
         }
         .sidebar-close {
             font-size: 16px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             cursor: pointer;
             background: none;
             border: none;
@@ -1726,12 +1775,12 @@
             width: 5px;
             height: 5px;
             border-radius: 50%;
-            background: var(--accent);
+            background: var(--notif-dot);
             margin-top: 3px;
             flex-shrink: 0;
         }
         .notif-dot.read {
-            background: #ddd;
+            background: var(--border-light);
         }
         .notif-content {
             flex: 1;
@@ -1744,13 +1793,15 @@
         }
         .notif-content .desc {
             font-size: 8px;
-            color: #666;
+            color: var(--text-secondary);
             margin-top: 1px;
+            transition: color 0.3s ease;
         }
         .notif-content .time {
             font-size: 7px;
-            color: #aaa;
+            color: var(--text-muted);
             margin-top: 3px;
+            transition: color 0.3s ease;
         }
 
         /* ===== SAMPLES ===== */
@@ -1773,24 +1824,25 @@
             padding: 12px;
             border: 1px solid var(--border-color);
             box-shadow: 0 2px 10px var(--shadow-color);
-            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.3s ease, border-color 0.3s ease;
             display: flex;
             flex-direction: column;
         }
         .sample-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 7px 21px var(--shadow-color);
+            box-shadow: 0 7px 21px var(--shadow-strong);
         }
         .sample-card .sample-frame {
             width: 100%;
             border-radius: 10px;
             overflow: hidden;
-            background: #f5f5f5;
+            background: var(--bg-body);
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 7px;
             position: relative;
+            transition: background 0.3s ease;
         }
         .sample-card .sample-frame img {
             width: 100%;
@@ -1807,24 +1859,26 @@
         }
         .sample-card .sample-desc {
             font-size: 10px;
-            color: #666;
+            color: var(--text-secondary);
             line-height: 1.4;
             flex: 1;
+            transition: color 0.3s ease;
         }
         .sample-card .sample-meta {
             font-size: 9px;
-            color: #aaa;
+            color: var(--text-muted);
             margin-top: 5px;
             display: flex;
             justify-content: space-between;
+            transition: color 0.3s ease;
         }
 
         .phone-frame-sample {
             border: 5px solid var(--bg-nav);
             border-radius: 26px;
             padding: 5px;
-            background: #fff;
-            box-shadow: 0 7px 26px var(--shadow-color);
+            background: var(--bg-card);
+            box-shadow: 0 7px 26px var(--shadow-strong);
             aspect-ratio: 9/19;
             display: flex;
             align-items: center;
@@ -1834,7 +1888,7 @@
             width: 100%;
             max-width: 187px;
             margin: 0 auto;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: border-color 0.3s ease, background 0.3s ease;
         }
         .phone-frame-sample .notch {
             position: absolute;
@@ -1845,21 +1899,21 @@
             height: 15px;
             background: var(--bg-nav);
             border-radius: 0 0 10px 10px;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s ease;
         }
 
         .laptop-frame-sample {
             background: var(--bg-nav);
             border-radius: 10px 10px 0 0;
             padding: 9px 9px 0 9px;
-            box-shadow: 0 7px 26px var(--shadow-color);
+            box-shadow: 0 7px 26px var(--shadow-strong);
             width: 100%;
             max-width: 272px;
             margin: 0 auto;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease;
         }
         .laptop-frame-sample .screen {
-            background: #fff;
+            background: var(--bg-card);
             border-radius: 5px 5px 0 0;
             aspect-ratio: 16/10;
             overflow: hidden;
@@ -1867,6 +1921,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            transition: background 0.3s ease;
         }
         .laptop-frame-sample .screen img {
             width: 100%;
@@ -1900,21 +1955,21 @@
             margin: 0 12px 14px 12px;
             box-shadow: 0 3px 17px var(--shadow-color);
             border: 1px solid var(--border-color);
-            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .profile-avatar-large {
             width: 61px;
             height: 61px;
             border-radius: 50%;
-            background-color: var(--profile-avatar-bg);
-            color: var(--profile-avatar-text);
+            background-color: var(--bg-nav);
+            color: var(--accent);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
             font-size: 24px;
             margin: 0 auto 11px auto;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.3s ease;
         }
         .profile-name {
             text-align: center;
@@ -1927,7 +1982,7 @@
         .profile-role {
             text-align: center;
             font-size: 9px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             margin-bottom: 14px;
             transition: color 0.3s ease;
         }
@@ -1949,7 +2004,7 @@
         }
         .profile-field .label {
             font-size: 9px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             transition: color 0.3s ease;
         }
         .profile-field .value {
@@ -1967,21 +2022,22 @@
         }
         .profile-about p {
             font-size: 9px;
-            color: #555;
+            color: var(--text-secondary);
             line-height: 1.6;
+            transition: color 0.3s ease;
         }
 
-        /* ===== Dark Mode Toggle (iOS style) ===== */
-        .dark-mode-toggle-wrapper {
+        /* ── Dark Mode Toggle (iOS style) ── */
+        .dark-mode-toggle-wrap {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 0 6px 0;
-            border-top: 1px solid var(--border-color);
-            margin-top: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 8px;
             transition: border-color 0.3s ease;
         }
-        .dark-mode-toggle-wrapper .label {
+        .dark-mode-toggle-wrap .toggle-label {
             font-size: 10px;
             font-weight: 600;
             color: var(--text-primary);
@@ -1990,61 +2046,50 @@
             gap: 8px;
             transition: color 0.3s ease;
         }
-        .dark-mode-toggle-wrapper .label i {
+        .dark-mode-toggle-wrap .toggle-label i {
             color: var(--accent);
             font-size: 14px;
         }
         .ios-toggle {
             position: relative;
-            width: 46px;
-            height: 28px;
-            flex-shrink: 0;
+            width: 44px;
+            height: 24px;
+            background: var(--toggle-bg);
+            border-radius: 12px;
             cursor: pointer;
-        }
-        .ios-toggle input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .ios-toggle .toggle-track {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 46px;
-            height: 28px;
-            background: var(--toggle-track);
-            border-radius: 14px;
             transition: background 0.3s ease;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+            flex-shrink: 0;
+            border: none;
+            padding: 0;
+        }
+        .ios-toggle.active {
+            background: var(--toggle-active);
         }
         .ios-toggle .toggle-knob {
             position: absolute;
             top: 2px;
             left: 2px;
-            width: 24px;
-            height: 24px;
-            background: var(--toggle-knob);
+            width: 20px;
+            height: 20px;
+            background: #fff;
             border-radius: 50%;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.3s ease, box-shadow 0.3s ease;
-        }
-        .ios-toggle.active .toggle-track {
-            background: var(--toggle-track-active);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         }
         .ios-toggle.active .toggle-knob {
-            transform: translateX(18px);
+            transform: translateX(20px);
         }
 
-        /* ===== Profile Contact Section ===== */
+        /* ── Profile Contact Section ── */
         .profile-contact {
-            margin-top: 12px;
-            padding-top: 10px;
+            padding: 12px 0 6px 0;
             border-top: 1px solid var(--border-color);
+            margin-top: 4px;
             transition: border-color 0.3s ease;
         }
         .profile-contact .contact-title {
             font-size: 10px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 8px;
             display: flex;
@@ -2066,7 +2111,6 @@
         }
         .profile-contact .contact-item i {
             width: 18px;
-            text-align: center;
             color: var(--accent);
             font-size: 13px;
         }
@@ -2079,10 +2123,34 @@
         .profile-contact .contact-item a:hover {
             color: var(--accent);
         }
-        .profile-contact .contact-item .label-text {
-            font-weight: 500;
-            color: var(--text-primary);
-            transition: color 0.3s ease;
+        .profile-contact .contact-item .wa-link {
+            color: #25D366;
+            font-weight: 600;
+        }
+        .profile-contact .contact-item .fb-link {
+            color: #1877F2;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 9px;
+            margin-top: 12px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+        }
+        .logout-btn:active {
+            transform: scale(0.95);
         }
 
         /* ===== ACCOUNT ===== */
@@ -2104,8 +2172,8 @@
             font-weight: 600;
             font-size: 11px;
             cursor: pointer;
-            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-            color: #555;
+            transition: all 0.2s, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            color: var(--text-secondary);
             text-align: center;
             display: flex;
             align-items: center;
@@ -2172,7 +2240,7 @@
             font-size: 9px;
             color: #1c2128;
             cursor: pointer;
-            transition: all 0.2s, background-color 0.3s ease, color 0.3s ease;
+            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -2202,7 +2270,7 @@
             margin: 10px 0 14px 0;
             border: 1px solid var(--border-color);
             display: none;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
         .send-money-section.open {
             display: block;
@@ -2216,7 +2284,7 @@
         }
         .send-money-section .sub {
             font-size: 9px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             margin-bottom: 10px;
             transition: color 0.3s ease;
         }
@@ -2239,7 +2307,7 @@
             font-size: 10px;
             background: var(--bg-input);
             color: var(--text-primary);
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         .send-money-section .form-group input:focus {
             outline: none;
@@ -2247,7 +2315,7 @@
         }
         .send-money-section .search-result {
             padding: 7px 10px;
-            background: var(--bg-body);
+            background: var(--status-bg);
             border-radius: 7px;
             font-size: 10px;
             color: var(--text-primary);
@@ -2256,19 +2324,19 @@
             align-items: center;
             gap: 5px;
             flex-wrap: wrap;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease;
         }
         .send-money-section .search-result .name {
             font-weight: 700;
             color: var(--accent);
         }
         .send-money-section .search-result .not-found {
-            color: #dc2626;
+            color: var(--error-text);
             font-weight: 600;
         }
         .send-money-section .balance-check {
             font-size: 9px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             margin-top: 2px;
             transition: color 0.3s ease;
         }
@@ -2278,7 +2346,7 @@
             transition: color 0.3s ease;
         }
         .send-money-section .balance-check .insufficient {
-            color: #dc2626;
+            color: var(--error-text);
             font-weight: 600;
         }
         .send-money-section .btn-send {
@@ -2295,7 +2363,7 @@
             margin-top: 3px;
         }
         .send-money-section .btn-send:disabled {
-            background: #ccc;
+            background: var(--border-light);
             cursor: not-allowed;
         }
         .send-money-section .btn-send:active:not(:disabled) {
@@ -2329,57 +2397,55 @@
             transition: color 0.3s ease;
         }
         .send-money-tx-list .tx-item .tx-left .tx-with {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 9px;
             transition: color 0.3s ease;
         }
         .send-money-tx-list .tx-item .tx-right .tx-amount {
             font-weight: 700;
+            transition: color 0.3s ease;
         }
         .send-money-tx-list .tx-item .tx-right .tx-amount.sent {
-            color: #dc2626;
+            color: var(--error-text);
         }
         .send-money-tx-list .tx-item .tx-right .tx-amount.received {
-            color: #00a86b;
+            color: var(--success-text);
         }
         .send-money-tx-list .tx-item .tx-right .tx-date {
             font-size: 8px;
-            color: #aaa;
+            color: var(--text-muted);
             display: block;
             text-align: right;
+            transition: color 0.3s ease;
         }
         .send-money-tx-list .empty-tx {
             text-align: center;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 9px;
             padding: 10px 0;
             transition: color 0.3s ease;
         }
 
-        /* ===== ACCOUNT TRANSACTIONS & WITHDRAWALS ===== */
-        .account-tx-card,
-        .withdrawal-card {
+        /* ===== ACCOUNT TRANSACTIONS ===== */
+        .account-tx-card {
             background: var(--bg-card);
             border-radius: 12px;
             padding: 12px 14px;
             box-shadow: 0 2px 9px var(--shadow-color);
             border: 1px solid var(--border-color);
             cursor: pointer;
-            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.2s, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 9px;
         }
-        .account-tx-card:active,
-        .withdrawal-card:active {
+        .account-tx-card:active {
             transform: scale(0.98);
         }
-        .account-tx-card .tx-summary,
-        .withdrawal-card .wd-summary {
+        .account-tx-card .tx-summary {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .account-tx-card .tx-summary .left,
-        .withdrawal-card .wd-summary .left {
+        .account-tx-card .tx-summary .left {
             display: flex;
             align-items: center;
             gap: 9px;
@@ -2387,84 +2453,335 @@
             color: var(--text-primary);
             transition: color 0.3s ease;
         }
-        .account-tx-card .tx-summary .left i,
-        .withdrawal-card .wd-summary .left i {
+        .account-tx-card .tx-summary .left i {
             font-size: 12px;
             color: #667eea;
         }
-        .account-tx-card .tx-summary .right,
-        .withdrawal-card .wd-summary .right {
+        .account-tx-card .tx-summary .right {
             font-size: 9px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             display: flex;
             align-items: center;
             gap: 7px;
             transition: color 0.3s ease;
         }
-        .account-tx-card .tx-details,
-        .withdrawal-card .wd-details {
+        .account-tx-card .tx-details {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease, border-color 0.3s ease;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
             padding: 0 3px;
             border-top: 1px solid transparent;
         }
-        .account-tx-card.open .tx-details,
-        .withdrawal-card.open .wd-details {
+        .account-tx-card.open .tx-details {
             max-height: 250px;
             padding: 9px 3px 3px 3px;
             border-top-color: var(--border-color);
             margin-top: 7px;
+            transition: border-top-color 0.3s ease;
         }
-        .account-tx-card .tx-details .d-row,
-        .withdrawal-card .wd-details .d-row {
+        .account-tx-card .tx-details .d-row {
             display: flex;
             justify-content: space-between;
             padding: 3px 0;
             font-size: 10px;
-            color: #555;
-        }
-        .account-tx-card .tx-details .d-row .d-label,
-        .withdrawal-card .wd-details .d-row .d-label {
             color: var(--text-secondary);
             transition: color 0.3s ease;
         }
-        .account-tx-card .tx-details .d-row .d-val,
-        .withdrawal-card .wd-details .d-row .d-val {
+        .account-tx-card .tx-details .d-row .d-label {
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+        .account-tx-card .tx-details .d-row .d-val {
             font-weight: 500;
             color: var(--text-primary);
             transition: color 0.3s ease;
         }
-        .account-tx-card .expand-icon,
-        .withdrawal-card .expand-icon {
+        .account-tx-card .expand-icon {
             transition: transform 0.3s ease;
             font-size: 9px;
-            color: #aaa;
+            color: var(--text-muted);
+            transition: transform 0.3s ease, color 0.3s ease;
         }
-        .account-tx-card.open .expand-icon,
-        .withdrawal-card.open .expand-icon {
+        .account-tx-card.open .expand-icon {
             transform: rotate(180deg);
         }
 
-        .withdrawal-card .status-badge {
+        /* ===== WITHDRAWALS (DETAILED PAGE) ===== */
+        .withdrawals-page {
+            padding: 0 12px 14px 12px;
+        }
+        .withdrawals-page .wd-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .withdrawals-page .wd-header h3 {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+        .withdrawals-page .wd-header .wd-balance-info {
+            font-size: 10px;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+        .withdrawals-page .wd-header .wd-balance-info strong {
+            color: var(--text-primary);
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+        .withdrawals-page .wd-balance-card {
+            background: linear-gradient(135deg, var(--bg-nav) 0%, #2a2a2a 100%);
+            border-radius: 14px;
+            padding: 16px 14px;
+            margin-bottom: 14px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            transition: background 0.3s ease;
+        }
+        .withdrawals-page .wd-balance-card .left .label {
+            font-size: 9px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .withdrawals-page .wd-balance-card .left .balance {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+        }
+        .withdrawals-page .wd-balance-card .left .sub-info {
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 2px;
+        }
+        .withdrawals-page .wd-balance-card .right .btn-withdraw-now {
+            background: var(--accent);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 26px;
+            font-weight: 700;
+            font-size: 11px;
+            color: #1c2128;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .withdrawals-page .wd-balance-card .right .btn-withdraw-now:active {
+            transform: scale(0.95);
+        }
+        .withdrawals-page .wd-balance-card .right .btn-withdraw-now i {
+            font-size: 13px;
+        }
+
+        /* Withdraw Form */
+        .withdraw-form-section {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 14px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .withdraw-form-section h4 {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 3px;
+            transition: color 0.3s ease;
+        }
+        .withdraw-form-section .sub {
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        .withdraw-form-section .form-group {
+            margin-bottom: 10px;
+        }
+        .withdraw-form-section .form-group label {
+            font-weight: 600;
+            font-size: 9px;
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 3px;
+            transition: color 0.3s ease;
+        }
+        .withdraw-form-section .form-group input {
+            width: 100%;
+            padding: 7px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 9px;
+            font-size: 10px;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        .withdraw-form-section .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        .withdraw-form-section .btn-withdraw-submit {
+            width: 100%;
+            padding: 9px;
+            background: var(--bg-nav);
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-weight: 700;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s, background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .withdraw-form-section .btn-withdraw-submit:active {
+            transform: scale(0.95);
+        }
+        .withdraw-form-section .btn-withdraw-submit i {
+            color: var(--accent);
+        }
+        .withdraw-form-section .btn-withdraw-submit:disabled {
+            background: var(--border-light);
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        /* Withdraw History */
+        .withdraw-history-section {
+            margin-top: 4px;
+        }
+        .withdraw-history-section h4 {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+        .withdraw-history-section .wd-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 12px 14px;
+            box-shadow: 0 2px 9px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 9px;
+        }
+        .withdraw-history-section .wd-card:active {
+            transform: scale(0.98);
+        }
+        .withdraw-history-section .wd-card .wd-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .withdraw-history-section .wd-card .wd-summary .left {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 10px;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+        .withdraw-history-section .wd-card .wd-summary .left i {
+            font-size: 12px;
+        }
+        .withdraw-history-section .wd-card .wd-summary .right {
+            font-size: 9px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: color 0.3s ease;
+        }
+        .withdraw-history-section .wd-card .wd-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
+            padding: 0 3px;
+            border-top: 1px solid transparent;
+        }
+        .withdraw-history-section .wd-card.open .wd-details {
+            max-height: 250px;
+            padding: 9px 3px 3px 3px;
+            border-top-color: var(--border-color);
+            margin-top: 7px;
+            transition: border-top-color 0.3s ease;
+        }
+        .withdraw-history-section .wd-card .wd-details .d-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 10px;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+        .withdraw-history-section .wd-card .wd-details .d-row .d-label {
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+        .withdraw-history-section .wd-card .wd-details .d-row .d-val {
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+        .withdraw-history-section .wd-card .expand-icon {
+            transition: transform 0.3s ease;
+            font-size: 9px;
+            color: var(--text-muted);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .withdraw-history-section .wd-card.open .expand-icon {
+            transform: rotate(180deg);
+        }
+        .withdraw-history-section .wd-card .status-badge {
             padding: 2px 10px;
             border-radius: 14px;
             font-size: 9px;
             font-weight: 600;
         }
-        .withdrawal-card .status-badge.pending {
-            background: var(--status-pending-bg);
-            color: var(--status-pending-text);
+        .withdraw-history-section .wd-card .status-badge.pending {
+            background: var(--warning-bg);
+            color: var(--warning-text);
         }
-        .withdrawal-card .status-badge.approved {
-            background: var(--status-completed-bg);
-            color: var(--status-completed-text);
+        .withdraw-history-section .wd-card .status-badge.approved {
+            background: var(--success-bg);
+            color: var(--success-text);
         }
-        .withdrawal-card .status-badge.declined {
-            background: var(--status-cancelled-bg);
-            color: var(--status-cancelled-text);
+        .withdraw-history-section .wd-card .status-badge.declined {
+            background: var(--error-bg);
+            color: var(--error-text);
+        }
+        .withdraw-history-section .empty-wd {
+            text-align: center;
+            padding: 14px;
+            color: var(--text-muted);
+            font-size: 10px;
+            transition: color 0.3s ease;
+        }
+        .withdraw-history-section .empty-wd i {
+            font-size: 20px;
+            color: var(--border-light);
+            display: block;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
         }
 
+        /* ===== REFERRAL ===== */
         .referral-code-box {
             background: var(--bg-nav);
             border-radius: 14px;
@@ -2472,7 +2789,7 @@
             margin: 14px 0 10px 0;
             text-align: center;
             color: white;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s ease;
         }
         .referral-code-box .label {
             font-size: 9px;
@@ -2498,7 +2815,7 @@
             font-size: 10px;
             color: #1c2128;
             cursor: pointer;
-            transition: all 0.2s, background-color 0.3s ease, color 0.3s ease;
+            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 7px;
@@ -2510,209 +2827,6 @@
             font-size: 12px;
         }
 
-        /* ===== WITHDRAW MODAL ===== */
-        .withdraw-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            z-index: 1100;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 14px;
-        }
-        .withdraw-modal-overlay.open {
-            display: flex;
-        }
-        .withdraw-modal {
-            background: var(--bg-card);
-            border-radius: 15px;
-            width: 100%;
-            max-width: 289px;
-            padding: 20px 17px 17px 17px;
-            box-shadow: 0 21px 51px var(--shadow-dark);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .withdraw-modal h3 {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 3px;
-            transition: color 0.3s ease;
-        }
-        .withdraw-modal .sub {
-            font-size: 10px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-            transition: color 0.3s ease;
-        }
-        .withdraw-modal .form-group {
-            margin-bottom: 12px;
-        }
-        .withdraw-modal .form-group label {
-            font-weight: 600;
-            font-size: 10px;
-            color: #222;
-            display: block;
-            margin-bottom: 3px;
-        }
-        .withdraw-modal .form-group input {
-            width: 100%;
-            padding: 9px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 9px;
-            font-size: 11px;
-            background: var(--bg-input);
-            color: var(--text-primary);
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-        }
-        .withdraw-modal .form-group input:focus {
-            outline: none;
-            border-color: var(--text-primary);
-        }
-        .withdraw-modal .btn-withdraw {
-            width: 100%;
-            padding: 9px;
-            background: var(--bg-nav);
-            color: white;
-            border: none;
-            border-radius: 9px;
-            font-weight: 700;
-            font-size: 12px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .withdraw-modal .btn-withdraw:active {
-            transform: scale(0.95);
-        }
-        .withdraw-modal .btn-cancel-withdraw {
-            width: 100%;
-            padding: 9px;
-            background: #f0f0f0;
-            color: #555;
-            border: none;
-            border-radius: 9px;
-            font-weight: 600;
-            font-size: 12px;
-            cursor: pointer;
-            margin-top: 7px;
-        }
-        .withdraw-modal .btn-cancel-withdraw:active {
-            transform: scale(0.95);
-        }
-
-        .withdraw-success-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            z-index: 1200;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 14px;
-        }
-        .withdraw-success-overlay.open {
-            display: flex;
-        }
-        .withdraw-success-modal {
-            background: var(--bg-card);
-            border-radius: 15px;
-            width: 100%;
-            max-width: 289px;
-            padding: 24px 17px 17px 17px;
-            text-align: center;
-            box-shadow: 0 21px 51px var(--shadow-dark);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .withdraw-success-modal i {
-            font-size: 41px;
-            color: var(--accent);
-            margin-bottom: 9px;
-        }
-        .withdraw-success-modal h3 {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 3px;
-            transition: color 0.3s ease;
-        }
-        .withdraw-success-modal p {
-            font-size: 11px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            transition: color 0.3s ease;
-        }
-        .withdraw-success-modal .btn-ok {
-            margin-top: 14px;
-            padding: 9px 26px;
-            background: var(--bg-nav);
-            color: white;
-            border: none;
-            border-radius: 26px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .withdraw-success-modal .btn-ok:active {
-            transform: scale(0.95);
-        }
-
-        .apply-btn {
-            background: var(--accent);
-            color: #1c2128;
-            border: none;
-            padding: 7px 12px;
-            border-radius: 9px;
-            font-weight: 700;
-            font-size: 9px;
-            cursor: pointer;
-            transition: all 0.25s ease, background-color 0.3s ease;
-            box-shadow: 0 3px 10px rgba(245, 184, 61, 0.3);
-        }
-        .apply-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 17px rgba(245, 184, 61, 0.4);
-        }
-        .apply-btn:active {
-            transform: scale(0.95);
-        }
-        .apply-btn:disabled {
-            background: #ddd;
-            color: #888;
-            cursor: not-allowed;
-            transform: none !important;
-            box-shadow: none !important;
-        }
-
-        .logout-btn {
-            width: 100%;
-            padding: 9px;
-            margin-top: 14px;
-            background: #ef4444;
-            color: white;
-            border: none;
-            border-radius: 9px;
-            font-size: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s, background-color 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
-        }
-        .logout-btn:active {
-            transform: scale(0.95);
-        }
-
         /* ===== FLYER DETAIL VIEW – 1200x675 (16:9) ===== */
         .flyer-detail-view {
             padding: 0 12px 14px 12px;
@@ -2721,20 +2835,21 @@
             background: var(--bg-card);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 8px 28px var(--shadow-color);
+            box-shadow: 0 8px 28px var(--shadow-strong);
             border: 1px solid var(--border-color);
-            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .flyer-detail-image-wrap {
             width: 100%;
             aspect-ratio: 1200 / 675;
             overflow: hidden;
             position: relative;
-            background: #f5f5f5;
+            background: var(--bg-body);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 20px 20px 0 0;
+            transition: background 0.3s ease;
+            border-radius: 17px 17px 0 0;
         }
         .flyer-detail-image-wrap img {
             width: 100%;
@@ -2748,7 +2863,6 @@
             object-fit: cover;
             display: none;
             background: #000;
-            border-radius: 20px 20px 0 0;
         }
         .flyer-detail-content {
             padding: 16px 14px 14px 14px;
@@ -2771,7 +2885,7 @@
             background: none;
             border: none;
             font-size: 18px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             cursor: pointer;
             padding: 4px;
             transition: color 0.3s ease;
@@ -2791,20 +2905,21 @@
         }
         .flyer-detail-instructions {
             font-size: 10px;
-            color: #555;
+            color: var(--text-secondary);
             line-height: 1.5;
-            background: var(--bg-body);
+            background: var(--status-bg);
             padding: 8px 10px;
             border-radius: 8px;
             margin-bottom: 6px;
             border: 1px solid var(--border-color);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         .flyer-detail-explanation {
             font-size: 10px;
-            color: #444;
+            color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 10px;
+            transition: color 0.3s ease;
         }
         .flyer-detail-explanation strong {
             color: var(--text-primary);
@@ -2812,7 +2927,6 @@
             transition: color 0.3s ease;
         }
 
-        /* flyer form styling */
         .flyer-detail-form {
             margin-top: 10px;
             border-top: 1px solid var(--border-color);
@@ -2840,13 +2954,13 @@
             font-size: 10px;
             background: var(--bg-input);
             color: var(--text-primary);
-            transition: border 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         .flyer-detail-form .form-group input:focus,
         .flyer-detail-form .form-group select:focus,
         .flyer-detail-form .form-group textarea:focus {
             outline: none;
-            border-color: var(--text-primary);
+            border-color: var(--bg-nav);
             box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
         }
         .flyer-detail-form .form-group textarea {
@@ -2854,7 +2968,6 @@
             min-height: 40px;
         }
 
-        /* ----- Small square upload boxes ----- */
         .upload-box-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
@@ -2869,7 +2982,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease;
+            transition: all 0.2s, background 0.3s ease, border-color 0.3s ease;
             background: var(--bg-input);
             padding: 4px;
             text-align: center;
@@ -2878,15 +2991,16 @@
         }
         .upload-box-sm:hover {
             border-color: var(--accent);
-            background: var(--accent-light);
+            background: var(--badge-bg);
         }
         .upload-box-sm i {
             font-size: 20px;
-            color: #aaa;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
         }
         .upload-box-sm .file-label {
             font-size: 7px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             margin-top: 2px;
             line-height: 1.2;
             word-break: break-all;
@@ -2914,7 +3028,7 @@
         }
         .upload-box-sm.has-preview {
             border-color: var(--accent);
-            background: var(--accent-light);
+            background: var(--badge-bg);
         }
         .upload-box-sm.has-preview i,
         .upload-box-sm.has-preview .file-label,
@@ -2925,14 +3039,13 @@
             display: block;
         }
 
-        /* ----- Payment single upload area ----- */
         .payment-upload-area {
             border: 2px dashed var(--border-color);
             border-radius: 9px;
             padding: 10px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.25s, background-color 0.3s ease, border-color 0.3s ease;
+            transition: all 0.25s, background 0.3s ease, border-color 0.3s ease;
             background: var(--bg-input);
             margin-bottom: 10px;
             position: relative;
@@ -2940,16 +3053,17 @@
         }
         .payment-upload-area:hover {
             border-color: var(--accent);
-            background: var(--accent-light);
+            background: var(--badge-bg);
         }
         .payment-upload-area i {
             font-size: 24px;
-            color: #aaa;
+            color: var(--text-muted);
             margin-bottom: 2px;
+            transition: color 0.3s ease;
         }
         .payment-upload-area .file-label {
             font-size: 9px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             transition: color 0.3s ease;
         }
         .payment-upload-area .file-name {
@@ -2972,7 +3086,7 @@
         }
         .payment-upload-area.has-preview {
             border-color: var(--accent);
-            background: var(--accent-light);
+            background: var(--badge-bg);
         }
         .payment-upload-area.has-preview i,
         .payment-upload-area.has-preview .file-label,
@@ -2998,7 +3112,7 @@
             font-size: 11px;
             border: none;
             cursor: pointer;
-            transition: all 0.2s, background-color 0.3s ease;
+            transition: all 0.2s;
             text-align: center;
         }
         .flyer-detail-actions .btn-primary {
@@ -3009,13 +3123,14 @@
             transform: scale(0.96);
         }
         .flyer-detail-actions .btn-primary:disabled {
-            background: #ddd;
-            color: #888;
+            background: var(--border-light);
+            color: var(--text-muted);
             cursor: not-allowed;
         }
         .flyer-detail-actions .btn-outline {
-            background: #f0f0f0;
-            color: #555;
+            background: var(--status-bg);
+            color: var(--text-secondary);
+            transition: background 0.3s ease, color 0.3s ease;
         }
         .flyer-detail-actions .btn-outline:active {
             transform: scale(0.96);
@@ -3032,7 +3147,7 @@
             transition: color 0.3s ease;
         }
         .applications-header p {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 9px;
             transition: color 0.3s ease;
         }
@@ -3043,7 +3158,7 @@
             padding: 12px 14px;
             box-shadow: 0 2px 10px var(--shadow-color);
             border: 1px solid var(--border-color);
-            transition: all 0.2s, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.2s, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 10px;
             cursor: pointer;
         }
@@ -3077,7 +3192,7 @@
         }
         .app-card .app-summary .left .app-info .app-sub {
             font-size: 9px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             transition: color 0.3s ease;
         }
         .app-card .app-summary .right {
@@ -3093,22 +3208,23 @@
             border-radius: 12px;
         }
         .app-card .app-summary .right .app-status.pending {
-            background: var(--status-pending-bg);
-            color: var(--status-pending-text);
+            background: var(--warning-bg);
+            color: var(--warning-text);
         }
         .app-card .app-summary .right .app-status.approved {
-            background: var(--status-completed-bg);
-            color: var(--status-completed-text);
+            background: var(--success-bg);
+            color: var(--success-text);
         }
         .app-card .app-summary .right .app-status.rejected {
-            background: var(--status-cancelled-bg);
-            color: var(--status-cancelled-text);
+            background: var(--error-bg);
+            color: var(--error-text);
         }
         .app-card .app-summary .right .expand-icon {
             transition: transform 0.3s ease;
             font-size: 10px;
-            color: #aaa;
+            color: var(--text-muted);
             margin-left: 4px;
+            transition: transform 0.3s ease, color 0.3s ease;
         }
         .app-card.open .app-summary .right .expand-icon {
             transform: rotate(180deg);
@@ -3117,7 +3233,7 @@
         .app-card .app-details-expand {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease, border-color 0.3s ease;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
             padding: 0 3px;
             border-top: 1px solid transparent;
             margin-top: 0;
@@ -3127,21 +3243,22 @@
             padding: 10px 3px 3px 3px;
             border-top-color: var(--border-color);
             margin-top: 9px;
+            transition: border-top-color 0.3s ease;
         }
         .app-card .app-details-expand .detail-row {
             display: flex;
             justify-content: space-between;
             padding: 3px 0;
             font-size: 10px;
-            color: #555;
+            color: var(--text-secondary);
             border-bottom: 1px solid var(--border-color);
-            transition: border-color 0.3s ease;
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
         .app-card .app-details-expand .detail-row:last-child {
             border-bottom: none;
         }
         .app-card .app-details-expand .detail-row .label {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             flex-shrink: 0;
             transition: color 0.3s ease;
         }
@@ -3158,7 +3275,7 @@
             transition: color 0.3s ease;
         }
 
-        /* ===== RECEIPT MODAL STYLES ===== */
+        /* ===== RECEIPT MODAL (ALWAYS WHITE) ===== */
         #receiptModal {
             display: none;
             position: fixed;
@@ -3183,22 +3300,20 @@
             margin: auto;
         }
         .receipt-card {
-            background: var(--receipt-bg);
+            background: #ffffff !important;
             border-radius: 0;
             overflow: hidden;
-            box-shadow: 0 15px 40px var(--shadow-dark);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
             font-family: 'Poppins', sans-serif;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         .receipt-header {
-            background: var(--bg-nav);
+            background: #1c2128;
             padding: 18px 20px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             position: relative;
-            border-bottom: 4px solid var(--accent);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            border-bottom: 4px solid #f5b83d;
         }
         .receipt-header h2 {
             color: white;
@@ -3215,7 +3330,7 @@
             letter-spacing: 2px;
         }
         .receipt-header .invoice-title {
-            color: var(--accent);
+            color: #f5b83d;
             font-weight: 800;
             margin: 0;
             font-size: 22px;
@@ -3231,19 +3346,19 @@
             display: flex;
             justify-content: space-between;
             padding: 18px 20px 12px 20px;
+            background: #ffffff;
         }
         .receipt-addresses h4 {
             margin: 0 0 4px 0;
             font-size: 11px;
             font-weight: 700;
-            color: var(--receipt-text);
-            border-left: 3px solid var(--accent);
+            color: #1c2128;
+            border-left: 3px solid #f5b83d;
             padding-left: 8px;
-            transition: color 0.3s ease, border-color 0.3s ease;
         }
         .receipt-addresses .address-right h4 {
             border-left: none;
-            border-right: 3px solid var(--accent);
+            border-right: 3px solid #f5b83d;
             padding-left: 0;
             padding-right: 8px;
             text-align: right;
@@ -3256,12 +3371,11 @@
         }
         .receipt-addresses .name {
             font-weight: 600;
-            color: var(--receipt-text);
+            color: #1c2128;
             font-size: 12px;
-            transition: color 0.3s ease;
         }
         .receipt-table-header {
-            background: var(--accent);
+            background: #f5b83d;
             display: flex;
             justify-content: space-between;
             padding: 7px 20px;
@@ -3270,14 +3384,14 @@
             color: white;
             text-transform: uppercase;
         }
-        .receipt-table-header > div {
+        .receipt-table-header>div {
             text-align: center;
         }
-        .receipt-table-header > div:first-child {
+        .receipt-table-header>div:first-child {
             flex: 2;
             text-align: left;
         }
-        .receipt-table-header > div:last-child {
+        .receipt-table-header>div:last-child {
             flex: 1;
             text-align: right;
         }
@@ -3285,18 +3399,18 @@
             display: flex;
             justify-content: space-between;
             padding: 8px 20px;
-            border-bottom: 1px solid var(--receipt-border);
+            border-bottom: 1px solid #eee;
             font-size: 11px;
-            transition: border-color 0.3s ease;
+            background: #ffffff;
         }
-        .receipt-item-row > div {
+        .receipt-item-row>div {
             text-align: center;
         }
-        .receipt-item-row > div:first-child {
+        .receipt-item-row>div:first-child {
             flex: 2;
             text-align: left;
         }
-        .receipt-item-row > div:last-child {
+        .receipt-item-row>div:last-child {
             flex: 1;
             text-align: right;
         }
@@ -3304,19 +3418,20 @@
             padding: 12px 20px 20px 20px;
             display: flex;
             justify-content: flex-end;
+            background: #ffffff;
         }
         .receipt-totals-box {
             width: 160px;
             font-size: 10px;
             text-align: right;
         }
-        .receipt-totals-box > div {
+        .receipt-totals-box>div {
             display: flex;
             justify-content: space-between;
             padding: 2px 0;
         }
         .receipt-totals-box .total-row {
-            background: var(--accent);
+            background: #f5b83d;
             margin-top: 6px;
             padding: 6px 10px;
             border-radius: 4px;
@@ -3325,36 +3440,34 @@
         }
         .receipt-footer {
             padding: 12px 20px 20px 20px;
-            border-top: 1px solid var(--receipt-border);
+            border-top: 1px solid #eee;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            transition: border-color 0.3s ease;
+            background: #ffffff;
         }
         .receipt-footer .thanks {
             font-size: 10px;
             font-weight: 600;
-            color: var(--receipt-text);
-            transition: color 0.3s ease;
+            color: #1c2128;
         }
         .receipt-footer .footnote {
             font-size: 8px;
-            color: #aaa;
+            color: #555;
             max-width: 180px;
+            line-height: 1.5;
         }
         .receipt-footer .signature-area {
             text-align: right;
-            border-top: 2px solid var(--text-primary);
+            border-top: 2px solid #1c2128;
             padding-top: 4px;
             width: 130px;
-            transition: border-color 0.3s ease;
         }
         .receipt-footer .signature-area .sign-name {
             font-weight: 800;
             font-size: 15px;
-            color: var(--text-primary);
+            color: #1c2128;
             letter-spacing: 0.5px;
-            transition: color 0.3s ease;
         }
         .receipt-footer .signature-area .sign-label {
             font-size: 8px;
@@ -3362,15 +3475,14 @@
             text-transform: uppercase;
         }
         .receipt-bottom-bar {
-            background: var(--bg-nav);
+            background: #1c2128;
             height: 10px;
             width: 100%;
-            transition: background-color 0.3s ease;
         }
         .receipt-download-btn {
             margin-top: 15px;
             width: 100%;
-            background: var(--bg-nav);
+            background: #1c2128;
             color: white;
             border: none;
             padding: 12px;
@@ -3382,14 +3494,19 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            box-shadow: 0 4px 14px var(--shadow-color);
-            transition: all 0.2s, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s;
         }
         .receipt-download-btn:active {
             transform: scale(0.98);
         }
         .receipt-download-btn i {
-            color: var(--accent);
+            color: #f5b83d;
+        }
+        .receipt-email {
+            font-size: 9px;
+            color: #555;
+            margin-top: 2px;
         }
 
         /* ===== RESPONSIVE ===== */
@@ -3572,7 +3689,7 @@
             <div id="ordersView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: var(--text-primary); transition: color 0.3s ease;">Your Orders</h3>
-                    <p style="color: var(--text-secondary); font-size: 9px; transition: color 0.3s ease;">Track your projects and payments.</p>
+                    <p style="color: var(--text-muted); font-size: 9px; transition: color 0.3s ease;">Track your projects and payments.</p>
                 </div>
                 <div class="order-grid" id="ordersGrid"></div>
             </div>
@@ -3581,7 +3698,7 @@
             <div id="historyView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: var(--text-primary); transition: color 0.3s ease;">Transaction History</h3>
-                    <p style="color: var(--text-secondary); font-size: 9px; transition: color 0.3s ease;">Tap a transaction to view more details.</p>
+                    <p style="color: var(--text-muted); font-size: 9px; transition: color 0.3s ease;">Tap a transaction to view more details.</p>
                 </div>
                 <div id="paymentReminderBanner" class="payment-reminder-banner">
                     <!-- Rendered by JS -->
@@ -3593,7 +3710,7 @@
             <div id="samplesView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: var(--text-primary); transition: color 0.3s ease;">📁 Work Samples</h3>
-                    <p style="color: var(--text-secondary); font-size: 9px; transition: color 0.3s ease;">Browse through our recent projects.</p>
+                    <p style="color: var(--text-muted); font-size: 9px; transition: color 0.3s ease;">Browse through our recent projects.</p>
                 </div>
                 <div id="samplesContainer" class="samples-grid"></div>
             </div>
@@ -3601,8 +3718,8 @@
             <!-- ===== VIEW: APPLICATIONS ===== -->
             <div id="applicationsView" class="view">
                 <div class="applications-header">
-                    <h3 style="color: var(--text-primary); transition: color 0.3s ease;">📋 My Applications</h3>
-                    <p style="color: var(--text-secondary); transition: color 0.3s ease;">Track the status of your form submissions.</p>
+                    <h3>📋 My Applications</h3>
+                    <p>Track the status of your form submissions.</p>
                 </div>
                 <div id="applicationsList">
                     <!-- Rendered by JS -->
@@ -3613,7 +3730,7 @@
             <div id="accountView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: var(--text-primary); transition: color 0.3s ease;">💰 My Account</h3>
-                    <p style="color: var(--text-secondary); font-size: 9px; transition: color 0.3s ease;">Manage your balance, referrals, and withdrawals.</p>
+                    <p style="color: var(--text-muted); font-size: 9px; transition: color 0.3s ease;">Manage your balance, referrals, and withdrawals.</p>
                 </div>
 
                 <div class="account-section">
@@ -3654,7 +3771,7 @@
                             <div class="form-group">
                                 <label>Recipient</label>
                                 <div class="search-result" id="recipientSearchResult">
-                                    <span style="color:var(--text-secondary);">Enter a referral code and click Search.</span>
+                                    <span style="color:var(--text-muted);">Enter a referral code and click Search.</span>
                                 </div>
                             </div>
 
@@ -3683,17 +3800,50 @@
                         </div>
                     </div>
 
-                    <!-- Withdrawals View -->
+                    <!-- Withdrawals View (Detailed Page) -->
                     <div class="account-view" id="accountWithdrawView">
-                        <div style="text-align:center; padding:17px 0;">
-                            <p style="color:var(--text-secondary); font-size:11px; transition:color 0.3s ease;">Click the "Withdraw" button below to request a withdrawal from your account.</p>
-                            <button class="withdraw-btn" id="withdrawBtnFromView" style="margin-top:10px; background:var(--accent); border:none; padding:10px 26px; border-radius:26px; font-weight:700; font-size:12px; color:#1c2128; cursor:pointer; display:inline-flex; align-items:center; gap:7px; transition:background-color 0.3s ease;">
-                                <i class="fa-solid fa-arrow-up"></i> Withdraw Funds
-                            </button>
-                        </div>
-                        <!-- Withdrawals list (expandable cards) -->
-                        <div id="withdrawalsListContainer">
-                            <!-- Rendered by JS -->
+                        <div class="withdrawals-page">
+                            <div class="wd-header">
+                                <h3>💸 Withdrawals</h3>
+                                <div class="wd-balance-info">
+                                    Balance: <strong id="wdHeaderBalance">ZMW 0.00</strong>
+                                    &middot; Pending: <strong id="wdHeaderPending">ZMW 0.00</strong>
+                                </div>
+                            </div>
+
+                            <div class="wd-balance-card">
+                                <div class="left">
+                                    <div class="label">Available for Withdrawal</div>
+                                    <div class="balance" id="wdAvailableBalance">ZMW 0.00</div>
+                                    <div class="sub-info">Total balance: ZMW <span id="wdTotalBalance">0.00</span> · Pending: ZMW <span id="wdPendingAmount">0.00</span></div>
+                                </div>
+                                <div class="right">
+                                    <button class="btn-withdraw-now" id="wdWithdrawNowBtn">
+                                        <i class="fa-solid fa-arrow-up"></i> Withdraw Now
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Withdraw Form -->
+                            <div class="withdraw-form-section" id="withdrawFormSection">
+                                <h4>Request Withdrawal</h4>
+                                <p class="sub">Enter the amount you'd like to withdraw. Funds will be sent to your registered phone number.</p>
+                                <div class="form-group">
+                                    <label>Amount (ZMW) — max: <span id="wdFormMaxLabel">0.00</span></label>
+                                    <input type="number" id="wdAmountInput" placeholder="e.g. 50" step="0.01" />
+                                </div>
+                                <button class="btn-withdraw-submit" id="wdSubmitBtn">
+                                    <i class="fa-solid fa-arrow-up"></i> Submit Withdrawal Request
+                                </button>
+                            </div>
+
+                            <!-- Withdraw History -->
+                            <div class="withdraw-history-section">
+                                <h4>📋 Withdrawal History</h4>
+                                <div id="wdHistoryList">
+                                    <!-- Rendered by JS -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -3703,7 +3853,7 @@
             <div id="profileView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: var(--text-primary); transition: color 0.3s ease;">My Profile</h3>
-                    <p style="color: var(--text-secondary); font-size: 9px; transition: color 0.3s ease;">Your personal information.</p>
+                    <p style="color: var(--text-muted); font-size: 9px; transition: color 0.3s ease;">Your personal information.</p>
                 </div>
                 <div class="profile-card">
                     <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
@@ -3719,29 +3869,29 @@
                     </div>
 
                     <!-- Dark Mode Toggle (iOS style) -->
-                    <div class="dark-mode-toggle-wrapper">
-                        <span class="label"><i class="fa-solid fa-moon"></i> Dark Mode</span>
-                        <label class="ios-toggle" id="darkModeToggle">
-                            <input type="checkbox" id="darkModeCheck" />
-                            <span class="toggle-track"></span>
+                    <div class="dark-mode-toggle-wrap">
+                        <span class="toggle-label">
+                            <i class="fa-solid fa-moon"></i> Dark Mode
+                        </span>
+                        <button class="ios-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
                             <span class="toggle-knob"></span>
-                        </label>
+                        </button>
                     </div>
 
-                    <!-- Contact Section -->
+                    <!-- Contact Info -->
                     <div class="profile-contact">
-                        <div class="contact-title"><i class="fa-regular fa-address-book"></i> Contact Us</div>
+                        <div class="contact-title"><i class="fa-solid fa-headset"></i> Contact Us</div>
                         <div class="contact-item">
                             <i class="fa-brands fa-whatsapp"></i>
-                            <span><span class="label-text">WhatsApp:</span> <a href="https://wa.me/260768658484" target="_blank" rel="noopener noreferrer">0768658484</a></span>
+                            <a href="https://wa.me/260768658484" target="_blank" class="wa-link">0768658484</a>
                         </div>
                         <div class="contact-item">
                             <i class="fa-brands fa-facebook"></i>
-                            <span><span class="label-text">Facebook:</span> <a href="https://facebook.com/BufferZONE" target="_blank" rel="noopener noreferrer">Buffer ZONE</a></span>
+                            <a href="https://facebook.com/BufferZONE" target="_blank" class="fb-link">Buffer ZONE</a>
                         </div>
                         <div class="contact-item">
                             <i class="fa-solid fa-phone"></i>
-                            <span><span class="label-text">SMS/CALLS:</span> <a href="tel:+260976760537">0976760537</a></span>
+                            <a href="tel:+260976760537">SMS/CALLS 0976760537</a>
                         </div>
                     </div>
 
@@ -3751,7 +3901,7 @@
 
         </div>
 
-        <!-- ===== BOTTOM NAV – YELLOW BORDER AROUND THE ENTIRE PILL BAR ===== -->
+        <!-- ===== BOTTOM NAV ===== -->
         <div class="bottom-nav">
             <button class="nav-item active" data-view="homeView"><i class="fa-solid fa-house"></i><span>Home</span></button>
             <button class="nav-item" data-view="ordersView"><i class="fa-solid fa-bag-shopping"></i><span>Orders</span></button>
@@ -3780,18 +3930,18 @@
                     <div>
                         <div class="name" id="paymentName">Airtel Mobile Number</div>
                         <div class="number" id="paymentNumber">0976760537</div>
-                        <div style="font-size:9px; color:#555;" id="paymentAccountName">Jubel Mobela</div>
+                        <div style="font-size:9px; color:var(--text-secondary); transition:color 0.3s ease;" id="paymentAccountName">Jubel Mobela</div>
                     </div>
                     <div style="text-align:right;">
-                        <div style="font-size:9px; color:var(--text-secondary); transition:color 0.3s ease;">Amount to pay</div>
+                        <div style="font-size:9px; color:var(--text-muted); transition:color 0.3s ease;">Amount to pay</div>
                         <div class="amount-large" id="paymentAmount">ZMW 350.00</div>
-                        <div style="font-size:9px; color:var(--text-secondary); transition:color 0.3s ease;">50% of total</div>
+                        <div style="font-size:9px; color:var(--text-muted); transition:color 0.3s ease;">50% of total</div>
                     </div>
                 </div>
             </div>
 
             <!-- ===== PAY WITH BUFFER ZONE WALLET ===== -->
-            <div id="walletPaymentSection" style="margin-bottom:10px; padding:9px; border-radius:9px; border:1px solid var(--border-color); background:var(--bg-body); transition:background-color 0.3s ease, border-color 0.3s ease;">
+            <div id="walletPaymentSection" style="margin-bottom:10px; padding:9px; border-radius:9px; border:1px solid var(--border-color); background:var(--status-bg); transition:border-color 0.3s ease, background 0.3s ease;">
                 <div style="display:flex; align-items:center; gap:7px; flex-wrap:wrap;">
                     <input type="checkbox" id="payWithWalletCheck" />
                     <label for="payWithWalletCheck" style="font-weight:600; font-size:10px; color:var(--text-primary); cursor:pointer; transition:color 0.3s ease;">Pay with Buffer Zone Wallet</label>
@@ -3845,7 +3995,7 @@
             <button class="btn-primary" id="confirmPaymentBtn">
                 <i class="fa-regular fa-circle-check"></i> Confirm Payment & Start Project
             </button>
-            <p style="text-align:center; font-size:8px; color:var(--text-secondary); margin-top:5px; transition:color 0.3s ease;">
+            <p style="text-align:center; font-size:8px; color:var(--text-muted); margin-top:5px; transition:color 0.3s ease;">
                 <i class="fa-regular fa-clock"></i> Project begins after payment confirmation
             </p>
         </div>
@@ -3861,30 +4011,6 @@
         </div>
     </div>
 
-    <!-- ===== WITHDRAW MODAL ===== -->
-    <div class="withdraw-modal-overlay" id="withdrawModal">
-        <div class="withdraw-modal">
-            <h3>💸 Withdraw Funds</h3>
-            <p class="sub">Enter the amount you'd like to withdraw from your account.</p>
-            <div class="form-group">
-                <label>Amount (ZMW) — max: <span id="withdrawMaxLabel">0.00</span></label>
-                <input type="number" id="withdrawAmountInput" placeholder="e.g. 50" step="0.01" />
-            </div>
-            <button class="btn-withdraw" id="confirmWithdrawBtn"><i class="fa-solid fa-arrow-up"></i> Submit Withdrawal</button>
-            <button class="btn-cancel-withdraw" id="cancelWithdrawBtn">Cancel</button>
-        </div>
-    </div>
-
-    <!-- ===== WITHDRAW SUCCESS MODAL ===== -->
-    <div class="withdraw-success-overlay" id="withdrawSuccessModal">
-        <div class="withdraw-success-modal">
-            <i class="fa-regular fa-circle-check"></i>
-            <h3>Withdrawal Submitted</h3>
-            <p>Your withdrawal request has been submitted and will be processed within 24 hours.</p>
-            <button class="btn-ok" id="withdrawSuccessOkBtn">OK</button>
-        </div>
-    </div>
-
     <!-- ===== NOTIFICATION SIDEBAR ===== -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <div class="sidebar" id="notifSidebar">
@@ -3897,7 +4023,7 @@
         </div>
     </div>
 
-    <!-- ===== RECEIPT MODAL ===== -->
+    <!-- ===== RECEIPT MODAL (ALWAYS WHITE) ===== -->
     <div id="receiptModal">
         <div class="receipt-wrapper">
             <div id="receiptContainer" class="receipt-card">
@@ -3919,8 +4045,8 @@
                         <h4>INVOICE TO</h4>
                         <p class="name" id="recCustName">Customer Name</p>
                         <p id="recCustPhone">+000 123 456 789</p>
-                        <p id="recCustEmail">customer@email.com</p>
                         <p>Customer</p>
+                        <p class="receipt-email" id="recCustEmail">Email: customer@example.com</p>
                     </div>
                     <div class="address-right">
                         <h4>INVOICE FROM</h4>
@@ -3958,9 +4084,7 @@
                 <div class="receipt-footer">
                     <div>
                         <div class="thanks">Thanks for your business!</div>
-                        <div class="footnote" id="recFootnote">
-                            We truly appreciate your trust and support. It has been a pleasure working with you, and we look forward to bringing your next project to life with creativity, professionalism, quality, innovation, and exceptional service every step of the way.
-                        </div>
+                        <div class="footnote">We truly appreciate your trust and support. It has been a pleasure working with you, and we look forward to bringing your next project to life with creativity, professionalism, quality, innovation, and exceptional service every step of the way.</div>
                     </div>
                     <div class="signature-area">
                         <div class="sign-name" id="recSignName">Jubel Mobela</div>
@@ -4038,6 +4162,7 @@
         let finalDiscountedPrice = 0;
         let orderTotalBeforeDiscount = 0;
         let appliedReferral = null;
+        let isDarkMode = false;
 
         // Carousel state
         let carouselItems = [];
@@ -4053,9 +4178,6 @@
 
         // Flyer detail state
         let currentFlyerId = null;
-
-        // Dark mode state
-        let darkModeEnabled = false;
 
         // =================================================================
         // DOM REFS
@@ -4125,28 +4247,7 @@
         const copyReferralBtn = document.getElementById('copyReferralBtn');
         const accountBalanceDisplay = document.getElementById('accountBalanceDisplay');
         const withdrawBtnFromBalance = document.getElementById('withdrawBtnFromBalance');
-        const withdrawBtnFromView = document.getElementById('withdrawBtnFromView');
         const transactionMessages = document.getElementById('transactionMessages');
-        const withdrawalsListContainer = document.getElementById('withdrawalsListContainer');
-        const withdrawModal = document.getElementById('withdrawModal');
-        const withdrawAmountInput = document.getElementById('withdrawAmountInput');
-        const confirmWithdrawBtn = document.getElementById('confirmWithdrawBtn');
-        const cancelWithdrawBtn = document.getElementById('cancelWithdrawBtn');
-        const withdrawMaxLabel = document.getElementById('withdrawMaxLabel');
-        const withdrawSuccessModal = document.getElementById('withdrawSuccessModal');
-        const withdrawSuccessOkBtn = document.getElementById('withdrawSuccessOkBtn');
-        const togglePromoBtn = document.getElementById('togglePromoBtn');
-        const toggleReferralBtn = document.getElementById('toggleReferralBtn');
-        const promoCodeWrap = document.getElementById('promoCodeWrap');
-        const referralCodeWrap = document.getElementById('referralCodeWrap');
-        const referralCodeInput = document.getElementById('referralCodeInput');
-        const applyReferralBtn = document.getElementById('applyReferralBtn');
-        const referralMsg = document.getElementById('referralMsg');
-        const payWithWalletCheck = document.getElementById('payWithWalletCheck');
-        const walletBalanceDisplay = document.getElementById('walletBalanceDisplay');
-        const walletSufficiency = document.getElementById('walletSufficiency');
-        const walletStatus = document.getElementById('walletStatus');
-        const uploadSection = document.getElementById('uploadSection');
         const sendMoneyBtn = document.getElementById('sendMoneyBtn');
         const sendMoneySection = document.getElementById('sendMoneySection');
         const sendReferralInput = document.getElementById('sendReferralInput');
@@ -4166,8 +4267,6 @@
         const flyerDetailCloseBtn = document.getElementById('flyerDetailCloseBtn');
         const backFromFlyerDetail = document.getElementById('backFromFlyerDetail');
         const applicationsListEl = document.getElementById('applicationsList');
-
-        // Added DOM refs for receipt modal
         const receiptModal = document.getElementById('receiptModal');
         const closeReceiptBtn = document.getElementById('closeReceiptBtn');
         const downloadReceiptBtn = document.getElementById('downloadReceiptBtn');
@@ -4180,11 +4279,21 @@
         const recDiscount = document.getElementById('recDiscount');
         const recTotalDisplay = document.getElementById('recTotalDisplay');
         const recSignName = document.getElementById('recSignName');
-        const recFootnote = document.getElementById('recFootnote');
 
-        // Dark mode toggle refs
+        // Withdraw page DOM refs
+        const wdHeaderBalance = document.getElementById('wdHeaderBalance');
+        const wdHeaderPending = document.getElementById('wdHeaderPending');
+        const wdAvailableBalance = document.getElementById('wdAvailableBalance');
+        const wdTotalBalance = document.getElementById('wdTotalBalance');
+        const wdPendingAmount = document.getElementById('wdPendingAmount');
+        const wdWithdrawNowBtn = document.getElementById('wdWithdrawNowBtn');
+        const wdFormMaxLabel = document.getElementById('wdFormMaxLabel');
+        const wdAmountInput = document.getElementById('wdAmountInput');
+        const wdSubmitBtn = document.getElementById('wdSubmitBtn');
+        const wdHistoryList = document.getElementById('wdHistoryList');
+
+        // Dark mode toggle
         const darkModeToggle = document.getElementById('darkModeToggle');
-        const darkModeCheck = document.getElementById('darkModeCheck');
 
         // =================================================================
         // HELPER FUNCTIONS
@@ -4197,7 +4306,7 @@
                 bottom: 77px;
                 left: 50%;
                 transform: translateX(-50%);
-                background: var(--bg-nav);
+                background: #1c2128;
                 color: #ffffff;
                 padding: 10px 20px;
                 border-radius: 10px;
@@ -4210,10 +4319,9 @@
                 pointer-events: none;
                 white-space: nowrap;
                 max-width: 90%;
-                transition: background-color 0.3s ease;
             `;
             const icon = type === 'success' ? 'fa-check-circle' : (type === 'error' ? 'fa-exclamation-circle' : 'fa-bell');
-            toast.innerHTML = `<i class="fas ${icon}" style="color: var(--accent); margin-right: 7px;"></i> ${msg}`;
+            toast.innerHTML = `<i class="fas ${icon}" style="color: #f5b83d; margin-right: 7px;"></i> ${msg}`;
             document.body.appendChild(toast);
             requestAnimationFrame(() => {
                 toast.style.opacity = '1';
@@ -4290,59 +4398,41 @@
         }
 
         // =================================================================
-        // DARK MODE TOGGLE
+        // DARK MODE
         // =================================================================
 
-        function toggleDarkMode(enable) {
-            darkModeEnabled = enable;
-            if (enable) {
-                document.body.classList.add('dark-mode');
-                darkModeCheck.checked = true;
+        function initDarkMode() {
+            const saved = localStorage.getItem('bufferzone-darkmode');
+            if (saved === 'true') {
+                isDarkMode = true;
+                document.documentElement.classList.add('dark');
                 darkModeToggle.classList.add('active');
-                // Save preference
-                if (currentUserId) {
-                    const prefRef = ref(db, `users/${currentUserId}/darkMode`);
-                    set(prefRef, true);
-                }
             } else {
-                document.body.classList.remove('dark-mode');
-                darkModeCheck.checked = false;
+                isDarkMode = false;
+                document.documentElement.classList.remove('dark');
                 darkModeToggle.classList.remove('active');
-                if (currentUserId) {
-                    const prefRef = ref(db, `users/${currentUserId}/darkMode`);
-                    set(prefRef, false);
-                }
             }
         }
 
-        function loadDarkModePreference() {
-            if (!currentUserId) return;
-            const prefRef = ref(db, `users/${currentUserId}/darkMode`);
-            get(prefRef).then((snapshot) => {
-                const val = snapshot.val();
-                if (val === true) {
-                    toggleDarkMode(true);
-                } else {
-                    // Check system preference
-                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    if (prefersDark) {
-                        toggleDarkMode(true);
-                    } else {
-                        toggleDarkMode(false);
-                    }
-                }
-            }).catch(() => {
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (prefersDark) {
-                    toggleDarkMode(true);
-                } else {
-                    toggleDarkMode(false);
-                }
-            });
+        function toggleDarkMode() {
+            isDarkMode = !isDarkMode;
+            if (isDarkMode) {
+                document.documentElement.classList.add('dark');
+                darkModeToggle.classList.add('active');
+                localStorage.setItem('bufferzone-darkmode', 'true');
+            } else {
+                document.documentElement.classList.remove('dark');
+                darkModeToggle.classList.remove('active');
+                localStorage.setItem('bufferzone-darkmode', 'false');
+            }
+            // Re-render dynamic content that might have color-sensitive inline styles
+            renderAll();
         }
 
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+
         // =================================================================
-        // CLOUDINARY UPLOAD (payment page)
+        // CLOUDINARY UPLOAD
         // =================================================================
 
         function setupCloudinaryUpload() {
@@ -4371,8 +4461,8 @@
                         cloudinaryScreenshotUrl = info.secure_url;
                         cloudinaryScreenshotUrlInput.value = info.secure_url;
                         fileName.textContent = info.original_filename + '.' + info.format;
-                        uploadArea.style.borderColor = 'var(--accent)';
-                        uploadArea.style.background = 'var(--accent-light)';
+                        uploadArea.style.borderColor = '#f5b83d';
+                        uploadArea.style.background = '#fffcf0';
                         showToast('Screenshot uploaded!', 'success');
                     }
                 });
@@ -4381,7 +4471,7 @@
         }
 
         // =================================================================
-        // FCM – REQUEST PERMISSION, GET TOKEN, STORE IN DB
+        // FCM
         // =================================================================
 
         async function setupFCM() {
@@ -4412,12 +4502,11 @@
         }
 
         // =================================================================
-        // SEND PUSH NOTIFICATION VIA CLOUD FUNCTION
+        // PUSH NOTIFICATION
         // =================================================================
 
         async function sendPushNotificationToUser(userId, title, message, clickUrl = '') {
             const functionUrl = 'https://us-central1-bufferzone-63501.cloudfunctions.net/sendPushNotification';
-
             const payload = {
                 recipient: userId,
                 title: title,
@@ -4425,14 +4514,12 @@
                 icon: 'https://your-domain.com/logo.png',
                 clickUrl: clickUrl || ''
             };
-
             try {
                 const response = await fetch(functionUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-
                 if (!response.ok) {
                     const errText = await response.text();
                     console.warn(`Push send warning: ${response.status} - ${errText}`);
@@ -4444,10 +4531,6 @@
                 console.error('Error sending push notification:', error);
             }
         }
-
-        // =================================================================
-        // WRAPPER: CREATE IN-APP NOTIFICATION + PUSH
-        // =================================================================
 
         function createNotification(userId, title, message, clickUrl = '') {
             if (!allData.notifications) allData.notifications = {};
@@ -4527,7 +4610,6 @@
                     }
                 }
                 renderAll();
-                loadDarkModePreference();
                 if (callback) callback();
             });
         }
@@ -4546,10 +4628,10 @@
 
             if (allData.disabled === true) {
                 document.body.innerHTML = `
-                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:var(--bg-body); padding:20px; transition:background-color 0.3s ease;">
+                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:var(--bg-body); padding:20px; transition:background 0.3s ease;">
                         <i class="fa-solid fa-triangle-exclamation" style="font-size:41px; color:var(--accent); margin-bottom:14px;"></i>
-                        <h1 style="font-size:20px; font-weight:700; color:var(--text-primary); transition:color 0.3s ease;">App Under Maintenance</h1>
-                        <p style="color:var(--text-secondary); text-align:center; max-width:272px; margin-top:7px; transition:color 0.3s ease;">We are currently performing updates. Please check back later.</p>
+                        <h1 style="font-size:20px; font-weight:700; color:var(--text-primary);">App Under Maintenance</h1>
+                        <p style="color:var(--text-muted); text-align:center; max-width:272px; margin-top:7px;">We are currently performing updates. Please check back later.</p>
                     </div>
                 `;
                 return;
@@ -4579,20 +4661,25 @@
             renderNotifications();
             renderAccountAndReferral();
             renderTransactionMessages();
-            renderWithdrawalsList();
+            renderWithdrawalsPage();
             renderSendMoneyTxList();
             renderApplications();
 
             if (allData.policy) {
                 const p = allData.policy;
-                const policyEl = document.querySelector('.order-policy-content h2');
-                if (policyEl) {
-                    policyEl.innerHTML = `${p.title || 'BUFFER ZONE'}<br><span>${p.tag || ''}</span>`;
+                const policyPanel = document.querySelector('.order-policy-content h2');
+                if (policyPanel) {
+                    policyPanel.innerHTML = `${p.title || 'BUFFER ZONE'}<br><span>${p.tag || ''}</span>`;
                 }
                 const policyDesc = document.querySelector('.order-policy-content p');
-                if (policyDesc) policyDesc.textContent = p.desc || 'To begin your project, we require a 50% down payment.';
+                if (policyDesc) {
+                    policyDesc.textContent = p.desc || 'To begin your project, we require a 50% down payment.';
+                }
                 const policyTag = document.querySelector('.order-policy-content .policy-tag');
-                if (policyTag) policyTag.innerHTML = `<i class="fa-regular fa-circle-check"></i> ${p.tag || '50% upfront required'}`;
+                if (policyTag) {
+                    policyTag.innerHTML =
+                    `<i class="fa-regular fa-circle-check"></i> ${p.tag || '50% upfront required'}`;
+                }
                 paymentNumber.textContent = p.number || '0976760537';
                 paymentName.textContent = p.name || 'Airtel Mobile Number';
                 paymentAccountName.textContent = p.accountName || 'Jubel Mobela';
@@ -4600,7 +4687,7 @@
         }
 
         // =================================================================
-        // PROMO CAROUSEL – INFINITE PEEK STYLE WITH REVERSE (10% peek)
+        // PROMO CAROUSEL
         // =================================================================
 
         function renderPromoCarousel() {
@@ -4609,7 +4696,6 @@
             entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
 
             carouselItems = entries;
-
             const wrapper = promoCarouselWrapper;
 
             if (entries.length === 0) {
@@ -4629,10 +4715,10 @@
             promoCarouselTrack.innerHTML = duplicated.map(([key, pic], idx) => {
                 const isClickable = pic.clickContent?.enabled === true;
                 const mediaType = pic.mediaType || 'image';
-                const mediaHtml = mediaType === 'video'
-                    ? `<video src="${pic.imageUrl}" muted playsinline style="width:100%;height:100%;object-fit:cover;border-radius:17px;"></video>
-                       <div class="video-play-overlay"><i class="fa-solid fa-play"></i></div>`
-                    : `<img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:17px;" />`;
+                const mediaHtml = mediaType === 'video' ?
+                    `<video src="${pic.imageUrl}" muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>
+                       <div class="video-play-overlay"><i class="fa-solid fa-play"></i></div>` :
+                    `<img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />`;
                 return `
                 <div class="promo-slide ${isClickable ? 'clickable' : ''}" data-key="${key}" data-index="${idx - 1}" data-real-index="${idx - 1 < 0 ? entries.length - 1 : idx - 1 >= entries.length ? 0 : idx - 1}" data-mediatype="${mediaType}">
                     ${mediaHtml}
@@ -4693,9 +4779,11 @@
 
                     const realIndex = parseInt(slides[closestIdx].dataset.realIndex);
                     if (realIndex !== currentCarouselIndex) {
-                        if (realIndex > currentCarouselIndex || (realIndex === 0 && currentCarouselIndex === carouselItems.length - 1)) {
+                        if (realIndex > currentCarouselIndex || (realIndex === 0 && currentCarouselIndex === carouselItems
+                                .length - 1)) {
                             carouselDirection = 1;
-                        } else if (realIndex < currentCarouselIndex || (realIndex === carouselItems.length - 1 && currentCarouselIndex === 0)) {
+                        } else if (realIndex < currentCarouselIndex || (realIndex === carouselItems.length - 1 &&
+                                currentCarouselIndex === 0)) {
                             carouselDirection = -1;
                         }
                         currentCarouselIndex = realIndex;
@@ -4917,7 +5005,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:17px; color:var(--text-secondary); transition:color 0.3s ease;">No services available.</div>`;
+                    `<div class="text-muted text-center" style="padding:17px; color:var(--text-muted); transition:color 0.3s ease;">No services available.</div>`;
                 return;
             }
 
@@ -4944,7 +5032,7 @@
         }
 
         // =================================================================
-        // ORDERS (MODIFIED TO ADD VIEW RECEIPT BUTTON)
+        // ORDERS
         // =================================================================
 
         function renderOrders() {
@@ -4955,7 +5043,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:17px; color:var(--text-secondary); transition:color 0.3s ease;">No orders found.</div>`;
+                    `<div class="text-muted text-center" style="padding:17px; color:var(--text-muted); transition:color 0.3s ease;">No orders found.</div>`;
                 return;
             }
             container.innerHTML = entries.map(([key, o]) => {
@@ -4997,7 +5085,7 @@
                             <div class="order-meta">
                                 <span>${escapeHtml(o.customer || 'N/A')}</span>
                                 <span>${escapeHtml(o.date || 'N/A')}</span>
-                                ${o.discountApplied ? `<span style="background:var(--accent-light);color:var(--accent);padding:0 5px;border-radius:7px;font-size:9px;transition:background-color 0.3s ease,color 0.3s ease;">${o.discountApplied}% OFF</span>` : ''}
+                                ${o.discountApplied ? `<span style="background:var(--badge-bg);color:var(--accent);padding:0 5px;border-radius:7px;font-size:9px;transition:background 0.3s ease,color 0.3s ease;">${o.discountApplied}% OFF</span>` : ''}
                             </div>
                         </div>
                         <div class="right">
@@ -5088,7 +5176,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:17px; color:var(--text-secondary); transition:color 0.3s ease;">No transactions found.</div>`;
+                    `<div class="text-muted text-center" style="padding:17px; color:var(--text-muted); transition:color 0.3s ease;">No transactions found.</div>`;
                 return;
             }
 
@@ -5134,7 +5222,7 @@
 
                     const direction = t.type?.toLowerCase().includes('sent') ? 'Sent to' : 'Received from';
                     otherPartyInfo = `
-                        <div style="font-size:9px; color:#555; margin-top:2px;">
+                        <div style="font-size:9px; color:var(--text-secondary); margin-top:2px; transition:color 0.3s ease;">
                             ${direction}: <strong>${escapeHtml(otherName)}</strong> (📞 ${escapeHtml(otherPhone)}) &middot; Balance: ${otherBalance}
                         </div>
                     `;
@@ -5253,11 +5341,6 @@
                 profileAvatarLarge.textContent = initial;
                 headerName.textContent = fullName;
                 profileRole.textContent = currentUserData.role || 'Customer';
-
-                // Sync dark mode toggle with user preference
-                if (currentUserData.darkMode === true) {
-                    toggleDarkMode(true);
-                }
             }
         }
 
@@ -5273,7 +5356,7 @@
 
             if (entries.length === 0) {
                 notifList.innerHTML =
-                    `<div style="text-align:center;padding:26px;color:var(--text-secondary); transition:color 0.3s ease;"><i class="fa-regular fa-bell-slash" style="font-size:27px;color:#ddd;display:block;margin-bottom:7px;"></i>No notifications</div>`;
+                    `<div style="text-align:center;padding:26px;color:var(--text-muted); transition:color 0.3s ease;"><i class="fa-regular fa-bell-slash" style="font-size:27px;color:var(--border-light);display:block;margin-bottom:7px;transition:color 0.3s ease;"></i>No notifications</div>`;
                 notifBadge.textContent = '0';
                 notifBadge.style.display = 'none';
                 return;
@@ -5330,9 +5413,9 @@
                 if (items.length === 0) continue;
 
                 html += `
-                    <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin:17px 0 9px 0;padding-bottom:5px;border-bottom:2px solid var(--border-color);display:flex;align-items:center;gap:7px;transition:color 0.3s ease,border-color 0.3s ease;">
+                    <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin:17px 0 9px 0;padding-bottom:5px;border-bottom:2px solid var(--border-color);display:flex;align-items:center;gap:7px;transition:color 0.3s ease, border-color 0.3s ease;">
                         ${typeLabels[type] || type}
-                        <span style="font-size:9px;background:var(--bg-body);padding:0 9px;border-radius:10px;font-weight:600;color:var(--text-secondary);transition:background-color 0.3s ease,color 0.3s ease;">${items.length}</span>
+                        <span style="font-size:9px;background:var(--status-bg);padding:0 9px;border-radius:10px;font-weight:600;color:var(--text-muted);transition:background 0.3s ease, color 0.3s ease;">${items.length}</span>
                     </div>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
                 `;
@@ -5341,7 +5424,7 @@
                     let frameHtml = '';
                     const imgHtml = post.imageUrl ?
                         `<img src="${post.imageUrl}" alt="${post.title || 'Work'}" loading="lazy" style="width:100%;height:100%;display:block;${type === 'app' ? 'object-fit:cover;border-radius:15px;' : 'object-fit:contain;'}" />` :
-                        `<div style="color:#ccc;font-size:27px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><i class="fa-regular fa-image"></i></div>`;
+                        `<div style="color:var(--border-light);font-size:27px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;transition:color 0.3s ease;"><i class="fa-regular fa-image"></i></div>`;
 
                     if (type === 'app') {
                         frameHtml = `
@@ -5359,7 +5442,7 @@
                         `;
                     } else {
                         frameHtml = `
-                            <div style="width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:var(--bg-body);display:flex;align-items:center;justify-content:center;position:relative;transition:background-color 0.3s ease;">
+                            <div style="width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:var(--bg-body);display:flex;align-items:center;justify-content:center;position:relative;transition:background 0.3s ease;">
                                 ${imgHtml}
                             </div>
                         `;
@@ -5383,7 +5466,7 @@
 
             if (html === '') {
                 html =
-                    `<div style="text-align:center;padding:26px 0;color:var(--text-secondary); transition:color 0.3s ease;">No samples available yet. Check back soon!</div>`;
+                    `<div style="text-align:center;padding:26px 0;color:var(--text-muted);transition:color 0.3s ease;">No samples available yet. Check back soon!</div>`;
             }
             container.innerHTML = html;
         }
@@ -5425,19 +5508,17 @@
             if (!pendingInfo) {
                 pendingInfo = document.createElement('div');
                 pendingInfo.className = 'pending-info';
-                pendingInfo.style.cssText = 'font-size:8px;color:var(--accent);margin-top:2px;transition:color 0.3s ease;';
+                pendingInfo.style.cssText = 'font-size:8px;color:var(--accent);margin-top:2px;';
                 balanceBox.querySelector('.left').appendChild(pendingInfo);
             }
             if (pendingTotal > 0) {
-                pendingInfo.textContent = `Pending: ZMW ${pendingTotal.toFixed(2)} · Available: ZMW ${availableBalance.toFixed(2)}`;
+                pendingInfo.textContent =
+                    `Pending: ZMW ${pendingTotal.toFixed(2)} · Available: ZMW ${availableBalance.toFixed(2)}`;
                 pendingInfo.style.display = 'block';
             } else {
                 pendingInfo.textContent = `Available: ZMW ${availableBalance.toFixed(2)}`;
                 pendingInfo.style.display = 'block';
             }
-
-            withdrawBtnFromBalance.dataset.availableBalance = availableBalance;
-            withdrawBtnFromView.dataset.availableBalance = availableBalance;
 
             sendAvailBalance.textContent = `ZMW ${availableBalance.toFixed(2)}`;
             updateSendButtonState();
@@ -5475,12 +5556,13 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div style="text-align:center;padding:14px;color:var(--text-secondary);font-size:10px;transition:color 0.3s ease;">No transactions yet.</div>`;
+                    `<div style="text-align:center;padding:14px;color:var(--text-muted);font-size:10px;transition:color 0.3s ease;">No transactions yet.</div>`;
                 return;
             }
 
             container.innerHTML = entries.map(([key, t]) => {
-                const isCredit = t.amount && t.amount > 0 && (t.type?.toLowerCase().includes('referral') || t.type?.toLowerCase().includes('received'));
+                const isCredit = t.amount && t.amount > 0 && (t.type?.toLowerCase().includes('referral') || t.type
+                    ?.toLowerCase().includes('received'));
                 let amountDisplay = '';
                 let amountClass = '';
                 if (t.amount) {
@@ -5526,7 +5608,7 @@
                 let iconColor = '#667eea';
                 if (t.type?.toLowerCase().includes('referral')) {
                     iconClass = 'fa-gift';
-                    iconColor = 'var(--accent)';
+                    iconColor = '#f5b83d';
                 } else if (t.type?.toLowerCase().includes('discount')) {
                     iconClass = 'fa-percent';
                     iconColor = '#00a86b';
@@ -5538,7 +5620,7 @@
                     iconColor = '#00a86b';
                 } else if (t.type?.toLowerCase().includes('payment')) {
                     iconClass = 'fa-credit-card';
-                    iconColor = 'var(--text-primary)';
+                    iconColor = '#1c2128';
                 } else {
                     iconClass = 'fa-arrow-right';
                     iconColor = '#667eea';
@@ -5574,88 +5656,371 @@
         }
 
         // =================================================================
-        // WITHDRAWALS LIST
+        // WITHDRAWALS PAGE (Detailed)
         // =================================================================
 
-        function renderWithdrawalsList() {
-            const container = withdrawalsListContainer;
+        function renderWithdrawalsPage() {
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+            const pendingTotal = calculatePendingWithdrawalTotal();
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            wdHeaderBalance.textContent = `ZMW ${balance.toFixed(2)}`;
+            wdHeaderPending.textContent = `ZMW ${pendingTotal.toFixed(2)}`;
+            wdAvailableBalance.textContent = `ZMW ${availableBalance.toFixed(2)}`;
+            wdTotalBalance.textContent = balance.toFixed(2);
+            wdPendingAmount.textContent = pendingTotal.toFixed(2);
+            wdFormMaxLabel.textContent = availableBalance.toFixed(2);
+
+            // Withdraw history
             const withdrawals = allData.withdrawalRequests || {};
             const entries = Object.entries(withdrawals)
                 .filter(([key, w]) => w.userId === currentUserId)
                 .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
             if (entries.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-withdrawals" style="text-align:center;padding:14px;color:var(--text-secondary); transition:color 0.3s ease;">
-                        <i class="fa-regular fa-receipt" style="font-size:20px;color:#ddd;display:block;margin-bottom:4px;"></i>
+                wdHistoryList.innerHTML = `
+                    <div class="empty-wd">
+                        <i class="fa-regular fa-receipt"></i>
                         No withdrawal requests yet.
                     </div>
                 `;
+            } else {
+                wdHistoryList.innerHTML = entries.map(([key, w]) => {
+                    const statusClass = w.status || 'pending';
+                    const statusDisplay = w.status ? w.status.charAt(0).toUpperCase() + w.status.slice(1) : 'Pending';
+                    const dateStr = w.date ? new Date(w.date).toLocaleString() : (w.createdAt ? new Date(w.createdAt)
+                        .toLocaleString() : 'N/A');
+
+                    let statusMessage = '';
+                    let statusColor = '#cc8800';
+                    if (w.status === 'approved') {
+                        statusColor = '#00a86b';
+                        statusMessage =
+                            `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was approved. The amount has been deducted from your account.`;
+                    } else if (w.status === 'declined') {
+                        statusColor = '#dc2626';
+                        statusMessage =
+                            `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount remains in your account.`;
+                    } else {
+                        statusMessage =
+                            `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
+                    }
+
+                    let iconClass = 'fa-clock';
+                    let iconColor = '#cc8800';
+                    if (w.status === 'approved') {
+                        iconClass = 'fa-check-circle';
+                        iconColor = '#00a86b';
+                    } else if (w.status === 'declined') {
+                        iconClass = 'fa-times-circle';
+                        iconColor = '#dc2626';
+                    }
+
+                    return `
+                    <div class="wd-card" data-key="${key}">
+                        <div class="wd-summary">
+                            <div class="left">
+                                <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
+                                <span>Withdrawal: ZMW ${(w.amount || 0).toFixed(2)}</span>
+                            </div>
+                            <div class="right">
+                                <span class="status-badge ${statusClass}">${statusDisplay}</span>
+                                <i class="fa-solid fa-chevron-down expand-icon"></i>
+                            </div>
+                        </div>
+                        <div class="wd-details">
+                            <div class="d-row"><span class="d-label">Amount</span><span class="d-val">ZMW ${(w.amount || 0).toFixed(2)}</span></div>
+                            <div class="d-row"><span class="d-label">Date</span><span class="d-val">${escapeHtml(dateStr)}</span></div>
+                            <div class="d-row"><span class="d-label">Phone</span><span class="d-val">${escapeHtml(w.phone || 'N/A')}</span></div>
+                            <div class="d-row"><span class="d-label">Status</span><span class="d-val">${statusDisplay}</span></div>
+                            <div class="d-row"><span class="d-label">Message</span><span class="d-val">${escapeHtml(statusMessage)}</span></div>
+                        </div>
+                    </div>
+                    `;
+                }).join('');
+
+                wdHistoryList.querySelectorAll('.wd-card').forEach(el => {
+                    el.addEventListener('click', function() {
+                        this.classList.toggle('open');
+                    });
+                });
+            }
+        }
+
+        // =================================================================
+        // WITHDRAW SUBMIT
+        // =================================================================
+
+        function submitWithdrawalFromPage() {
+            const amount = parseFloat(wdAmountInput.value);
+            if (!amount || amount <= 0) {
+                showToast('Please enter a valid amount.', 'error');
                 return;
             }
 
-            container.innerHTML = entries.map(([key, w]) => {
-                const statusClass = w.status || 'pending';
-                const statusDisplay = w.status ? w.status.charAt(0).toUpperCase() + w.status.slice(1) : 'Pending';
-                const dateStr = w.date ? new Date(w.date).toLocaleString() : (w.createdAt ? new Date(w.createdAt).toLocaleString() : 'N/A');
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+            const pendingTotal = calculatePendingWithdrawalTotal();
+            const availableBalance = Math.max(0, balance - pendingTotal);
 
-                let statusMessage = '';
-                let statusColor = '#cc8800';
-                if (w.status === 'approved') {
-                    statusColor = '#00a86b';
-                    statusMessage =
-                        `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was approved. The amount has been deducted from your account.`;
-                } else if (w.status === 'declined') {
-                    statusColor = '#dc2626';
-                    statusMessage =
-                        `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount remains in your account.`;
-                } else {
-                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
-                }
+            if (amount > availableBalance) {
+                showToast(`Insufficient available balance. You have ZMW ${availableBalance.toFixed(2)} available.`, 'error');
+                return;
+            }
 
-                let iconClass = 'fa-clock';
-                let iconColor = '#cc8800';
-                if (w.status === 'approved') {
-                    iconClass = 'fa-check-circle';
-                    iconColor = '#00a86b';
-                } else if (w.status === 'declined') {
-                    iconClass = 'fa-times-circle';
-                    iconColor = '#dc2626';
-                }
+            if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
+            const wId = 'w' + Date.now();
+            allData.withdrawalRequests[wId] = {
+                id: wId,
+                userId: currentUserId,
+                amount: amount,
+                phone: currentUserData?.phone || 'N/A',
+                status: 'pending',
+                createdAt: Date.now(),
+                date: new Date().toLocaleString()
+            };
 
-                return `
-                <div class="withdrawal-card" data-key="${key}">
-                    <div class="wd-summary">
-                        <div class="left">
-                            <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
-                            <span>Withdrawal: ZMW ${(w.amount || 0).toFixed(2)}</span>
-                        </div>
-                        <div class="right">
-                            <span class="status-badge ${statusClass}">${statusDisplay}</span>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                    </div>
-                    <div class="wd-details">
-                        <div class="d-row"><span class="d-label">Amount</span><span class="d-val">ZMW ${(w.amount || 0).toFixed(2)}</span></div>
-                        <div class="d-row"><span class="d-label">Date</span><span class="d-val">${escapeHtml(dateStr)}</span></div>
-                        <div class="d-row"><span class="d-label">Phone</span><span class="d-val">${escapeHtml(w.phone || 'N/A')}</span></div>
-                        <div class="d-row"><span class="d-label">Status</span><span class="d-val">${statusDisplay}</span></div>
-                        <div class="d-row"><span class="d-label">Message</span><span class="d-val">${escapeHtml(statusMessage)}</span></div>
-                    </div>
-                </div>
-                `;
-            }).join('');
+            if (!allData.transactions) allData.transactions = {};
+            const txId = 'tx' + Date.now();
+            allData.transactions[txId] = {
+                type: 'Withdrawal Request',
+                amount: amount,
+                method: 'Bank Transfer',
+                status: 'pending',
+                date: new Date().toLocaleString(),
+                ref: 'W-' + wId,
+                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested. Pending approval.`,
+                screenshot: 'N/A',
+                userId: currentUserId,
+                itemId: wId,
+                itemTitle: 'Withdrawal',
+                itemType: 'withdrawal',
+                userName: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
+                    currentUser.email || 'Customer',
+                userEmail: currentUser.email || 'N/A',
+                userPhone: currentUserData?.phone || 'N/A',
+                timestamp: Date.now()
+            };
 
-            container.querySelectorAll('.withdrawal-card').forEach(el => {
-                el.addEventListener('click', function() {
-                    this.classList.toggle('open');
-                });
+            saveData().then(() => {
+                createNotification(
+                    currentUserId,
+                    'Withdrawal Request',
+                    `Your withdrawal of ZMW ${amount.toFixed(2)} has been submitted and is pending admin approval.`
+                );
+
+                wdAmountInput.value = '';
+                renderAll();
+                showToast('✅ Withdrawal request submitted! Admin will review it.', 'success');
             });
         }
 
         // =================================================================
-        // SEND MONEY TRANSACTIONS LIST
+        // SEND MONEY
         // =================================================================
+
+        function toggleSendMoneySection() {
+            const section = sendMoneySection;
+            section.classList.toggle('open');
+            if (section.classList.contains('open')) {
+                const accounts = allData.customerAccounts || {};
+                const userAccount = accounts[currentUserId] || { balance: 0 };
+                const balance = userAccount.balance || 0;
+                const pendingTotal = calculatePendingWithdrawalTotal();
+                const availableBalance = Math.max(0, balance - pendingTotal);
+                sendAvailBalance.textContent = `ZMW ${availableBalance.toFixed(2)}`;
+                updateSendButtonState();
+                renderSendMoneyTxList();
+            }
+        }
+
+        function searchRecipient() {
+            const code = sendReferralInput.value.trim().toUpperCase();
+            if (!code) {
+                recipientSearchResult.innerHTML = `<span style="color:var(--text-muted);">Please enter a referral code.</span>`;
+                return;
+            }
+
+            const usersRef = ref(db, 'users');
+            get(usersRef).then((snapshot) => {
+                const users = snapshot.val() || {};
+                let foundUid = null;
+                let foundUser = null;
+                for (const [uid, u] of Object.entries(users)) {
+                    if (u.referralCode === code) {
+                        foundUid = uid;
+                        foundUser = u;
+                        break;
+                    }
+                }
+
+                if (!foundUid) {
+                    recipientSearchResult.innerHTML = `<span class="not-found">❌ No user found with that referral code.</span>`;
+                    sendRecipientUid = null;
+                    sendRecipientName = '';
+                    sendRecipientData = null;
+                    updateSendButtonState();
+                    return;
+                }
+
+                if (foundUid === currentUserId) {
+                    recipientSearchResult.innerHTML = `<span style="color:#cc8800;">⚠️ You cannot send money to yourself.</span>`;
+                    sendRecipientUid = null;
+                    sendRecipientName = '';
+                    sendRecipientData = null;
+                    updateSendButtonState();
+                    return;
+                }
+
+                const fullName = `${foundUser.firstName || ''} ${foundUser.lastName || ''}`.trim() || foundUser.email ||
+                    'User';
+                sendRecipientUid = foundUid;
+                sendRecipientName = fullName;
+                sendRecipientData = foundUser;
+
+                recipientSearchResult.innerHTML = `
+                    <span>Send money to: <span class="name">${escapeHtml(fullName)}</span></span>
+                    <span style="font-size:9px; color:var(--text-muted);">(${code})</span>
+                `;
+                updateSendButtonState();
+            }).catch((error) => {
+                console.error('Error searching recipient:', error);
+                recipientSearchResult.innerHTML = `<span class="not-found">Error searching. Please try again.</span>`;
+                sendRecipientUid = null;
+                sendRecipientName = '';
+                sendRecipientData = null;
+                updateSendButtonState();
+            });
+        }
+
+        function updateSendButtonState() {
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+            const pendingTotal = calculatePendingWithdrawalTotal();
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            const amount = parseFloat(sendAmountInput.value) || 0;
+            const hasRecipient = !!sendRecipientUid;
+            const hasAmount = amount > 0 && amount <= availableBalance;
+
+            sendMoneyConfirmBtn.disabled = !(hasRecipient && hasAmount);
+        }
+
+        function confirmSendMoney() {
+            const amount = parseFloat(sendAmountInput.value);
+            if (!amount || amount <= 0) {
+                showToast('Please enter a valid amount.', 'error');
+                return;
+            }
+
+            if (!sendRecipientUid || !sendRecipientName) {
+                showToast('Please search and select a valid recipient.', 'error');
+                return;
+            }
+
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+            const pendingTotal = calculatePendingWithdrawalTotal();
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            if (amount > availableBalance) {
+                showToast(`Insufficient balance. You have ZMW ${availableBalance.toFixed(2)} available.`, 'error');
+                return;
+            }
+
+            const confirmed = confirm(
+                `You're sending ZMW ${amount.toFixed(2)} to ${sendRecipientName}.\n\nPlease confirm this transaction.`
+            );
+
+            if (!confirmed) {
+                showToast('Transaction cancelled.', 'info');
+                return;
+            }
+
+            const newSenderBalance = balance - amount;
+            const senderAccRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
+            set(senderAccRef, { balance: newSenderBalance });
+
+            const recipientAccRef = ref(db, `bufferzoneAppData/customerAccounts/${sendRecipientUid}`);
+            get(recipientAccRef).then((snapshot) => {
+                const currentRecipientBal = snapshot.val()?.balance || 0;
+                set(recipientAccRef, { balance: currentRecipientBal + amount });
+            });
+
+            const senderTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
+            const senderTxData = {
+                type: 'Sent Money',
+                amount: -amount,
+                method: 'Buffer Zone Wallet',
+                status: 'completed',
+                date: new Date().toLocaleString(),
+                ref: 'SEND-' + Date.now(),
+                detail: `Sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}`,
+                screenshot: 'N/A',
+                userId: currentUserId,
+                itemId: 'send-' + Date.now(),
+                itemTitle: 'Send Money',
+                itemType: 'send',
+                userName: sendRecipientName,
+                userEmail: sendRecipientData?.email || 'N/A',
+                userPhone: sendRecipientData?.phone || 'N/A',
+                otherParty: sendRecipientName,
+                otherPartyUid: sendRecipientUid,
+                timestamp: Date.now()
+            };
+            set(senderTxRef, senderTxData);
+
+            const recipientTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
+            const recipientTxData = {
+                type: 'Received Money',
+                amount: amount,
+                method: 'Buffer Zone Wallet',
+                status: 'completed',
+                date: new Date().toLocaleString(),
+                ref: 'RECV-' + Date.now(),
+                detail: `Received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}`,
+                screenshot: 'N/A',
+                userId: sendRecipientUid,
+                itemId: 'recv-' + Date.now(),
+                itemTitle: 'Receive Money',
+                itemType: 'receive',
+                userName: currentUserData?.firstName || 'User',
+                userEmail: currentUser.email || 'N/A',
+                userPhone: currentUserData?.phone || 'N/A',
+                otherParty: currentUserData?.firstName || 'User',
+                otherPartyUid: currentUserId,
+                timestamp: Date.now()
+            };
+            set(recipientTxRef, recipientTxData);
+
+            createNotification(
+                currentUserId,
+                '💰 Money Sent',
+                `You sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}.`
+            );
+
+            createNotification(
+                sendRecipientUid,
+                '💰 Money Received',
+                `You received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}.`
+            );
+
+            showToast(`✅ ZMW ${amount.toFixed(2)} sent to ${sendRecipientName}!`, 'success');
+
+            sendAmountInput.value = '';
+            sendReferralInput.value = '';
+            recipientSearchResult.innerHTML = `<span style="color:var(--text-muted);">Enter a referral code and click Search.</span>`;
+            sendRecipientUid = null;
+            sendRecipientName = '';
+            sendRecipientData = null;
+            updateSendButtonState();
+            renderAll();
+        }
 
         function renderSendMoneyTxList() {
             const container = sendTxItems;
@@ -5668,13 +6033,15 @@
                 .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
             if (entries.length === 0) {
-                container.innerHTML = `<div class="empty-tx" style="color:var(--text-secondary); transition:color 0.3s ease;">No sent or received transactions yet.</div>`;
+                container.innerHTML = `<div class="empty-tx">No sent or received transactions yet.</div>`;
                 return;
             }
 
             container.innerHTML = entries.slice(0, 10).map(([key, t]) => {
-                const isSent = t.type?.toLowerCase().includes('sent') || (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
-                const isReceived = t.type?.toLowerCase().includes('received') || (t.type?.toLowerCase().includes('send') && t.amount && t.amount > 0);
+                const isSent = t.type?.toLowerCase().includes('sent') || (t.type?.toLowerCase().includes('send') && t
+                    .amount && t.amount < 0);
+                const isReceived = t.type?.toLowerCase().includes('received') || (t.type?.toLowerCase().includes('send') &&
+                    t.amount && t.amount > 0);
                 const amountClass = isSent ? 'sent' : 'received';
                 const sign = isSent ? '-' : '+';
                 const label = isSent ? 'Sent to' : 'Received from';
@@ -5698,13 +6065,13 @@
                 return `
                     <div class="tx-item">
                         <div class="tx-left">
-                            <div class="tx-type" style="color:var(--text-primary); transition:color 0.3s ease;">${isSent ? 'Sent' : 'Received'}</div>
-                            <div class="tx-with" style="color:var(--text-secondary); transition:color 0.3s ease;">${label} ${escapeHtml(otherName)}</div>
-                            <div style="font-size:8px; color:var(--text-secondary); transition:color 0.3s ease;">${escapeHtml(otherPhone)} &middot; Balance: ${otherBalance}</div>
+                            <div class="tx-type">${isSent ? 'Sent' : 'Received'}</div>
+                            <div class="tx-with">${label} ${escapeHtml(otherName)}</div>
+                            <div style="font-size:8px; color:var(--text-muted); transition:color 0.3s ease;">${escapeHtml(otherPhone)} &middot; Balance: ${otherBalance}</div>
                         </div>
                         <div class="tx-right">
                             <div class="tx-amount ${amountClass}">${sign}ZMW ${Math.abs(t.amount || 0).toFixed(2)}</div>
-                            <div class="tx-date" style="color:#aaa;">${t.date ? new Date(t.date).toLocaleString() : ''}</div>
+                            <div class="tx-date">${t.date ? new Date(t.date).toLocaleString() : ''}</div>
                         </div>
                     </div>
                 `;
@@ -5791,7 +6158,7 @@
 
                 <div class="order-specs">
                     <h4>SPECIFICATIONS</h4>
-                    ${specsHtml || '<p class="text-muted" style="color:var(--text-secondary); transition:color 0.3s ease;">No specifications available.</p>'}
+                    ${specsHtml || '<p class="text-muted">No specifications available.</p>'}
                 </div>
 
                 <div class="order-customize">
@@ -5814,8 +6181,8 @@
 
                 <div class="order-notes" style="margin-top:3px;">
                     <h4 style="font-size:9px; font-weight:600; color:var(--text-primary); margin-bottom:4px; transition:color 0.3s ease;">📝 Add Extra Notes (Optional)</h4>
-                    <textarea id="orderNotes" placeholder="Tell us more about your requirements, special instructions, or any additional details..." style="width:100%; padding:9px; border:1px solid var(--border-light); border-radius:9px; font-size:9px; resize:vertical; min-height:41px; background:var(--bg-input); transition:border 0.2s, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; font-family:'Poppins',sans-serif; color:var(--text-primary);"></textarea>
-                    <p style="font-size:7px; color:#aaa; margin-top:3px;">These notes will be attached to your order for the team to review.</p>
+                    <textarea id="orderNotes" placeholder="Tell us more about your requirements, special instructions, or any additional details..." style="width:100%; padding:9px; border:1px solid var(--border-color); border-radius:9px; font-size:9px; resize:vertical; min-height:41px; background:var(--bg-input); transition:border 0.2s, background 0.3s ease, color 0.3s ease; font-family:'Poppins',sans-serif; color:var(--text-primary);"></textarea>
+                    <p style="font-size:7px; color:var(--text-muted); margin-top:3px; transition:color 0.3s ease;">These notes will be attached to your order for the team to review.</p>
                 </div>
 
                 <div class="order-footer">
@@ -5915,7 +6282,7 @@
                 if (selectedDeliverySpeed) customizationParts.push(`Delivery: ${selectedDeliverySpeed}`);
                 paymentPage.dataset.orderData = JSON.stringify({
                     service: service.title,
-                    serviceId: key || 'N/A',
+                    serviceId: service.id || key,
                     quantity: currentQuantity,
                     total: total,
                     size: selectedSize,
@@ -6155,7 +6522,7 @@
                     uploadSection.style.display = 'block';
                 }
             } else {
-                walletStatusEl.style.color = 'var(--text-secondary)';
+                walletStatusEl.style.color = '#888';
                 walletSufficiency.textContent = '';
                 payWithWalletCheckEl.disabled = true;
                 payWithWalletCheckEl.style.cursor = 'not-allowed';
@@ -6387,8 +6754,8 @@
             paymentPage.classList.remove('open');
             cloudinaryScreenshotUrlInput.value = '';
             fileName.textContent = 'No file chosen';
-            uploadArea.style.borderColor = 'var(--border-color)';
-            uploadArea.style.background = 'var(--bg-input)';
+            uploadArea.style.borderColor = '#ddd';
+            uploadArea.style.background = '#fafbfc';
             payWithWalletCheck.checked = false;
             uploadSection.style.display = 'block';
 
@@ -6418,302 +6785,6 @@
                 renderServices('all');
             }
         });
-
-        // =================================================================
-        // WITHDRAWAL
-        // =================================================================
-
-        function openWithdrawModal() {
-            const accounts = allData.customerAccounts || {};
-            const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
-            const pendingTotal = calculatePendingWithdrawalTotal();
-            const availableBalance = Math.max(0, balance - pendingTotal);
-
-            withdrawMaxLabel.textContent = availableBalance.toFixed(2);
-            withdrawModal.classList.add('open');
-            withdrawAmountInput.value = '';
-            const sub = withdrawModal.querySelector('.sub');
-            if (pendingTotal > 0) {
-                sub.textContent = `You have ZMW ${pendingTotal.toFixed(2)} in pending withdrawals. Available to withdraw: ZMW ${availableBalance.toFixed(2)}`;
-            } else {
-                sub.textContent = `Enter the amount you'd like to withdraw from your account. Max: ZMW ${availableBalance.toFixed(2)}`;
-            }
-        }
-
-        function closeWithdrawModal() {
-            withdrawModal.classList.remove('open');
-        }
-
-        function submitWithdrawal() {
-            const amount = parseFloat(withdrawAmountInput.value);
-            if (!amount || amount <= 0) {
-                showToast('Please enter a valid amount.', 'error');
-                return;
-            }
-
-            const accounts = allData.customerAccounts || {};
-            const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
-            const pendingTotal = calculatePendingWithdrawalTotal();
-            const availableBalance = Math.max(0, balance - pendingTotal);
-
-            if (amount > availableBalance) {
-                showToast(`Insufficient available balance. You have ZMW ${availableBalance.toFixed(2)} available after accounting for pending withdrawals.`, 'error');
-                return;
-            }
-
-            if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
-            const wId = 'w' + Date.now();
-            allData.withdrawalRequests[wId] = {
-                id: wId,
-                userId: currentUserId,
-                amount: amount,
-                phone: currentUserData?.phone || 'N/A',
-                status: 'pending',
-                createdAt: Date.now(),
-                date: new Date().toLocaleString()
-            };
-
-            if (!allData.transactions) allData.transactions = {};
-            const txId = 'tx' + Date.now();
-            allData.transactions[txId] = {
-                type: 'Withdrawal Request',
-                amount: amount,
-                method: 'Bank Transfer',
-                status: 'pending',
-                date: new Date().toLocaleString(),
-                ref: 'W-' + wId,
-                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested. Pending approval.`,
-                screenshot: 'N/A',
-                userId: currentUserId,
-                itemId: wId,
-                itemTitle: 'Withdrawal',
-                itemType: 'withdrawal',
-                userName: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
-                    currentUser.email || 'Customer',
-                userEmail: currentUser.email || 'N/A',
-                userPhone: currentUserData?.phone || 'N/A',
-                timestamp: Date.now()
-            };
-
-            saveData().then(() => {
-                createNotification(
-                    currentUserId,
-                    'Withdrawal Request',
-                    `Your withdrawal of ZMW ${amount.toFixed(2)} has been submitted and is pending admin approval.`
-                );
-
-                closeWithdrawModal();
-                withdrawSuccessModal.classList.add('open');
-                renderAll();
-                showToast('✅ Withdrawal request submitted! Admin will review it.', 'success');
-            });
-        }
-
-        // =================================================================
-        // SEND MONEY
-        // =================================================================
-
-        function toggleSendMoneySection() {
-            const section = sendMoneySection;
-            section.classList.toggle('open');
-            if (section.classList.contains('open')) {
-                const accounts = allData.customerAccounts || {};
-                const userAccount = accounts[currentUserId] || { balance: 0 };
-                const balance = userAccount.balance || 0;
-                const pendingTotal = calculatePendingWithdrawalTotal();
-                const availableBalance = Math.max(0, balance - pendingTotal);
-                sendAvailBalance.textContent = `ZMW ${availableBalance.toFixed(2)}`;
-                updateSendButtonState();
-                renderSendMoneyTxList();
-            }
-        }
-
-        function searchRecipient() {
-            const code = sendReferralInput.value.trim().toUpperCase();
-            if (!code) {
-                recipientSearchResult.innerHTML = `<span style="color:var(--text-secondary); transition:color 0.3s ease;">Please enter a referral code.</span>`;
-                return;
-            }
-
-            const usersRef = ref(db, 'users');
-            get(usersRef).then((snapshot) => {
-                const users = snapshot.val() || {};
-                let foundUid = null;
-                let foundUser = null;
-                for (const [uid, u] of Object.entries(users)) {
-                    if (u.referralCode === code) {
-                        foundUid = uid;
-                        foundUser = u;
-                        break;
-                    }
-                }
-
-                if (!foundUid) {
-                    recipientSearchResult.innerHTML = `<span class="not-found" style="color:#dc2626;">❌ No user found with that referral code.</span>`;
-                    sendRecipientUid = null;
-                    sendRecipientName = '';
-                    sendRecipientData = null;
-                    updateSendButtonState();
-                    return;
-                }
-
-                if (foundUid === currentUserId) {
-                    recipientSearchResult.innerHTML = `<span style="color:#cc8800;">⚠️ You cannot send money to yourself.</span>`;
-                    sendRecipientUid = null;
-                    sendRecipientName = '';
-                    sendRecipientData = null;
-                    updateSendButtonState();
-                    return;
-                }
-
-                const fullName = `${foundUser.firstName || ''} ${foundUser.lastName || ''}`.trim() || foundUser.email ||
-                    'User';
-                sendRecipientUid = foundUid;
-                sendRecipientName = fullName;
-                sendRecipientData = foundUser;
-
-                recipientSearchResult.innerHTML = `
-                    <span>Send money to: <span class="name" style="color:var(--accent);">${escapeHtml(fullName)}</span></span>
-                    <span style="font-size:9px; color:var(--text-secondary); transition:color 0.3s ease;">(${code})</span>
-                `;
-                updateSendButtonState();
-            }).catch((error) => {
-                console.error('Error searching recipient:', error);
-                recipientSearchResult.innerHTML = `<span class="not-found" style="color:#dc2626;">Error searching. Please try again.</span>`;
-                sendRecipientUid = null;
-                sendRecipientName = '';
-                sendRecipientData = null;
-                updateSendButtonState();
-            });
-        }
-
-        function updateSendButtonState() {
-            const accounts = allData.customerAccounts || {};
-            const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
-            const pendingTotal = calculatePendingWithdrawalTotal();
-            const availableBalance = Math.max(0, balance - pendingTotal);
-
-            const amount = parseFloat(sendAmountInput.value) || 0;
-            const hasRecipient = !!sendRecipientUid;
-            const hasAmount = amount > 0 && amount <= availableBalance;
-
-            sendMoneyConfirmBtn.disabled = !(hasRecipient && hasAmount);
-        }
-
-        function confirmSendMoney() {
-            const amount = parseFloat(sendAmountInput.value);
-            if (!amount || amount <= 0) {
-                showToast('Please enter a valid amount.', 'error');
-                return;
-            }
-
-            if (!sendRecipientUid || !sendRecipientName) {
-                showToast('Please search and select a valid recipient.', 'error');
-                return;
-            }
-
-            const accounts = allData.customerAccounts || {};
-            const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
-            const pendingTotal = calculatePendingWithdrawalTotal();
-            const availableBalance = Math.max(0, balance - pendingTotal);
-
-            if (amount > availableBalance) {
-                showToast(`Insufficient balance. You have ZMW ${availableBalance.toFixed(2)} available.`, 'error');
-                return;
-            }
-
-            const confirmed = confirm(
-                `You're sending ZMW ${amount.toFixed(2)} to ${sendRecipientName}.\n\nPlease confirm this transaction.`
-            );
-
-            if (!confirmed) {
-                showToast('Transaction cancelled.', 'info');
-                return;
-            }
-
-            const newSenderBalance = balance - amount;
-            const senderAccRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
-            set(senderAccRef, { balance: newSenderBalance });
-
-            const recipientAccRef = ref(db, `bufferzoneAppData/customerAccounts/${sendRecipientUid}`);
-            get(recipientAccRef).then((snapshot) => {
-                const currentRecipientBal = snapshot.val()?.balance || 0;
-                set(recipientAccRef, { balance: currentRecipientBal + amount });
-            });
-
-            const senderTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
-            const senderTxData = {
-                type: 'Sent Money',
-                amount: -amount,
-                method: 'Buffer Zone Wallet',
-                status: 'completed',
-                date: new Date().toLocaleString(),
-                ref: 'SEND-' + Date.now(),
-                detail: `Sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}`,
-                screenshot: 'N/A',
-                userId: currentUserId,
-                itemId: 'send-' + Date.now(),
-                itemTitle: 'Send Money',
-                itemType: 'send',
-                userName: sendRecipientName,
-                userEmail: sendRecipientData?.email || 'N/A',
-                userPhone: sendRecipientData?.phone || 'N/A',
-                otherParty: sendRecipientName,
-                otherPartyUid: sendRecipientUid,
-                timestamp: Date.now()
-            };
-            set(senderTxRef, senderTxData);
-
-            const recipientTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
-            const recipientTxData = {
-                type: 'Received Money',
-                amount: amount,
-                method: 'Buffer Zone Wallet',
-                status: 'completed',
-                date: new Date().toLocaleString(),
-                ref: 'RECV-' + Date.now(),
-                detail: `Received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}`,
-                screenshot: 'N/A',
-                userId: sendRecipientUid,
-                itemId: 'recv-' + Date.now(),
-                itemTitle: 'Receive Money',
-                itemType: 'receive',
-                userName: currentUserData?.firstName || 'User',
-                userEmail: currentUser.email || 'N/A',
-                userPhone: currentUserData?.phone || 'N/A',
-                otherParty: currentUserData?.firstName || 'User',
-                otherPartyUid: currentUserId,
-                timestamp: Date.now()
-            };
-            set(recipientTxRef, recipientTxData);
-
-            createNotification(
-                currentUserId,
-                '💰 Money Sent',
-                `You sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}.`
-            );
-
-            createNotification(
-                sendRecipientUid,
-                '💰 Money Received',
-                `You received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}.`
-            );
-
-            showToast(`✅ ZMW ${amount.toFixed(2)} sent to ${sendRecipientName}!`, 'success');
-
-            sendAmountInput.value = '';
-            sendReferralInput.value = '';
-            recipientSearchResult.innerHTML = `<span style="color:var(--text-secondary); transition:color 0.3s ease;">Enter a referral code and click Search.</span>`;
-            sendRecipientUid = null;
-            sendRecipientName = '';
-            sendRecipientData = null;
-            updateSendButtonState();
-            renderAll();
-        }
 
         // =================================================================
         // FLYER DETAIL VIEW
@@ -6791,7 +6862,7 @@
                 const actionsDiv = document.querySelector('.flyer-detail-actions');
                 if (actionsDiv) actionsDiv.style.display = 'none';
                 flyerDetailForm.innerHTML =
-                    `<p style="font-size:10px;color:var(--text-secondary);text-align:center;padding:8px;transition:color 0.3s ease;">No form attached to this flyer.</p>`;
+                    `<p style="font-size:10px;color:var(--text-muted);text-align:center;padding:8px;transition:color 0.3s ease;">No form attached to this flyer.</p>`;
                 return;
             } else {
                 const actionsDiv = document.querySelector('.flyer-detail-actions');
@@ -6921,11 +6992,11 @@
                 const paymentHtml = `
                     <div id="flyerPaymentSection" style="margin-top:10px; border-top:1px solid var(--border-color); padding-top:12px; transition:border-color 0.3s ease;">
                         <h4 style="font-size:11px; font-weight:700; color:var(--text-primary); margin-bottom:6px; transition:color 0.3s ease;">💳 Payment Required</h4>
-                        <div style="background:var(--bg-body); border-radius:8px; padding:10px; margin-bottom:10px; border:1px solid var(--border-color); transition:background-color 0.3s ease, border-color 0.3s ease;">
+                        <div style="background:var(--status-bg); border-radius:8px; padding:10px; margin-bottom:10px; border:1px solid var(--border-color); transition:background 0.3s ease, border-color 0.3s ease;">
                             <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
-                                <div><span style="font-size:9px; color:var(--text-secondary); transition:color 0.3s ease;">Amount to pay</span><br><span style="font-weight:700;font-size:16px;color:var(--accent);">ZMW ${config.price || 0}</span></div>
-                                <div><span style="font-size:9px; color:var(--text-secondary); transition:color 0.3s ease;">Mobile Number</span><br><span style="font-weight:600;font-size:12px; color:var(--text-primary); transition:color 0.3s ease;">${config.mobileNumber || 'N/A'}</span></div>
-                                <div><span style="font-size:9px; color:var(--text-secondary); transition:color 0.3s ease;">Account Name</span><br><span style="font-weight:600;font-size:12px; color:var(--text-primary); transition:color 0.3s ease;">${config.accountName || 'N/A'}</span></div>
+                                <div><span style="font-size:9px; color:var(--text-muted); transition:color 0.3s ease;">Amount to pay</span><br><span style="font-weight:700;font-size:16px;color:var(--accent);">ZMW ${config.price || 0}</span></div>
+                                <div><span style="font-size:9px; color:var(--text-muted); transition:color 0.3s ease;">Mobile Number</span><br><span style="font-weight:600;font-size:12px;">${config.mobileNumber || 'N/A'}</span></div>
+                                <div><span style="font-size:9px; color:var(--text-muted); transition:color 0.3s ease;">Account Name</span><br><span style="font-weight:600;font-size:12px;">${config.accountName || 'N/A'}</span></div>
                             </div>
                         </div>
                         <label style="font-weight:600; font-size:9px; color:var(--text-primary); display:block; margin-bottom:4px; transition:color 0.3s ease;">Upload Payment Screenshot (Single)</label>
@@ -6935,7 +7006,7 @@
                             <div class="file-name" id="flyerPaymentFileName">No file chosen</div>
                             <input type="hidden" id="flyerPaymentUrl" />
                         </div>
-                        <p style="font-size:8px; color:#aaa; margin-top:4px;">Upload a screenshot of your payment confirmation.</p>
+                        <p style="font-size:8px; color:var(--text-muted); margin-top:4px; transition:color 0.3s ease;">Upload a screenshot of your payment confirmation.</p>
                     </div>
                 `;
                 flyerDetailForm.insertAdjacentHTML('beforeend', paymentHtml);
@@ -6978,8 +7049,8 @@
                                 previewImg.src = url;
                                 previewImg.style.display = 'block';
                                 paymentUpload.classList.add('has-preview');
-                                paymentUpload.style.borderColor = 'var(--accent)';
-                                paymentUpload.style.background = 'var(--accent-light)';
+                                paymentUpload.style.borderColor = '#f5b83d';
+                                paymentUpload.style.background = '#fffcf0';
                                 if (paymentFileName) paymentFileName.textContent = info.original_filename + '.' + info
                                     .format;
                                 showToast('Payment screenshot uploaded!', 'success');
@@ -7055,8 +7126,8 @@
                             previewImg.src = url;
                             previewImg.style.display = 'block';
                             trigger.classList.add('has-preview');
-                            trigger.style.borderColor = 'var(--accent)';
-                            trigger.style.background = 'var(--accent-light)';
+                            trigger.style.borderColor = '#f5b83d';
+                            trigger.style.background = '#fffcf0';
                             if (fileNameEl) fileNameEl.textContent = info.original_filename + '.' + info.format;
                             showToast('File uploaded!', 'success');
                         }
@@ -7206,8 +7277,8 @@
 
             if (entries.length === 0) {
                 container.innerHTML = `
-                    <div class="text-muted text-center" style="padding:20px;color:var(--text-secondary); transition:color 0.3s ease;">
-                        <i class="fa-regular fa-clipboard" style="font-size:28px;color:#ddd;display:block;margin-bottom:6px;"></i>
+                    <div class="text-muted text-center" style="padding:20px;color:var(--text-muted);transition:color 0.3s ease;">
+                        <i class="fa-regular fa-clipboard" style="font-size:28px;color:var(--border-light);display:block;margin-bottom:6px;transition:color 0.3s ease;"></i>
                         No applications yet.
                     </div>
                 `;
@@ -7274,7 +7345,7 @@
                         </div>
                     </div>
                     <div class="app-details-expand">
-                        ${detailRows || '<p style="font-size:10px;color:var(--text-secondary);text-align:center;padding:4px;transition:color 0.3s ease;">No additional details</p>'}
+                        ${detailRows || '<p style="font-size:10px;color:var(--text-muted);text-align:center;padding:4px;transition:color 0.3s ease;">No additional details</p>'}
                     </div>
                 </div>
                 `;
@@ -7288,11 +7359,12 @@
         }
 
         // =================================================================
-        // RECEIPT MODAL LOGIC
+        // RECEIPT MODAL (ALWAYS WHITE)
         // =================================================================
 
         function openReceiptModal(order, key) {
-            const customerName = order.customer || currentUserData?.firstName + ' ' + currentUserData?.lastName || 'Customer';
+            const customerName = order.customer || currentUserData?.firstName + ' ' + currentUserData?.lastName ||
+                'Customer';
             const customerPhone = order.clientNumber || currentUserData?.phone || 'N/A';
             const customerEmail = currentUser?.email || 'N/A';
 
@@ -7326,9 +7398,6 @@
             recDiscount.textContent = `ZMW ${discountVal.toFixed(2)}`;
             recTotalDisplay.textContent = `ZMW ${subtotal.toFixed(2)}`;
             recSignName.textContent = 'Jubel Mobela';
-
-            // Update footnote with the new message
-            recFootnote.textContent = 'We truly appreciate your trust and support. It has been a pleasure working with you, and we look forward to bringing your next project to life with creativity, professionalism, quality, innovation, and exceptional service every step of the way.';
 
             receiptModal.classList.add('open');
         }
@@ -7485,22 +7554,20 @@
             accountTransactionsView.classList.remove('active');
         });
 
-        withdrawBtnFromBalance.addEventListener('click', openWithdrawModal);
-        withdrawBtnFromView.addEventListener('click', openWithdrawModal);
-        cancelWithdrawBtn.addEventListener('click', closeWithdrawModal);
-        withdrawModal.addEventListener('click', function(e) {
-            if (e.target === this) closeWithdrawModal();
-        });
-        confirmWithdrawBtn.addEventListener('click', submitWithdrawal);
-        withdrawSuccessOkBtn.addEventListener('click', function() {
-            withdrawSuccessModal.classList.remove('open');
+        withdrawBtnFromBalance.addEventListener('click', function() {
             switchView('accountView');
+            // Switch to withdrawals tab
+            accountWithdrawBtn.click();
+            document.getElementById('appContent').scrollTop = 0;
         });
-        withdrawSuccessModal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('open');
-                switchView('accountView');
-            }
+
+        wdWithdrawNowBtn.addEventListener('click', function() {
+            document.getElementById('withdrawFormSection').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        wdSubmitBtn.addEventListener('click', submitWithdrawalFromPage);
+        wdAmountInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') submitWithdrawalFromPage();
         });
 
         sendMoneyBtn.addEventListener('click', toggleSendMoneySection);
@@ -7520,10 +7587,10 @@
             const amount = parseFloat(this.value) || 0;
             if (amount > availableBalance) {
                 sendBalanceCheck.innerHTML =
-                    `Available: <span class="avail" style="color:var(--text-primary); transition:color 0.3s ease;">ZMW ${availableBalance.toFixed(2)}</span> <span class="insufficient" style="color:#dc2626;">⚠️ Amount exceeds available balance</span>`;
+                    `Available: <span class="avail">ZMW ${availableBalance.toFixed(2)}</span> <span class="insufficient">⚠️ Amount exceeds available balance</span>`;
             } else {
                 sendBalanceCheck.innerHTML =
-                    `Available: <span class="avail" style="color:var(--text-primary); transition:color 0.3s ease;">ZMW ${availableBalance.toFixed(2)}</span>`;
+                    `Available: <span class="avail">ZMW ${availableBalance.toFixed(2)}</span>`;
             }
         });
 
@@ -7549,25 +7616,13 @@
                 uploadSection.style.display = 'none';
                 cloudinaryScreenshotUrlInput.value = '';
                 fileName.textContent = 'No file chosen';
-                uploadArea.style.borderColor = 'var(--border-color)';
-                uploadArea.style.background = 'var(--bg-input)';
+                uploadArea.style.borderColor = '#ddd';
+                uploadArea.style.background = '#fafbfc';
             } else {
                 uploadSection.style.display = 'block';
             }
         });
 
-        // Dark Mode Toggle
-        darkModeToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            const isChecked = darkModeCheck.checked;
-            toggleDarkMode(!isChecked);
-        });
-
-        darkModeCheck.addEventListener('change', function() {
-            toggleDarkMode(this.checked);
-        });
-
-        // Receipt Event Listeners
         closeReceiptBtn.addEventListener('click', closeReceiptModal);
         receiptModal.addEventListener('click', function(e) {
             if (e.target === this) closeReceiptModal();
@@ -7587,10 +7642,10 @@
                     const data = snapshot.val();
                     if (data && data.banned === true) {
                         document.body.innerHTML = `
-                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:var(--bg-body); padding:20px; transition:background-color 0.3s ease;">
+                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:var(--bg-body); padding:20px; transition:background 0.3s ease;">
                                 <i class="fa-solid fa-ban" style="font-size:41px; color:#dc2626; margin-bottom:14px;"></i>
-                                <h1 style="font-size:20px; font-weight:700; color:var(--text-primary); transition:color 0.3s ease;">Account Banned</h1>
-                                <p style="color:var(--text-secondary); text-align:center; max-width:272px; margin-top:7px; transition:color 0.3s ease;">Your account has been banned. Please contact support for assistance.</p>
+                                <h1 style="font-size:20px; font-weight:700; color:var(--text-primary);">Account Banned</h1>
+                                <p style="color:var(--text-muted); text-align:center; max-width:272px; margin-top:7px;">Your account has been banned. Please contact support for assistance.</p>
                             </div>
                         `;
                         return;
@@ -7611,7 +7666,23 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code updated with dark mode, contact section, 1200x675 flyers with curved edges, new receipt message, and customer email on invoice.');
+        // ── Initialize Dark Mode ──
+        initDarkMode();
+
+        // ── Withdraw: update form max on input ──
+        wdAmountInput.addEventListener('input', function() {
+            const maxVal = parseFloat(wdFormMaxLabel.textContent) || 0;
+            const val = parseFloat(this.value) || 0;
+            if (val > maxVal) {
+                this.value = maxVal.toFixed(2);
+            }
+        });
+
+        console.log('✅ Customer code updated with Dark Mode, Profile Contact, 1200x675 flyers, white invoice, and detailed Withdraw page.');
+        console.log('✅ Invoice footer text updated with customer email.');
+        console.log('✅ Withdraw is now a detailed page instead of a popup.');
+        console.log('✅ Dark mode toggle (iOS style) added in Profile.');
+        console.log('✅ Contact info (WhatsApp, Facebook, SMS/Calls) added under logout button.');
     </script>
 </body>
 </html>
