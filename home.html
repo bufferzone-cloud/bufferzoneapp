@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -840,6 +839,7 @@
             color: #f5b83d;
         }
 
+        /* ===== PAYMENT PAGE ===== */
         .payment-page-overlay {
             position: fixed;
             top: 0;
@@ -1871,7 +1871,7 @@
             color: #fff;
         }
 
-        /* ===== SEND MONEY PAGE (full page like withdraw) ===== */
+        /* ===== SEND MONEY PAGE ===== */
         .send-money-page-overlay {
             position: fixed;
             top: 0;
@@ -3168,6 +3168,219 @@
             color: #f5b83d;
         }
 
+        /* ===== APPLICATION STATUS POPUP ===== */
+        .app-status-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .app-status-overlay.open {
+            display: flex;
+        }
+        .app-status-modal {
+            background: #ffffff;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 400px;
+            padding: 0 0 20px 0;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+            animation: modalIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
+            position: relative;
+        }
+        .app-status-modal .app-status-logo-wrap {
+            background: #1c2128;
+            padding: 18px 0 14px 0;
+            text-align: center;
+            border-bottom: 3px solid #f5b83d;
+        }
+        .app-status-modal .app-status-logo-wrap img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #fff;
+            padding: 4px;
+        }
+        .app-status-modal .app-status-logo-wrap .logo-text {
+            color: #f5b83d;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .app-status-modal .app-status-body {
+            padding: 18px 20px 12px 20px;
+            text-align: center;
+        }
+        .app-status-modal .app-status-icon {
+            font-size: 56px;
+            line-height: 1;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .app-status-modal .app-status-icon .check-mark {
+            color: #00a86b;
+            font-size: 56px;
+            font-weight: 900;
+            display: inline-block;
+        }
+        .app-status-modal .app-status-icon .x-mark {
+            color: #dc2626;
+            font-size: 56px;
+            font-weight: 900;
+            display: inline-block;
+        }
+        .app-status-modal .app-status-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #1c2128;
+            margin: 4px 0 6px 0;
+            letter-spacing: 0.5px;
+        }
+        .app-status-modal .app-status-title.approved {
+            color: #00a86b;
+        }
+        .app-status-modal .app-status-title.rejected {
+            color: #dc2626;
+        }
+        .app-status-modal .app-status-message {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        .app-status-modal .app-status-details-box {
+            background: #f8f9fc;
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin: 8px 0 12px 0;
+            text-align: left;
+            border: 1px solid #f0f0f0;
+        }
+        .app-status-modal .app-status-details-box .detail-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .app-status-modal .app-status-details-box .detail-line:last-child {
+            border-bottom: none;
+        }
+        .app-status-modal .app-status-details-box .detail-line .dl-label {
+            color: #888;
+        }
+        .app-status-modal .app-status-details-box .detail-line .dl-value {
+            font-weight: 600;
+            color: #1c2128;
+        }
+        .app-status-modal .app-status-btn {
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .app-status-modal .app-status-btn:active {
+            transform: scale(0.95);
+        }
+        .app-status-modal .app-status-btn i {
+            color: #f5b83d;
+        }
+
+        /* ===== ORDER COMPLETE POPUP ===== */
+        .order-complete-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 3100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .order-complete-overlay.open {
+            display: flex;
+        }
+        .order-complete-modal {
+            background: #ffffff;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 360px;
+            padding: 28px 22px 22px 22px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+            animation: modalIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-align: center;
+        }
+        .order-complete-modal .oc-icon {
+            font-size: 48px;
+            color: #f5b83d;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .order-complete-modal h3 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1c2128;
+            margin-bottom: 6px;
+        }
+        .order-complete-modal p {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .order-complete-modal p strong {
+            color: #1c2128;
+        }
+        .order-complete-modal .oc-amount {
+            font-size: 22px;
+            font-weight: 900;
+            color: #f5b83d;
+            display: block;
+            margin: 2px 0 10px 0;
+        }
+        .order-complete-modal .oc-btn {
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            padding: 10px 40px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .order-complete-modal .oc-btn:active {
+            transform: scale(0.95);
+        }
+        .order-complete-modal .oc-btn i {
+            color: #f5b83d;
+            margin-right: 6px;
+        }
+
         @media (max-width: 420px) {
             .bottom-nav {
                 max-width: 400px;
@@ -3217,10 +3430,24 @@
                 align-items: flex-start;
                 gap: 2px;
             }
+            .app-status-modal .app-status-title {
+                font-size: 20px;
+            }
+            .app-status-modal .app-status-icon .check-mark,
+            .app-status-modal .app-status-icon .x-mark {
+                font-size: 44px;
+            }
         }
         @media (max-width: 380px) {
             .promo-slide .slide-text {
                 font-size: 12px;
+            }
+            .app-status-modal .app-status-title {
+                font-size: 18px;
+            }
+            .app-status-modal .app-status-icon .check-mark,
+            .app-status-modal .app-status-icon .x-mark {
+                font-size: 38px;
             }
         }
     </style>
@@ -3440,9 +3667,9 @@
                         <p>Passionate about design and technology. Helping brands grow through innovation and strategic design.</p>
                     </div>
 
-                    <!-- ===== LOGOUT BUTTON — CENTERED RED TRIANGLE ===== -->
+                    <!-- ===== LOGOUT BUTTON — RECTANGLE (not triangle) ===== -->
                     <div style="display: flex; justify-content: center; margin-top: 14px;">
-                        <button class="logout-btn" id="logoutBtn" style="background: #dc2626; color: white; border: none; padding: 10px 24px; border-radius: 0; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 7px; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); width: 140px; height: 60px;">
+                        <button class="logout-btn" id="logoutBtn" style="background: #dc2626; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 7px; width: 140px;">
                             <i class="fa-solid fa-right-from-bracket" style="color: white;"></i> Log Out
                         </button>
                     </div>
@@ -3489,6 +3716,34 @@
             <h3>💳 Payment Required</h3>
             <p class="sub">To begin your project, you must pay 50% upfront.</p>
 
+            <!-- ===== EXTRA DETAILS ON PAYMENT PAGE ===== -->
+            <div class="payment-details" style="margin-bottom:6px;">
+                <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;">
+                    <div style="flex:1; min-width:120px;">
+                        <div style="font-size:8px; color:#888;">Customer</div>
+                        <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentCustomerName">—</div>
+                    </div>
+                    <div style="flex:1; min-width:100px;">
+                        <div style="font-size:8px; color:#888;">Service</div>
+                        <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentServiceName">—</div>
+                    </div>
+                    <div style="flex:1; min-width:80px;">
+                        <div style="font-size:8px; color:#888;">Qty</div>
+                        <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentQty">—</div>
+                    </div>
+                </div>
+                <div style="margin-top:4px; padding-top:4px; border-top:1px solid #f0f0f0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;">
+                    <div>
+                        <div style="font-size:8px; color:#888;">Customization</div>
+                        <div style="font-weight:500; font-size:10px; color:#1c2128;" id="paymentCustomization">—</div>
+                    </div>
+                    <div>
+                        <div style="font-size:8px; color:#888;">Notes</div>
+                        <div style="font-weight:500; font-size:10px; color:#1c2128;" id="paymentNotes">—</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="payment-details">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <div>
@@ -3530,7 +3785,7 @@
 
             <div class="code-input-wrap" id="referralCodeWrap">
                 <input type="text" id="referralCodeInput" placeholder="Enter referral code">
-                <button class="apply-btn" id="applyReferralBtn" style="margin-top:5px;">Apply Referral</button>
+                <button class="apply-btn" id="applyReferralBtn" style="margin-top:5px; background:#1c2128; color:#fff; border:none; padding:7px 14px; border-radius:9px; font-weight:700; font-size:9px; cursor:pointer; transition:all 0.2s; width:100%;">Apply Referral</button>
                 <span class="coupon-msg" id="referralMsg"></span>
             </div>
 
@@ -3616,7 +3871,7 @@
         </div>
     </div>
 
-    <!-- ===== SEND MONEY PAGE (full page) ===== -->
+    <!-- ===== SEND MONEY PAGE ===== -->
     <div class="send-money-page-overlay" id="sendMoneyPage">
         <div class="send-money-page">
             <div class="page-header">
@@ -3670,6 +3925,45 @@
             <h3>Withdrawal Submitted</h3>
             <p>Your withdrawal request has been submitted and will be processed within 24 hours.</p>
             <button class="btn-ok" id="withdrawSuccessOkBtn">OK</button>
+        </div>
+    </div>
+
+    <!-- ===== APPLICATION STATUS POPUP ===== -->
+    <div class="app-status-overlay" id="appStatusPopup">
+        <div class="app-status-modal">
+            <div class="app-status-logo-wrap">
+                <img src="bufferzone.png" alt="Buffer Zone" onerror="this.style.display='none'" />
+                <div class="logo-text">BUFFER ZONE</div>
+            </div>
+            <div class="app-status-body">
+                <div class="app-status-icon" id="appStatusIcon">
+                    <span class="check-mark" id="appStatusCheck" style="display:none;">✓</span>
+                    <span class="x-mark" id="appStatusX" style="display:none;">✗</span>
+                </div>
+                <div class="app-status-title" id="appStatusTitle">CONGRATULATIONS</div>
+                <div class="app-status-message" id="appStatusMessage">Your application has been approved.</div>
+                <div class="app-status-details-box" id="appStatusDetailsBox">
+                    <div class="detail-line"><span class="dl-label">Name</span><span class="dl-value" id="asName">—</span></div>
+                    <div class="detail-line"><span class="dl-label">Email</span><span class="dl-value" id="asEmail">—</span></div>
+                    <div class="detail-line"><span class="dl-label">Phone</span><span class="dl-value" id="asPhone">—</span></div>
+                    <div class="detail-line"><span class="dl-label">BZ Code</span><span class="dl-value" id="asBzCode">—</span></div>
+                    <div class="detail-line"><span class="dl-label">Form Type</span><span class="dl-value" id="asFormType">—</span></div>
+                    <div class="detail-line"><span class="dl-label">Flyer</span><span class="dl-value" id="asFlyer">—</span></div>
+                    <div class="detail-line"><span class="dl-label">Applied On</span><span class="dl-value" id="asDate">—</span></div>
+                </div>
+                <button class="app-status-btn" id="appStatusBtn"><i class="fa-solid fa-arrow-right"></i> Go to Applications</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ORDER COMPLETE POPUP ===== -->
+    <div class="order-complete-overlay" id="orderCompletePopup">
+        <div class="order-complete-modal">
+            <span class="oc-icon"><i class="fa-regular fa-circle-check"></i></span>
+            <h3>Order Complete!</h3>
+            <p>Your order has been marked as complete.<br>Please pay the remaining 50% which is:</p>
+            <span class="oc-amount" id="ocRemainingAmount">ZMW 0.00</span>
+            <button class="oc-btn" id="ocOkBtn"><i class="fa-regular fa-circle-check"></i> OK</button>
         </div>
     </div>
 
@@ -3815,6 +4109,12 @@
 
         let currentFlyerId = null;
 
+        // ===== POPUP TRACKING =====
+        const shownPopups = {
+            applications: {}, // appId -> true
+            orderComplete: {} // orderId -> true
+        };
+
         const headerName = document.getElementById('headerName');
         const heroTitle = document.getElementById('heroTitle');
         const heroTitleSpan = document.getElementById('heroTitleSpan');
@@ -3958,6 +4258,32 @@
         const withdrawSuccessModal = document.getElementById('withdrawSuccessModal');
         const withdrawSuccessOkBtn = document.getElementById('withdrawSuccessOkBtn');
 
+        // ===== POPUP ELEMENTS =====
+        const appStatusPopup = document.getElementById('appStatusPopup');
+        const appStatusCheck = document.getElementById('appStatusCheck');
+        const appStatusX = document.getElementById('appStatusX');
+        const appStatusTitle = document.getElementById('appStatusTitle');
+        const appStatusMessage = document.getElementById('appStatusMessage');
+        const appStatusBtn = document.getElementById('appStatusBtn');
+        const asName = document.getElementById('asName');
+        const asEmail = document.getElementById('asEmail');
+        const asPhone = document.getElementById('asPhone');
+        const asBzCode = document.getElementById('asBzCode');
+        const asFormType = document.getElementById('asFormType');
+        const asFlyer = document.getElementById('asFlyer');
+        const asDate = document.getElementById('asDate');
+
+        const orderCompletePopup = document.getElementById('orderCompletePopup');
+        const ocRemainingAmount = document.getElementById('ocRemainingAmount');
+        const ocOkBtn = document.getElementById('ocOkBtn');
+
+        // ===== PAYMENT PAGE EXTRA DETAILS =====
+        const paymentCustomerName = document.getElementById('paymentCustomerName');
+        const paymentServiceName = document.getElementById('paymentServiceName');
+        const paymentQty = document.getElementById('paymentQty');
+        const paymentCustomization = document.getElementById('paymentCustomization');
+        const paymentNotes = document.getElementById('paymentNotes');
+
         function showToast(msg, type = 'info') {
             const toast = document.createElement('div');
             toast.style.cssText = `
@@ -4006,6 +4332,13 @@
             if (viewId !== 'homeView') {
                 window.history.pushState({ view: viewId }, '', '');
             }
+            // Check for popups when switching to relevant views
+            if (viewId === 'applicationsView') {
+                checkApplicationPopups();
+            }
+            if (viewId === 'ordersView') {
+                checkOrderCompletePopups();
+            }
         }
 
         window.addEventListener('popstate', (event) => {
@@ -4022,6 +4355,12 @@
                     document.getElementById('flyerDetailView').classList.remove('active');
                 }
                 document.getElementById('appContent').scrollTop = 0;
+                if (viewId === 'applicationsView') {
+                    checkApplicationPopups();
+                }
+                if (viewId === 'ordersView') {
+                    checkOrderCompletePopups();
+                }
             } else {
                 switchView('homeView');
             }
@@ -4219,6 +4558,15 @@
                     }
                 }
                 renderAll();
+                // Check for popups after data loads
+                setTimeout(() => {
+                    if (document.getElementById('applicationsView').classList.contains('active')) {
+                        checkApplicationPopups();
+                    }
+                    if (document.getElementById('ordersView').classList.contains('active')) {
+                        checkOrderCompletePopups();
+                    }
+                }, 500);
                 if (callback) callback();
             });
         }
@@ -5720,7 +6068,10 @@
                 phone: currentUserData?.phone || 'N/A',
                 status: 'pending',
                 createdAt: Date.now(),
-                date: new Date().toLocaleString()
+                date: new Date().toLocaleString(),
+                // ===== CURRENT DATE & TIME IN WITHDRAW REQUEST =====
+                requestedAt: new Date().toISOString(),
+                requestedAtFormatted: new Date().toLocaleString()
             };
 
             if (!allData.transactions) allData.transactions = {};
@@ -6229,6 +6580,8 @@
                 referralMsg.className = 'coupon-msg';
                 payWithWalletCheck.checked = false;
                 updateWalletPaymentUI();
+
+                // ===== FILL PAYMENT PAGE EXTRA DETAILS =====
                 const notes = document.getElementById('orderNotes').value.trim();
                 const customizationParts = [];
                 if (selectedSize) customizationParts.push(`Size: ${selectedSize}`);
@@ -6237,6 +6590,15 @@
                 if (selectedColorScheme) customizationParts.push(`Color Scheme: ${selectedColorScheme}`);
                 if (selectedRevisions) customizationParts.push(`Revisions: ${selectedRevisions}`);
                 if (selectedDeliverySpeed) customizationParts.push(`Delivery: ${selectedDeliverySpeed}`);
+
+                const customerName = currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
+                    currentUser.email || 'Customer';
+                paymentCustomerName.textContent = customerName;
+                paymentServiceName.textContent = service.title || '—';
+                paymentQty.textContent = currentQuantity;
+                paymentCustomization.textContent = customizationParts.join(', ') || 'None';
+                paymentNotes.textContent = notes || '—';
+
                 paymentPage.dataset.orderData = JSON.stringify({
                     service: service.title,
                     serviceId: service.id || key,
@@ -6901,6 +7263,129 @@
             });
         }
 
+        // ===== APPLICATION POPUP FUNCTIONS =====
+        function checkApplicationPopups() {
+            const apps = allData.applications || {};
+            const entries = Object.entries(apps)
+                .filter(([key, a]) => a.userId === currentUserId)
+                .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
+
+            for (const [key, app] of entries) {
+                const status = app.status || 'pending';
+                if ((status === 'approved' || status === 'rejected') && !shownPopups.applications[key]) {
+                    showApplicationPopup(key, app);
+                    return;
+                }
+            }
+        }
+
+        function showApplicationPopup(appId, app) {
+            const isApproved = app.status === 'approved';
+
+            // Set the popup content
+            if (isApproved) {
+                appStatusCheck.style.display = 'inline';
+                appStatusX.style.display = 'none';
+                appStatusTitle.textContent = 'CONGRATULATIONS';
+                appStatusTitle.className = 'app-status-title approved';
+                appStatusMessage.textContent = 'Your application has been approved.';
+            } else {
+                appStatusCheck.style.display = 'none';
+                appStatusX.style.display = 'inline';
+                appStatusTitle.textContent = 'APPLICATION STATUS';
+                appStatusTitle.className = 'app-status-title rejected';
+                appStatusMessage.textContent = 'Your application has been rejected.';
+            }
+
+            // Fill in user details from the application form data
+            const fd = app.formData || {};
+            const customerName = currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
+                currentUser.email || '—';
+            asName.textContent = fd.name || customerName || '—';
+            asEmail.textContent = fd.email || currentUser.email || '—';
+            asPhone.textContent = fd.number || fd.phone || currentUserData?.phone || '—';
+            asBzCode.textContent = fd.bzCode || currentUserData?.referralCode || '—';
+
+            const formTypeLabels = {
+                ambassador: 'Ambassador',
+                investor: 'Investor',
+                prize: 'Prize',
+                job: 'Job',
+                referrer: 'Referrer'
+            };
+            asFormType.textContent = formTypeLabels[app.formType] || app.formType || 'Unknown';
+            asFlyer.textContent = app.flyerTitle || 'Untitled';
+            asDate.textContent = app.createdAt ? new Date(app.createdAt).toLocaleDateString() : 'N/A';
+
+            // Store the appId to mark as seen after button click
+            appStatusBtn.dataset.appId = appId;
+
+            // Show the popup
+            appStatusPopup.classList.add('open');
+
+            // Mark as seen immediately so it doesn't show again while open
+            shownPopups.applications[appId] = true;
+        }
+
+        appStatusBtn.addEventListener('click', function() {
+            appStatusPopup.classList.remove('open');
+            switchView('applicationsView');
+        });
+
+        appStatusPopup.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+                switchView('applicationsView');
+            }
+        });
+
+        // ===== ORDER COMPLETE POPUP FUNCTIONS =====
+        function checkOrderCompletePopups() {
+            const orders = allData.orders || {};
+            const entries = Object.entries(orders)
+                .filter(([key, o]) => o.userId === currentUserId)
+                .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
+
+            for (const [key, order] of entries) {
+                if (order.status === 'completed' && !shownPopups.orderComplete[key]) {
+                    // Check if the order has a remaining balance (50%)
+                    const remainingAmount = (order.amount || 0) * 0.5;
+                    if (remainingAmount > 0) {
+                        showOrderCompletePopup(key, order, remainingAmount);
+                        return;
+                    }
+                }
+            }
+        }
+
+        function showOrderCompletePopup(orderId, order, remainingAmount) {
+            ocRemainingAmount.textContent = `ZMW ${remainingAmount.toFixed(2)}`;
+            ocOkBtn.dataset.orderId = orderId;
+            orderCompletePopup.classList.add('open');
+            shownPopups.orderComplete[orderId] = true;
+        }
+
+        ocOkBtn.addEventListener('click', function() {
+            orderCompletePopup.classList.remove('open');
+            // Navigate to orders view or stay
+            if (document.getElementById('ordersView').classList.contains('active')) {
+                // Stay on orders view
+            } else {
+                switchView('ordersView');
+            }
+        });
+
+        orderCompletePopup.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+                if (document.getElementById('ordersView').classList.contains('active')) {
+                    // Stay on orders view
+                } else {
+                    switchView('ordersView');
+                }
+            }
+        });
+
         function renderApplications() {
             const container = applicationsListEl;
             const apps = allData.applications || {};
@@ -7308,13 +7793,13 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code updated with:');
-        console.log('  • Withdraw page with 25%/50%/100% actual ZMW amounts');
-        console.log('  • Send Money page (full page, matching withdraw style)');
-        console.log('  • Contact links: orange icons next to text, clickable');
-        console.log('  • Logout button: centered, red triangle shape');
-        console.log('  • Flyers: 1200x675 with more curved edges (border-radius: 28px)');
-        console.log('  • Invoice: appreciation text, customer email, 20% smaller');
+        console.log('✅ Customer code updated with all requested features:');
+        console.log('  • Current date & time in withdraw request');
+        console.log('  • CSS for apply referral code button');
+        console.log('  • More details on payment page (without changing workflow)');
+        console.log('  • One-time application status popup (approved ✓ / rejected ✗) with logo, user details, and button');
+        console.log('  • One-time order complete popup with remaining 50% amount');
+        console.log('  • Logout button is now a rectangle (not triangle)');
     </script>
 </body>
 </html>
