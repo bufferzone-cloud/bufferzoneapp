@@ -8,8 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+    </script>
     <style>
+        /* ── All existing styles (unchanged) ── */
         * {
             margin: 0;
             padding: 0;
@@ -17,12 +19,14 @@
             font-family: 'Poppins', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
+
         body {
             background-color: #f8f9fc;
             display: block;
             overflow: hidden;
             height: 100%;
         }
+
         .app-root {
             display: flex;
             flex-direction: column;
@@ -34,12 +38,15 @@
             overflow: hidden;
             position: relative;
         }
+
         .app-content {
             flex: 1;
             overflow-y: auto;
             padding: 0 0 128px 0;
             -webkit-overflow-scrolling: touch;
         }
+
+        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
             position: fixed;
             bottom: 17px;
@@ -60,6 +67,7 @@
             flex-shrink: 0;
             pointer-events: auto;
         }
+
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -86,6 +94,8 @@
         .nav-item:active {
             transform: scale(0.92);
         }
+
+        /* ===== HEADER ===== */
         .header {
             display: flex;
             align-items: center;
@@ -151,6 +161,8 @@
             align-items: center;
             justify-content: center;
         }
+
+        /* ===== HERO ===== */
         .hero {
             background-color: #1c2128;
             border-radius: 14px;
@@ -230,6 +242,7 @@
             color: #f5b83d;
             font-size: 9px;
         }
+
         .cta-container {
             position: absolute;
             bottom: 14px;
@@ -258,6 +271,8 @@
             font-size: 9px;
             font-weight: 700;
         }
+
+        /* ===== PROMO CAROUSEL – with curved edges ===== */
         .promo-carousel-wrapper {
             position: relative;
             margin: 3px 0 12px 0;
@@ -267,7 +282,8 @@
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.08);
             padding: 0;
             transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            aspect-ratio: 1200 / 675;
+            aspect-ratio: 675 / 1200;
+            /* ← portrait 675×1200 */;
             width: 100%;
             max-height: 80vh;
         }
@@ -278,6 +294,7 @@
             box-shadow: none !important;
             overflow: hidden !important;
         }
+
         .promo-carousel-track {
             display: flex;
             gap: 0;
@@ -294,12 +311,13 @@
         .promo-carousel-track::-webkit-scrollbar {
             display: none;
         }
+
         .promo-slide {
             flex: 0 0 80%;
             max-width: 80%;
             scroll-snap-align: center;
             position: relative;
-            border-radius: 20px;
+            border-radius: 17px;
             overflow: hidden;
             transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 opacity 0.5s ease,
@@ -316,15 +334,19 @@
             z-index: 1;
             will-change: transform, opacity;
             cursor: pointer;
-            aspect-ratio: 1200 / 675;
+            aspect-ratio: 675 / 1200;
+            /* ← portrait */;
             border-radius: 20px;
+            /* ← curved edges */;
         }
+
         .promo-slide.clickable {
             cursor: pointer;
         }
         .promo-slide:not(.clickable) {
             cursor: default;
         }
+
         .promo-slide img,
         .promo-slide video {
             width: 100%;
@@ -333,7 +355,9 @@
             display: block;
             background-color: #ffffff;
             border-radius: 20px;
+            /* ← curved edges */;
         }
+
         .promo-slide .slide-overlay {
             position: absolute;
             bottom: 0;
@@ -363,6 +387,7 @@
             margin-top: 2px;
             text-shadow: 0 1px 7px rgba(0, 0, 0, 0.3);
         }
+
         .promo-slide .video-play-overlay {
             position: absolute;
             top: 50%;
@@ -386,6 +411,7 @@
             opacity: 0;
             pointer-events: none;
         }
+
         .promo-slide .tap-indicator {
             position: absolute;
             bottom: 12px;
@@ -397,6 +423,7 @@
             text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
             pointer-events: none;
         }
+
         .promo-slide.prev-slide,
         .promo-slide.next-slide {
             transform: scale(0.85) !important;
@@ -414,6 +441,8 @@
             opacity: 0.20 !important;
             z-index: 0;
         }
+
+        /* ===== PROMOTIONS BANNER ===== */
         .promotions-banner {
             margin: 0 12px 12px 12px;
             padding: 9px 12px;
@@ -441,6 +470,8 @@
             color: #1c2128;
             flex: 1;
         }
+
+        /* ===== CATEGORY ROW ===== */
         .category-row {
             display: flex;
             gap: 7px;
@@ -452,6 +483,7 @@
         .category-row::-webkit-scrollbar {
             display: none;
         }
+
         .cat-btn {
             flex-shrink: 0;
             background: white;
@@ -478,6 +510,7 @@
         .cat-btn.active i {
             color: #f5b83d;
         }
+
         .dynamic-header {
             display: flex;
             justify-content: space-between;
@@ -509,6 +542,7 @@
             font-weight: 600;
             cursor: pointer;
         }
+
         .service-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -551,9 +585,12 @@
             color: #777;
             line-height: 1.2;
         }
+
+        /* ===== ORDER FLOW ===== */
         .order-flow-container {
             padding: 0 12px 14px 12px;
         }
+
         .order-policy-panel {
             background-color: #1c2128;
             border-radius: 14px;
@@ -609,6 +646,7 @@
             font-weight: 700;
             margin-top: 5px;
         }
+
         .order-title-section {
             display: flex;
             flex-direction: column;
@@ -648,6 +686,7 @@
         .order-title-section .price .new-price.regular {
             color: #1c2128;
         }
+
         .order-tags {
             display: flex;
             gap: 7px;
@@ -668,6 +707,7 @@
         .order-tags .tag i {
             color: #f5b83d;
         }
+
         .order-specs {
             margin-bottom: 14px;
         }
@@ -691,6 +731,7 @@
             color: #1c2128;
             font-weight: 500;
         }
+
         .order-customize {
             margin-bottom: 14px;
         }
@@ -739,6 +780,7 @@
         .customize-btn.active i {
             color: #f5b83d;
         }
+
         .quantity-selector {
             display: flex;
             align-items: center;
@@ -763,6 +805,7 @@
             min-width: 14px;
             text-align: center;
         }
+
         .order-notes textarea {
             width: 100%;
             padding: 9px;
@@ -783,6 +826,7 @@
             color: #bbb;
             font-size: 9px;
         }
+
         .order-footer {
             display: flex;
             justify-content: space-between;
@@ -820,6 +864,8 @@
         .btn-confirm-order i {
             color: #f5b83d;
         }
+
+        /* ===== PAYMENT PAGE ===== */
         .payment-page-overlay {
             position: fixed;
             top: 0;
@@ -911,6 +957,8 @@
             font-weight: 800;
             color: #f5b83d;
         }
+
+        /* ===== PROMO / REFERRAL DROPDOWN ===== */
         .toggle-row {
             display: flex;
             gap: 7px;
@@ -939,6 +987,7 @@
         .toggle-row .toggle-code-btn:active {
             transform: scale(0.95);
         }
+
         .code-input-wrap {
             display: none;
             margin-bottom: 9px;
@@ -957,6 +1006,7 @@
             outline: none;
             border-color: #f5b83d;
         }
+
         .coupon-section {
             display: flex;
             gap: 7px;
@@ -1024,6 +1074,7 @@
         .price-breakdown .row .val.discounted {
             color: #00a86b;
         }
+
         .upload-area {
             border: 2px dashed #ddd;
             border-radius: 9px;
@@ -1055,6 +1106,7 @@
         .upload-area.hidden {
             display: none !important;
         }
+
         .btn-primary {
             width: 100%;
             padding: 9px;
@@ -1074,6 +1126,8 @@
         .btn-primary i {
             color: #f5b83d;
         }
+
+        /* ===== ORDER SUCCESS POPUP ===== */
         .order-success-overlay {
             position: fixed;
             top: 0;
@@ -1143,12 +1197,15 @@
         .order-success-modal .btn-ok:active {
             transform: scale(0.95);
         }
+
         .view {
             display: none;
         }
         .view.active {
             display: block;
         }
+
+        /* ===== ORDERS ===== */
         .orders-header {
             margin-top: 7px;
             margin-bottom: 14px;
@@ -1162,6 +1219,7 @@
             color: #888;
             font-size: 9px;
         }
+
         .order-grid {
             display: flex;
             flex-direction: column;
@@ -1216,6 +1274,7 @@
             display: inline-block;
             margin-bottom: 2px;
         }
+
         .status-pending {
             background: #fff6e0;
             color: #cc8800;
@@ -1240,6 +1299,7 @@
             background: #d1fae5;
             color: #065f46;
         }
+
         .order-card .order-details-expand {
             max-height: 0;
             overflow: hidden;
@@ -1284,6 +1344,8 @@
         .order-card.open .expand-icon {
             transform: rotate(180deg);
         }
+
+        /* ===== HISTORY ===== */
         .history-list {
             padding: 0 12px 14px 12px;
             display: flex;
@@ -1360,6 +1422,7 @@
         .history-card.open .expand-icon {
             transform: rotate(180deg);
         }
+
         .payment-reminder-banner {
             background: #fff8ed;
             border: 1px solid #f5b83d;
@@ -1434,6 +1497,8 @@
         .payment-reminder-banner .done-badge.show {
             display: inline-block;
         }
+
+        /* ===== SIDEBAR ===== */
         .sidebar-overlay {
             position: fixed;
             top: 0;
@@ -1525,6 +1590,8 @@
             color: #aaa;
             margin-top: 3px;
         }
+
+        /* ===== SAMPLES ===== */
         .samples-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1537,6 +1604,7 @@
                 gap: 10px;
             }
         }
+
         .sample-card {
             background: #ffffff;
             border-radius: 14px;
@@ -1587,6 +1655,7 @@
             display: flex;
             justify-content: space-between;
         }
+
         .phone-frame-sample {
             border: 5px solid #1c2128;
             border-radius: 26px;
@@ -1613,6 +1682,7 @@
             background: #1c2128;
             border-radius: 0 0 10px 10px;
         }
+
         .laptop-frame-sample {
             background: #1c2128;
             border-radius: 10px 10px 0 0;
@@ -1655,6 +1725,8 @@
             background: #444;
             border-radius: 0 0 3px 3px;
         }
+
+        /* ===== PROFILE ===== */
         .profile-card {
             background: #ffffff;
             border-radius: 14px;
@@ -1724,6 +1796,8 @@
             color: #555;
             line-height: 1.6;
         }
+
+        /* ===== ACCOUNT ===== */
         .account-section {
             padding: 0 12px 14px 12px;
         }
@@ -1764,12 +1838,14 @@
         .account-toggle-row .toggle-btn.active i {
             color: #f5b83d;
         }
+
         .account-view {
             display: none;
         }
         .account-view.active {
             display: block;
         }
+
         .account-balance-box {
             background: linear-gradient(135deg, #1c2128 0%, #2a2a2a 100%);
             border-radius: 14px;
@@ -1828,6 +1904,8 @@
         .account-balance-box .right-btns .btn-action.send-btn i {
             color: #fff;
         }
+
+        /* ===== SEND MONEY ===== */
         .send-money-section {
             background: #ffffff;
             border-radius: 14px;
@@ -1927,6 +2005,7 @@
         .send-money-section .btn-send i {
             margin-right: 5px;
         }
+
         .send-money-tx-list {
             margin-top: 10px;
             border-top: 1px solid #f0f0f0;
@@ -1972,6 +2051,8 @@
             font-size: 9px;
             padding: 10px 0;
         }
+
+        /* ===== ACCOUNT TRANSACTIONS & WITHDRAWALS ===== */
         .account-tx-card,
         .withdrawal-card {
             background: #ffffff;
@@ -2056,6 +2137,7 @@
         .withdrawal-card.open .expand-icon {
             transform: rotate(180deg);
         }
+
         .withdrawal-card .status-badge {
             padding: 2px 10px;
             border-radius: 14px;
@@ -2074,6 +2156,7 @@
             background: #fee2e2;
             color: #dc2626;
         }
+
         .referral-code-box {
             background: #1c2128;
             border-radius: 14px;
@@ -2117,144 +2200,204 @@
         .referral-code-box .copy-btn i {
             font-size: 12px;
         }
+
+        /* ===== WITHDRAW MODAL (removed – now a page) ===== */
+        /* ===== WITHDRAW PAGE ===== */
         .withdraw-page {
             padding: 0 12px 14px 12px;
         }
-        .withdraw-page .page-title {
-            font-weight: 700;
-            font-size: 17px;
-            color: #1c2128;
-            margin-bottom: 3px;
-        }
-        .withdraw-page .page-sub {
-            font-size: 10px;
-            color: #888;
-            margin-bottom: 14px;
-        }
-        .withdraw-page .balance-summary {
-            background: linear-gradient(135deg, #1c2128 0%, #2a2a2a 100%);
-            border-radius: 14px;
-            padding: 16px 14px;
-            color: white;
-            margin-bottom: 14px;
-        }
-        .withdraw-page .balance-summary .bal-label {
-            font-size: 9px;
-            color: #f5b83d;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-        .withdraw-page .balance-summary .bal-amount {
-            font-size: 28px;
+        .withdraw-page .wp-header {
+            font-size: 22px;
             font-weight: 800;
-        }
-        .withdraw-page .balance-summary .bal-detail {
-            font-size: 10px;
-            color: #ddd;
-            margin-top: 3px;
-        }
-        .withdraw-page .balance-summary .bal-detail span {
-            color: #f5b83d;
-            font-weight: 600;
-        }
-        .withdraw-page .withdraw-form {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 14px;
-            border: 1px solid #f0f0f0;
-            margin-bottom: 14px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-        }
-        .withdraw-page .withdraw-form h4 {
-            font-size: 12px;
-            font-weight: 700;
             color: #1c2128;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
-        .withdraw-page .withdraw-form .form-sub {
-            font-size: 9px;
+        .withdraw-page .wp-sub {
+            font-size: 11px;
             color: #888;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
         }
-        .withdraw-page .withdraw-form .form-group {
+        .withdraw-page .wp-customer-info {
+            background: #f8f9fc;
+            border-radius: 12px;
+            padding: 12px 14px;
             margin-bottom: 10px;
+            border: 1px solid #eee;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 12px;
+            font-size: 10px;
         }
-        .withdraw-page .withdraw-form .form-group label {
+        .withdraw-page .wp-customer-info .label {
+            color: #888;
+        }
+        .withdraw-page .wp-customer-info .value {
+            font-weight: 600;
+            color: #1c2128;
+        }
+        .withdraw-page .wp-transfer-note {
+            font-size: 10px;
+            color: #555;
+            background: #fef9e7;
+            border-left: 3px solid #f5b83d;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+        .withdraw-page .wp-balance-large {
+            font-size: 38px;
+            font-weight: 800;
+            color: #f5b83d;
+            text-align: center;
+            padding: 8px 0 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 14px;
+        }
+        .withdraw-page .wp-balance-large small {
+            font-size: 14px;
+            font-weight: 400;
+            color: #888;
+        }
+        .withdraw-page .wp-options {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .withdraw-page .wp-options .opt-btn {
+            flex: 1;
+            min-width: 80px;
+            padding: 10px 6px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            background: #fff;
+            font-weight: 600;
+            font-size: 11px;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .withdraw-page .wp-options .opt-btn.active {
+            border-color: #f5b83d;
+            background: #fef9e7;
+            color: #1c2128;
+        }
+        .withdraw-page .wp-options .opt-btn:active {
+            transform: scale(0.95);
+        }
+        .withdraw-page .wp-custom-input {
+            margin-bottom: 12px;
+        }
+        .withdraw-page .wp-custom-input label {
             font-size: 9px;
             font-weight: 600;
             color: #1c2128;
             display: block;
             margin-bottom: 3px;
         }
-        .withdraw-page .withdraw-form .form-group input {
+        .withdraw-page .wp-custom-input input {
             width: 100%;
             padding: 9px 12px;
             border: 1px solid #ddd;
             border-radius: 9px;
-            font-size: 11px;
+            font-size: 13px;
+            transition: border 0.2s;
         }
-        .withdraw-page .withdraw-form .form-group input:focus {
+        .withdraw-page .wp-custom-input input:focus {
             outline: none;
             border-color: #f5b83d;
         }
-        .withdraw-page .withdraw-form .btn-withdraw-submit {
+        .withdraw-page .wp-withdraw-btn {
             width: 100%;
-            padding: 10px;
-            background: #f5b83d;
-            color: #1c2128;
+            padding: 11px;
+            background: #1c2128;
+            color: white;
             border: none;
             border-radius: 9px;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
+            margin-bottom: 18px;
         }
-        .withdraw-page .withdraw-form .btn-withdraw-submit:active {
-            transform: scale(0.95);
+        .withdraw-page .wp-withdraw-btn:active {
+            transform: scale(0.96);
         }
-        .withdraw-page .withdraw-form .btn-withdraw-submit:disabled {
-            background: #ddd;
-            color: #888;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        .withdraw-page .withdraw-form .btn-withdraw-submit i {
-            color: #1c2128;
-        }
-        .withdraw-page .withdraw-history-title {
-            font-size: 13px;
+        .withdraw-page .wp-history-title {
             font-weight: 700;
+            font-size: 13px;
             color: #1c2128;
             margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 7px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 6px;
         }
-        .withdraw-page .withdraw-history-title span {
-            font-size: 9px;
-            background: #f0f0f0;
-            padding: 0 10px;
-            border-radius: 10px;
-            font-weight: 600;
-            color: #555;
-        }
-        .withdraw-page .empty-withdrawals {
-            text-align: center;
-            padding: 20px;
-            color: #888;
-            font-size: 10px;
-        }
-        .withdraw-page .empty-withdrawals i {
-            font-size: 28px;
-            color: #ddd;
-            display: block;
+        .withdraw-page .wp-history-group {
             margin-bottom: 6px;
         }
+        .withdraw-page .wp-history-group .group-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            background: #f8f9fc;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 11px;
+            color: #1c2128;
+            border: 1px solid #eee;
+            transition: background 0.2s;
+            user-select: none;
+        }
+        .withdraw-page .wp-history-group .group-header:active {
+            background: #eef0f3;
+        }
+        .withdraw-page .wp-history-group .group-header i {
+            transition: transform 0.3s;
+            font-size: 10px;
+            color: #888;
+        }
+        .withdraw-page .wp-history-group .group-header.open i {
+            transform: rotate(90deg);
+        }
+        .withdraw-page .wp-history-group .group-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.3s ease;
+            padding: 0 6px;
+        }
+        .withdraw-page .wp-history-group .group-body.open {
+            max-height: 300px;
+            padding: 6px 6px 4px 6px;
+        }
+        .withdraw-page .wp-history-group .group-body .hist-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 8px;
+            border-bottom: 1px solid #f5f5f5;
+            font-size: 10px;
+            color: #555;
+        }
+        .withdraw-page .wp-history-group .group-body .hist-item:last-child {
+            border-bottom: none;
+        }
+        .withdraw-page .wp-history-group .group-body .hist-item .amount {
+            font-weight: 600;
+            color: #1c2128;
+        }
+        .withdraw-page .wp-history-group .group-body .hist-item .date {
+            color: #888;
+            font-size: 9px;
+        }
+        .withdraw-page .wp-history-group .group-body .empty-msg {
+            font-size: 10px;
+            color: #aaa;
+            text-align: center;
+            padding: 8px 0;
+        }
+
+        /* ===== APPLICATIONS VIEW ===== */
         .applications-header {
             padding: 0 12px 11px 12px;
         }
@@ -2267,6 +2410,7 @@
             color: #888;
             font-size: 9px;
         }
+
         .app-card {
             background: #ffffff;
             border-radius: 14px;
@@ -2341,6 +2485,7 @@
         .app-card.open .app-summary .right .expand-icon {
             transform: rotate(180deg);
         }
+
         .app-card .app-details-expand {
             max-height: 0;
             overflow: hidden;
@@ -2380,6 +2525,8 @@
             color: #1c2128;
             text-decoration: underline;
         }
+
+        /* ===== RECEIPT MODAL (size reduced by 20%) ===== */
         #receiptModal {
             display: none;
             position: fixed;
@@ -2412,170 +2559,194 @@
         }
         .receipt-header {
             background: #1c2128;
-            padding: 18px 20px;
+            padding: 14px 16px;
+            /* reduced by 20% */;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             position: relative;
-            border-bottom: 4px solid #f5b83d;
+            border-bottom: 3px solid #f5b83d;
+            /* reduced */;
         }
         .receipt-header h2 {
             color: white;
             font-weight: 800;
             margin: 0;
-            letter-spacing: 1px;
-            font-size: 20px;
+            letter-spacing: 0.8px;
+            font-size: 17px;
+            /* reduced */;
         }
         .receipt-header .slogan {
             color: white;
             opacity: 0.6;
-            font-size: 10px;
+            font-size: 8px;
+            /* reduced */;
             margin: 0;
-            letter-spacing: 2px;
+            letter-spacing: 1.6px;
         }
         .receipt-header .invoice-title {
             color: #f5b83d;
             font-weight: 800;
             margin: 0;
-            font-size: 22px;
+            font-size: 18px;
+            /* reduced */;
             text-align: right;
         }
         .receipt-header .invoice-id {
             color: white;
             opacity: 0.6;
-            font-size: 10px;
+            font-size: 8px;
+            /* reduced */;
             margin: 0;
         }
         .receipt-addresses {
             display: flex;
             justify-content: space-between;
-            padding: 18px 20px 12px 20px;
+            padding: 14px 16px 10px 16px;
+            /* reduced */;
         }
         .receipt-addresses h4 {
-            margin: 0 0 4px 0;
-            font-size: 11px;
+            margin: 0 0 3px 0;
+            font-size: 9px;
+            /* reduced */;
             font-weight: 700;
             color: #1c2128;
-            border-left: 3px solid #f5b83d;
-            padding-left: 8px;
+            border-left: 2px solid #f5b83d;
+            padding-left: 6px;
         }
         .receipt-addresses .address-right h4 {
             border-left: none;
-            border-right: 3px solid #f5b83d;
+            border-right: 2px solid #f5b83d;
             padding-left: 0;
-            padding-right: 8px;
+            padding-right: 6px;
             text-align: right;
         }
         .receipt-addresses p {
-            font-size: 10px;
+            font-size: 8px;
+            /* reduced */;
             color: #555;
             margin: 1px 0;
-            line-height: 1.4;
+            line-height: 1.3;
         }
         .receipt-addresses .name {
             font-weight: 600;
             color: #1c2128;
-            font-size: 12px;
+            font-size: 10px;
+            /* reduced */;
         }
         .receipt-table-header {
             background: #f5b83d;
             display: flex;
             justify-content: space-between;
-            padding: 7px 20px;
-            font-size: 10px;
+            padding: 6px 16px;
+            /* reduced */;
+            font-size: 8px;
+            /* reduced */;
             font-weight: 700;
             color: white;
             text-transform: uppercase;
         }
-        .receipt-table-header > div {
+        .receipt-table-header>div {
             text-align: center;
         }
-        .receipt-table-header > div:first-child {
+        .receipt-table-header>div:first-child {
             flex: 2;
             text-align: left;
         }
-        .receipt-table-header > div:last-child {
+        .receipt-table-header>div:last-child {
             flex: 1;
             text-align: right;
         }
         .receipt-item-row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 20px;
+            padding: 6px 16px;
+            /* reduced */;
             border-bottom: 1px solid #eee;
-            font-size: 11px;
+            font-size: 9px;
+            /* reduced */;
         }
-        .receipt-item-row > div {
+        .receipt-item-row>div {
             text-align: center;
         }
-        .receipt-item-row > div:first-child {
+        .receipt-item-row>div:first-child {
             flex: 2;
             text-align: left;
         }
-        .receipt-item-row > div:last-child {
+        .receipt-item-row>div:last-child {
             flex: 1;
             text-align: right;
         }
         .receipt-totals {
-            padding: 12px 20px 20px 20px;
+            padding: 10px 16px 16px 16px;
+            /* reduced */;
             display: flex;
             justify-content: flex-end;
         }
         .receipt-totals-box {
-            width: 160px;
-            font-size: 10px;
+            width: 140px;
+            /* reduced */;
+            font-size: 8px;
+            /* reduced */;
             text-align: right;
         }
-        .receipt-totals-box > div {
+        .receipt-totals-box>div {
             display: flex;
             justify-content: space-between;
             padding: 2px 0;
         }
         .receipt-totals-box .total-row {
             background: #f5b83d;
-            margin-top: 6px;
-            padding: 6px 10px;
-            border-radius: 4px;
+            margin-top: 5px;
+            padding: 5px 8px;
+            /* reduced */;
+            border-radius: 3px;
             color: #1c2128;
             font-weight: 700;
         }
         .receipt-footer {
-            padding: 12px 20px 20px 20px;
+            padding: 10px 16px 16px 16px;
+            /* reduced */;
             border-top: 1px solid #eee;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
         }
         .receipt-footer .thanks {
-            font-size: 10px;
+            font-size: 8px;
+            /* reduced */;
             font-weight: 600;
             color: #1c2128;
         }
         .receipt-footer .footnote {
-            font-size: 8px;
+            font-size: 7px;
+            /* reduced */;
             color: #aaa;
-            max-width: 180px;
+            max-width: 160px;
         }
         .receipt-footer .signature-area {
             text-align: right;
-            border-top: 2px solid #1c2128;
-            padding-top: 4px;
-            width: 130px;
+            border-top: 1.6px solid #1c2128;
+            padding-top: 3px;
+            width: 110px;
         }
         .receipt-footer .signature-area .sign-name {
             font-weight: 800;
-            font-size: 15px;
+            font-size: 12px;
+            /* reduced */;
             color: #1c2128;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.4px;
         }
         .receipt-footer .signature-area .sign-label {
-            font-size: 8px;
+            font-size: 6px;
+            /* reduced */;
             color: #666;
             text-transform: uppercase;
         }
         .receipt-bottom-bar {
             background: #1c2128;
-            height: 10px;
+            height: 8px;
+            /* reduced */;
             width: 100%;
         }
         .receipt-download-btn {
@@ -2584,15 +2755,17 @@
             background: #1c2128;
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 10px;
+            padding: 10px;
+            /* reduced */;
+            border-radius: 8px;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 11px;
+            /* reduced */;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
             transition: all 0.2s;
         }
@@ -2602,6 +2775,8 @@
         .receipt-download-btn i {
             color: #f5b83d;
         }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 420px) {
             .bottom-nav {
                 max-width: 400px;
@@ -2646,76 +2821,72 @@
                 font-size: 12px;
             }
         }
+
+        /* ===== CONTACT INFO IN PROFILE ===== */
         .profile-contact {
             margin-top: 14px;
             padding-top: 11px;
             border-top: 1px solid #f0f0f0;
         }
-        .profile-contact h4 {
-            font-size: 9px;
+        .profile-contact .contact-title {
             font-weight: 600;
+            font-size: 10px;
             color: #1c2128;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
-        .profile-contact .contact-item {
+        .profile-contact .contact-row {
             display: flex;
             align-items: center;
-            gap: 9px;
-            padding: 5px 0;
-            font-size: 10px;
+            gap: 8px;
+            padding: 4px 0;
+            font-size: 9px;
             color: #555;
         }
-        .profile-contact .contact-item i {
-            width: 17px;
+        .profile-contact .contact-row i {
+            width: 16px;
             color: #f5b83d;
-            font-size: 13px;
+            font-size: 12px;
         }
-        .profile-contact .contact-item .contact-label {
-            color: #888;
-            font-weight: 500;
-        }
-        .profile-contact .contact-item .contact-value {
-            font-weight: 600;
-            color: #1c2128;
-            margin-left: auto;
-        }
-        .profile-contact .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+        .profile-contact .contact-row .wa-btn {
             background: #25D366;
-            color: white;
+            color: #fff;
             border: none;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 10px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 9px;
             font-weight: 600;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
             transition: all 0.2s;
             text-decoration: none;
-            margin-top: 4px;
         }
-        .profile-contact .whatsapp-btn:active {
+        .profile-contact .contact-row .wa-btn:active {
             transform: scale(0.95);
         }
-        .profile-contact .whatsapp-btn i {
-            font-size: 14px;
-            color: white;
+        .profile-contact .contact-row .wa-btn i {
+            color: #fff;
+            width: auto;
+            font-size: 11px;
         }
-        .profile-contact .social-link {
-            color: #1c2128;
+        .profile-contact .contact-row .fb-link {
+            color: #1877F2;
             font-weight: 600;
             text-decoration: none;
+            font-size: 9px;
         }
-        .profile-contact .social-link i {
-            font-size: 13px;
+        .profile-contact .contact-row .fb-link i {
             color: #1877F2;
+            width: auto;
+            font-size: 11px;
         }
     </style>
 </head>
 <body>
     <div class="app-root">
         <div class="app-content" id="appContent">
+            <!-- ===== HEADER ===== -->
             <div class="header">
                 <div class="header-left">
                     <img src="bufferzone.png" alt="Buffer Zone" class="logo-img" onerror="this.style.display='none'" />
@@ -2729,7 +2900,10 @@
                     <span class="notif-badge" id="notifBadge">0</span>
                 </div>
             </div>
+
+            <!-- ===== VIEW: HOME ===== -->
             <div id="homeView" class="view active">
+                <!-- ===== HERO ===== -->
                 <div class="hero">
                     <div class="small-grid-dots">
                         <div></div><div></div><div></div><div></div>
@@ -2748,7 +2922,9 @@
                         </div>
                         <div class="hero-services">
                             <div class="hero-services-title">OUR SERVICES</div>
-                            <ul class="service-list" id="ourServicesList"></ul>
+                            <ul class="service-list" id="ourServicesList">
+                                <!-- Rendered by JS -->
+                            </ul>
                         </div>
                     </div>
                     <div class="cta-container">
@@ -2756,10 +2932,20 @@
                         <div class="contact-number">Call to find out more<br><strong id="heroPhone">+123 456 7890</strong></div>
                     </div>
                 </div>
+
+                <!-- ===== PROMO CAROUSEL ===== -->
                 <div class="promo-carousel-wrapper" id="promoCarouselWrapper">
-                    <div class="promo-carousel-track" id="promoCarouselTrack"></div>
+                    <div class="promo-carousel-track" id="promoCarouselTrack">
+                        <!-- Rendered by JS -->
+                    </div>
                 </div>
-                <div id="promotionsBanner" class="promotions-banner"></div>
+
+                <!-- ===== PROMOTIONS BANNER ===== -->
+                <div id="promotionsBanner" class="promotions-banner">
+                    <!-- Rendered by JS -->
+                </div>
+
+                <!-- ===== CATEGORY BUTTONS ===== -->
                 <div class="category-row" id="categoryRow">
                     <button class="cat-btn active" data-cat="all"><i class="fa-solid fa-th-large"></i> All</button>
                     <button class="cat-btn" data-cat="graphic"><i class="fa-regular fa-lightbulb"></i> Graphic</button>
@@ -2767,6 +2953,8 @@
                     <button class="cat-btn" data-cat="tech"><i class="fa-solid fa-gear"></i> Technical</button>
                     <button class="cat-btn" data-cat="it"><i class="fa-solid fa-headset"></i> IT Support</button>
                 </div>
+
+                <!-- ===== SERVICE GRID ===== -->
                 <div id="serviceSection">
                     <div class="dynamic-header">
                         <span class="dynamic-title" id="dynamicTitle">RECENT WORK</span>
@@ -2778,6 +2966,8 @@
                     <div id="serviceGridContainer" class="service-grid"></div>
                 </div>
             </div>
+
+            <!-- ===== VIEW: ORDER FLOW ===== -->
             <div id="orderFlowView" class="view">
                 <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
                     <button id="backFromOrder" style="background: none; border: none; font-size: 14px; color: #1c2128; cursor: pointer; padding: 3px;">
@@ -2785,8 +2975,12 @@
                     </button>
                     <h3 style="font-weight: 700; font-size: 12px; color: #1c2128;">Customize Order</h3>
                 </div>
-                <div id="orderFlowContainer" class="order-flow-container"></div>
+                <div id="orderFlowContainer" class="order-flow-container">
+                    <!-- Dynamically rendered -->
+                </div>
             </div>
+
+            <!-- ===== VIEW: FLYER DETAIL ===== -->
             <div id="flyerDetailView" class="view">
                 <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
                     <button id="backFromFlyerDetail" style="background: none; border: none; font-size: 14px; color: #1c2128; cursor: pointer; padding: 3px;">
@@ -2817,6 +3011,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ===== VIEW: ORDERS ===== -->
             <div id="ordersView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Your Orders</h3>
@@ -2824,14 +3020,20 @@
                 </div>
                 <div class="order-grid" id="ordersGrid"></div>
             </div>
+
+            <!-- ===== VIEW: HISTORY ===== -->
             <div id="historyView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Transaction History</h3>
                     <p style="color: #888; font-size: 9px;">Tap a transaction to view more details.</p>
                 </div>
-                <div id="paymentReminderBanner" class="payment-reminder-banner"></div>
+                <div id="paymentReminderBanner" class="payment-reminder-banner">
+                    <!-- Rendered by JS -->
+                </div>
                 <div class="history-list" id="historyList"></div>
             </div>
+
+            <!-- ===== VIEW: SAMPLES ===== -->
             <div id="samplesView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">📁 Work Samples</h3>
@@ -2839,23 +3041,32 @@
                 </div>
                 <div id="samplesContainer" class="samples-grid"></div>
             </div>
+
+            <!-- ===== VIEW: APPLICATIONS ===== -->
             <div id="applicationsView" class="view">
                 <div class="applications-header">
                     <h3>📋 My Applications</h3>
                     <p>Track the status of your form submissions.</p>
                 </div>
-                <div id="applicationsList"></div>
+                <div id="applicationsList">
+                    <!-- Rendered by JS -->
+                </div>
             </div>
+
+            <!-- ===== VIEW: ACCOUNT ===== -->
             <div id="accountView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">💰 My Account</h3>
                     <p style="color: #888; font-size: 9px;">Manage your balance, referrals, and withdrawals.</p>
                 </div>
+
                 <div class="account-section">
                     <div class="account-toggle-row">
                         <button class="toggle-btn active" id="accountTransactionsBtn"><i class="fa-solid fa-receipt"></i> Transactions</button>
                         <button class="toggle-btn" id="accountWithdrawBtn"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
                     </div>
+
+                    <!-- Transactions View -->
                     <div class="account-view active" id="accountTransactionsView">
                         <div class="referral-code-box" id="referralCodeBox">
                             <div class="label">Your Referral Code</div>
@@ -2872,20 +3083,25 @@
                                 <button class="btn-action send-btn" id="sendMoneyBtn"><i class="fa-solid fa-paper-plane"></i> Send Money</button>
                             </div>
                         </div>
+
+                        <!-- Send Money Section -->
                         <div class="send-money-section" id="sendMoneySection">
                             <h4><i class="fa-solid fa-paper-plane" style="color:#4a90d9;"></i> Send Money</h4>
                             <p class="sub">Send funds to another Buffer Zone user using their referral code.</p>
+
                             <div class="form-group">
                                 <label>Recipient Referral Code</label>
                                 <input type="text" id="sendReferralInput" placeholder="e.g. BZ-ABCDE" />
                                 <button class="apply-btn" id="searchRecipientBtn" style="margin-top:3px; width:100%;">🔍 Search</button>
                             </div>
+
                             <div class="form-group">
                                 <label>Recipient</label>
                                 <div class="search-result" id="recipientSearchResult">
                                     <span style="color:#888;">Enter a referral code and click Search.</span>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label>Amount (ZMW)</label>
                                 <input type="number" id="sendAmountInput" placeholder="0.00" step="0.01" />
@@ -2893,45 +3109,84 @@
                                     Available: <span class="avail" id="sendAvailBalance">ZMW 0.00</span>
                                 </div>
                             </div>
+
                             <button class="btn-send" id="sendMoneyConfirmBtn" disabled>
                                 <i class="fa-solid fa-paper-plane"></i> Send Money
                             </button>
+
                             <div class="send-money-tx-list" id="sendMoneyTxList">
                                 <div style="font-weight:600; font-size:10px; color:#1c2128; margin-bottom:5px;">📋 Recent Sent &amp; Received</div>
-                                <div id="sendTxItems"></div>
+                                <div id="sendTxItems">
+                                    <!-- Rendered by JS -->
+                                </div>
                             </div>
                         </div>
-                        <div id="transactionMessages"></div>
+
+                        <div id="transactionMessages">
+                            <!-- Rendered by JS (expandable cards) -->
+                        </div>
                     </div>
+
+                    <!-- Withdrawals View (now points to the Withdraw Page) -->
                     <div class="account-view" id="accountWithdrawView">
-                        <div class="withdraw-page">
-                            <div class="page-title">💸 Withdraw Funds</div>
-                            <div class="page-sub">Request a withdrawal from your Buffer Zone account. All requests are reviewed within 24 hours.</div>
-                            <div class="balance-summary" id="withdrawBalanceSummary">
-                                <div class="bal-label">Available Balance</div>
-                                <div class="bal-amount" id="withdrawBalAmount">ZMW 0.00</div>
-                                <div class="bal-detail">Pending withdrawals: <span id="withdrawPendingAmount">ZMW 0.00</span> &middot; Total balance: <span id="withdrawTotalBalance">ZMW 0.00</span></div>
-                            </div>
-                            <div class="withdraw-form">
-                                <h4>📝 Withdrawal Request</h4>
-                                <div class="form-sub">Enter the amount you wish to withdraw. Funds will be sent to your registered phone number.</div>
-                                <div class="form-group">
-                                    <label>Amount (ZMW) — max: <span id="withdrawMaxLabel">0.00</span></label>
-                                    <input type="number" id="withdrawAmountInput" placeholder="e.g. 50" step="0.01" />
-                                </div>
-                                <button class="btn-withdraw-submit" id="submitWithdrawBtn">
-                                    <i class="fa-solid fa-arrow-up"></i> Submit Withdrawal Request
-                                </button>
-                            </div>
-                            <div class="withdraw-history-title">
-                                📋 Withdrawal History
-                                <span id="withdrawCount">0</span>
-                            </div>
-                            <div id="withdrawalsListContainer"></div>
+                        <div style="text-align:center; padding:17px 0;">
+                            <p style="color:#888; font-size:11px;">Click the "Withdraw" button below to go to the withdrawal page.</p>
+                            <button class="withdraw-btn" id="withdrawBtnFromView" style="margin-top:10px; background:#f5b83d; border:none; padding:10px 26px; border-radius:26px; font-weight:700; font-size:12px; color:#1c2128; cursor:pointer; display:inline-flex; align-items:center; gap:7px;">
+                                <i class="fa-solid fa-arrow-up"></i> Go to Withdraw Page
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- ===== VIEW: WITHDRAW (NEW PAGE) ===== -->
+            <div id="withdrawView" class="view">
+                <div class="withdraw-page">
+                    <div class="wp-header">Withdraw Funds</div>
+                    <div class="wp-sub">Transfer your available earnings to your registered mobile number</div>
+
+                    <!-- Customer Info -->
+                    <div class="wp-customer-info" id="wpCustomerInfo">
+                        <div><span class="label">Name</span><br><span class="value" id="wpName">—</span></div>
+                        <div><span class="label">Number</span><br><span class="value" id="wpNumber">—</span></div>
+                        <div style="grid-column: span 2;"><span class="label">Email</span><br><span class="value" id="wpEmail">—</span></div>
+                    </div>
+
+                    <div class="wp-transfer-note" id="wpTransferNote">
+                        Once approved funds will be transferred to <strong id="wpTransferNumber">—</strong>
+                    </div>
+
+                    <!-- Large Balance -->
+                    <div class="wp-balance-large">
+                        <span id="wpBalanceDisplay">ZMW 0.00</span>
+                        <small>available</small>
+                    </div>
+
+                    <!-- Quick Options -->
+                    <div class="wp-options" id="wpOptions">
+                        <button class="opt-btn" data-pct="25">25%</button>
+                        <button class="opt-btn" data-pct="50">50%</button>
+                        <button class="opt-btn" data-pct="100">100%</button>
+                    </div>
+
+                    <!-- Custom Amount -->
+                    <div class="wp-custom-input">
+                        <label>Or enter custom amount (max: <span id="wpMaxLabel">0.00</span>)</label>
+                        <input type="number" id="wpCustomAmount" placeholder="0.00" step="0.01" />
+                    </div>
+
+                    <!-- Withdraw Button -->
+                    <button class="wp-withdraw-btn" id="wpWithdrawBtn">Withdraw Funds</button>
+
+                    <!-- Withdraw History -->
+                    <div class="wp-history-title">Withdraw History</div>
+                    <div id="wpHistoryContainer">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== VIEW: PROFILE ===== -->
             <div id="profileView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">My Profile</h3>
@@ -2949,33 +3204,32 @@
                         <h4 style="font-size: 9px; font-weight: 600; color: #1c2128; margin-bottom: 3px;">About</h4>
                         <p>Passionate about design and technology. Helping brands grow through innovation and strategic design.</p>
                     </div>
+                    <!-- ===== CONTACT INFO ADDED ===== -->
                     <div class="profile-contact">
-                        <h4>📞 Contact Us</h4>
-                        <div class="contact-item">
+                        <div class="contact-title">📞 Contact Us</div>
+                        <div class="contact-row">
                             <i class="fa-brands fa-whatsapp"></i>
-                            <span class="contact-label">WhatsApp</span>
-                            <span class="contact-value">0768658484</span>
+                            <span>WhatsApp:</span>
+                            <button class="wa-btn" id="waBtn"><i class="fa-brands fa-whatsapp"></i> 0768658484</button>
                         </div>
-                        <div style="display:flex; justify-content:center; margin:4px 0 8px 0;">
-                            <a href="https://wa.me/260768658484" target="_blank" class="whatsapp-btn" id="whatsappBtn">
-                                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
-                            </a>
-                        </div>
-                        <div class="contact-item">
+                        <div class="contact-row">
                             <i class="fa-brands fa-facebook"></i>
-                            <span class="contact-label">Facebook</span>
-                            <span class="contact-value"><a href="https://facebook.com/BufferZONE" target="_blank" class="social-link"><i class="fa-brands fa-facebook"></i> Buffer ZONE</a></span>
+                            <span>Facebook:</span>
+                            <a href="https://facebook.com/bufferzone" target="_blank" class="fb-link"><i class="fa-brands fa-facebook"></i> Buffer ZONE</a>
                         </div>
-                        <div class="contact-item">
+                        <div class="contact-row">
                             <i class="fa-solid fa-phone"></i>
-                            <span class="contact-label">SMS / CALLS</span>
-                            <span class="contact-value">0976760537</span>
+                            <span>SMS/CALLS:</span>
+                            <span style="font-weight:600;color:#1c2128;">0976760537</span>
                         </div>
                     </div>
                     <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
                 </div>
             </div>
+
         </div>
+
+        <!-- ===== BOTTOM NAV – YELLOW BORDER AROUND THE ENTIRE PILL BAR ===== -->
         <div class="bottom-nav">
             <button class="nav-item active" data-view="homeView"><i class="fa-solid fa-house"></i><span>Home</span></button>
             <button class="nav-item" data-view="ordersView"><i class="fa-solid fa-bag-shopping"></i><span>Orders</span></button>
@@ -2983,9 +3237,13 @@
             <button class="nav-item" data-view="samplesView"><i class="fa-solid fa-images"></i><span>Samples</span></button>
             <button class="nav-item" data-view="applicationsView"><i class="fa-solid fa-clipboard-list"></i><span>Applications</span></button>
             <button class="nav-item" data-view="accountView"><i class="fa-solid fa-wallet"></i><span>Account</span></button>
+            <button class="nav-item" data-view="withdrawView"><i class="fa-solid fa-arrow-up"></i><span>Withdraw</span></button>
             <button class="nav-item" data-view="profileView"><i class="fa-regular fa-user"></i><span>Profile</span></button>
         </div>
+
     </div>
+
+    <!-- ===== PAYMENT PAGE ===== -->
     <div class="payment-page-overlay" id="paymentPage">
         <div class="payment-page">
             <button class="close-btn" id="paymentCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -2995,6 +3253,7 @@
             </div>
             <h3>💳 Payment Required</h3>
             <p class="sub">To begin your project, you must pay 50% upfront.</p>
+
             <div class="payment-details">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <div>
@@ -3009,6 +3268,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ===== PAY WITH BUFFER ZONE WALLET ===== -->
             <div id="walletPaymentSection" style="margin-bottom:10px; padding:9px; border-radius:9px; border:1px solid #e0e0e0; background:#fafbfc;">
                 <div style="display:flex; align-items:center; gap:7px; flex-wrap:wrap;">
                     <input type="checkbox" id="payWithWalletCheck" />
@@ -3019,10 +3280,14 @@
                     <span id="walletSufficiency" style="font-weight:600;"></span>
                 </div>
             </div>
+
+            <!-- ===== DROPDOWN: PROMO CODE / REFERRAL CODE ===== -->
             <div class="toggle-row">
                 <button class="toggle-code-btn active" id="togglePromoBtn">Promo Code</button>
                 <button class="toggle-code-btn" id="toggleReferralBtn">Referral Code</button>
             </div>
+
+            <!-- Promo Code Dropdown -->
             <div class="code-input-wrap open" id="promoCodeWrap">
                 <div class="coupon-section">
                     <input type="text" id="couponInput" placeholder="Enter promo code">
@@ -3030,17 +3295,21 @@
                 </div>
                 <span class="coupon-msg" id="couponMsg"></span>
             </div>
+
+            <!-- Referral Code Dropdown -->
             <div class="code-input-wrap" id="referralCodeWrap">
                 <input type="text" id="referralCodeInput" placeholder="Enter referral code">
                 <button class="apply-btn" id="applyReferralBtn" style="margin-top:5px;">Apply Referral</button>
                 <span class="coupon-msg" id="referralMsg"></span>
             </div>
+
             <div class="price-breakdown" id="priceBreakdown" style="display:none;">
                 <div class="row"><span class="label">Original Price</span><span class="val" id="origPriceVal">ZMW 0.00</span></div>
                 <div class="row"><span class="label">Discount</span><span class="val discounted" id="discountVal">- ZMW 0.00</span></div>
                 <div class="row"><span class="label">Final Price</span><span class="val" id="finalPriceVal">ZMW 0.00</span></div>
                 <div class="row"><span class="label" style="font-weight:700;">50% Deposit</span><span class="val" style="font-weight:700;color:#f5b83d;" id="finalDepositVal">ZMW 0.00</span></div>
             </div>
+
             <div style="margin-bottom:9px;" id="uploadSection">
                 <label style="font-weight:600; font-size:9px; color:#1c2128; display:block; margin-bottom:3px;">Upload transaction screenshot</label>
                 <div class="upload-area" id="uploadArea">
@@ -3051,6 +3320,7 @@
                     <input type="hidden" id="cloudinaryScreenshotUrl">
                 </div>
             </div>
+
             <button class="btn-primary" id="confirmPaymentBtn">
                 <i class="fa-regular fa-circle-check"></i> Confirm Payment & Start Project
             </button>
@@ -3059,6 +3329,8 @@
             </p>
         </div>
     </div>
+
+    <!-- ===== ORDER SUCCESS POPUP ===== -->
     <div class="order-success-overlay" id="orderSuccessPopup">
         <div class="order-success-modal">
             <i class="fa-regular fa-circle-check"></i>
@@ -3067,17 +3339,36 @@
             <button class="btn-ok" id="orderSuccessOkBtn">OK</button>
         </div>
     </div>
+
+    <!-- ===== WITHDRAW MODAL (removed – now a page) ===== -->
+
+    <!-- ===== WITHDRAW SUCCESS MODAL (kept for after submission) ===== -->
+    <div class="withdraw-success-overlay" id="withdrawSuccessModal">
+        <div class="withdraw-success-modal">
+            <i class="fa-regular fa-circle-check"></i>
+            <h3>Withdrawal Submitted</h3>
+            <p>Your withdrawal request has been submitted and will be processed within 24 hours.</p>
+            <button class="btn-ok" id="withdrawSuccessOkBtn">OK</button>
+        </div>
+    </div>
+
+    <!-- ===== NOTIFICATION SIDEBAR ===== -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <div class="sidebar" id="notifSidebar">
         <div class="sidebar-header">
             <h3>Notifications</h3>
             <button class="sidebar-close" id="sidebarClose"><i class="fa-solid fa-times"></i></button>
         </div>
-        <div id="notifList"></div>
+        <div id="notifList">
+            <!-- Rendered by JS -->
+        </div>
     </div>
+
+    <!-- ===== RECEIPT MODAL (size reduced by 20%) ===== -->
     <div id="receiptModal">
         <div class="receipt-wrapper">
             <div id="receiptContainer" class="receipt-card">
+                <!-- Header -->
                 <div class="receipt-header">
                     <div>
                         <h2>BUFFER ZONE</h2>
@@ -3088,12 +3379,14 @@
                         <p class="invoice-id">ID NO : <span id="recOrderId" style="color:white;">ORD-001</span></p>
                     </div>
                 </div>
+
+                <!-- Addresses -->
                 <div class="receipt-addresses">
                     <div>
                         <h4>INVOICE TO</h4>
                         <p class="name" id="recCustName">Customer Name</p>
                         <p id="recCustPhone">+000 123 456 789</p>
-                        <p id="recCustEmail">customer@email.com</p>
+                        <p id="recCustEmail" style="font-size:8px;color:#555;">customer@email.com</p>
                         <p>Customer</p>
                     </div>
                     <div class="address-right">
@@ -3104,13 +3397,21 @@
                         <p>Lusaka, Kitwe and Ndola</p>
                     </div>
                 </div>
+
+                <!-- Table Header -->
                 <div class="receipt-table-header">
                     <div>DESCRIPTION</div>
                     <div>PRICE</div>
                     <div>QTY</div>
                     <div>TOTAL</div>
                 </div>
-                <div id="recItemsBody"></div>
+
+                <!-- Items -->
+                <div id="recItemsBody">
+                    <!-- Rendered by JS -->
+                </div>
+
+                <!-- Totals -->
                 <div class="receipt-totals">
                     <div class="receipt-totals-box">
                         <div><span>Subtotal :</span> <span id="recSubtotal">ZMW 0.00</span></div>
@@ -3119,27 +3420,43 @@
                         <div class="total-row"><span>TOTAL</span> <span id="recTotalDisplay">ZMW 0.00</span></div>
                     </div>
                 </div>
+
+                <!-- Footer -->
                 <div class="receipt-footer">
                     <div>
                         <div class="thanks">Thanks for your business!</div>
-                        <div class="footnote">We truly appreciate your trust and support. It has been a pleasure working with you, and we look forward to bringing your next project to life.</div>
+                        <div class="footnote" id="recFootnote">
+                            We truly appreciate your trust and support. It has been a pleasure working with you, and we look forward to bringing your next project to life.
+                        </div>
                     </div>
                     <div class="signature-area">
                         <div class="sign-name" id="recSignName">Jubel Mobela</div>
                         <div class="sign-label">SIGNATURE</div>
                     </div>
                 </div>
+
                 <div class="receipt-bottom-bar"></div>
             </div>
+
+            <!-- Download Button -->
             <button class="receipt-download-btn" id="downloadReceiptBtn">
                 <i class="fa-solid fa-download"></i> Download Receipt
             </button>
             <button style="margin-top:8px; width:100%; background:transparent; color:#fff; border:1px solid #fff; padding:8px; border-radius:8px; font-size:11px; cursor:pointer;" id="closeReceiptBtn">Close</button>
         </div>
     </div>
+
+    <!-- ===== CLOUDINARY WIDGET SCRIPT ===== -->
     <script type="text/javascript">
+        // Cloudinary is loaded via CDN script tag in head
     </script>
+
+    <!-- ===== FIREBASE MODULE ===== -->
     <script type="module">
+        // =================================================================
+        // FIREBASE SDK
+        // =================================================================
+
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
         import { getDatabase, ref, onValue, set, push, get, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
@@ -3165,6 +3482,10 @@
         const auth = getAuth(app);
         const messaging = getMessaging(app);
 
+        // =================================================================
+        // STATE
+        // =================================================================
+
         let allData = null;
         let currentUser = null;
         let currentUserData = null;
@@ -3185,17 +3506,24 @@
         let orderTotalBeforeDiscount = 0;
         let appliedReferral = null;
 
+        // Carousel state
         let carouselItems = [];
         let currentCarouselIndex = 0;
         let autoScrollTimer = null;
         let isUserInteracting = false;
         let carouselDirection = 1;
 
+        // Send money state
         let sendRecipientUid = null;
         let sendRecipientName = '';
         let sendRecipientData = null;
 
+        // Flyer detail state
         let currentFlyerId = null;
+
+        // =================================================================
+        // DOM REFS
+        // =================================================================
 
         const headerName = document.getElementById('headerName');
         const heroTitle = document.getElementById('heroTitle');
@@ -3261,15 +3589,16 @@
         const copyReferralBtn = document.getElementById('copyReferralBtn');
         const accountBalanceDisplay = document.getElementById('accountBalanceDisplay');
         const withdrawBtnFromBalance = document.getElementById('withdrawBtnFromBalance');
+        const withdrawBtnFromView = document.getElementById('withdrawBtnFromView');
         const transactionMessages = document.getElementById('transactionMessages');
         const withdrawalsListContainer = document.getElementById('withdrawalsListContainer');
+        const withdrawModal = document.getElementById('withdrawModal');
         const withdrawAmountInput = document.getElementById('withdrawAmountInput');
+        const confirmWithdrawBtn = document.getElementById('confirmWithdrawBtn');
+        const cancelWithdrawBtn = document.getElementById('cancelWithdrawBtn');
         const withdrawMaxLabel = document.getElementById('withdrawMaxLabel');
-        const submitWithdrawBtn = document.getElementById('submitWithdrawBtn');
-        const withdrawBalAmount = document.getElementById('withdrawBalAmount');
-        const withdrawPendingAmount = document.getElementById('withdrawPendingAmount');
-        const withdrawTotalBalance = document.getElementById('withdrawTotalBalance');
-        const withdrawCount = document.getElementById('withdrawCount');
+        const withdrawSuccessModal = document.getElementById('withdrawSuccessModal');
+        const withdrawSuccessOkBtn = document.getElementById('withdrawSuccessOkBtn');
         const togglePromoBtn = document.getElementById('togglePromoBtn');
         const toggleReferralBtn = document.getElementById('toggleReferralBtn');
         const promoCodeWrap = document.getElementById('promoCodeWrap');
@@ -3301,6 +3630,8 @@
         const flyerDetailCloseBtn = document.getElementById('flyerDetailCloseBtn');
         const backFromFlyerDetail = document.getElementById('backFromFlyerDetail');
         const applicationsListEl = document.getElementById('applicationsList');
+
+        // Receipt modal refs
         const receiptModal = document.getElementById('receiptModal');
         const closeReceiptBtn = document.getElementById('closeReceiptBtn');
         const downloadReceiptBtn = document.getElementById('downloadReceiptBtn');
@@ -3313,6 +3644,25 @@
         const recDiscount = document.getElementById('recDiscount');
         const recTotalDisplay = document.getElementById('recTotalDisplay');
         const recSignName = document.getElementById('recSignName');
+        const recFootnote = document.getElementById('recFootnote');
+
+        // Withdraw page refs
+        const withdrawView = document.getElementById('withdrawView');
+        const wpName = document.getElementById('wpName');
+        const wpNumber = document.getElementById('wpNumber');
+        const wpEmail = document.getElementById('wpEmail');
+        const wpTransferNumber = document.getElementById('wpTransferNumber');
+        const wpBalanceDisplay = document.getElementById('wpBalanceDisplay');
+        const wpOptions = document.getElementById('wpOptions');
+        const wpCustomAmount = document.getElementById('wpCustomAmount');
+        const wpMaxLabel = document.getElementById('wpMaxLabel');
+        const wpWithdrawBtn = document.getElementById('wpWithdrawBtn');
+        const wpHistoryContainer = document.getElementById('wpHistoryContainer');
+        const waBtn = document.getElementById('waBtn');
+
+        // =================================================================
+        // HELPER FUNCTIONS
+        // =================================================================
 
         function showToast(msg, type = 'info') {
             const toast = document.createElement('div');
@@ -3412,6 +3762,10 @@
             return `ZMW ${curr.toFixed(2)}`;
         }
 
+        // =================================================================
+        // CLOUDINARY UPLOAD (payment page)
+        // =================================================================
+
         function setupCloudinaryUpload() {
             uploadArea.addEventListener('click', () => {
                 const options = {
@@ -3447,6 +3801,10 @@
             });
         }
 
+        // =================================================================
+        // FCM – REQUEST PERMISSION, GET TOKEN, STORE IN DB
+        // =================================================================
+
         async function setupFCM() {
             try {
                 const permission = await Notification.requestPermission();
@@ -3464,6 +3822,7 @@
             } catch (error) {
                 console.error('Error getting FCM token:', error);
             }
+
             onMessage(messaging, (payload) => {
                 console.log('📩 Foreground message received:', payload);
                 const title = payload.notification?.title || payload.data?.title || 'New Notification';
@@ -3472,6 +3831,10 @@
                 renderNotifications();
             });
         }
+
+        // =================================================================
+        // SEND PUSH NOTIFICATION VIA CLOUD FUNCTION
+        // =================================================================
 
         async function sendPushNotificationToUser(userId, title, message, clickUrl = '') {
             const functionUrl = 'https://us-central1-bufferzone-63501.cloudfunctions.net/sendPushNotification';
@@ -3500,6 +3863,10 @@
             }
         }
 
+        // =================================================================
+        // WRAPPER: CREATE IN-APP NOTIFICATION + PUSH
+        // =================================================================
+
         function createNotification(userId, title, message, clickUrl = '') {
             if (!allData.notifications) allData.notifications = {};
             const notifId = 'notif_' + Date.now();
@@ -3515,6 +3882,10 @@
                 sendPushNotificationToUser(userId, title, message, clickUrl);
             }).catch(err => console.error('Error saving notification:', err));
         }
+
+        // =================================================================
+        // LOAD DATA
+        // =================================================================
 
         function loadData(callback) {
             const dbRef = ref(db, 'bufferzoneAppData');
@@ -3583,8 +3954,13 @@
             return set(dbRef, allData);
         }
 
+        // =================================================================
+        // RENDER FUNCTIONS
+        // =================================================================
+
         function renderAll() {
             if (!allData) return;
+
             if (allData.disabled === true) {
                 document.body.innerHTML = `
                     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
@@ -3595,6 +3971,7 @@
                 `;
                 return;
             }
+
             if (allData.hero) {
                 const h = allData.hero;
                 heroTitle.innerHTML = `${h.title || 'WE ARE'}<br><span>${h.titleSpan || 'CREATIVE'}</span>`;
@@ -3602,11 +3979,13 @@
                 heroCtaBtn.textContent = h.cta || 'GET STARTED';
                 heroPhone.textContent = h.phone || '+123 456 7890';
             }
+
             if (allData.ourServicesList) {
                 ourServicesList.innerHTML = allData.ourServicesList.map(item =>
                     `<li><i class="fa-solid fa-check-circle"></i> ${item}</li>`
                 ).join('');
             }
+
             renderPromotionsBanner();
             renderPromoCarousel();
             renderServices();
@@ -3620,6 +3999,8 @@
             renderWithdrawalsList();
             renderSendMoneyTxList();
             renderApplications();
+            renderWithdrawPage();
+
             if (allData.policy) {
                 const p = allData.policy;
                 document.querySelector('.order-policy-content h2').innerHTML =
@@ -3634,23 +4015,33 @@
             }
         }
 
+        // =================================================================
+        // PROMO CAROUSEL – INFINITE PEEK STYLE WITH REVERSE (10% peek)
+        // =================================================================
+
         function renderPromoCarousel() {
             const promoPics = allData.promoPics || {};
             const entries = Object.entries(promoPics);
             entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+
             carouselItems = entries;
+
             const wrapper = promoCarouselWrapper;
+
             if (entries.length === 0) {
                 wrapper.classList.add('collapsed');
                 promoCarouselTrack.innerHTML = '';
                 return;
             }
+
             wrapper.classList.remove('collapsed');
+
             const duplicated = [
                 entries[entries.length - 1],
                 ...entries,
                 entries[0]
             ];
+
             promoCarouselTrack.innerHTML = duplicated.map(([key, pic], idx) => {
                 const isClickable = pic.clickContent?.enabled === true;
                 const mediaType = pic.mediaType || 'image';
@@ -3671,6 +4062,7 @@
                 </div>
                 `;
             }).join('');
+
             const track = promoCarouselTrack;
             const slides = track.querySelectorAll('.promo-slide');
             if (slides.length > 1) {
@@ -3683,6 +4075,7 @@
                 carouselDirection = 1;
                 updateCarouselClasses(1);
             }
+
             track.addEventListener('scroll', () => {
                 if (isUserInteracting) {
                     const containerWidth = track.clientWidth;
@@ -3700,6 +4093,7 @@
                             closestIdx = i;
                         }
                     });
+
                     if (closestIdx === 0) {
                         const targetSlide = slides[1];
                         const scrollPos2 = targetSlide.offsetLeft - (containerWidth - targetSlide.offsetWidth) / 2;
@@ -3712,6 +4106,7 @@
                         track.scrollLeft = Math.max(0, scrollPos2);
                         closestIdx = slides.length - 2;
                     }
+
                     const realIndex = parseInt(slides[closestIdx].dataset.realIndex);
                     if (realIndex !== currentCarouselIndex) {
                         if (realIndex > currentCarouselIndex || (realIndex === 0 && currentCarouselIndex === carouselItems.length - 1)) {
@@ -3731,7 +4126,9 @@
                     resetAutoScroll();
                 }, 2000);
             });
+
             updateCarouselClasses(1);
+
             setTimeout(() => {
                 const slides2 = track.querySelectorAll('.promo-slide');
                 if (slides2.length > 1) {
@@ -3742,13 +4139,16 @@
                     track.scrollLeft = Math.max(0, scrollPos);
                 }
             }, 100);
+
             startAutoScroll();
+
             slides.forEach(slide => {
                 slide.addEventListener('click', function(e) {
                     const key = this.dataset.key;
                     const mediaType = this.dataset.mediatype;
                     const videoEl = this.querySelector('video');
                     const playOverlay = this.querySelector('.video-play-overlay');
+
                     if (videoEl && mediaType === 'video') {
                         if (videoEl.paused) {
                             isUserInteracting = true;
@@ -3774,6 +4174,7 @@
                             return;
                         }
                     }
+
                     if (key) {
                         const flyer = allData.promoPics?.[key];
                         if (flyer && flyer.clickContent?.enabled) {
@@ -3784,6 +4185,7 @@
                     }
                 });
             });
+
             slides.forEach(slide => {
                 const videoEl = slide.querySelector('video');
                 if (videoEl) {
@@ -3847,13 +4249,16 @@
                 }
             });
             if (targetIdx === -1) return;
+
             const containerWidth = promoCarouselTrack.clientWidth;
             const slideWidth = slides[targetIdx].offsetWidth;
             const scrollPos = slides[targetIdx].offsetLeft - (containerWidth - slideWidth) / 2;
+
             promoCarouselTrack.scrollTo({
                 left: Math.max(0, scrollPos),
                 behavior: 'smooth'
             });
+
             currentCarouselIndex = realIndex;
             updateCarouselClasses(targetIdx);
             resetAutoScroll();
@@ -3869,6 +4274,7 @@
                         if (s.classList.contains('video-playing')) videoPlaying = true;
                     });
                     if (videoPlaying) return;
+
                     let nextIndex;
                     if (carouselDirection === 1) {
                         nextIndex = currentCarouselIndex + 1;
@@ -3913,6 +4319,10 @@
             `).join('');
         }
 
+        // =================================================================
+        // SERVICES
+        // =================================================================
+
         function renderServices(category = 'all') {
             const container = serviceGridContainer;
             const services = allData.services || {};
@@ -3920,11 +4330,13 @@
             if (category !== 'all') {
                 entries = entries.filter(([key, s]) => s.category === category);
             }
+
             if (entries.length === 0) {
                 container.innerHTML =
                     `<div class="text-muted text-center" style="padding:17px;">No services available.</div>`;
                 return;
             }
+
             container.innerHTML = entries.map(([key, s]) => {
                 const thumbClass = 'thumb-1';
                 return `
@@ -3937,6 +4349,7 @@
                     </div>
                 `;
             }).join('');
+
             container.querySelectorAll('.service-item').forEach(item => {
                 item.addEventListener('click', function() {
                     const id = this.dataset.id;
@@ -3946,11 +4359,16 @@
             });
         }
 
+        // =================================================================
+        // ORDERS
+        // =================================================================
+
         function renderOrders() {
             const container = ordersGrid;
             const orders = allData.orders || {};
             const entries = Object.entries(orders).filter(([key, o]) => o.userId === currentUserId);
             entries.sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
+
             if (entries.length === 0) {
                 container.innerHTML =
                     `<div class="text-muted text-center" style="padding:17px;">No orders found.</div>`;
@@ -3971,8 +4389,10 @@
                     customizationHtml =
                         `<div class="detail-row"><span class="label">Customization</span><span class="val">None</span></div>`;
                 }
+
                 const statusClass = o.status ? `status-${o.status}` : 'status-pending';
                 const statusDisplay = o.status ? o.status.charAt(0).toUpperCase() + o.status.slice(1) : 'Pending';
+
                 let actionHtml = '';
                 if (o.status === 'completed' || o.status === 'done') {
                     actionHtml = `
@@ -3983,6 +4403,7 @@
                         </div>
                     `;
                 }
+
                 return `
                 <div class="order-card">
                     <div class="order-summary" data-key="${key}">
@@ -4010,12 +4431,14 @@
                 </div>
                 `;
             }).join('');
+
             container.querySelectorAll('.order-summary').forEach(el => {
                 el.addEventListener('click', function() {
                     const parent = this.closest('.order-card');
                     parent.classList.toggle('open');
                 });
             });
+
             container.querySelectorAll('.view-receipt-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -4026,11 +4449,16 @@
             });
         }
 
+        // =================================================================
+        // HISTORY
+        // =================================================================
+
         function renderHistory() {
             const container = historyList;
             const transactions = allData.transactions || {};
             const entries = Object.entries(transactions).filter(([key, t]) => t.userId === currentUserId);
             entries.sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
+
             const orders = allData.orders || {};
             let pendingReminder = null;
             let orderKeyToUpdate = null;
@@ -4042,6 +4470,7 @@
                     break;
                 }
             }
+
             const reminderBanner = document.getElementById('paymentReminderBanner');
             if (pendingReminder) {
                 reminderBanner.classList.add('show');
@@ -4054,6 +4483,7 @@
                     </button>
                     <span class="done-badge" id="doneBadge">✅ Paid in full</span>
                 `;
+
                 const doneBtn = document.getElementById('doneRemainingBtn');
                 if (doneBtn) {
                     doneBtn.addEventListener('click', function(e) {
@@ -4061,6 +4491,7 @@
                         markRemainingAsPaid(pendingReminder.key, pendingReminder.order);
                     });
                 }
+
                 if (pendingReminder.order.remainingPaid === true) {
                     const doneBadge = document.getElementById('doneBadge');
                     const doneBtn2 = document.getElementById('doneRemainingBtn');
@@ -4070,11 +4501,13 @@
             } else {
                 reminderBanner.classList.remove('show');
             }
+
             if (entries.length === 0) {
                 container.innerHTML =
                     `<div class="text-muted text-center" style="padding:17px;">No transactions found.</div>`;
                 return;
             }
+
             container.innerHTML = entries.map(([key, t]) => {
                 const isWithdrawal = t.type?.toLowerCase().includes('withdraw');
                 const isApproved = t.status === 'approved';
@@ -4090,15 +4523,18 @@
                     iconColor = t.amount && t.amount > 0 ? '#00a86b' : '#cc8800';
                     iconClass = t.amount && t.amount > 0 ? 'fa-arrow-right' : 'fa-arrow-left';
                 }
+
                 let statusDisplay = t.status ? t.status.charAt(0).toUpperCase() + t.status.slice(1) : 'N/A';
                 if (isWithdrawal && isApproved) statusDisplay = 'Approved';
                 if (isWithdrawal && isDeclined) statusDisplay = 'Declined';
+
                 let otherPartyInfo = '';
                 let isSendReceive = t.type?.toLowerCase().includes('sent') || t.type?.toLowerCase().includes('received');
                 if (isSendReceive) {
                     let otherName = t.otherParty || t.userName || 'Unknown';
                     let otherPhone = t.userPhone || 'N/A';
                     let otherBalance = 'N/A';
+
                     if (t.otherPartyUid && allData.users && allData.customerAccounts) {
                         const otherUser = allData.users[t.otherPartyUid];
                         if (otherUser) {
@@ -4111,6 +4547,7 @@
                             otherBalance = `ZMW ${otherBalance.toFixed(2)}`;
                         }
                     }
+
                     const direction = t.type?.toLowerCase().includes('sent') ? 'Sent to' : 'Received from';
                     otherPartyInfo = `
                         <div style="font-size:9px; color:#555; margin-top:2px;">
@@ -4118,6 +4555,7 @@
                         </div>
                     `;
                 }
+
                 let detailText = t.detail || '';
                 if (t.type?.toLowerCase().includes('referral') && t.userName) {
                     detailText =
@@ -4127,6 +4565,7 @@
                     detailText =
                         `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral for a service discount.`;
                 }
+
                 return `
                 <div class="history-card" data-key="${key}">
                     <div class="history-summary">
@@ -4149,6 +4588,7 @@
                 </div>
                 `;
             }).join('');
+
             container.querySelectorAll('.history-card').forEach(el => {
                 el.addEventListener('click', function() {
                     this.classList.toggle('open');
@@ -4156,13 +4596,19 @@
             });
         }
 
+        // =================================================================
+        // MARK REMAINING PAYMENT
+        // =================================================================
+
         function markRemainingAsPaid(orderKey, orderData) {
             if (!orderKey || !orderData) {
                 showToast('Order not found.', 'error');
                 return;
             }
+
             const orderRef = ref(db, `bufferzoneAppData/orders/${orderKey}`);
             const updates = { status: 'done', remainingPaid: true, remainingPaidAt: Date.now() };
+
             update(orderRef, updates).then(() => {
                 const txData = {
                     type: 'Remaining 50% payment for ' + orderData.service,
@@ -4184,16 +4630,20 @@
                 };
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 set(txRef, txData);
+
                 createNotification(
                     currentUserId,
                     'Payment Complete',
                     `Order ${orderData.id} is now fully paid. Thank you!`
                 );
+
                 showToast(`✅ Order ${orderData.id} marked as fully paid!`, 'success');
+
                 const doneBadge = document.getElementById('doneBadge');
                 const doneBtn = document.getElementById('doneRemainingBtn');
                 if (doneBadge) doneBadge.classList.add('show');
                 if (doneBtn) doneBtn.style.display = 'none';
+
                 renderOrders();
                 renderHistory();
             }).catch((error) => {
@@ -4201,6 +4651,10 @@
                 showToast('Error updating order: ' + error.message, 'error');
             });
         }
+
+        // =================================================================
+        // PROFILE
+        // =================================================================
 
         function renderProfile() {
             if (currentUserData) {
@@ -4218,11 +4672,16 @@
             }
         }
 
+        // =================================================================
+        // NOTIFICATIONS
+        // =================================================================
+
         function renderNotifications() {
             const notifications = allData.notifications || {};
             const entries = Object.entries(notifications)
                 .filter(([key, n]) => n.userId === currentUserId)
                 .sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
+
             if (entries.length === 0) {
                 notifList.innerHTML =
                     `<div style="text-align:center;padding:26px;color:#888;"><i class="fa-regular fa-bell-slash" style="font-size:27px;color:#ddd;display:block;margin-bottom:7px;"></i>No notifications</div>`;
@@ -4233,6 +4692,7 @@
             const unreadCount = entries.filter(([key, n]) => !n.read).length;
             notifBadge.textContent = unreadCount > 9 ? '9+' : unreadCount;
             notifBadge.style.display = unreadCount > 0 ? 'flex' : 'none';
+
             notifList.innerHTML = entries.slice(0, 10).map(([key, n]) => `
                 <div class="notification-item" data-key="${key}">
                     <div class="notif-dot ${n.read ? 'read' : ''}"></div>
@@ -4243,6 +4703,7 @@
                     </div>
                 </div>
             `).join('');
+
             notifList.querySelectorAll('.notification-item').forEach(el => {
                 el.addEventListener('click', function() {
                     const key = this.dataset.key;
@@ -4256,6 +4717,10 @@
             });
         }
 
+        // =================================================================
+        // SAMPLES
+        // =================================================================
+
         function renderSamples() {
             const container = samplesContainer;
             const posts = allData.workPosts || {};
@@ -4267,11 +4732,14 @@
             for (const type in groups) {
                 groups[type].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
             }
+
             const typeLabels = { app: '📱 Apps', flyer: '📄 Flyers', website: '💻 Websites', logo: '🎨 Logos' };
+
             let html = '';
             for (const type of ['app', 'flyer', 'website', 'logo']) {
                 const items = groups[type] || [];
                 if (items.length === 0) continue;
+
                 html += `
                     <div style="font-size:14px;font-weight:700;color:#1c2128;margin:17px 0 9px 0;padding-bottom:5px;border-bottom:2px solid #f0f0f0;display:flex;align-items:center;gap:7px;">
                         ${typeLabels[type] || type}
@@ -4279,11 +4747,13 @@
                     </div>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
                 `;
+
                 items.forEach(post => {
                     let frameHtml = '';
                     const imgHtml = post.imageUrl ?
                         `<img src="${post.imageUrl}" alt="${post.title || 'Work'}" loading="lazy" style="width:100%;height:100%;display:block;${type === 'app' ? 'object-fit:cover;border-radius:15px;' : 'object-fit:contain;'}" />` :
                         `<div style="color:#ccc;font-size:27px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><i class="fa-regular fa-image"></i></div>`;
+
                     if (type === 'app') {
                         frameHtml = `
                             <div class="phone-frame-sample">
@@ -4305,6 +4775,7 @@
                             </div>
                         `;
                     }
+
                     html += `
                         <div class="sample-card">
                             ${frameHtml}
@@ -4317,8 +4788,10 @@
                         </div>
                     `;
                 });
+
                 html += `</div>`;
             }
+
             if (html === '') {
                 html =
                     `<div style="text-align:center;padding:26px 0;color:#888;">No samples available yet. Check back soon!</div>`;
@@ -4326,10 +4799,16 @@
             container.innerHTML = html;
         }
 
+        // =================================================================
+        // ACCOUNT & REFERRAL
+        // =================================================================
+
         function renderAccountAndReferral() {
             if (!currentUserData) return;
+
             const code = currentUserData.referralCode || 'BZ-XXXXX';
             referralCodeDisplay.textContent = code;
+
             copyReferralBtn.addEventListener('click', function() {
                 navigator.clipboard.writeText(code).then(() => {
                     showToast('Referral code copied!', 'success');
@@ -4343,11 +4822,14 @@
                     showToast('Referral code copied!', 'success');
                 });
             });
+
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
             const balance = userAccount.balance || 0;
+
             const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
+
             accountBalanceDisplay.textContent = `ZMW ${balance.toFixed(2)}`;
             const balanceBox = document.getElementById('accountBalanceBox');
             let pendingInfo = balanceBox.querySelector('.pending-info');
@@ -4364,13 +4846,21 @@
                 pendingInfo.textContent = `Available: ZMW ${availableBalance.toFixed(2)}`;
                 pendingInfo.style.display = 'block';
             }
+
             withdrawBtnFromBalance.dataset.availableBalance = availableBalance;
+            withdrawBtnFromView.dataset.availableBalance = availableBalance;
+
             sendAvailBalance.textContent = `ZMW ${availableBalance.toFixed(2)}`;
             updateSendButtonState();
+
             updateWalletPaymentUI();
+
             renderSendMoneyTxList();
-            updateWithdrawPage();
         }
+
+        // =================================================================
+        // PENDING WITHDRAWAL TOTAL
+        // =================================================================
 
         function calculatePendingWithdrawalTotal() {
             const withdrawals = allData.withdrawalRequests || {};
@@ -4383,20 +4873,9 @@
             return total;
         }
 
-        function updateWithdrawPage() {
-            const accounts = allData.customerAccounts || {};
-            const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
-            const pendingTotal = calculatePendingWithdrawalTotal();
-            const availableBalance = Math.max(0, balance - pendingTotal);
-            withdrawBalAmount.textContent = `ZMW ${availableBalance.toFixed(2)}`;
-            withdrawPendingAmount.textContent = `ZMW ${pendingTotal.toFixed(2)}`;
-            withdrawTotalBalance.textContent = `ZMW ${balance.toFixed(2)}`;
-            withdrawMaxLabel.textContent = availableBalance.toFixed(2);
-            const withdrawals = allData.withdrawalRequests || {};
-            const entries = Object.entries(withdrawals).filter(([key, w]) => w.userId === currentUserId);
-            withdrawCount.textContent = entries.length;
-        }
+        // =================================================================
+        // ACCOUNT TRANSACTIONS
+        // =================================================================
 
         function renderTransactionMessages() {
             const container = transactionMessages;
@@ -4404,11 +4883,13 @@
             const entries = Object.entries(transactions)
                 .filter(([key, t]) => t.userId === currentUserId && !t.type?.toLowerCase().includes('withdraw'))
                 .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
+
             if (entries.length === 0) {
                 container.innerHTML =
                     `<div style="text-align:center;padding:14px;color:#888;font-size:10px;">No transactions yet.</div>`;
                 return;
             }
+
             container.innerHTML = entries.map(([key, t]) => {
                 const isCredit = t.amount && t.amount > 0 && (t.type?.toLowerCase().includes('referral') || t.type?.toLowerCase().includes('received'));
                 let amountDisplay = '';
@@ -4422,8 +4903,10 @@
                         amountClass = '';
                     }
                 }
+
                 let title = t.type || 'Transaction';
                 let desc = t.detail || t.message || '';
+
                 if (t.type?.toLowerCase().includes('referral') && t.userName) {
                     title = `Referral Bonus`;
                     desc =
@@ -4434,6 +4917,7 @@
                     desc =
                         `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral for a service discount.`;
                 }
+
                 let otherInfo = '';
                 if (t.type?.toLowerCase().includes('sent') || t.type?.toLowerCase().includes('received')) {
                     let otherName = t.otherParty || t.userName || 'Unknown';
@@ -4448,6 +4932,7 @@
                     const direction = t.type?.toLowerCase().includes('sent') ? 'Sent to' : 'Received from';
                     otherInfo = ` ${direction} <strong>${escapeHtml(otherName)}</strong> (${escapeHtml(otherPhone)})`;
                 }
+
                 let iconClass = 'fa-arrow-right';
                 let iconColor = '#667eea';
                 if (t.type?.toLowerCase().includes('referral')) {
@@ -4469,6 +4954,7 @@
                     iconClass = 'fa-arrow-right';
                     iconColor = '#667eea';
                 }
+
                 return `
                 <div class="account-tx-card" data-key="${key}">
                     <div class="tx-summary">
@@ -4490,6 +4976,7 @@
                 </div>
                 `;
             }).join('');
+
             container.querySelectorAll('.account-tx-card').forEach(el => {
                 el.addEventListener('click', function() {
                     this.classList.toggle('open');
@@ -4497,38 +4984,32 @@
             });
         }
 
+        // =================================================================
+        // WITHDRAWALS LIST (legacy – used in account view)
+        // =================================================================
+
         function renderWithdrawalsList() {
+            // This is now mostly replaced by the withdraw page, but we keep a minimal version for the account view.
             const container = withdrawalsListContainer;
             const withdrawals = allData.withdrawalRequests || {};
             const entries = Object.entries(withdrawals)
                 .filter(([key, w]) => w.userId === currentUserId)
                 .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
+
             if (entries.length === 0) {
                 container.innerHTML = `
-                    <div class="empty-withdrawals">
-                        <i class="fa-regular fa-receipt"></i>
+                    <div class="empty-withdrawals" style="text-align:center;padding:14px;color:#888;">
+                        <i class="fa-regular fa-receipt" style="font-size:20px;color:#ddd;display:block;margin-bottom:4px;"></i>
                         No withdrawal requests yet.
                     </div>
                 `;
                 return;
             }
-            container.innerHTML = entries.map(([key, w]) => {
+
+            container.innerHTML = entries.slice(0, 3).map(([key, w]) => {
                 const statusClass = w.status || 'pending';
                 const statusDisplay = w.status ? w.status.charAt(0).toUpperCase() + w.status.slice(1) : 'Pending';
                 const dateStr = w.date ? new Date(w.date).toLocaleString() : (w.createdAt ? new Date(w.createdAt).toLocaleString() : 'N/A');
-                let statusMessage = '';
-                let statusColor = '#cc8800';
-                if (w.status === 'approved') {
-                    statusColor = '#00a86b';
-                    statusMessage =
-                        `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was approved. The amount has been deducted from your account.`;
-                } else if (w.status === 'declined') {
-                    statusColor = '#dc2626';
-                    statusMessage =
-                        `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount remains in your account.`;
-                } else {
-                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
-                }
                 let iconClass = 'fa-clock';
                 let iconColor = '#cc8800';
                 if (w.status === 'approved') {
@@ -4543,7 +5024,7 @@
                     <div class="wd-summary">
                         <div class="left">
                             <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
-                            <span>Withdrawal: ZMW ${(w.amount || 0).toFixed(2)}</span>
+                            <span>ZMW ${(w.amount || 0).toFixed(2)}</span>
                         </div>
                         <div class="right">
                             <span class="status-badge ${statusClass}">${statusDisplay}</span>
@@ -4553,19 +5034,16 @@
                     <div class="wd-details">
                         <div class="d-row"><span class="d-label">Amount</span><span class="d-val">ZMW ${(w.amount || 0).toFixed(2)}</span></div>
                         <div class="d-row"><span class="d-label">Date</span><span class="d-val">${escapeHtml(dateStr)}</span></div>
-                        <div class="d-row"><span class="d-label">Phone</span><span class="d-val">${escapeHtml(w.phone || 'N/A')}</span></div>
                         <div class="d-row"><span class="d-label">Status</span><span class="d-val">${statusDisplay}</span></div>
-                        <div class="d-row"><span class="d-label">Message</span><span class="d-val">${escapeHtml(statusMessage)}</span></div>
                     </div>
                 </div>
                 `;
             }).join('');
-            container.querySelectorAll('.withdrawal-card').forEach(el => {
-                el.addEventListener('click', function() {
-                    this.classList.toggle('open');
-                });
-            });
         }
+
+        // =================================================================
+        // SEND MONEY TRANSACTIONS LIST
+        // =================================================================
 
         function renderSendMoneyTxList() {
             const container = sendTxItems;
@@ -4576,10 +5054,12 @@
                     return t.userId === currentUserId && (isSend || t.type?.toLowerCase().includes('send'));
                 })
                 .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
+
             if (entries.length === 0) {
                 container.innerHTML = `<div class="empty-tx">No sent or received transactions yet.</div>`;
                 return;
             }
+
             container.innerHTML = entries.slice(0, 10).map(([key, t]) => {
                 const isSent = t.type?.toLowerCase().includes('sent') || (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
                 const isReceived = t.type?.toLowerCase().includes('received') || (t.type?.toLowerCase().includes('send') && t.amount && t.amount > 0);
@@ -4589,6 +5069,7 @@
                 let otherName = t.otherParty || t.userName || 'Unknown';
                 let otherPhone = t.userPhone || 'N/A';
                 let otherBalance = 'N/A';
+
                 if (t.otherPartyUid && allData.users && allData.customerAccounts) {
                     const otherUser = allData.users[t.otherPartyUid];
                     if (otherUser) {
@@ -4601,6 +5082,7 @@
                         otherBalance = `ZMW ${otherBalance.toFixed(2)}`;
                     }
                 }
+
                 return `
                     <div class="tx-item">
                         <div class="tx-left">
@@ -4617,6 +5099,10 @@
             }).join('');
         }
 
+        // =================================================================
+        // ORDER FLOW
+        // =================================================================
+
         function openOrderFlow(service) {
             selectedService = service;
             currentQuantity = 1;
@@ -4627,8 +5113,10 @@
             selectedColorScheme = c.defaultColorScheme || (c.colorSchemes ? c.colorSchemes[0] : '');
             selectedRevisions = c.defaultRevisions || (c.revisions ? c.revisions[0] : '');
             selectedDeliverySpeed = c.defaultDeliverySpeed || (c.deliverySpeeds ? c.deliverySpeeds[0] : '');
+
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('orderFlowView').classList.add('active');
+
             renderOrderFlow(service);
         }
 
@@ -4636,6 +5124,7 @@
             const container = orderFlowContainer;
             const specs = service.specs || '';
             const specLines = specs.split('\n').filter(line => line.trim());
+
             let specsHtml = '';
             specLines.forEach(line => {
                 const parts = line.split(':');
@@ -4644,6 +5133,7 @@
                         `<div class="spec-row"><span class="label">${parts[0].trim()}</span><span class="value">${parts[1].trim()}</span></div>`;
                 }
             });
+
             const c = service.customize || {};
             const sizeBtns = (c.sizes || []).map(s =>
                 `<button class="customize-btn ${s === selectedSize ? 'active' : ''}" data-size="${s}">${s}</button>`
@@ -4663,7 +5153,9 @@
             const deliveryBtns = (c.deliverySpeeds || []).map(d =>
                 `<button class="customize-btn ${d === selectedDeliverySpeed ? 'active' : ''}" data-delivery="${d}">${d}</button>`
             ).join('');
+
             const totalPrice = (service.price * currentQuantity).toFixed(2);
+
             container.innerHTML = `
                 <div class="order-policy-panel">
                     <div class="order-policy-content">
@@ -4672,6 +5164,7 @@
                         <div class="policy-tag"><i class="fa-regular fa-circle-check"></i> ${allData.policy?.tag || '50% upfront required'}</div>
                     </div>
                 </div>
+
                 <div class="order-title-section">
                     <h2>${(service.title || 'Service').toUpperCase()}</h2>
                     <p>${service.subtitle || ''}</p>
@@ -4679,13 +5172,16 @@
                         ${renderPriceInline(service)}
                     </div>
                 </div>
+
                 <div class="order-tags">
                     ${(service.tags || []).map(t => `<span class="tag"><i class="fa-regular fa-circle-check"></i> ${t}</span>`).join('')}
                 </div>
+
                 <div class="order-specs">
                     <h4>SPECIFICATIONS</h4>
                     ${specsHtml || '<p class="text-muted">No specifications available.</p>'}
                 </div>
+
                 <div class="order-customize">
                     <h4>CUSTOMIZE YOUR ORDER</h4>
                     ${sizeBtns ? `<div class="customize-group"><div class="group-label">Select Size</div><div class="customize-options" id="sizeOptions">${sizeBtns}</div></div>` : ''}
@@ -4703,11 +5199,13 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="order-notes" style="margin-top:3px;">
                     <h4 style="font-size:9px; font-weight:600; color:#1c2128; margin-bottom:4px;">📝 Add Extra Notes (Optional)</h4>
                     <textarea id="orderNotes" placeholder="Tell us more about your requirements, special instructions, or any additional details..." style="width:100%; padding:9px; border:1px solid #eee; border-radius:9px; font-size:9px; resize:vertical; min-height:41px; background:#fafbfc; transition:border 0.2s; font-family:'Poppins',sans-serif;"></textarea>
                     <p style="font-size:7px; color:#aaa; margin-top:3px;">These notes will be attached to your order for the team to review.</p>
                 </div>
+
                 <div class="order-footer">
                     <div>
                         <div class="total-label">Total Price</div>
@@ -4718,6 +5216,7 @@
                     </button>
                 </div>
             `;
+
             document.querySelectorAll('#sizeOptions .customize-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('#sizeOptions .customize-btn').forEach(b => b.classList.remove('active'));
@@ -4761,6 +5260,7 @@
                     selectedDeliverySpeed = this.dataset.delivery;
                 });
             });
+
             document.getElementById('qtyMinus').addEventListener('click', function() {
                 if (currentQuantity > 1) {
                     currentQuantity--;
@@ -4773,6 +5273,7 @@
                 document.getElementById('qtyDisplay').textContent = currentQuantity;
                 updateOrderTotal();
             });
+
             document.getElementById('confirmOrderBtn').addEventListener('click', function() {
                 const total = service.price * currentQuantity;
                 orderTotalBeforeDiscount = total;
@@ -4824,6 +5325,10 @@
             document.querySelector('.order-footer .total-price').textContent = `ZMW ${total.toFixed(2)}`;
         }
 
+        // =================================================================
+        // COUPON
+        // =================================================================
+
         function applyCoupon() {
             const code = couponInput.value.trim().toUpperCase();
             if (!code) {
@@ -4831,6 +5336,7 @@
                 couponMsg.className = 'coupon-msg error';
                 return;
             }
+
             const promotions = allData.promotions || {};
             let foundPromo = null;
             let promoKey = null;
@@ -4841,11 +5347,13 @@
                     break;
                 }
             }
+
             if (!foundPromo) {
                 couponMsg.textContent = 'Invalid coupon code.';
                 couponMsg.className = 'coupon-msg error';
                 return;
             }
+
             const usedCouponsRef = ref(db, `users/${currentUserId}/usedCoupons`);
             get(usedCouponsRef).then((snapshot) => {
                 const usedCoupons = snapshot.val() || {};
@@ -4854,24 +5362,31 @@
                     couponMsg.className = 'coupon-msg error';
                     return;
                 }
+
                 const orderData = JSON.parse(paymentPage.dataset.orderData || '{}');
                 const total = orderData.total || orderTotalBeforeDiscount;
                 const discountAmount = total * (foundPromo.discount / 100);
                 const finalPrice = total - discountAmount;
                 const depositAmount = finalPrice * 0.5;
+
                 origPriceVal.textContent = `ZMW ${total.toFixed(2)}`;
                 discountVal.textContent = `- ZMW ${discountAmount.toFixed(2)}`;
                 finalPriceVal.textContent = `ZMW ${finalPrice.toFixed(2)}`;
                 finalDepositVal.textContent = `ZMW ${depositAmount.toFixed(2)}`;
                 priceBreakdown.style.display = 'block';
+
                 paymentAmount.textContent = `ZMW ${depositAmount.toFixed(2)}`;
+
                 couponMsg.textContent = `✅ Coupon applied! ${foundPromo.discount}% off.`;
                 couponMsg.className = 'coupon-msg success';
+
                 discountApplied = true;
                 appliedPromo = { key: promoKey, code: foundPromo.code, discount: foundPromo.discount };
                 applyCouponBtn.disabled = true;
                 couponInput.disabled = true;
+
                 paymentPage.dataset.appliedPromo = JSON.stringify(appliedPromo);
+
                 updateWalletPaymentUI();
             }).catch((error) => {
                 console.error('Error checking used coupons:', error);
@@ -4880,6 +5395,10 @@
             });
         }
 
+        // =================================================================
+        // REFERRAL CODE IN PAYMENT
+        // =================================================================
+
         function applyReferral() {
             const code = referralCodeInput.value.trim().toUpperCase();
             if (!code) {
@@ -4887,6 +5406,7 @@
                 referralMsg.className = 'coupon-msg error';
                 return;
             }
+
             const usersRef = ref(db, 'users');
             get(usersRef).then((snapshot) => {
                 const users = snapshot.val() || {};
@@ -4899,16 +5419,19 @@
                         break;
                     }
                 }
+
                 if (!referrerUid || referrerUid === currentUserId) {
                     referralMsg.textContent = 'Invalid referral code.';
                     referralMsg.className = 'coupon-msg error';
                     return;
                 }
+
                 const discounts = allData.referralDiscounts || {};
                 const promoDiscounts = allData.referralPromoDiscounts || {};
                 let foundDiscount = null;
                 let discountKey = null;
                 let isPromo = false;
+
                 for (const [key, d] of Object.entries(discounts)) {
                     if (d.referralCode === code) {
                         foundDiscount = d;
@@ -4917,6 +5440,7 @@
                         break;
                     }
                 }
+
                 if (!foundDiscount) {
                     for (const [key, d] of Object.entries(promoDiscounts)) {
                         if (d.referralCode === code || d.referralCode === '') {
@@ -4927,25 +5451,31 @@
                         }
                     }
                 }
+
                 if (!foundDiscount) {
                     referralMsg.textContent = 'This referral code has no active discount.';
                     referralMsg.className = 'coupon-msg error';
                     return;
                 }
+
                 const orderData = JSON.parse(paymentPage.dataset.orderData || '{}');
                 const total = orderData.total || orderTotalBeforeDiscount;
                 const discountAmount = total * (foundDiscount.discount / 100);
                 const finalPrice = total - discountAmount;
                 const depositAmount = finalPrice * 0.5;
+
                 origPriceVal.textContent = `ZMW ${total.toFixed(2)}`;
                 discountVal.textContent = `- ZMW ${discountAmount.toFixed(2)}`;
                 finalPriceVal.textContent = `ZMW ${finalPrice.toFixed(2)}`;
                 finalDepositVal.textContent = `ZMW ${depositAmount.toFixed(2)}`;
                 priceBreakdown.style.display = 'block';
+
                 paymentAmount.textContent = `ZMW ${depositAmount.toFixed(2)}`;
+
                 referralMsg.textContent =
                     `✅ Referral applied! ${foundDiscount.discount}% off. Owner will receive ZMW ${foundDiscount.ownerAmount || 0}.`;
                 referralMsg.className = 'coupon-msg success';
+
                 appliedReferral = {
                     key: discountKey,
                     code: code,
@@ -4958,7 +5488,9 @@
                 discountApplied = true;
                 referralCodeInput.disabled = true;
                 applyReferralBtn.disabled = true;
+
                 paymentPage.dataset.appliedReferral = JSON.stringify(appliedReferral);
+
                 updateWalletPaymentUI();
             }).catch((error) => {
                 console.error('Error checking referral:', error);
@@ -4967,19 +5499,28 @@
             });
         }
 
+        // =================================================================
+        // WALLET PAYMENT UI
+        // =================================================================
+
         function updateWalletPaymentUI() {
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
             const balance = userAccount.balance || 0;
             const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
+
             walletBalanceDisplay.textContent = `ZMW ${availableBalance.toFixed(2)}`;
+
             let depositAmount = 0;
             const amountText = paymentAmount.textContent.replace('ZMW ', '');
             depositAmount = parseFloat(amountText) || 0;
+
             const hasEnough = availableBalance >= depositAmount;
+
             const walletStatusEl = walletStatus;
             const payWithWalletCheckEl = payWithWalletCheck;
+
             if (depositAmount > 0) {
                 if (hasEnough) {
                     walletStatusEl.style.color = '#00a86b';
@@ -5010,47 +5551,63 @@
             }
         }
 
+        // =================================================================
+        // CONFIRM PAYMENT
+        // =================================================================
+
         function confirmPayment() {
             const dataStr = paymentPage.dataset.orderData;
             if (!dataStr) {
                 showToast('Order data missing.', 'error');
                 return;
             }
+
             const data = JSON.parse(dataStr);
             const orderId = 'ORD-' + String(Object.keys(allData.orders || {}).length + 1).padStart(3, '0');
             const customerName = currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
                 currentUser.email || 'Customer';
+
             let finalAmount = data.total;
             let discountAppliedVal = 0;
             let promoCodeUsed = null;
+
             if (discountApplied && appliedPromo) {
                 discountAppliedVal = appliedPromo.discount;
                 promoCodeUsed = appliedPromo.code;
                 finalAmount = data.total * (1 - discountAppliedVal / 100);
             }
+
             if (discountApplied && appliedReferral) {
                 discountAppliedVal = appliedReferral.discount;
                 promoCodeUsed = appliedReferral.code;
                 finalAmount = data.total * (1 - discountAppliedVal / 100);
             }
+
             const depositAmount = finalAmount * 0.5;
+
             const payWithWallet = payWithWalletCheck.checked;
+
             let screenshotUrl = '';
             let paymentMethod = 'Airtel Money';
+
             if (payWithWallet) {
                 paymentMethod = 'Buffer Zone Wallet';
+
                 const accounts = allData.customerAccounts || {};
                 const userAccount = accounts[currentUserId] || { balance: 0 };
                 const balance = userAccount.balance || 0;
                 const pendingTotal = calculatePendingWithdrawalTotal();
                 const availableBalance = Math.max(0, balance - pendingTotal);
+
                 if (availableBalance < depositAmount) {
                     showToast('Insufficient wallet balance.', 'error');
                     return;
                 }
+
                 const newBalance = balance - depositAmount;
                 const accRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
                 set(accRef, { balance: newBalance });
+
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 const txData = {
                     type: 'Wallet Payment for ' + data.service,
@@ -5072,6 +5629,7 @@
                     timestamp: Date.now()
                 };
                 set(txRef, txData);
+
                 const orderTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 const orderTxData = {
                     type: 'Order placed: ' + data.service,
@@ -5092,19 +5650,23 @@
                     timestamp: Date.now()
                 };
                 set(orderTxRef, orderTxData);
+
                 createNotification(
                     currentUserId,
                     'Order Placed',
                     `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.${data.notes ? ` Notes: "${data.notes}"` : ''}`
                 );
+
                 showToast('✅ Payment confirmed via Buffer Zone Wallet! Project "' + data.service + '" has been initiated.',
                     'success');
+
             } else {
                 screenshotUrl = cloudinaryScreenshotUrlInput.value;
                 if (!screenshotUrl) {
                     showToast('Please upload a transaction screenshot before confirming.', 'error');
                     return;
                 }
+
                 const txData = {
                     type: 'Payment for ' + data.service,
                     amount: depositAmount,
@@ -5126,14 +5688,17 @@
                 };
                 const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                 set(txRef, txData);
+
                 createNotification(
                     currentUserId,
                     'Payment Submitted',
                     `Your 50% deposit for "${data.service}" has been submitted. We will verify it shortly.`
                 );
+
                 showToast('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.',
                     'success');
             }
+
             const orderData = {
                 id: orderId,
                 service: data.service,
@@ -5155,10 +5720,12 @@
             };
             const orderRef = push(ref(db, 'bufferzoneAppData/orders'));
             set(orderRef, orderData);
+
             if (appliedPromo) {
                 const usedCouponRef = ref(db, `users/${currentUserId}/usedCoupons/${appliedPromo.key}`);
                 set(usedCouponRef, true);
             }
+
             if (appliedReferral && appliedReferral.referrerUid) {
                 const bonusAmount = appliedReferral.ownerAmount || 0;
                 if (bonusAmount > 0) {
@@ -5167,6 +5734,7 @@
                         const currentBal = snapshot.val()?.balance || 0;
                         set(accRef, { balance: currentBal + bonusAmount });
                     });
+
                     const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
                     const txData = {
                         type: appliedReferral.isPromo ? 'Referral Promo Bonus' : 'Referral Discount Bonus',
@@ -5187,6 +5755,7 @@
                         timestamp: Date.now()
                     };
                     set(txRef, txData);
+
                     createNotification(
                         appliedReferral.referrerUid,
                         '💰 Referral Bonus',
@@ -5194,6 +5763,7 @@
                     );
                 }
             }
+
             if (!payWithWallet) {
                 createNotification(
                     currentUserId,
@@ -5201,6 +5771,7 @@
                     `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.${data.notes ? ` Notes: "${data.notes}"` : ''}`
                 );
             }
+
             paymentPage.classList.remove('open');
             cloudinaryScreenshotUrlInput.value = '';
             fileName.textContent = 'No file chosen';
@@ -5208,8 +5779,13 @@
             uploadArea.style.background = '#fafbfc';
             payWithWalletCheck.checked = false;
             uploadSection.style.display = 'block';
+
             orderSuccessPopup.classList.add('open');
         }
+
+        // =================================================================
+        // ORDER SUCCESS POPUP
+        // =================================================================
 
         orderSuccessOkBtn.addEventListener('click', function() {
             orderSuccessPopup.classList.remove('open');
@@ -5219,6 +5795,7 @@
             document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
             renderServices('all');
         });
+
         orderSuccessPopup.addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('open');
@@ -5230,64 +5807,208 @@
             }
         });
 
-        function submitWithdrawal() {
-            const amount = parseFloat(withdrawAmountInput.value);
-            if (!amount || amount <= 0) {
-                showToast('Please enter a valid amount.', 'error');
-                return;
-            }
+        // =================================================================
+        // WITHDRAWAL (NEW PAGE VERSION)
+        // =================================================================
+
+        function renderWithdrawPage() {
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
             const balance = userAccount.balance || 0;
             const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
-            if (amount > availableBalance) {
-                showToast(`Insufficient available balance. You have ZMW ${availableBalance.toFixed(2)} available after accounting for pending withdrawals.`, 'error');
-                return;
+
+            const fullName = currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}`.trim() :
+                '—';
+            const phone = currentUserData?.phone || '—';
+            const email = currentUser?.email || '—';
+
+            wpName.textContent = fullName;
+            wpNumber.textContent = phone;
+            wpEmail.textContent = email;
+            wpTransferNumber.textContent = phone;
+            wpBalanceDisplay.textContent = `ZMW ${availableBalance.toFixed(2)}`;
+            wpMaxLabel.textContent = availableBalance.toFixed(2);
+
+            // Reset options
+            document.querySelectorAll('.wp-options .opt-btn').forEach(b => b.classList.remove('active'));
+            wpCustomAmount.value = '';
+
+            // Render history
+            renderWithdrawHistory();
+        }
+
+        function renderWithdrawHistory() {
+            const container = wpHistoryContainer;
+            const withdrawals = allData.withdrawalRequests || {};
+            const entries = Object.entries(withdrawals)
+                .filter(([key, w]) => w.userId === currentUserId)
+                .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
+
+            const groups = {
+                pending: [],
+                approved: [],
+                rejected: []
+            };
+
+            entries.forEach(([key, w]) => {
+                const status = w.status || 'pending';
+                if (groups[status]) groups[status].push({ key, ...w });
+                else groups.pending.push({ key, ...w });
+            });
+
+            const groupLabels = {
+                pending: '⏳ Pending',
+                approved: '✅ Approved',
+                rejected: '❌ Rejected'
+            };
+
+            let html = '';
+            for (const [status, items] of Object.entries(groups)) {
+                const label = groupLabels[status] || status;
+                const isOpen = status === 'pending' ? 'open' : '';
+                html += `
+                    <div class="wp-history-group">
+                        <div class="group-header ${isOpen}" data-group="${status}">
+                            <i class="fa-solid fa-chevron-right"></i>
+                            ${label} <span style="font-size:9px;color:#888;font-weight:400;">(${items.length})</span>
+                        </div>
+                        <div class="group-body ${isOpen}" data-group="${status}">
+                            ${items.length === 0 ? `<div class="empty-msg">No ${status} withdrawals.</div>` :
+                            items.map(w => `
+                                <div class="hist-item">
+                                    <span class="amount">ZMW ${(w.amount || 0).toFixed(2)}</span>
+                                    <span class="date">${w.date ? new Date(w.date).toLocaleString() : 'N/A'}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
             }
-            if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
-            const wId = 'w' + Date.now();
-            allData.withdrawalRequests[wId] = {
-                id: wId,
-                userId: currentUserId,
-                amount: amount,
-                phone: currentUserData?.phone || 'N/A',
-                status: 'pending',
-                createdAt: Date.now(),
-                date: new Date().toLocaleString()
-            };
-            if (!allData.transactions) allData.transactions = {};
-            const txId = 'tx' + Date.now();
-            allData.transactions[txId] = {
-                type: 'Withdrawal Request',
-                amount: amount,
-                method: 'Bank Transfer',
-                status: 'pending',
-                date: new Date().toLocaleString(),
-                ref: 'W-' + wId,
-                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested. Pending approval.`,
-                screenshot: 'N/A',
-                userId: currentUserId,
-                itemId: wId,
-                itemTitle: 'Withdrawal',
-                itemType: 'withdrawal',
-                userName: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
-                    currentUser.email || 'Customer',
-                userEmail: currentUser.email || 'N/A',
-                userPhone: currentUserData?.phone || 'N/A',
-                timestamp: Date.now()
-            };
-            saveData().then(() => {
-                createNotification(
-                    currentUserId,
-                    'Withdrawal Request',
-                    `Your withdrawal of ZMW ${amount.toFixed(2)} has been submitted and is pending admin approval.`
-                );
-                withdrawAmountInput.value = '';
-                renderAll();
-                showToast('✅ Withdrawal request submitted! Admin will review it.', 'success');
+
+            container.innerHTML = html;
+
+            // Toggle handlers
+            container.querySelectorAll('.group-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    const group = this.dataset.group;
+                    const body = document.querySelector(`.group-body[data-group="${group}"]`);
+                    if (body) {
+                        body.classList.toggle('open');
+                        this.classList.toggle('open');
+                    }
+                });
             });
         }
+
+        function setupWithdrawPageEvents() {
+            // Quick option buttons
+            document.querySelectorAll('.wp-options .opt-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.wp-options .opt-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const pct = parseInt(this.dataset.pct);
+                    const accounts = allData.customerAccounts || {};
+                    const userAccount = accounts[currentUserId] || { balance: 0 };
+                    const balance = userAccount.balance || 0;
+                    const pendingTotal = calculatePendingWithdrawalTotal();
+                    const availableBalance = Math.max(0, balance - pendingTotal);
+                    const amount = availableBalance * (pct / 100);
+                    wpCustomAmount.value = amount.toFixed(2);
+                });
+            });
+
+            // Custom amount input – clear selection when typing
+            wpCustomAmount.addEventListener('input', function() {
+                document.querySelectorAll('.wp-options .opt-btn').forEach(b => b.classList.remove('active'));
+                // Validate not over balance
+                const accounts = allData.customerAccounts || {};
+                const userAccount = accounts[currentUserId] || { balance: 0 };
+                const balance = userAccount.balance || 0;
+                const pendingTotal = calculatePendingWithdrawalTotal();
+                const availableBalance = Math.max(0, balance - pendingTotal);
+                const val = parseFloat(this.value) || 0;
+                if (val > availableBalance) {
+                    this.style.borderColor = '#dc2626';
+                } else {
+                    this.style.borderColor = '#ddd';
+                }
+            });
+
+            // Withdraw button
+            wpWithdrawBtn.addEventListener('click', function() {
+                const accounts = allData.customerAccounts || {};
+                const userAccount = accounts[currentUserId] || { balance: 0 };
+                const balance = userAccount.balance || 0;
+                const pendingTotal = calculatePendingWithdrawalTotal();
+                const availableBalance = Math.max(0, balance - pendingTotal);
+
+                const amount = parseFloat(wpCustomAmount.value) || 0;
+                if (!amount || amount <= 0) {
+                    showToast('Please enter a valid amount.', 'error');
+                    return;
+                }
+                if (amount > availableBalance) {
+                    showToast(`Amount exceeds available balance (ZMW ${availableBalance.toFixed(2)}).`, 'error');
+                    return;
+                }
+
+                if (!confirm(`Submit withdrawal of ZMW ${amount.toFixed(2)}?`)) return;
+
+                if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
+                const wId = 'w' + Date.now();
+                allData.withdrawalRequests[wId] = {
+                    id: wId,
+                    userId: currentUserId,
+                    amount: amount,
+                    phone: currentUserData?.phone || 'N/A',
+                    status: 'pending',
+                    createdAt: Date.now(),
+                    date: new Date().toLocaleString()
+                };
+
+                if (!allData.transactions) allData.transactions = {};
+                const txId = 'tx' + Date.now();
+                allData.transactions[txId] = {
+                    type: 'Withdrawal Request',
+                    amount: amount,
+                    method: 'Bank Transfer',
+                    status: 'pending',
+                    date: new Date().toLocaleString(),
+                    ref: 'W-' + wId,
+                    detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested. Pending approval.`,
+                    screenshot: 'N/A',
+                    userId: currentUserId,
+                    itemId: wId,
+                    itemTitle: 'Withdrawal',
+                    itemType: 'withdrawal',
+                    userName: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
+                        currentUser.email || 'Customer',
+                    userEmail: currentUser.email || 'N/A',
+                    userPhone: currentUserData?.phone || 'N/A',
+                    timestamp: Date.now()
+                };
+
+                saveData().then(() => {
+                    createNotification(
+                        currentUserId,
+                        'Withdrawal Request',
+                        `Your withdrawal of ZMW ${amount.toFixed(2)} has been submitted and is pending admin approval.`
+                    );
+                    withdrawSuccessModal.classList.add('open');
+                    renderAll();
+                    showToast('✅ Withdrawal request submitted! Admin will review it.', 'success');
+                    // Reset
+                    wpCustomAmount.value = '';
+                    document.querySelectorAll('.wp-options .opt-btn').forEach(b => b.classList.remove('active'));
+                    renderWithdrawPage();
+                });
+            });
+        }
+
+        // =================================================================
+        // SEND MONEY
+        // =================================================================
 
         function toggleSendMoneySection() {
             const section = sendMoneySection;
@@ -5310,6 +6031,7 @@
                 recipientSearchResult.innerHTML = `<span style="color:#888;">Please enter a referral code.</span>`;
                 return;
             }
+
             const usersRef = ref(db, 'users');
             get(usersRef).then((snapshot) => {
                 const users = snapshot.val() || {};
@@ -5322,6 +6044,7 @@
                         break;
                     }
                 }
+
                 if (!foundUid) {
                     recipientSearchResult.innerHTML = `<span class="not-found">❌ No user found with that referral code.</span>`;
                     sendRecipientUid = null;
@@ -5330,6 +6053,7 @@
                     updateSendButtonState();
                     return;
                 }
+
                 if (foundUid === currentUserId) {
                     recipientSearchResult.innerHTML = `<span style="color:#cc8800;">⚠️ You cannot send money to yourself.</span>`;
                     sendRecipientUid = null;
@@ -5338,11 +6062,13 @@
                     updateSendButtonState();
                     return;
                 }
+
                 const fullName = `${foundUser.firstName || ''} ${foundUser.lastName || ''}`.trim() || foundUser.email ||
                     'User';
                 sendRecipientUid = foundUid;
                 sendRecipientName = fullName;
                 sendRecipientData = foundUser;
+
                 recipientSearchResult.innerHTML = `
                     <span>Send money to: <span class="name">${escapeHtml(fullName)}</span></span>
                     <span style="font-size:9px; color:#888;">(${code})</span>
@@ -5364,9 +6090,11 @@
             const balance = userAccount.balance || 0;
             const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
+
             const amount = parseFloat(sendAmountInput.value) || 0;
             const hasRecipient = !!sendRecipientUid;
             const hasAmount = amount > 0 && amount <= availableBalance;
+
             sendMoneyConfirmBtn.disabled = !(hasRecipient && hasAmount);
         }
 
@@ -5376,34 +6104,42 @@
                 showToast('Please enter a valid amount.', 'error');
                 return;
             }
+
             if (!sendRecipientUid || !sendRecipientName) {
                 showToast('Please search and select a valid recipient.', 'error');
                 return;
             }
+
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
             const balance = userAccount.balance || 0;
             const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
+
             if (amount > availableBalance) {
                 showToast(`Insufficient balance. You have ZMW ${availableBalance.toFixed(2)} available.`, 'error');
                 return;
             }
+
             const confirmed = confirm(
                 `You're sending ZMW ${amount.toFixed(2)} to ${sendRecipientName}.\n\nPlease confirm this transaction.`
             );
+
             if (!confirmed) {
                 showToast('Transaction cancelled.', 'info');
                 return;
             }
+
             const newSenderBalance = balance - amount;
             const senderAccRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
             set(senderAccRef, { balance: newSenderBalance });
+
             const recipientAccRef = ref(db, `bufferzoneAppData/customerAccounts/${sendRecipientUid}`);
             get(recipientAccRef).then((snapshot) => {
                 const currentRecipientBal = snapshot.val()?.balance || 0;
                 set(recipientAccRef, { balance: currentRecipientBal + amount });
             });
+
             const senderTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
             const senderTxData = {
                 type: 'Sent Money',
@@ -5426,6 +6162,7 @@
                 timestamp: Date.now()
             };
             set(senderTxRef, senderTxData);
+
             const recipientTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
             const recipientTxData = {
                 type: 'Received Money',
@@ -5448,17 +6185,21 @@
                 timestamp: Date.now()
             };
             set(recipientTxRef, recipientTxData);
+
             createNotification(
                 currentUserId,
                 '💰 Money Sent',
                 `You sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}.`
             );
+
             createNotification(
                 sendRecipientUid,
                 '💰 Money Received',
                 `You received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}.`
             );
+
             showToast(`✅ ZMW ${amount.toFixed(2)} sent to ${sendRecipientName}!`, 'success');
+
             sendAmountInput.value = '';
             sendReferralInput.value = '';
             recipientSearchResult.innerHTML = `<span style="color:#888;">Enter a referral code and click Search.</span>`;
@@ -5469,17 +6210,25 @@
             renderAll();
         }
 
+        // =================================================================
+        // FLYER DETAIL VIEW
+        // =================================================================
+
         function openFlyerDetail(flyerId) {
             const flyer = allData.promoPics?.[flyerId];
             if (!flyer) {
                 showToast('Flyer not found.', 'error');
                 return;
             }
+
             currentFlyerId = flyerId;
             const cc = flyer.clickContent || { enabled: false };
+
             const mediaType = flyer.mediaType || 'image';
+
             const imgEl = document.getElementById('flyerDetailImage');
             const videoEl = document.getElementById('flyerDetailVideo');
+
             if (mediaType === 'video') {
                 imgEl.style.display = 'none';
                 videoEl.src = flyer.imageUrl || '';
@@ -5510,10 +6259,13 @@
                     applyBtn.style.display = 'block';
                 }
             }
+
             flyerDetailTitle.textContent = cc.title || flyer.text || 'Promo Details';
+
             const instructions = cc.instructions || '';
             flyerDetailInstructions.innerHTML = instructions ? `<strong>Instructions</strong><br>${escapeHtml(instructions)}` :
                 '';
+
             let explanationHtml = (cc.explanation || '');
             if (cc.boldWords && cc.boldWords.length > 0) {
                 const words = cc.boldWords.filter(w => w.trim());
@@ -5523,10 +6275,12 @@
                 });
             }
             flyerDetailExplanation.innerHTML = explanationHtml ? `<strong>Details</strong><br>${explanationHtml}` : '';
+
             const formType = cc.formType || 'none';
             flyerDetailForm.innerHTML = '';
             flyerDetailApplyBtn.style.display = 'block';
             flyerDetailApplyBtn.style.display = '';
+
             if (formType === 'none') {
                 flyerDetailApplyBtn.style.display = 'none';
                 const actionsDiv = document.querySelector('.flyer-detail-actions');
@@ -5539,17 +6293,21 @@
                 if (actionsDiv) actionsDiv.style.display = 'flex';
                 flyerDetailApplyBtn.style.display = 'block';
             }
+
             flyerDetailApplyBtn.textContent = 'Apply Now';
             flyerDetailApplyBtn.disabled = false;
             flyerDetailApplyBtn.className = 'btn btn-primary';
+
             let formHtml =
                 `<h4 style="font-size:11px;font-weight:700;color:#1c2128;margin-bottom:6px;">Apply as ${formType.charAt(0).toUpperCase() + formType.slice(1)}</h4>`;
+
             const commonFields = `
                 <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" value="${escapeHtml(currentUserData?.firstName || '')} ${escapeHtml(currentUserData?.lastName || '')}" /></div>
                 <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" value="${escapeHtml(currentUser?.email || '')}" /></div>
                 <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" value="${escapeHtml(currentUserData?.phone || '')}" /></div>
                 <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code" value="${escapeHtml(currentUserData?.referralCode || '')}" /></div>
             `;
+
             if (formType === 'ambassador') {
                 formHtml += `
                     ${commonFields}
@@ -5648,9 +6406,12 @@
                     <div class="form-group"><label>Occupation</label><input type="text" id="f_occupation" placeholder="Your occupation" /></div>
                 `;
             }
+
             flyerDetailForm.innerHTML = formHtml;
+
             const config = allData.formConfigs?.[formType] || { isFree: true };
             let requiresPayment = !config.isFree;
+
             if (requiresPayment) {
                 const paymentHtml = `
                     <div id="flyerPaymentSection" style="margin-top:10px; border-top:1px solid #f0f0f0; padding-top:12px;">
@@ -5673,6 +6434,7 @@
                     </div>
                 `;
                 flyerDetailForm.insertAdjacentHTML('beforeend', paymentHtml);
+
                 const paymentUpload = document.getElementById('flyerPaymentUpload');
                 const paymentFileName = document.getElementById('flyerPaymentFileName');
                 const paymentUrlInput = document.getElementById('flyerPaymentUrl');
@@ -5722,10 +6484,13 @@
                     });
                 }
             }
+
             setupFlyerUploads();
+
             flyerDetailApplyBtn.onclick = () => {
                 submitFlyerApplication(flyerId, formType);
             };
+
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             flyerDetailView.classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -5750,6 +6515,7 @@
                 const fileNameEl = document.getElementById(fileNameId);
                 const urlInput = document.getElementById(urlInputId);
                 if (!trigger) return;
+
                 trigger.addEventListener('click', () => {
                     const options = {
                         cloudName: CLOUD_NAME,
@@ -5793,6 +6559,7 @@
                     widget.open();
                 });
             }
+
             setupUpload('flyerProofUpload', 'flyerProofFileName', 'flyerProofUrl');
             setupUpload('flyerProfileUpload', 'flyerProfileFileName', 'flyerProfileUrl');
             setupUpload('flyerNrcFrontUpload', 'flyerNrcFrontFileName', 'flyerNrcFrontUrl');
@@ -5806,9 +6573,12 @@
                 showToast('Flyer not found.', 'error');
                 return;
             }
+
             const getVal = (id) => document.getElementById(id)?.value?.trim() || '';
             const getFileUrl = (id) => document.getElementById(id)?.value || '';
+
             let formData = {};
+
             if (formType === 'ambassador') {
                 formData = {
                     name: getVal('f_name'),
@@ -5862,12 +6632,15 @@
                     occupation: getVal('f_occupation')
                 };
             }
+
             if (!formData.name && !formData.email) {
                 showToast('Please fill in at least your name and email.', 'error');
                 return;
             }
+
             const config = allData.formConfigs?.[formType] || { isFree: true };
             let paymentData = null;
+
             if (!config.isFree) {
                 const paymentUrlInput = document.getElementById('flyerPaymentUrl');
                 const screenshot = paymentUrlInput ? paymentUrlInput.value : '';
@@ -5875,6 +6648,7 @@
                     showToast('Please upload a payment screenshot.', 'error');
                     return;
                 }
+
                 paymentData = {
                     amount: config.price || 0,
                     mobileNumber: config.mobileNumber || '',
@@ -5882,6 +6656,7 @@
                     screenshots: [screenshot]
                 };
             }
+
             if (!allData.applications) allData.applications = {};
             const appId = 'app_' + Date.now();
             allData.applications[appId] = {
@@ -5895,11 +6670,13 @@
                 createdAt: Date.now(),
                 paymentData: paymentData
             };
+
             createNotification(
                 currentUserId,
                 'Application Submitted',
                 `Your ${formType} application for "${flyer.text || 'Untitled Flyer'}" has been submitted successfully. We will review it shortly.`
             );
+
             saveData().then(() => {
                 showToast('✅ Application submitted successfully!', 'success');
                 switchView('applicationsView');
@@ -5911,12 +6688,17 @@
             });
         }
 
+        // =================================================================
+        // APPLICATIONS VIEW
+        // =================================================================
+
         function renderApplications() {
             const container = applicationsListEl;
             const apps = allData.applications || {};
             const entries = Object.entries(apps)
                 .filter(([key, a]) => a.userId === currentUserId)
                 .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
+
             if (entries.length === 0) {
                 container.innerHTML = `
                     <div class="text-muted text-center" style="padding:20px;color:#888;">
@@ -5926,6 +6708,7 @@
                 `;
                 return;
             }
+
             container.innerHTML = entries.map(([key, a]) => {
                 const statusClass = a.status || 'pending';
                 const statusDisplay = a.status ? a.status.charAt(0).toUpperCase() + a.status.slice(1) : 'Pending';
@@ -5937,6 +6720,7 @@
                     job: 'Job',
                     referrer: 'Referrer'
                 } [a.formType] || a.formType || 'Unknown';
+
                 let detailRows = '';
                 const fd = a.formData || {};
                 for (const [k, v] of Object.entries(fd)) {
@@ -5950,6 +6734,7 @@
                             `<div class="detail-row"><span class="label">${label}</span><span class="val">${val}</span></div>`;
                     }
                 }
+
                 if (a.paymentData) {
                     const pd = a.paymentData;
                     detailRows +=
@@ -5967,6 +6752,7 @@
                             `<div class="detail-row"><span class="label">Screenshots</span><span class="val">${links}</span></div>`;
                     }
                 }
+
                 return `
                 <div class="app-card" data-key="${key}">
                     <div class="app-summary">
@@ -5988,6 +6774,7 @@
                 </div>
                 `;
             }).join('');
+
             container.querySelectorAll('.app-card').forEach(el => {
                 el.addEventListener('click', function() {
                     this.classList.toggle('open');
@@ -5995,23 +6782,32 @@
             });
         }
 
+        // =================================================================
+        // RECEIPT MODAL LOGIC
+        // =================================================================
+
         function openReceiptModal(order, key) {
             const customerName = order.customer || currentUserData?.firstName + ' ' + currentUserData?.lastName || 'Customer';
             const customerPhone = order.clientNumber || currentUserData?.phone || 'N/A';
             const customerEmail = currentUser?.email || 'N/A';
+
             recOrderId.textContent = order.id || 'N/A';
             recCustName.textContent = customerName;
             recCustPhone.textContent = 'Phone: ' + customerPhone;
             recCustEmail.textContent = 'Email: ' + customerEmail;
+
             const serviceTitle = order.service || 'Design Service';
             const qty = order.quantity || 1;
             const totalPrice = order.amount || 0;
             const unitPrice = qty > 0 ? (totalPrice / qty) : totalPrice;
+
             let discountVal = 0;
             if (order.discountApplied && typeof order.discountApplied === 'number') {
                 discountVal = totalPrice * (order.discountApplied / 100);
             }
+
             const subtotal = Math.max(0, totalPrice - discountVal);
+
             recItemsBody.innerHTML = `
                 <div class="receipt-item-row">
                     <div>${escapeHtml(serviceTitle)}</div>
@@ -6020,10 +6816,13 @@
                     <div>ZMW ${(unitPrice * qty).toFixed(2)}</div>
                 </div>
             `;
+
             recSubtotal.textContent = `ZMW ${totalPrice.toFixed(2)}`;
             recDiscount.textContent = `ZMW ${discountVal.toFixed(2)}`;
             recTotalDisplay.textContent = `ZMW ${subtotal.toFixed(2)}`;
             recSignName.textContent = 'Jubel Mobela';
+            recFootnote.textContent = 'We truly appreciate your trust and support. It has been a pleasure working with you, and we look forward to bringing your next project to life.';
+
             receiptModal.classList.add('open');
         }
 
@@ -6035,6 +6834,7 @@
             const receiptEl = document.getElementById('receiptContainer');
             downloadReceiptBtn.disabled = true;
             downloadReceiptBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generating...`;
+
             html2canvas(receiptEl, {
                 scale: 2,
                 backgroundColor: '#ffffff',
@@ -6058,12 +6858,17 @@
             });
         }
 
+        // =================================================================
+        // EVENT BINDINGS
+        // =================================================================
+
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
                 const viewId = this.dataset.view;
                 if (viewId) switchView(viewId);
             });
         });
+
         backFromOrder.addEventListener('click', function() {
             switchView('homeView');
             selectedService = null;
@@ -6071,12 +6876,15 @@
             document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
             renderServices('all');
         });
+
         backFromFlyerDetail.addEventListener('click', function() {
             switchView('homeView');
         });
+
         flyerDetailCloseBtn.addEventListener('click', function() {
             switchView('homeView');
         });
+
         document.querySelectorAll('.cat-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
@@ -6096,6 +6904,7 @@
                 }
             });
         });
+
         dynamicBack.addEventListener('click', function() {
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
             document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
@@ -6104,7 +6913,9 @@
             dynamicBack.style.display = 'none';
             dynamicViewAll.style.display = 'inline';
         });
+
         dynamicViewAll.addEventListener('click', () => switchView('historyView'));
+
         logoutBtn.addEventListener('click', () => {
             signOut(auth).then(() => {
                 window.location.href = 'login.html';
@@ -6113,62 +6924,77 @@
                 showToast('Error logging out', 'error');
             });
         });
+
         notifIcon.addEventListener('click', openSidebar);
         sidebarClose.addEventListener('click', closeSidebar);
         sidebarOverlay.addEventListener('click', closeSidebar);
+
         paymentCloseBtn.addEventListener('click', function() {
             paymentPage.classList.remove('open');
         });
         paymentPage.addEventListener('click', function(e) {
             if (e.target === this) this.classList.remove('open');
         });
+
         applyCouponBtn.addEventListener('click', applyCoupon);
         couponInput.addEventListener('keyup', function(e) {
             if (e.key === 'Enter') applyCoupon();
         });
+
         togglePromoBtn.addEventListener('click', function() {
             togglePromoBtn.classList.add('active');
             toggleReferralBtn.classList.remove('active');
             promoCodeWrap.classList.add('open');
             referralCodeWrap.classList.remove('open');
         });
+
         toggleReferralBtn.addEventListener('click', function() {
             toggleReferralBtn.classList.add('active');
             togglePromoBtn.classList.remove('active');
             referralCodeWrap.classList.add('open');
             promoCodeWrap.classList.remove('open');
         });
+
         applyReferralBtn.addEventListener('click', applyReferral);
         referralCodeInput.addEventListener('keyup', function(e) {
             if (e.key === 'Enter') applyReferral();
         });
+
         confirmPaymentBtn.addEventListener('click', confirmPayment);
+
         setupCloudinaryUpload();
+
         accountTransactionsBtn.addEventListener('click', function() {
             accountTransactionsBtn.classList.add('active');
             accountWithdrawBtn.classList.remove('active');
             accountTransactionsView.classList.add('active');
             accountWithdrawView.classList.remove('active');
         });
+
         accountWithdrawBtn.addEventListener('click', function() {
             accountWithdrawBtn.classList.add('active');
             accountTransactionsBtn.classList.remove('active');
             accountWithdrawView.classList.add('active');
             accountTransactionsView.classList.remove('active');
         });
+
+        // Withdraw button from account now goes to the withdraw page
         withdrawBtnFromBalance.addEventListener('click', function() {
-            switchView('accountView');
-            setTimeout(() => {
-                accountWithdrawBtn.click();
-                document.getElementById('accountWithdrawView').scrollIntoView({ behavior: 'smooth' });
-            }, 300);
+            switchView('withdrawView');
+            renderWithdrawPage();
         });
-        submitWithdrawBtn.addEventListener('click', submitWithdrawal);
+        withdrawBtnFromView.addEventListener('click', function() {
+            switchView('withdrawView');
+            renderWithdrawPage();
+        });
+
         sendMoneyBtn.addEventListener('click', toggleSendMoneySection);
+
         searchRecipientBtn.addEventListener('click', searchRecipient);
         sendReferralInput.addEventListener('keyup', function(e) {
             if (e.key === 'Enter') searchRecipient();
         });
+
         sendAmountInput.addEventListener('input', function() {
             updateSendButtonState();
             const accounts = allData.customerAccounts || {};
@@ -6185,7 +7011,9 @@
                     `Available: <span class="avail">ZMW ${availableBalance.toFixed(2)}</span>`;
             }
         });
+
         sendMoneyConfirmBtn.addEventListener('click', confirmSendMoney);
+
         payWithWalletCheck.addEventListener('change', function() {
             if (this.checked) {
                 const accounts = allData.customerAccounts || {};
@@ -6193,9 +7021,11 @@
                 const balance = userAccount.balance || 0;
                 const pendingTotal = calculatePendingWithdrawalTotal();
                 const availableBalance = Math.max(0, balance - pendingTotal);
+
                 let depositAmount = 0;
                 const amountText = paymentAmount.textContent.replace('ZMW ', '');
                 depositAmount = parseFloat(amountText) || 0;
+
                 if (availableBalance < depositAmount) {
                     showToast('Insufficient wallet balance.', 'error');
                     this.checked = false;
@@ -6210,16 +7040,41 @@
                 uploadSection.style.display = 'block';
             }
         });
+
+        // Receipt Event Listeners
         closeReceiptBtn.addEventListener('click', closeReceiptModal);
         receiptModal.addEventListener('click', function(e) {
             if (e.target === this) closeReceiptModal();
         });
         downloadReceiptBtn.addEventListener('click', downloadReceipt);
-        document.getElementById('whatsappBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            const url = this.href;
+
+        // Withdraw success modal
+        withdrawSuccessOkBtn.addEventListener('click', function() {
+            withdrawSuccessModal.classList.remove('open');
+            switchView('withdrawView');
+            renderWithdrawPage();
+        });
+        withdrawSuccessModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+                switchView('withdrawView');
+                renderWithdrawPage();
+            }
+        });
+
+        // WhatsApp button
+        waBtn.addEventListener('click', function() {
+            const phone = '0768658484';
+            const url = `https://wa.me/${phone}`;
             window.open(url, '_blank');
         });
+
+        // Setup withdraw page events
+        setupWithdrawPageEvents();
+
+        // =================================================================
+        // AUTH & INIT
+        // =================================================================
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -6255,11 +7110,10 @@
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
         console.log('✅ Customer code updated with all requested changes:');
-        console.log('1. Profile contact section added with WhatsApp, Facebook, SMS/CALLS');
-        console.log('2. WhatsApp button opens WhatsApp app on phone');
-        console.log('3. Flyers: 1200x675px with curved edges (border-radius: 20px)');
-        console.log('4. Receipt: lorem ipsum replaced with appreciation text, customer email added');
-        console.log('5. Withdrawal: now a detailed page instead of a popup modal');
+        console.log('  • Profile contact info (WhatsApp, Facebook, SMS/CALLS)');
+        console.log('  • Flyers 675×1200 portrait with curved edges');
+        console.log('  • Invoice: lorem ipsum replaced, customer email added, size reduced 20%');
+        console.log('  • Withdraw popup → full page with quick options and history dropdowns');
     </script>
 </body>
 </html>
