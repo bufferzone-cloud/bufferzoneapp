@@ -932,6 +932,33 @@
             color: #f5b83d;
         }
 
+        /* ===== PAYMENT PAGE EXTRA DETAILS (NEW) ===== */
+        .payment-extra-details {
+            background: #f8f9fc;
+            border-radius: 9px;
+            padding: 8px 11px;
+            margin-bottom: 11px;
+            border: 1px solid #eee;
+            font-size: 9px;
+        }
+        .payment-extra-details .extra-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .payment-extra-details .extra-row:last-child {
+            border-bottom: none;
+        }
+        .payment-extra-details .extra-row .extra-label {
+            color: #888;
+        }
+        .payment-extra-details .extra-row .extra-value {
+            font-weight: 500;
+            color: #1c2128;
+            text-align: right;
+        }
+
         .toggle-row {
             display: flex;
             gap: 7px;
@@ -3168,7 +3195,7 @@
             color: #f5b83d;
         }
 
-        /* ===== APPLICATION STATUS POPUP ===== */
+        /* ===== APPLICATION STATUS POPUP (NEW) ===== */
         .app-status-overlay {
             position: fixed;
             top: 0;
@@ -3306,7 +3333,7 @@
             color: #f5b83d;
         }
 
-        /* ===== ORDER COMPLETE POPUP ===== */
+        /* ===== ORDER COMPLETE POPUP (NEW) ===== */
         .order-complete-overlay {
             position: fixed;
             top: 0;
@@ -3706,6 +3733,7 @@
 
     </div>
 
+    <!-- PAYMENT PAGE OVERLAY (with extra details) -->
     <div class="payment-page-overlay" id="paymentPage">
         <div class="payment-page">
             <button class="close-btn" id="paymentCloseBtn"><i class="fa-solid fa-times"></i></button>
@@ -3716,32 +3744,13 @@
             <h3>💳 Payment Required</h3>
             <p class="sub">To begin your project, you must pay 50% upfront.</p>
 
-            <!-- ===== EXTRA DETAILS ON PAYMENT PAGE ===== -->
-            <div class="payment-details" style="margin-bottom:6px;">
-                <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;">
-                    <div style="flex:1; min-width:120px;">
-                        <div style="font-size:8px; color:#888;">Customer</div>
-                        <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentCustomerName">—</div>
-                    </div>
-                    <div style="flex:1; min-width:100px;">
-                        <div style="font-size:8px; color:#888;">Service</div>
-                        <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentServiceName">—</div>
-                    </div>
-                    <div style="flex:1; min-width:80px;">
-                        <div style="font-size:8px; color:#888;">Qty</div>
-                        <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentQty">—</div>
-                    </div>
-                </div>
-                <div style="margin-top:4px; padding-top:4px; border-top:1px solid #f0f0f0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;">
-                    <div>
-                        <div style="font-size:8px; color:#888;">Customization</div>
-                        <div style="font-weight:500; font-size:10px; color:#1c2128;" id="paymentCustomization">—</div>
-                    </div>
-                    <div>
-                        <div style="font-size:8px; color:#888;">Notes</div>
-                        <div style="font-weight:500; font-size:10px; color:#1c2128;" id="paymentNotes">—</div>
-                    </div>
-                </div>
+            <!-- ===== EXTRA DETAILS ON PAYMENT PAGE (NEW) ===== -->
+            <div class="payment-extra-details">
+                <div class="extra-row"><span class="extra-label">Customer</span><span class="extra-value" id="paymentCustomerName">—</span></div>
+                <div class="extra-row"><span class="extra-label">Service</span><span class="extra-value" id="paymentServiceName">—</span></div>
+                <div class="extra-row"><span class="extra-label">Quantity</span><span class="extra-value" id="paymentQty">—</span></div>
+                <div class="extra-row"><span class="extra-label">Customization</span><span class="extra-value" id="paymentCustomization">—</span></div>
+                <div class="extra-row"><span class="extra-label">Notes</span><span class="extra-value" id="paymentNotes">—</span></div>
             </div>
 
             <div class="payment-details">
@@ -3825,7 +3834,7 @@
         </div>
     </div>
 
-    <!-- ===== WITHDRAW PAGE ===== -->
+    <!-- WITHDRAW PAGE -->
     <div class="withdraw-page-overlay" id="withdrawPage">
         <div class="withdraw-page">
             <div class="page-header">
@@ -3871,7 +3880,7 @@
         </div>
     </div>
 
-    <!-- ===== SEND MONEY PAGE ===== -->
+    <!-- SEND MONEY PAGE -->
     <div class="send-money-page-overlay" id="sendMoneyPage">
         <div class="send-money-page">
             <div class="page-header">
@@ -3928,7 +3937,7 @@
         </div>
     </div>
 
-    <!-- ===== APPLICATION STATUS POPUP ===== -->
+    <!-- ===== APPLICATION STATUS POPUP (NEW) ===== -->
     <div class="app-status-overlay" id="appStatusPopup">
         <div class="app-status-modal">
             <div class="app-status-logo-wrap">
@@ -3956,7 +3965,7 @@
         </div>
     </div>
 
-    <!-- ===== ORDER COMPLETE POPUP ===== -->
+    <!-- ===== ORDER COMPLETE POPUP (NEW) ===== -->
     <div class="order-complete-overlay" id="orderCompletePopup">
         <div class="order-complete-modal">
             <span class="oc-icon"><i class="fa-regular fa-circle-check"></i></span>
@@ -4109,7 +4118,7 @@
 
         let currentFlyerId = null;
 
-        // ===== POPUP TRACKING =====
+        // Popup tracking (one-time)
         const shownPopups = {
             applications: {}, // appId -> true
             orderComplete: {} // orderId -> true
@@ -4258,26 +4267,7 @@
         const withdrawSuccessModal = document.getElementById('withdrawSuccessModal');
         const withdrawSuccessOkBtn = document.getElementById('withdrawSuccessOkBtn');
 
-        // ===== POPUP ELEMENTS =====
-        const appStatusPopup = document.getElementById('appStatusPopup');
-        const appStatusCheck = document.getElementById('appStatusCheck');
-        const appStatusX = document.getElementById('appStatusX');
-        const appStatusTitle = document.getElementById('appStatusTitle');
-        const appStatusMessage = document.getElementById('appStatusMessage');
-        const appStatusBtn = document.getElementById('appStatusBtn');
-        const asName = document.getElementById('asName');
-        const asEmail = document.getElementById('asEmail');
-        const asPhone = document.getElementById('asPhone');
-        const asBzCode = document.getElementById('asBzCode');
-        const asFormType = document.getElementById('asFormType');
-        const asFlyer = document.getElementById('asFlyer');
-        const asDate = document.getElementById('asDate');
-
-        const orderCompletePopup = document.getElementById('orderCompletePopup');
-        const ocRemainingAmount = document.getElementById('ocRemainingAmount');
-        const ocOkBtn = document.getElementById('ocOkBtn');
-
-        // ===== PAYMENT PAGE EXTRA DETAILS =====
+        // ===== PAYMENT PAGE EXTRA DETAILS ELEMENTS =====
         const paymentCustomerName = document.getElementById('paymentCustomerName');
         const paymentServiceName = document.getElementById('paymentServiceName');
         const paymentQty = document.getElementById('paymentQty');
@@ -4334,10 +4324,10 @@
             }
             // Check for popups when switching to relevant views
             if (viewId === 'applicationsView') {
-                checkApplicationPopups();
+                setTimeout(() => checkApplicationPopups(), 300);
             }
             if (viewId === 'ordersView') {
-                checkOrderCompletePopups();
+                setTimeout(() => checkOrderCompletePopups(), 300);
             }
         }
 
@@ -4356,10 +4346,10 @@
                 }
                 document.getElementById('appContent').scrollTop = 0;
                 if (viewId === 'applicationsView') {
-                    checkApplicationPopups();
+                    setTimeout(() => checkApplicationPopups(), 300);
                 }
                 if (viewId === 'ordersView') {
-                    checkOrderCompletePopups();
+                    setTimeout(() => checkOrderCompletePopups(), 300);
                 }
             } else {
                 switchView('homeView');
@@ -7281,8 +7271,19 @@
 
         function showApplicationPopup(appId, app) {
             const isApproved = app.status === 'approved';
+            const appStatusCheck = document.getElementById('appStatusCheck');
+            const appStatusX = document.getElementById('appStatusX');
+            const appStatusTitle = document.getElementById('appStatusTitle');
+            const appStatusMessage = document.getElementById('appStatusMessage');
+            const asName = document.getElementById('asName');
+            const asEmail = document.getElementById('asEmail');
+            const asPhone = document.getElementById('asPhone');
+            const asBzCode = document.getElementById('asBzCode');
+            const asFormType = document.getElementById('asFormType');
+            const asFlyer = document.getElementById('asFlyer');
+            const asDate = document.getElementById('asDate');
+            const appStatusBtn = document.getElementById('appStatusBtn');
 
-            // Set the popup content
             if (isApproved) {
                 appStatusCheck.style.display = 'inline';
                 appStatusX.style.display = 'none';
@@ -7297,7 +7298,6 @@
                 appStatusMessage.textContent = 'Your application has been rejected.';
             }
 
-            // Fill in user details from the application form data
             const fd = app.formData || {};
             const customerName = currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
                 currentUser.email || '—';
@@ -7317,27 +7317,10 @@
             asFlyer.textContent = app.flyerTitle || 'Untitled';
             asDate.textContent = app.createdAt ? new Date(app.createdAt).toLocaleDateString() : 'N/A';
 
-            // Store the appId to mark as seen after button click
             appStatusBtn.dataset.appId = appId;
-
-            // Show the popup
-            appStatusPopup.classList.add('open');
-
-            // Mark as seen immediately so it doesn't show again while open
+            document.getElementById('appStatusPopup').classList.add('open');
             shownPopups.applications[appId] = true;
         }
-
-        appStatusBtn.addEventListener('click', function() {
-            appStatusPopup.classList.remove('open');
-            switchView('applicationsView');
-        });
-
-        appStatusPopup.addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('open');
-                switchView('applicationsView');
-            }
-        });
 
         // ===== ORDER COMPLETE POPUP FUNCTIONS =====
         function checkOrderCompletePopups() {
@@ -7348,7 +7331,6 @@
 
             for (const [key, order] of entries) {
                 if (order.status === 'completed' && !shownPopups.orderComplete[key]) {
-                    // Check if the order has a remaining balance (50%)
                     const remainingAmount = (order.amount || 0) * 0.5;
                     if (remainingAmount > 0) {
                         showOrderCompletePopup(key, order, remainingAmount);
@@ -7359,32 +7341,13 @@
         }
 
         function showOrderCompletePopup(orderId, order, remainingAmount) {
+            const ocRemainingAmount = document.getElementById('ocRemainingAmount');
+            const ocOkBtn = document.getElementById('ocOkBtn');
             ocRemainingAmount.textContent = `ZMW ${remainingAmount.toFixed(2)}`;
             ocOkBtn.dataset.orderId = orderId;
-            orderCompletePopup.classList.add('open');
+            document.getElementById('orderCompletePopup').classList.add('open');
             shownPopups.orderComplete[orderId] = true;
         }
-
-        ocOkBtn.addEventListener('click', function() {
-            orderCompletePopup.classList.remove('open');
-            // Navigate to orders view or stay
-            if (document.getElementById('ordersView').classList.contains('active')) {
-                // Stay on orders view
-            } else {
-                switchView('ordersView');
-            }
-        });
-
-        orderCompletePopup.addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('open');
-                if (document.getElementById('ordersView').classList.contains('active')) {
-                    // Stay on orders view
-                } else {
-                    switchView('ordersView');
-                }
-            }
-        });
 
         function renderApplications() {
             const container = applicationsListEl;
@@ -7760,6 +7723,38 @@
         });
         downloadReceiptBtn.addEventListener('click', downloadReceipt);
 
+        // ===== APP STATUS POPUP EVENT LISTENERS =====
+        document.getElementById('appStatusBtn').addEventListener('click', function() {
+            document.getElementById('appStatusPopup').classList.remove('open');
+            switchView('applicationsView');
+        });
+        document.getElementById('appStatusPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+                switchView('applicationsView');
+            }
+        });
+
+        // ===== ORDER COMPLETE POPUP EVENT LISTENERS =====
+        document.getElementById('ocOkBtn').addEventListener('click', function() {
+            document.getElementById('orderCompletePopup').classList.remove('open');
+            if (document.getElementById('ordersView').classList.contains('active')) {
+                // Stay on orders view
+            } else {
+                switchView('ordersView');
+            }
+        });
+        document.getElementById('orderCompletePopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+                if (document.getElementById('ordersView').classList.contains('active')) {
+                    // Stay on orders view
+                } else {
+                    switchView('ordersView');
+                }
+            }
+        });
+
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
@@ -7793,13 +7788,14 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code updated with all requested features:');
+        console.log('✅ Full customer code with all requested features:');
         console.log('  • Current date & time in withdraw request');
         console.log('  • CSS for apply referral code button');
-        console.log('  • More details on payment page (without changing workflow)');
+        console.log('  • More details on payment page (extra-details section)');
         console.log('  • One-time application status popup (approved ✓ / rejected ✗) with logo, user details, and button');
         console.log('  • One-time order complete popup with remaining 50% amount');
-        console.log('  • Logout button is now a rectangle (not triangle)');
+        console.log('  • Logout button is a rectangle (not triangle)');
+        console.log('  • Core order/application submission logic is completely unchanged.');
     </script>
 </body>
 </html>
