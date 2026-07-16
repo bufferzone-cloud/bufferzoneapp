@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1870,150 +1871,510 @@
             color: #fff;
         }
 
-        .send-money-section {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 14px;
-            margin: 10px 0 14px 0;
-            border: 1px solid #e0e0e0;
-            display: none;
-        }
-        .send-money-section.open {
-            display: block;
-        }
-        .send-money-section h4 {
-            font-size: 12px;
-            font-weight: 700;
-            color: #1c2128;
-            margin-bottom: 3px;
-        }
-        .send-money-section .sub {
-            font-size: 9px;
-            color: #888;
-            margin-bottom: 10px;
-        }
-        .send-money-section .form-group {
-            margin-bottom: 10px;
-        }
-        .send-money-section .form-group label {
-            font-size: 9px;
-            font-weight: 600;
-            color: #1c2128;
-            display: block;
-            margin-bottom: 3px;
-        }
-        .send-money-section .form-group input {
+        /* ===== SEND MONEY PAGE (full page like withdraw) ===== */
+        .send-money-page-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 7px 10px;
-            border: 1px solid #ddd;
-            border-radius: 9px;
+            height: 100%;
+            background: #ffffff;
+            z-index: 1100;
+            display: none;
+            overflow-y: auto;
+            padding: 0;
+        }
+        .send-money-page-overlay.open {
+            display: block;
+        }
+        .send-money-page {
+            width: 100%;
+            max-width: 100%;
+            padding: 20px 12px 30px 12px;
+            background: #ffffff;
+            position: relative;
+            min-height: 100vh;
+        }
+        .send-money-page .page-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .send-money-page .page-header h2 {
+            font-weight: 700;
+            font-size: 18px;
+            color: #1c2128;
+            flex: 1;
+        }
+        .send-money-page .page-header .close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #aaa;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .send-money-page .page-header .close-btn:hover {
+            color: #1c2128;
+        }
+        .send-money-page .subtitle {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+        .send-money-page .customer-info {
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 14px;
+            border: 1px solid #f0f0f0;
+        }
+        .send-money-page .customer-info .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
             font-size: 10px;
         }
-        .send-money-section .form-group input:focus {
+        .send-money-page .customer-info .row .lbl {
+            color: #888;
+        }
+        .send-money-page .customer-info .row .val {
+            font-weight: 600;
+            color: #1c2128;
+        }
+        .send-money-page .form-group {
+            margin-bottom: 12px;
+        }
+        .send-money-page .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 10px;
+            color: #1c2128;
+            margin-bottom: 4px;
+        }
+        .send-money-page .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border 0.2s;
+        }
+        .send-money-page .form-group input:focus {
             outline: none;
             border-color: #f5b83d;
         }
-        .send-money-section .search-result {
-            padding: 7px 10px;
+        .send-money-page .search-result {
+            padding: 10px 12px;
             background: #f8f9fc;
-            border-radius: 7px;
-            font-size: 10px;
+            border-radius: 10px;
+            font-size: 13px;
             color: #1c2128;
-            min-height: 31px;
+            min-height: 44px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             flex-wrap: wrap;
+            border: 1px solid #f0f0f0;
         }
-        .send-money-section .search-result .name {
+        .send-money-page .search-result .name {
             font-weight: 700;
             color: #f5b83d;
         }
-        .send-money-section .search-result .not-found {
+        .send-money-page .search-result .not-found {
             color: #dc2626;
             font-weight: 600;
         }
-        .send-money-section .balance-check {
-            font-size: 9px;
+        .send-money-page .balance-check {
+            font-size: 10px;
             color: #888;
-            margin-top: 2px;
+            margin-top: 4px;
         }
-        .send-money-section .balance-check .avail {
+        .send-money-page .balance-check .avail {
             font-weight: 700;
             color: #1c2128;
         }
-        .send-money-section .balance-check .insufficient {
+        .send-money-page .balance-check .insufficient {
             color: #dc2626;
             font-weight: 600;
         }
-        .send-money-section .btn-send {
+        .send-money-page .btn-send-rect {
             width: 100%;
-            padding: 9px;
+            padding: 12px;
             background: #4a90d9;
             color: white;
             border: none;
-            border-radius: 9px;
+            border-radius: 10px;
             font-weight: 700;
-            font-size: 11px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.2s;
-            margin-top: 3px;
+            margin-top: 4px;
         }
-        .send-money-section .btn-send:disabled {
+        .send-money-page .btn-send-rect:disabled {
             background: #ccc;
             cursor: not-allowed;
         }
-        .send-money-section .btn-send:active:not(:disabled) {
-            transform: scale(0.95);
+        .send-money-page .btn-send-rect:active:not(:disabled) {
+            transform: scale(0.97);
         }
-        .send-money-section .btn-send i {
-            margin-right: 5px;
+        .send-money-page .history-section h4 {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1c2128;
+            margin-bottom: 8px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 6px;
+            margin-top: 16px;
         }
-
-        .send-money-tx-list {
-            margin-top: 10px;
-            border-top: 1px solid #f0f0f0;
-            padding-top: 10px;
+        .send-money-page .history-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 10px 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 8px;
         }
-        .send-money-tx-list .tx-item {
+        .send-money-page .history-card:active {
+            transform: scale(0.98);
+        }
+        .send-money-page .history-card .summary {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 5px 0;
-            border-bottom: 1px solid #f5f5f5;
+        }
+        .send-money-page .history-card .summary .left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            color: #1c2128;
+        }
+        .send-money-page .history-card .summary .left i {
+            font-size: 12px;
+        }
+        .send-money-page .history-card .summary .right {
             font-size: 9px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        .send-money-tx-list .tx-item:last-child {
-            border-bottom: none;
+        .send-money-page .history-card .details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
+            padding: 0 3px;
+            border-top: 1px solid transparent;
         }
-        .send-money-tx-list .tx-item .tx-left .tx-type {
+        .send-money-page .history-card.open .details {
+            max-height: 250px;
+            padding: 8px 3px 3px 3px;
+            border-top-color: #f0f0f0;
+            margin-top: 6px;
+        }
+        .send-money-page .history-card .details .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 10px;
+            color: #555;
+        }
+        .send-money-page .history-card .details .row .lbl {
+            color: #888;
+        }
+        .send-money-page .history-card .details .row .val {
+            font-weight: 500;
+            color: #1c2128;
+        }
+        .send-money-page .history-card .expand-icon {
+            transition: transform 0.3s ease;
+            font-size: 9px;
+            color: #aaa;
+        }
+        .send-money-page .history-card.open .expand-icon {
+            transform: rotate(180deg);
+        }
+        .send-money-page .empty-history {
+            text-align: center;
+            padding: 14px;
+            color: #888;
+            font-size: 10px;
+        }
+
+        /* ===== WITHDRAW PAGE ===== */
+        .withdraw-page-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 1100;
+            display: none;
+            overflow-y: auto;
+            padding: 0;
+        }
+        .withdraw-page-overlay.open {
+            display: block;
+        }
+        .withdraw-page {
+            width: 100%;
+            max-width: 100%;
+            padding: 20px 12px 30px 12px;
+            background: #ffffff;
+            position: relative;
+            min-height: 100vh;
+        }
+        .withdraw-page .page-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .withdraw-page .page-header h2 {
+            font-weight: 700;
+            font-size: 18px;
+            color: #1c2128;
+            flex: 1;
+        }
+        .withdraw-page .page-header .close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #aaa;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .withdraw-page .page-header .close-btn:hover {
+            color: #1c2128;
+        }
+        .withdraw-page .subtitle {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+        .withdraw-page .customer-info {
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 14px;
+            border: 1px solid #f0f0f0;
+        }
+        .withdraw-page .customer-info .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 10px;
+        }
+        .withdraw-page .customer-info .row .lbl {
+            color: #888;
+        }
+        .withdraw-page .customer-info .row .val {
             font-weight: 600;
             color: #1c2128;
         }
-        .send-money-tx-list .tx-item .tx-left .tx-with {
-            color: #888;
+        .withdraw-page .transfer-note {
+            font-size: 10px;
+            color: #555;
+            background: #fef9e7;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 14px;
+            border-left: 3px solid #f5b83d;
+        }
+        .withdraw-page .balance-display {
+            text-align: center;
+            background: #1c2128;
+            border-radius: 14px;
+            padding: 20px 14px;
+            margin-bottom: 16px;
+            color: white;
+        }
+        .withdraw-page .balance-display .lbl {
+            font-size: 10px;
+            color: #f5b83d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .withdraw-page .balance-display .amount {
+            font-size: 36px;
+            font-weight: 800;
+            color: #fff;
+            margin: 4px 0;
+        }
+        .withdraw-page .balance-display .sub {
             font-size: 9px;
+            color: #aaa;
         }
-        .send-money-tx-list .tx-item .tx-right .tx-amount {
-            font-weight: 700;
+        .withdraw-page .amount-options {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 14px;
         }
-        .send-money-tx-list .tx-item .tx-right .tx-amount.sent {
+        .withdraw-page .amount-options .opt-btn {
+            flex: 1;
+            padding: 10px 6px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            background: #fff;
+            font-weight: 600;
+            font-size: 11px;
+            color: #1c2128;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .withdraw-page .amount-options .opt-btn.active {
+            border-color: #f5b83d;
+            background: #fef9e7;
+        }
+        .withdraw-page .amount-options .opt-btn:active {
+            transform: scale(0.95);
+        }
+        .withdraw-page .custom-amount {
+            margin-bottom: 14px;
+        }
+        .withdraw-page .custom-amount label {
+            display: block;
+            font-weight: 600;
+            font-size: 10px;
+            color: #1c2128;
+            margin-bottom: 4px;
+        }
+        .withdraw-page .custom-amount input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border 0.2s;
+        }
+        .withdraw-page .custom-amount input:focus {
+            outline: none;
+            border-color: #f5b83d;
+        }
+        .withdraw-page .custom-amount .hint {
+            font-size: 9px;
+            color: #888;
+            margin-top: 3px;
+        }
+        .withdraw-page .custom-amount .hint.error {
             color: #dc2626;
         }
-        .send-money-tx-list .tx-item .tx-right .tx-amount.received {
-            color: #00a86b;
+        .withdraw-page .btn-withdraw-rect {
+            width: 100%;
+            padding: 12px;
+            background: #1c2128;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 20px;
         }
-        .send-money-tx-list .tx-item .tx-right .tx-date {
-            font-size: 8px;
-            color: #aaa;
-            display: block;
-            text-align: right;
+        .withdraw-page .btn-withdraw-rect:active {
+            transform: scale(0.97);
         }
-        .send-money-tx-list .empty-tx {
-            text-align: center;
-            color: #888;
+        .withdraw-page .btn-withdraw-rect:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .withdraw-page .history-section h4 {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1c2128;
+            margin-bottom: 8px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 6px;
+        }
+        .withdraw-page .history-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 10px 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 8px;
+        }
+        .withdraw-page .history-card:active {
+            transform: scale(0.98);
+        }
+        .withdraw-page .history-card .summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .withdraw-page .history-card .summary .left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            color: #1c2128;
+        }
+        .withdraw-page .history-card .summary .left i {
+            font-size: 12px;
+        }
+        .withdraw-page .history-card .summary .right {
             font-size: 9px;
-            padding: 10px 0;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .withdraw-page .history-card .details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
+            padding: 0 3px;
+            border-top: 1px solid transparent;
+        }
+        .withdraw-page .history-card.open .details {
+            max-height: 250px;
+            padding: 8px 3px 3px 3px;
+            border-top-color: #f0f0f0;
+            margin-top: 6px;
+        }
+        .withdraw-page .history-card .details .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 10px;
+            color: #555;
+        }
+        .withdraw-page .history-card .details .row .lbl {
+            color: #888;
+        }
+        .withdraw-page .history-card .details .row .val {
+            font-weight: 500;
+            color: #1c2128;
+        }
+        .withdraw-page .history-card .expand-icon {
+            transition: transform 0.3s ease;
+            font-size: 9px;
+            color: #aaa;
+        }
+        .withdraw-page .history-card.open .expand-icon {
+            transform: rotate(180deg);
+        }
+        .withdraw-page .empty-history {
+            text-align: center;
+            padding: 14px;
+            color: #888;
+            font-size: 10px;
         }
 
         .account-tx-card,
@@ -2162,271 +2523,6 @@
         }
         .referral-code-box .copy-btn i {
             font-size: 12px;
-        }
-
-        /* ===== WITHDRAW PAGE ===== */
-        .withdraw-page-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #ffffff;
-            z-index: 1100;
-            display: none;
-            overflow-y: auto;
-            padding: 0;
-        }
-        .withdraw-page-overlay.open {
-            display: block;
-        }
-        .withdraw-page {
-            width: 100%;
-            max-width: 100%;
-            padding: 20px 12px 30px 12px;
-            background: #ffffff;
-            position: relative;
-            min-height: 100vh;
-        }
-        .withdraw-page .page-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 14px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .withdraw-page .page-header h2 {
-            font-weight: 700;
-            font-size: 18px;
-            color: #1c2128;
-            flex: 1;
-        }
-        .withdraw-page .page-header .close-btn {
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: #aaa;
-            cursor: pointer;
-            padding: 4px;
-        }
-        .withdraw-page .page-header .close-btn:hover {
-            color: #1c2128;
-        }
-        .withdraw-page .subtitle {
-            font-size: 11px;
-            color: #888;
-            margin-bottom: 14px;
-            line-height: 1.5;
-        }
-        .withdraw-page .customer-info {
-            background: #f8f9fc;
-            border-radius: 10px;
-            padding: 12px 14px;
-            margin-bottom: 14px;
-            border: 1px solid #f0f0f0;
-        }
-        .withdraw-page .customer-info .row {
-            display: flex;
-            justify-content: space-between;
-            padding: 3px 0;
-            font-size: 10px;
-        }
-        .withdraw-page .customer-info .row .lbl {
-            color: #888;
-        }
-        .withdraw-page .customer-info .row .val {
-            font-weight: 600;
-            color: #1c2128;
-        }
-        .withdraw-page .transfer-note {
-            font-size: 10px;
-            color: #555;
-            background: #fef9e7;
-            border-radius: 8px;
-            padding: 8px 12px;
-            margin-bottom: 14px;
-            border-left: 3px solid #f5b83d;
-        }
-        .withdraw-page .balance-display {
-            text-align: center;
-            background: #1c2128;
-            border-radius: 14px;
-            padding: 20px 14px;
-            margin-bottom: 16px;
-            color: white;
-        }
-        .withdraw-page .balance-display .lbl {
-            font-size: 10px;
-            color: #f5b83d;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-        .withdraw-page .balance-display .amount {
-            font-size: 36px;
-            font-weight: 800;
-            color: #fff;
-            margin: 4px 0;
-        }
-        .withdraw-page .balance-display .sub {
-            font-size: 9px;
-            color: #aaa;
-        }
-
-        .withdraw-page .amount-options {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 14px;
-        }
-        .withdraw-page .amount-options .opt-btn {
-            flex: 1;
-            padding: 10px 6px;
-            border-radius: 10px;
-            border: 2px solid #e0e0e0;
-            background: #fff;
-            font-weight: 600;
-            font-size: 11px;
-            color: #1c2128;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-        }
-        .withdraw-page .amount-options .opt-btn.active {
-            border-color: #f5b83d;
-            background: #fef9e7;
-        }
-        .withdraw-page .amount-options .opt-btn:active {
-            transform: scale(0.95);
-        }
-        .withdraw-page .custom-amount {
-            margin-bottom: 14px;
-        }
-        .withdraw-page .custom-amount label {
-            display: block;
-            font-weight: 600;
-            font-size: 10px;
-            color: #1c2128;
-            margin-bottom: 4px;
-        }
-        .withdraw-page .custom-amount input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-size: 14px;
-            transition: border 0.2s;
-        }
-        .withdraw-page .custom-amount input:focus {
-            outline: none;
-            border-color: #f5b83d;
-        }
-        .withdraw-page .custom-amount .hint {
-            font-size: 9px;
-            color: #888;
-            margin-top: 3px;
-        }
-        .withdraw-page .custom-amount .hint.error {
-            color: #dc2626;
-        }
-        .withdraw-page .btn-withdraw-rect {
-            width: 100%;
-            padding: 12px;
-            background: #1c2128;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 20px;
-        }
-        .withdraw-page .btn-withdraw-rect:active {
-            transform: scale(0.97);
-        }
-        .withdraw-page .btn-withdraw-rect:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-        .withdraw-page .history-section h4 {
-            font-weight: 700;
-            font-size: 14px;
-            color: #1c2128;
-            margin-bottom: 8px;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 6px;
-        }
-
-        .withdraw-page .history-card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 10px 14px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            border: 1px solid #f0f0f0;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 8px;
-        }
-        .withdraw-page .history-card:active {
-            transform: scale(0.98);
-        }
-        .withdraw-page .history-card .summary {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .withdraw-page .history-card .summary .left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 10px;
-            color: #1c2128;
-        }
-        .withdraw-page .history-card .summary .left i {
-            font-size: 12px;
-        }
-        .withdraw-page .history-card .summary .right {
-            font-size: 9px;
-            color: #888;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .withdraw-page .history-card .details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.3s ease;
-            padding: 0 3px;
-            border-top: 1px solid transparent;
-        }
-        .withdraw-page .history-card.open .details {
-            max-height: 250px;
-            padding: 8px 3px 3px 3px;
-            border-top-color: #f0f0f0;
-            margin-top: 6px;
-        }
-        .withdraw-page .history-card .details .row {
-            display: flex;
-            justify-content: space-between;
-            padding: 3px 0;
-            font-size: 10px;
-            color: #555;
-        }
-        .withdraw-page .history-card .details .row .lbl {
-            color: #888;
-        }
-        .withdraw-page .history-card .details .row .val {
-            font-weight: 500;
-            color: #1c2128;
-        }
-        .withdraw-page .history-card .expand-icon {
-            transition: transform 0.3s ease;
-            font-size: 9px;
-            color: #aaa;
-        }
-        .withdraw-page .history-card.open .expand-icon {
-            transform: rotate(180deg);
         }
 
         .flyer-detail-view {
@@ -3116,6 +3212,11 @@
             .withdraw-page .balance-display .amount {
                 font-size: 28px;
             }
+            .send-money-page .customer-info .row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+            }
         }
         @media (max-width: 380px) {
             .promo-slide .slide-text {
@@ -3304,42 +3405,6 @@
                             </div>
                         </div>
 
-                        <div class="send-money-section" id="sendMoneySection">
-                            <h4><i class="fa-solid fa-paper-plane" style="color:#4a90d9;"></i> Send Money</h4>
-                            <p class="sub">Send funds to another Buffer Zone user using their referral code.</p>
-
-                            <div class="form-group">
-                                <label>Recipient Referral Code</label>
-                                <input type="text" id="sendReferralInput" placeholder="e.g. BZ-ABCDE" />
-                                <button class="apply-btn" id="searchRecipientBtn" style="margin-top:3px; width:100%;">🔍 Search</button>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Recipient</label>
-                                <div class="search-result" id="recipientSearchResult">
-                                    <span style="color:#888;">Enter a referral code and click Search.</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Amount (ZMW)</label>
-                                <input type="number" id="sendAmountInput" placeholder="0.00" step="0.01" />
-                                <div class="balance-check" id="sendBalanceCheck">
-                                    Available: <span class="avail" id="sendAvailBalance">ZMW 0.00</span>
-                                </div>
-                            </div>
-
-                            <button class="btn-send" id="sendMoneyConfirmBtn" disabled>
-                                <i class="fa-solid fa-paper-plane"></i> Send Money
-                            </button>
-
-                            <div class="send-money-tx-list" id="sendMoneyTxList">
-                                <div style="font-weight:600; font-size:10px; color:#1c2128; margin-bottom:5px;">📋 Recent Sent &amp; Received</div>
-                                <div id="sendTxItems">
-                                </div>
-                            </div>
-                        </div>
-
                         <div id="transactionMessages">
                         </div>
                     </div>
@@ -3374,20 +3439,26 @@
                         <h4 style="font-size: 9px; font-weight: 600; color: #1c2128; margin-bottom: 3px;">About</h4>
                         <p>Passionate about design and technology. Helping brands grow through innovation and strategic design.</p>
                     </div>
-                    <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
 
-                    <!-- ===== CONTACT US SECTION — RED STYLED ===== -->
-                    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #f0f0f0;">
-                        <h4 style="font-size: 10px; font-weight: 700; color: #1c2128; margin-bottom: 6px;">📞 Contact Us</h4>
-                        <div style="display: flex; flex-direction: column; gap: 5px;">
-                            <a href="https://wa.me/260768658484" target="_blank" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: #dc2626; color: white; border-radius: 8px; text-decoration: none; font-size: 10px; font-weight: 600;">
-                                <i class="fa-brands fa-whatsapp" style="font-size: 14px;"></i> WhatsApp: 0768658484
+                    <!-- ===== LOGOUT BUTTON — CENTERED RED TRIANGLE ===== -->
+                    <div style="display: flex; justify-content: center; margin-top: 14px;">
+                        <button class="logout-btn" id="logoutBtn" style="background: #dc2626; color: white; border: none; padding: 10px 24px; border-radius: 0; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 7px; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); width: 140px; height: 60px;">
+                            <i class="fa-solid fa-right-from-bracket" style="color: white;"></i> Log Out
+                        </button>
+                    </div>
+
+                    <!-- ===== CONTACT US — ORANGE ICONS NEXT TO TEXT ===== -->
+                    <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid #f0f0f0;">
+                        <h4 style="font-size: 10px; font-weight: 700; color: #1c2128; margin-bottom: 8px;">📞 Contact Us</h4>
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <a href="https://wa.me/260768658484" target="_blank" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: #f8f9fc; border-radius: 8px; text-decoration: none; color: #1c2128; font-size: 10px; font-weight: 500; border: 1px solid #f0f0f0;">
+                                <i class="fa-brands fa-whatsapp" style="color: #f5b83d; font-size: 16px;"></i> WhatsApp: 0768658484
                             </a>
-                            <a href="https://facebook.com/BufferZone" target="_blank" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: #dc2626; color: white; border-radius: 8px; text-decoration: none; font-size: 10px; font-weight: 600;">
-                                <i class="fa-brands fa-facebook" style="font-size: 14px;"></i> Facebook: Buffer ZONE
+                            <a href="https://facebook.com/BufferZone" target="_blank" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: #f8f9fc; border-radius: 8px; text-decoration: none; color: #1c2128; font-size: 10px; font-weight: 500; border: 1px solid #f0f0f0;">
+                                <i class="fa-brands fa-facebook" style="color: #f5b83d; font-size: 16px;"></i> Facebook: Buffer ZONE
                             </a>
-                            <a href="tel:+260976760537" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: #dc2626; color: white; border-radius: 8px; text-decoration: none; font-size: 10px; font-weight: 600;">
-                                <i class="fa-solid fa-phone" style="font-size: 14px;"></i> SMS/CALLS: 0976760537
+                            <a href="tel:+260976760537" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: #f8f9fc; border-radius: 8px; text-decoration: none; color: #1c2128; font-size: 10px; font-weight: 500; border: 1px solid #f0f0f0;">
+                                <i class="fa-solid fa-phone" style="color: #f5b83d; font-size: 16px;"></i> SMS/CALLS: 0976760537
                             </a>
                         </div>
                     </div>
@@ -3499,7 +3570,7 @@
         </div>
     </div>
 
-    <!-- ===== WITHDRAW PAGE (replaces modal) ===== -->
+    <!-- ===== WITHDRAW PAGE ===== -->
     <div class="withdraw-page-overlay" id="withdrawPage">
         <div class="withdraw-page">
             <div class="page-header">
@@ -3526,7 +3597,6 @@
             </div>
 
             <div class="amount-options" id="wdAmountOptions">
-                <!-- Dynamic content populated by JS with actual ZMW amounts -->
             </div>
 
             <div class="custom-amount">
@@ -3540,7 +3610,55 @@
             <div class="history-section">
                 <h4>📋 Withdraw History</h4>
                 <div id="wdHistoryList">
-                    <div style="text-align:center; padding:14px; color:#888; font-size:10px;">No withdrawal history yet.</div>
+                    <div class="empty-history">No withdrawal history yet.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SEND MONEY PAGE (full page) ===== -->
+    <div class="send-money-page-overlay" id="sendMoneyPage">
+        <div class="send-money-page">
+            <div class="page-header">
+                <h2><i class="fa-solid fa-paper-plane" style="color:#4a90d9; margin-right:6px;"></i> Send Money</h2>
+                <button class="close-btn" id="sendMoneyPageClose"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="subtitle">Send funds to another Buffer Zone user using their referral code.</div>
+
+            <div class="customer-info" id="sendCustomerInfo">
+                <div class="row"><span class="lbl">Your Name</span><span class="val" id="sendName">—</span></div>
+                <div class="row"><span class="lbl">Your Balance</span><span class="val" id="sendBalanceDisplay">ZMW 0.00</span></div>
+            </div>
+
+            <div class="form-group">
+                <label>Recipient Referral Code</label>
+                <input type="text" id="sendPageReferralInput" placeholder="e.g. BZ-ABCDE" />
+                <button class="apply-btn" id="sendPageSearchBtn" style="margin-top:4px; width:100%; background:#f5b83d; color:#1c2128; border:none; padding:8px; border-radius:10px; font-weight:700; font-size:12px; cursor:pointer;">🔍 Search</button>
+            </div>
+
+            <div class="form-group">
+                <label>Recipient</label>
+                <div class="search-result" id="sendPageSearchResult">
+                    <span style="color:#888;">Enter a referral code and click Search.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Amount (ZMW)</label>
+                <input type="number" id="sendPageAmountInput" placeholder="0.00" step="0.01" />
+                <div class="balance-check" id="sendPageBalanceCheck">
+                    Available: <span class="avail" id="sendPageAvailBalance">ZMW 0.00</span>
+                </div>
+            </div>
+
+            <button class="btn-send-rect" id="sendPageConfirmBtn" disabled>
+                <i class="fa-solid fa-paper-plane"></i> Send Money
+            </button>
+
+            <div class="history-section">
+                <h4>📋 Recent Sent &amp; Received</h4>
+                <div id="sendPageHistoryList">
+                    <div class="empty-history">No transactions yet.</div>
                 </div>
             </div>
         </div>
@@ -3823,6 +3941,20 @@
         const wdMaxHint = document.getElementById('wdMaxHint');
         const wdSubmitBtn = document.getElementById('wdSubmitBtn');
         const wdHistoryList = document.getElementById('wdHistoryList');
+
+        const sendMoneyPage = document.getElementById('sendMoneyPage');
+        const sendMoneyPageClose = document.getElementById('sendMoneyPageClose');
+        const sendName = document.getElementById('sendName');
+        const sendBalanceDisplay = document.getElementById('sendBalanceDisplay');
+        const sendPageReferralInput = document.getElementById('sendPageReferralInput');
+        const sendPageSearchBtn = document.getElementById('sendPageSearchBtn');
+        const sendPageSearchResult = document.getElementById('sendPageSearchResult');
+        const sendPageAmountInput = document.getElementById('sendPageAmountInput');
+        const sendPageAvailBalance = document.getElementById('sendPageAvailBalance');
+        const sendPageBalanceCheck = document.getElementById('sendPageBalanceCheck');
+        const sendPageConfirmBtn = document.getElementById('sendPageConfirmBtn');
+        const sendPageHistoryList = document.getElementById('sendPageHistoryList');
+
         const withdrawSuccessModal = document.getElementById('withdrawSuccessModal');
         const withdrawSuccessOkBtn = document.getElementById('withdrawSuccessOkBtn');
 
@@ -4135,7 +4267,6 @@
             renderAccountAndReferral();
             renderTransactionMessages();
             renderWithdrawalsList();
-            renderSendMoneyTxList();
             renderApplications();
 
             if (allData.policy) {
@@ -4951,12 +5082,7 @@
             withdrawBtnFromBalance.dataset.availableBalance = availableBalance;
             withdrawBtnFromView.dataset.availableBalance = availableBalance;
 
-            sendAvailBalance.textContent = `ZMW ${availableBalance.toFixed(2)}`;
-            updateSendButtonState();
-
             updateWalletPaymentUI();
-
-            renderSendMoneyTxList();
         }
 
         function calculatePendingWithdrawalTotal() {
@@ -5153,8 +5279,701 @@
             });
         }
 
-        function renderSendMoneyTxList() {
-            const container = sendTxItems;
+        function updateWalletPaymentUI() {
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+            const pendingTotal = calculatePendingWithdrawalTotal();
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            walletBalanceDisplay.textContent = `ZMW ${availableBalance.toFixed(2)}`;
+
+            let depositAmount = 0;
+            const amountText = paymentAmount.textContent.replace('ZMW ', '');
+            depositAmount = parseFloat(amountText) || 0;
+
+            const hasEnough = availableBalance >= depositAmount;
+
+            const walletStatusEl = walletStatus;
+            const payWithWalletCheckEl = payWithWalletCheck;
+
+            if (depositAmount > 0) {
+                if (hasEnough) {
+                    walletStatusEl.style.color = '#00a86b';
+                    walletSufficiency.textContent = '✅ Sufficient balance';
+                    walletSufficiency.style.color = '#00a86b';
+                    payWithWalletCheckEl.disabled = false;
+                    payWithWalletCheckEl.style.cursor = 'pointer';
+                    if (payWithWalletCheckEl.checked) {
+                        uploadSection.style.display = 'none';
+                    } else {
+                        uploadSection.style.display = 'block';
+                    }
+                } else {
+                    walletStatusEl.style.color = '#dc2626';
+                    walletSufficiency.textContent = '❌ Insufficient balance (need ZMW ' + depositAmount.toFixed(2) + ')';
+                    walletSufficiency.style.color = '#dc2626';
+                    payWithWalletCheckEl.disabled = true;
+                    payWithWalletCheckEl.style.cursor = 'not-allowed';
+                    payWithWalletCheckEl.checked = false;
+                    uploadSection.style.display = 'block';
+                }
+            } else {
+                walletStatusEl.style.color = '#888';
+                walletSufficiency.textContent = '';
+                payWithWalletCheckEl.disabled = true;
+                payWithWalletCheckEl.style.cursor = 'not-allowed';
+                uploadSection.style.display = 'block';
+            }
+        }
+
+        function confirmPayment() {
+            const dataStr = paymentPage.dataset.orderData;
+            if (!dataStr) {
+                showToast('Order data missing.', 'error');
+                return;
+            }
+
+            const data = JSON.parse(dataStr);
+            const orderId = 'ORD-' + String(Object.keys(allData.orders || {}).length + 1).padStart(3, '0');
+            const customerName = currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
+                currentUser.email || 'Customer';
+
+            let finalAmount = data.total;
+            let discountAppliedVal = 0;
+            let promoCodeUsed = null;
+
+            if (discountApplied && appliedPromo) {
+                discountAppliedVal = appliedPromo.discount;
+                promoCodeUsed = appliedPromo.code;
+                finalAmount = data.total * (1 - discountAppliedVal / 100);
+            }
+
+            if (discountApplied && appliedReferral) {
+                discountAppliedVal = appliedReferral.discount;
+                promoCodeUsed = appliedReferral.code;
+                finalAmount = data.total * (1 - discountAppliedVal / 100);
+            }
+
+            const depositAmount = finalAmount * 0.5;
+
+            const payWithWallet = payWithWalletCheck.checked;
+
+            let screenshotUrl = '';
+            let paymentMethod = 'Airtel Money';
+
+            if (payWithWallet) {
+                paymentMethod = 'Buffer Zone Wallet';
+
+                const accounts = allData.customerAccounts || {};
+                const userAccount = accounts[currentUserId] || { balance: 0 };
+                const balance = userAccount.balance || 0;
+                const pendingTotal = calculatePendingWithdrawalTotal();
+                const availableBalance = Math.max(0, balance - pendingTotal);
+
+                if (availableBalance < depositAmount) {
+                    showToast('Insufficient wallet balance.', 'error');
+                    return;
+                }
+
+                const newBalance = balance - depositAmount;
+                const accRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
+                set(accRef, { balance: newBalance });
+
+                const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
+                const txData = {
+                    type: 'Wallet Payment for ' + data.service,
+                    amount: -depositAmount,
+                    method: 'Buffer Zone Wallet',
+                    status: 'completed',
+                    date: new Date().toLocaleString(),
+                    ref: orderId + '-wallet',
+                    detail: 'Paid 50% deposit with Buffer Zone Wallet for ' + data.service + (discountAppliedVal > 0 ?
+                        ` (${discountAppliedVal}% off)` : '') + (data.notes ? ` · Notes: ${data.notes}` : ''),
+                    screenshot: 'N/A',
+                    userId: currentUserId,
+                    itemId: data.serviceId || 'N/A',
+                    itemTitle: data.service,
+                    itemType: 'service',
+                    userName: customerName,
+                    userEmail: currentUser.email || 'N/A',
+                    userPhone: currentUserData?.phone || 'N/A',
+                    timestamp: Date.now()
+                };
+                set(txRef, txData);
+
+                const orderTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
+                const orderTxData = {
+                    type: 'Order placed: ' + data.service,
+                    amount: 0,
+                    method: 'Buffer Zone Wallet',
+                    status: 'completed',
+                    date: new Date().toLocaleString(),
+                    ref: orderId,
+                    detail: `Order "${data.service}" placed with 50% deposit paid via Buffer Zone Wallet.`,
+                    screenshot: 'N/A',
+                    userId: currentUserId,
+                    itemId: data.serviceId || 'N/A',
+                    itemTitle: data.service,
+                    itemType: 'service',
+                    userName: customerName,
+                    userEmail: currentUser.email || 'N/A',
+                    userPhone: currentUserData?.phone || 'N/A',
+                    timestamp: Date.now()
+                };
+                set(orderTxRef, orderTxData);
+
+                createNotification(
+                    currentUserId,
+                    'Order Placed',
+                    `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.${data.notes ? ` Notes: "${data.notes}"` : ''}`
+                );
+
+                showToast('✅ Payment confirmed via Buffer Zone Wallet! Project "' + data.service + '" has been initiated.',
+                    'success');
+
+            } else {
+                screenshotUrl = cloudinaryScreenshotUrlInput.value;
+                if (!screenshotUrl) {
+                    showToast('Please upload a transaction screenshot before confirming.', 'error');
+                    return;
+                }
+
+                const txData = {
+                    type: 'Payment for ' + data.service,
+                    amount: depositAmount,
+                    method: 'Airtel Money',
+                    status: 'pending',
+                    date: new Date().toLocaleString(),
+                    ref: orderId,
+                    detail: '50% down payment for ' + data.service + (discountAppliedVal > 0 ? ` (${discountAppliedVal}% off)` :
+                        '') + (data.notes ? ` · Notes: ${data.notes}` : ''),
+                    screenshot: screenshotUrl,
+                    userId: currentUserId,
+                    itemId: data.serviceId || 'N/A',
+                    itemTitle: data.service,
+                    itemType: 'service',
+                    userName: customerName,
+                    userEmail: currentUser.email || 'N/A',
+                    userPhone: currentUserData?.phone || 'N/A',
+                    timestamp: Date.now()
+                };
+                const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
+                set(txRef, txData);
+
+                createNotification(
+                    currentUserId,
+                    'Payment Submitted',
+                    `Your 50% deposit for "${data.service}" has been submitted. We will verify it shortly.`
+                );
+
+                showToast('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.',
+                    'success');
+            }
+
+            const orderData = {
+                id: orderId,
+                service: data.service,
+                amount: finalAmount,
+                status: 'pending',
+                customer: customerName,
+                clientNumber: currentUserData?.phone || 'N/A',
+                customization: data.customizationString ||
+                    `Size: ${data.size || 'N/A'}, Orientation: ${data.orientation || 'N/A'}, Format: ${data.format || 'N/A'}`,
+                date: new Date().toLocaleDateString(),
+                paymentProof: screenshotUrl || 'Wallet Payment',
+                userId: currentUserId,
+                discountApplied: discountAppliedVal,
+                promoCode: promoCodeUsed,
+                notes: data.notes || '',
+                remainingPaid: false,
+                createdAt: Date.now(),
+                paymentMethod: paymentMethod
+            };
+            const orderRef = push(ref(db, 'bufferzoneAppData/orders'));
+            set(orderRef, orderData);
+
+            if (appliedPromo) {
+                const usedCouponRef = ref(db, `users/${currentUserId}/usedCoupons/${appliedPromo.key}`);
+                set(usedCouponRef, true);
+            }
+
+            if (appliedReferral && appliedReferral.referrerUid) {
+                const bonusAmount = appliedReferral.ownerAmount || 0;
+                if (bonusAmount > 0) {
+                    const accRef = ref(db, `bufferzoneAppData/customerAccounts/${appliedReferral.referrerUid}`);
+                    get(accRef).then((snapshot) => {
+                        const currentBal = snapshot.val()?.balance || 0;
+                        set(accRef, { balance: currentBal + bonusAmount });
+                    });
+
+                    const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
+                    const txData = {
+                        type: appliedReferral.isPromo ? 'Referral Promo Bonus' : 'Referral Discount Bonus',
+                        amount: bonusAmount,
+                        method: 'Referral System',
+                        status: 'completed',
+                        date: new Date().toLocaleString(),
+                        ref: orderId + '-ref',
+                        detail: `You received ZMW ${bonusAmount.toFixed(2)} from ${customerName} who used your referral code for a service discount.`,
+                        screenshot: 'N/A',
+                        userId: appliedReferral.referrerUid,
+                        itemId: orderId,
+                        itemTitle: data.service,
+                        itemType: 'referral',
+                        userName: customerName,
+                        userEmail: currentUser.email || 'N/A',
+                        userPhone: currentUserData?.phone || 'N/A',
+                        timestamp: Date.now()
+                    };
+                    set(txRef, txData);
+
+                    createNotification(
+                        appliedReferral.referrerUid,
+                        '💰 Referral Bonus',
+                        `You received ZMW ${bonusAmount.toFixed(2)} from ${customerName} who used your referral code.`
+                    );
+                }
+            }
+
+            if (!payWithWallet) {
+                createNotification(
+                    currentUserId,
+                    'Order Placed',
+                    `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.${data.notes ? ` Notes: "${data.notes}"` : ''}`
+                );
+            }
+
+            paymentPage.classList.remove('open');
+            cloudinaryScreenshotUrlInput.value = '';
+            fileName.textContent = 'No file chosen';
+            uploadArea.style.borderColor = '#ddd';
+            uploadArea.style.background = '#fafbfc';
+            payWithWalletCheck.checked = false;
+            uploadSection.style.display = 'block';
+
+            orderSuccessPopup.classList.add('open');
+        }
+
+        orderSuccessOkBtn.addEventListener('click', function() {
+            orderSuccessPopup.classList.remove('open');
+            switchView('homeView');
+            selectedService = null;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
+            renderServices('all');
+        });
+
+        orderSuccessPopup.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+                switchView('homeView');
+                selectedService = null;
+                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
+                renderServices('all');
+            }
+        });
+
+        function openWithdrawPage() {
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+            const pendingTotal = calculatePendingWithdrawalTotal();
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            const fullName = `${currentUserData?.firstName || ''} ${currentUserData?.lastName || ''}`.trim() || '—';
+            const phone = currentUserData?.phone || '—';
+            const email = currentUser.email || '—';
+
+            wdName.textContent = fullName;
+            wdPhone.textContent = phone;
+            wdEmail.textContent = email;
+            wdTransferNumber.textContent = phone;
+            wdBalanceAmount.textContent = `ZMW ${availableBalance.toFixed(2)}`;
+            wdBalanceSub.textContent = pendingTotal > 0 ? `Includes ZMW ${pendingTotal.toFixed(2)} pending` : 'Ready to withdraw';
+            wdMaxHint.textContent = availableBalance.toFixed(2);
+            wdCustomAmount.value = '';
+            wdCustomHint.className = 'hint';
+            wdCustomHint.textContent = `Maximum: ZMW ${availableBalance.toFixed(2)}`;
+
+            document.querySelectorAll('#wdAmountOptions .opt-btn').forEach(b => b.classList.remove('active'));
+            wdSubmitBtn.disabled = false;
+
+            const optsContainer = document.getElementById('wdAmountOptions');
+            const pcts = [25, 50, 100];
+            optsContainer.innerHTML = pcts.map(pct => {
+                const amount = (availableBalance * (pct / 100)).toFixed(2);
+                return `<button class="opt-btn" data-pct="${pct}" data-amount="${amount}">ZMW ${amount}</button>`;
+            }).join('');
+
+            optsContainer.querySelectorAll('.opt-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    optsContainer.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    wdCustomAmount.value = this.dataset.amount;
+                    wdCustomHint.className = 'hint';
+                    wdCustomHint.textContent = `Maximum: ZMW ${availableBalance.toFixed(2)}`;
+                });
+            });
+
+            renderWithdrawHistory();
+
+            withdrawPage.classList.add('open');
+        }
+
+        function closeWithdrawPage() {
+            withdrawPage.classList.remove('open');
+        }
+
+        function renderWithdrawHistory() {
+            const container = wdHistoryList;
+            const withdrawals = allData.withdrawalRequests || {};
+            const entries = Object.entries(withdrawals)
+                .filter(([key, w]) => w.userId === currentUserId)
+                .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
+
+            if (entries.length === 0) {
+                container.innerHTML =
+                    `<div class="empty-history">No withdrawal history yet.</div>`;
+                return;
+            }
+
+            container.innerHTML = entries.map(([key, w]) => {
+                const statusClass = w.status || 'pending';
+                const statusDisplay = w.status ? w.status.charAt(0).toUpperCase() + w.status.slice(1) : 'Pending';
+                const dateStr = w.date ? new Date(w.date).toLocaleString() : (w.createdAt ? new Date(w.createdAt).toLocaleString() : 'N/A');
+
+                let iconClass = 'fa-clock';
+                let iconColor = '#cc8800';
+                let msg = '';
+                if (w.status === 'approved') {
+                    iconClass = 'fa-check-circle';
+                    iconColor = '#00a86b';
+                    msg = 'Approved – funds transferred.';
+                } else if (w.status === 'declined') {
+                    iconClass = 'fa-times-circle';
+                    iconColor = '#dc2626';
+                    msg = 'Declined – please contact support.';
+                } else {
+                    msg = 'Pending – awaiting admin approval.';
+                }
+
+                return `
+                <div class="history-card" data-key="${key}">
+                    <div class="summary">
+                        <div class="left">
+                            <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
+                            <span>ZMW ${(w.amount || 0).toFixed(2)}</span>
+                        </div>
+                        <div class="right">
+                            <span class="status-badge ${statusClass}">${statusDisplay}</span>
+                            <i class="fa-solid fa-chevron-down expand-icon"></i>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="row"><span class="lbl">Amount</span><span class="val">ZMW ${(w.amount || 0).toFixed(2)}</span></div>
+                        <div class="row"><span class="lbl">Date</span><span class="val">${escapeHtml(dateStr)}</span></div>
+                        <div class="row"><span class="lbl">Phone</span><span class="val">${escapeHtml(w.phone || 'N/A')}</span></div>
+                        <div class="row"><span class="lbl">Status</span><span class="val">${statusDisplay}</span></div>
+                        <div class="row"><span class="lbl">Message</span><span class="val">${msg}</span></div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+            container.querySelectorAll('.history-card').forEach(el => {
+                el.addEventListener('click', function() {
+                    this.classList.toggle('open');
+                });
+            });
+        }
+
+        function submitWithdrawFromPage() {
+            const amount = parseFloat(wdCustomAmount.value);
+            if (!amount || amount <= 0) {
+                showToast('Please enter a valid amount.', 'error');
+                return;
+            }
+
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+            const pendingTotal = calculatePendingWithdrawalTotal();
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            if (amount > availableBalance) {
+                wdCustomHint.className = 'hint error';
+                wdCustomHint.textContent = `⚠️ Maximum is ZMW ${availableBalance.toFixed(2)}`;
+                showToast(`Amount exceeds available balance (ZMW ${availableBalance.toFixed(2)})`, 'error');
+                return;
+            }
+
+            wdCustomHint.className = 'hint';
+
+            if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
+            const wId = 'w' + Date.now();
+            allData.withdrawalRequests[wId] = {
+                id: wId,
+                userId: currentUserId,
+                amount: amount,
+                phone: currentUserData?.phone || 'N/A',
+                status: 'pending',
+                createdAt: Date.now(),
+                date: new Date().toLocaleString()
+            };
+
+            if (!allData.transactions) allData.transactions = {};
+            const txId = 'tx' + Date.now();
+            allData.transactions[txId] = {
+                type: 'Withdrawal Request',
+                amount: amount,
+                method: 'Bank Transfer',
+                status: 'pending',
+                date: new Date().toLocaleString(),
+                ref: 'W-' + wId,
+                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested. Pending approval.`,
+                screenshot: 'N/A',
+                userId: currentUserId,
+                itemId: wId,
+                itemTitle: 'Withdrawal',
+                itemType: 'withdrawal',
+                userName: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
+                    currentUser.email || 'Customer',
+                userEmail: currentUser.email || 'N/A',
+                userPhone: currentUserData?.phone || 'N/A',
+                timestamp: Date.now()
+            };
+
+            saveData().then(() => {
+                createNotification(
+                    currentUserId,
+                    'Withdrawal Request',
+                    `Your withdrawal of ZMW ${amount.toFixed(2)} has been submitted and is pending admin approval.`
+                );
+
+                closeWithdrawPage();
+                withdrawSuccessModal.classList.add('open');
+                renderAll();
+                showToast('✅ Withdrawal request submitted! Admin will review it.', 'success');
+            });
+        }
+
+        // ===== SEND MONEY PAGE FUNCTIONS =====
+        function openSendMoneyPage() {
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+            const pendingTotal = calculatePendingWithdrawalTotal();
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            const fullName = `${currentUserData?.firstName || ''} ${currentUserData?.lastName || ''}`.trim() || '—';
+            sendName.textContent = fullName;
+            sendBalanceDisplay.textContent = `ZMW ${availableBalance.toFixed(2)}`;
+            sendPageAvailBalance.textContent = `ZMW ${availableBalance.toFixed(2)}`;
+            sendPageAmountInput.value = '';
+            sendPageSearchResult.innerHTML = `<span style="color:#888;">Enter a referral code and click Search.</span>`;
+            sendPageReferralInput.value = '';
+            sendPageConfirmBtn.disabled = true;
+            sendRecipientUid = null;
+            sendRecipientName = '';
+            sendRecipientData = null;
+            renderSendPageHistory();
+            sendMoneyPage.classList.add('open');
+        }
+
+        function closeSendMoneyPage() {
+            sendMoneyPage.classList.remove('open');
+        }
+
+        function searchSendPageRecipient() {
+            const code = sendPageReferralInput.value.trim().toUpperCase();
+            if (!code) {
+                sendPageSearchResult.innerHTML = `<span style="color:#888;">Please enter a referral code.</span>`;
+                return;
+            }
+
+            const usersRef = ref(db, 'users');
+            get(usersRef).then((snapshot) => {
+                const users = snapshot.val() || {};
+                let foundUid = null;
+                let foundUser = null;
+                for (const [uid, u] of Object.entries(users)) {
+                    if (u.referralCode === code) {
+                        foundUid = uid;
+                        foundUser = u;
+                        break;
+                    }
+                }
+
+                if (!foundUid) {
+                    sendPageSearchResult.innerHTML = `<span class="not-found">❌ No user found with that referral code.</span>`;
+                    sendRecipientUid = null;
+                    sendRecipientName = '';
+                    sendRecipientData = null;
+                    updateSendPageButtonState();
+                    return;
+                }
+
+                if (foundUid === currentUserId) {
+                    sendPageSearchResult.innerHTML = `<span style="color:#cc8800;">⚠️ You cannot send money to yourself.</span>`;
+                    sendRecipientUid = null;
+                    sendRecipientName = '';
+                    sendRecipientData = null;
+                    updateSendPageButtonState();
+                    return;
+                }
+
+                const fullName = `${foundUser.firstName || ''} ${foundUser.lastName || ''}`.trim() || foundUser.email ||
+                    'User';
+                sendRecipientUid = foundUid;
+                sendRecipientName = fullName;
+                sendRecipientData = foundUser;
+
+                sendPageSearchResult.innerHTML = `
+                    <span>Send money to: <span class="name">${escapeHtml(fullName)}</span></span>
+                    <span style="font-size:9px; color:#888;">(${code})</span>
+                `;
+                updateSendPageButtonState();
+            }).catch((error) => {
+                console.error('Error searching recipient:', error);
+                sendPageSearchResult.innerHTML = `<span class="not-found">Error searching. Please try again.</span>`;
+                sendRecipientUid = null;
+                sendRecipientName = '';
+                sendRecipientData = null;
+                updateSendPageButtonState();
+            });
+        }
+
+        function updateSendPageButtonState() {
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+            const pendingTotal = calculatePendingWithdrawalTotal();
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            const amount = parseFloat(sendPageAmountInput.value) || 0;
+            const hasRecipient = !!sendRecipientUid;
+            const hasAmount = amount > 0 && amount <= availableBalance;
+
+            sendPageConfirmBtn.disabled = !(hasRecipient && hasAmount);
+        }
+
+        function confirmSendPageMoney() {
+            const amount = parseFloat(sendPageAmountInput.value);
+            if (!amount || amount <= 0) {
+                showToast('Please enter a valid amount.', 'error');
+                return;
+            }
+
+            if (!sendRecipientUid || !sendRecipientName) {
+                showToast('Please search and select a valid recipient.', 'error');
+                return;
+            }
+
+            const accounts = allData.customerAccounts || {};
+            const userAccount = accounts[currentUserId] || { balance: 0 };
+            const balance = userAccount.balance || 0;
+            const pendingTotal = calculatePendingWithdrawalTotal();
+            const availableBalance = Math.max(0, balance - pendingTotal);
+
+            if (amount > availableBalance) {
+                showToast(`Insufficient balance. You have ZMW ${availableBalance.toFixed(2)} available.`, 'error');
+                return;
+            }
+
+            const confirmed = confirm(
+                `You're sending ZMW ${amount.toFixed(2)} to ${sendRecipientName}.\n\nPlease confirm this transaction.`
+            );
+
+            if (!confirmed) {
+                showToast('Transaction cancelled.', 'info');
+                return;
+            }
+
+            const newSenderBalance = balance - amount;
+            const senderAccRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
+            set(senderAccRef, { balance: newSenderBalance });
+
+            const recipientAccRef = ref(db, `bufferzoneAppData/customerAccounts/${sendRecipientUid}`);
+            get(recipientAccRef).then((snapshot) => {
+                const currentRecipientBal = snapshot.val()?.balance || 0;
+                set(recipientAccRef, { balance: currentRecipientBal + amount });
+            });
+
+            const senderTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
+            const senderTxData = {
+                type: 'Sent Money',
+                amount: -amount,
+                method: 'Buffer Zone Wallet',
+                status: 'completed',
+                date: new Date().toLocaleString(),
+                ref: 'SEND-' + Date.now(),
+                detail: `Sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}`,
+                screenshot: 'N/A',
+                userId: currentUserId,
+                itemId: 'send-' + Date.now(),
+                itemTitle: 'Send Money',
+                itemType: 'send',
+                userName: sendRecipientName,
+                userEmail: sendRecipientData?.email || 'N/A',
+                userPhone: sendRecipientData?.phone || 'N/A',
+                otherParty: sendRecipientName,
+                otherPartyUid: sendRecipientUid,
+                timestamp: Date.now()
+            };
+            set(senderTxRef, senderTxData);
+
+            const recipientTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
+            const recipientTxData = {
+                type: 'Received Money',
+                amount: amount,
+                method: 'Buffer Zone Wallet',
+                status: 'completed',
+                date: new Date().toLocaleString(),
+                ref: 'RECV-' + Date.now(),
+                detail: `Received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}`,
+                screenshot: 'N/A',
+                userId: sendRecipientUid,
+                itemId: 'recv-' + Date.now(),
+                itemTitle: 'Receive Money',
+                itemType: 'receive',
+                userName: currentUserData?.firstName || 'User',
+                userEmail: currentUser.email || 'N/A',
+                userPhone: currentUserData?.phone || 'N/A',
+                otherParty: currentUserData?.firstName || 'User',
+                otherPartyUid: currentUserId,
+                timestamp: Date.now()
+            };
+            set(recipientTxRef, recipientTxData);
+
+            createNotification(
+                currentUserId,
+                '💰 Money Sent',
+                `You sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}.`
+            );
+
+            createNotification(
+                sendRecipientUid,
+                '💰 Money Received',
+                `You received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}.`
+            );
+
+            showToast(`✅ ZMW ${amount.toFixed(2)} sent to ${sendRecipientName}!`, 'success');
+
+            sendPageAmountInput.value = '';
+            sendPageReferralInput.value = '';
+            sendPageSearchResult.innerHTML = `<span style="color:#888;">Enter a referral code and click Search.</span>`;
+            sendRecipientUid = null;
+            sendRecipientName = '';
+            sendRecipientData = null;
+            updateSendPageButtonState();
+            renderAll();
+            renderSendPageHistory();
+        }
+
+        function renderSendPageHistory() {
+            const container = sendPageHistoryList;
             const transactions = allData.transactions || {};
             const entries = Object.entries(transactions)
                 .filter(([key, t]) => {
@@ -5164,14 +5983,13 @@
                 .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
             if (entries.length === 0) {
-                container.innerHTML = `<div class="empty-tx">No sent or received transactions yet.</div>`;
+                container.innerHTML = `<div class="empty-history">No transactions yet.</div>`;
                 return;
             }
 
             container.innerHTML = entries.slice(0, 10).map(([key, t]) => {
                 const isSent = t.type?.toLowerCase().includes('sent') || (t.type?.toLowerCase().includes('send') && t.amount && t.amount < 0);
                 const isReceived = t.type?.toLowerCase().includes('received') || (t.type?.toLowerCase().includes('send') && t.amount && t.amount > 0);
-                const amountClass = isSent ? 'sent' : 'received';
                 const sign = isSent ? '-' : '+';
                 const label = isSent ? 'Sent to' : 'Received from';
                 let otherName = t.otherParty || t.userName || 'Unknown';
@@ -5192,19 +6010,33 @@
                 }
 
                 return `
-                    <div class="tx-item">
-                        <div class="tx-left">
-                            <div class="tx-type">${isSent ? 'Sent' : 'Received'}</div>
-                            <div class="tx-with">${label} ${escapeHtml(otherName)}</div>
-                            <div style="font-size:8px; color:#888;">${escapeHtml(otherPhone)} &middot; Balance: ${otherBalance}</div>
+                    <div class="history-card" data-key="${key}">
+                        <div class="summary">
+                            <div class="left">
+                                <i class="fa-solid ${isSent ? 'fa-paper-plane' : 'fa-inbox'}" style="color:${isSent ? '#4a90d9' : '#00a86b'};"></i>
+                                <span>${isSent ? 'Sent' : 'Received'} ZMW ${Math.abs(t.amount || 0).toFixed(2)}</span>
+                            </div>
+                            <div class="right">
+                                <span style="font-size:9px; color:#888;">${t.date ? new Date(t.date).toLocaleString() : ''}</span>
+                                <i class="fa-solid fa-chevron-down expand-icon"></i>
+                            </div>
                         </div>
-                        <div class="tx-right">
-                            <div class="tx-amount ${amountClass}">${sign}ZMW ${Math.abs(t.amount || 0).toFixed(2)}</div>
-                            <div class="tx-date">${t.date ? new Date(t.date).toLocaleString() : ''}</div>
+                        <div class="details">
+                            <div class="row"><span class="lbl">Amount</span><span class="val">${sign}ZMW ${Math.abs(t.amount || 0).toFixed(2)}</span></div>
+                            <div class="row"><span class="lbl">${label}</span><span class="val">${escapeHtml(otherName)}</span></div>
+                            <div class="row"><span class="lbl">Phone</span><span class="val">${escapeHtml(otherPhone)}</span></div>
+                            <div class="row"><span class="lbl">Balance</span><span class="val">${otherBalance}</span></div>
+                            <div class="row"><span class="lbl">Date</span><span class="val">${t.date ? new Date(t.date).toLocaleString() : ''}</span></div>
                         </div>
                     </div>
                 `;
             }).join('');
+
+            container.querySelectorAll('.history-card').forEach(el => {
+                el.addEventListener('click', function() {
+                    this.classList.toggle('open');
+                });
+            });
         }
 
         function openOrderFlow(service) {
@@ -5593,688 +6425,6 @@
                 referralMsg.textContent = 'Error validating referral.';
                 referralMsg.className = 'coupon-msg error';
             });
-        }
-
-        function updateWalletPaymentUI() {
-            const accounts = allData.customerAccounts || {};
-            const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
-            const pendingTotal = calculatePendingWithdrawalTotal();
-            const availableBalance = Math.max(0, balance - pendingTotal);
-
-            walletBalanceDisplay.textContent = `ZMW ${availableBalance.toFixed(2)}`;
-
-            let depositAmount = 0;
-            const amountText = paymentAmount.textContent.replace('ZMW ', '');
-            depositAmount = parseFloat(amountText) || 0;
-
-            const hasEnough = availableBalance >= depositAmount;
-
-            const walletStatusEl = walletStatus;
-            const payWithWalletCheckEl = payWithWalletCheck;
-
-            if (depositAmount > 0) {
-                if (hasEnough) {
-                    walletStatusEl.style.color = '#00a86b';
-                    walletSufficiency.textContent = '✅ Sufficient balance';
-                    walletSufficiency.style.color = '#00a86b';
-                    payWithWalletCheckEl.disabled = false;
-                    payWithWalletCheckEl.style.cursor = 'pointer';
-                    if (payWithWalletCheckEl.checked) {
-                        uploadSection.style.display = 'none';
-                    } else {
-                        uploadSection.style.display = 'block';
-                    }
-                } else {
-                    walletStatusEl.style.color = '#dc2626';
-                    walletSufficiency.textContent = '❌ Insufficient balance (need ZMW ' + depositAmount.toFixed(2) + ')';
-                    walletSufficiency.style.color = '#dc2626';
-                    payWithWalletCheckEl.disabled = true;
-                    payWithWalletCheckEl.style.cursor = 'not-allowed';
-                    payWithWalletCheckEl.checked = false;
-                    uploadSection.style.display = 'block';
-                }
-            } else {
-                walletStatusEl.style.color = '#888';
-                walletSufficiency.textContent = '';
-                payWithWalletCheckEl.disabled = true;
-                payWithWalletCheckEl.style.cursor = 'not-allowed';
-                uploadSection.style.display = 'block';
-            }
-        }
-
-        function confirmPayment() {
-            const dataStr = paymentPage.dataset.orderData;
-            if (!dataStr) {
-                showToast('Order data missing.', 'error');
-                return;
-            }
-
-            const data = JSON.parse(dataStr);
-            const orderId = 'ORD-' + String(Object.keys(allData.orders || {}).length + 1).padStart(3, '0');
-            const customerName = currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
-                currentUser.email || 'Customer';
-
-            let finalAmount = data.total;
-            let discountAppliedVal = 0;
-            let promoCodeUsed = null;
-
-            if (discountApplied && appliedPromo) {
-                discountAppliedVal = appliedPromo.discount;
-                promoCodeUsed = appliedPromo.code;
-                finalAmount = data.total * (1 - discountAppliedVal / 100);
-            }
-
-            if (discountApplied && appliedReferral) {
-                discountAppliedVal = appliedReferral.discount;
-                promoCodeUsed = appliedReferral.code;
-                finalAmount = data.total * (1 - discountAppliedVal / 100);
-            }
-
-            const depositAmount = finalAmount * 0.5;
-
-            const payWithWallet = payWithWalletCheck.checked;
-
-            let screenshotUrl = '';
-            let paymentMethod = 'Airtel Money';
-
-            if (payWithWallet) {
-                paymentMethod = 'Buffer Zone Wallet';
-
-                const accounts = allData.customerAccounts || {};
-                const userAccount = accounts[currentUserId] || { balance: 0 };
-                const balance = userAccount.balance || 0;
-                const pendingTotal = calculatePendingWithdrawalTotal();
-                const availableBalance = Math.max(0, balance - pendingTotal);
-
-                if (availableBalance < depositAmount) {
-                    showToast('Insufficient wallet balance.', 'error');
-                    return;
-                }
-
-                const newBalance = balance - depositAmount;
-                const accRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
-                set(accRef, { balance: newBalance });
-
-                const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
-                const txData = {
-                    type: 'Wallet Payment for ' + data.service,
-                    amount: -depositAmount,
-                    method: 'Buffer Zone Wallet',
-                    status: 'completed',
-                    date: new Date().toLocaleString(),
-                    ref: orderId + '-wallet',
-                    detail: 'Paid 50% deposit with Buffer Zone Wallet for ' + data.service + (discountAppliedVal > 0 ?
-                        ` (${discountAppliedVal}% off)` : '') + (data.notes ? ` · Notes: ${data.notes}` : ''),
-                    screenshot: 'N/A',
-                    userId: currentUserId,
-                    itemId: data.serviceId || 'N/A',
-                    itemTitle: data.service,
-                    itemType: 'service',
-                    userName: customerName,
-                    userEmail: currentUser.email || 'N/A',
-                    userPhone: currentUserData?.phone || 'N/A',
-                    timestamp: Date.now()
-                };
-                set(txRef, txData);
-
-                const orderTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
-                const orderTxData = {
-                    type: 'Order placed: ' + data.service,
-                    amount: 0,
-                    method: 'Buffer Zone Wallet',
-                    status: 'completed',
-                    date: new Date().toLocaleString(),
-                    ref: orderId,
-                    detail: `Order "${data.service}" placed with 50% deposit paid via Buffer Zone Wallet.`,
-                    screenshot: 'N/A',
-                    userId: currentUserId,
-                    itemId: data.serviceId || 'N/A',
-                    itemTitle: data.service,
-                    itemType: 'service',
-                    userName: customerName,
-                    userEmail: currentUser.email || 'N/A',
-                    userPhone: currentUserData?.phone || 'N/A',
-                    timestamp: Date.now()
-                };
-                set(orderTxRef, orderTxData);
-
-                createNotification(
-                    currentUserId,
-                    'Order Placed',
-                    `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.${data.notes ? ` Notes: "${data.notes}"` : ''}`
-                );
-
-                showToast('✅ Payment confirmed via Buffer Zone Wallet! Project "' + data.service + '" has been initiated.',
-                    'success');
-
-            } else {
-                screenshotUrl = cloudinaryScreenshotUrlInput.value;
-                if (!screenshotUrl) {
-                    showToast('Please upload a transaction screenshot before confirming.', 'error');
-                    return;
-                }
-
-                const txData = {
-                    type: 'Payment for ' + data.service,
-                    amount: depositAmount,
-                    method: 'Airtel Money',
-                    status: 'pending',
-                    date: new Date().toLocaleString(),
-                    ref: orderId,
-                    detail: '50% down payment for ' + data.service + (discountAppliedVal > 0 ? ` (${discountAppliedVal}% off)` :
-                        '') + (data.notes ? ` · Notes: ${data.notes}` : ''),
-                    screenshot: screenshotUrl,
-                    userId: currentUserId,
-                    itemId: data.serviceId || 'N/A',
-                    itemTitle: data.service,
-                    itemType: 'service',
-                    userName: customerName,
-                    userEmail: currentUser.email || 'N/A',
-                    userPhone: currentUserData?.phone || 'N/A',
-                    timestamp: Date.now()
-                };
-                const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
-                set(txRef, txData);
-
-                createNotification(
-                    currentUserId,
-                    'Payment Submitted',
-                    `Your 50% deposit for "${data.service}" has been submitted. We will verify it shortly.`
-                );
-
-                showToast('✅ Payment confirmed! Project "' + data.service + '" has been initiated. We will contact you shortly.',
-                    'success');
-            }
-
-            const orderData = {
-                id: orderId,
-                service: data.service,
-                amount: finalAmount,
-                status: 'pending',
-                customer: customerName,
-                clientNumber: currentUserData?.phone || 'N/A',
-                customization: data.customizationString ||
-                    `Size: ${data.size || 'N/A'}, Orientation: ${data.orientation || 'N/A'}, Format: ${data.format || 'N/A'}`,
-                date: new Date().toLocaleDateString(),
-                paymentProof: screenshotUrl || 'Wallet Payment',
-                userId: currentUserId,
-                discountApplied: discountAppliedVal,
-                promoCode: promoCodeUsed,
-                notes: data.notes || '',
-                remainingPaid: false,
-                createdAt: Date.now(),
-                paymentMethod: paymentMethod
-            };
-            const orderRef = push(ref(db, 'bufferzoneAppData/orders'));
-            set(orderRef, orderData);
-
-            if (appliedPromo) {
-                const usedCouponRef = ref(db, `users/${currentUserId}/usedCoupons/${appliedPromo.key}`);
-                set(usedCouponRef, true);
-            }
-
-            if (appliedReferral && appliedReferral.referrerUid) {
-                const bonusAmount = appliedReferral.ownerAmount || 0;
-                if (bonusAmount > 0) {
-                    const accRef = ref(db, `bufferzoneAppData/customerAccounts/${appliedReferral.referrerUid}`);
-                    get(accRef).then((snapshot) => {
-                        const currentBal = snapshot.val()?.balance || 0;
-                        set(accRef, { balance: currentBal + bonusAmount });
-                    });
-
-                    const txRef = push(ref(db, 'bufferzoneAppData/transactions'));
-                    const txData = {
-                        type: appliedReferral.isPromo ? 'Referral Promo Bonus' : 'Referral Discount Bonus',
-                        amount: bonusAmount,
-                        method: 'Referral System',
-                        status: 'completed',
-                        date: new Date().toLocaleString(),
-                        ref: orderId + '-ref',
-                        detail: `You received ZMW ${bonusAmount.toFixed(2)} from ${customerName} who used your referral code for a service discount.`,
-                        screenshot: 'N/A',
-                        userId: appliedReferral.referrerUid,
-                        itemId: orderId,
-                        itemTitle: data.service,
-                        itemType: 'referral',
-                        userName: customerName,
-                        userEmail: currentUser.email || 'N/A',
-                        userPhone: currentUserData?.phone || 'N/A',
-                        timestamp: Date.now()
-                    };
-                    set(txRef, txData);
-
-                    createNotification(
-                        appliedReferral.referrerUid,
-                        '💰 Referral Bonus',
-                        `You received ZMW ${bonusAmount.toFixed(2)} from ${customerName} who used your referral code.`
-                    );
-                }
-            }
-
-            if (!payWithWallet) {
-                createNotification(
-                    currentUserId,
-                    'Order Placed',
-                    `Your order ${orderId} for "${data.service}" has been placed and is pending confirmation.${data.notes ? ` Notes: "${data.notes}"` : ''}`
-                );
-            }
-
-            paymentPage.classList.remove('open');
-            cloudinaryScreenshotUrlInput.value = '';
-            fileName.textContent = 'No file chosen';
-            uploadArea.style.borderColor = '#ddd';
-            uploadArea.style.background = '#fafbfc';
-            payWithWalletCheck.checked = false;
-            uploadSection.style.display = 'block';
-
-            orderSuccessPopup.classList.add('open');
-        }
-
-        orderSuccessOkBtn.addEventListener('click', function() {
-            orderSuccessPopup.classList.remove('open');
-            switchView('homeView');
-            selectedService = null;
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
-            renderServices('all');
-        });
-
-        orderSuccessPopup.addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('open');
-                switchView('homeView');
-                selectedService = null;
-                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-                document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
-                renderServices('all');
-            }
-        });
-
-        function openWithdrawPage() {
-            const accounts = allData.customerAccounts || {};
-            const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
-            const pendingTotal = calculatePendingWithdrawalTotal();
-            const availableBalance = Math.max(0, balance - pendingTotal);
-
-            const fullName = `${currentUserData?.firstName || ''} ${currentUserData?.lastName || ''}`.trim() || '—';
-            const phone = currentUserData?.phone || '—';
-            const email = currentUser.email || '—';
-
-            wdName.textContent = fullName;
-            wdPhone.textContent = phone;
-            wdEmail.textContent = email;
-            wdTransferNumber.textContent = phone;
-            wdBalanceAmount.textContent = `ZMW ${availableBalance.toFixed(2)}`;
-            wdBalanceSub.textContent = pendingTotal > 0 ? `Includes ZMW ${pendingTotal.toFixed(2)} pending` : 'Ready to withdraw';
-            wdMaxHint.textContent = availableBalance.toFixed(2);
-            wdCustomAmount.value = '';
-            wdCustomHint.className = 'hint';
-            wdCustomHint.textContent = `Maximum: ZMW ${availableBalance.toFixed(2)}`;
-
-            document.querySelectorAll('#wdAmountOptions .opt-btn').forEach(b => b.classList.remove('active'));
-            wdSubmitBtn.disabled = false;
-
-            // Update amount options with actual ZMW values
-            const optsContainer = document.getElementById('wdAmountOptions');
-            const pcts = [25, 50, 100];
-            optsContainer.innerHTML = pcts.map(pct => {
-                const amount = (availableBalance * (pct / 100)).toFixed(2);
-                return `<button class="opt-btn" data-pct="${pct}" data-amount="${amount}">ZMW ${amount}</button>`;
-            }).join('');
-
-            // Re-bind click events for amount option buttons
-            optsContainer.querySelectorAll('.opt-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    optsContainer.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    wdCustomAmount.value = this.dataset.amount;
-                    wdCustomHint.className = 'hint';
-                    wdCustomHint.textContent = `Maximum: ZMW ${availableBalance.toFixed(2)}`;
-                });
-            });
-
-            renderWithdrawHistory();
-
-            withdrawPage.classList.add('open');
-        }
-
-        function closeWithdrawPage() {
-            withdrawPage.classList.remove('open');
-        }
-
-        function renderWithdrawHistory() {
-            const container = wdHistoryList;
-            const withdrawals = allData.withdrawalRequests || {};
-            const entries = Object.entries(withdrawals)
-                .filter(([key, w]) => w.userId === currentUserId)
-                .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
-
-            if (entries.length === 0) {
-                container.innerHTML =
-                    `<div style="text-align:center; padding:14px; color:#888; font-size:10px;">No withdrawal history yet.</div>`;
-                return;
-            }
-
-            container.innerHTML = entries.map(([key, w]) => {
-                const statusClass = w.status || 'pending';
-                const statusDisplay = w.status ? w.status.charAt(0).toUpperCase() + w.status.slice(1) : 'Pending';
-                const dateStr = w.date ? new Date(w.date).toLocaleString() : (w.createdAt ? new Date(w.createdAt).toLocaleString() : 'N/A');
-
-                let iconClass = 'fa-clock';
-                let iconColor = '#cc8800';
-                let msg = '';
-                if (w.status === 'approved') {
-                    iconClass = 'fa-check-circle';
-                    iconColor = '#00a86b';
-                    msg = 'Approved – funds transferred.';
-                } else if (w.status === 'declined') {
-                    iconClass = 'fa-times-circle';
-                    iconColor = '#dc2626';
-                    msg = 'Declined – please contact support.';
-                } else {
-                    msg = 'Pending – awaiting admin approval.';
-                }
-
-                return `
-                <div class="history-card" data-key="${key}">
-                    <div class="summary">
-                        <div class="left">
-                            <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
-                            <span>ZMW ${(w.amount || 0).toFixed(2)}</span>
-                        </div>
-                        <div class="right">
-                            <span class="status-badge ${statusClass}">${statusDisplay}</span>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <div class="row"><span class="lbl">Amount</span><span class="val">ZMW ${(w.amount || 0).toFixed(2)}</span></div>
-                        <div class="row"><span class="lbl">Date</span><span class="val">${escapeHtml(dateStr)}</span></div>
-                        <div class="row"><span class="lbl">Phone</span><span class="val">${escapeHtml(w.phone || 'N/A')}</span></div>
-                        <div class="row"><span class="lbl">Status</span><span class="val">${statusDisplay}</span></div>
-                        <div class="row"><span class="lbl">Message</span><span class="val">${msg}</span></div>
-                    </div>
-                </div>
-                `;
-            }).join('');
-
-            container.querySelectorAll('.history-card').forEach(el => {
-                el.addEventListener('click', function() {
-                    this.classList.toggle('open');
-                });
-            });
-        }
-
-        function submitWithdrawFromPage() {
-            const amount = parseFloat(wdCustomAmount.value);
-            if (!amount || amount <= 0) {
-                showToast('Please enter a valid amount.', 'error');
-                return;
-            }
-
-            const accounts = allData.customerAccounts || {};
-            const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
-            const pendingTotal = calculatePendingWithdrawalTotal();
-            const availableBalance = Math.max(0, balance - pendingTotal);
-
-            if (amount > availableBalance) {
-                wdCustomHint.className = 'hint error';
-                wdCustomHint.textContent = `⚠️ Maximum is ZMW ${availableBalance.toFixed(2)}`;
-                showToast(`Amount exceeds available balance (ZMW ${availableBalance.toFixed(2)})`, 'error');
-                return;
-            }
-
-            wdCustomHint.className = 'hint';
-
-            if (!allData.withdrawalRequests) allData.withdrawalRequests = {};
-            const wId = 'w' + Date.now();
-            allData.withdrawalRequests[wId] = {
-                id: wId,
-                userId: currentUserId,
-                amount: amount,
-                phone: currentUserData?.phone || 'N/A',
-                status: 'pending',
-                createdAt: Date.now(),
-                date: new Date().toLocaleString()
-            };
-
-            if (!allData.transactions) allData.transactions = {};
-            const txId = 'tx' + Date.now();
-            allData.transactions[txId] = {
-                type: 'Withdrawal Request',
-                amount: amount,
-                method: 'Bank Transfer',
-                status: 'pending',
-                date: new Date().toLocaleString(),
-                ref: 'W-' + wId,
-                detail: `Withdrawal of ZMW ${amount.toFixed(2)} requested. Pending approval.`,
-                screenshot: 'N/A',
-                userId: currentUserId,
-                itemId: wId,
-                itemTitle: 'Withdrawal',
-                itemType: 'withdrawal',
-                userName: currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
-                    currentUser.email || 'Customer',
-                userEmail: currentUser.email || 'N/A',
-                userPhone: currentUserData?.phone || 'N/A',
-                timestamp: Date.now()
-            };
-
-            saveData().then(() => {
-                createNotification(
-                    currentUserId,
-                    'Withdrawal Request',
-                    `Your withdrawal of ZMW ${amount.toFixed(2)} has been submitted and is pending admin approval.`
-                );
-
-                closeWithdrawPage();
-                withdrawSuccessModal.classList.add('open');
-                renderAll();
-                showToast('✅ Withdrawal request submitted! Admin will review it.', 'success');
-            });
-        }
-
-        function toggleSendMoneySection() {
-            const section = sendMoneySection;
-            section.classList.toggle('open');
-            if (section.classList.contains('open')) {
-                const accounts = allData.customerAccounts || {};
-                const userAccount = accounts[currentUserId] || { balance: 0 };
-                const balance = userAccount.balance || 0;
-                const pendingTotal = calculatePendingWithdrawalTotal();
-                const availableBalance = Math.max(0, balance - pendingTotal);
-                sendAvailBalance.textContent = `ZMW ${availableBalance.toFixed(2)}`;
-                updateSendButtonState();
-                renderSendMoneyTxList();
-            }
-        }
-
-        function searchRecipient() {
-            const code = sendReferralInput.value.trim().toUpperCase();
-            if (!code) {
-                recipientSearchResult.innerHTML = `<span style="color:#888;">Please enter a referral code.</span>`;
-                return;
-            }
-
-            const usersRef = ref(db, 'users');
-            get(usersRef).then((snapshot) => {
-                const users = snapshot.val() || {};
-                let foundUid = null;
-                let foundUser = null;
-                for (const [uid, u] of Object.entries(users)) {
-                    if (u.referralCode === code) {
-                        foundUid = uid;
-                        foundUser = u;
-                        break;
-                    }
-                }
-
-                if (!foundUid) {
-                    recipientSearchResult.innerHTML = `<span class="not-found">❌ No user found with that referral code.</span>`;
-                    sendRecipientUid = null;
-                    sendRecipientName = '';
-                    sendRecipientData = null;
-                    updateSendButtonState();
-                    return;
-                }
-
-                if (foundUid === currentUserId) {
-                    recipientSearchResult.innerHTML = `<span style="color:#cc8800;">⚠️ You cannot send money to yourself.</span>`;
-                    sendRecipientUid = null;
-                    sendRecipientName = '';
-                    sendRecipientData = null;
-                    updateSendButtonState();
-                    return;
-                }
-
-                const fullName = `${foundUser.firstName || ''} ${foundUser.lastName || ''}`.trim() || foundUser.email ||
-                    'User';
-                sendRecipientUid = foundUid;
-                sendRecipientName = fullName;
-                sendRecipientData = foundUser;
-
-                recipientSearchResult.innerHTML = `
-                    <span>Send money to: <span class="name">${escapeHtml(fullName)}</span></span>
-                    <span style="font-size:9px; color:#888;">(${code})</span>
-                `;
-                updateSendButtonState();
-            }).catch((error) => {
-                console.error('Error searching recipient:', error);
-                recipientSearchResult.innerHTML = `<span class="not-found">Error searching. Please try again.</span>`;
-                sendRecipientUid = null;
-                sendRecipientName = '';
-                sendRecipientData = null;
-                updateSendButtonState();
-            });
-        }
-
-        function updateSendButtonState() {
-            const accounts = allData.customerAccounts || {};
-            const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
-            const pendingTotal = calculatePendingWithdrawalTotal();
-            const availableBalance = Math.max(0, balance - pendingTotal);
-
-            const amount = parseFloat(sendAmountInput.value) || 0;
-            const hasRecipient = !!sendRecipientUid;
-            const hasAmount = amount > 0 && amount <= availableBalance;
-
-            sendMoneyConfirmBtn.disabled = !(hasRecipient && hasAmount);
-        }
-
-        function confirmSendMoney() {
-            const amount = parseFloat(sendAmountInput.value);
-            if (!amount || amount <= 0) {
-                showToast('Please enter a valid amount.', 'error');
-                return;
-            }
-
-            if (!sendRecipientUid || !sendRecipientName) {
-                showToast('Please search and select a valid recipient.', 'error');
-                return;
-            }
-
-            const accounts = allData.customerAccounts || {};
-            const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
-            const pendingTotal = calculatePendingWithdrawalTotal();
-            const availableBalance = Math.max(0, balance - pendingTotal);
-
-            if (amount > availableBalance) {
-                showToast(`Insufficient balance. You have ZMW ${availableBalance.toFixed(2)} available.`, 'error');
-                return;
-            }
-
-            const confirmed = confirm(
-                `You're sending ZMW ${amount.toFixed(2)} to ${sendRecipientName}.\n\nPlease confirm this transaction.`
-            );
-
-            if (!confirmed) {
-                showToast('Transaction cancelled.', 'info');
-                return;
-            }
-
-            const newSenderBalance = balance - amount;
-            const senderAccRef = ref(db, `bufferzoneAppData/customerAccounts/${currentUserId}`);
-            set(senderAccRef, { balance: newSenderBalance });
-
-            const recipientAccRef = ref(db, `bufferzoneAppData/customerAccounts/${sendRecipientUid}`);
-            get(recipientAccRef).then((snapshot) => {
-                const currentRecipientBal = snapshot.val()?.balance || 0;
-                set(recipientAccRef, { balance: currentRecipientBal + amount });
-            });
-
-            const senderTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
-            const senderTxData = {
-                type: 'Sent Money',
-                amount: -amount,
-                method: 'Buffer Zone Wallet',
-                status: 'completed',
-                date: new Date().toLocaleString(),
-                ref: 'SEND-' + Date.now(),
-                detail: `Sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}`,
-                screenshot: 'N/A',
-                userId: currentUserId,
-                itemId: 'send-' + Date.now(),
-                itemTitle: 'Send Money',
-                itemType: 'send',
-                userName: sendRecipientName,
-                userEmail: sendRecipientData?.email || 'N/A',
-                userPhone: sendRecipientData?.phone || 'N/A',
-                otherParty: sendRecipientName,
-                otherPartyUid: sendRecipientUid,
-                timestamp: Date.now()
-            };
-            set(senderTxRef, senderTxData);
-
-            const recipientTxRef = push(ref(db, 'bufferzoneAppData/transactions'));
-            const recipientTxData = {
-                type: 'Received Money',
-                amount: amount,
-                method: 'Buffer Zone Wallet',
-                status: 'completed',
-                date: new Date().toLocaleString(),
-                ref: 'RECV-' + Date.now(),
-                detail: `Received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}`,
-                screenshot: 'N/A',
-                userId: sendRecipientUid,
-                itemId: 'recv-' + Date.now(),
-                itemTitle: 'Receive Money',
-                itemType: 'receive',
-                userName: currentUserData?.firstName || 'User',
-                userEmail: currentUser.email || 'N/A',
-                userPhone: currentUserData?.phone || 'N/A',
-                otherParty: currentUserData?.firstName || 'User',
-                otherPartyUid: currentUserId,
-                timestamp: Date.now()
-            };
-            set(recipientTxRef, recipientTxData);
-
-            createNotification(
-                currentUserId,
-                '💰 Money Sent',
-                `You sent ZMW ${amount.toFixed(2)} to ${sendRecipientName}.`
-            );
-
-            createNotification(
-                sendRecipientUid,
-                '💰 Money Received',
-                `You received ZMW ${amount.toFixed(2)} from ${currentUserData?.firstName || 'User'}.`
-            );
-
-            showToast(`✅ ZMW ${amount.toFixed(2)} sent to ${sendRecipientName}!`, 'success');
-
-            sendAmountInput.value = '';
-            sendReferralInput.value = '';
-            recipientSearchResult.innerHTML = `<span style="color:#888;">Enter a referral code and click Search.</span>`;
-            sendRecipientUid = null;
-            sendRecipientName = '';
-            sendRecipientData = null;
-            updateSendButtonState();
-            renderAll();
         }
 
         function openFlyerDetail(flyerId) {
@@ -7064,15 +7214,18 @@
             }
         });
 
-        sendMoneyBtn.addEventListener('click', toggleSendMoneySection);
-
-        searchRecipientBtn.addEventListener('click', searchRecipient);
-        sendReferralInput.addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') searchRecipient();
+        // Send Money Page events
+        sendMoneyBtn.addEventListener('click', openSendMoneyPage);
+        sendMoneyPageClose.addEventListener('click', closeSendMoneyPage);
+        sendMoneyPage.addEventListener('click', function(e) {
+            if (e.target === this) closeSendMoneyPage();
         });
-
-        sendAmountInput.addEventListener('input', function() {
-            updateSendButtonState();
+        sendPageSearchBtn.addEventListener('click', searchSendPageRecipient);
+        sendPageReferralInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') searchSendPageRecipient();
+        });
+        sendPageAmountInput.addEventListener('input', function() {
+            updateSendPageButtonState();
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
             const balance = userAccount.balance || 0;
@@ -7080,15 +7233,14 @@
             const availableBalance = Math.max(0, balance - pendingTotal);
             const amount = parseFloat(this.value) || 0;
             if (amount > availableBalance) {
-                sendBalanceCheck.innerHTML =
+                sendPageBalanceCheck.innerHTML =
                     `Available: <span class="avail">ZMW ${availableBalance.toFixed(2)}</span> <span class="insufficient">⚠️ Amount exceeds available balance</span>`;
             } else {
-                sendBalanceCheck.innerHTML =
+                sendPageBalanceCheck.innerHTML =
                     `Available: <span class="avail">ZMW ${availableBalance.toFixed(2)}</span>`;
             }
         });
-
-        sendMoneyConfirmBtn.addEventListener('click', confirmSendMoney);
+        sendPageConfirmBtn.addEventListener('click', confirmSendPageMoney);
 
         payWithWalletCheck.addEventListener('change', function() {
             if (this.checked) {
@@ -7156,13 +7308,13 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer code updated with 80% slide width (10% peek) to guarantee visibility of prev/next flyers on all phone screens, and endless loop with reverse direction.');
-        console.log('✅ Receipt system added.');
-        console.log('✅ Withdraw popup changed to full page with 25%/50%/100% options showing actual ZMW amounts, custom amount, and history dropdowns.');
-        console.log('✅ Profile contact section added: WhatsApp (opens app), Facebook, SMS/CALLS — all styled red.');
-        console.log('✅ Logout button styled red.');
-        console.log('✅ Flyers: 1200x675 with more curved edges (border-radius: 28px).');
-        console.log('✅ Invoice: lorem ipsum replaced with appreciation text, customer email added, all sizes reduced by 20%.');
+        console.log('✅ Customer code updated with:');
+        console.log('  • Withdraw page with 25%/50%/100% actual ZMW amounts');
+        console.log('  • Send Money page (full page, matching withdraw style)');
+        console.log('  • Contact links: orange icons next to text, clickable');
+        console.log('  • Logout button: centered, red triangle shape');
+        console.log('  • Flyers: 1200x675 with more curved edges (border-radius: 28px)');
+        console.log('  • Invoice: appreciation text, customer email, 20% smaller');
     </script>
 </body>
 </html>
