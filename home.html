@@ -11,6 +11,79 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
     </script>
     <style>
+        /* ===== LOADING SCREEN ===== */
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+        }
+        #loadingScreen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #loadingScreen .loading-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            animation: loadPulse 2s ease-in-out infinite;
+        }
+        #loadingScreen .loading-content img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #1c2128;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
+        }
+        #loadingScreen .loading-content .brand-name {
+            font-weight: 800;
+            font-size: 22px;
+            color: #1c2128;
+            letter-spacing: 1px;
+        }
+        #loadingScreen .loading-content .brand-name span {
+            color: #f5b83d;
+        }
+        #loadingScreen .loading-spinner {
+            width: 42px;
+            height: 42px;
+            border: 4px solid #f0f0f0;
+            border-top-color: #f5b83d;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            margin-top: 6px;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes loadPulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+        /* ===== END LOADING SCREEN ===== */
+
         * {
             margin: 0;
             padding: 0;
@@ -264,11 +337,13 @@
             font-weight: 700;
         }
 
+        /* ===== PROMO CAROUSEL — EXTRA CURVED FLYERS ===== */
         .promo-carousel-wrapper {
             position: relative;
             margin: 3px 0 12px 0;
             overflow: hidden;
-            border-radius: 24px;
+            border-radius: 32px;
+            /* was 24px → more curve */
             background: #f8f9fc;
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.08);
             padding: 0;
@@ -305,7 +380,8 @@
             max-width: 80%;
             scroll-snap-align: center;
             position: relative;
-            border-radius: 28px;
+            border-radius: 40px;
+            /* was 28px → much more curve */
             overflow: hidden;
             transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 opacity 0.5s ease,
@@ -323,7 +399,8 @@
             will-change: transform, opacity;
             cursor: pointer;
             aspect-ratio: 1200 / 675;
-            border-radius: 28px;
+            border-radius: 40px;
+            /* was 28px → more curve */
         }
         .promo-slide.clickable {
             cursor: pointer;
@@ -338,7 +415,8 @@
             object-fit: cover;
             display: block;
             background-color: #ffffff;
-            border-radius: 28px;
+            border-radius: 40px;
+            /* match slide curve */
         }
         .promo-slide .slide-overlay {
             position: absolute;
@@ -351,7 +429,8 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            border-radius: 0 0 28px 28px;
+            border-radius: 0 0 40px 40px;
+            /* match slide curve */
         }
         .promo-slide .slide-text {
             color: #fff;
@@ -2530,7 +2609,8 @@
         }
         .flyer-detail-container {
             background: #ffffff;
-            border-radius: 24px;
+            border-radius: 28px;
+            /* was 24px → more curve */
             overflow: hidden;
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.10);
             border: 1px solid #f0f0f0;
@@ -2544,14 +2624,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 24px;
+            border-radius: 28px 28px 0 0;
+            /* top corners match container */
         }
         .flyer-detail-image-wrap img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            border-radius: 24px;
+            border-radius: 28px 28px 0 0;
         }
         .flyer-detail-image-wrap video {
             width: 100%;
@@ -2559,7 +2640,7 @@
             object-fit: cover;
             display: none;
             background: #000;
-            border-radius: 24px;
+            border-radius: 28px 28px 0 0;
         }
         .flyer-detail-content {
             padding: 16px 14px 14px 14px;
@@ -3753,6 +3834,16 @@
     </style>
 </head>
 <body>
+
+    <!-- ===== LOADING SCREEN ===== -->
+    <div id="loadingScreen">
+        <div class="loading-content">
+            <img src="bufferzone.png" alt="Buffer Zone" />
+            <div class="brand-name">BUFFER <span>ZONE</span></div>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
     <div class="app-root">
         <div class="app-content" id="appContent">
             <div class="header">
@@ -4462,12 +4553,27 @@
 
         // ===== POPUP TRACKING (persistent per user) =====
         let shownPopups = {
-            applications: {}, // appId -> true
-            orderComplete: {}, // orderId -> true
-            withdrawalStatus: {}, // withdrawalId -> true
-            referralReceived: {}, // transactionId -> true
-            moneyReceived: {} // transactionId -> true
+            applications: {},
+            orderComplete: {},
+            withdrawalStatus: {},
+            referralReceived: {},
+            moneyReceived: {}
         };
+
+        // ===== LOADING SCREEN CONTROL =====
+        let loadingHidden = false;
+
+        function hideLoadingScreen() {
+            if (loadingHidden) return;
+            loadingHidden = true;
+            const el = document.getElementById('loadingScreen');
+            if (el) {
+                el.classList.add('hidden');
+                setTimeout(() => {
+                    el.style.display = 'none';
+                }, 700);
+            }
+        }
 
         const headerName = document.getElementById('headerName');
         const heroTitle = document.getElementById('heroTitle');
@@ -4970,6 +5076,8 @@
                         checkAllPopups();
                     }, 500);
                 });
+                // Hide loading screen after first data load
+                hideLoadingScreen();
                 if (callback) callback();
             });
         }
@@ -8363,6 +8471,9 @@
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
         console.log('✅ Customer code updated with all requested features:');
+        console.log('  • White loading screen with Buffer Zone logo and spinner');
+        console.log('  • Flyer cards now have extra-curved corners (40px border-radius)');
+        console.log('  • Flyer detail container also has enhanced curvature (28px)');
         console.log('  • Pop-ups appear immediately on any page (global check)');
         console.log('  • Added "View Screenshot" button in order and application dropdowns');
         console.log('  • One-time application status popup (approved ✓ / rejected ✗) with logo, user details, and button');
