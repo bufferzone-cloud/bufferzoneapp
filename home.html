@@ -24,97 +24,6 @@
             overflow: hidden;
             height: 100%;
         }
-
-        /* ===== LOADING SCREEN ===== */
-        #loadingScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #1c2128;
-            z-index: 99999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            pointer-events: none;
-            opacity: 1;
-            transform: scale(1);
-        }
-        #loadingScreen.hidden {
-            opacity: 0;
-            transform: scale(1.04);
-            pointer-events: none;
-        }
-        #loadingScreen .loader-logo {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            background: #f5b83d;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 28px;
-            color: #1c2128;
-            margin-bottom: 18px;
-            box-shadow: 0 0 50px rgba(245, 184, 61, 0.25);
-            animation: pulseGlow 1.8s ease-in-out infinite;
-        }
-        @keyframes pulseGlow {
-            0%,
-            100% {
-                box-shadow: 0 0 30px rgba(245, 184, 61, 0.20);
-            }
-            50% {
-                box-shadow: 0 0 70px rgba(245, 184, 61, 0.45);
-            }
-        }
-        #loadingScreen .loader-title {
-            color: #fff;
-            font-weight: 800;
-            font-size: 20px;
-            letter-spacing: 2px;
-            margin-bottom: 4px;
-        }
-        #loadingScreen .loader-sub {
-            color: #f5b83d;
-            font-weight: 400;
-            font-size: 11px;
-            letter-spacing: 4px;
-        }
-        #loadingScreen .loader-spinner {
-            margin-top: 22px;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 3px solid rgba(255, 255, 255, 0.08);
-            border-top-color: #f5b83d;
-            animation: spin 0.9s linear infinite;
-        }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        #loadingScreen .loader-progress {
-            margin-top: 12px;
-            width: 120px;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.10);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        #loadingScreen .loader-progress-bar {
-            height: 100%;
-            width: 0%;
-            background: #f5b83d;
-            border-radius: 3px;
-            transition: width 0.3s ease;
-        }
-
         .app-root {
             display: flex;
             flex-direction: column;
@@ -3673,7 +3582,7 @@
             margin-right: 6px;
         }
 
-        /* ===== MONEY RECEIVED POPUP (from Send Money) ===== */
+        /* ===== MONEY RECEIVED POPUP ===== */
         .money-received-overlay {
             position: fixed;
             top: 0;
@@ -3703,7 +3612,7 @@
         }
         .money-received-modal .mr-icon {
             font-size: 48px;
-            color: #00a86b;
+            color: #4a90d9;
             display: block;
             margin-bottom: 6px;
         }
@@ -3722,15 +3631,9 @@
         .money-received-modal .mr-amount {
             font-size: 22px;
             font-weight: 900;
-            color: #00a86b;
+            color: #4a90d9;
             display: block;
             margin: 2px 0 10px 0;
-        }
-        .money-received-modal .mr-sender {
-            font-size: 13px;
-            color: #1c2128;
-            font-weight: 600;
-            margin-bottom: 4px;
         }
         .money-received-modal .mr-btn {
             background: #1c2128;
@@ -3850,16 +3753,6 @@
     </style>
 </head>
 <body>
-
-    <!-- ===== LOADING SCREEN ===== -->
-    <div id="loadingScreen">
-        <div class="loader-logo">BZ</div>
-        <div class="loader-title">BUFFER ZONE</div>
-        <div class="loader-sub">CREATIVE AGENCY</div>
-        <div class="loader-spinner"></div>
-        <div class="loader-progress"><div class="loader-progress-bar" id="loaderProgressBar"></div></div>
-    </div>
-
     <div class="app-root">
         <div class="app-content" id="appContent">
             <div class="header">
@@ -4074,12 +3967,14 @@
                         <p>Passionate about design and technology. Helping brands grow through innovation and strategic design.</p>
                     </div>
 
+                    <!-- ===== LOGOUT BUTTON — RECTANGLE (not triangle) ===== -->
                     <div style="display: flex; justify-content: center; margin-top: 14px;">
                         <button class="logout-btn" id="logoutBtn" style="background: #dc2626; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 7px; width: 140px;">
                             <i class="fa-solid fa-right-from-bracket" style="color: white;"></i> Log Out
                         </button>
                     </div>
 
+                    <!-- ===== CONTACT US — ORANGE ICONS NEXT TO TEXT ===== -->
                     <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid #f0f0f0;">
                         <h4 style="font-size: 10px; font-weight: 700; color: #1c2128; margin-bottom: 8px;">📞 Contact Us</h4>
                         <div style="display: flex; flex-direction: column; gap: 6px;">
@@ -4121,6 +4016,7 @@
             <h3>💳 Payment Required</h3>
             <p class="sub">To begin your project, you must pay 50% upfront.</p>
 
+            <!-- ===== EXTRA DETAILS ON PAYMENT PAGE ===== -->
             <div class="payment-details" style="margin-bottom:6px;">
                 <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;">
                     <div style="flex:1; min-width:120px;">
@@ -4406,14 +4302,12 @@
         </div>
     </div>
 
-    <!-- ===== MONEY RECEIVED POPUP (from Send Money) ===== -->
+    <!-- ===== MONEY RECEIVED POPUP ===== -->
     <div class="money-received-overlay" id="moneyReceivedPopup">
         <div class="money-received-modal">
-            <span class="mr-icon"><i class="fa-solid fa-inbox"></i></span>
+            <span class="mr-icon"><i class="fa-solid fa-circle-dollar"></i></span>
             <h3>💰 Money Received!</h3>
-            <p>You have received money from:</p>
-            <div class="mr-sender" id="mrSender">—</div>
-            <p>Amount added to your account:</p>
+            <p>You have received money from <strong id="mrSenderName">User</strong>!</p>
             <span class="mr-amount" id="mrAmount">ZMW 0.00</span>
             <button class="mr-btn" id="mrBtn"><i class="fa-regular fa-circle-check"></i> OK</button>
         </div>
@@ -4566,7 +4460,7 @@
 
         let currentFlyerId = null;
 
-        // ===== POPUP TRACKING (persisted in Firebase under user) =====
+        // ===== POPUP TRACKING (persistent per user) =====
         let shownPopups = {
             applications: {}, // appId -> true
             orderComplete: {}, // orderId -> true
@@ -4752,10 +4646,10 @@
         const rrAmount = document.getElementById('rrAmount');
         const rrBtn = document.getElementById('rrBtn');
 
-        // ===== MONEY RECEIVED POPUP ELEMENTS =====
+        // ===== MONEY RECEIVED POPUP =====
         const moneyReceivedPopup = document.getElementById('moneyReceivedPopup');
+        const mrSenderName = document.getElementById('mrSenderName');
         const mrAmount = document.getElementById('mrAmount');
-        const mrSender = document.getElementById('mrSender');
         const mrBtn = document.getElementById('mrBtn');
 
         const imageViewer = document.getElementById('imageViewer');
@@ -4767,24 +4661,6 @@
         const paymentQty = document.getElementById('paymentQty');
         const paymentCustomization = document.getElementById('paymentCustomization');
         const paymentNotes = document.getElementById('paymentNotes');
-
-        // ===== LOADING SCREEN =====
-        const loadingScreen = document.getElementById('loadingScreen');
-        const loaderProgressBar = document.getElementById('loaderProgressBar');
-
-        function updateLoaderProgress(pct) {
-            if (loaderProgressBar) loaderProgressBar.style.width = Math.min(100, pct) + '%';
-        }
-
-        function hideLoadingScreen() {
-            loadingScreen.classList.add('hidden');
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 700);
-        }
-
-        // Start loading progress
-        updateLoaderProgress(10);
 
         function showToast(msg, type = 'info') {
             const toast = document.createElement('div');
@@ -4990,13 +4866,24 @@
         }
 
         // ===== PERSISTENT POPUP TRACKING =====
-        async function loadPopupTracking() {
+        function saveShownPopups() {
             if (!currentUserId) return;
-            const trackRef = ref(db, `users/${currentUserId}/seenPopups`);
-            try {
-                const snap = await get(trackRef);
-                if (snap.exists()) {
-                    const data = snap.val();
+            const refPath = `users/${currentUserId}/shownPopups`;
+            return set(ref(db, refPath), shownPopups);
+        }
+
+        function markPopupShown(type, id) {
+            if (!shownPopups[type]) shownPopups[type] = {};
+            shownPopups[type][id] = true;
+            return saveShownPopups();
+        }
+
+        function loadShownPopups() {
+            if (!currentUserId) return;
+            const refPath = `users/${currentUserId}/shownPopups`;
+            get(ref(db, refPath)).then(snapshot => {
+                const data = snapshot.val();
+                if (data) {
                     shownPopups = {
                         applications: data.applications || {},
                         orderComplete: data.orderComplete || {},
@@ -5005,7 +4892,6 @@
                         moneyReceived: data.moneyReceived || {}
                     };
                 } else {
-                    // Initialize with empty tracking
                     shownPopups = {
                         applications: {},
                         orderComplete: {},
@@ -5013,41 +4899,10 @@
                         referralReceived: {},
                         moneyReceived: {}
                     };
-                    await set(trackRef, shownPopups);
                 }
-                updateLoaderProgress(50);
-            } catch (err) {
-                console.warn('Error loading popup tracking:', err);
-                shownPopups = {
-                    applications: {},
-                    orderComplete: {},
-                    withdrawalStatus: {},
-                    referralReceived: {},
-                    moneyReceived: {}
-                };
-                updateLoaderProgress(50);
-            }
-        }
-
-        async function savePopupTracking() {
-            if (!currentUserId) return;
-            const trackRef = ref(db, `users/${currentUserId}/seenPopups`);
-            try {
-                await set(trackRef, shownPopups);
-            } catch (err) {
-                console.warn('Error saving popup tracking:', err);
-            }
-        }
-
-        function markPopupSeen(category, id) {
-            if (!shownPopups[category]) shownPopups[category] = {};
-            shownPopups[category][id] = true;
-            savePopupTracking();
-        }
-
-        function isPopupSeen(category, id) {
-            if (!shownPopups[category]) return false;
-            return !!shownPopups[category][id];
+            }).catch(err => {
+                console.error('Error loading shown popups:', err);
+            });
         }
 
         function loadData(callback) {
@@ -5085,7 +4940,6 @@
                         }
                     };
                     set(dbRef, allData);
-                    updateLoaderProgress(60);
                 } else {
                     allData = data;
                     if (!allData.workPosts) allData.workPosts = {};
@@ -5107,17 +4961,16 @@
                         };
                         saveData();
                     }
-                    updateLoaderProgress(60);
                 }
                 renderAll();
-                // Check for popups immediately after data loads
-                setTimeout(() => {
-                    checkAllPopups();
-                    updateLoaderProgress(90);
-                }, 500);
+                // Load shown popups from user data
+                loadShownPopups().then(() => {
+                    // Check for popups after loading
+                    setTimeout(() => {
+                        checkAllPopups();
+                    }, 500);
+                });
                 if (callback) callback();
-                updateLoaderProgress(100);
-                setTimeout(hideLoadingScreen, 400);
             });
         }
 
@@ -5140,7 +4993,6 @@
                         <p style="color:#888; text-align:center; max-width:272px; margin-top:7px;">We are currently performing updates. Please check back later.</p>
                     </div>
                 `;
-                hideLoadingScreen();
                 return;
             }
 
@@ -5170,7 +5022,7 @@
             renderTransactionMessages();
             renderWithdrawalsList();
             renderApplications();
-            renderWithdrawHistory();
+            renderWithdrawHistory(); // for the withdraw page
 
             if (allData.policy) {
                 const p = allData.policy;
@@ -5563,6 +5415,7 @@
                     `;
                 }
 
+                // Screenshot view button
                 let screenshotBtnHtml = '';
                 if (o.paymentProof && o.paymentProof !== 'Wallet Payment' && o.paymentProof !== 'N/A') {
                     screenshotBtnHtml = `
@@ -7155,6 +7008,7 @@
                 payWithWalletCheck.checked = false;
                 updateWalletPaymentUI();
 
+                // ===== FILL PAYMENT PAGE EXTRA DETAILS =====
                 const notes = document.getElementById('orderNotes').value.trim();
                 const customizationParts = [];
                 if (selectedSize) customizationParts.push(`Size: ${selectedSize}`);
@@ -7836,7 +7690,7 @@
             });
         }
 
-        // ===== POPUP FUNCTIONS =====
+        // ===== APPLICATION POPUP FUNCTIONS =====
         function checkAllPopups() {
             if (!currentUserId || !allData) return;
 
@@ -7848,9 +7702,9 @@
 
             for (const [key, app] of appEntries) {
                 const status = app.status || 'pending';
-                if ((status === 'approved' || status === 'rejected') && !isPopupSeen('applications', key)) {
+                if ((status === 'approved' || status === 'rejected') && !shownPopups.applications[key]) {
                     showApplicationPopup(key, app);
-                    return;
+                    return; // show one at a time
                 }
             }
 
@@ -7861,7 +7715,7 @@
                 .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
 
             for (const [key, order] of orderEntries) {
-                if (order.status === 'completed' && !isPopupSeen('orderComplete', key)) {
+                if (order.status === 'completed' && !shownPopups.orderComplete[key]) {
                     const remainingAmount = (order.amount || 0) * 0.5;
                     if (remainingAmount > 0) {
                         showOrderCompletePopup(key, order, remainingAmount);
@@ -7878,7 +7732,7 @@
 
             for (const [key, w] of wdEntries) {
                 const status = w.status || 'pending';
-                if ((status === 'approved' || status === 'declined') && !isPopupSeen('withdrawalStatus', key)) {
+                if ((status === 'approved' || status === 'declined') && !shownPopups.withdrawalStatus[key]) {
                     showWithdrawalStatusPopup(key, w);
                     return;
                 }
@@ -7892,16 +7746,16 @@
 
             for (const [key, t] of txEntries) {
                 const isReferral = t.type?.toLowerCase().includes('referral') && t.amount && t.amount > 0;
-                if (isReferral && !isPopupSeen('referralReceived', key)) {
+                if (isReferral && !shownPopups.referralReceived[key]) {
                     showReferralReceivedPopup(key, t);
                     return;
                 }
             }
 
-            // Money received from Send Money popups
+            // Money received popups (from send money)
             for (const [key, t] of txEntries) {
-                const isMoneyReceived = t.type?.toLowerCase() === 'received money' && t.amount && t.amount > 0;
-                if (isMoneyReceived && !isPopupSeen('moneyReceived', key)) {
+                const isReceived = t.type?.toLowerCase() === 'received money' && t.amount && t.amount > 0;
+                if (isReceived && !shownPopups.moneyReceived[key]) {
                     showMoneyReceivedPopup(key, t);
                     return;
                 }
@@ -7947,7 +7801,7 @@
             appStatusBtn.dataset.appId = appId;
 
             appStatusPopup.classList.add('open');
-            markPopupSeen('applications', appId);
+            markPopupShown('applications', appId);
         }
 
         appStatusBtn.addEventListener('click', function() {
@@ -7966,7 +7820,7 @@
             ocRemainingAmount.textContent = `ZMW ${remainingAmount.toFixed(2)}`;
             ocOkBtn.dataset.orderId = orderId;
             orderCompletePopup.classList.add('open');
-            markPopupSeen('orderComplete', orderId);
+            markPopupShown('orderComplete', orderId);
         }
 
         ocOkBtn.addEventListener('click', function() {
@@ -8013,7 +7867,7 @@
 
             wsBtn.dataset.wdId = wdId;
             withdrawalStatusPopup.classList.add('open');
-            markPopupSeen('withdrawalStatus', wdId);
+            markPopupShown('withdrawalStatus', wdId);
         }
 
         wsBtn.addEventListener('click', function() {
@@ -8033,7 +7887,7 @@
             rrAmount.textContent = `ZMW ${amount.toFixed(2)}`;
             rrBtn.dataset.txId = txId;
             referralReceivedPopup.classList.add('open');
-            markPopupSeen('referralReceived', txId);
+            markPopupShown('referralReceived', txId);
         }
 
         rrBtn.addEventListener('click', function() {
@@ -8050,16 +7904,16 @@
 
         function showMoneyReceivedPopup(txId, tx) {
             const amount = tx.amount || 0;
-            const sender = tx.otherParty || tx.userName || 'Someone';
             mrAmount.textContent = `ZMW ${amount.toFixed(2)}`;
-            mrSender.textContent = sender;
+            mrSenderName.textContent = tx.otherParty || 'User';
             mrBtn.dataset.txId = txId;
             moneyReceivedPopup.classList.add('open');
-            markPopupSeen('moneyReceived', txId);
+            markPopupShown('moneyReceived', txId);
         }
 
         mrBtn.addEventListener('click', function() {
             moneyReceivedPopup.classList.remove('open');
+            // Optionally go to account view
             switchView('accountView');
         });
 
@@ -8141,6 +7995,7 @@
                     }
                 }
 
+                // Screenshot view button for application payment screenshots
                 let screenshotBtnHtml = '';
                 if (a.paymentData && a.paymentData.screenshots && a.paymentData.screenshots.length > 0) {
                     screenshotBtnHtml = `
@@ -8489,20 +8344,11 @@
                                 <p style="color:#888; text-align:center; max-width:272px; margin-top:7px;">Your account has been banned. Please contact support for assistance.</p>
                             </div>
                         `;
-                        hideLoadingScreen();
                         return;
                     }
                     currentUserData = data || {};
-                    updateLoaderProgress(20);
                     setupFCM();
-                    // Load popup tracking first, then load data
-                    loadPopupTracking().then(() => {
-                        updateLoaderProgress(40);
-                        loadData();
-                    }).catch(() => {
-                        updateLoaderProgress(40);
-                        loadData();
-                    });
+                    loadData();
                 });
             } else {
                 window.location.href = 'login.html';
@@ -8517,14 +8363,15 @@
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
         console.log('✅ Customer code updated with all requested features:');
-        console.log('  • Startup loading screen with progress bar');
         console.log('  • Pop-ups appear immediately on any page (global check)');
-        console.log('  • Pop-up tracking persisted in Firebase — seen once across all devices');
-        console.log('  • Money Received popup for Send Money transactions');
-        console.log('  • Application status popup (approved ✓ / rejected ✗)');
-        console.log('  • Order complete popup with remaining 50% amount');
-        console.log('  • Withdrawal status popup (approved/rejected)');
-        console.log('  • Referral money received popup');
+        console.log('  • Added "View Screenshot" button in order and application dropdowns');
+        console.log('  • One-time application status popup (approved ✓ / rejected ✗) with logo, user details, and button');
+        console.log('  • One-time order complete popup with remaining 50% amount');
+        console.log('  • One-time withdrawal status popup (approved/rejected) with details');
+        console.log('  • One-time referral money received popup with amount');
+        console.log('  • One-time money received popup from "Send Money" with sender name and amount');
+        console.log('  • Persistent popup tracking across devices (saved per user)');
+        console.log('  • Logout button is now a rectangle (not triangle)');
     </script>
 </body>
 </html>
