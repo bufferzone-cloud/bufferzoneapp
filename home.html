@@ -268,7 +268,7 @@
             position: relative;
             margin: 3px 0 12px 0;
             overflow: hidden;
-            border-radius: 24px;
+            border-radius: 32px; /* increased */
             background: #f8f9fc;
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.08);
             padding: 0;
@@ -305,7 +305,7 @@
             max-width: 80%;
             scroll-snap-align: center;
             position: relative;
-            border-radius: 28px;
+            border-radius: 40px; /* increased */
             overflow: hidden;
             transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 opacity 0.5s ease,
@@ -323,7 +323,6 @@
             will-change: transform, opacity;
             cursor: pointer;
             aspect-ratio: 1200 / 675;
-            border-radius: 28px;
         }
         .promo-slide.clickable {
             cursor: pointer;
@@ -338,7 +337,7 @@
             object-fit: cover;
             display: block;
             background-color: #ffffff;
-            border-radius: 28px;
+            border-radius: 40px; /* increased */
         }
         .promo-slide .slide-overlay {
             position: absolute;
@@ -351,7 +350,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            border-radius: 0 0 28px 28px;
+            border-radius: 0 0 40px 40px; /* increased */
         }
         .promo-slide .slide-text {
             color: #fff;
@@ -2530,7 +2529,7 @@
         }
         .flyer-detail-container {
             background: #ffffff;
-            border-radius: 24px;
+            border-radius: 32px; /* increased */
             overflow: hidden;
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.10);
             border: 1px solid #f0f0f0;
@@ -2544,14 +2543,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 24px;
+            border-radius: 32px; /* increased */
         }
         .flyer-detail-image-wrap img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            border-radius: 24px;
+            border-radius: 32px; /* increased */
         }
         .flyer-detail-image-wrap video {
             width: 100%;
@@ -2559,7 +2558,7 @@
             object-fit: cover;
             display: none;
             background: #000;
-            border-radius: 24px;
+            border-radius: 32px; /* increased */
         }
         .flyer-detail-content {
             padding: 16px 14px 14px 14px;
@@ -3582,7 +3581,7 @@
             margin-right: 6px;
         }
 
-        /* ===== MONEY RECEIVED POPUP ===== */
+        /* ===== MONEY RECEIVED POPUP (from Send Money) ===== */
         .money-received-overlay {
             position: fixed;
             top: 0;
@@ -3612,7 +3611,7 @@
         }
         .money-received-modal .mr-icon {
             font-size: 48px;
-            color: #4a90d9;
+            color: #00a86b;
             display: block;
             margin-bottom: 6px;
         }
@@ -3631,9 +3630,15 @@
         .money-received-modal .mr-amount {
             font-size: 22px;
             font-weight: 900;
-            color: #4a90d9;
+            color: #00a86b;
             display: block;
             margin: 2px 0 10px 0;
+        }
+        .money-received-modal .mr-sender {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1c2128;
+            margin-bottom: 8px;
         }
         .money-received-modal .mr-btn {
             background: #1c2128;
@@ -4302,12 +4307,13 @@
         </div>
     </div>
 
-    <!-- ===== MONEY RECEIVED POPUP ===== -->
+    <!-- ===== MONEY RECEIVED POPUP (from Send Money) ===== -->
     <div class="money-received-overlay" id="moneyReceivedPopup">
         <div class="money-received-modal">
-            <span class="mr-icon"><i class="fa-solid fa-circle-dollar"></i></span>
-            <h3>💰 Money Received!</h3>
-            <p>You have received money from <strong id="mrSenderName">User</strong>!</p>
+            <span class="mr-icon"><i class="fa-solid fa-inbox"></i></span>
+            <h3>💵 Money Received!</h3>
+            <p>You have received money from another Buffer Zone user via the Send Money feature.</p>
+            <div class="mr-sender" id="mrSender">From: <span id="mrSenderName">—</span></div>
             <span class="mr-amount" id="mrAmount">ZMW 0.00</span>
             <button class="mr-btn" id="mrBtn"><i class="fa-regular fa-circle-check"></i> OK</button>
         </div>
@@ -4460,7 +4466,7 @@
 
         let currentFlyerId = null;
 
-        // ===== POPUP TRACKING (persistent per user) =====
+        // ===== POPUP TRACKING (persisted in Firebase) =====
         let shownPopups = {
             applications: {}, // appId -> true
             orderComplete: {}, // orderId -> true
@@ -4648,6 +4654,7 @@
 
         // ===== MONEY RECEIVED POPUP =====
         const moneyReceivedPopup = document.getElementById('moneyReceivedPopup');
+        const mrSender = document.getElementById('mrSender');
         const mrSenderName = document.getElementById('mrSenderName');
         const mrAmount = document.getElementById('mrAmount');
         const mrBtn = document.getElementById('mrBtn');
@@ -4865,46 +4872,6 @@
             }).catch(err => console.error('Error saving notification:', err));
         }
 
-        // ===== PERSISTENT POPUP TRACKING =====
-        function saveShownPopups() {
-            if (!currentUserId) return;
-            const refPath = `users/${currentUserId}/shownPopups`;
-            return set(ref(db, refPath), shownPopups);
-        }
-
-        function markPopupShown(type, id) {
-            if (!shownPopups[type]) shownPopups[type] = {};
-            shownPopups[type][id] = true;
-            return saveShownPopups();
-        }
-
-        function loadShownPopups() {
-            if (!currentUserId) return;
-            const refPath = `users/${currentUserId}/shownPopups`;
-            get(ref(db, refPath)).then(snapshot => {
-                const data = snapshot.val();
-                if (data) {
-                    shownPopups = {
-                        applications: data.applications || {},
-                        orderComplete: data.orderComplete || {},
-                        withdrawalStatus: data.withdrawalStatus || {},
-                        referralReceived: data.referralReceived || {},
-                        moneyReceived: data.moneyReceived || {}
-                    };
-                } else {
-                    shownPopups = {
-                        applications: {},
-                        orderComplete: {},
-                        withdrawalStatus: {},
-                        referralReceived: {},
-                        moneyReceived: {}
-                    };
-                }
-            }).catch(err => {
-                console.error('Error loading shown popups:', err);
-            });
-        }
-
         function loadData(callback) {
             const dbRef = ref(db, 'bufferzoneAppData');
             onValue(dbRef, (snapshot) => {
@@ -4963,13 +4930,10 @@
                     }
                 }
                 renderAll();
-                // Load shown popups from user data
-                loadShownPopups().then(() => {
-                    // Check for popups after loading
-                    setTimeout(() => {
-                        checkAllPopups();
-                    }, 500);
-                });
+                // Check for popups immediately after data loads
+                setTimeout(() => {
+                    checkAllPopups();
+                }, 500);
                 if (callback) callback();
             });
         }
@@ -6497,6 +6461,7 @@
                 status: 'pending',
                 createdAt: Date.now(),
                 date: new Date().toLocaleString(),
+                // ===== CURRENT DATE & TIME IN WITHDRAW REQUEST =====
                 requestedAt: new Date().toISOString(),
                 requestedAtFormatted: new Date().toLocaleString()
             };
@@ -7690,76 +7655,99 @@
             });
         }
 
-        // ===== APPLICATION POPUP FUNCTIONS =====
+        // ===== POPUP FUNCTIONS =====
         function checkAllPopups() {
             if (!currentUserId || !allData) return;
 
-            // Application status popups
-            const apps = allData.applications || {};
-            const appEntries = Object.entries(apps)
-                .filter(([key, a]) => a.userId === currentUserId)
-                .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
+            // Load shownPopups from user data
+            const userShownRef = ref(db, `users/${currentUserId}/shownPopups`);
+            get(userShownRef).then((snapshot) => {
+                const stored = snapshot.val() || {};
+                shownPopups = {
+                    applications: stored.applications || {},
+                    orderComplete: stored.orderComplete || {},
+                    withdrawalStatus: stored.withdrawalStatus || {},
+                    referralReceived: stored.referralReceived || {},
+                    moneyReceived: stored.moneyReceived || {}
+                };
 
-            for (const [key, app] of appEntries) {
-                const status = app.status || 'pending';
-                if ((status === 'approved' || status === 'rejected') && !shownPopups.applications[key]) {
-                    showApplicationPopup(key, app);
-                    return; // show one at a time
+                // Application status popups
+                const apps = allData.applications || {};
+                const appEntries = Object.entries(apps)
+                    .filter(([key, a]) => a.userId === currentUserId)
+                    .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
+
+                for (const [key, app] of appEntries) {
+                    const status = app.status || 'pending';
+                    if ((status === 'approved' || status === 'rejected') && !shownPopups.applications[key]) {
+                        showApplicationPopup(key, app);
+                        return; // show one at a time
+                    }
                 }
-            }
 
-            // Order complete popups
-            const orders = allData.orders || {};
-            const orderEntries = Object.entries(orders)
-                .filter(([key, o]) => o.userId === currentUserId)
-                .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
+                // Order complete popups
+                const orders = allData.orders || {};
+                const orderEntries = Object.entries(orders)
+                    .filter(([key, o]) => o.userId === currentUserId)
+                    .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
 
-            for (const [key, order] of orderEntries) {
-                if (order.status === 'completed' && !shownPopups.orderComplete[key]) {
-                    const remainingAmount = (order.amount || 0) * 0.5;
-                    if (remainingAmount > 0) {
-                        showOrderCompletePopup(key, order, remainingAmount);
+                for (const [key, order] of orderEntries) {
+                    if (order.status === 'completed' && !shownPopups.orderComplete[key]) {
+                        const remainingAmount = (order.amount || 0) * 0.5;
+                        if (remainingAmount > 0) {
+                            showOrderCompletePopup(key, order, remainingAmount);
+                            return;
+                        }
+                    }
+                }
+
+                // Withdrawal status popups
+                const withdrawals = allData.withdrawalRequests || {};
+                const wdEntries = Object.entries(withdrawals)
+                    .filter(([key, w]) => w.userId === currentUserId)
+                    .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
+
+                for (const [key, w] of wdEntries) {
+                    const status = w.status || 'pending';
+                    if ((status === 'approved' || status === 'declined') && !shownPopups.withdrawalStatus[key]) {
+                        showWithdrawalStatusPopup(key, w);
                         return;
                     }
                 }
-            }
 
-            // Withdrawal status popups
-            const withdrawals = allData.withdrawalRequests || {};
-            const wdEntries = Object.entries(withdrawals)
-                .filter(([key, w]) => w.userId === currentUserId)
-                .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
+                // Referral received popups (money from referrals)
+                const transactions = allData.transactions || {};
+                const txEntries = Object.entries(transactions)
+                    .filter(([key, t]) => t.userId === currentUserId)
+                    .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
-            for (const [key, w] of wdEntries) {
-                const status = w.status || 'pending';
-                if ((status === 'approved' || status === 'declined') && !shownPopups.withdrawalStatus[key]) {
-                    showWithdrawalStatusPopup(key, w);
-                    return;
+                for (const [key, t] of txEntries) {
+                    const isReferral = t.type?.toLowerCase().includes('referral') && t.amount && t.amount > 0;
+                    if (isReferral && !shownPopups.referralReceived[key]) {
+                        showReferralReceivedPopup(key, t);
+                        return;
+                    }
                 }
-            }
 
-            // Referral received popups (money from referrals)
-            const transactions = allData.transactions || {};
-            const txEntries = Object.entries(transactions)
-                .filter(([key, t]) => t.userId === currentUserId)
-                .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
-
-            for (const [key, t] of txEntries) {
-                const isReferral = t.type?.toLowerCase().includes('referral') && t.amount && t.amount > 0;
-                if (isReferral && !shownPopups.referralReceived[key]) {
-                    showReferralReceivedPopup(key, t);
-                    return;
+                // Money Received popups (from Send Money) - exclude referral ones
+                for (const [key, t] of txEntries) {
+                    const isSendReceive = t.type?.toLowerCase() === 'received money' || (t.type?.toLowerCase().includes('received') && !t.type?.toLowerCase().includes('referral'));
+                    if (isSendReceive && t.amount && t.amount > 0 && !shownPopups.moneyReceived[key]) {
+                        showMoneyReceivedPopup(key, t);
+                        return;
+                    }
                 }
-            }
+            }).catch((error) => {
+                console.error('Error loading shown popups:', error);
+            });
+        }
 
-            // Money received popups (from send money)
-            for (const [key, t] of txEntries) {
-                const isReceived = t.type?.toLowerCase() === 'received money' && t.amount && t.amount > 0;
-                if (isReceived && !shownPopups.moneyReceived[key]) {
-                    showMoneyReceivedPopup(key, t);
-                    return;
-                }
-            }
+        function markPopupShown(type, id) {
+            if (!shownPopups[type]) shownPopups[type] = {};
+            shownPopups[type][id] = true;
+            // Persist to Firebase
+            const userShownRef = ref(db, `users/${currentUserId}/shownPopups`);
+            set(userShownRef, shownPopups);
         }
 
         function showApplicationPopup(appId, app) {
@@ -7905,7 +7893,8 @@
         function showMoneyReceivedPopup(txId, tx) {
             const amount = tx.amount || 0;
             mrAmount.textContent = `ZMW ${amount.toFixed(2)}`;
-            mrSenderName.textContent = tx.otherParty || 'User';
+            const sender = tx.otherParty || tx.userName || 'Unknown';
+            mrSenderName.textContent = sender;
             mrBtn.dataset.txId = txId;
             moneyReceivedPopup.classList.add('open');
             markPopupShown('moneyReceived', txId);
@@ -7913,7 +7902,6 @@
 
         mrBtn.addEventListener('click', function() {
             moneyReceivedPopup.classList.remove('open');
-            // Optionally go to account view
             switchView('accountView');
         });
 
@@ -8347,6 +8335,20 @@
                         return;
                     }
                     currentUserData = data || {};
+                    // Load shownPopups from Firebase
+                    const shownRef = ref(db, `users/${currentUserId}/shownPopups`);
+                    get(shownRef).then((snapshot) => {
+                        const stored = snapshot.val() || {};
+                        shownPopups = {
+                            applications: stored.applications || {},
+                            orderComplete: stored.orderComplete || {},
+                            withdrawalStatus: stored.withdrawalStatus || {},
+                            referralReceived: stored.referralReceived || {},
+                            moneyReceived: stored.moneyReceived || {}
+                        };
+                    }).catch((error) => {
+                        console.error('Error loading shown popups:', error);
+                    });
                     setupFCM();
                     loadData();
                 });
@@ -8369,9 +8371,10 @@
         console.log('  • One-time order complete popup with remaining 50% amount');
         console.log('  • One-time withdrawal status popup (approved/rejected) with details');
         console.log('  • One-time referral money received popup with amount');
-        console.log('  • One-time money received popup from "Send Money" with sender name and amount');
-        console.log('  • Persistent popup tracking across devices (saved per user)');
+        console.log('  • NEW: Money Received from Send Money popup (with sender name and amount)');
+        console.log('  • All pop-ups persist across devices (stored in Firebase)');
         console.log('  • Logout button is now a rectangle (not triangle)');
+        console.log('  • Flyer edges are more rounded (border-radius increased)');
     </script>
 </body>
 </html>
