@@ -268,7 +268,7 @@
             position: relative;
             margin: 3px 0 12px 0;
             overflow: hidden;
-            border-radius: 32px; /* increased */
+            border-radius: 32px;
             background: #f8f9fc;
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.08);
             padding: 0;
@@ -305,7 +305,7 @@
             max-width: 80%;
             scroll-snap-align: center;
             position: relative;
-            border-radius: 40px; /* increased */
+            border-radius: 40px;
             overflow: hidden;
             transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 opacity 0.5s ease,
@@ -334,10 +334,10 @@
         .promo-slide video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain !important;
             display: block;
             background-color: #ffffff;
-            border-radius: 40px; /* increased */
+            border-radius: 40px;
         }
         .promo-slide .slide-overlay {
             position: absolute;
@@ -350,7 +350,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            border-radius: 0 0 40px 40px; /* increased */
+            border-radius: 0 0 40px 40px;
         }
         .promo-slide .slide-text {
             color: #fff;
@@ -2529,7 +2529,7 @@
         }
         .flyer-detail-container {
             background: #ffffff;
-            border-radius: 32px; /* increased */
+            border-radius: 32px;
             overflow: hidden;
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.10);
             border: 1px solid #f0f0f0;
@@ -2543,22 +2543,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 32px; /* increased */
+            border-radius: 32px;
         }
         .flyer-detail-image-wrap img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
-            border-radius: 32px; /* increased */
+            border-radius: 32px;
         }
         .flyer-detail-image-wrap video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: none;
             background: #000;
-            border-radius: 32px; /* increased */
+            border-radius: 32px;
         }
         .flyer-detail-content {
             padding: 16px 14px 14px 14px;
@@ -3686,6 +3686,246 @@
             box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
         }
 
+        /* ===== STATEMENT MODAL ===== */
+        .statement-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .statement-modal-overlay.open {
+            display: flex;
+        }
+        .statement-modal-wrapper {
+            max-width: 580px;
+            width: 100%;
+            margin: auto;
+        }
+        .statement-card {
+            background: #ffffff;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            font-family: 'Poppins', sans-serif;
+        }
+        .statement-header {
+            background: #1c2128;
+            padding: 16px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 3px solid #f5b83d;
+        }
+        .statement-header h2 {
+            color: white;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: 1px;
+            font-size: 18px;
+        }
+        .statement-header .slogan {
+            color: white;
+            opacity: 0.6;
+            font-size: 9px;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+        .statement-header .statement-title {
+            color: #f5b83d;
+            font-weight: 800;
+            margin: 0;
+            font-size: 20px;
+            text-align: right;
+        }
+        .statement-header .statement-ref {
+            color: white;
+            opacity: 0.6;
+            font-size: 9px;
+            margin: 0;
+        }
+        .statement-addresses {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 18px 10px 18px;
+        }
+        .statement-addresses h4 {
+            margin: 0 0 3px 0;
+            font-size: 10px;
+            font-weight: 700;
+            color: #1c2128;
+            border-left: 3px solid #f5b83d;
+            padding-left: 6px;
+        }
+        .statement-addresses .address-right h4 {
+            border-left: none;
+            border-right: 3px solid #f5b83d;
+            padding-left: 0;
+            padding-right: 6px;
+            text-align: right;
+        }
+        .statement-addresses p {
+            font-size: 9px;
+            color: #555;
+            margin: 1px 0;
+            line-height: 1.3;
+        }
+        .statement-addresses .name {
+            font-weight: 600;
+            color: #1c2128;
+            font-size: 11px;
+        }
+        .statement-table-header {
+            background: #f5b83d;
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 18px;
+            font-size: 9px;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+        }
+        .statement-table-header>div {
+            text-align: center;
+        }
+        .statement-table-header>div:first-child {
+            flex: 2;
+            text-align: left;
+        }
+        .statement-table-header>div:last-child {
+            flex: 1;
+            text-align: right;
+        }
+        .statement-item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 18px;
+            border-bottom: 1px solid #eee;
+            font-size: 10px;
+        }
+        .statement-item-row>div {
+            text-align: center;
+        }
+        .statement-item-row>div:first-child {
+            flex: 2;
+            text-align: left;
+        }
+        .statement-item-row>div:last-child {
+            flex: 1;
+            text-align: right;
+        }
+        .statement-totals {
+            padding: 10px 18px 16px 18px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .statement-totals-box {
+            width: 150px;
+            font-size: 9px;
+            text-align: right;
+        }
+        .statement-totals-box>div {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+        }
+        .statement-totals-box .total-row {
+            background: #f5b83d;
+            margin-top: 5px;
+            padding: 5px 8px;
+            border-radius: 4px;
+            color: #1c2128;
+            font-weight: 700;
+        }
+        .statement-footer {
+            padding: 10px 18px 16px 18px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .statement-footer .thanks {
+            font-size: 9px;
+            font-weight: 600;
+            color: #1c2128;
+        }
+        .statement-footer .footnote {
+            font-size: 8px;
+            color: #aaa;
+            max-width: 170px;
+            line-height: 1.4;
+        }
+        .statement-footer .signature-area {
+            text-align: right;
+            border-top: 2px solid #1c2128;
+            padding-top: 3px;
+            width: 120px;
+        }
+        .statement-footer .signature-area .sign-name {
+            font-weight: 800;
+            font-size: 13px;
+            color: #1c2128;
+            letter-spacing: 0.5px;
+        }
+        .statement-footer .signature-area .sign-label {
+            font-size: 7px;
+            color: #666;
+            text-transform: uppercase;
+        }
+        .statement-bottom-bar {
+            background: #1c2128;
+            height: 8px;
+            width: 100%;
+        }
+        .statement-download-btn {
+            margin-top: 12px;
+            width: 100%;
+            background: #1c2128;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s;
+        }
+        .statement-download-btn:active {
+            transform: scale(0.98);
+        }
+        .statement-download-btn i {
+            color: #f5b83d;
+        }
+        .statement-close-btn {
+            margin-top: 8px;
+            width: 100%;
+            background: transparent;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .statement-close-btn:hover {
+            background: #fff;
+            color: #1c2128;
+        }
+
         @media (max-width: 420px) {
             .bottom-nav {
                 max-width: 400px;
@@ -3972,14 +4212,12 @@
                         <p>Passionate about design and technology. Helping brands grow through innovation and strategic design.</p>
                     </div>
 
-                    <!-- ===== LOGOUT BUTTON — RECTANGLE (not triangle) ===== -->
                     <div style="display: flex; justify-content: center; margin-top: 14px;">
                         <button class="logout-btn" id="logoutBtn" style="background: #dc2626; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 7px; width: 140px;">
                             <i class="fa-solid fa-right-from-bracket" style="color: white;"></i> Log Out
                         </button>
                     </div>
 
-                    <!-- ===== CONTACT US — ORANGE ICONS NEXT TO TEXT ===== -->
                     <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid #f0f0f0;">
                         <h4 style="font-size: 10px; font-weight: 700; color: #1c2128; margin-bottom: 8px;">📞 Contact Us</h4>
                         <div style="display: flex; flex-direction: column; gap: 6px;">
@@ -4021,7 +4259,6 @@
             <h3>💳 Payment Required</h3>
             <p class="sub">To begin your project, you must pay 50% upfront.</p>
 
-            <!-- ===== EXTRA DETAILS ON PAYMENT PAGE ===== -->
             <div class="payment-details" style="margin-bottom:6px;">
                 <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;">
                     <div style="flex:1; min-width:120px;">
@@ -4130,7 +4367,6 @@
         </div>
     </div>
 
-    <!-- ===== WITHDRAW PAGE ===== -->
     <div class="withdraw-page-overlay" id="withdrawPage">
         <div class="withdraw-page">
             <div class="page-header">
@@ -4176,7 +4412,6 @@
         </div>
     </div>
 
-    <!-- ===== SEND MONEY PAGE ===== -->
     <div class="send-money-page-overlay" id="sendMoneyPage">
         <div class="send-money-page">
             <div class="page-header">
@@ -4233,7 +4468,6 @@
         </div>
     </div>
 
-    <!-- ===== APPLICATION STATUS POPUP ===== -->
     <div class="app-status-overlay" id="appStatusPopup">
         <div class="app-status-modal">
             <div class="app-status-logo-wrap">
@@ -4261,7 +4495,6 @@
         </div>
     </div>
 
-    <!-- ===== ORDER COMPLETE POPUP ===== -->
     <div class="order-complete-overlay" id="orderCompletePopup">
         <div class="order-complete-modal">
             <span class="oc-icon"><i class="fa-regular fa-circle-check"></i></span>
@@ -4272,7 +4505,6 @@
         </div>
     </div>
 
-    <!-- ===== WITHDRAWAL STATUS POPUP ===== -->
     <div class="withdrawal-status-overlay" id="withdrawalStatusPopup">
         <div class="withdrawal-status-modal">
             <div class="ws-logo-wrap">
@@ -4296,7 +4528,6 @@
         </div>
     </div>
 
-    <!-- ===== REFERRAL RECEIVED POPUP ===== -->
     <div class="referral-received-overlay" id="referralReceivedPopup">
         <div class="referral-received-modal">
             <span class="rr-icon"><i class="fa-solid fa-gift"></i></span>
@@ -4307,7 +4538,6 @@
         </div>
     </div>
 
-    <!-- ===== MONEY RECEIVED POPUP (from Send Money) ===== -->
     <div class="money-received-overlay" id="moneyReceivedPopup">
         <div class="money-received-modal">
             <span class="mr-icon"><i class="fa-solid fa-inbox"></i></span>
@@ -4319,7 +4549,6 @@
         </div>
     </div>
 
-    <!-- ===== IMAGE VIEWER MODAL ===== -->
     <div class="image-viewer-overlay" id="imageViewer">
         <img id="imageViewerImg" src="" alt="Screenshot" />
     </div>
@@ -4405,6 +4634,77 @@
         </div>
     </div>
 
+    <!-- ===== STATEMENT MODAL ===== -->
+    <div class="statement-modal-overlay" id="statementModal">
+        <div class="statement-modal-wrapper">
+            <div id="statementContainer" class="statement-card">
+                <div class="statement-header">
+                    <div>
+                        <h2>BUFFER ZONE</h2>
+                        <p class="slogan">CREATIVE AGENCY</p>
+                    </div>
+                    <div>
+                        <div class="statement-title">STATEMENT</div>
+                        <p class="statement-ref">REF : <span id="stmtRef" style="color:white;">STM-001</span></p>
+                    </div>
+                </div>
+
+                <div class="statement-addresses">
+                    <div>
+                        <h4>TO</h4>
+                        <p class="name" id="stmtCustName">Customer Name</p>
+                        <p id="stmtCustPhone">+000 123 456 789</p>
+                        <p id="stmtCustEmail">customer@email.com</p>
+                        <p>Customer</p>
+                    </div>
+                    <div class="address-right">
+                        <h4>FROM</h4>
+                        <p class="name">Buffer Zone Creative Agency</p>
+                        <p>Phone: 0768658484</p>
+                        <p>Email: bufferzone802@gmail.com</p>
+                        <p>Lusaka, Kitwe and Ndola</p>
+                    </div>
+                </div>
+
+                <div class="statement-table-header">
+                    <div>DESCRIPTION</div>
+                    <div>AMOUNT</div>
+                    <div>STATUS</div>
+                    <div>DATE</div>
+                </div>
+
+                <div id="stmtItemsBody">
+                </div>
+
+                <div class="statement-totals">
+                    <div class="statement-totals-box">
+                        <div><span>Total :</span> <span id="stmtTotalDisplay">ZMW 0.00</span></div>
+                        <div><span>Method :</span> <span id="stmtMethod">N/A</span></div>
+                        <div class="total-row"><span>NET</span> <span id="stmtNetDisplay">ZMW 0.00</span></div>
+                    </div>
+                </div>
+
+                <div class="statement-footer">
+                    <div>
+                        <div class="thanks">Thank you for using Buffer Zone!</div>
+                        <div class="footnote">This is a computer-generated statement. For inquiries, please contact our support team.</div>
+                    </div>
+                    <div class="signature-area">
+                        <div class="sign-name" id="stmtSignName">Jubel Mobela</div>
+                        <div class="sign-label">AUTHORIZED SIGNATURE</div>
+                    </div>
+                </div>
+
+                <div class="statement-bottom-bar"></div>
+            </div>
+
+            <button class="statement-download-btn" id="downloadStatementBtn">
+                <i class="fa-solid fa-download"></i> Download Statement
+            </button>
+            <button class="statement-close-btn" id="closeStatementBtn">Close</button>
+        </div>
+    </div>
+
     <script type="text/javascript">
     </script>
 
@@ -4466,14 +4766,27 @@
 
         let currentFlyerId = null;
 
-        // ===== POPUP TRACKING (persisted in Firebase) =====
         let shownPopups = {
-            applications: {}, // appId -> true
-            orderComplete: {}, // orderId -> true
-            withdrawalStatus: {}, // withdrawalId -> true
-            referralReceived: {}, // transactionId -> true
-            moneyReceived: {} // transactionId -> true
+            applications: {},
+            orderComplete: {},
+            withdrawalStatus: {},
+            referralReceived: {},
+            moneyReceived: {}
         };
+
+        // ===== NOTIFICATION SOUND =====
+        const notificationSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3');
+
+        function playNotificationSound() {
+            try {
+                notificationSound.currentTime = 0;
+                notificationSound.play().catch(() => {
+                    console.warn('🔇 Notification sound play failed (user interaction required).');
+                });
+            } catch (e) {
+                console.warn('🔇 Notification sound error:', e);
+            }
+        }
 
         const headerName = document.getElementById('headerName');
         const heroTitle = document.getElementById('heroTitle');
@@ -4618,7 +4931,6 @@
         const withdrawSuccessModal = document.getElementById('withdrawSuccessModal');
         const withdrawSuccessOkBtn = document.getElementById('withdrawSuccessOkBtn');
 
-        // ===== POPUP ELEMENTS =====
         const appStatusPopup = document.getElementById('appStatusPopup');
         const appStatusCheck = document.getElementById('appStatusCheck');
         const appStatusX = document.getElementById('appStatusX');
@@ -4652,7 +4964,6 @@
         const rrAmount = document.getElementById('rrAmount');
         const rrBtn = document.getElementById('rrBtn');
 
-        // ===== MONEY RECEIVED POPUP =====
         const moneyReceivedPopup = document.getElementById('moneyReceivedPopup');
         const mrSender = document.getElementById('mrSender');
         const mrSenderName = document.getElementById('mrSenderName');
@@ -4662,12 +4973,25 @@
         const imageViewer = document.getElementById('imageViewer');
         const imageViewerImg = document.getElementById('imageViewerImg');
 
-        // ===== PAYMENT PAGE EXTRA DETAILS =====
         const paymentCustomerName = document.getElementById('paymentCustomerName');
         const paymentServiceName = document.getElementById('paymentServiceName');
         const paymentQty = document.getElementById('paymentQty');
         const paymentCustomization = document.getElementById('paymentCustomization');
         const paymentNotes = document.getElementById('paymentNotes');
+
+        // ===== STATEMENT MODAL ELEMENTS =====
+        const statementModal = document.getElementById('statementModal');
+        const stmtRef = document.getElementById('stmtRef');
+        const stmtCustName = document.getElementById('stmtCustName');
+        const stmtCustPhone = document.getElementById('stmtCustPhone');
+        const stmtCustEmail = document.getElementById('stmtCustEmail');
+        const stmtItemsBody = document.getElementById('stmtItemsBody');
+        const stmtTotalDisplay = document.getElementById('stmtTotalDisplay');
+        const stmtMethod = document.getElementById('stmtMethod');
+        const stmtNetDisplay = document.getElementById('stmtNetDisplay');
+        const stmtSignName = document.getElementById('stmtSignName');
+        const downloadStatementBtn = document.getElementById('downloadStatementBtn');
+        const closeStatementBtn = document.getElementById('closeStatementBtn');
 
         function showToast(msg, type = 'info') {
             const toast = document.createElement('div');
@@ -4930,7 +5254,6 @@
                     }
                 }
                 renderAll();
-                // Check for popups immediately after data loads
                 setTimeout(() => {
                     checkAllPopups();
                 }, 500);
@@ -4941,7 +5264,6 @@
         function saveData() {
             const dbRef = ref(db, 'bufferzoneAppData');
             return set(dbRef, allData).then(() => {
-                // After saving, check for popups again (in case status changed)
                 setTimeout(() => checkAllPopups(), 300);
             });
         }
@@ -4986,7 +5308,7 @@
             renderTransactionMessages();
             renderWithdrawalsList();
             renderApplications();
-            renderWithdrawHistory(); // for the withdraw page
+            renderWithdrawHistory();
 
             if (allData.policy) {
                 const p = allData.policy;
@@ -5029,9 +5351,9 @@
                 const isClickable = pic.clickContent?.enabled === true;
                 const mediaType = pic.mediaType || 'image';
                 const mediaHtml = mediaType === 'video'
-                    ? `<video src="${pic.imageUrl}" muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>
+                    ? `<video src="${pic.imageUrl}" muted playsinline style="width:100%;height:100%;object-fit:contain;border-radius:40px;"></video>
                        <div class="video-play-overlay"><i class="fa-solid fa-play"></i></div>`
-                    : `<img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />`;
+                    : `<img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" style="width:100%;height:100%;object-fit:contain;border-radius:40px;" />`;
                 return `
                 <div class="promo-slide ${isClickable ? 'clickable' : ''}" data-key="${key}" data-index="${idx - 1}" data-real-index="${idx - 1 < 0 ? entries.length - 1 : idx - 1 >= entries.length ? 0 : idx - 1}" data-mediatype="${mediaType}">
                     ${mediaHtml}
@@ -5379,7 +5701,6 @@
                     `;
                 }
 
-                // Screenshot view button
                 let screenshotBtnHtml = '';
                 if (o.paymentProof && o.paymentProof !== 'Wallet Payment' && o.paymentProof !== 'N/A') {
                     screenshotBtnHtml = `
@@ -5558,6 +5879,21 @@
                         `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral for a service discount.`;
                 }
 
+                const isWithdrawTx = t.type?.toLowerCase().includes('withdraw');
+                const isSendTx = t.type?.toLowerCase().includes('sent') || t.type?.toLowerCase().includes('send');
+                const isReceiveTx = t.type?.toLowerCase().includes('received') && !t.type?.toLowerCase().includes('referral');
+
+                let statementBtnHtml = '';
+                if (isWithdrawTx || isSendTx || isReceiveTx) {
+                    statementBtnHtml = `
+                        <div class="h-row" style="border-bottom:none; padding-top:6px;">
+                            <button class="view-statement-btn" data-key="${key}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
+                                <i class="fa-regular fa-file-lines" style="color:#f5b83d;"></i> View Statement
+                            </button>
+                        </div>
+                    `;
+                }
+
                 return `
                 <div class="history-card" data-key="${key}">
                     <div class="history-summary">
@@ -5576,6 +5912,7 @@
                         <div class="h-row"><span class="h-label">Status</span><span class="h-val">${statusDisplay}</span></div>
                         <div class="h-row"><span class="h-label">Detail</span><span class="h-val">${escapeHtml(detailText)}</span></div>
                         ${isSendReceive ? `<div class="h-row" style="flex-direction:column; align-items:flex-start; gap:2px;"><span class="h-label" style="margin-bottom:2px;">Other Party</span><div class="h-val" style="text-align:left; width:100%;">${otherPartyInfo}</div></div>` : ''}
+                        ${statementBtnHtml}
                     </div>
                 </div>
                 `;
@@ -5584,6 +5921,15 @@
             container.querySelectorAll('.history-card').forEach(el => {
                 el.addEventListener('click', function() {
                     this.classList.toggle('open');
+                });
+            });
+
+            container.querySelectorAll('.view-statement-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const key = this.dataset.key;
+                    const tx = allData.transactions?.[key];
+                    if (tx) openStatementModal(tx, key);
                 });
             });
         }
@@ -6461,7 +6807,6 @@
                 status: 'pending',
                 createdAt: Date.now(),
                 date: new Date().toLocaleString(),
-                // ===== CURRENT DATE & TIME IN WITHDRAW REQUEST =====
                 requestedAt: new Date().toISOString(),
                 requestedAtFormatted: new Date().toLocaleString()
             };
@@ -6502,7 +6847,6 @@
             });
         }
 
-        // ===== SEND MONEY PAGE FUNCTIONS =====
         function openSendMoneyPage() {
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
@@ -6973,7 +7317,6 @@
                 payWithWalletCheck.checked = false;
                 updateWalletPaymentUI();
 
-                // ===== FILL PAYMENT PAGE EXTRA DETAILS =====
                 const notes = document.getElementById('orderNotes').value.trim();
                 const customizationParts = [];
                 if (selectedSize) customizationParts.push(`Size: ${selectedSize}`);
@@ -7655,11 +7998,9 @@
             });
         }
 
-        // ===== POPUP FUNCTIONS =====
         function checkAllPopups() {
             if (!currentUserId || !allData) return;
 
-            // Load shownPopups from user data
             const userShownRef = ref(db, `users/${currentUserId}/shownPopups`);
             get(userShownRef).then((snapshot) => {
                 const stored = snapshot.val() || {};
@@ -7671,7 +8012,6 @@
                     moneyReceived: stored.moneyReceived || {}
                 };
 
-                // Application status popups
                 const apps = allData.applications || {};
                 const appEntries = Object.entries(apps)
                     .filter(([key, a]) => a.userId === currentUserId)
@@ -7680,12 +8020,12 @@
                 for (const [key, app] of appEntries) {
                     const status = app.status || 'pending';
                     if ((status === 'approved' || status === 'rejected') && !shownPopups.applications[key]) {
+                        playNotificationSound();
                         showApplicationPopup(key, app);
-                        return; // show one at a time
+                        return;
                     }
                 }
 
-                // Order complete popups
                 const orders = allData.orders || {};
                 const orderEntries = Object.entries(orders)
                     .filter(([key, o]) => o.userId === currentUserId)
@@ -7695,13 +8035,13 @@
                     if (order.status === 'completed' && !shownPopups.orderComplete[key]) {
                         const remainingAmount = (order.amount || 0) * 0.5;
                         if (remainingAmount > 0) {
+                            playNotificationSound();
                             showOrderCompletePopup(key, order, remainingAmount);
                             return;
                         }
                     }
                 }
 
-                // Withdrawal status popups
                 const withdrawals = allData.withdrawalRequests || {};
                 const wdEntries = Object.entries(withdrawals)
                     .filter(([key, w]) => w.userId === currentUserId)
@@ -7710,12 +8050,12 @@
                 for (const [key, w] of wdEntries) {
                     const status = w.status || 'pending';
                     if ((status === 'approved' || status === 'declined') && !shownPopups.withdrawalStatus[key]) {
+                        playNotificationSound();
                         showWithdrawalStatusPopup(key, w);
                         return;
                     }
                 }
 
-                // Referral received popups (money from referrals)
                 const transactions = allData.transactions || {};
                 const txEntries = Object.entries(transactions)
                     .filter(([key, t]) => t.userId === currentUserId)
@@ -7724,15 +8064,16 @@
                 for (const [key, t] of txEntries) {
                     const isReferral = t.type?.toLowerCase().includes('referral') && t.amount && t.amount > 0;
                     if (isReferral && !shownPopups.referralReceived[key]) {
+                        playNotificationSound();
                         showReferralReceivedPopup(key, t);
                         return;
                     }
                 }
 
-                // Money Received popups (from Send Money) - exclude referral ones
                 for (const [key, t] of txEntries) {
                     const isSendReceive = t.type?.toLowerCase() === 'received money' || (t.type?.toLowerCase().includes('received') && !t.type?.toLowerCase().includes('referral'));
                     if (isSendReceive && t.amount && t.amount > 0 && !shownPopups.moneyReceived[key]) {
+                        playNotificationSound();
                         showMoneyReceivedPopup(key, t);
                         return;
                     }
@@ -7745,7 +8086,6 @@
         function markPopupShown(type, id) {
             if (!shownPopups[type]) shownPopups[type] = {};
             shownPopups[type][id] = true;
-            // Persist to Firebase
             const userShownRef = ref(db, `users/${currentUserId}/shownPopups`);
             set(userShownRef, shownPopups);
         }
@@ -7813,9 +8153,7 @@
 
         ocOkBtn.addEventListener('click', function() {
             orderCompletePopup.classList.remove('open');
-            if (document.getElementById('ordersView').classList.contains('active')) {
-                // stay
-            } else {
+            if (document.getElementById('ordersView').classList.contains('active')) {} else {
                 switchView('ordersView');
             }
         });
@@ -7823,9 +8161,7 @@
         orderCompletePopup.addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('open');
-                if (document.getElementById('ordersView').classList.contains('active')) {
-                    // stay
-                } else {
+                if (document.getElementById('ordersView').classList.contains('active')) {} else {
                     switchView('ordersView');
                 }
             }
@@ -7983,7 +8319,6 @@
                     }
                 }
 
-                // Screenshot view button for application payment screenshots
                 let screenshotBtnHtml = '';
                 if (a.paymentData && a.paymentData.screenshots && a.paymentData.screenshots.length > 0) {
                     screenshotBtnHtml = `
@@ -8101,6 +8436,76 @@
                 showToast('Failed to generate receipt image.', 'error');
                 downloadReceiptBtn.disabled = false;
                 downloadReceiptBtn.innerHTML = `<i class="fa-solid fa-download"></i> Download Receipt`;
+            });
+        }
+
+        // ===== STATEMENT MODAL FUNCTIONS =====
+        function openStatementModal(tx, key) {
+            const customerName = currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
+                currentUser.email || 'Customer';
+            const customerPhone = currentUserData?.phone || 'N/A';
+            const customerEmail = currentUser.email || 'N/A';
+
+            stmtRef.textContent = tx.ref || 'STM-' + key.slice(-6);
+            stmtCustName.textContent = customerName;
+            stmtCustPhone.textContent = 'Phone: ' + customerPhone;
+            stmtCustEmail.textContent = 'Email: ' + customerEmail;
+
+            const type = tx.type || 'Transaction';
+            const amount = tx.amount || 0;
+            const status = tx.status || 'N/A';
+            const date = tx.date || 'N/A';
+            const method = tx.method || 'N/A';
+
+            const sign = amount < 0 ? '-' : '+';
+            const absAmount = Math.abs(amount);
+
+            stmtItemsBody.innerHTML = `
+                <div class="statement-item-row">
+                    <div>${escapeHtml(type)}</div>
+                    <div>${sign}ZMW ${absAmount.toFixed(2)}</div>
+                    <div>${escapeHtml(status.charAt(0).toUpperCase() + status.slice(1))}</div>
+                    <div>${escapeHtml(date)}</div>
+                </div>
+            `;
+
+            stmtTotalDisplay.textContent = `ZMW ${amount.toFixed(2)}`;
+            stmtMethod.textContent = method;
+            stmtNetDisplay.textContent = `ZMW ${amount.toFixed(2)}`;
+            stmtSignName.textContent = 'Jubel Mobela';
+
+            statementModal.classList.add('open');
+        }
+
+        function closeStatementModal() {
+            statementModal.classList.remove('open');
+        }
+
+        function downloadStatement() {
+            const stmtEl = document.getElementById('statementContainer');
+            downloadStatementBtn.disabled = true;
+            downloadStatementBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generating...`;
+
+            html2canvas(stmtEl, {
+                scale: 2,
+                backgroundColor: '#ffffff',
+                useCORS: true,
+                allowTaint: true,
+                logging: false,
+            }).then(canvas => {
+                const link = document.createElement('a');
+                const ref = stmtRef.textContent.trim();
+                link.download = `Statement_${ref}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                downloadStatementBtn.disabled = false;
+                downloadStatementBtn.innerHTML = `<i class="fa-solid fa-download"></i> Download Statement`;
+                showToast('Statement downloaded successfully!', 'success');
+            }).catch(err => {
+                console.error('Error generating statement:', err);
+                showToast('Failed to generate statement image.', 'error');
+                downloadStatementBtn.disabled = false;
+                downloadStatementBtn.innerHTML = `<i class="fa-solid fa-download"></i> Download Statement`;
             });
         }
 
@@ -8256,7 +8661,6 @@
             }
         });
 
-        // Send Money Page events
         sendMoneyBtn.addEventListener('click', openSendMoneyPage);
         sendMoneyPageClose.addEventListener('click', closeSendMoneyPage);
         sendMoneyPage.addEventListener('click', function(e) {
@@ -8317,6 +8721,12 @@
         });
         downloadReceiptBtn.addEventListener('click', downloadReceipt);
 
+        closeStatementBtn.addEventListener('click', closeStatementModal);
+        statementModal.addEventListener('click', function(e) {
+            if (e.target === this) closeStatementModal();
+        });
+        downloadStatementBtn.addEventListener('click', downloadStatement);
+
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
@@ -8335,7 +8745,6 @@
                         return;
                     }
                     currentUserData = data || {};
-                    // Load shownPopups from Firebase
                     const shownRef = ref(db, `users/${currentUserId}/shownPopups`);
                     get(shownRef).then((snapshot) => {
                         const stored = snapshot.val() || {};
@@ -8365,16 +8774,13 @@
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
         console.log('✅ Customer code updated with all requested features:');
-        console.log('  • Pop-ups appear immediately on any page (global check)');
-        console.log('  • Added "View Screenshot" button in order and application dropdowns');
-        console.log('  • One-time application status popup (approved ✓ / rejected ✗) with logo, user details, and button');
-        console.log('  • One-time order complete popup with remaining 50% amount');
-        console.log('  • One-time withdrawal status popup (approved/rejected) with details');
-        console.log('  • One-time referral money received popup with amount');
-        console.log('  • NEW: Money Received from Send Money popup (with sender name and amount)');
-        console.log('  • All pop-ups persist across devices (stored in Firebase)');
-        console.log('  • Logout button is now a rectangle (not triangle)');
-        console.log('  • Flyer edges are more rounded (border-radius increased)');
+        console.log('  • Flyers fill 1200×675 without cropping (object-fit: contain)');
+        console.log('  • Notification bell sound plays on every popup');
+        console.log('  • "View Statement" + "Download Statement" for withdrawals & send-money transactions');
+        console.log('  • Statement uses the same receipt-style design');
+        console.log('  • All popups persist across devices (Firebase)');
+        console.log('  • Logout button is a rectangle (not triangle)');
+        console.log('  • Flyer edges are extra rounded (border-radius: 40px)');
     </script>
 </body>
 </html>
