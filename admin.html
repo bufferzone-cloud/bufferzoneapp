@@ -4015,57 +4015,74 @@
             border-color: #bbb;
         }
 
-        /* ── NEW: Notifications page styles ── */
+        /* ── NEW: Enhanced notifications page styles ── */
         #page-notifications .notif-preview {
-            background: #f8f9fc;
-            border-radius: 12px;
-            padding: 16px;
+            background: linear-gradient(135deg, #f8f9fc 0%, #ffffff 100%);
+            border-radius: 16px;
+            padding: 16px 20px;
             margin: 12px 0;
-            border: 1px solid #eee;
+            border: 1px solid #e8e8e8;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            transition: box-shadow 0.2s;
+        }
+        #page-notifications .notif-preview:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
         }
         #page-notifications .notif-preview img {
-            width: 48px;
-            height: 48px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             object-fit: cover;
+            border: 2px solid #f5b83d;
+            box-shadow: 0 4px 12px rgba(245, 184, 61, 0.2);
         }
         #page-notifications .notif-preview .content {
             flex: 1;
         }
         #page-notifications .notif-preview .content .title {
             font-weight: 700;
-            font-size: 14px;
+            font-size: 15px;
             color: #1c2128;
+            margin-bottom: 2px;
         }
         #page-notifications .notif-preview .content .body {
             font-size: 12px;
-            color: #555;
-            margin-top: 2px;
-            line-height: 1.4;
+            color: #444;
+            line-height: 1.5;
         }
         #page-notifications .notif-preview .content .body b {
             color: #1c2128;
+            font-weight: 700;
         }
+
         #page-notifications .form-group .hint {
             font-size: 9px;
-            color: #aaa;
+            color: #888;
             margin-top: 2px;
+            background: #f8f9fc;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
         }
+
         #page-notifications .send-progress {
             display: none;
             text-align: center;
             padding: 20px;
+            background: #f8f9fc;
+            border-radius: 12px;
+            margin-top: 16px;
         }
         #page-notifications .send-progress .spinner {
-            border: 3px solid #f0f0f0;
+            border: 3px solid #e0e0e0;
             border-top: 3px solid #f5b83d;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
+            width: 36px;
+            height: 36px;
+            animation: spin 0.8s linear infinite;
             margin: 0 auto;
         }
         @keyframes spin {
@@ -4073,9 +4090,106 @@
             100% { transform: rotate(360deg); }
         }
         #page-notifications .send-progress p {
-            margin-top: 8px;
-            font-size: 11px;
+            margin-top: 10px;
+            font-size: 12px;
             color: #555;
+            font-weight: 500;
+        }
+
+        /* ── Admin popup modal ── */
+        .admin-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            animation: fadeIn 0.3s ease;
+        }
+        .admin-popup-overlay.open {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .admin-popup-modal {
+            background: #ffffff;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 420px;
+            padding: 24px 22px 18px 22px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
+            animation: modalIn 0.3s ease;
+            position: relative;
+            border: 1px solid #f0f0f0;
+        }
+        .admin-popup-modal .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .admin-popup-modal .close-btn:hover {
+            color: #1c2128;
+        }
+        .admin-popup-modal .popup-icon {
+            font-size: 48px;
+            margin-bottom: 8px;
+            display: block;
+            text-align: center;
+        }
+        .admin-popup-modal .popup-icon .fa-circle-check {
+            color: #16a34a;
+        }
+        .admin-popup-modal .popup-icon .fa-circle-exclamation {
+            color: #f59e0b;
+        }
+        .admin-popup-modal .popup-icon .fa-bell {
+            color: #f5b83d;
+        }
+        .admin-popup-modal h3 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1c2128;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .admin-popup-modal p {
+            font-size: 13px;
+            color: #555;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+        .admin-popup-modal .popup-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+        .admin-popup-modal .popup-actions .btn {
+            padding: 8px 20px;
+            font-size: 11px;
+            border-radius: 24px;
+        }
+        .admin-popup-modal .popup-actions .btn-primary {
+            background: #1c2128;
+            color: #fff;
+        }
+        .admin-popup-modal .popup-actions .btn-secondary {
+            background: #f0f0f0;
+            color: #1c2128;
         }
     </style>
 </head>
@@ -5198,6 +5312,20 @@
         </div>
     </div>
 
+    <!-- ===== ADMIN POPUP MODAL ===== -->
+    <div class="admin-popup-overlay" id="adminPopup">
+        <div class="admin-popup-modal">
+            <button class="close-btn" id="adminPopupClose"><i class="fa-solid fa-times"></i></button>
+            <span class="popup-icon" id="adminPopupIcon"><i class="fa-solid fa-bell"></i></span>
+            <h3 id="adminPopupTitle">New Event</h3>
+            <p id="adminPopupMessage">You have a new item to review.</p>
+            <div class="popup-actions">
+                <button class="btn btn-primary" id="adminPopupActionBtn">View</button>
+                <button class="btn btn-secondary" id="adminPopupDismissBtn">Dismiss</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
@@ -5256,6 +5384,14 @@
         let applicationsFilter = 'pending';
         let currentJobPositions = []; // holds job positions in the modal
         let editingPromoKey = null; // for promo-upload page
+
+        // ── Admin popup tracking ──
+        let adminShownPopups = {
+            orders: {},
+            applications: {},
+            withdrawals: {},
+            customers: {}
+        };
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -5499,7 +5635,7 @@
         const customerWalletListPage = document.getElementById('customerWalletListPage');
         const customerWalletSearch = document.getElementById('customerWalletSearch');
 
-        // ─── NEW: Notifications DOM ───
+        // ─── NOTIFICATIONS DOM ───
         const notifForm = document.getElementById('notificationForm');
         const notifRecipient = document.getElementById('notifRecipient');
         const notifUserSelectGroup = document.getElementById('notifUserSelectGroup');
@@ -5514,6 +5650,15 @@
         const notifPreviewIcon = document.getElementById('notifPreviewIcon');
         const notifPreviewTitle = document.getElementById('notifPreviewTitle');
         const notifPreviewBody = document.getElementById('notifPreviewBody');
+
+        // ─── ADMIN POPUP DOM ───
+        const adminPopup = document.getElementById('adminPopup');
+        const adminPopupClose = document.getElementById('adminPopupClose');
+        const adminPopupIcon = document.getElementById('adminPopupIcon');
+        const adminPopupTitle = document.getElementById('adminPopupTitle');
+        const adminPopupMessage = document.getElementById('adminPopupMessage');
+        const adminPopupActionBtn = document.getElementById('adminPopupActionBtn');
+        const adminPopupDismissBtn = document.getElementById('adminPopupDismissBtn');
 
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
@@ -5756,6 +5901,9 @@
 
             // ── Update badges ──
             updateBadges();
+
+            // ── Check for admin popups ──
+            checkAdminPopups();
         }
 
         function renderDashboard() {
@@ -9890,7 +10038,166 @@
             }
         });
 
-        console.log('✅ Admin Dashboard — Hash routing enabled. Notifications page included.');
+        // ───────────────────────────────────────────────────────────────────
+        // ADMIN POPUP SYSTEM – ONE‑TIME NOTIFICATIONS
+        // ───────────────────────────────────────────────────────────────────
+
+        function checkAdminPopups() {
+            if (!currentUserId || !allData) return;
+
+            // Load already shown popups from admin's record
+            const adminPopupRef = ref(db, `admins/${currentUserId}/adminPopups`);
+            get(adminPopupRef).then((snapshot) => {
+                const stored = snapshot.val() || {};
+                adminShownPopups = {
+                    orders: stored.orders || {},
+                    applications: stored.applications || {},
+                    withdrawals: stored.withdrawals || {},
+                    customers: stored.customers || {}
+                };
+
+                // Check for new orders
+                const orders = allData.orders || {};
+                for (const [key, order] of Object.entries(orders)) {
+                    if (!adminShownPopups.orders[key]) {
+                        // If order is not shown, and created within last 24h? Actually just show all unseen.
+                        showAdminPopup('order', key, order);
+                        return;
+                    }
+                }
+
+                // Check for new applications
+                const apps = allData.applications || {};
+                for (const [key, app] of Object.entries(apps)) {
+                    if (!adminShownPopups.applications[key]) {
+                        showAdminPopup('application', key, app);
+                        return;
+                    }
+                }
+
+                // Check for new withdrawals
+                const withdrawals = allData.withdrawalRequests || {};
+                for (const [key, wd] of Object.entries(withdrawals)) {
+                    if (!adminShownPopups.withdrawals[key]) {
+                        showAdminPopup('withdrawal', key, wd);
+                        return;
+                    }
+                }
+
+                // Check for new customers (users) - only those with role 'customer'
+                const users = allData.users || {};
+                // Sort by newest first
+                const sortedUsers = Object.entries(users).filter(([uid, u]) => u.role === 'customer' || !u.role)
+                    .sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+                for (const [uid, u] of sortedUsers) {
+                    if (!adminShownPopups.customers[uid]) {
+                        showAdminPopup('customer', uid, u);
+                        return;
+                    }
+                }
+            }).catch((error) => {
+                console.error('Error loading admin popups:', error);
+            });
+        }
+
+        function showAdminPopup(type, key, data) {
+            let title = '',
+                message = '',
+                iconClass = 'fa-bell',
+                actionPage = 'orders';
+
+            const users = allData.users || {};
+
+            switch (type) {
+                case 'order':
+                    const order = data;
+                    const custName = order.customer || 'Unknown';
+                    title = '🛒 New Order Placed';
+                    message = `Order #${order.id} from ${custName} for "${order.service}" — ZMW ${(order.amount || 0).toFixed(2)}`;
+                    iconClass = 'fa-circle-check';
+                    actionPage = 'orders';
+                    break;
+                case 'application':
+                    const app = data;
+                    const user = users[app.userId] || {};
+                    const userName = app.formData?.name || `${user.firstName || ''} ${user.lastName || ''}`.trim() ||
+                    'Unknown';
+                    const formTypeLabels = {
+                        ambassador: 'Ambassador',
+                        investor: 'Investor',
+                        prize: 'Prize',
+                        job: 'Job',
+                        referrer: 'Referrer'
+                    };
+                    const formLabel = formTypeLabels[app.formType] || app.formType || 'Unknown';
+                    title = '📋 New Application';
+                    message = `${userName} applied as ${formLabel} for "${app.flyerTitle || 'Untitled Flyer'}"`;
+                    iconClass = 'fa-circle-exclamation';
+                    actionPage = 'applications';
+                    break;
+                case 'withdrawal':
+                    const wd = data;
+                    const wdUser = users[wd.userId] || {};
+                    const wdName = `${wdUser.firstName || ''} ${wdUser.lastName || ''}`.trim() || 'Unknown';
+                    title = '💰 New Withdrawal Request';
+                    message =
+                    `${wdName} requested ZMW ${(wd.amount || 0).toFixed(2)} via ${wd.phone || 'N/A'} (referral: ${wdUser.referralCode || '—'})`;
+                    iconClass = 'fa-circle-exclamation';
+                    actionPage = 'payables';
+                    break;
+                case 'customer':
+                    const u = data;
+                    const fullName = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
+                    title = '🎉 New Customer Registered';
+                    message = `${fullName} (${u.email || 'No email'}) joined Buffer Zone. Referral code: ${u.referralCode || '—'}`;
+                    iconClass = 'fa-bell';
+                    actionPage = 'users';
+                    break;
+            }
+
+            // Set popup content
+            adminPopupIcon.innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
+            adminPopupTitle.textContent = title;
+            adminPopupMessage.textContent = message;
+            adminPopupActionBtn.dataset.actionPage = actionPage;
+
+            // Show popup
+            adminPopup.classList.add('open');
+
+            // Mark as shown
+            adminShownPopups[type + 's'][key] = true;
+            // Persist to Firebase
+            const adminPopupRef = ref(db, `admins/${currentUserId}/adminPopups`);
+            set(adminPopupRef, adminShownPopups);
+        }
+
+        // Admin popup button handlers
+        adminPopupClose.addEventListener('click', function() {
+            adminPopup.classList.remove('open');
+        });
+
+        adminPopupDismissBtn.addEventListener('click', function() {
+            adminPopup.classList.remove('open');
+        });
+
+        adminPopupActionBtn.addEventListener('click', function() {
+            const page = this.dataset.actionPage || 'orders';
+            adminPopup.classList.remove('open');
+            showPage(page);
+        });
+
+        adminPopup.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('open');
+            }
+        });
+
+        // ───────────────────────────────────────────────────────────────────
+        // FINAL LOG
+        // ───────────────────────────────────────────────────────────────────
+
+        console.log('✅ Admin Dashboard — Hash routing enabled. Notifications page included with enhanced styling.');
+        console.log('✅ One-time admin popups implemented for: orders, applications, withdrawals, new customers.');
         console.log('🔔 To send notifications, deploy the Cloud Function (see separate file).');
     </script>
 </body>
