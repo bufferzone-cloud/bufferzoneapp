@@ -4015,181 +4015,290 @@
             border-color: #bbb;
         }
 
-        /* ── NEW: Enhanced notifications page styles ── */
+        /* ── NEW: Notifications page styles (enhanced) ── */
         #page-notifications .notif-preview {
-            background: linear-gradient(135deg, #f8f9fc 0%, #ffffff 100%);
-            border-radius: 16px;
-            padding: 16px 20px;
+            background: #f8f9fc;
+            border-radius: 12px;
+            padding: 16px;
             margin: 12px 0;
-            border: 1px solid #e8e8e8;
+            border: 1px solid #eee;
             display: flex;
             align-items: center;
-            gap: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-            transition: box-shadow 0.2s;
+            gap: 12px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
         #page-notifications .notif-preview:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         }
         #page-notifications .notif-preview img {
-            width: 56px;
-            height: 56px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #f5b83d;
-            box-shadow: 0 4px 12px rgba(245, 184, 61, 0.2);
+            border: 2px solid #f0f0f0;
+            background: #fff;
         }
         #page-notifications .notif-preview .content {
             flex: 1;
         }
         #page-notifications .notif-preview .content .title {
             font-weight: 700;
-            font-size: 15px;
+            font-size: 14px;
             color: #1c2128;
             margin-bottom: 2px;
         }
         #page-notifications .notif-preview .content .body {
             font-size: 12px;
-            color: #444;
+            color: #555;
+            margin-top: 2px;
             line-height: 1.5;
         }
         #page-notifications .notif-preview .content .body b {
             color: #1c2128;
-            font-weight: 700;
         }
-
         #page-notifications .form-group .hint {
             font-size: 9px;
-            color: #888;
+            color: #aaa;
             margin-top: 2px;
+            padding: 2px 8px;
             background: #f8f9fc;
-            padding: 4px 10px;
             border-radius: 6px;
             display: inline-block;
         }
-
         #page-notifications .send-progress {
             display: none;
             text-align: center;
             padding: 20px;
             background: #f8f9fc;
             border-radius: 12px;
-            margin-top: 16px;
+            margin-top: 12px;
+            border: 1px solid #f0f0f0;
         }
         #page-notifications .send-progress .spinner {
-            border: 3px solid #e0e0e0;
+            border: 3px solid #e8e8e8;
             border-top: 3px solid #f5b83d;
             border-radius: 50%;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             animation: spin 0.8s linear infinite;
             margin: 0 auto;
         }
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
         #page-notifications .send-progress p {
-            margin-top: 10px;
-            font-size: 12px;
+            margin-top: 8px;
+            font-size: 11px;
             color: #555;
             font-weight: 500;
         }
 
-        /* ── Admin popup modal ── */
-        .admin-popup-overlay {
+        /* ── NEW: One-Time Pop-up Overlay ── */
+        .popup-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.55);
             backdrop-filter: blur(6px);
             z-index: 9999;
             display: none;
             align-items: center;
             justify-content: center;
             padding: 16px;
-            animation: fadeIn 0.3s ease;
         }
-        .admin-popup-overlay.open {
+        .popup-overlay.open {
             display: flex;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        .admin-popup-modal {
+
+        .popup-modal {
             background: #ffffff;
-            border-radius: 24px;
+            border-radius: 20px;
             width: 100%;
             max-width: 420px;
-            padding: 24px 22px 18px 22px;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 28px 24px 20px 24px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
             animation: modalIn 0.3s ease;
             position: relative;
-            border: 1px solid #f0f0f0;
         }
-        .admin-popup-modal .close-btn {
+
+        .popup-modal .popup-close-btn {
             position: absolute;
             top: 12px;
             right: 16px;
             background: none;
             border: none;
             font-size: 18px;
-            color: #999;
+            color: #aaa;
             cursor: pointer;
-            transition: color 0.2s;
+            padding: 4px;
+            transition: color 0.2s, transform 0.2s;
         }
-        .admin-popup-modal .close-btn:hover {
+        .popup-modal .popup-close-btn:hover {
+            color: #1c2128;
+            transform: rotate(90deg);
+        }
+
+        .popup-modal .popup-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .popup-modal .popup-header .popup-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f5b83d;
+            color: #1c2128;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .popup-modal .popup-header h3 {
+            font-size: 17px;
+            font-weight: 700;
             color: #1c2128;
         }
-        .admin-popup-modal .popup-icon {
-            font-size: 48px;
-            margin-bottom: 8px;
-            display: block;
-            text-align: center;
+        .popup-modal .popup-header .popup-time {
+            font-size: 10px;
+            color: #aaa;
+            margin-left: auto;
         }
-        .admin-popup-modal .popup-icon .fa-circle-check {
-            color: #16a34a;
+
+        .popup-modal .popup-body {
+            margin-bottom: 18px;
         }
-        .admin-popup-modal .popup-icon .fa-circle-exclamation {
-            color: #f59e0b;
+
+        .popup-modal .popup-customer {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f8f9fc;
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 14px;
+            border: 1px solid #f0f0f0;
         }
-        .admin-popup-modal .popup-icon .fa-bell {
+        .popup-modal .popup-customer .popup-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #1c2128;
+            color: #f5b83d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .popup-modal .popup-customer .popup-customer-info {
+            flex: 1;
+        }
+        .popup-modal .popup-customer .popup-customer-info .popup-customer-name {
+            font-weight: 600;
+            font-size: 13px;
+            color: #1c2128;
+        }
+        .popup-modal .popup-customer .popup-customer-info .popup-customer-email {
+            font-size: 10px;
+            color: #888;
+        }
+
+        .popup-modal .popup-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .popup-modal .popup-details .popup-detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 12px;
+            border-bottom: 1px solid #f8f8f8;
+        }
+        .popup-modal .popup-details .popup-detail-row:last-child {
+            border-bottom: none;
+        }
+        .popup-modal .popup-details .popup-detail-row .popup-detail-label {
+            color: #888;
+            font-weight: 400;
+        }
+        .popup-modal .popup-details .popup-detail-row .popup-detail-value {
+            font-weight: 600;
+            color: #1c2128;
+        }
+        .popup-modal .popup-details .popup-detail-row .popup-detail-value.highlight {
             color: #f5b83d;
         }
-        .admin-popup-modal h3 {
-            font-size: 20px;
-            font-weight: 800;
-            color: #1c2128;
-            text-align: center;
-            margin-bottom: 4px;
-        }
-        .admin-popup-modal p {
-            font-size: 13px;
-            color: #555;
-            text-align: center;
-            line-height: 1.6;
-            margin-bottom: 14px;
-        }
-        .admin-popup-modal .popup-actions {
+
+        .popup-modal .popup-actions {
             display: flex;
-            gap: 8px;
-            justify-content: center;
+            gap: 10px;
+            margin-top: 6px;
         }
-        .admin-popup-modal .popup-actions .btn {
-            padding: 8px 20px;
-            font-size: 11px;
-            border-radius: 24px;
+        .popup-modal .popup-actions button {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        .admin-popup-modal .popup-actions .btn-primary {
+        .popup-modal .popup-actions .popup-btn-dismiss {
+            background: #f0f0f0;
+            color: #555;
+        }
+        .popup-modal .popup-actions .popup-btn-dismiss:hover {
+            background: #e0e0e0;
+        }
+        .popup-modal .popup-actions .popup-btn-dismiss:active {
+            transform: scale(0.95);
+        }
+        .popup-modal .popup-actions .popup-btn-view {
             background: #1c2128;
             color: #fff;
+            box-shadow: 0 4px 12px rgba(28, 33, 40, 0.2);
         }
-        .admin-popup-modal .popup-actions .btn-secondary {
-            background: #f0f0f0;
-            color: #1c2128;
+        .popup-modal .popup-actions .popup-btn-view:hover {
+            background: #2a2a2a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(28, 33, 40, 0.3);
+        }
+        .popup-modal .popup-actions .popup-btn-view:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 480px) {
+            .popup-modal {
+                padding: 20px 16px 16px 16px;
+            }
+            .popup-modal .popup-header h3 {
+                font-size: 15px;
+            }
+            .popup-modal .popup-details .popup-detail-row {
+                font-size: 11px;
+            }
+            .popup-modal .popup-actions button {
+                font-size: 11px;
+                padding: 8px 12px;
+            }
         }
     </style>
 </head>
@@ -4264,7 +4373,6 @@
                     <button class="quick-action-btn" id="viewOrdersQuick"><i class="fa-solid fa-truck"></i> Orders</button>
                     <button class="quick-action-btn" id="viewUsersQuick"><i class="fa-solid fa-users"></i> Users</button>
                     <button class="quick-action-btn" id="viewPromoPicsQuick"><i class="fa-regular fa-images"></i> Promo Pics</button>
-                    <!-- NEW: Notifications button -->
                     <button class="quick-action-btn" id="viewNotificationsQuick"><i class="fa-solid fa-bell"></i> Notifications</button>
                 </div>
 
@@ -5312,22 +5420,36 @@
         </div>
     </div>
 
-    <!-- ===== ADMIN POPUP MODAL ===== -->
-    <div class="admin-popup-overlay" id="adminPopup">
-        <div class="admin-popup-modal">
-            <button class="close-btn" id="adminPopupClose"><i class="fa-solid fa-times"></i></button>
-            <span class="popup-icon" id="adminPopupIcon"><i class="fa-solid fa-bell"></i></span>
-            <h3 id="adminPopupTitle">New Event</h3>
-            <p id="adminPopupMessage">You have a new item to review.</p>
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
+
+    <!-- ===== ONE‑TIME POP‑UP OVERLAY ===== -->
+    <div class="popup-overlay" id="newItemPopup">
+        <div class="popup-modal">
+            <button class="popup-close-btn" id="popupCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <div class="popup-header">
+                <div class="popup-icon"><i class="fa-solid fa-bell"></i></div>
+                <h3 id="popupTitle">New Notification</h3>
+                <span class="popup-time" id="popupTime">Just now</span>
+            </div>
+            <div class="popup-body">
+                <div class="popup-customer">
+                    <div class="popup-avatar" id="popupAvatar">U</div>
+                    <div class="popup-customer-info">
+                        <div class="popup-customer-name" id="popupCustomerName">Customer Name</div>
+                        <div class="popup-customer-email" id="popupCustomerEmail">customer@email.com</div>
+                    </div>
+                </div>
+                <div class="popup-details" id="popupDetails">
+                    <!-- populated by JS -->
+                </div>
+            </div>
             <div class="popup-actions">
-                <button class="btn btn-primary" id="adminPopupActionBtn">View</button>
-                <button class="btn btn-secondary" id="adminPopupDismissBtn">Dismiss</button>
+                <button class="popup-btn-dismiss" id="popupDismissBtn">Dismiss</button>
+                <button class="popup-btn-view" id="popupViewBtn"><i class="fa-solid fa-arrow-right"></i> View Details</button>
             </div>
         </div>
     </div>
-
-    <!-- ===== TOAST ===== -->
-    <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
     <script type="module">
         // ───────────────────────────────────────────────────────────────────
@@ -5385,13 +5507,10 @@
         let currentJobPositions = []; // holds job positions in the modal
         let editingPromoKey = null; // for promo-upload page
 
-        // ── Admin popup tracking ──
-        let adminShownPopups = {
-            orders: {},
-            applications: {},
-            withdrawals: {},
-            customers: {}
-        };
+        // ── Pop-up queue ──
+        let popupQueue = [];
+        let isPopupShowing = false;
+        let currentPopupItem = null;
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -5635,7 +5754,7 @@
         const customerWalletListPage = document.getElementById('customerWalletListPage');
         const customerWalletSearch = document.getElementById('customerWalletSearch');
 
-        // ─── NOTIFICATIONS DOM ───
+        // ─── NEW: Notifications DOM ───
         const notifForm = document.getElementById('notificationForm');
         const notifRecipient = document.getElementById('notifRecipient');
         const notifUserSelectGroup = document.getElementById('notifUserSelectGroup');
@@ -5651,14 +5770,17 @@
         const notifPreviewTitle = document.getElementById('notifPreviewTitle');
         const notifPreviewBody = document.getElementById('notifPreviewBody');
 
-        // ─── ADMIN POPUP DOM ───
-        const adminPopup = document.getElementById('adminPopup');
-        const adminPopupClose = document.getElementById('adminPopupClose');
-        const adminPopupIcon = document.getElementById('adminPopupIcon');
-        const adminPopupTitle = document.getElementById('adminPopupTitle');
-        const adminPopupMessage = document.getElementById('adminPopupMessage');
-        const adminPopupActionBtn = document.getElementById('adminPopupActionBtn');
-        const adminPopupDismissBtn = document.getElementById('adminPopupDismissBtn');
+        // ── Pop-up DOM ──
+        const popupOverlay = document.getElementById('newItemPopup');
+        const popupCloseBtn = document.getElementById('popupCloseBtn');
+        const popupTitle = document.getElementById('popupTitle');
+        const popupTime = document.getElementById('popupTime');
+        const popupAvatar = document.getElementById('popupAvatar');
+        const popupCustomerName = document.getElementById('popupCustomerName');
+        const popupCustomerEmail = document.getElementById('popupCustomerEmail');
+        const popupDetails = document.getElementById('popupDetails');
+        const popupDismissBtn = document.getElementById('popupDismissBtn');
+        const popupViewBtn = document.getElementById('popupViewBtn');
 
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
@@ -5703,7 +5825,8 @@
                             prize: { isFree: false, price: 20, mobileNumber: '', accountName: '' },
                             job: { isFree: true, price: 0, mobileNumber: '', accountName: '' },
                             referrer: { isFree: true, price: 0, mobileNumber: '', accountName: '' }
-                        }
+                        },
+                        shownPopups: { orders: {}, applications: {}, withdrawals: {} }
                     };
                     set(dbRef, allData).then(() => {
                         if (callback) callback(allData);
@@ -5746,6 +5869,10 @@
                             job: { isFree: true, price: 0, mobileNumber: '', accountName: '' },
                             referrer: { isFree: true, price: 0, mobileNumber: '', accountName: '' }
                         };
+                        saveData();
+                    }
+                    if (!allData.shownPopups) {
+                        allData.shownPopups = { orders: {}, applications: {}, withdrawals: {} };
                         saveData();
                     }
                     if (callback) callback(data);
@@ -5902,8 +6029,8 @@
             // ── Update badges ──
             updateBadges();
 
-            // ── Check for admin popups ──
-            checkAdminPopups();
+            // ── Check for new pop-ups ──
+            checkForNewPopups();
         }
 
         function renderDashboard() {
@@ -10039,165 +10166,278 @@
         });
 
         // ───────────────────────────────────────────────────────────────────
-        // ADMIN POPUP SYSTEM – ONE‑TIME NOTIFICATIONS
+        // ONE‑TIME POP‑UP SYSTEM
         // ───────────────────────────────────────────────────────────────────
 
-        function checkAdminPopups() {
-            if (!currentUserId || !allData) return;
+        function checkForNewPopups() {
+            if (!allData) return;
+            if (isPopupShowing) return;
 
-            // Load already shown popups from admin's record
-            const adminPopupRef = ref(db, `admins/${currentUserId}/adminPopups`);
-            get(adminPopupRef).then((snapshot) => {
-                const stored = snapshot.val() || {};
-                adminShownPopups = {
-                    orders: stored.orders || {},
-                    applications: stored.applications || {},
-                    withdrawals: stored.withdrawals || {},
-                    customers: stored.customers || {}
-                };
+            // Build queue of all unshown items
+            const queue = [];
 
-                // Check for new orders
-                const orders = allData.orders || {};
-                for (const [key, order] of Object.entries(orders)) {
-                    if (!adminShownPopups.orders[key]) {
-                        // If order is not shown, and created within last 24h? Actually just show all unseen.
-                        showAdminPopup('order', key, order);
-                        return;
-                    }
+            // Orders
+            const orders = Object.entries(allData.orders || {});
+            for (const [key, order] of orders) {
+                if (!allData.shownPopups?.orders?.[key]) {
+                    queue.push({ type: 'order', key, data: order });
                 }
-
-                // Check for new applications
-                const apps = allData.applications || {};
-                for (const [key, app] of Object.entries(apps)) {
-                    if (!adminShownPopups.applications[key]) {
-                        showAdminPopup('application', key, app);
-                        return;
-                    }
-                }
-
-                // Check for new withdrawals
-                const withdrawals = allData.withdrawalRequests || {};
-                for (const [key, wd] of Object.entries(withdrawals)) {
-                    if (!adminShownPopups.withdrawals[key]) {
-                        showAdminPopup('withdrawal', key, wd);
-                        return;
-                    }
-                }
-
-                // Check for new customers (users) - only those with role 'customer'
-                const users = allData.users || {};
-                // Sort by newest first
-                const sortedUsers = Object.entries(users).filter(([uid, u]) => u.role === 'customer' || !u.role)
-                    .sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
-                for (const [uid, u] of sortedUsers) {
-                    if (!adminShownPopups.customers[uid]) {
-                        showAdminPopup('customer', uid, u);
-                        return;
-                    }
-                }
-            }).catch((error) => {
-                console.error('Error loading admin popups:', error);
-            });
-        }
-
-        function showAdminPopup(type, key, data) {
-            let title = '',
-                message = '',
-                iconClass = 'fa-bell',
-                actionPage = 'orders';
-
-            const users = allData.users || {};
-
-            switch (type) {
-                case 'order':
-                    const order = data;
-                    const custName = order.customer || 'Unknown';
-                    title = '🛒 New Order Placed';
-                    message = `Order #${order.id} from ${custName} for "${order.service}" — ZMW ${(order.amount || 0).toFixed(2)}`;
-                    iconClass = 'fa-circle-check';
-                    actionPage = 'orders';
-                    break;
-                case 'application':
-                    const app = data;
-                    const user = users[app.userId] || {};
-                    const userName = app.formData?.name || `${user.firstName || ''} ${user.lastName || ''}`.trim() ||
-                    'Unknown';
-                    const formTypeLabels = {
-                        ambassador: 'Ambassador',
-                        investor: 'Investor',
-                        prize: 'Prize',
-                        job: 'Job',
-                        referrer: 'Referrer'
-                    };
-                    const formLabel = formTypeLabels[app.formType] || app.formType || 'Unknown';
-                    title = '📋 New Application';
-                    message = `${userName} applied as ${formLabel} for "${app.flyerTitle || 'Untitled Flyer'}"`;
-                    iconClass = 'fa-circle-exclamation';
-                    actionPage = 'applications';
-                    break;
-                case 'withdrawal':
-                    const wd = data;
-                    const wdUser = users[wd.userId] || {};
-                    const wdName = `${wdUser.firstName || ''} ${wdUser.lastName || ''}`.trim() || 'Unknown';
-                    title = '💰 New Withdrawal Request';
-                    message =
-                    `${wdName} requested ZMW ${(wd.amount || 0).toFixed(2)} via ${wd.phone || 'N/A'} (referral: ${wdUser.referralCode || '—'})`;
-                    iconClass = 'fa-circle-exclamation';
-                    actionPage = 'payables';
-                    break;
-                case 'customer':
-                    const u = data;
-                    const fullName = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
-                    title = '🎉 New Customer Registered';
-                    message = `${fullName} (${u.email || 'No email'}) joined Buffer Zone. Referral code: ${u.referralCode || '—'}`;
-                    iconClass = 'fa-bell';
-                    actionPage = 'users';
-                    break;
             }
 
-            // Set popup content
-            adminPopupIcon.innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
-            adminPopupTitle.textContent = title;
-            adminPopupMessage.textContent = message;
-            adminPopupActionBtn.dataset.actionPage = actionPage;
+            // Applications
+            const applications = Object.entries(allData.applications || {});
+            for (const [key, app] of applications) {
+                if (!allData.shownPopups?.applications?.[key]) {
+                    queue.push({ type: 'application', key, data: app });
+                }
+            }
 
-            // Show popup
-            adminPopup.classList.add('open');
+            // Withdrawals
+            const withdrawals = Object.entries(allData.withdrawalRequests || {});
+            for (const [key, withdrawal] of withdrawals) {
+                if (!allData.shownPopups?.withdrawals?.[key]) {
+                    queue.push({ type: 'withdrawal', key, data: withdrawal });
+                }
+            }
+
+            // Sort by creation time (most recent first)
+            queue.sort((a, b) => (b.data.createdAt || 0) - (a.data.createdAt || 0));
+
+            popupQueue = queue;
+
+            if (popupQueue.length > 0) {
+                showNextPopup();
+            }
+        }
+
+        function showNextPopup() {
+            if (popupQueue.length === 0 || isPopupShowing) return;
+            const item = popupQueue[0];
+            isPopupShowing = true;
+            currentPopupItem = item;
+            renderPopup(item);
+            popupOverlay.classList.add('open');
+        }
+
+        function renderPopup(item) {
+            const users = allData.users || {};
+            const user = users[item.data.userId] || {};
+
+            // Determine customer name and email
+            let customerName = 'Unknown';
+            let customerEmail = 'N/A';
+
+            if (item.type === 'order') {
+                customerName = item.data.customer || 'Unknown';
+                // Try to find user by email or name match
+                for (const [uid, u] of Object.entries(users)) {
+                    if (u.email && item.data.customer && item.data.customer.toLowerCase().includes(u.email.toLowerCase())) {
+                        customerName = `${u.firstName || ''} ${u.lastName || ''}`.trim() || u.email;
+                        customerEmail = u.email;
+                        break;
+                    }
+                }
+            } else if (item.type === 'application') {
+                const fd = item.data.formData || {};
+                customerName = fd.name || `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
+                customerEmail = fd.email || user.email || 'N/A';
+            } else if (item.type === 'withdrawal') {
+                customerName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
+                customerEmail = user.email || 'N/A';
+            }
+
+            // Avatar initial
+            const initial = (customerName || 'U').charAt(0).toUpperCase();
+            popupAvatar.textContent = initial;
+
+            // Customer info
+            popupCustomerName.textContent = customerName;
+            popupCustomerEmail.textContent = customerEmail;
+
+            // Time
+            const timeStr = item.data.createdAt ? new Date(item.data.createdAt).toLocaleString() : 'Just now';
+            popupTime.textContent = timeStr;
+
+            // Title
+            let title = 'New Notification';
+            if (item.type === 'order') title = '🛒 New Order';
+            else if (item.type === 'application') title = '📋 New Application';
+            else if (item.type === 'withdrawal') title = '💰 Withdrawal Request';
+            popupTitle.textContent = title;
+
+            // Details
+            let detailsHtml = '';
+            if (item.type === 'order') {
+                const order = item.data;
+                detailsHtml = `
+                            <div class="popup-detail-row">
+                                <span class="popup-detail-label">Order ID:</span>
+                                <span class="popup-detail-value">${order.id || 'N/A'}</span>
+                            </div>
+                            <div class="popup-detail-row">
+                                <span class="popup-detail-label">Service:</span>
+                                <span class="popup-detail-value">${order.service || 'N/A'}</span>
+                            </div>
+                            <div class="popup-detail-row">
+                                <span class="popup-detail-label">Amount:</span>
+                                <span class="popup-detail-value highlight">ZMW ${(order.amount || 0).toFixed(2)}</span>
+                            </div>
+                            <div class="popup-detail-row">
+                                <span class="popup-detail-label">Status:</span>
+                                <span class="popup-detail-value"><span class="status-badge ${order.status || 'pending'}">${order.status || 'pending'}</span></span>
+                            </div>
+                        `;
+            } else if (item.type === 'application') {
+                const app = item.data;
+                const formTypeLabel = {
+                    ambassador: 'Ambassador',
+                    investor: 'Investor',
+                    prize: 'Prize',
+                    job: 'Job',
+                    referrer: 'Referrer'
+                } [app.formType] || app.formType || 'Unknown';
+                const fd = app.formData || {};
+                detailsHtml = `
+                            <div class="popup-detail-row">
+                                <span class="popup-detail-label">Form Type:</span>
+                                <span class="popup-detail-value">${formTypeLabel}</span>
+                            </div>
+                            <div class="popup-detail-row">
+                                <span class="popup-detail-label">Flyer:</span>
+                                <span class="popup-detail-value">${allData.promoPics?.[app.flyerId]?.text || 'Untitled'}</span>
+                            </div>
+                            <div class="popup-detail-row">
+                                <span class="popup-detail-label">Payment:</span>
+                                <span class="popup-detail-value">${app.paymentData ? `ZMW ${app.paymentData.amount || 0}` : 'N/A'}</span>
+                            </div>
+                            <div class="popup-detail-row">
+                                <span class="popup-detail-label">Status:</span>
+                                <span class="popup-detail-value"><span class="status-badge ${app.status || 'pending'}">${app.status || 'pending'}</span></span>
+                            </div>
+                        `;
+            } else if (item.type === 'withdrawal') {
+                const w = item.data;
+                detailsHtml = `
+                            <div class="popup-detail-row">
+                                <span class="popup-detail-label">Amount:</span>
+                                <span class="popup-detail-value highlight">ZMW ${(w.amount || 0).toFixed(2)}</span>
+                            </div>
+                            <div class="popup-detail-row">
+                                <span class="popup-detail-label">Phone:</span>
+                                <span class="popup-detail-value">${w.phone || 'N/A'}</span>
+                            </div>
+                            <div class="popup-detail-row">
+                                <span class="popup-detail-label">Status:</span>
+                                <span class="popup-detail-value"><span class="status-badge ${w.status || 'pending'}">${w.status || 'pending'}</span></span>
+                            </div>
+                        `;
+            }
+            popupDetails.innerHTML = detailsHtml;
+
+            // Store the current item on the view button
+            popupViewBtn.dataset.type = item.type;
+            popupViewBtn.dataset.key = item.key;
+        }
+
+        function markAsShown(item) {
+            if (!allData.shownPopups) {
+                allData.shownPopups = { orders: {}, applications: {}, withdrawals: {} };
+            }
+            if (item.type === 'order') allData.shownPopups.orders[item.key] = true;
+            else if (item.type === 'application') allData.shownPopups.applications[item.key] = true;
+            else if (item.type === 'withdrawal') allData.shownPopups.withdrawals[item.key] = true;
+            return saveData();
+        }
+
+        function closePopupAndShowNext() {
+            popupOverlay.classList.remove('open');
+            isPopupShowing = false;
+            currentPopupItem = null;
+            // Remove the item from the queue
+            if (popupQueue.length > 0) {
+                popupQueue.shift();
+            }
+            // Check if there are more items
+            if (popupQueue.length > 0) {
+                setTimeout(() => {
+                    showNextPopup();
+                }, 400);
+            }
+        }
+
+        // ── Pop-up event bindings ──
+
+        popupCloseBtn.addEventListener('click', function() {
+            // Dismiss: close pop-up, remove from queue, don't mark as shown
+            if (currentPopupItem) {
+                // Remove from queue without marking
+                closePopupAndShowNext();
+            } else {
+                popupOverlay.classList.remove('open');
+                isPopupShowing = false;
+            }
+        });
+
+        popupDismissBtn.addEventListener('click', function() {
+            // Dismiss: close pop-up, remove from queue, don't mark as shown
+            if (currentPopupItem) {
+                closePopupAndShowNext();
+            } else {
+                popupOverlay.classList.remove('open');
+                isPopupShowing = false;
+            }
+        });
+
+        popupViewBtn.addEventListener('click', function() {
+            const type = this.dataset.type;
+            const key = this.dataset.key;
+            if (!type || !key || !currentPopupItem) {
+                popupOverlay.classList.remove('open');
+                isPopupShowing = false;
+                return;
+            }
 
             // Mark as shown
-            adminShownPopups[type + 's'][key] = true;
-            // Persist to Firebase
-            const adminPopupRef = ref(db, `admins/${currentUserId}/adminPopups`);
-            set(adminPopupRef, adminShownPopups);
-        }
+            markAsShown(currentPopupItem).then(() => {
+                // Navigate to the appropriate page
+                let page = '';
+                if (type === 'order') page = 'orders';
+                else if (type === 'application') page = 'applications';
+                else if (type === 'withdrawal') page = 'payables';
 
-        // Admin popup button handlers
-        adminPopupClose.addEventListener('click', function() {
-            adminPopup.classList.remove('open');
+                // Close pop-up
+                closePopupAndShowNext();
+
+                // Navigate
+                if (page) {
+                    showPage(page);
+                    showToast(`Viewing ${type} details`, 'success');
+                } else {
+                    showToast('Unknown item type', 'error');
+                }
+            }).catch((error) => {
+                showToast('Error marking item as shown', 'error');
+                console.error(error);
+            });
         });
 
-        adminPopupDismissBtn.addEventListener('click', function() {
-            adminPopup.classList.remove('open');
-        });
-
-        adminPopupActionBtn.addEventListener('click', function() {
-            const page = this.dataset.actionPage || 'orders';
-            adminPopup.classList.remove('open');
-            showPage(page);
-        });
-
-        adminPopup.addEventListener('click', function(e) {
+        // ── Overlay click to dismiss ──
+        popupOverlay.addEventListener('click', function(e) {
             if (e.target === this) {
-                this.classList.remove('open');
+                if (currentPopupItem) {
+                    closePopupAndShowNext();
+                } else {
+                    popupOverlay.classList.remove('open');
+                    isPopupShowing = false;
+                }
             }
         });
 
         // ───────────────────────────────────────────────────────────────────
-        // FINAL LOG
+        // INITIAL LOG
         // ───────────────────────────────────────────────────────────────────
 
-        console.log('✅ Admin Dashboard — Hash routing enabled. Notifications page included with enhanced styling.');
-        console.log('✅ One-time admin popups implemented for: orders, applications, withdrawals, new customers.');
+        console.log('✅ Admin Dashboard — Hash routing enabled. One‑time pop-ups active.');
         console.log('🔔 To send notifications, deploy the Cloud Function (see separate file).');
     </script>
 </body>
