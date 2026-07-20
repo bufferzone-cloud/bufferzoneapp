@@ -4015,291 +4015,293 @@
             border-color: #bbb;
         }
 
-        /* ── NEW: Notifications page styles (enhanced) ── */
+        /* ── NEW: Notifications page styles (improved) ── */
         #page-notifications .notif-preview {
             background: #f8f9fc;
-            border-radius: 12px;
-            padding: 16px;
-            margin: 12px 0;
-            border: 1px solid #eee;
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border: 1px solid #e5e7eb;
             display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            align-items: flex-start;
+            gap: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: box-shadow 0.2s;
         }
         #page-notifications .notif-preview:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
         }
         #page-notifications .notif-preview img {
             width: 48px;
             height: 48px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #f0f0f0;
-            background: #fff;
+            border: 2px solid #f5b83d;
         }
         #page-notifications .notif-preview .content {
             flex: 1;
         }
         #page-notifications .notif-preview .content .title {
             font-weight: 700;
-            font-size: 14px;
+            font-size: 15px;
             color: #1c2128;
             margin-bottom: 2px;
         }
         #page-notifications .notif-preview .content .body {
-            font-size: 12px;
-            color: #555;
+            font-size: 13px;
+            color: #4b5563;
             margin-top: 2px;
             line-height: 1.5;
         }
         #page-notifications .notif-preview .content .body b {
             color: #1c2128;
         }
+        #page-notifications .form-group {
+            margin-bottom: 16px;
+        }
+        #page-notifications .form-group label {
+            font-weight: 600;
+            font-size: 12px;
+            color: #374151;
+            display: block;
+            margin-bottom: 4px;
+        }
         #page-notifications .form-group .hint {
-            font-size: 9px;
-            color: #aaa;
-            margin-top: 2px;
-            padding: 2px 8px;
-            background: #f8f9fc;
-            border-radius: 6px;
-            display: inline-block;
+            font-size: 10px;
+            color: #9ca3af;
+            margin-top: 4px;
+        }
+        #page-notifications .form-group input,
+        #page-notifications .form-group select,
+        #page-notifications .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 13px;
+            background: #ffffff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        #page-notifications .form-group input:focus,
+        #page-notifications .form-group select:focus,
+        #page-notifications .form-group textarea:focus {
+            outline: none;
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(28,33,40,0.1);
+        }
+        #page-notifications .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
         }
         #page-notifications .send-progress {
             display: none;
             text-align: center;
-            padding: 20px;
-            background: #f8f9fc;
-            border-radius: 12px;
-            margin-top: 12px;
-            border: 1px solid #f0f0f0;
+            padding: 24px 0;
         }
         #page-notifications .send-progress .spinner {
-            border: 3px solid #e8e8e8;
+            border: 3px solid #e5e7eb;
             border-top: 3px solid #f5b83d;
             border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            animation: spin 0.8s linear infinite;
+            width: 36px;
+            height: 36px;
+            animation: spin 1s linear infinite;
             margin: 0 auto;
         }
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         #page-notifications .send-progress p {
-            margin-top: 8px;
-            font-size: 11px;
-            color: #555;
-            font-weight: 500;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+        #page-notifications #sendNotifBtn {
+            padding: 12px 28px;
+            font-size: 14px;
+            border-radius: 24px;
+            width: 100%;
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        #page-notifications #sendNotifBtn:hover {
+            background: #2a2a2a;
+            transform: translateY(-2px);
+        }
+        #page-notifications #sendNotifBtn:active {
+            transform: scale(0.96);
+        }
+        #page-notifications #sendNotifBtn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
-        /* ── NEW: One-Time Pop-up Overlay ── */
-        .popup-overlay {
+        /* ── NEW: One-time pop-up modal for new orders/apps/withdrawals ── */
+        #popupModalOverlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(6px);
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
             z-index: 9999;
             display: none;
             align-items: center;
             justify-content: center;
             padding: 16px;
         }
-        .popup-overlay.open {
+        #popupModalOverlay.open {
             display: flex;
         }
-
-        .popup-modal {
+        #popupModal {
             background: #ffffff;
-            border-radius: 20px;
+            border-radius: 24px;
             width: 100%;
             max-width: 420px;
             max-height: 90vh;
             overflow-y: auto;
-            padding: 28px 24px 20px 24px;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
-            animation: modalIn 0.3s ease;
+            padding: 24px 20px 20px 20px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+            animation: modalIn 0.35s ease;
             position: relative;
         }
-
-        .popup-modal .popup-close-btn {
-            position: absolute;
-            top: 12px;
-            right: 16px;
-            background: none;
-            border: none;
-            font-size: 18px;
-            color: #aaa;
-            cursor: pointer;
-            padding: 4px;
-            transition: color 0.2s, transform 0.2s;
-        }
-        .popup-modal .popup-close-btn:hover {
-            color: #1c2128;
-            transform: rotate(90deg);
-        }
-
-        .popup-modal .popup-header {
+        #popupModal .popup-header {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
+            margin-bottom: 14px;
             border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
         }
-        .popup-modal .popup-header .popup-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #f5b83d;
-            color: #1c2128;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        #popupModal .popup-header .popup-icon {
+            font-size: 28px;
+            color: #f5b83d;
+        }
+        #popupModal .popup-header h3 {
             font-size: 18px;
-            flex-shrink: 0;
-        }
-        .popup-modal .popup-header h3 {
-            font-size: 17px;
             font-weight: 700;
             color: #1c2128;
+            margin: 0;
         }
-        .popup-modal .popup-header .popup-time {
-            font-size: 10px;
-            color: #aaa;
-            margin-left: auto;
+        #popupModal .popup-body {
+            margin-bottom: 16px;
         }
-
-        .popup-modal .popup-body {
-            margin-bottom: 18px;
+        #popupModal .popup-body p {
+            font-size: 13px;
+            color: #4b5563;
+            margin: 6px 0;
+            line-height: 1.5;
         }
-
-        .popup-modal .popup-customer {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        #popupModal .popup-body p strong {
+            color: #1c2128;
+        }
+        #popupModal .popup-body .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 16px;
             background: #f8f9fc;
-            border-radius: 12px;
             padding: 12px 14px;
-            margin-bottom: 14px;
+            border-radius: 12px;
+            margin-top: 8px;
             border: 1px solid #f0f0f0;
         }
-        .popup-modal .popup-customer .popup-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #1c2128;
+        #popupModal .popup-body .detail-grid .detail-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            padding: 2px 0;
+        }
+        #popupModal .popup-body .detail-grid .detail-item .label {
+            color: #6b7280;
+        }
+        #popupModal .popup-body .detail-grid .detail-item .val {
+            font-weight: 600;
+            color: #1c2128;
+        }
+        #popupModal .popup-body .detail-grid .detail-item .val.highlight {
             color: #f5b83d;
+        }
+        #popupModal .popup-footer {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        #popupModal .popup-footer .btn {
+            flex: 1;
+            padding: 10px 16px;
+            font-size: 13px;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 16px;
-            flex-shrink: 0;
+            gap: 6px;
+            min-width: 80px;
         }
-        .popup-modal .popup-customer .popup-customer-info {
-            flex: 1;
-        }
-        .popup-modal .popup-customer .popup-customer-info .popup-customer-name {
-            font-weight: 600;
-            font-size: 13px;
-            color: #1c2128;
-        }
-        .popup-modal .popup-customer .popup-customer-info .popup-customer-email {
-            font-size: 10px;
-            color: #888;
-        }
-
-        .popup-modal .popup-details {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .popup-modal .popup-details .popup-detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 3px 0;
-            font-size: 12px;
-            border-bottom: 1px solid #f8f8f8;
-        }
-        .popup-modal .popup-details .popup-detail-row:last-child {
-            border-bottom: none;
-        }
-        .popup-modal .popup-details .popup-detail-row .popup-detail-label {
-            color: #888;
-            font-weight: 400;
-        }
-        .popup-modal .popup-details .popup-detail-row .popup-detail-value {
-            font-weight: 600;
-            color: #1c2128;
-        }
-        .popup-modal .popup-details .popup-detail-row .popup-detail-value.highlight {
-            color: #f5b83d;
-        }
-
-        .popup-modal .popup-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 6px;
-        }
-        .popup-modal .popup-actions button {
-            flex: 1;
-            padding: 10px 16px;
-            border-radius: 12px;
-            border: none;
-            font-weight: 600;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .popup-modal .popup-actions .popup-btn-dismiss {
-            background: #f0f0f0;
-            color: #555;
-        }
-        .popup-modal .popup-actions .popup-btn-dismiss:hover {
-            background: #e0e0e0;
-        }
-        .popup-modal .popup-actions .popup-btn-dismiss:active {
-            transform: scale(0.95);
-        }
-        .popup-modal .popup-actions .popup-btn-view {
+        #popupModal .popup-footer .btn-primary {
             background: #1c2128;
             color: #fff;
-            box-shadow: 0 4px 12px rgba(28, 33, 40, 0.2);
         }
-        .popup-modal .popup-actions .popup-btn-view:hover {
+        #popupModal .popup-footer .btn-primary:hover {
             background: #2a2a2a;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(28, 33, 40, 0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .popup-modal .popup-actions .popup-btn-view:active {
-            transform: scale(0.95);
+        #popupModal .popup-footer .btn-outline {
+            background: transparent;
+            color: #1c2128;
+            border: 1px solid #d1d5db;
+        }
+        #popupModal .popup-footer .btn-outline:hover {
+            border-color: #1c2128;
+            background: #f8f9fc;
+        }
+        #popupModal .popup-footer .btn:active {
+            transform: scale(0.96);
         }
 
-        @media (max-width: 480px) {
-            .popup-modal {
-                padding: 20px 16px 16px 16px;
+        /* Sound icon in popup header (optional) */
+        #popupModal .popup-header .sound-icon {
+            font-size: 16px;
+            color: #f5b83d;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive for popup */
+        @media (max-width: 500px) {
+            #popupModal {
+                padding: 18px 16px 16px 16px;
             }
-            .popup-modal .popup-header h3 {
-                font-size: 15px;
+            #popupModal .popup-body .detail-grid {
+                grid-template-columns: 1fr;
+                gap: 2px;
             }
-            .popup-modal .popup-details .popup-detail-row {
-                font-size: 11px;
-            }
-            .popup-modal .popup-actions button {
-                font-size: 11px;
+            #popupModal .popup-footer .btn {
+                font-size: 12px;
                 padding: 8px 12px;
             }
         }
+
+        /* ── END of new styles ── */
     </style>
 </head>
 <body>
@@ -4373,6 +4375,7 @@
                     <button class="quick-action-btn" id="viewOrdersQuick"><i class="fa-solid fa-truck"></i> Orders</button>
                     <button class="quick-action-btn" id="viewUsersQuick"><i class="fa-solid fa-users"></i> Users</button>
                     <button class="quick-action-btn" id="viewPromoPicsQuick"><i class="fa-regular fa-images"></i> Promo Pics</button>
+                    <!-- NEW: Notifications button -->
                     <button class="quick-action-btn" id="viewNotificationsQuick"><i class="fa-solid fa-bell"></i> Notifications</button>
                 </div>
 
@@ -4975,34 +4978,34 @@
                     <form id="notificationForm" style="max-width:800px; margin:0 auto;">
                         <div class="form-group">
                             <label>Recipient</label>
-                            <select id="notifRecipient" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:8px; font-size:12px;">
+                            <select id="notifRecipient" style="width:100%; padding:10px 14px; border:1px solid #d1d5db; border-radius:10px; font-size:13px; background:#fff;">
                                 <option value="all">All Users</option>
                                 <option value="specific">Specific User</option>
                             </select>
                         </div>
                         <div class="form-group" id="notifUserSelectGroup" style="display:none;">
                             <label>Select User</label>
-                            <select id="notifUserSelect" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:8px; font-size:12px;">
+                            <select id="notifUserSelect" style="width:100%; padding:10px 14px; border:1px solid #d1d5db; border-radius:10px; font-size:13px; background:#fff;">
                                 <option value="">— Select a user —</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Notification Title</label>
-                            <input type="text" id="notifTitle" placeholder="e.g. Special Offer!" required style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
+                            <input type="text" id="notifTitle" placeholder="e.g. Special Offer!" required style="width:100%; padding:10px 14px; border:1px solid #d1d5db; border-radius:10px; font-size:14px;" />
                         </div>
                         <div class="form-group">
                             <label>Message</label>
-                            <textarea id="notifBody" rows="3" placeholder="Write your message here. Words you want to show bold should be wrapped in ** like **this**." required style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px; resize:vertical;"></textarea>
+                            <textarea id="notifBody" rows="4" placeholder="Write your message here. Words you want to show bold should be wrapped in ** like **this**." required style="width:100%; padding:10px 14px; border:1px solid #d1d5db; border-radius:10px; font-size:14px; resize:vertical;"></textarea>
                             <div class="hint">Use **bold** to make words bold in the notification.</div>
                         </div>
                         <div class="form-group">
                             <label>Logo URL (optional)</label>
-                            <input type="url" id="notifIcon" placeholder="https://yourdomain.com/logo.png" style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
+                            <input type="url" id="notifIcon" placeholder="https://yourdomain.com/logo.png" style="width:100%; padding:10px 14px; border:1px solid #d1d5db; border-radius:10px; font-size:14px;" />
                             <div class="hint">Leave blank to use default buffer zone logo.</div>
                         </div>
                         <div class="form-group">
                             <label>Click URL (optional)</label>
-                            <input type="url" id="notifClickUrl" placeholder="https://yourdomain.com/promo" style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
+                            <input type="url" id="notifClickUrl" placeholder="https://yourdomain.com/promo" style="width:100%; padding:10px 14px; border:1px solid #d1d5db; border-radius:10px; font-size:14px;" />
                             <div class="hint">When user taps the notification, they will be taken to this URL.</div>
                         </div>
                         <button type="submit" class="btn btn-primary" id="sendNotifBtn" style="padding:12px 28px; font-size:14px; border-radius:24px; width:100%;"><i class="fa-solid fa-paper-plane"></i> Send Notification</button>
@@ -5423,33 +5426,31 @@
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
-    <!-- ===== ONE‑TIME POP‑UP OVERLAY ===== -->
-    <div class="popup-overlay" id="newItemPopup">
-        <div class="popup-modal">
-            <button class="popup-close-btn" id="popupCloseBtn"><i class="fa-solid fa-times"></i></button>
+    <!-- ===== NEW: One-time pop-up overlay ===== -->
+    <div id="popupModalOverlay">
+        <div id="popupModal">
             <div class="popup-header">
-                <div class="popup-icon"><i class="fa-solid fa-bell"></i></div>
-                <h3 id="popupTitle">New Notification</h3>
-                <span class="popup-time" id="popupTime">Just now</span>
+                <i class="fa-solid fa-bell popup-icon"></i>
+                <i class="fa-solid fa-volume-up sound-icon"></i>
+                <h3 id="popupTitle">New Event</h3>
             </div>
-            <div class="popup-body">
-                <div class="popup-customer">
-                    <div class="popup-avatar" id="popupAvatar">U</div>
-                    <div class="popup-customer-info">
-                        <div class="popup-customer-name" id="popupCustomerName">Customer Name</div>
-                        <div class="popup-customer-email" id="popupCustomerEmail">customer@email.com</div>
-                    </div>
-                </div>
-                <div class="popup-details" id="popupDetails">
-                    <!-- populated by JS -->
+            <div class="popup-body" id="popupBody">
+                <p id="popupDescription">You have a new item to review.</p>
+                <div class="detail-grid" id="popupDetails">
+                    <!-- rendered by JS -->
                 </div>
             </div>
-            <div class="popup-actions">
-                <button class="popup-btn-dismiss" id="popupDismissBtn">Dismiss</button>
-                <button class="popup-btn-view" id="popupViewBtn"><i class="fa-solid fa-arrow-right"></i> View Details</button>
+            <div class="popup-footer">
+                <button class="btn btn-primary" id="popupRedirectBtn"><i class="fa-solid fa-arrow-right"></i> Go to Page</button>
+                <button class="btn btn-outline" id="popupCloseBtn"><i class="fa-solid fa-times"></i> Close</button>
             </div>
         </div>
     </div>
+
+    <!-- ===== Audio for notification sound ===== -->
+    <audio id="notificationSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRlwAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVoAAACAgICAf39/gH9/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f4B/f3+Af39/gH9/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f38=" type="audio/wav" />
+    </audio>
 
     <script type="module">
         // ───────────────────────────────────────────────────────────────────
@@ -5507,10 +5508,10 @@
         let currentJobPositions = []; // holds job positions in the modal
         let editingPromoKey = null; // for promo-upload page
 
-        // ── Pop-up queue ──
-        let popupQueue = [];
+        // ── Pop-up state ──
+        let popupQueue = []; // queue of pop-up items (order, app, withdrawal)
         let isPopupShowing = false;
-        let currentPopupItem = null;
+        let shownPopups = { orders: {}, applications: {}, withdrawals: {} }; // track shown
 
         // ───────────────────────────────────────────────────────────────────
         // DOM REFS
@@ -5770,17 +5771,15 @@
         const notifPreviewTitle = document.getElementById('notifPreviewTitle');
         const notifPreviewBody = document.getElementById('notifPreviewBody');
 
-        // ── Pop-up DOM ──
-        const popupOverlay = document.getElementById('newItemPopup');
-        const popupCloseBtn = document.getElementById('popupCloseBtn');
+        // ─── NEW: Pop-up DOM ───
+        const popupOverlay = document.getElementById('popupModalOverlay');
+        const popupModalEl = document.getElementById('popupModal');
         const popupTitle = document.getElementById('popupTitle');
-        const popupTime = document.getElementById('popupTime');
-        const popupAvatar = document.getElementById('popupAvatar');
-        const popupCustomerName = document.getElementById('popupCustomerName');
-        const popupCustomerEmail = document.getElementById('popupCustomerEmail');
+        const popupDescription = document.getElementById('popupDescription');
         const popupDetails = document.getElementById('popupDetails');
-        const popupDismissBtn = document.getElementById('popupDismissBtn');
-        const popupViewBtn = document.getElementById('popupViewBtn');
+        const popupRedirectBtn = document.getElementById('popupRedirectBtn');
+        const popupCloseBtn = document.getElementById('popupCloseBtn');
+        const notificationSound = document.getElementById('notificationSound');
 
         // ───────────────────────────────────────────────────────────────────
         // DATA FUNCTIONS
@@ -5826,7 +5825,7 @@
                             job: { isFree: true, price: 0, mobileNumber: '', accountName: '' },
                             referrer: { isFree: true, price: 0, mobileNumber: '', accountName: '' }
                         },
-                        shownPopups: { orders: {}, applications: {}, withdrawals: {} }
+                        adminNotified: { orders: {}, applications: {}, withdrawals: {} }
                     };
                     set(dbRef, allData).then(() => {
                         if (callback) callback(allData);
@@ -5871,8 +5870,8 @@
                         };
                         saveData();
                     }
-                    if (!allData.shownPopups) {
-                        allData.shownPopups = { orders: {}, applications: {}, withdrawals: {} };
+                    if (!allData.adminNotified) {
+                        allData.adminNotified = { orders: {}, applications: {}, withdrawals: {} };
                         saveData();
                     }
                     if (callback) callback(data);
@@ -6029,7 +6028,7 @@
             // ── Update badges ──
             updateBadges();
 
-            // ── Check for new pop-ups ──
+            // ── Check for pop-ups ──
             checkForNewPopups();
         }
 
@@ -10008,6 +10007,9 @@
                             // Ensure the page shown matches the hash
                             handleHashChange();
                         }
+
+                        // Pop-up queue check after initial load
+                        checkForNewPopups();
                     });
                 });
             } else {
@@ -10166,279 +10168,236 @@
         });
 
         // ───────────────────────────────────────────────────────────────────
-        // ONE‑TIME POP‑UP SYSTEM
+        // ONE-TIME POP-UP LOGIC FOR NEW ORDERS, APPLICATIONS, WITHDRAWALS
         // ───────────────────────────────────────────────────────────────────
 
+        // Initialize shownPopups from allData.adminNotified
+        function loadShownPopups() {
+            if (allData.adminNotified) {
+                shownPopups.orders = allData.adminNotified.orders || {};
+                shownPopups.applications = allData.adminNotified.applications || {};
+                shownPopups.withdrawals = allData.adminNotified.withdrawals || {};
+            } else {
+                shownPopups = { orders: {}, applications: {}, withdrawals: {} };
+            }
+        }
+
+        // Check for new items and add to popup queue
         function checkForNewPopups() {
             if (!allData) return;
-            if (isPopupShowing) return;
+            loadShownPopups();
 
-            // Build queue of all unshown items
-            const queue = [];
+            const newOrders = Object.entries(allData.orders || {}).filter(([key, order]) => {
+                // Only orders from July 20, 2025 onwards (ignore earlier)
+                const orderDate = order.createdAt || 0;
+                const cutoff = new Date(2025, 6, 20).getTime(); // July 20, 2025
+                if (orderDate < cutoff) return false;
+                return !shownPopups.orders[key];
+            });
 
-            // Orders
-            const orders = Object.entries(allData.orders || {});
-            for (const [key, order] of orders) {
-                if (!allData.shownPopups?.orders?.[key]) {
-                    queue.push({ type: 'order', key, data: order });
-                }
-            }
+            const newApplications = Object.entries(allData.applications || {}).filter(([key, app]) => {
+                const appDate = app.createdAt || 0;
+                const cutoff = new Date(2025, 6, 20).getTime();
+                if (appDate < cutoff) return false;
+                return !shownPopups.applications[key];
+            });
 
-            // Applications
-            const applications = Object.entries(allData.applications || {});
-            for (const [key, app] of applications) {
-                if (!allData.shownPopups?.applications?.[key]) {
-                    queue.push({ type: 'application', key, data: app });
-                }
-            }
+            const newWithdrawals = Object.entries(allData.withdrawalRequests || {}).filter(([key, w]) => {
+                const wDate = w.createdAt || 0;
+                const cutoff = new Date(2025, 6, 20).getTime();
+                if (wDate < cutoff) return false;
+                return !shownPopups.withdrawals[key];
+            });
 
-            // Withdrawals
-            const withdrawals = Object.entries(allData.withdrawalRequests || {});
-            for (const [key, withdrawal] of withdrawals) {
-                if (!allData.shownPopups?.withdrawals?.[key]) {
-                    queue.push({ type: 'withdrawal', key, data: withdrawal });
-                }
-            }
+            // Add to queue
+            newOrders.forEach(([key, order]) => {
+                popupQueue.push({ type: 'order', key, data: order });
+            });
+            newApplications.forEach(([key, app]) => {
+                popupQueue.push({ type: 'application', key, data: app });
+            });
+            newWithdrawals.forEach(([key, w]) => {
+                popupQueue.push({ type: 'withdrawal', key, data: w });
+            });
 
-            // Sort by creation time (most recent first)
-            queue.sort((a, b) => (b.data.createdAt || 0) - (a.data.createdAt || 0));
-
-            popupQueue = queue;
-
-            if (popupQueue.length > 0) {
+            // If there is a popup and none is showing, show the next one
+            if (popupQueue.length > 0 && !isPopupShowing) {
                 showNextPopup();
             }
         }
 
         function showNextPopup() {
-            if (popupQueue.length === 0 || isPopupShowing) return;
-            const item = popupQueue[0];
-            isPopupShowing = true;
-            currentPopupItem = item;
-            renderPopup(item);
-            popupOverlay.classList.add('open');
-        }
-
-        function renderPopup(item) {
-            const users = allData.users || {};
-            const user = users[item.data.userId] || {};
-
-            // Determine customer name and email
-            let customerName = 'Unknown';
-            let customerEmail = 'N/A';
-
-            if (item.type === 'order') {
-                customerName = item.data.customer || 'Unknown';
-                // Try to find user by email or name match
-                for (const [uid, u] of Object.entries(users)) {
-                    if (u.email && item.data.customer && item.data.customer.toLowerCase().includes(u.email.toLowerCase())) {
-                        customerName = `${u.firstName || ''} ${u.lastName || ''}`.trim() || u.email;
-                        customerEmail = u.email;
-                        break;
-                    }
-                }
-            } else if (item.type === 'application') {
-                const fd = item.data.formData || {};
-                customerName = fd.name || `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
-                customerEmail = fd.email || user.email || 'N/A';
-            } else if (item.type === 'withdrawal') {
-                customerName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
-                customerEmail = user.email || 'N/A';
-            }
-
-            // Avatar initial
-            const initial = (customerName || 'U').charAt(0).toUpperCase();
-            popupAvatar.textContent = initial;
-
-            // Customer info
-            popupCustomerName.textContent = customerName;
-            popupCustomerEmail.textContent = customerEmail;
-
-            // Time
-            const timeStr = item.data.createdAt ? new Date(item.data.createdAt).toLocaleString() : 'Just now';
-            popupTime.textContent = timeStr;
-
-            // Title
-            let title = 'New Notification';
-            if (item.type === 'order') title = '🛒 New Order';
-            else if (item.type === 'application') title = '📋 New Application';
-            else if (item.type === 'withdrawal') title = '💰 Withdrawal Request';
-            popupTitle.textContent = title;
-
-            // Details
-            let detailsHtml = '';
-            if (item.type === 'order') {
-                const order = item.data;
-                detailsHtml = `
-                            <div class="popup-detail-row">
-                                <span class="popup-detail-label">Order ID:</span>
-                                <span class="popup-detail-value">${order.id || 'N/A'}</span>
-                            </div>
-                            <div class="popup-detail-row">
-                                <span class="popup-detail-label">Service:</span>
-                                <span class="popup-detail-value">${order.service || 'N/A'}</span>
-                            </div>
-                            <div class="popup-detail-row">
-                                <span class="popup-detail-label">Amount:</span>
-                                <span class="popup-detail-value highlight">ZMW ${(order.amount || 0).toFixed(2)}</span>
-                            </div>
-                            <div class="popup-detail-row">
-                                <span class="popup-detail-label">Status:</span>
-                                <span class="popup-detail-value"><span class="status-badge ${order.status || 'pending'}">${order.status || 'pending'}</span></span>
-                            </div>
-                        `;
-            } else if (item.type === 'application') {
-                const app = item.data;
-                const formTypeLabel = {
-                    ambassador: 'Ambassador',
-                    investor: 'Investor',
-                    prize: 'Prize',
-                    job: 'Job',
-                    referrer: 'Referrer'
-                } [app.formType] || app.formType || 'Unknown';
-                const fd = app.formData || {};
-                detailsHtml = `
-                            <div class="popup-detail-row">
-                                <span class="popup-detail-label">Form Type:</span>
-                                <span class="popup-detail-value">${formTypeLabel}</span>
-                            </div>
-                            <div class="popup-detail-row">
-                                <span class="popup-detail-label">Flyer:</span>
-                                <span class="popup-detail-value">${allData.promoPics?.[app.flyerId]?.text || 'Untitled'}</span>
-                            </div>
-                            <div class="popup-detail-row">
-                                <span class="popup-detail-label">Payment:</span>
-                                <span class="popup-detail-value">${app.paymentData ? `ZMW ${app.paymentData.amount || 0}` : 'N/A'}</span>
-                            </div>
-                            <div class="popup-detail-row">
-                                <span class="popup-detail-label">Status:</span>
-                                <span class="popup-detail-value"><span class="status-badge ${app.status || 'pending'}">${app.status || 'pending'}</span></span>
-                            </div>
-                        `;
-            } else if (item.type === 'withdrawal') {
-                const w = item.data;
-                detailsHtml = `
-                            <div class="popup-detail-row">
-                                <span class="popup-detail-label">Amount:</span>
-                                <span class="popup-detail-value highlight">ZMW ${(w.amount || 0).toFixed(2)}</span>
-                            </div>
-                            <div class="popup-detail-row">
-                                <span class="popup-detail-label">Phone:</span>
-                                <span class="popup-detail-value">${w.phone || 'N/A'}</span>
-                            </div>
-                            <div class="popup-detail-row">
-                                <span class="popup-detail-label">Status:</span>
-                                <span class="popup-detail-value"><span class="status-badge ${w.status || 'pending'}">${w.status || 'pending'}</span></span>
-                            </div>
-                        `;
-            }
-            popupDetails.innerHTML = detailsHtml;
-
-            // Store the current item on the view button
-            popupViewBtn.dataset.type = item.type;
-            popupViewBtn.dataset.key = item.key;
-        }
-
-        function markAsShown(item) {
-            if (!allData.shownPopups) {
-                allData.shownPopups = { orders: {}, applications: {}, withdrawals: {} };
-            }
-            if (item.type === 'order') allData.shownPopups.orders[item.key] = true;
-            else if (item.type === 'application') allData.shownPopups.applications[item.key] = true;
-            else if (item.type === 'withdrawal') allData.shownPopups.withdrawals[item.key] = true;
-            return saveData();
-        }
-
-        function closePopupAndShowNext() {
-            popupOverlay.classList.remove('open');
-            isPopupShowing = false;
-            currentPopupItem = null;
-            // Remove the item from the queue
-            if (popupQueue.length > 0) {
-                popupQueue.shift();
-            }
-            // Check if there are more items
-            if (popupQueue.length > 0) {
-                setTimeout(() => {
-                    showNextPopup();
-                }, 400);
-            }
-        }
-
-        // ── Pop-up event bindings ──
-
-        popupCloseBtn.addEventListener('click', function() {
-            // Dismiss: close pop-up, remove from queue, don't mark as shown
-            if (currentPopupItem) {
-                // Remove from queue without marking
-                closePopupAndShowNext();
-            } else {
-                popupOverlay.classList.remove('open');
+            if (popupQueue.length === 0) {
                 isPopupShowing = false;
-            }
-        });
-
-        popupDismissBtn.addEventListener('click', function() {
-            // Dismiss: close pop-up, remove from queue, don't mark as shown
-            if (currentPopupItem) {
-                closePopupAndShowNext();
-            } else {
                 popupOverlay.classList.remove('open');
-                isPopupShowing = false;
-            }
-        });
-
-        popupViewBtn.addEventListener('click', function() {
-            const type = this.dataset.type;
-            const key = this.dataset.key;
-            if (!type || !key || !currentPopupItem) {
-                popupOverlay.classList.remove('open');
-                isPopupShowing = false;
                 return;
             }
 
-            // Mark as shown
-            markAsShown(currentPopupItem).then(() => {
-                // Navigate to the appropriate page
+            isPopupShowing = true;
+            const item = popupQueue.shift();
+            const { type, key, data } = item;
+
+            // Build popup content based on type
+            let title = '',
+                description = '',
+                detailsHtml = '';
+            let redirectPage = '';
+            let redirectParams = {};
+
+            if (type === 'order') {
+                title = '🛒 New Order';
+                description = `A new order has been placed.`;
+                redirectPage = 'orders';
+                // Try to get customer info
+                const user = allData.users?.[data.userId] || {};
+                const customerName = data.customer || `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
+                const customerEmail = user.email || 'N/A';
+                const customerPhone = user.phone || data.clientNumber || 'N/A';
+                detailsHtml = `
+                    <div class="detail-item"><span class="label">Order ID</span><span class="val">${data.id || 'N/A'}</span></div>
+                    <div class="detail-item"><span class="label">Customer</span><span class="val">${customerName}</span></div>
+                    <div class="detail-item"><span class="label">Service</span><span class="val">${data.service || 'N/A'}</span></div>
+                    <div class="detail-item"><span class="label">Amount</span><span class="val highlight">ZMW ${(data.amount || 0).toFixed(2)}</span></div>
+                    <div class="detail-item"><span class="label">Status</span><span class="val">${data.status || 'pending'}</span></div>
+                `;
+            } else if (type === 'application') {
+                title = '📋 New Application';
+                description = `A new form submission has been received.`;
+                redirectPage = 'applications';
+                const user = allData.users?.[data.userId] || {};
+                const appName = data.formData?.name || `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
+                const appEmail = data.formData?.email || user.email || 'N/A';
+                const formType = data.formType || 'Unknown';
+                detailsHtml = `
+                    <div class="detail-item"><span class="label">Applicant</span><span class="val">${appName}</span></div>
+                    <div class="detail-item"><span class="label">Email</span><span class="val">${appEmail}</span></div>
+                    <div class="detail-item"><span class="label">Form Type</span><span class="val">${formType}</span></div>
+                    <div class="detail-item"><span class="label">Flyer</span><span class="val">${allData.promoPics?.[data.flyerId]?.text || 'Untitled'}</span></div>
+                    <div class="detail-item"><span class="label">Status</span><span class="val">${data.status || 'pending'}</span></div>
+                `;
+            } else if (type === 'withdrawal') {
+                title = '💰 New Withdrawal Request';
+                description = `A customer has requested a withdrawal.`;
+                redirectPage = 'payables';
+                const user = allData.users?.[data.userId] || {};
+                const wName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown';
+                const wEmail = user.email || 'N/A';
+                const wPhone = data.phone || user.phone || 'N/A';
+                detailsHtml = `
+                    <div class="detail-item"><span class="label">Customer</span><span class="val">${wName}</span></div>
+                    <div class="detail-item"><span class="label">Email</span><span class="val">${wEmail}</span></div>
+                    <div class="detail-item"><span class="label">Phone</span><span class="val">${wPhone}</span></div>
+                    <div class="detail-item"><span class="label">Amount</span><span class="val highlight">ZMW ${(data.amount || 0).toFixed(2)}</span></div>
+                    <div class="detail-item"><span class="label">Status</span><span class="val">${data.status || 'pending'}</span></div>
+                `;
+            }
+
+            // Set popup content
+            popupTitle.textContent = title;
+            popupDescription.textContent = description;
+            popupDetails.innerHTML = detailsHtml;
+
+            // Store the current item for redirect
+            popupOverlay.dataset.currentType = type;
+            popupOverlay.dataset.currentKey = key;
+
+            // Show popup
+            popupOverlay.classList.add('open');
+
+            // Play notification sound
+            playNotificationSound();
+        }
+
+        function playNotificationSound() {
+            try {
+                notificationSound.currentTime = 0;
+                notificationSound.play().catch(e => {
+                    console.warn('Could not play notification sound:', e);
+                });
+            } catch (e) {
+                console.warn('Notification sound error:', e);
+            }
+        }
+
+        // Mark popup as shown and remove from queue
+        function markPopupShown(type, key) {
+            if (!allData.adminNotified) allData.adminNotified = { orders: {}, applications: {}, withdrawals: {} };
+            if (type === 'order') {
+                allData.adminNotified.orders[key] = true;
+                shownPopups.orders[key] = true;
+            } else if (type === 'application') {
+                allData.adminNotified.applications[key] = true;
+                shownPopups.applications[key] = true;
+            } else if (type === 'withdrawal') {
+                allData.adminNotified.withdrawals[key] = true;
+                shownPopups.withdrawals[key] = true;
+            }
+            saveData().then(() => {
+                // After saving, we can continue
+            });
+        }
+
+        // Redirect button click
+        popupRedirectBtn.addEventListener('click', function() {
+            const type = popupOverlay.dataset.currentType;
+            const key = popupOverlay.dataset.currentKey;
+            if (type && key) {
+                markPopupShown(type, key);
+                // Redirect to appropriate page
                 let page = '';
                 if (type === 'order') page = 'orders';
                 else if (type === 'application') page = 'applications';
                 else if (type === 'withdrawal') page = 'payables';
-
-                // Close pop-up
-                closePopupAndShowNext();
-
-                // Navigate
                 if (page) {
                     showPage(page);
-                    showToast(`Viewing ${type} details`, 'success');
-                } else {
-                    showToast('Unknown item type', 'error');
                 }
-            }).catch((error) => {
-                showToast('Error marking item as shown', 'error');
-                console.error(error);
-            });
+                // Close popup and show next
+                popupOverlay.classList.remove('open');
+                isPopupShowing = false;
+                // Show next if any
+                if (popupQueue.length > 0) {
+                    showNextPopup();
+                }
+            }
         });
 
-        // ── Overlay click to dismiss ──
+        // Close button (skip for now, but mark as shown? The requirement: "once the admin clicks the redirect button that pop up should dissappear for good". We'll allow close to also mark as shown? Not exactly; they said only redirect button should dismiss for good. But we can allow close to just hide and not mark? We'll implement: close button marks as shown as well? The spec says "once the admin clicks the redirect button that pop up should dissappear for good". So we should not mark if they just close. We'll keep close only to close the popup but not mark as shown. However, if they close without redirect, the popup will reappear on next data refresh (since it's not marked). That's fine. We'll implement close to just close and not mark, and then show next popup if any.
+
+        popupCloseBtn.addEventListener('click', function() {
+            // Just close without marking
+            popupOverlay.classList.remove('open');
+            isPopupShowing = false;
+            // Show next if any
+            if (popupQueue.length > 0) {
+                showNextPopup();
+            }
+        });
+
+        // Also close when clicking outside the popup (optional)
         popupOverlay.addEventListener('click', function(e) {
             if (e.target === this) {
-                if (currentPopupItem) {
-                    closePopupAndShowNext();
-                } else {
-                    popupOverlay.classList.remove('open');
-                    isPopupShowing = false;
+                popupOverlay.classList.remove('open');
+                isPopupShowing = false;
+                if (popupQueue.length > 0) {
+                    showNextPopup();
                 }
             }
         });
 
         // ───────────────────────────────────────────────────────────────────
-        // INITIAL LOG
+        // FINAL INIT: call checkForNewPopups on data changes
         // ───────────────────────────────────────────────────────────────────
 
-        console.log('✅ Admin Dashboard — Hash routing enabled. One‑time pop-ups active.');
+        // The checkForNewPopups is called in renderAll, which is called on each data update.
+        // Also call after initial load.
+
+        console.log('✅ Admin Dashboard — Hash routing enabled. Notifications page included. One-time pop-ups active.');
         console.log('🔔 To send notifications, deploy the Cloud Function (see separate file).');
+
+        // Additional: when data changes, check popups again
+        // Already done in renderAll
+
+        // ── Start a periodic check (optional) but we rely on onValue updates ──
     </script>
 </body>
 </html>
