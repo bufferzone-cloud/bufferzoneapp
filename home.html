@@ -264,18 +264,19 @@
             font-weight: 700;
         }
 
+        /* ---------- PROMO CAROUSEL (UPDATED: WHITE BG, NO HEIGHT CUT) ---------- */
         .promo-carousel-wrapper {
             position: relative;
             margin: 3px 0 12px 0;
             overflow: hidden;
             border-radius: 32px;
             background: #ffffff;
-            box-shadow: none;
+            box-shadow: 0 3px 17px rgba(0, 0, 0, 0.08);
             padding: 0;
             transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            aspect-ratio: 1200 / 675;
             width: 100%;
-            max-height: 80vh;
+            height: auto;
+            max-height: none;
         }
         .promo-carousel-wrapper.collapsed {
             height: 0 !important;
@@ -292,7 +293,7 @@
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             scroll-behavior: smooth;
-            height: 100%;
+            height: auto;
             align-items: center;
             scrollbar-width: none;
             -ms-overflow-style: none;
@@ -310,7 +311,7 @@
             transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 opacity 0.5s ease,
                 box-shadow 0.5s ease;
-            height: 100%;
+            height: auto;
             background: #ffffff;
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.12);
             display: flex;
@@ -967,18 +968,8 @@
         .code-input-wrap.open {
             display: block;
         }
-        .code-input-wrap input {
-            width: 100%;
-            padding: 7px 10px;
-            border: 1px solid #ddd;
-            border-radius: 9px;
-            font-size: 10px;
-        }
-        .code-input-wrap input:focus {
-            outline: none;
-            border-color: #f5b83d;
-        }
 
+        /* ---------- PROMO COUPON SECTION (UPDATED) ---------- */
         .coupon-section {
             display: flex;
             gap: 7px;
@@ -989,20 +980,20 @@
             background: #f5b83d;
             color: #1c2128;
             border: none;
-            padding: 7px 18px;
+            padding: 7px 12px;
             border-radius: 9px;
             font-weight: 700;
             font-size: 9px;
             cursor: pointer;
             transition: all 0.2s;
+            flex: 1;
+            min-width: 140px;
         }
         .coupon-section .apply-btn:disabled {
             background: #ddd;
             color: #888;
             cursor: not-allowed;
-        }
-        .coupon-section .apply-btn:active {
-            transform: scale(0.95);
+            opacity: 0.6;
         }
         .coupon-msg {
             font-size: 9px;
@@ -1016,6 +1007,42 @@
         .coupon-msg.error {
             color: #dc2626;
         }
+
+        /* ---------- REFERRAL SECTION (KEPT FOR TYPING) ---------- */
+        .referral-section {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .referral-section input {
+            width: 100%;
+            padding: 7px 10px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            font-size: 10px;
+        }
+        .referral-section input:focus {
+            outline: none;
+            border-color: #f5b83d;
+        }
+        .referral-section .apply-btn {
+            background: #1c2128;
+            color: #fff;
+            border: none;
+            padding: 7px 14px;
+            border-radius: 9px;
+            font-weight: 700;
+            font-size: 9px;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        .referral-section .apply-btn:disabled {
+            background: #ddd;
+            color: #888;
+            cursor: not-allowed;
+        }
+
         .price-breakdown {
             background: #f8f9fc;
             border-radius: 7px;
@@ -4309,16 +4336,20 @@
                 <button class="toggle-code-btn" id="toggleReferralBtn">Referral Code</button>
             </div>
 
+            <!-- PROMO CODE SECTION (UPDATED) -->
             <div class="code-input-wrap open" id="promoCodeWrap">
                 <div class="coupon-section">
-                    <button class="apply-btn" id="applyCouponBtn">Apply</button>
+                    <button class="apply-btn" id="applyPromoBtn">Apply promo coupon <span id="promoCodeDisplay">SAVE10</span> and get <span id="promoDiscountDisplay">20%</span> off</button>
                 </div>
                 <span class="coupon-msg" id="couponMsg"></span>
             </div>
 
+            <!-- REFERRAL CODE SECTION (KEPT FOR TYPING) -->
             <div class="code-input-wrap" id="referralCodeWrap">
-                <input type="text" id="referralCodeInput" placeholder="Enter referral code">
-                <button class="apply-btn" id="applyReferralBtn" style="margin-top:5px; background:#1c2128; color:#fff; border:none; padding:7px 14px; border-radius:9px; font-weight:700; font-size:9px; cursor:pointer; transition:all 0.2s; width:100%;">Apply Referral</button>
+                <div class="referral-section">
+                    <input type="text" id="referralCodeInput" placeholder="Enter referral code">
+                    <button class="apply-btn" id="applyReferralBtn">Apply Referral</button>
+                </div>
                 <span class="coupon-msg" id="referralMsg"></span>
             </div>
 
@@ -4824,7 +4855,6 @@
         const fileName = document.getElementById('fileName');
         const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
         const cloudinaryScreenshotUrlInput = document.getElementById('cloudinaryScreenshotUrl');
-        const applyCouponBtn = document.getElementById('applyCouponBtn');
         const couponMsg = document.getElementById('couponMsg');
         const priceBreakdown = document.getElementById('priceBreakdown');
         const origPriceVal = document.getElementById('origPriceVal');
@@ -4982,6 +5012,9 @@
         const stmtSignName = document.getElementById('stmtSignName');
         const downloadStatementBtn = document.getElementById('downloadStatementBtn');
         const closeStatementBtn = document.getElementById('closeStatementBtn');
+
+        // ===== NEW PROMO BUTTON TARGET =====
+        let promoButtonTarget = null;
 
         function showToast(msg, type = 'info') {
             const toast = document.createElement('div');
@@ -5258,6 +5291,75 @@
             });
         }
 
+        // ===== NEW PROMO SETUP FUNCTION =====
+        function setupPromoButton() {
+            const promoBtn = document.getElementById('applyPromoBtn');
+            const promoCodeDisplay = document.getElementById('promoCodeDisplay');
+            const promoDiscountDisplay = document.getElementById('promoDiscountDisplay');
+            const promoWrap = document.getElementById('promoCodeWrap');
+            const togglePromoBtn = document.getElementById('togglePromoBtn');
+
+            const promotions = allData.promotions || {};
+            const entries = Object.entries(promotions);
+            if (entries.length === 0) {
+                togglePromoBtn.style.display = 'none';
+                promoWrap.style.display = 'none';
+                return;
+            }
+            togglePromoBtn.style.display = 'inline-block';
+            promoWrap.style.display = 'block';
+            const [key, promo] = entries[0]; // take the first promo
+            promoButtonTarget = { key: key, code: promo.code, discount: promo.discount };
+            promoCodeDisplay.textContent = promo.code;
+            promoDiscountDisplay.textContent = promo.discount + '%';
+
+            promoBtn.onclick = function() {
+                if (!promoButtonTarget) {
+                    showToast('No promo available.', 'error');
+                    return;
+                }
+                const usedCouponsRef = ref(db, `users/${currentUserId}/usedCoupons`);
+                get(usedCouponsRef).then((snapshot) => {
+                    const usedCoupons = snapshot.val() || {};
+                    if (usedCoupons[promoButtonTarget.key]) {
+                        document.getElementById('couponMsg').textContent = 'You have already used this coupon.';
+                        document.getElementById('couponMsg').className = 'coupon-msg error';
+                        return;
+                    }
+
+                    const orderData = JSON.parse(paymentPage.dataset.orderData || '{}');
+                    const total = orderData.total || orderTotalBeforeDiscount;
+                    const discountAmount = total * (promoButtonTarget.discount / 100);
+                    const finalPrice = total - discountAmount;
+                    const depositAmount = finalPrice * 0.5;
+
+                    origPriceVal.textContent = `ZMW ${total.toFixed(2)}`;
+                    discountVal.textContent = `- ZMW ${discountAmount.toFixed(2)}`;
+                    finalPriceVal.textContent = `ZMW ${finalPrice.toFixed(2)}`;
+                    finalDepositVal.textContent = `ZMW ${depositAmount.toFixed(2)}`;
+                    priceBreakdown.style.display = 'block';
+
+                    paymentAmount.textContent = `ZMW ${depositAmount.toFixed(2)}`;
+
+                    document.getElementById('couponMsg').textContent = `✅ Coupon applied! ${promoButtonTarget.discount}% off.`;
+                    document.getElementById('couponMsg').className = 'coupon-msg success';
+
+                    discountApplied = true;
+                    appliedPromo = { key: promoButtonTarget.key, code: promoButtonTarget.code, discount: promoButtonTarget.discount };
+                    promoBtn.disabled = true;
+                    promoBtn.style.opacity = '0.6';
+
+                    paymentPage.dataset.appliedPromo = JSON.stringify(appliedPromo);
+
+                    updateWalletPaymentUI();
+                }).catch((error) => {
+                    console.error('Error checking used coupons:', error);
+                    document.getElementById('couponMsg').textContent = 'Error validating coupon.';
+                    document.getElementById('couponMsg').className = 'coupon-msg error';
+                });
+            };
+        }
+
         function renderAll() {
             if (!allData) return;
 
@@ -5299,6 +5401,8 @@
             renderWithdrawalsList();
             renderApplications();
             renderWithdrawHistory();
+
+            setupPromoButton(); // initialize promo button
 
             if (allData.policy) {
                 const p = allData.policy;
@@ -7298,7 +7402,8 @@
                 couponMsg.textContent = '';
                 couponMsg.className = 'coupon-msg';
                 priceBreakdown.style.display = 'none';
-                applyCouponBtn.disabled = false;
+                const promoBtn = document.getElementById('applyPromoBtn');
+                if (promoBtn) { promoBtn.disabled = false; promoBtn.style.opacity = '1'; }
                 referralCodeInput.value = '';
                 referralMsg.textContent = '';
                 referralMsg.className = 'coupon-msg';
@@ -7344,58 +7449,6 @@
             if (!selectedService) return;
             const total = selectedService.price * currentQuantity;
             document.querySelector('.order-footer .total-price').textContent = `ZMW ${total.toFixed(2)}`;
-        }
-
-        function applyCoupon() {
-            const promotions = allData.promotions || {};
-            const entries = Object.entries(promotions);
-
-            if (entries.length === 0) {
-                couponMsg.textContent = 'No promotions available.';
-                couponMsg.className = 'coupon-msg error';
-                return;
-            }
-
-            const [promoKey, foundPromo] = entries[0];
-
-            const usedCouponsRef = ref(db, `users/${currentUserId}/usedCoupons`);
-            get(usedCouponsRef).then((snapshot) => {
-                const usedCoupons = snapshot.val() || {};
-                if (usedCoupons[promoKey]) {
-                    couponMsg.textContent = 'You have already used this coupon.';
-                    couponMsg.className = 'coupon-msg error';
-                    return;
-                }
-
-                const orderData = JSON.parse(paymentPage.dataset.orderData || '{}');
-                const total = orderData.total || orderTotalBeforeDiscount;
-                const discountAmount = total * (foundPromo.discount / 100);
-                const finalPrice = total - discountAmount;
-                const depositAmount = finalPrice * 0.5;
-
-                origPriceVal.textContent = `ZMW ${total.toFixed(2)}`;
-                discountVal.textContent = `- ZMW ${discountAmount.toFixed(2)}`;
-                finalPriceVal.textContent = `ZMW ${finalPrice.toFixed(2)}`;
-                finalDepositVal.textContent = `ZMW ${depositAmount.toFixed(2)}`;
-                priceBreakdown.style.display = 'block';
-
-                paymentAmount.textContent = `ZMW ${depositAmount.toFixed(2)}`;
-
-                couponMsg.textContent = `✅ Coupon applied! ${foundPromo.discount}% off.`;
-                couponMsg.className = 'coupon-msg success';
-
-                discountApplied = true;
-                appliedPromo = { key: promoKey, code: foundPromo.code, discount: foundPromo.discount };
-                applyCouponBtn.disabled = true;
-
-                paymentPage.dataset.appliedPromo = JSON.stringify(appliedPromo);
-
-                updateWalletPaymentUI();
-            }).catch((error) => {
-                console.error('Error checking used coupons:', error);
-                couponMsg.textContent = 'Error validating coupon.';
-                couponMsg.className = 'coupon-msg error';
-            });
         }
 
         function applyReferral() {
@@ -8556,8 +8609,6 @@
         paymentPage.addEventListener('click', function(e) {
             if (e.target === this) this.classList.remove('open');
         });
-
-        applyCouponBtn.addEventListener('click', applyCoupon);
 
         togglePromoBtn.addEventListener('click', function() {
             togglePromoBtn.classList.add('active');
