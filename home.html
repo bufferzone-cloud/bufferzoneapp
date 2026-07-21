@@ -269,8 +269,8 @@
             margin: 3px 0 12px 0;
             overflow: hidden;
             border-radius: 32px;
-            background: #f8f9fc;
-            box-shadow: 0 3px 17px rgba(0, 0, 0, 0.08);
+            background: #ffffff;
+            box-shadow: none;
             padding: 0;
             transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             aspect-ratio: 1200 / 675;
@@ -985,32 +985,24 @@
             align-items: center;
             flex-wrap: wrap;
         }
-        .coupon-section input {
-            flex: 1;
-            padding: 7px 10px;
-            border: 1px solid #ddd;
-            border-radius: 9px;
-            font-size: 10px;
-            min-width: 68px;
-        }
-        .coupon-section input:focus {
-            outline: none;
-            border-color: #f5b83d;
-        }
         .coupon-section .apply-btn {
             background: #f5b83d;
             color: #1c2128;
             border: none;
-            padding: 7px 12px;
+            padding: 7px 18px;
             border-radius: 9px;
             font-weight: 700;
             font-size: 9px;
             cursor: pointer;
+            transition: all 0.2s;
         }
         .coupon-section .apply-btn:disabled {
             background: #ddd;
             color: #888;
             cursor: not-allowed;
+        }
+        .coupon-section .apply-btn:active {
+            transform: scale(0.95);
         }
         .coupon-msg {
             font-size: 9px;
@@ -4319,7 +4311,6 @@
 
             <div class="code-input-wrap open" id="promoCodeWrap">
                 <div class="coupon-section">
-                    <input type="text" id="couponInput" placeholder="Enter promo code">
                     <button class="apply-btn" id="applyCouponBtn">Apply</button>
                 </div>
                 <span class="coupon-msg" id="couponMsg"></span>
@@ -4833,7 +4824,6 @@
         const fileName = document.getElementById('fileName');
         const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
         const cloudinaryScreenshotUrlInput = document.getElementById('cloudinaryScreenshotUrl');
-        const couponInput = document.getElementById('couponInput');
         const applyCouponBtn = document.getElementById('applyCouponBtn');
         const couponMsg = document.getElementById('couponMsg');
         const priceBreakdown = document.getElementById('priceBreakdown');
@@ -7305,12 +7295,10 @@
                 discountApplied = false;
                 appliedPromo = null;
                 appliedReferral = null;
-                couponInput.value = '';
                 couponMsg.textContent = '';
                 couponMsg.className = 'coupon-msg';
                 priceBreakdown.style.display = 'none';
                 applyCouponBtn.disabled = false;
-                couponInput.disabled = false;
                 referralCodeInput.value = '';
                 referralMsg.textContent = '';
                 referralMsg.className = 'coupon-msg';
@@ -7359,29 +7347,16 @@
         }
 
         function applyCoupon() {
-            const code = couponInput.value.trim().toUpperCase();
-            if (!code) {
-                couponMsg.textContent = 'Please enter a coupon code.';
-                couponMsg.className = 'coupon-msg error';
-                return;
-            }
-
             const promotions = allData.promotions || {};
-            let foundPromo = null;
-            let promoKey = null;
-            for (const [key, p] of Object.entries(promotions)) {
-                if (p.code === code) {
-                    foundPromo = p;
-                    promoKey = key;
-                    break;
-                }
-            }
+            const entries = Object.entries(promotions);
 
-            if (!foundPromo) {
-                couponMsg.textContent = 'Invalid coupon code.';
+            if (entries.length === 0) {
+                couponMsg.textContent = 'No promotions available.';
                 couponMsg.className = 'coupon-msg error';
                 return;
             }
+
+            const [promoKey, foundPromo] = entries[0];
 
             const usedCouponsRef = ref(db, `users/${currentUserId}/usedCoupons`);
             get(usedCouponsRef).then((snapshot) => {
@@ -7412,7 +7387,6 @@
                 discountApplied = true;
                 appliedPromo = { key: promoKey, code: foundPromo.code, discount: foundPromo.discount };
                 applyCouponBtn.disabled = true;
-                couponInput.disabled = true;
 
                 paymentPage.dataset.appliedPromo = JSON.stringify(appliedPromo);
 
@@ -8584,9 +8558,6 @@
         });
 
         applyCouponBtn.addEventListener('click', applyCoupon);
-        couponInput.addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') applyCoupon();
-        });
 
         togglePromoBtn.addEventListener('click', function() {
             togglePromoBtn.classList.add('active');
