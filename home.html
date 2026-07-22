@@ -264,19 +264,16 @@
             font-weight: 700;
         }
 
-        /* ---------- PROMO CAROUSEL (UPDATED: TRANSPARENT BG, NO CURVED EDGES, SEPARATION SPACE) ---------- */
+        /* ---------- PROMO CAROUSEL (UPDATED: TRANSPARENT BG, NO CLIPPING, SPACING) ---------- */
         .promo-carousel-wrapper {
             position: relative;
             margin: 3px 0 12px 0;
-            overflow: hidden;
+            overflow-x: auto;        /* horizontal scroll */
+            overflow-y: visible;     /* prevents top/bottom clipping */
             border-radius: 0;
-            /* was 32px — removed curved edges that cut peek views */
             background: transparent;
-            /* was #ffffff — now transparent, only flyers have white bg */
             box-shadow: none;
-            /* was 0 3px 17px rgba(0,0,0,0.08) — removed */
-            padding: 6px 0;
-            /* was 0 — tiny separation space top & bottom */
+            padding: 8px 0;          /* tiny separation space top & bottom */
             transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             width: 100%;
             height: auto;
@@ -298,7 +295,7 @@
             -webkit-overflow-scrolling: touch;
             scroll-behavior: smooth;
             height: auto;
-            align-items: center;
+            align-items: center;     /* center slides vertically */
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
@@ -316,8 +313,9 @@
                 opacity 0.5s ease,
                 box-shadow 0.5s ease;
             height: auto;
+            aspect-ratio: 1200 / 675;  /* strictly enforce the 1200x675 ratio */
+            flex-shrink: 0;
             background: #ffffff;
-            /* flyers keep pure white bg */
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.12);
             display: flex;
             align-items: center;
@@ -328,7 +326,6 @@
             z-index: 1;
             will-change: transform, opacity;
             cursor: pointer;
-            aspect-ratio: 1200 / 675;
         }
         .promo-slide.clickable {
             cursor: pointer;
