@@ -72,14 +72,14 @@
             flex: 1;
             background: none;
             border: none;
-            font-size: 5px;
+            font-size: 6px;
             gap: 0px;
             user-select: none;
             padding: 2px 0;
             min-width: 28px;
         }
         .nav-item i {
-            font-size: 14px;
+            font-size: 16px;
             margin-bottom: 1px;
         }
         .nav-item.active {
@@ -335,7 +335,7 @@
         .promo-slide video {
             width: 100%;
             height: 100%;
-            object-fit: contain !important;
+            object-fit: cover !important;
             display: block;
             background-color: #ffffff;
             border-radius: 40px;
@@ -2562,22 +2562,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 32px;
+            border-radius: 40px;
         }
         .flyer-detail-image-wrap img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             display: block;
-            border-radius: 32px;
+            border-radius: 40px;
         }
         .flyer-detail-image-wrap video {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             display: none;
             background: #000;
-            border-radius: 32px;
+            border-radius: 40px;
         }
         .flyer-detail-content {
             padding: 16px 14px 14px 14px;
@@ -5445,9 +5445,9 @@
                 const isClickable = pic.clickContent?.enabled === true;
                 const mediaType = pic.mediaType || 'image';
                 const mediaHtml = mediaType === 'video'
-                    ? `<video src="${pic.imageUrl}" muted playsinline style="width:100%;height:100%;object-fit:contain;border-radius:40px;"></video>
+                    ? `<video src="${pic.imageUrl}" muted playsinline style="width:100%;height:100%;object-fit:cover;border-radius:40px;"></video>
                        <div class="video-play-overlay"><i class="fa-solid fa-play"></i></div>`
-                    : `<img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" style="width:100%;height:100%;object-fit:contain;border-radius:40px;" />`;
+                    : `<img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:40px;" />`;
                 return `
                 <div class="promo-slide ${isClickable ? 'clickable' : ''}" data-key="${key}" data-index="${idx - 1}" data-real-index="${idx - 1 < 0 ? entries.length - 1 : idx - 1 >= entries.length ? 0 : idx - 1}" data-mediatype="${mediaType}">
                     ${mediaHtml}
@@ -5456,7 +5456,7 @@
                             ${escapeHtml(pic.text || 'Promo')}
                             ${pic.subtext ? `<small>${escapeHtml(pic.subtext)}</small>` : ''}
                         </div>
-                        ${isClickable ? `<div class="tap-indicator">👆 tap for details</div>` : ''}
+                        ${isClickable ? `<div class="tap-indicator">CLICK ME</div>` : ''}
                     </div>
                 </div>
                 `;
@@ -8796,13 +8796,10 @@
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
         console.log('✅ Customer code updated with all requested features:');
-        console.log('  • Flyers fill 1200×675 without cropping (object-fit: contain)');
-        console.log('  • Notification bell sound plays on every popup');
-        console.log('  • "View Statement" + "Download Statement" for withdrawals & send-money transactions');
-        console.log('  • Statement uses the same receipt-style design');
-        console.log('  • All popups persist across devices (Firebase)');
-        console.log('  • Logout button is a rectangle (not triangle)');
-        console.log('  • Flyer edges are extra rounded (border-radius: 40px)');
+        console.log('  • Nav buttons increased by 15% (icons 16px, text 6px)');
+        console.log('  • "tap for details" → "CLICK ME" (only on clickable flyers with forms)');
+        console.log('  • All flyers fill 1200×675 with object-fit:cover and 40px round edges');
+        console.log('  • Flyer detail view also uses 1200×675 with 40px border-radius');
     </script>
 </body>
 </html>
