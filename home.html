@@ -269,10 +269,10 @@
             position: relative;
             margin: 3px 0 12px 0;
             overflow: hidden;
-            border-radius: 32px;
+            border-radius: 40px; /* Increased to match slide border-radius to prevent corner clipping */
             background: #ffffff;
             box-shadow: 0 3px 17px rgba(0, 0, 0, 0.08);
-            padding: 0;
+            padding: 15px 0; /* Added vertical padding to prevent top/bottom clipping */
             transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             width: 100%;
             height: auto;
@@ -288,7 +288,7 @@
         .promo-carousel-track {
             display: flex;
             gap: 0;
-            padding: 0;
+            padding: 0 15px; /* Added horizontal padding to provide breathing room */
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
@@ -8800,6 +8800,7 @@
         console.log('  • "tap for details" → "CLICK ME" (only on clickable flyers with forms)');
         console.log('  • All flyers fill 1200×675 with object-fit:cover and 40px round edges');
         console.log('  • Flyer detail view also uses 1200×675 with 40px border-radius');
+        console.log('  • Carousel wrapper padding + border-radius adjusted to prevent top/bottom & corner clipping');
     </script>
 </body>
 </html>
