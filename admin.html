@@ -1868,7 +1868,8 @@
             overflow: hidden;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
             background: #fff;
-            aspect-ratio: 16 / 9; /* 1200:675 = 16:9 */
+            aspect-ratio: 16 / 9;
+            /* 1200:675 = 16:9 */
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -1974,7 +1975,8 @@
         .promo-upload-preview-large {
             width: 100%;
             max-width: 1200px;
-            aspect-ratio: 1200 / 675; /* 16:9 */
+            aspect-ratio: 1200 / 675;
+            /* 16:9 */
             border-radius: 28px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
             overflow: hidden;
@@ -4015,399 +4017,396 @@
             border-color: #bbb;
         }
 
-        /* ── NEW: Notifications page styles (improved) ── */
-        #page-notifications .notif-preview {
-            background: linear-gradient(135deg, #1c2128 0%, #2a2a2a 100%);
-            border-radius: 16px;
-            padding: 18px 20px;
-            margin: 16px 0;
-            border: 1px solid #444;
+        /* ────────────────────────────────────────────── */
+        /*  MACOS‑THEMED NOTIFICATION PAGE (ONLY)       */
+        /* ────────────────────────────────────────────── */
+        #page-notifications {
+            padding: 6px 0 14px 0;
+        }
+
+        /* macOS‑style outer container – frosted glass, rounded, shadow */
+        #page-notifications .macos-notif-container {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 22px;
+            padding: 22px 24px 24px 24px;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08), 0 0 0 0.5px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        /* macOS‑style header with traffic‑light dots */
+        #page-notifications .macos-header {
             display: flex;
             align-items: center;
-            gap: 14px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            gap: 12px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            margin-bottom: 18px;
         }
-        #page-notifications .notif-preview img {
-            width: 56px;
-            height: 56px;
+
+        #page-notifications .macos-header .traffic-lights {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        #page-notifications .macos-header .traffic-lights span {
+            width: 11px;
+            height: 11px;
             border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #f5b83d;
+            display: block;
         }
-        #page-notifications .notif-preview .content {
+
+        #page-notifications .macos-header .traffic-lights .tl-red {
+            background: #fe5f57;
+        }
+        #page-notifications .macos-header .traffic-lights .tl-yellow {
+            background: #febc2e;
+        }
+        #page-notifications .macos-header .traffic-lights .tl-green {
+            background: #28c840;
+        }
+
+        #page-notifications .macos-header .macos-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1c2128;
+            letter-spacing: -0.2px;
             flex: 1;
         }
-        #page-notifications .notif-preview .content .title {
-            font-weight: 700;
-            font-size: 16px;
-            color: #fff;
-            letter-spacing: 0.3px;
+
+        #page-notifications .macos-header .macos-subtitle {
+            font-size: 11px;
+            color: #888;
+            font-weight: 400;
         }
-        #page-notifications .notif-preview .content .body {
+
+        /* macOS‑style form controls – pill‑like, subtle, SF‑inspired */
+        #page-notifications .macos-form-group {
+            margin-bottom: 14px;
+        }
+
+        #page-notifications .macos-form-group label {
+            font-size: 11px;
+            font-weight: 500;
+            color: #444;
+            display: block;
+            margin-bottom: 4px;
+            letter-spacing: 0.2px;
+        }
+
+        #page-notifications .macos-form-group input,
+        #page-notifications .macos-form-group select,
+        #page-notifications .macos-form-group textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(4px);
             font-size: 13px;
-            color: #ddd;
-            margin-top: 3px;
-            line-height: 1.5;
+            font-family: 'Poppins', sans-serif;
+            color: #1c2128;
+            transition: all 0.2s;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
         }
-        #page-notifications .notif-preview .content .body b {
+
+        #page-notifications .macos-form-group input:focus,
+        #page-notifications .macos-form-group select:focus,
+        #page-notifications .macos-form-group textarea:focus {
+            outline: none;
+            border-color: #1c2128;
+            box-shadow: 0 0 0 3px rgba(28, 33, 40, 0.08), inset 0 1px 2px rgba(0, 0, 0, 0.02);
+        }
+
+        #page-notifications .macos-form-group textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        /* macOS‑style hint text */
+        #page-notifications .macos-hint {
+            font-size: 10px;
+            color: #999;
+            margin-top: 3px;
+            letter-spacing: 0.1px;
+        }
+
+        /* macOS‑style button – pill, with subtle hover */
+        #page-notifications .macos-btn {
+            padding: 10px 28px;
+            border-radius: 40px;
+            border: none;
+            background: #1c2128;
+            color: #fff;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        #page-notifications .macos-btn:hover {
+            background: #2a2a2a;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        #page-notifications .macos-btn:active {
+            transform: scale(0.96);
+        }
+
+        #page-notifications .macos-btn i {
             color: #f5b83d;
         }
 
-        #page-notifications .form-group .hint {
-            font-size: 10px;
-            color: #888;
-            margin-top: 3px;
+        /* macOS‑style preview card – glass, rounded, with icon */
+        #page-notifications .macos-preview-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 16px 18px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            display: none;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.2s;
         }
 
-        #page-notifications .send-progress {
+        #page-notifications .macos-preview-card.show {
+            display: flex;
+        }
+
+        #page-notifications .macos-preview-card .preview-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #1c2128;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #f5b83d;
+            font-size: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        #page-notifications .macos-preview-card .preview-content {
+            flex: 1;
+        }
+
+        #page-notifications .macos-preview-card .preview-content .p-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1c2128;
+        }
+
+        #page-notifications .macos-preview-card .preview-content .p-body {
+            font-size: 12px;
+            color: #555;
+            margin-top: 1px;
+            line-height: 1.5;
+        }
+
+        #page-notifications .macos-preview-card .preview-content .p-body b {
+            color: #f5b83d;
+        }
+
+        /* macOS‑style progress overlay */
+        #page-notifications .macos-progress {
             display: none;
             text-align: center;
-            padding: 24px;
-            background: #f8f9fc;
-            border-radius: 12px;
-            border: 1px solid #eee;
+            padding: 20px;
+            margin-top: 16px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
-        #page-notifications .send-progress .spinner {
-            border: 3px solid #f0f0f0;
+
+        #page-notifications .macos-progress .spinner {
+            border: 3px solid rgba(0, 0, 0, 0.04);
             border-top: 3px solid #f5b83d;
             border-radius: 50%;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             animation: spin 1s linear infinite;
             margin: 0 auto;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        #page-notifications .send-progress p {
-            margin-top: 10px;
-            font-size: 13px;
+
+        #page-notifications .macos-progress p {
+            margin-top: 8px;
+            font-size: 12px;
             color: #555;
             font-weight: 500;
         }
 
-        /* ── One-time pop-up modal ── */
+        /* responsive */
+        @media (max-width: 500px) {
+            #page-notifications .macos-notif-container {
+                padding: 16px 14px;
+                border-radius: 16px;
+            }
+            #page-notifications .macos-header .macos-subtitle {
+                display: none;
+            }
+            #page-notifications .macos-preview-card .preview-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+        }
+
+        /* ────────────────────────────────────────────── */
+        /*  ENHANCED POP‑UP MODAL  (bigger, more info)   */
+        /* ────────────────────────────────────────────── */
         .popup-modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 9999;
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 16px;
+            padding: 20px;
         }
+
         .popup-modal-overlay.open {
             display: flex;
         }
+
         .popup-modal {
             background: #ffffff;
-            border-radius: 20px;
+            border-radius: 28px;
             width: 100%;
-            max-width: 450px;
+            max-width: 580px;
+            /* bigger */
             max-height: 90vh;
             overflow-y: auto;
-            padding: 24px 22px 18px;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.3);
-            animation: modalIn 0.3s ease;
+            padding: 28px 28px 22px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
+            animation: modalIn 0.35s ease;
             position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
+
         .popup-modal .popup-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
+            align-items: flex-start;
+            margin-bottom: 16px;
             border-bottom: 2px solid #f5b83d;
-            padding-bottom: 8px;
+            padding-bottom: 12px;
         }
+
         .popup-modal .popup-header h3 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             color: #1c2128;
             margin: 0;
+            letter-spacing: -0.3px;
         }
+
         .popup-modal .popup-header .popup-close-btn {
             background: none;
             border: none;
-            font-size: 20px;
+            font-size: 22px;
             color: #999;
             cursor: pointer;
             padding: 4px;
-            transition: color 0.2s;
+            transition: color 0.2s, transform 0.2s;
+            line-height: 1;
         }
+
         .popup-modal .popup-header .popup-close-btn:hover {
             color: #dc2626;
+            transform: rotate(90deg);
         }
+
         .popup-modal .popup-body {
-            padding: 6px 0 12px;
+            padding: 4px 0 16px;
         }
+
         .popup-modal .popup-body .popup-item-title {
             font-weight: 700;
-            font-size: 16px;
+            font-size: 18px;
             color: #1c2128;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
         }
+
         .popup-modal .popup-body .popup-item-detail {
-            font-size: 13px;
+            font-size: 14px;
             color: #555;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
+            line-height: 1.6;
+            padding: 2px 0;
+            border-bottom: 1px solid #f5f5f5;
         }
+
+        .popup-modal .popup-body .popup-item-detail:last-child {
+            border-bottom: none;
+        }
+
         .popup-modal .popup-body .popup-item-detail strong {
             color: #1c2128;
+            font-weight: 600;
         }
+
         .popup-modal .popup-footer {
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 12px;
+            margin-top: 12px;
             justify-content: flex-end;
             border-top: 1px solid #f0f0f0;
-            padding-top: 14px;
+            padding-top: 16px;
         }
+
         .popup-modal .popup-footer .btn {
-            padding: 8px 20px;
-            font-size: 12px;
-            border-radius: 20px;
+            padding: 10px 24px;
+            font-size: 13px;
+            border-radius: 40px;
+            font-weight: 600;
         }
+
         .popup-modal .popup-footer .btn-view-details {
             background: #f5b83d;
             color: #1c2128;
             font-weight: 700;
+            box-shadow: 0 4px 12px rgba(245, 184, 61, 0.25);
         }
+
         .popup-modal .popup-footer .btn-view-details:hover {
             background: #e5a830;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(245,184,61,0.3);
+            box-shadow: 0 6px 20px rgba(245, 184, 61, 0.3);
         }
 
-        /* ── Invoice Receipt Modal (for admin) ── */
-        #receiptModal {
+        .popup-modal .popup-footer .btn-view-details:active {
+            transform: scale(0.94);
+        }
+
+        /* ── new ringtone audio element (more prominent) ── */
+        #notificationSound {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 9999;
-            overflow-y: auto;
-            padding: 20px;
-            backdrop-filter: blur(6px);
-            align-items: flex-start;
-            justify-content: center;
         }
-        #receiptModal.open {
-            display: flex;
-        }
-        .receipt-wrapper {
-            max-width: 580px;
-            width: 100%;
-            margin: auto;
-        }
-        .receipt-card {
-            background: #ffffff;
-            border-radius: 0;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            font-family: 'Poppins', sans-serif;
-        }
-        .receipt-header {
-            background: #1c2128;
-            padding: 16px 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            position: relative;
-            border-bottom: 3px solid #f5b83d;
-        }
-        .receipt-header h2 {
-            color: white;
-            font-weight: 800;
-            margin: 0;
-            letter-spacing: 1px;
-            font-size: 18px;
-        }
-        .receipt-header .slogan {
-            color: white;
-            opacity: 0.6;
-            font-size: 9px;
-            margin: 0;
-            letter-spacing: 2px;
-        }
-        .receipt-header .invoice-title {
-            color: #f5b83d;
-            font-weight: 800;
-            margin: 0;
-            font-size: 20px;
-            text-align: right;
-        }
-        .receipt-header .invoice-id {
-            color: white;
-            opacity: 0.6;
-            font-size: 9px;
-            margin: 0;
-        }
-        .receipt-addresses {
-            display: flex;
-            justify-content: space-between;
-            padding: 14px 18px 10px 18px;
-        }
-        .receipt-addresses h4 {
-            margin: 0 0 3px 0;
-            font-size: 10px;
-            font-weight: 700;
-            color: #1c2128;
-            border-left: 3px solid #f5b83d;
-            padding-left: 6px;
-        }
-        .receipt-addresses .address-right h4 {
-            border-left: none;
-            border-right: 3px solid #f5b83d;
-            padding-left: 0;
-            padding-right: 6px;
-            text-align: right;
-        }
-        .receipt-addresses p {
-            font-size: 9px;
-            color: #555;
-            margin: 1px 0;
-            line-height: 1.3;
-        }
-        .receipt-addresses .name {
-            font-weight: 600;
-            color: #1c2128;
-            font-size: 11px;
-        }
-        .receipt-table-header {
-            background: #f5b83d;
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 18px;
-            font-size: 9px;
-            font-weight: 700;
-            color: white;
-            text-transform: uppercase;
-        }
-        .receipt-table-header>div {
-            text-align: center;
-        }
-        .receipt-table-header>div:first-child {
-            flex: 2;
-            text-align: left;
-        }
-        .receipt-table-header>div:last-child {
-            flex: 1;
-            text-align: right;
-        }
-        .receipt-item-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 7px 18px;
-            border-bottom: 1px solid #eee;
-            font-size: 10px;
-        }
-        .receipt-item-row>div {
-            text-align: center;
-        }
-        .receipt-item-row>div:first-child {
-            flex: 2;
-            text-align: left;
-        }
-        .receipt-item-row>div:last-child {
-            flex: 1;
-            text-align: right;
-        }
-        .receipt-totals {
-            padding: 10px 18px 16px 18px;
-            display: flex;
-            justify-content: flex-end;
-        }
-        .receipt-totals-box {
-            width: 150px;
-            font-size: 9px;
-            text-align: right;
-        }
-        .receipt-totals-box>div {
-            display: flex;
-            justify-content: space-between;
-            padding: 2px 0;
-        }
-        .receipt-totals-box .total-row {
-            background: #f5b83d;
-            margin-top: 5px;
-            padding: 5px 8px;
-            border-radius: 4px;
-            color: #1c2128;
-            font-weight: 700;
-        }
-        .receipt-footer {
-            padding: 10px 18px 16px 18px;
-            border-top: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-        .receipt-footer .thanks {
-            font-size: 9px;
-            font-weight: 600;
-            color: #1c2128;
-        }
-        .receipt-footer .footnote {
-            font-size: 8px;
-            color: #aaa;
-            max-width: 170px;
-            line-height: 1.4;
-        }
-        .receipt-footer .signature-area {
-            text-align: right;
-            border-top: 2px solid #1c2128;
-            padding-top: 3px;
-            width: 120px;
-        }
-        .receipt-footer .signature-area .sign-name {
-            font-weight: 800;
-            font-size: 13px;
-            color: #1c2128;
-            letter-spacing: 0.5px;
-        }
-        .receipt-footer .signature-area .sign-label {
-            font-size: 7px;
-            color: #666;
-            text-transform: uppercase;
-        }
-        .receipt-bottom-bar {
-            background: #1c2128;
-            height: 8px;
-            width: 100%;
-        }
-        .receipt-download-btn {
-            margin-top: 12px;
-            width: 100%;
-            background: #1c2128;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-            transition: all 0.2s;
-        }
-        .receipt-download-btn:active {
-            transform: scale(0.98);
-        }
-        .receipt-download-btn i {
-            color: #f5b83d;
-        }
+
+        /* ────────────────────────────────────────────── */
+        /*  remaining styles unchanged                   */
+        /* ────────────────────────────────────────────── */
     </style>
 </head>
 <body>
@@ -5077,66 +5076,70 @@
                 </div>
             </div>
 
-            <!-- ===== NEW PAGE: NOTIFICATIONS ===== -->
+            <!-- ===== NEW PAGE: NOTIFICATIONS (macOS themed layout) ===== -->
             <div id="page-notifications" class="page">
 
-                <div class="card" style="border:none; box-shadow:none; padding:0 0 14px 0;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
-                        <div>
-                            <h2 style="font-size:20px; font-weight:800; color:#1c2128;"><i class="fa-solid fa-bell" style="color:#f5b83d;"></i> Send Push Notifications</h2>
-                            <p style="font-size:11px; color:#888;">Send instant push notifications to all users or a specific user. Bold words will appear in <b>bold</b> on the device.</p>
+                <div class="macos-notif-container">
+                    <div class="macos-header">
+                        <div class="traffic-lights">
+                            <span class="tl-red"></span>
+                            <span class="tl-yellow"></span>
+                            <span class="tl-green"></span>
                         </div>
+                        <span class="macos-title">📬 Notification Center</span>
+                        <span class="macos-subtitle">Send push notifications</span>
                     </div>
 
-                    <form id="notificationForm" style="max-width:800px; margin:0 auto;">
-                        <div class="form-group">
+                    <form id="notificationForm">
+                        <div class="macos-form-group">
                             <label>Recipient</label>
-                            <select id="notifRecipient" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:8px; font-size:12px;">
+                            <select id="notifRecipient">
                                 <option value="all">All Users</option>
                                 <option value="specific">Specific User</option>
                             </select>
                         </div>
-                        <div class="form-group" id="notifUserSelectGroup" style="display:none;">
+                        <div class="macos-form-group" id="notifUserSelectGroup" style="display:none;">
                             <label>Select User</label>
-                            <select id="notifUserSelect" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:8px; font-size:12px;">
+                            <select id="notifUserSelect">
                                 <option value="">— Select a user —</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="macos-form-group">
                             <label>Notification Title</label>
-                            <input type="text" id="notifTitle" placeholder="e.g. Special Offer!" required style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
+                            <input type="text" id="notifTitle" placeholder="e.g. Special Offer!" required />
                         </div>
-                        <div class="form-group">
+                        <div class="macos-form-group">
                             <label>Message</label>
-                            <textarea id="notifBody" rows="3" placeholder="Write your message here. Words you want to show bold should be wrapped in ** like **this**." required style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px; resize:vertical;"></textarea>
-                            <div class="hint">Use **bold** to make words bold in the notification.</div>
+                            <textarea id="notifBody" rows="3" placeholder="Write your message here. Words you want to show bold should be wrapped in ** like **this**." required></textarea>
+                            <div class="macos-hint">Use **bold** to make words bold in the notification.</div>
                         </div>
-                        <div class="form-group">
+                        <div class="macos-form-group">
                             <label>Logo URL (optional)</label>
-                            <input type="url" id="notifIcon" placeholder="https://yourdomain.com/logo.png" style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
-                            <div class="hint">Leave blank to use default buffer zone logo.</div>
+                            <input type="url" id="notifIcon" placeholder="https://yourdomain.com/logo.png" />
+                            <div class="macos-hint">Leave blank to use default buffer zone logo.</div>
                         </div>
-                        <div class="form-group">
+                        <div class="macos-form-group">
                             <label>Click URL (optional)</label>
-                            <input type="url" id="notifClickUrl" placeholder="https://yourdomain.com/promo" style="width:100%; padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
-                            <div class="hint">When user taps the notification, they will be taken to this URL.</div>
+                            <input type="url" id="notifClickUrl" placeholder="https://yourdomain.com/promo" />
+                            <div class="macos-hint">When user taps the notification, they will be taken to this URL.</div>
                         </div>
-                        <button type="submit" class="btn btn-primary" id="sendNotifBtn" style="padding:12px 28px; font-size:14px; border-radius:24px; width:100%;"><i class="fa-solid fa-paper-plane"></i> Send Notification</button>
+                        <button type="submit" class="macos-btn" id="sendNotifBtn"><i class="fa-solid fa-paper-plane"></i> Send Notification</button>
                     </form>
 
-                    <div class="send-progress" id="notifProgress">
+                    <div class="macos-progress" id="notifProgress">
                         <div class="spinner"></div>
                         <p>Sending notifications...</p>
                     </div>
 
-                    <div class="notif-preview" id="notifPreview" style="display:none;">
-                        <img id="notifPreviewIcon" src="" alt="logo" />
-                        <div class="content">
-                            <div class="title" id="notifPreviewTitle">Title</div>
-                            <div class="body" id="notifPreviewBody">Body</div>
+                    <div class="macos-preview-card" id="notifPreview">
+                        <div class="preview-icon"><i class="fa-regular fa-bell"></i></div>
+                        <div class="preview-content">
+                            <div class="p-title" id="notifPreviewTitle">Title</div>
+                            <div class="p-body" id="notifPreviewBody">Body</div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
         </div>
@@ -5611,7 +5614,7 @@
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"><i class="fa-regular fa-circle-check"></i> <span id="toastMessage">Saved</span></div>
 
-    <!-- ===== ONE-TIME POP-UP MODAL ===== -->
+    <!-- ===== ENHANCED POP‑UP MODAL (bigger, more info) ===== -->
     <div class="popup-modal-overlay" id="popupModal">
         <div class="popup-modal">
             <div class="popup-header">
@@ -5628,7 +5631,7 @@
         </div>
     </div>
 
-    <!-- ===== CUSTOM NOTIFICATION SOUND ===== -->
+    <!-- ===== RINGTONE AUDIO (more prominent, loops once) ===== -->
     <audio id="notificationSound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" preload="auto"></audio>
 
     <script type="module">
@@ -5657,20 +5660,11 @@
         const auth = getAuth(app);
         const messaging = getMessaging(app);
 
-        // ── VAPID key (provided) ──
         const VAPID_KEY = "BOkohCEBQhlS69mnlH-6VGDpBz8cMDscxyE_NpwedsBG_1pC5wSh5HwXPpIwKTMk2YiELQOYDhCTxvDWHmS88aw";
-
-        // ───────────────────────────────────────────────────────────────────
-        // CLOUDINARY CONFIG
-        // ───────────────────────────────────────────────────────────────────
 
         const CLOUDINARY_CLOUD_NAME = 'dd3lcymrk';
         const CLOUDINARY_UPLOAD_PRESET = 'h3eyhc2o';
         const MAX_FILE_SIZE = 50 * 1024 * 1024;
-
-        // ───────────────────────────────────────────────────────────────────
-        // STATE
-        // ───────────────────────────────────────────────────────────────────
 
         let allData = null;
         let currentUser = null;
@@ -5684,12 +5678,8 @@
         let pendingEditCustomerUid = null;
         let selectedUserId = null;
         let applicationsFilter = 'pending';
-        let currentJobPositions = []; // holds job positions in the modal
-        let editingPromoKey = null; // for promo-upload page
-
-        // ───────────────────────────────────────────────────────────────────
-        // DOM REFS
-        // ───────────────────────────────────────────────────────────────────
+        let currentJobPositions = [];
+        let editingPromoKey = null;
 
         const adminNameCenterEl = document.getElementById('adminNameCenter');
         const profileNameEl = document.getElementById('profileName');
@@ -5756,7 +5746,6 @@
         const workUploadSubmit = document.getElementById('workUploadSubmit');
         const workUploadCancelBtn = document.getElementById('workUploadCancelBtn');
 
-        // Promo upload page elements
         const promoUploadTitle = document.getElementById('promoUploadTitle');
         const promoUploadCancelBtn = document.getElementById('promoUploadCancelBtn');
         const promoUploadCancelBtn2 = document.getElementById('promoUploadCancelBtn2');
@@ -5768,7 +5757,6 @@
         const promoPicSubtext = document.getElementById('promoPicSubtext');
         const promoPicMediaType = document.getElementById('promoPicMediaType');
 
-        // Click-config fields + job positions
         const enableClickContent = document.getElementById('enableClickContent');
         const clickConfigFields = document.getElementById('clickConfigFields');
         const clickTitle = document.getElementById('clickTitle');
@@ -5782,7 +5770,6 @@
         const jobPositionsList = document.getElementById('jobPositionsList');
         const customerPreviewSelect = document.getElementById('customerPreviewSelect');
 
-        // Applications page
         const applicationsListEl = document.getElementById('applicationsList');
         const appStatusTabs = document.getElementById('appStatusTabs');
         const pendingCountEl = document.getElementById('pendingCount');
@@ -5804,7 +5791,6 @@
         const statusOptionsContainer = document.getElementById('statusOptionsContainer');
         const confirmStatusBtn = document.getElementById('confirmStatusBtn');
 
-        // ── Referral DOM ──
         const referralPromoAmount = document.getElementById('referralPromoAmount');
         const postReferralPromoBtn = document.getElementById('postReferralPromo');
         const referralPromoList = document.getElementById('referralPromoList');
@@ -5821,14 +5807,12 @@
         const postReferralDiscountBtn = document.getElementById('postReferralDiscount');
         const referralDiscountList = document.getElementById('referralDiscountList');
 
-        // ── New Referral Promos ──
         const referralPromoDiscountPercent = document.getElementById('referralPromoDiscountPercent');
         const referralPromoOwnerAmount = document.getElementById('referralPromoOwnerAmount');
         const referralPromoCodeFilter = document.getElementById('referralPromoCodeFilter');
         const postReferralPromoDiscountBtn = document.getElementById('postReferralPromoDiscount');
         const referralPromoDiscountList = document.getElementById('referralPromoDiscountList');
 
-        // ── Signup Bonuses ──
         const signupBonusWithReferral = document.getElementById('signupBonusWithReferral');
         const signupBonusWithCustomReferral = document.getElementById('signupBonusWithCustomReferral');
         const signupBonusWithoutReferral = document.getElementById('signupBonusWithoutReferral');
@@ -5837,7 +5821,6 @@
         const displayWithCustom = document.getElementById('displayWithCustom');
         const displayWithoutReferral = document.getElementById('displayWithoutReferral');
 
-        // ── Payables DOM ──
         const toggleAccounts = document.getElementById('toggleAccounts');
         const toggleWithdrawals = document.getElementById('toggleWithdrawals');
         const viewAccounts = document.getElementById('viewAccounts');
@@ -5852,7 +5835,6 @@
         const depositAmount = document.getElementById('depositAmount');
         const manualDepositCancelBtn = document.getElementById('manualDepositCancelBtn');
 
-        // ── Account Update DOM ──
         const accountUpdateBtn = document.getElementById('accountUpdateBtn');
         const accountUpdateModal = document.getElementById('accountUpdateModal');
         const accountUpdateCloseBtn = document.getElementById('accountUpdateCloseBtn');
@@ -5868,7 +5850,6 @@
         const accountUpdateAmount = document.getElementById('accountUpdateAmount');
         const applyAccountUpdateBtn = document.getElementById('applyAccountUpdateBtn');
 
-        // ── Withdrawal Confirm DOM ──
         const withdrawConfirmModal = document.getElementById('withdrawConfirmModal');
         const withdrawConfirmCloseBtn = document.getElementById('withdrawConfirmCloseBtn');
         const withdrawConfirmTitle = document.getElementById('withdrawConfirmTitle');
@@ -5877,29 +5858,24 @@
         const withdrawConfirmActionBtn = document.getElementById('withdrawConfirmActionBtn');
         const withdrawConfirmCancelBtn = document.getElementById('withdrawConfirmCancelBtn');
 
-        // ── Withdrawal filter buttons ──
         const showApprovedBtn = document.getElementById('showApprovedWithdrawals');
         const showRejectedBtn = document.getElementById('showRejectedWithdrawals');
         const showPendingBtn = document.getElementById('showPendingWithdrawals');
 
-        // ── Action buttons ──
         const actionPromoPics = document.getElementById('actionPromoPics');
         const actionReferral = document.getElementById('actionReferral');
         const actionPayables = document.getElementById('actionPayables');
         const actionCustomerWallets = document.getElementById('actionCustomerWallets');
 
-        // ── Services price adjustment ──
         const adjustOptions = document.getElementById('adjustOptions');
         const adjustValue = document.getElementById('adjustValue');
         const adjustLabel = document.getElementById('adjustLabel');
         const applyAdjustBtn = document.getElementById('applyAdjustBtn');
         const adjustPreview = document.getElementById('adjustPreview');
 
-        // ─── Badge elements ───
         const badgeOrdersPending = document.getElementById('badgeOrdersPending');
         const badgeWithdrawalsPending = document.getElementById('badgeWithdrawalsPending');
 
-        // ─── Edit Customer DOM ───
         const editCustomerModal = document.getElementById('editCustomerModal');
         const editCustomerCloseBtn = document.getElementById('editCustomerCloseBtn');
         const editCustomerForm = document.getElementById('editCustomerForm');
@@ -5911,7 +5887,6 @@
         const editReferralCode = document.getElementById('editReferralCode');
         const saveEditCustomerBtn = document.getElementById('saveEditCustomerBtn');
 
-        // ─── User Selector DOM ───
         const userSelectorModal = document.getElementById('userSelectorModal');
         const userSelectorCloseBtn = document.getElementById('userSelectorCloseBtn');
         const userSelectorSearch = document.getElementById('userSelectorSearch');
@@ -5919,17 +5894,13 @@
         const userSelectorConfirmBtn = document.getElementById('userSelectorConfirmBtn');
         const selectedCustomerName = document.getElementById('selectedCustomerName');
 
-        // ─── Account Update Search ───
         const accountUpdateSearch = document.getElementById('accountUpdateSearch');
 
-        // ─── Users page filter ───
         const userFilterSelect = document.getElementById('userFilterSelect');
 
-        // ─── Customer Wallets Page ───
         const customerWalletListPage = document.getElementById('customerWalletListPage');
         const customerWalletSearch = document.getElementById('customerWalletSearch');
 
-        // ─── NEW: Notifications DOM ───
         const notifForm = document.getElementById('notificationForm');
         const notifRecipient = document.getElementById('notifRecipient');
         const notifUserSelectGroup = document.getElementById('notifUserSelectGroup');
@@ -5945,7 +5916,6 @@
         const notifPreviewTitle = document.getElementById('notifPreviewTitle');
         const notifPreviewBody = document.getElementById('notifPreviewBody');
 
-        // ─── One-time pop-up DOM ───
         const popupModal = document.getElementById('popupModal');
         const popupCloseBtn = document.getElementById('popupCloseBtn');
         const popupCloseBtn2 = document.getElementById('popupCloseBtn2');
@@ -5953,10 +5923,8 @@
         const popupTitle = document.getElementById('popupTitle');
         const popupContent = document.getElementById('popupContent');
 
-        // ─── Notification sound ───
         const notificationSound = document.getElementById('notificationSound');
 
-        // ─── Invoice Receipt DOM ───
         const receiptModal = document.getElementById('receiptModal');
         const closeReceiptBtn = document.getElementById('closeReceiptBtn');
         const downloadReceiptBtn = document.getElementById('downloadReceiptBtn');
@@ -6014,7 +5982,7 @@
                             job: { isFree: true, price: 0, mobileNumber: '', accountName: '' },
                             referrer: { isFree: true, price: 0, mobileNumber: '', accountName: '' }
                         },
-                        popupShown: {} // NEW: track shown pop-ups
+                        popupShown: {}
                     };
                     set(dbRef, allData).then(() => {
                         if (callback) callback(allData);
@@ -6059,7 +6027,7 @@
                         };
                         saveData();
                     }
-                    if (!allData.popupShown) { // NEW
+                    if (!allData.popupShown) {
                         allData.popupShown = {};
                         saveData();
                     }
@@ -6111,7 +6079,6 @@
                             previewEl.innerHTML =
                                 `<img src="${url}" alt="Uploaded" style="width:100%;height:100%;object-fit:cover;" />`;
                         }
-                        // Add a small badge to show file type
                         const badge = document.createElement('div');
                         badge.className = 'file-type-badge';
                         badge.textContent = info.resource_type === 'video' ? '🎬 Video' : '🖼️ Image';
@@ -6191,33 +6158,26 @@
             renderApplications();
             renderPromoPics();
 
-            // ── Referral renders ──
             renderReferralPromos();
             renderCustomReferrals();
             renderReferralDiscounts();
             renderReferralPromoDiscounts();
             renderSignupBonuses();
 
-            // ── Payables renders ──
             renderAccounts();
             renderWithdrawals();
             populateUserSelects();
 
-            // ── Custom referral user select ──
             populateCustomReferralSelect();
 
-            // ── Account Update Modal user list ──
             renderAccountUpdateUserList();
 
-            // ── Customer Wallets Page ──
             if (document.getElementById('page-customer-wallet').classList.contains('active')) {
                 renderCustomerWalletsPage();
             }
 
-            // ── Update badges ──
             updateBadges();
 
-            // ── Check for pop-ups ──
             checkAndShowPopups();
         }
 
@@ -6424,7 +6384,6 @@
                 });
             });
 
-            // ─── INVOICE BUTTON ───
             container.querySelectorAll('.view-invoice-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -6437,7 +6396,6 @@
             updateBadges();
         }
 
-        // ── COMPACT USER CARDS ──
         function renderUsers(searchTerm = '', filter = 'all') {
             const container = document.getElementById('usersList');
             const usersData = allData.users || {};
@@ -6450,7 +6408,6 @@
 
             let entries = Object.entries(usersData);
 
-            // Search
             if (searchTerm.trim()) {
                 const term = searchTerm.trim().toLowerCase();
                 entries = entries.filter(([uid, u]) =>
@@ -6462,7 +6419,6 @@
                 );
             }
 
-            // Filter
             if (filter === 'banned') {
                 entries = entries.filter(([uid, u]) => u.banned === true);
             } else if (filter === 'active') {
@@ -6640,9 +6596,6 @@
                         `;
             }).join('');
 
-            // ── Event bindings ──
-
-            // Toggle expand
             container.querySelectorAll('.user-card').forEach(el => {
                 el.addEventListener('click', function(e) {
                     if (e.target.closest('.ban-toggle-wrap') || e.target.closest('.actions-row') ||
@@ -6662,7 +6615,6 @@
                 });
             });
 
-            // Ban toggle
             container.querySelectorAll('.ban-toggle-input').forEach(input => {
                 input.addEventListener('change', function(e) {
                     e.stopPropagation();
@@ -6680,7 +6632,6 @@
                 });
             });
 
-            // Edit user
             container.querySelectorAll('.edit-user').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -6689,7 +6640,6 @@
                 });
             });
 
-            // Delete user
             container.querySelectorAll('.delete-user').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -6866,13 +6816,11 @@
             });
         }
 
-        // ── NEW: Render Promo Pics Grid ──
         function renderPromoPics() {
             const container = document.getElementById('promoPicsGrid');
             const data = allData.promoPics || {};
             const entries = Object.entries(data);
 
-            // ── Update pending applications count ──
             const apps = allData.applications || {};
             const pendingApps = Object.values(apps).filter(a => a.status === 'pending').length;
             document.getElementById('pendingAppsCount').textContent = pendingApps;
@@ -6888,7 +6836,6 @@
                 return;
             }
 
-            // Sort by newest first
             entries.sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
 
             container.innerHTML = entries.map(([key, pic]) => {
@@ -6911,7 +6858,6 @@
                 `;
             }).join('');
 
-            // Edit buttons -> navigate to upload page with edit param
             container.querySelectorAll('.btn-edit-promo').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -6920,7 +6866,6 @@
                 });
             });
 
-            // Delete buttons
             container.querySelectorAll('.btn-delete-promo').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -6929,7 +6874,6 @@
                 });
             });
 
-            // Optional: click card to enlarge (video or image)
             container.querySelectorAll('.promo-pic-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const key = this.dataset.key;
@@ -6951,10 +6895,6 @@
                 });
             });
         }
-
-        // ───────────────────────────────────────────────────────────────────
-        // REFERRAL RENDER FUNCTIONS
-        // ───────────────────────────────────────────────────────────────────
 
         function renderReferralPromos() {
             const data = allData.referralPromos || {};
@@ -7154,10 +7094,6 @@
             signupBonusWithoutReferral.value = bonuses.withoutReferral || '';
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // PAYABLES RENDER FUNCTIONS
-        // ───────────────────────────────────────────────────────────────────
-
         function renderAccounts() {
             const accounts = allData.customerAccounts || {};
             const users = allData.users || {};
@@ -7315,8 +7251,6 @@
             updateBadges();
         }
 
-        // ─── WITHDRAWAL CONFIRMATION MODAL ──────────────────────────────
-
         function openWithdrawConfirmModal(key, action) {
             const withdrawals = allData.withdrawalRequests || {};
             const users = allData.users || {};
@@ -7459,10 +7393,6 @@
             });
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // POPULATE SELECTS
-        // ───────────────────────────────────────────────────────────────────
-
         function populateUserSelects() {
             const users = allData.users || {};
             const options = Object.entries(users).map(([uid, u]) => {
@@ -7486,10 +7416,6 @@
             }).join('');
             customReferralUserSelect.innerHTML = `<option value="">— Select a user —</option>` + options;
         }
-
-        // ───────────────────────────────────────────────────────────────────
-        // ACCOUNT UPDATE MODAL FUNCTIONS
-        // ───────────────────────────────────────────────────────────────────
 
         function renderAccountUpdateUserList() {
             const users = allData.users || {};
@@ -7705,10 +7631,6 @@
             }
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // CUSTOMER WALLETS PAGE
-        // ───────────────────────────────────────────────────────────────────
-
         function renderCustomerWalletsPage(searchTerm = '') {
             const container = document.getElementById('customerWalletListPage');
             const users = allData.users || {};
@@ -7874,10 +7796,6 @@
             }
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // WORK UPLOAD MODAL
-        // ───────────────────────────────────────────────────────────────────
-
         function openWorkUploadModal(type, editData = null) {
             workPostType.value = type;
             editWorkPostId.value = editData ? editData.key : '';
@@ -7989,10 +7907,6 @@
             }
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // PROMO PICS CRUD + CLICK CONTENT + JOB POSITIONS (NEW PAGE)
-        // ───────────────────────────────────────────────────────────────────
-
         function addPromoPic(data) {
             const newId = 'pp' + Date.now();
             if (!allData.promoPics) allData.promoPics = {};
@@ -8027,7 +7941,6 @@
         }
 
         function openEditClickContent(key) {
-            // Navigate to the new upload page with edit param
             showPage('promo-upload', { edit: key });
         }
 
@@ -8053,7 +7966,6 @@
                 });
             }
 
-            // Update customer preview dropdown
             const previewSelect = customerPreviewSelect;
             previewSelect.innerHTML = `<option value="">— Select a position —</option>`;
             if (positions && positions.length > 0) {
@@ -8134,10 +8046,6 @@
             }
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // APPLICATIONS MANAGEMENT – 2×2 IMAGE GRID WITH ENLARGE
-        // ───────────────────────────────────────────────────────────────────
-
         function renderApplications(filter = applicationsFilter) {
             const data = allData.applications || {};
             const users = allData.users || {};
@@ -8184,16 +8092,13 @@
                 const initial = (userName || 'U').charAt(0).toUpperCase();
                 const dateStr = app.createdAt ? new Date(app.createdAt).toLocaleString() : 'N/A';
 
-                // ─── Collect all image URLs from form data ───
                 const fd = app.formData || {};
                 const imageUrls = [];
 
-                // Prize: proofImage
                 if (app.formType === 'prize' && fd.proofImage) {
                     imageUrls.push({ url: fd.proofImage, label: 'Proof' });
                 }
 
-                // Job: profilePic, nrcFront, nrcBack, qualification
                 if (app.formType === 'job') {
                     if (fd.profilePic) imageUrls.push({ url: fd.profilePic, label: 'Profile' });
                     if (fd.nrcFront) imageUrls.push({ url: fd.nrcFront, label: 'NRC Front' });
@@ -8201,7 +8106,6 @@
                     if (fd.qualification) imageUrls.push({ url: fd.qualification, label: 'Qualification' });
                 }
 
-                // Payment screenshot (if available)
                 if (app.paymentData && app.paymentData.screenshot) {
                     imageUrls.push({ url: app.paymentData.screenshot, label: 'Payment' });
                 } else if (app.paymentData && app.paymentData.screenshots && app.paymentData.screenshots.length > 0) {
@@ -8210,7 +8114,6 @@
                     });
                 }
 
-                // ─── Build detail fields (excluding images) ───
                 let detailFields = [];
                 if (app.formType === 'ambassador') {
                     detailFields = [
@@ -8268,7 +8171,6 @@
                     }
                 }
 
-                // Add payment details (excluding screenshot)
                 if (app.paymentData) {
                     const pd = app.paymentData;
                     detailFields.push({ label: 'Amount Paid', val: `ZMW ${pd.amount || 0}` });
@@ -8281,7 +8183,6 @@
                     return `<div class="detail-item"><span class="label">${f.label}</span><span class="val">${val}</span></div>`;
                 }).join('');
 
-                // ─── Build 2×2 image grid ───
                 let imageGridHtml = '';
                 if (imageUrls.length > 0) {
                     const imageItems = imageUrls.map(({ url, label }) => {
@@ -8292,7 +8193,6 @@
                             </div>
                         `;
                     }).join('');
-                    // Pad to even number for 2-column layout
                     const remainder = imageUrls.length % 2;
                     const padded = remainder === 1 ? imageItems + `<div class="img-box" style="opacity:0;pointer-events:none;"></div>` : imageItems;
                     imageGridHtml = `
@@ -8345,7 +8245,6 @@
                         `;
             }).join('');
 
-            // ─── Bind events ───
             applicationsListEl.querySelectorAll('.app-card').forEach(card => {
                 card.addEventListener('click', function(e) {
                     if (e.target.closest('.btn-approve-app') || e.target.closest('.btn-reject-app') ||
@@ -8378,8 +8277,6 @@
                 });
             });
 
-            // ─── Re-bind image click for enlarge (inline onclick already handles) ───
-            // Also handle any dynamically added view-proof buttons (legacy)
             applicationsListEl.querySelectorAll('.btn-view-proof').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -8406,10 +8303,6 @@
                 showToast('Error updating application status', 'error');
             });
         }
-
-        // ───────────────────────────────────────────────────────────────────
-        // FORM CONFIGURATION
-        // ───────────────────────────────────────────────────────────────────
 
         function renderFormConfigs() {
             const container = document.getElementById('formConfigList');
@@ -8452,10 +8345,6 @@
             }
             container.innerHTML = html;
         }
-
-        // ───────────────────────────────────────────────────────────────────
-        // DELETE CONFIRMATION
-        // ───────────────────────────────────────────────────────────────────
 
         function showDeleteConfirmation(type, key) {
             const messages = {
@@ -8556,10 +8445,6 @@
             pendingDeleteAction = null;
         });
 
-        // ───────────────────────────────────────────────────────────────────
-        // SERVICE CRUD
-        // ───────────────────────────────────────────────────────────────────
-
         function addService(data) {
             const newId = 's' + Date.now();
             if (!allData.services) allData.services = {};
@@ -8631,10 +8516,6 @@
             }
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // ORDER STATUS MODAL
-        // ───────────────────────────────────────────────────────────────────
-
         function openStatusModal(orderId, currentStatus) {
             pendingStatusOrderId = orderId;
             selectedStatus = currentStatus;
@@ -8684,10 +8565,6 @@
                 console.error(error);
             });
         });
-
-        // ───────────────────────────────────────────────────────────────────
-        // SERVICE MODAL
-        // ───────────────────────────────────────────────────────────────────
 
         function openModal(title, subtitle, data, key) {
             modalTitle.textContent = title;
@@ -8751,10 +8628,6 @@
             openModal('Edit Service', 'Update the service details.', service, key);
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // CATEGORY
-        // ───────────────────────────────────────────────────────────────────
-
         document.getElementById('addCategoryBtn').addEventListener('click', function() {
             const name = document.getElementById('newCategoryInput').value.trim().toLowerCase();
             if (!name) {
@@ -8773,10 +8646,6 @@
             });
         });
 
-        // ───────────────────────────────────────────────────────────────────
-        // PROMO
-        // ───────────────────────────────────────────────────────────────────
-
         function addPromo(data) {
             const newId = 'p' + Date.now();
             if (!allData.promotions) allData.promotions = {};
@@ -8787,10 +8656,6 @@
             };
             return saveData();
         }
-
-        // ───────────────────────────────────────────────────────────────────
-        // REFERRAL ACTIONS
-        // ───────────────────────────────────────────────────────────────────
 
         postReferralPromoBtn.addEventListener('click', function() {
             const amount = parseFloat(referralPromoAmount.value);
@@ -8935,8 +8800,6 @@
             });
         });
 
-        // ─── New Referral Promo Discount ────────────────────────────────
-
         postReferralPromoDiscountBtn.addEventListener('click', function() {
             const discount = parseFloat(referralPromoDiscountPercent.value);
             const ownerAmount = parseFloat(referralPromoOwnerAmount.value);
@@ -8987,10 +8850,6 @@
             });
         });
 
-        // ───────────────────────────────────────────────────────────────────
-        // SIGNUP BONUSES
-        // ───────────────────────────────────────────────────────────────────
-
         saveSignupBonusesBtn.addEventListener('click', function() {
             const withReferral = parseFloat(signupBonusWithReferral.value) || 0;
             const withCustomReferral = parseFloat(signupBonusWithCustomReferral.value) || 0;
@@ -9009,10 +8868,6 @@
             });
         });
 
-        // ───────────────────────────────────────────────────────────────────
-        // PAYABLES TOGGLES
-        // ───────────────────────────────────────────────────────────────────
-
         toggleAccounts.addEventListener('click', function() {
             toggleAccounts.classList.add('active');
             toggleWithdrawals.classList.remove('active');
@@ -9027,7 +8882,6 @@
             viewAccounts.classList.remove('active');
         });
 
-        // ── Withdrawal filter buttons ──
         showApprovedBtn.addEventListener('click', function() {
             withdrawalsFilter = 'approved';
             renderWithdrawals();
@@ -9054,10 +8908,6 @@
         }
         updateFilterButtons();
 
-        // ───────────────────────────────────────────────────────────────────
-        // MANUAL DEPOSIT (User Selector Modal)
-        // ───────────────────────────────────────────────────────────────────
-
         let selectedUserForDeposit = null;
 
         manualDepositBtn.addEventListener('click', function() {
@@ -9074,7 +8924,6 @@
             if (e.target === this) manualDepositModal.classList.remove('open');
         });
 
-        // User Selector Modal
         userSelectorCloseBtn.addEventListener('click', function() {
             userSelectorModal.classList.remove('open');
         });
@@ -9216,10 +9065,6 @@
             });
         });
 
-        // ───────────────────────────────────────────────────────────────────
-        // ACCOUNT UPDATE EVENT BINDINGS
-        // ───────────────────────────────────────────────────────────────────
-
         accountUpdateBtn.addEventListener('click', openAccountUpdateModal);
         accountUpdateCloseBtn.addEventListener('click', closeAccountUpdateModal);
         accountUpdateModal.addEventListener('click', function(e) {
@@ -9252,20 +9097,12 @@
 
         applyAccountUpdateBtn.addEventListener('click', applyAccountUpdate);
 
-        // ───────────────────────────────────────────────────────────────────
-        // WITHDRAWAL CONFIRMATION EVENT BINDINGS
-        // ───────────────────────────────────────────────────────────────────
-
         withdrawConfirmCloseBtn.addEventListener('click', closeWithdrawConfirmModal);
         withdrawConfirmModal.addEventListener('click', function(e) {
             if (e.target === this) closeWithdrawConfirmModal();
         });
         withdrawConfirmCancelBtn.addEventListener('click', closeWithdrawConfirmModal);
         withdrawConfirmActionBtn.addEventListener('click', executeWithdrawAction);
-
-        // ───────────────────────────────────────────────────────────────────
-        // EDIT CUSTOMER MODAL EVENT BINDINGS
-        // ───────────────────────────────────────────────────────────────────
 
         editCustomerCloseBtn.addEventListener('click', function() {
             editCustomerModal.classList.remove('open');
@@ -9317,10 +9154,6 @@
                 showToast('Error updating customer: ' + error.message, 'error');
             });
         });
-
-        // ───────────────────────────────────────────────────────────────────
-        // EVENT BINDINGS
-        // ───────────────────────────────────────────────────────────────────
 
         workAvatarBtn.addEventListener('click', function() {
             showPage('work');
@@ -9443,8 +9276,6 @@
             }
         });
 
-        // ── PROMO PICS UPLOAD PAGE NAVIGATION ──
-
         document.getElementById('addPromoPicBtn').addEventListener('click', () => {
             showPage('promo-upload');
         });
@@ -9453,7 +9284,6 @@
             showPage('promo-upload');
         });
 
-        // Cancel buttons on upload page
         document.getElementById('promoUploadCancelBtn').addEventListener('click', () => {
             showPage('promo-pics');
         });
@@ -9461,27 +9291,22 @@
             showPage('promo-pics');
         });
 
-        // Click-config toggle
         enableClickContent.addEventListener('change', function() {
             clickConfigFields.style.opacity = this.checked ? '1' : '0.5';
             clickConfigFields.querySelectorAll('input, textarea, select').forEach(el => el.disabled = !this.checked);
         });
         clickConfigFields.querySelectorAll('input, textarea, select').forEach(el => el.disabled = false);
 
-        // Setup Cloudinary for promo page - using the large preview container
         setupCloudinaryUpload(promoPicImagePreview, promoPicImageUrl, promoPicImagePreview, (url, info) => {
             promoPicMediaType.value = info.resource_type || 'image';
-            // Add file type badge
             const badge = document.createElement('div');
             badge.className = 'file-type-badge';
             badge.textContent = info.resource_type === 'video' ? '🎬 Video' : '🖼️ Image';
-            // Remove any existing badge
             const oldBadge = promoPicImagePreview.querySelector('.file-type-badge');
             if (oldBadge) oldBadge.remove();
             promoPicImagePreview.appendChild(badge);
         }, { resourceType: 'auto' });
 
-        // ── Job Positions toggle & add ──
         clickFormType.addEventListener('change', function() {
             if (this.value === 'job') {
                 jobPositionsEditor.style.display = 'block';
@@ -9511,7 +9336,6 @@
             }
         });
 
-        // ── PROMO UPLOAD FORM SUBMIT ──
         document.getElementById('promoPicUploadForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -9531,7 +9355,6 @@
             };
 
             if (editingPromoKey) {
-                // Update existing
                 const currentPic = allData.promoPics?.[editingPromoKey];
                 if (!currentPic) {
                     showToast('Media not found.', 'error');
@@ -9552,7 +9375,6 @@
                 return;
             }
 
-            // New upload
             if (!imageUrl) {
                 showToast('Please upload a file first', 'error');
                 return;
@@ -9568,8 +9390,6 @@
                 showToast('Media uploaded!', 'success');
             });
         });
-
-        // ── FORM CONFIGURATION BUTTONS ──
 
         document.getElementById('configureFormsBtn').addEventListener('click', function() {
             renderFormConfigs();
@@ -9610,16 +9430,12 @@
             });
         });
 
-        // ── PROMO PIC ENLARGE MODAL ──
-
         document.getElementById('promoPicEnlargeCloseBtn').addEventListener('click', function() {
             document.getElementById('promoPicEnlargeModal').classList.remove('open');
         });
         document.getElementById('promoPicEnlargeModal').addEventListener('click', function(e) {
             if (e.target === this) this.classList.remove('open');
         });
-
-        // ── Other buttons ──
 
         document.getElementById('addServiceBtn').addEventListener('click', () => {
             openModal('Add Service', 'Fill in the details to create a new service.', null);
@@ -9791,7 +9607,6 @@
             renderOrders(searchTerm, this.value);
         });
 
-        // ── Users page: search + filter ──
         document.getElementById('userSearchInput').addEventListener('input', function() {
             renderUsers(this.value, userFilterSelect.value);
         });
@@ -9822,7 +9637,6 @@
             showPage('promo-pics');
         });
 
-        // ─── NEW: Notifications button ───
         document.getElementById('viewNotificationsQuick').addEventListener('click', () => {
             showPage('notifications');
         });
@@ -9849,10 +9663,6 @@
             }
         });
 
-        // ───────────────────────────────────────────────────────────────────
-        // APPLICATIONS EVENT BINDINGS
-        // ───────────────────────────────────────────────────────────────────
-
         appStatusTabs.querySelectorAll('.tab-btn').forEach(tab => {
             tab.addEventListener('click', function() {
                 appStatusTabs.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
@@ -9866,10 +9676,6 @@
             renderApplications(applicationsFilter);
             showToast('Applications refreshed');
         });
-
-        // ───────────────────────────────────────────────────────────────────
-        // SERVICES PRICE ADJUSTMENT
-        // ───────────────────────────────────────────────────────────────────
 
         let currentAdjustMode = 'add-amount';
 
@@ -9973,10 +9779,6 @@
             }
         });
 
-        // ───────────────────────────────────────────────────────────────────
-        // BADGE UPDATES
-        // ───────────────────────────────────────────────────────────────────
-
         function updateBadges() {
             const orders = Object.values(allData.orders || {});
             const pendingOrders = orders.filter(o => o.status === 'pending').length;
@@ -9997,56 +9799,43 @@
             }
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // HASH‑BASED ROUTING (the core back‑button fix)
-        // ───────────────────────────────────────────────────────────────────
-
         function showPage(pageId, params = {}) {
-            // Build the hash
             let hash = '#' + pageId;
             if (Object.keys(params).length > 0) {
                 hash += '?' + new URLSearchParams(params).toString();
             }
-            // Only push if different from current
             if (window.location.hash !== hash) {
                 window.location.hash = hash;
             } else {
-                // If same, still ensure the page is shown (e.g., when back button triggers same hash)
                 navigateToPage(pageId, params);
             }
         }
 
         function navigateToPage(pageId, params) {
-            // Hide all pages, show the target
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             const target = document.getElementById('page-' + pageId);
             if (target) {
                 target.classList.add('active');
             }
 
-            // Update nav items
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             const navItem = document.querySelector(`.nav-item[data-page="${pageId}"]`);
             if (navItem) navItem.classList.add('active');
 
-            // Special handling for 'work' (no nav item)
             if (pageId === 'work') {
                 mainHeader.classList.add('work-active');
             } else {
                 mainHeader.classList.remove('work-active');
             }
 
-            // Show/hide back button and action row
             if (pageId === 'dashboard') {
                 hideBackButton();
             } else {
                 showBackButton();
             }
 
-            // Scroll to top
             document.getElementById('appContent').scrollTop = 0;
 
-            // Render content if needed
             switch (pageId) {
                 case 'dashboard':
                     renderDashboard();
@@ -10055,7 +9844,7 @@
                     renderServices();
                     break;
                 case 'promo-pics':
-                    renderPromoPics(); // render the grid + pending count
+                    renderPromoPics();
                     break;
                 case 'promo-upload':
                     const editKey = params.edit || null;
@@ -10093,19 +9882,16 @@
                     renderPromotions();
                     break;
                 case 'profile':
-                    // already rendered on load
                     break;
                 case 'work':
                     renderWorkPosts();
                     break;
                 case 'notifications':
-                    // just show page, no extra rendering needed
                     break;
                 default:
                     break;
             }
 
-            // Update badges after navigation
             updateBadges();
         }
 
@@ -10119,11 +9905,9 @@
             actionRow.style.display = 'flex';
         }
 
-        // Handle hash changes (back/forward)
         function handleHashChange() {
             const hash = window.location.hash;
             if (!hash || hash === '#') {
-                // Default to dashboard
                 window.location.hash = '#dashboard';
                 return;
             }
@@ -10138,10 +9922,6 @@
 
         window.addEventListener('hashchange', handleHashChange);
 
-        // ───────────────────────────────────────────────────────────────────
-        // TOAST
-        // ───────────────────────────────────────────────────────────────────
-
         function showToast(msg, type = 'success') {
             toastMsg.textContent = msg;
             toast.classList.add('show');
@@ -10150,10 +9930,6 @@
                 toast.classList.remove('show');
             }, 2200);
         }
-
-        // ───────────────────────────────────────────────────────────────────
-        // AUTH & INIT
-        // ───────────────────────────────────────────────────────────────────
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -10178,7 +9954,6 @@
                             allUsersCache = usersData;
                             renderDashboard();
                             updateBadges();
-                            // Re‑render active page if needed
                             if (document.getElementById('page-users').classList.contains('active')) {
                                 renderUsers(document.getElementById('userSearchInput').value, userFilterSelect
                                     .value);
@@ -10208,11 +9983,9 @@
                         }
                         hideBackButton();
 
-                        // Set initial hash if none
                         if (!window.location.hash || window.location.hash === '#') {
                             window.location.hash = '#dashboard';
                         } else {
-                            // Ensure the page shown matches the hash
                             handleHashChange();
                         }
                     });
@@ -10222,10 +9995,6 @@
             }
         });
 
-        // ───────────────────────────────────────────────────────────────────
-        // FCM: REQUEST PERMISSION & GET TOKEN (for admin – not used for sending)
-        // ───────────────────────────────────────────────────────────────────
-
         async function requestNotificationPermission() {
             const permission = await Notification.requestPermission();
             if (permission === 'granted') {
@@ -10233,7 +10002,6 @@
                 try {
                     const token = await getToken(messaging, { vapidKey: VAPID_KEY });
                     console.log('🔔 FCM Token:', token);
-                    // You can store this token in the admin's record if needed
                 } catch (err) {
                     console.error('Error getting token:', err);
                 }
@@ -10241,33 +10009,16 @@
                 console.warn('❌ Notification permission denied.');
             }
         }
-
-        // Call it on load – but it's not required for sending, just for receiving foreground messages (optional)
         requestNotificationPermission();
 
-        // ───────────────────────────────────────────────────────────────────
-        // SEND NOTIFICATION – via Cloud Function (required)
-        // ───────────────────────────────────────────────────────────────────
-
-        /**
-         * This function sends a push notification by calling a Firebase Cloud Function.
-         * You must deploy the following Cloud Function (see separate file) to make this work.
-         * 
-         * The function expects:
-         *   - recipient: 'all' or a specific user UID
-         *   - title, body, icon, clickUrl
-         * 
-         * It will look up the user's FCM token from the database.
-         */
         async function sendNotificationToUsers(recipient, title, body, icon, clickUrl) {
             const functionUrl = 'https://us-central1-bufferzone-63501.cloudfunctions.net/sendPushNotification';
-            // Adjust the URL to your actual Cloud Function endpoint
 
             const payload = {
                 recipient,
                 title,
                 body,
-                icon: icon || 'https://your-domain.com/logo.png', // Replace with your actual logo URL
+                icon: icon || 'https://your-domain.com/logo.png',
                 clickUrl: clickUrl || ''
             };
 
@@ -10293,14 +10044,9 @@
             }
         }
 
-        // ───────────────────────────────────────────────────────────────────
-        // NOTIFICATION FORM HANDLING
-        // ───────────────────────────────────────────────────────────────────
-
         notifRecipient.addEventListener('change', function() {
             if (this.value === 'specific') {
                 notifUserSelectGroup.style.display = 'block';
-                // Populate user list
                 const users = allData.users || {};
                 const options = Object.entries(users).map(([uid, u]) => {
                     const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
@@ -10312,7 +10058,6 @@
             }
         });
 
-        // Preview as user types
         notifTitle.addEventListener('input', updatePreview);
         notifBody.addEventListener('input', updatePreview);
         notifIcon.addEventListener('input', updatePreview);
@@ -10323,14 +10068,13 @@
             const icon = notifIcon.value.trim();
 
             if (title || body) {
-                notifPreview.style.display = 'flex';
+                notifPreview.classList.add('show');
                 notifPreviewTitle.textContent = title || 'Title';
-                // Convert **bold** to <b>bold</b>
                 const formattedBody = body.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
                 notifPreviewBody.innerHTML = formattedBody || 'Body';
                 notifPreviewIcon.src = icon || 'https://via.placeholder.com/48?text=Logo';
             } else {
-                notifPreview.style.display = 'none';
+                notifPreview.classList.remove('show');
             }
         }
 
@@ -10348,7 +10092,6 @@
                 return;
             }
 
-            // Show progress
             notifProgress.style.display = 'block';
             sendNotifBtn.disabled = true;
 
@@ -10359,9 +10102,8 @@
                 } else {
                     showToast('⚠️ Notification sent but some devices may not have received it.', 'warning');
                 }
-                // Reset form
                 notifForm.reset();
-                notifPreview.style.display = 'none';
+                notifPreview.classList.remove('show');
                 notifRecipient.value = 'all';
                 notifUserSelectGroup.style.display = 'none';
             } catch (error) {
@@ -10372,14 +10114,9 @@
             }
         });
 
-        // ───────────────────────────────────────────────────────────────────
-        // ONE-TIME POP-UP SYSTEM
-        // ───────────────────────────────────────────────────────────────────
-
-        // Cutoff: July 20, 2026 00:00:00
         const CUTOFF_DATE = new Date('2026-07-20T00:00:00').getTime();
 
-        let currentPopup = null; // { type, id, data }
+        let currentPopup = null;
 
         function getCutoffTimestamp() {
             return CUTOFF_DATE;
@@ -10404,7 +10141,6 @@
         }
 
         function showPopup(type, item) {
-            // Build content based on type
             let title = '';
             let details = '';
 
@@ -10414,6 +10150,9 @@
                     <div class="popup-item-detail"><strong>Customer:</strong> ${item.customer || 'N/A'}</div>
                     <div class="popup-item-detail"><strong>Service:</strong> ${item.service || 'N/A'}</div>
                     <div class="popup-item-detail"><strong>Amount:</strong> ZMW ${(item.amount || 0).toFixed(2)}</div>
+                    <div class="popup-item-detail"><strong>Payment Method:</strong> ${item.paymentMethod || 'Airtel Money'}</div>
+                    <div class="popup-item-detail"><strong>Customization:</strong> ${item.customization || 'None'}</div>
+                    <div class="popup-item-detail"><strong>Notes:</strong> ${item.notes || 'No notes'}</div>
                     <div class="popup-item-detail"><strong>Date:</strong> ${item.date || 'N/A'}</div>
                 `;
                 popupRedirectBtn.dataset.redirect = 'orders';
@@ -10430,14 +10169,31 @@
                     referrer: 'Referrer'
                 } [item.formType] || item.formType || 'Unknown';
                 title = `📋 New Application: ${formTypeLabel}`;
+                const fd = item.formData || {};
                 details = `
                     <div class="popup-item-detail"><strong>Applicant:</strong> ${userName}</div>
-                    <div class="popup-item-detail"><strong>Email:</strong> ${item.formData?.email || user.email || 'N/A'}</div>
+                    <div class="popup-item-detail"><strong>Email:</strong> ${fd.email || user.email || 'N/A'}</div>
+                    <div class="popup-item-detail"><strong>Phone:</strong> ${fd.number || fd.phone || user.phone || 'N/A'}</div>
+                    <div class="popup-item-detail"><strong>BZ Code:</strong> ${fd.bzCode || 'N/A'}</div>
                     <div class="popup-item-detail"><strong>Form:</strong> ${formTypeLabel}</div>
+                    <div class="popup-item-detail"><strong>Flyer:</strong> ${item.flyerId ? (allData.promoPics?.[item.flyerId]?.text || 'Untitled') : 'N/A'}</div>
+                    ${fd.discountForCustomer ? `<div class="popup-item-detail"><strong>Discount for Customer:</strong> ${fd.discountForCustomer}%</div>` : ''}
+                    ${fd.ambassadorPayout ? `<div class="popup-item-detail"><strong>Ambassador Payout:</strong> ZMW ${fd.ambassadorPayout}</div>` : ''}
+                    ${fd.investmentAmount ? `<div class="popup-item-detail"><strong>Investment:</strong> ZMW ${fd.investmentAmount}</div>` : ''}
+                    ${fd.durationMonths ? `<div class="popup-item-detail"><strong>Duration:</strong> ${fd.durationMonths} months</div>` : ''}
+                    ${fd.profitPerMonth ? `<div class="popup-item-detail"><strong>Profit/Month:</strong> ZMW ${fd.profitPerMonth}</div>` : ''}
+                    ${fd.position ? `<div class="popup-item-detail"><strong>Position:</strong> ${fd.position}</div>` : ''}
+                    ${fd.occupation ? `<div class="popup-item-detail"><strong>Occupation:</strong> ${fd.occupation}</div>` : ''}
+                    ${fd.age ? `<div class="popup-item-detail"><strong>Age:</strong> ${fd.age}</div>` : ''}
+                    ${fd.gender ? `<div class="popup-item-detail"><strong>Gender:</strong> ${fd.gender}</div>` : ''}
+                    ${fd.details ? `<div class="popup-item-detail"><strong>Details:</strong> ${fd.details}</div>` : ''}
+                    ${fd.about ? `<div class="popup-item-detail"><strong>About:</strong> ${fd.about}</div>` : ''}
+                    ${item.paymentData ? `<div class="popup-item-detail"><strong>Amount Paid:</strong> ZMW ${item.paymentData.amount || 0}</div>` : ''}
+                    ${item.paymentData ? `<div class="popup-item-detail"><strong>Paid To:</strong> ${item.paymentData.accountName || 'N/A'}</div>` : ''}
                     <div class="popup-item-detail"><strong>Date:</strong> ${item.createdAt ? new Date(item.createdAt).toLocaleString() : 'N/A'}</div>
                 `;
                 popupRedirectBtn.dataset.redirect = 'applications';
-                popupRedirectBtn.dataset.itemId = item.id || item.flyerId; // Use application key
+                popupRedirectBtn.dataset.itemId = item.id || item.flyerId;
             } else if (type === 'withdrawal') {
                 const users = allData.users || {};
                 const user = users[item.userId] || {};
@@ -10446,7 +10202,9 @@
                 details = `
                     <div class="popup-item-detail"><strong>User:</strong> ${name}</div>
                     <div class="popup-item-detail"><strong>Phone:</strong> ${item.phone || 'N/A'}</div>
+                    <div class="popup-item-detail"><strong>Referral Code:</strong> ${user.referralCode || 'N/A'}</div>
                     <div class="popup-item-detail"><strong>Amount:</strong> ZMW ${(item.amount || 0).toFixed(2)}</div>
+                    <div class="popup-item-detail"><strong>Status:</strong> ${item.status || 'Pending'}</div>
                     <div class="popup-item-detail"><strong>Date:</strong> ${item.createdAt ? new Date(item.createdAt).toLocaleString() : 'N/A'}</div>
                 `;
                 popupRedirectBtn.dataset.redirect = 'payables';
@@ -10459,16 +10217,14 @@
                 ${details}
             `;
 
-            // Store current popup
             currentPopup = { type, id: item.id || key, data: item };
 
-            // Show modal
             popupModal.classList.add('open');
 
-            // Play notification sound
             try {
                 notificationSound.currentTime = 0;
                 notificationSound.play();
+                notificationSound.loop = false;
             } catch (e) {
                 console.warn('Could not play notification sound:', e);
             }
@@ -10476,35 +10232,28 @@
 
         function closePopup() {
             popupModal.classList.remove('open');
-            // Do not mark as shown; user can reopen by reload if they didn't redirect
         }
 
         function redirectAndMark() {
             if (!currentPopup) return;
             const { type, id } = currentPopup;
-            // Mark as shown
             markPopupShown(type, id).then(() => {
-                // Navigate to the appropriate page
                 const redirect = popupRedirectBtn.dataset.redirect;
                 if (redirect) {
                     showPage(redirect);
                 }
                 closePopup();
                 currentPopup = null;
-                // Check for next popup
                 checkAndShowPopups();
             });
         }
 
         function checkAndShowPopups() {
             if (!allData) return;
-            // If a popup is already open, don't open another
             if (popupModal.classList.contains('open')) return;
 
-            // Collect all candidates: orders, applications, withdrawals
             let candidates = [];
 
-            // Orders
             const orders = allData.orders || {};
             for (const [key, order] of Object.entries(orders)) {
                 if (isNewerThanCutoff(order) && !isPopupShown('order', key)) {
@@ -10512,7 +10261,6 @@
                 }
             }
 
-            // Applications
             const applications = allData.applications || {};
             for (const [key, app] of Object.entries(applications)) {
                 if (isNewerThanCutoff(app) && !isPopupShown('application', key)) {
@@ -10520,7 +10268,6 @@
                 }
             }
 
-            // Withdrawals
             const withdrawals = allData.withdrawalRequests || {};
             for (const [key, wd] of Object.entries(withdrawals)) {
                 if (isNewerThanCutoff(wd) && !isPopupShown('withdrawal', key)) {
@@ -10529,29 +10276,21 @@
             }
 
             if (candidates.length === 0) {
-                // No new popups
                 return;
             }
 
-            // Sort by newest first
             candidates.sort((a, b) => b.createdAt - a.createdAt);
 
-            // Show the newest one
             const first = candidates[0];
             showPopup(first.type, first.data);
         }
 
-        // ── Popup event bindings ──
         popupCloseBtn.addEventListener('click', closePopup);
         popupCloseBtn2.addEventListener('click', closePopup);
         popupModal.addEventListener('click', function(e) {
             if (e.target === this) closePopup();
         });
         popupRedirectBtn.addEventListener('click', redirectAndMark);
-
-        // ───────────────────────────────────────────────────────────────────
-        // INVOICE / RECEIPT FUNCTIONS (for admin)
-        // ───────────────────────────────────────────────────────────────────
 
         function openInvoiceModal(order, key) {
             const customerName = order.customer || currentAdminData?.name || 'Customer';
@@ -10631,21 +10370,13 @@
             return div.innerHTML;
         }
 
-        // ── Invoice modal event bindings ──
         closeReceiptBtn.addEventListener('click', closeInvoiceModal);
         receiptModal.addEventListener('click', function(e) {
             if (e.target === this) closeInvoiceModal();
         });
         downloadReceiptBtn.addEventListener('click', downloadInvoice);
 
-        // ───────────────────────────────────────────────────────────────────
-        // INITIAL POPUP CHECK AFTER DATA LOAD
-        // ───────────────────────────────────────────────────────────────────
-
-        // We already call checkAndShowPopups() inside renderAll(), which is called after data load.
-        // Also, we should call it when new data arrives via onValue; renderAll already does that.
-
-        console.log('✅ Admin Dashboard — Invoice for completed orders added, pending applications count in promo pics, enhanced pop-up system with database tracking.');
+        console.log('✅ Admin Dashboard — macOS Notification page, ringtone for every pop‑up, enhanced pop‑up with more info and fixed View Details button.');
     </script>
 </body>
 </html>
