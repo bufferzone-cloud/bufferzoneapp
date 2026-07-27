@@ -20,62 +20,16 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* ── GLOBAL LAYOUT: PHONE-FRAME ON ALL SCREENS ── */
         body {
-            background: #1a1a1a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            min-height: 100dvh;
+            background-color: #f8f9fc;
+            display: block;
             overflow: hidden;
-            padding: 0;
-            margin: 0;
-        }
-
-        .phone-frame {
-            width: 100%;
-            max-width: 430px;
-            height: 100vh;
-            height: 100dvh;
-            max-height: 932px;
-            background: #ffffff;
-            border-radius: 0;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            box-shadow: none;
-        }
-
-        /* On screens wider than 500px, show phone frame with rounded corners + shadow */
-        @media (min-width: 500px) {
-            body {
-                padding: 20px;
-                background: #1a1a1a;
-            }
-            .phone-frame {
-                border-radius: 40px;
-                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7), 0 0 0 2px #333, 0 0 0 4px #1a1a1a;
-                height: 90vh;
-                max-height: 820px;
-                min-height: 640px;
-                width: 100%;
-                max-width: 420px;
-            }
-        }
-
-        /* On very large screens, keep it centered and phone-sized */
-        @media (min-width: 1200px) {
-            .phone-frame {
-                max-width: 400px;
-                max-height: 800px;
-            }
+            height: 100%;
         }
 
         /* ── SPINNER OVERLAY ── */
         .spinner-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -85,160 +39,133 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: #1c2128;
-            overflow: hidden;
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            will-change: opacity, transform;
+            background: #ffffff;
             pointer-events: auto;
+            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            overflow: hidden;
         }
 
         .spinner-overlay.hidden {
             opacity: 0;
-            transform: scale(1.05);
             pointer-events: none;
         }
 
-        /* ── SPINNER ANIMATED BACKGROUND ── */
-        .spinner-bg {
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg,
-                    #1c2128, #f5b83d, #00a86b, #7c3aed, #f59e0b, #1c2128);
-            animation: spinBg 12s linear infinite;
-            opacity: 0.25;
-            filter: blur(80px);
-            z-index: 0;
-        }
-
-        @keyframes spinBg {
-            0% {
-                transform: rotate(0deg) scale(1);
-            }
-            50% {
-                transform: rotate(180deg) scale(1.2);
-            }
-            100% {
-                transform: rotate(360deg) scale(1);
-            }
-        }
-
-        /* ── SPINNER FLOATING ORBS ── */
-        .spinner-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.4;
-            z-index: 0;
-            animation: orbFloat 6s ease-in-out infinite alternate;
-        }
-
-        .spinner-orb:nth-child(1) {
-            width: 140px;
-            height: 140px;
-            background: #f5b83d;
-            top: 10%;
-            left: 5%;
-            animation-delay: 0s;
-        }
-        .spinner-orb:nth-child(2) {
-            width: 180px;
-            height: 180px;
-            background: #00a86b;
-            bottom: 15%;
-            right: 0%;
-            animation-delay: 1.2s;
-        }
-        .spinner-orb:nth-child(3) {
-            width: 120px;
-            height: 120px;
-            background: #7c3aed;
-            top: 50%;
-            left: 60%;
-            animation-delay: 2.4s;
-        }
-        .spinner-orb:nth-child(4) {
-            width: 100px;
-            height: 100px;
-            background: #f59e0b;
-            bottom: 30%;
-            left: 10%;
-            animation-delay: 0.6s;
-        }
-        .spinner-orb:nth-child(5) {
-            width: 160px;
-            height: 160px;
-            background: #1c2128;
-            top: 0%;
-            right: 10%;
-            animation-delay: 1.8s;
-        }
-
-        @keyframes orbFloat {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(30px, -40px) scale(1.1);
-            }
-            66% {
-                transform: translate(-20px, 30px) scale(0.9);
-            }
-            100% {
-                transform: translate(10px, -20px) scale(1.05);
-            }
-        }
-
-        /* ── SPINNER CONTENT ── */
-        .spinner-content {
+        .spinner-slide {
             position: relative;
-            z-index: 1;
+            width: 100%;
+            max-width: 500px;
+            height: 100%;
+            max-height: 700px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            padding: 30px 28px;
             text-align: center;
-            padding: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1c2128 0%, #2a2a2a 40%, #f5b83d 80%, #f59e0b 100%);
+            border-radius: 0;
+            box-shadow: none;
         }
 
-        .spinner-logo {
-            width: 80px;
-            height: 80px;
+        @media (min-width: 768px) {
+            .spinner-slide {
+                border-radius: 40px;
+                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.30);
+                height: auto;
+                min-height: 500px;
+                max-height: 90vh;
+            }
+            .spinner-overlay {
+                background: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(12px);
+            }
+        }
+
+        .spinner-slide .slide-bg-decor {
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 70%;
+            height: 90%;
             border-radius: 50%;
-            background: #ffffff;
+            background: rgba(245, 184, 61, 0.20);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .spinner-slide .slide-bg-decor-2 {
+            position: absolute;
+            bottom: -30%;
+            left: -20%;
+            width: 60%;
+            height: 80%;
+            border-radius: 50%;
+            background: rgba(0, 168, 107, 0.20);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .spinner-slide .slide-bg-decor-3 {
+            position: absolute;
+            top: 40%;
+            right: -10%;
+            width: 40%;
+            height: 50%;
+            border-radius: 50%;
+            background: rgba(124, 58, 237, 0.15);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .spinner-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner-icon-wrap {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            font-weight: 900;
-            color: #1c2128;
-            box-shadow: 0 0 40px rgba(245, 184, 61, 0.3);
-            animation: logoPulse 1.8s ease-in-out infinite;
-            position: relative;
-            overflow: hidden;
+            font-size: 42px;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(4px);
+            margin-bottom: 20px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.20);
+            flex-shrink: 0;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            animation: pulseGlow 2s ease-in-out infinite;
         }
 
-        .spinner-logo::after {
-            content: '';
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg,
-                    #f5b83d, #00a86b, #7c3aed, #f59e0b, #f5b83d);
-            z-index: -1;
-            animation: spinBorder 2s linear infinite;
-            padding: 4px;
-            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff calc(100% - 3px));
-            mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff calc(100% - 3px));
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                box-shadow: 0 8px 40px rgba(0, 0, 0, 0.20);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 8px 60px rgba(245, 184, 61, 0.35);
+                transform: scale(1.04);
+            }
         }
 
-        @keyframes spinBorder {
+        .spinner-icon-wrap i {
+            color: #f5b83d;
+            font-size: 42px;
+            animation: spin 1.2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        }
+
+        @keyframes spin {
             0% {
                 transform: rotate(0deg);
             }
@@ -247,69 +174,59 @@
             }
         }
 
-        @keyframes logoPulse {
-            0%,
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 40px rgba(245, 184, 61, 0.3);
-            }
-            50% {
-                transform: scale(1.04);
-                box-shadow: 0 0 70px rgba(245, 184, 61, 0.5);
-            }
-        }
-
-        .spinner-title {
-            font-size: 22px;
+        .spinner-content h2 {
+            font-size: 28px;
             font-weight: 800;
             color: #ffffff;
-            letter-spacing: 2px;
-            text-shadow: 0 0 30px rgba(245, 184, 61, 0.2);
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
         }
 
-        .spinner-title span {
+        .spinner-content h2 .highlight {
             color: #f5b83d;
+        }
+
+        .spinner-content p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.80);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            max-width: 320px;
         }
 
         .spinner-loader {
             display: flex;
             gap: 12px;
-            margin-top: 6px;
+            margin-top: 4px;
         }
 
-        .spinner-loader .dot {
-            width: 14px;
-            height: 14px;
+        .spinner-loader .spinner-dot {
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
+            background: #f5b83d;
             animation: dotBounce 1.4s ease-in-out infinite both;
         }
 
-        .spinner-loader .dot:nth-child(1) {
-            background: #f5b83d;
+        .spinner-loader .spinner-dot:nth-child(1) {
             animation-delay: 0s;
         }
-        .spinner-loader .dot:nth-child(2) {
-            background: #00a86b;
+        .spinner-loader .spinner-dot:nth-child(2) {
             animation-delay: 0.2s;
         }
-        .spinner-loader .dot:nth-child(3) {
-            background: #7c3aed;
+        .spinner-loader .spinner-dot:nth-child(3) {
             animation-delay: 0.4s;
         }
-        .spinner-loader .dot:nth-child(4) {
-            background: #f59e0b;
+        .spinner-loader .spinner-dot:nth-child(4) {
             animation-delay: 0.6s;
-        }
-        .spinner-loader .dot:nth-child(5) {
-            background: #f5b83d;
-            animation-delay: 0.8s;
         }
 
         @keyframes dotBounce {
             0%,
             80%,
             100% {
-                transform: scale(0.6);
+                transform: scale(0.4);
                 opacity: 0.4;
             }
             40% {
@@ -318,147 +235,26 @@
             }
         }
 
-        .spinner-sub {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 400;
-            letter-spacing: 1px;
-            margin-top: 4px;
-            animation: pulseText 2s ease-in-out infinite;
-        }
-
-        @keyframes pulseText {
-            0%,
-            100% {
-                opacity: 0.6;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-
-        .spinner-progress {
-            width: 200px;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 4px;
-        }
-
-        .spinner-progress .bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #f5b83d, #00a86b, #7c3aed, #f59e0b);
-            border-radius: 4px;
-            animation: progressFill 2.2s ease-in-out forwards;
-        }
-
-        @keyframes progressFill {
-            0% {
-                width: 0%;
-            }
-            30% {
-                width: 25%;
-            }
-            60% {
-                width: 55%;
-            }
-            85% {
-                width: 80%;
-            }
-            100% {
-                width: 100%;
-            }
-        }
-
-        /* ── SPINNER FLOATING SHAPES ── */
-        .spinner-shape {
+        .spinner-version {
             position: absolute;
-            z-index: 0;
-            opacity: 0.15;
-            animation: shapeDrift 12s linear infinite;
-            pointer-events: none;
+            bottom: 20px;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.30);
+            letter-spacing: 1px;
+            z-index: 1;
         }
 
-        .spinner-shape:nth-child(1) {
-            width: 40px;
-            height: 40px;
-            background: #f5b83d;
-            top: 20%;
-            left: 70%;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            animation-duration: 14s;
-        }
-        .spinner-shape:nth-child(2) {
-            width: 30px;
-            height: 30px;
-            background: #00a86b;
-            bottom: 25%;
-            right: 75%;
-            border-radius: 50%;
-            animation-duration: 10s;
-            animation-delay: 1s;
-        }
-        .spinner-shape:nth-child(3) {
-            width: 35px;
-            height: 35px;
-            background: #7c3aed;
-            top: 60%;
-            left: 15%;
-            transform: rotate(45deg);
-            animation-duration: 16s;
-            animation-delay: 2s;
-        }
-        .spinner-shape:nth-child(4) {
-            width: 25px;
-            height: 25px;
-            background: #f59e0b;
-            bottom: 10%;
-            left: 50%;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            animation-duration: 11s;
-            animation-delay: 0.5s;
-        }
-        .spinner-shape:nth-child(5) {
-            width: 45px;
-            height: 45px;
-            background: #f5b83d;
-            top: 5%;
-            left: 40%;
-            border-radius: 50%;
-            animation-duration: 13s;
-            animation-delay: 3s;
-        }
-
-        @keyframes shapeDrift {
-            0% {
-                transform: translate(0, 0) rotate(0deg) scale(1);
-            }
-            25% {
-                transform: translate(60px, -40px) rotate(90deg) scale(1.2);
-            }
-            50% {
-                transform: translate(-30px, 50px) rotate(180deg) scale(0.8);
-            }
-            75% {
-                transform: translate(40px, 30px) rotate(270deg) scale(1.1);
-            }
-            100% {
-                transform: translate(0, 0) rotate(360deg) scale(1);
-            }
-        }
-
-        /* ── APP ROOT (inside phone-frame) ── */
+        /* ── APP ROOT ── */
         .app-root {
             display: flex;
             flex-direction: column;
-            height: 100%;
+            height: 100vh;
             width: 100%;
+            max-width: 100vw;
+            margin: 0 auto;
             background-color: #ffffff;
             overflow: hidden;
             position: relative;
-            flex: 1;
         }
 
         .app-content {
@@ -470,7 +266,7 @@
 
         /* ── BOTTOM NAV ── */
         .bottom-nav {
-            position: absolute;
+            position: fixed;
             bottom: 17px;
             left: 50%;
             transform: translateX(-50%);
@@ -1371,7 +1167,7 @@
 
         /* ── PAYMENT PAGE ── */
         .payment-page-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -1393,7 +1189,7 @@
             padding: 20px 12px 30px 12px;
             background: #ffffff;
             position: relative;
-            min-height: 100%;
+            min-height: 100vh;
         }
 
         .payment-page .page-logo {
@@ -1684,7 +1480,7 @@
         }
 
         .order-success-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -2111,7 +1907,7 @@
 
         /* ── SIDEBAR ── */
         .sidebar-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -2126,7 +1922,7 @@
         }
 
         .sidebar {
-            position: absolute;
+            position: fixed;
             top: 0;
             right: -300px;
             width: 238px;
@@ -2570,7 +2366,7 @@
 
         /* ── SEND MONEY ── */
         .send-money-page-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -2592,7 +2388,7 @@
             padding: 20px 12px 30px 12px;
             background: #ffffff;
             position: relative;
-            min-height: 100%;
+            min-height: 100vh;
         }
 
         .send-money-page .page-header {
@@ -2846,7 +2642,7 @@
 
         /* ── WITHDRAW ── */
         .withdraw-page-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -2868,7 +2664,7 @@
             padding: 20px 12px 30px 12px;
             background: #ffffff;
             position: relative;
-            min-height: 100%;
+            min-height: 100vh;
         }
 
         .withdraw-page .page-header {
@@ -3812,7 +3608,7 @@
         /* ── RECEIPT ── */
         #receiptModal {
             display: none;
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -4071,7 +3867,7 @@
 
         /* ── APP STATUS POPUP ── */
         .app-status-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -4230,7 +4026,7 @@
 
         /* ── ORDER COMPLETE POPUP ── */
         .order-complete-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -4315,7 +4111,7 @@
 
         /* ── WITHDRAWAL STATUS POPUP ── */
         .withdrawal-status-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -4464,7 +4260,7 @@
 
         /* ── REFERRAL RECEIVED POPUP ── */
         .referral-received-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -4545,7 +4341,7 @@
 
         /* ── MONEY RECEIVED POPUP ── */
         .money-received-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -4633,7 +4429,7 @@
 
         /* ── IMAGE VIEWER ── */
         .image-viewer-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -4662,7 +4458,7 @@
 
         /* ── STATEMENT MODAL ── */
         .statement-modal-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -4939,7 +4735,7 @@
 
         /* ── TUTORIAL OVERLAY ── */
         .tutorial-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -5195,7 +4991,7 @@
             background: #f59e0b;
         }
 
-        /* ── RESPONSIVE TWEAKS (all inside phone-frame) ── */
+        /* ── RESPONSIVE TWEAKS ── */
         @media (max-width: 420px) {
             .bottom-nav {
                 max-width: 400px;
@@ -5347,860 +5143,884 @@
                 font-size: 12px;
             }
         }
+
+        @media (min-width: 768px) {
+            .app-root {
+                max-width: 480px;
+                border-radius: 32px;
+                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.20);
+                margin: 20px auto;
+                height: calc(100vh - 40px);
+                max-height: 900px;
+            }
+            body {
+                background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                padding: 20px;
+                overflow: hidden;
+            }
+            .tutorial-overlay.open {
+                background: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(12px);
+            }
+            .tutorial-slides {
+                max-width: 580px;
+                max-height: 700px;
+                border-radius: 40px;
+                overflow: hidden;
+                margin: auto;
+                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.30);
+            }
+            .tutorial-bottom-bar {
+                max-width: 580px;
+                margin: 0 auto;
+                padding: 18px 32px 28px 32px;
+                background: transparent;
+                border-radius: 0 0 40px 40px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- ─── PHONE FRAME (enforces same layout on all screens) ─── -->
-    <div class="phone-frame" id="phoneFrame">
-
-        <!-- ─── SPINNER OVERLAY ─── -->
-        <div class="spinner-overlay" id="spinnerOverlay">
-            <div class="spinner-bg"></div>
-
-            <!-- Floating orbs -->
-            <div class="spinner-orb"></div>
-            <div class="spinner-orb"></div>
-            <div class="spinner-orb"></div>
-            <div class="spinner-orb"></div>
-            <div class="spinner-orb"></div>
-
-            <!-- Floating shapes -->
-            <div class="spinner-shape"></div>
-            <div class="spinner-shape"></div>
-            <div class="spinner-shape"></div>
-            <div class="spinner-shape"></div>
-            <div class="spinner-shape"></div>
-
+    <!-- ─── SPINNER OVERLAY ─── -->
+    <div class="spinner-overlay" id="spinnerOverlay">
+        <div class="spinner-slide">
+            <div class="slide-bg-decor"></div>
+            <div class="slide-bg-decor-2"></div>
+            <div class="slide-bg-decor-3"></div>
             <div class="spinner-content">
-                <div class="spinner-logo">BZ</div>
-                <div class="spinner-title">Buffer <span>Zone</span></div>
+                <div class="spinner-icon-wrap">
+                    <i class="fa-solid fa-circle-notch"></i>
+                </div>
+                <h2>Welcome to <span class="highlight">Buffer Zone</span></h2>
+                <p>Loading your experience...</p>
                 <div class="spinner-loader">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
+                    <div class="spinner-dot"></div>
+                    <div class="spinner-dot"></div>
+                    <div class="spinner-dot"></div>
+                    <div class="spinner-dot"></div>
                 </div>
-                <div class="spinner-sub">Loading system settings …</div>
-                <div class="spinner-progress"><div class="bar"></div></div>
+            </div>
+            <div class="spinner-version">v2.0</div>
+        </div>
+    </div>
+
+    <!-- ─── TUTORIAL OVERLAY ─── -->
+    <div class="tutorial-overlay" id="tutorialOverlay">
+        <div class="tutorial-slides" id="tutorialSlides">
+            <!-- Slide 1: About Buffer Zone -->
+            <div class="tutorial-slide tutorial-slide-1">
+                <div class="slide-bg-decor"></div>
+                <div class="slide-bg-decor-2"></div>
+                <div class="slide-content">
+                    <div class="slide-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h2>Welcome to <span class="highlight">Buffer Zone</span></h2>
+                    <p>
+                        We are a <strong>creative agency</strong> specializing in
+                        <span class="highlight">graphic design</span>,
+                        <span class="highlight">web development</span>, and
+                        <span class="highlight">cyber security technical services</span>.
+                    </p>
+                    <p style="margin-top:8px;font-size:13px;color:#666;">
+                        Our mission: to provide innovative, secure solutions that help your business grow.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Where to find BZ code & how to use it -->
+            <div class="tutorial-slide tutorial-slide-2">
+                <div class="slide-bg-decor"></div>
+                <div class="slide-bg-decor-2"></div>
+                <div class="slide-content">
+                    <div class="slide-icon-wrap"><i class="fa-solid fa-qrcode"></i></div>
+                    <h2>Your <span class="highlight">Buffer Zone Code</span></h2>
+                    <p>Find your personal referral code in the <strong>Account</strong> tab.</p>
+                    <ul>
+                        <li>Tap <strong>Account</strong> → your code appears at the top.</li>
+                        <li>Share it with friends &amp; family.</li>
+                        <li>When they use it, <strong>you earn bonuses</strong>!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 3: How to apply on flyers/forms -->
+            <div class="tutorial-slide tutorial-slide-3">
+                <div class="slide-bg-decor"></div>
+                <div class="slide-bg-decor-2"></div>
+                <div class="slide-content">
+                    <div class="slide-icon-wrap"><i class="fa-solid fa-file-pen"></i></div>
+                    <h2>Apply on <span class="highlight">Flyers &amp; Forms</span></h2>
+                    <p>Tap any <strong>clickable flyer</strong> in the carousel to open its application form.</p>
+                    <ul>
+                        <li>Fill in your details and upload required files.</li>
+                        <li>Some forms require a small payment – follow the on-screen instructions.</li>
+                        <li>Track your application status in the <strong>Applications</strong> tab.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 4: Choose service, order, apply codes -->
+            <div class="tutorial-slide tutorial-slide-4">
+                <div class="slide-bg-decor"></div>
+                <div class="slide-bg-decor-2"></div>
+                <div class="slide-content">
+                    <div class="slide-icon-wrap"><i class="fa-solid fa-cart-shopping"></i></div>
+                    <h2>Choose &amp; <span class="highlight">Order Services</span></h2>
+                    <ul>
+                        <li>Browse services on the <strong>Home</strong> tab and tap one to customize.</li>
+                        <li>Select size, orientation, format, and quantity.</li>
+                        <li>At checkout, apply a <strong>promo code</strong> or <strong>referral code</strong> for discounts.</li>
+                        <li>Pay 50% upfront to start your project.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 5: Thank you -->
+            <div class="tutorial-slide tutorial-slide-5">
+                <div class="slide-bg-decor"></div>
+                <div class="slide-bg-decor-2"></div>
+                <div class="slide-content">
+                    <div class="slide-icon-wrap"><i class="fa-solid fa-heart"></i></div>
+                    <h2>Thank You for Choosing <span class="highlight">Buffer Zone</span></h2>
+                    <p style="font-size:16px;font-weight:500;color:#1c2128;">
+                        We're excited to work with you!
+                    </p>
+                    <p style="margin-top:6px;">
+                        Tap <strong>"Get Started"</strong> below to dive into the app.
+                    </p>
+                    <p style="margin-top:4px;font-size:12px;color:#888;">
+                        You'll only see this tour once.
+                    </p>
+                </div>
             </div>
         </div>
 
-        <!-- ─── TUTORIAL OVERLAY ─── -->
-        <div class="tutorial-overlay" id="tutorialOverlay">
-            <div class="tutorial-slides" id="tutorialSlides">
-                <!-- Slide 1: About Buffer Zone -->
-                <div class="tutorial-slide tutorial-slide-1">
-                    <div class="slide-bg-decor"></div>
-                    <div class="slide-bg-decor-2"></div>
-                    <div class="slide-content">
-                        <div class="slide-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
-                        <h2>Welcome to <span class="highlight">Buffer Zone</span></h2>
-                        <p>
-                            We are a <strong>creative agency</strong> specializing in
-                            <span class="highlight">graphic design</span>,
-                            <span class="highlight">web development</span>, and
-                            <span class="highlight">cyber security technical services</span>.
-                        </p>
-                        <p style="margin-top:8px;font-size:13px;color:#666;">
-                            Our mission: to provide innovative, secure solutions that help your business grow.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Slide 2: Where to find BZ code & how to use it -->
-                <div class="tutorial-slide tutorial-slide-2">
-                    <div class="slide-bg-decor"></div>
-                    <div class="slide-bg-decor-2"></div>
-                    <div class="slide-content">
-                        <div class="slide-icon-wrap"><i class="fa-solid fa-qrcode"></i></div>
-                        <h2>Your <span class="highlight">Buffer Zone Code</span></h2>
-                        <p>Find your personal referral code in the <strong>Account</strong> tab.</p>
-                        <ul>
-                            <li>Tap <strong>Account</strong> → your code appears at the top.</li>
-                            <li>Share it with friends &amp; family.</li>
-                            <li>When they use it, <strong>you earn bonuses</strong>!</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Slide 3: How to apply on flyers/forms -->
-                <div class="tutorial-slide tutorial-slide-3">
-                    <div class="slide-bg-decor"></div>
-                    <div class="slide-bg-decor-2"></div>
-                    <div class="slide-content">
-                        <div class="slide-icon-wrap"><i class="fa-solid fa-file-pen"></i></div>
-                        <h2>Apply on <span class="highlight">Flyers &amp; Forms</span></h2>
-                        <p>Tap any <strong>clickable flyer</strong> in the carousel to open its application form.</p>
-                        <ul>
-                            <li>Fill in your details and upload required files.</li>
-                            <li>Some forms require a small payment – follow the on-screen instructions.</li>
-                            <li>Track your application status in the <strong>Applications</strong> tab.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Slide 4: Choose service, order, apply codes -->
-                <div class="tutorial-slide tutorial-slide-4">
-                    <div class="slide-bg-decor"></div>
-                    <div class="slide-bg-decor-2"></div>
-                    <div class="slide-content">
-                        <div class="slide-icon-wrap"><i class="fa-solid fa-cart-shopping"></i></div>
-                        <h2>Choose &amp; <span class="highlight">Order Services</span></h2>
-                        <ul>
-                            <li>Browse services on the <strong>Home</strong> tab and tap one to customize.</li>
-                            <li>Select size, orientation, format, and quantity.</li>
-                            <li>At checkout, apply a <strong>promo code</strong> or <strong>referral code</strong> for discounts.</li>
-                            <li>Pay 50% upfront to start your project.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Slide 5: Thank you -->
-                <div class="tutorial-slide tutorial-slide-5">
-                    <div class="slide-bg-decor"></div>
-                    <div class="slide-bg-decor-2"></div>
-                    <div class="slide-content">
-                        <div class="slide-icon-wrap"><i class="fa-solid fa-heart"></i></div>
-                        <h2>Thank You for Choosing <span class="highlight">Buffer Zone</span></h2>
-                        <p style="font-size:16px;font-weight:500;color:#1c2128;">
-                            We're excited to work with you!
-                        </p>
-                        <p style="margin-top:6px;">
-                            Tap <strong>"Get Started"</strong> below to dive into the app.
-                        </p>
-                        <p style="margin-top:4px;font-size:12px;color:#888;">
-                            You'll only see this tour once.
-                        </p>
-                    </div>
-                </div>
+        <div class="tutorial-bottom-bar">
+            <div class="tutorial-dots" id="tutorialDots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
             </div>
-
-            <div class="tutorial-bottom-bar">
-                <div class="tutorial-dots" id="tutorialDots">
-                    <span class="dot active"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
-                <button class="tutorial-btn-next" id="tutorialNextBtn">
-                    Next <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </div>
+            <button class="tutorial-btn-next" id="tutorialNextBtn">
+                Next <i class="fa-solid fa-arrow-right"></i>
+            </button>
         </div>
+    </div>
 
-        <!-- ─── APP ROOT ─── -->
-        <div class="app-root">
-            <div class="app-content" id="appContent">
-                <div class="header">
-                    <div class="header-left">
-                        <img src="bufferzone.png" alt="Buffer Zone" class="logo-img" onerror="this.style.display='none'" />
+    <!-- ─── APP ROOT ─── -->
+    <div class="app-root">
+        <div class="app-content" id="appContent">
+            <div class="header">
+                <div class="header-left">
+                    <img src="bufferzone.png" alt="Buffer Zone" class="logo-img" onerror="this.style.display='none'" />
+                </div>
+                <div class="header-text">
+                    <span>Welcome back,</span>
+                    <span id="headerName">User</span>
+                </div>
+                <div class="notif-icon" id="notifIcon">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notif-badge" id="notifBadge">0</span>
+                </div>
+            </div>
+
+            <div id="homeView" class="view active">
+                <div class="hero">
+                    <div class="small-grid-dots">
+                        <div></div><div></div><div></div><div></div>
+                        <div></div><div></div><div></div><div></div>
+                        <div></div><div></div><div></div><div></div>
+                        <div></div><div></div><div></div><div></div>
                     </div>
-                    <div class="header-text">
-                        <span>Welcome back,</span>
-                        <span id="headerName">User</span>
+                    <div class="hero-bg-decor"></div>
+                    <div class="hero-content">
+                        <div class="hero-title" id="heroTitle">
+                            WE ARE<br>
+                            <span id="heroTitleSpan">CREATIVE</span>
+                        </div>
+                        <div class="hero-desc" id="heroDesc">
+                            We provide the best ideas to grow your business
+                        </div>
+                        <div class="hero-services">
+                            <div class="hero-services-title">OUR SERVICES</div>
+                            <ul class="service-list" id="ourServicesList">
+                            </ul>
+                        </div>
                     </div>
-                    <div class="notif-icon" id="notifIcon">
-                        <i class="fa-regular fa-bell"></i>
-                        <span class="notif-badge" id="notifBadge">0</span>
+                    <div class="cta-container">
+                        <div class="btn-get-started" id="heroCtaBtn">GET STARTED</div>
+                        <div class="contact-number">Call to find out more<br><strong id="heroPhone">+123 456 7890</strong></div>
                     </div>
                 </div>
 
-                <div id="homeView" class="view active">
-                    <div class="hero">
-                        <div class="small-grid-dots">
-                            <div></div><div></div><div></div><div></div>
-                            <div></div><div></div><div></div><div></div>
-                            <div></div><div></div><div></div><div></div>
-                            <div></div><div></div><div></div><div></div>
-                        </div>
-                        <div class="hero-bg-decor"></div>
-                        <div class="hero-content">
-                            <div class="hero-title" id="heroTitle">
-                                WE ARE<br>
-                                <span id="heroTitleSpan">CREATIVE</span>
-                            </div>
-                            <div class="hero-desc" id="heroDesc">
-                                We provide the best ideas to grow your business
-                            </div>
-                            <div class="hero-services">
-                                <div class="hero-services-title">OUR SERVICES</div>
-                                <ul class="service-list" id="ourServicesList">
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="cta-container">
-                            <div class="btn-get-started" id="heroCtaBtn">GET STARTED</div>
-                            <div class="contact-number">Call to find out more<br><strong id="heroPhone">+123 456 7890</strong></div>
-                        </div>
-                    </div>
-
-                    <div class="promo-carousel-wrapper" id="promoCarouselWrapper">
-                        <div class="promo-carousel-track" id="promoCarouselTrack">
-                        </div>
-                    </div>
-
-                    <div id="promotionsBanner" class="promotions-banner">
-                    </div>
-
-                    <div class="category-row" id="categoryRow">
-                        <button class="cat-btn active" data-cat="all"><i class="fa-solid fa-th-large"></i> All</button>
-                        <button class="cat-btn" data-cat="graphic"><i class="fa-regular fa-lightbulb"></i> Graphic</button>
-                        <button class="cat-btn" data-cat="dev"><i class="fa-solid fa-code"></i> Developer</button>
-                        <button class="cat-btn" data-cat="tech"><i class="fa-solid fa-gear"></i> Technical</button>
-                        <button class="cat-btn" data-cat="it"><i class="fa-solid fa-headset"></i> IT Support</button>
-                    </div>
-
-                    <div id="serviceSection">
-                        <div class="dynamic-header">
-                            <span class="dynamic-title" id="dynamicTitle">RECENT WORK</span>
-                            <div class="dynamic-actions">
-                                <span class="dynamic-back" id="dynamicBack" style="display:none;">← Back</span>
-                                <span class="dynamic-view-all" id="dynamicViewAll">View All</span>
-                            </div>
-                        </div>
-                        <div id="serviceGridContainer" class="service-grid"></div>
+                <div class="promo-carousel-wrapper" id="promoCarouselWrapper">
+                    <div class="promo-carousel-track" id="promoCarouselTrack">
                     </div>
                 </div>
 
-                <div id="orderFlowView" class="view">
-                    <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
-                        <button id="backFromOrder" style="background: none; border: none; font-size: 14px; color: #1c2128; cursor: pointer; padding: 3px;">
-                            <i class="fa-solid fa-arrow-left"></i>
-                        </button>
-                        <h3 style="font-weight: 700; font-size: 12px; color: #1c2128;">Customize Order</h3>
-                    </div>
-                    <div id="orderFlowContainer" class="order-flow-container">
-                    </div>
+                <div id="promotionsBanner" class="promotions-banner">
                 </div>
 
-                <div id="flyerDetailView" class="view">
-                    <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
-                        <button id="backFromFlyerDetail" style="background: none; border: none; font-size: 14px; color: #1c2128; cursor: pointer; padding: 3px;">
-                            <i class="fa-solid fa-arrow-left"></i>
-                        </button>
-                        <h3 style="font-weight: 700; font-size: 12px; color: #1c2128;">Flyer Details</h3>
-                    </div>
-                    <div class="flyer-detail-view">
-                        <div class="flyer-detail-container">
-                            <div class="flyer-detail-image-wrap">
-                                <img id="flyerDetailImage" src="" alt="Flyer" />
-                                <video id="flyerDetailVideo" controls style="display:none;"></video>
-                            </div>
-                            <div class="flyer-detail-content">
-                                <div class="flyer-detail-header-row">
-                                    <h2 id="flyerDetailTitle">Promo Details</h2>
-                                    <button class="flyer-detail-close-btn" id="flyerDetailCloseBtn"><i class="fa-solid fa-times"></i></button>
-                                </div>
-                                <div class="flyer-detail-section">
-                                    <div class="flyer-detail-instructions" id="flyerDetailInstructions"></div>
-                                    <div class="flyer-detail-explanation" id="flyerDetailExplanation"></div>
-                                </div>
-                                <div class="flyer-detail-form" id="flyerDetailForm"></div>
-                                <div class="flyer-detail-actions">
-                                    <button class="btn btn-primary" id="flyerDetailApplyBtn">Apply Now</button>
-                                </div>
-                            </div>
+                <div class="category-row" id="categoryRow">
+                    <button class="cat-btn active" data-cat="all"><i class="fa-solid fa-th-large"></i> All</button>
+                    <button class="cat-btn" data-cat="graphic"><i class="fa-regular fa-lightbulb"></i> Graphic</button>
+                    <button class="cat-btn" data-cat="dev"><i class="fa-solid fa-code"></i> Developer</button>
+                    <button class="cat-btn" data-cat="tech"><i class="fa-solid fa-gear"></i> Technical</button>
+                    <button class="cat-btn" data-cat="it"><i class="fa-solid fa-headset"></i> IT Support</button>
+                </div>
+
+                <div id="serviceSection">
+                    <div class="dynamic-header">
+                        <span class="dynamic-title" id="dynamicTitle">RECENT WORK</span>
+                        <div class="dynamic-actions">
+                            <span class="dynamic-back" id="dynamicBack" style="display:none;">← Back</span>
+                            <span class="dynamic-view-all" id="dynamicViewAll">View All</span>
                         </div>
                     </div>
+                    <div id="serviceGridContainer" class="service-grid"></div>
                 </div>
+            </div>
 
-                <div id="ordersView" class="view">
-                    <div style="padding: 0 12px 11px 12px;">
-                        <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Your Orders</h3>
-                        <p style="color: #888; font-size: 9px;">Track your projects and payments.</p>
-                    </div>
-                    <div class="order-grid" id="ordersGrid"></div>
+            <div id="orderFlowView" class="view">
+                <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
+                    <button id="backFromOrder" style="background: none; border: none; font-size: 14px; color: #1c2128; cursor: pointer; padding: 3px;">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <h3 style="font-weight: 700; font-size: 12px; color: #1c2128;">Customize Order</h3>
                 </div>
-
-                <div id="historyView" class="view">
-                    <div style="padding: 0 12px 11px 12px;">
-                        <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Transaction History</h3>
-                        <p style="color: #888; font-size: 9px;">Tap a transaction to view more details.</p>
-                    </div>
-                    <div id="paymentReminderBanner" class="payment-reminder-banner">
-                    </div>
-                    <div class="history-list" id="historyList"></div>
+                <div id="orderFlowContainer" class="order-flow-container">
                 </div>
+            </div>
 
-                <div id="samplesView" class="view">
-                    <div style="padding: 0 12px 11px 12px;">
-                        <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">📁 Work Samples</h3>
-                        <p style="color: #888; font-size: 9px;">Browse through our recent projects.</p>
-                    </div>
-                    <div id="samplesContainer" class="samples-grid"></div>
+            <div id="flyerDetailView" class="view">
+                <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
+                    <button id="backFromFlyerDetail" style="background: none; border: none; font-size: 14px; color: #1c2128; cursor: pointer; padding: 3px;">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <h3 style="font-weight: 700; font-size: 12px; color: #1c2128;">Flyer Details</h3>
                 </div>
-
-                <div id="applicationsView" class="view">
-                    <div class="applications-header">
-                        <h3>📋 My Applications</h3>
-                        <p>Track the status of your form submissions.</p>
-                    </div>
-                    <div id="applicationsList">
-                    </div>
-                </div>
-
-                <div id="accountView" class="view">
-                    <div style="padding: 0 12px 11px 12px;">
-                        <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">💰 My Account</h3>
-                        <p style="color: #888; font-size: 9px;">Manage your balance, referrals, and withdrawals.</p>
-                    </div>
-
-                    <div class="account-section">
-                        <div class="account-toggle-row">
-                            <button class="toggle-btn active" id="accountTransactionsBtn"><i class="fa-solid fa-receipt"></i> Transactions</button>
-                            <button class="toggle-btn" id="accountWithdrawBtn"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
+                <div class="flyer-detail-view">
+                    <div class="flyer-detail-container">
+                        <div class="flyer-detail-image-wrap">
+                            <img id="flyerDetailImage" src="" alt="Flyer" />
+                            <video id="flyerDetailVideo" controls style="display:none;"></video>
                         </div>
-
-                        <div class="account-view active" id="accountTransactionsView">
-                            <div class="referral-code-box" id="referralCodeBox">
-                                <div class="label">Your Referral Code</div>
-                                <div class="code" id="referralCodeDisplay">BZ-XXXXX</div>
-                                <button class="copy-btn" id="copyReferralBtn"><i class="fa-regular fa-copy"></i> Copy</button>
+                        <div class="flyer-detail-content">
+                            <div class="flyer-detail-header-row">
+                                <h2 id="flyerDetailTitle">Promo Details</h2>
+                                <button class="flyer-detail-close-btn" id="flyerDetailCloseBtn"><i class="fa-solid fa-times"></i></button>
                             </div>
-                            <div class="account-balance-box" id="accountBalanceBox">
-                                <div class="left">
-                                    <div class="label">Account Balance</div>
-                                    <div class="balance" id="accountBalanceDisplay">ZMW 0.00</div>
-                                </div>
-                                <div class="right-btns">
-                                    <button class="btn-action" id="withdrawBtnFromBalance"><i class="fa-solid fa-arrow-up"></i> Withdraw</button>
-                                    <button class="btn-action send-btn" id="sendMoneyBtn"><i class="fa-solid fa-paper-plane"></i> Send Money</button>
-                                </div>
+                            <div class="flyer-detail-section">
+                                <div class="flyer-detail-instructions" id="flyerDetailInstructions"></div>
+                                <div class="flyer-detail-explanation" id="flyerDetailExplanation"></div>
                             </div>
-
-                            <div id="transactionMessages">
-                            </div>
-                        </div>
-
-                        <div class="account-view" id="accountWithdrawView">
-                            <div style="text-align:center; padding:17px 0;">
-                                <p style="color:#888; font-size:11px;">Click the "Withdraw" button below to request a withdrawal from your account.</p>
-                                <button class="withdraw-btn" id="withdrawBtnFromView" style="margin-top:10px; background:#f5b83d; border:none; padding:10px 26px; border-radius:26px; font-weight:700; font-size:12px; color:#1c2128; cursor:pointer; display:inline-flex; align-items:center; gap:7px;">
-                                    <i class="fa-solid fa-arrow-up"></i> Withdraw Funds
-                                </button>
-                            </div>
-                            <div id="withdrawalsListContainer">
+                            <div class="flyer-detail-form" id="flyerDetailForm"></div>
+                            <div class="flyer-detail-actions">
+                                <button class="btn btn-primary" id="flyerDetailApplyBtn">Apply Now</button>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div id="profileView" class="view">
-                    <div style="padding: 0 12px 11px 12px;">
-                        <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">My Profile</h3>
-                        <p style="color: #888; font-size: 9px;">Your personal information.</p>
+            <div id="ordersView" class="view">
+                <div style="padding: 0 12px 11px 12px;">
+                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Your Orders</h3>
+                    <p style="color: #888; font-size: 9px;">Track your projects and payments.</p>
+                </div>
+                <div class="order-grid" id="ordersGrid"></div>
+            </div>
+
+            <div id="historyView" class="view">
+                <div style="padding: 0 12px 11px 12px;">
+                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Transaction History</h3>
+                    <p style="color: #888; font-size: 9px;">Tap a transaction to view more details.</p>
+                </div>
+                <div id="paymentReminderBanner" class="payment-reminder-banner">
+                </div>
+                <div class="history-list" id="historyList"></div>
+            </div>
+
+            <div id="samplesView" class="view">
+                <div style="padding: 0 12px 11px 12px;">
+                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">📁 Work Samples</h3>
+                    <p style="color: #888; font-size: 9px;">Browse through our recent projects.</p>
+                </div>
+                <div id="samplesContainer" class="samples-grid"></div>
+            </div>
+
+            <div id="applicationsView" class="view">
+                <div class="applications-header">
+                    <h3>📋 My Applications</h3>
+                    <p>Track the status of your form submissions.</p>
+                </div>
+                <div id="applicationsList">
+                </div>
+            </div>
+
+            <div id="accountView" class="view">
+                <div style="padding: 0 12px 11px 12px;">
+                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">💰 My Account</h3>
+                    <p style="color: #888; font-size: 9px;">Manage your balance, referrals, and withdrawals.</p>
+                </div>
+
+                <div class="account-section">
+                    <div class="account-toggle-row">
+                        <button class="toggle-btn active" id="accountTransactionsBtn"><i class="fa-solid fa-receipt"></i> Transactions</button>
+                        <button class="toggle-btn" id="accountWithdrawBtn"><i class="fa-solid fa-arrow-up"></i> Withdrawals</button>
                     </div>
-                    <div class="profile-card">
-                        <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
-                        <div class="profile-name" id="profileName">User</div>
-                        <div class="profile-role" id="profileRole">Customer</div>
-                        <div class="profile-field"><i class="fa-solid fa-user"></i><span class="label">Full Name</span><span class="value" id="profileFullName">User</span></div>
-                        <div class="profile-field"><i class="fa-solid fa-phone"></i><span class="label">Phone</span><span class="value" id="profilePhone">Not set</span></div>
-                        <div class="profile-field"><i class="fa-solid fa-envelope"></i><span class="label">Email</span><span class="value" id="profileEmail">No email</span></div>
-                        <div class="profile-field"><i class="fa-solid fa-calendar"></i><span class="label">Joined</span><span class="value" id="profileJoined">N/A</span></div>
-                        <div class="profile-about">
-                            <h4 style="font-size: 9px; font-weight: 600; color: #1c2128; margin-bottom: 3px;">About</h4>
-                            <p>Passionate about design and technology. Helping brands grow through innovation and strategic design.</p>
+
+                    <div class="account-view active" id="accountTransactionsView">
+                        <div class="referral-code-box" id="referralCodeBox">
+                            <div class="label">Your Referral Code</div>
+                            <div class="code" id="referralCodeDisplay">BZ-XXXXX</div>
+                            <button class="copy-btn" id="copyReferralBtn"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="account-balance-box" id="accountBalanceBox">
+                            <div class="left">
+                                <div class="label">Account Balance</div>
+                                <div class="balance" id="accountBalanceDisplay">ZMW 0.00</div>
+                            </div>
+                            <div class="right-btns">
+                                <button class="btn-action" id="withdrawBtnFromBalance"><i class="fa-solid fa-arrow-up"></i> Withdraw</button>
+                                <button class="btn-action send-btn" id="sendMoneyBtn"><i class="fa-solid fa-paper-plane"></i> Send Money</button>
+                            </div>
                         </div>
 
-                        <div style="display: flex; justify-content: center; margin-top: 14px;">
-                            <button class="logout-btn" id="logoutBtn" style="background: #dc2626; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 7px; width: 140px;">
-                                <i class="fa-solid fa-right-from-bracket" style="color: white;"></i> Log Out
+                        <div id="transactionMessages">
+                        </div>
+                    </div>
+
+                    <div class="account-view" id="accountWithdrawView">
+                        <div style="text-align:center; padding:17px 0;">
+                            <p style="color:#888; font-size:11px;">Click the "Withdraw" button below to request a withdrawal from your account.</p>
+                            <button class="withdraw-btn" id="withdrawBtnFromView" style="margin-top:10px; background:#f5b83d; border:none; padding:10px 26px; border-radius:26px; font-weight:700; font-size:12px; color:#1c2128; cursor:pointer; display:inline-flex; align-items:center; gap:7px;">
+                                <i class="fa-solid fa-arrow-up"></i> Withdraw Funds
                             </button>
                         </div>
-
-                        <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid #f0f0f0;">
-                            <h4 style="font-size: 10px; font-weight: 700; color: #1c2128; margin-bottom: 8px;">📞 Contact Us</h4>
-                            <div style="display: flex; flex-direction: column; gap: 6px;">
-                                <a href="https://wa.me/260768658484" target="_blank" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: #f8f9fc; border-radius: 8px; text-decoration: none; color: #1c2128; font-size: 10px; font-weight: 500; border: 1px solid #f0f0f0;">
-                                    <i class="fa-brands fa-whatsapp" style="color: #f5b83d; font-size: 16px;"></i> WhatsApp: 0768658484
-                                </a>
-                                <a href="https://facebook.com/BufferZone" target="_blank" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: #f8f9fc; border-radius: 8px; text-decoration: none; color: #1c2128; font-size: 10px; font-weight: 500; border: 1px solid #f0f0f0;">
-                                    <i class="fa-brands fa-facebook" style="color: #f5b83d; font-size: 16px;"></i> Facebook: Buffer ZONE
-                                </a>
-                                <a href="tel:+260976760537" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: #f8f9fc; border-radius: 8px; text-decoration: none; color: #1c2128; font-size: 10px; font-weight: 500; border: 1px solid #f0f0f0;">
-                                    <i class="fa-solid fa-phone" style="color: #f5b83d; font-size: 16px;"></i> SMS/CALLS: 0976760537
-                                </a>
-                            </div>
+                        <div id="withdrawalsListContainer">
                         </div>
                     </div>
                 </div>
-
             </div>
 
-            <div class="bottom-nav">
-                <button class="nav-item active" data-view="homeView"><i class="fa-solid fa-house"></i><span>Home</span></button>
-                <button class="nav-item" data-view="ordersView"><i class="fa-solid fa-bag-shopping"></i><span>Orders</span></button>
-                <button class="nav-item" data-view="historyView"><i class="fa-solid fa-clock"></i><span>History</span></button>
-                <button class="nav-item" data-view="samplesView"><i class="fa-solid fa-images"></i><span>Samples</span></button>
-                <button class="nav-item" data-view="applicationsView"><i class="fa-solid fa-clipboard-list"></i><span>Applications</span></button>
-                <button class="nav-item" data-view="accountView"><i class="fa-solid fa-wallet"></i><span>Account</span></button>
-                <button class="nav-item" data-view="profileView"><i class="fa-regular fa-user"></i><span>Profile</span></button>
+            <div id="profileView" class="view">
+                <div style="padding: 0 12px 11px 12px;">
+                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">My Profile</h3>
+                    <p style="color: #888; font-size: 9px;">Your personal information.</p>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
+                    <div class="profile-name" id="profileName">User</div>
+                    <div class="profile-role" id="profileRole">Customer</div>
+                    <div class="profile-field"><i class="fa-solid fa-user"></i><span class="label">Full Name</span><span class="value" id="profileFullName">User</span></div>
+                    <div class="profile-field"><i class="fa-solid fa-phone"></i><span class="label">Phone</span><span class="value" id="profilePhone">Not set</span></div>
+                    <div class="profile-field"><i class="fa-solid fa-envelope"></i><span class="label">Email</span><span class="value" id="profileEmail">No email</span></div>
+                    <div class="profile-field"><i class="fa-solid fa-calendar"></i><span class="label">Joined</span><span class="value" id="profileJoined">N/A</span></div>
+                    <div class="profile-about">
+                        <h4 style="font-size: 9px; font-weight: 600; color: #1c2128; margin-bottom: 3px;">About</h4>
+                        <p>Passionate about design and technology. Helping brands grow through innovation and strategic design.</p>
+                    </div>
+
+                    <div style="display: flex; justify-content: center; margin-top: 14px;">
+                        <button class="logout-btn" id="logoutBtn" style="background: #dc2626; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 7px; width: 140px;">
+                            <i class="fa-solid fa-right-from-bracket" style="color: white;"></i> Log Out
+                        </button>
+                    </div>
+
+                    <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid #f0f0f0;">
+                        <h4 style="font-size: 10px; font-weight: 700; color: #1c2128; margin-bottom: 8px;">📞 Contact Us</h4>
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <a href="https://wa.me/260768658484" target="_blank" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: #f8f9fc; border-radius: 8px; text-decoration: none; color: #1c2128; font-size: 10px; font-weight: 500; border: 1px solid #f0f0f0;">
+                                <i class="fa-brands fa-whatsapp" style="color: #f5b83d; font-size: 16px;"></i> WhatsApp: 0768658484
+                            </a>
+                            <a href="https://facebook.com/BufferZone" target="_blank" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: #f8f9fc; border-radius: 8px; text-decoration: none; color: #1c2128; font-size: 10px; font-weight: 500; border: 1px solid #f0f0f0;">
+                                <i class="fa-brands fa-facebook" style="color: #f5b83d; font-size: 16px;"></i> Facebook: Buffer ZONE
+                            </a>
+                            <a href="tel:+260976760537" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: #f8f9fc; border-radius: 8px; text-decoration: none; color: #1c2128; font-size: 10px; font-weight: 500; border: 1px solid #f0f0f0;">
+                                <i class="fa-solid fa-phone" style="color: #f5b83d; font-size: 16px;"></i> SMS/CALLS: 0976760537
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
 
-        <!-- ─── PAYMENT PAGE ─── -->
-        <div class="payment-page-overlay" id="paymentPage">
-            <div class="payment-page">
-                <button class="close-btn" id="paymentCloseBtn"><i class="fa-solid fa-times"></i></button>
-                <div class="page-logo">
-                    <img src="bufferzone.png" alt="Buffer Zone" onerror="this.style.display='none'" />
-                    <span>Buffer Zone</span>
-                </div>
-                <h3>💳 Payment Required</h3>
-                <p class="sub">To begin your project, you must pay 50% upfront.</p>
-
-                <div class="payment-details" style="margin-bottom:6px;">
-                    <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;">
-                        <div style="flex:1; min-width:120px;">
-                            <div style="font-size:8px; color:#888;">Customer</div>
-                            <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentCustomerName">—</div>
-                        </div>
-                        <div style="flex:1; min-width:100px;">
-                            <div style="font-size:8px; color:#888;">Service</div>
-                            <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentServiceName">—</div>
-                        </div>
-                        <div style="flex:1; min-width:80px;">
-                            <div style="font-size:8px; color:#888;">Qty</div>
-                            <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentQty">—</div>
-                        </div>
-                    </div>
-                    <div style="margin-top:4px; padding-top:4px; border-top:1px solid #f0f0f0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;">
-                        <div>
-                            <div style="font-size:8px; color:#888;">Customization</div>
-                            <div style="font-weight:500; font-size:10px; color:#1c2128;" id="paymentCustomization">—</div>
-                        </div>
-                        <div>
-                            <div style="font-size:8px; color:#888;">Notes</div>
-                            <div style="font-weight:500; font-size:10px; color:#1c2128;" id="paymentNotes">—</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="payment-details">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <div>
-                            <div class="name" id="paymentName">Airtel Mobile Number</div>
-                            <div class="number" id="paymentNumber">0976760537</div>
-                            <div style="font-size:9px; color:#555;" id="paymentAccountName">Jubel Mobela</div>
-                        </div>
-                        <div style="text-align:right;">
-                            <div style="font-size:9px; color:#888;">Amount to pay</div>
-                            <div class="amount-large" id="paymentAmount">ZMW 350.00</div>
-                            <div style="font-size:9px; color:#888;">50% of total</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="walletPaymentSection" style="margin-bottom:10px; padding:9px; border-radius:9px; border:1px solid #e0e0e0; background:#fafbfc;">
-                    <div style="display:flex; align-items:center; gap:7px; flex-wrap:wrap;">
-                        <input type="checkbox" id="payWithWalletCheck" />
-                        <label for="payWithWalletCheck" style="font-weight:600; font-size:10px; color:#1c2128; cursor:pointer;">Pay with Buffer Zone Wallet</label>
-                    </div>
-                    <div id="walletStatus" style="font-size:9px; margin-top:3px; padding:3px 7px; border-radius:5px;">
-                        Wallet balance: <span id="walletBalanceDisplay">ZMW 0.00</span>
-                        <span id="walletSufficiency" style="font-weight:600;"></span>
-                    </div>
-                </div>
-
-                <div class="toggle-row">
-                    <button class="toggle-code-btn active" id="togglePromoBtn">Promo Code</button>
-                    <button class="toggle-code-btn" id="toggleReferralBtn">Referral Code</button>
-                </div>
-
-                <div class="code-input-wrap open" id="promoCodeWrap">
-                    <div class="coupon-section">
-                        <button class="apply-btn" id="applyPromoBtn">Apply promo coupon <span id="promoCodeDisplay">SAVE10</span> and get <span id="promoDiscountDisplay">20%</span> off</button>
-                    </div>
-                    <span class="coupon-msg" id="couponMsg"></span>
-                </div>
-
-                <div class="code-input-wrap" id="referralCodeWrap">
-                    <div class="referral-section">
-                        <input type="text" id="referralCodeInput" placeholder="Enter referral code">
-                        <button class="apply-btn" id="applyReferralBtn">Apply Referral</button>
-                    </div>
-                    <span class="coupon-msg" id="referralMsg"></span>
-                </div>
-
-                <div class="price-breakdown" id="priceBreakdown" style="display:none;">
-                    <div class="row"><span class="label">Original Price</span><span class="val" id="origPriceVal">ZMW 0.00</span></div>
-                    <div class="row"><span class="label">Discount</span><span class="val discounted" id="discountVal">- ZMW 0.00</span></div>
-                    <div class="row"><span class="label">Final Price</span><span class="val" id="finalPriceVal">ZMW 0.00</span></div>
-                    <div class="row"><span class="label" style="font-weight:700;">50% Deposit</span><span class="val" style="font-weight:700;color:#f5b83d;" id="finalDepositVal">ZMW 0.00</span></div>
-                </div>
-
-                <div style="margin-bottom:9px;" id="uploadSection">
-                    <label style="font-weight:600; font-size:9px; color:#1c2128; display:block; margin-bottom:3px;">Upload transaction screenshot</label>
-                    <div class="upload-area" id="uploadArea">
-                        <i class="fa-regular fa-image"></i>
-                        <p>Tap to upload receipt or screenshot</p>
-                        <div class="file-name" id="fileName">No file chosen</div>
-                        <input type="file" id="fileInput" accept="image/*" style="display:none;">
-                        <input type="hidden" id="cloudinaryScreenshotUrl">
-                    </div>
-                </div>
-
-                <button class="btn-primary" id="confirmPaymentBtn">
-                    <i class="fa-regular fa-circle-check"></i> Confirm Payment & Start Project
-                </button>
-                <p style="text-align:center; font-size:8px; color:#888; margin-top:5px;">
-                    <i class="fa-regular fa-clock"></i> Project begins after payment confirmation
-                </p>
-            </div>
+        <div class="bottom-nav">
+            <button class="nav-item active" data-view="homeView"><i class="fa-solid fa-house"></i><span>Home</span></button>
+            <button class="nav-item" data-view="ordersView"><i class="fa-solid fa-bag-shopping"></i><span>Orders</span></button>
+            <button class="nav-item" data-view="historyView"><i class="fa-solid fa-clock"></i><span>History</span></button>
+            <button class="nav-item" data-view="samplesView"><i class="fa-solid fa-images"></i><span>Samples</span></button>
+            <button class="nav-item" data-view="applicationsView"><i class="fa-solid fa-clipboard-list"></i><span>Applications</span></button>
+            <button class="nav-item" data-view="accountView"><i class="fa-solid fa-wallet"></i><span>Account</span></button>
+            <button class="nav-item" data-view="profileView"><i class="fa-regular fa-user"></i><span>Profile</span></button>
         </div>
 
-        <div class="order-success-overlay" id="orderSuccessPopup">
-            <div class="order-success-modal">
-                <i class="fa-regular fa-circle-check"></i>
-                <h3>🎉 Order Submitted!</h3>
-                <p>Your order has been successfully submitted.<br>You will be contacted by one of our team.<br><br>Thank you for choosing <strong>BUFFER ZONE</strong>.</p>
-                <button class="btn-ok" id="orderSuccessOkBtn">OK</button>
+    </div>
+
+    <!-- ─── PAYMENT PAGE ─── -->
+    <div class="payment-page-overlay" id="paymentPage">
+        <div class="payment-page">
+            <button class="close-btn" id="paymentCloseBtn"><i class="fa-solid fa-times"></i></button>
+            <div class="page-logo">
+                <img src="bufferzone.png" alt="Buffer Zone" onerror="this.style.display='none'" />
+                <span>Buffer Zone</span>
             </div>
-        </div>
+            <h3>💳 Payment Required</h3>
+            <p class="sub">To begin your project, you must pay 50% upfront.</p>
 
-        <div class="withdraw-page-overlay" id="withdrawPage">
-            <div class="withdraw-page">
-                <div class="page-header">
-                    <h2><i class="fa-solid fa-arrow-up" style="color:#f5b83d; margin-right:6px;"></i> Withdraw Funds</h2>
-                    <button class="close-btn" id="withdrawPageClose"><i class="fa-solid fa-times"></i></button>
+            <div class="payment-details" style="margin-bottom:6px;">
+                <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;">
+                    <div style="flex:1; min-width:120px;">
+                        <div style="font-size:8px; color:#888;">Customer</div>
+                        <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentCustomerName">—</div>
+                    </div>
+                    <div style="flex:1; min-width:100px;">
+                        <div style="font-size:8px; color:#888;">Service</div>
+                        <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentServiceName">—</div>
+                    </div>
+                    <div style="flex:1; min-width:80px;">
+                        <div style="font-size:8px; color:#888;">Qty</div>
+                        <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentQty">—</div>
+                    </div>
                 </div>
-                <div class="subtitle">Transfer your available earnings to your registered mobile number below.</div>
-
-                <div class="customer-info" id="withdrawCustomerInfo">
-                    <div class="row"><span class="lbl">Name</span><span class="val" id="wdName">—</span></div>
-                    <div class="row"><span class="lbl">Mobile</span><span class="val" id="wdPhone">—</span></div>
-                    <div class="row"><span class="lbl">Email</span><span class="val" id="wdEmail">—</span></div>
-                </div>
-
-                <div class="transfer-note" id="transferNote">
-                    <i class="fa-solid fa-info-circle" style="color:#f5b83d; margin-right:6px;"></i>
-                    Once approved, funds will be transferred to <strong id="wdTransferNumber">—</strong>
-                </div>
-
-                <div class="balance-display">
-                    <div class="lbl">Available Balance</div>
-                    <div class="amount" id="wdBalanceAmount">ZMW 0.00</div>
-                    <div class="sub" id="wdBalanceSub">Includes pending withdrawals</div>
-                </div>
-
-                <div class="amount-options" id="wdAmountOptions">
-                </div>
-
-                <div class="custom-amount">
-                    <label for="wdCustomAmount">Custom amount (ZMW)</label>
-                    <input type="number" id="wdCustomAmount" placeholder="Enter amount" step="0.01" />
-                    <div class="hint" id="wdCustomHint">Maximum: <span id="wdMaxHint">0.00</span></div>
-                </div>
-
-                <button class="btn-withdraw-rect" id="wdSubmitBtn"><i class="fa-solid fa-arrow-up" style="margin-right:6px;"></i> Withdraw</button>
-
-                <div class="history-section">
-                    <h4>📋 Withdraw History</h4>
-                    <div id="wdHistoryList">
-                        <div class="empty-history">No withdrawal history yet.</div>
+                <div style="margin-top:4px; padding-top:4px; border-top:1px solid #f0f0f0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;">
+                    <div>
+                        <div style="font-size:8px; color:#888;">Customization</div>
+                        <div style="font-weight:500; font-size:10px; color:#1c2128;" id="paymentCustomization">—</div>
+                    </div>
+                    <div>
+                        <div style="font-size:8px; color:#888;">Notes</div>
+                        <div style="font-weight:500; font-size:10px; color:#1c2128;" id="paymentNotes">—</div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="send-money-page-overlay" id="sendMoneyPage">
-            <div class="send-money-page">
-                <div class="page-header">
-                    <h2><i class="fa-solid fa-paper-plane" style="color:#4a90d9; margin-right:6px;"></i> Send Money</h2>
-                    <button class="close-btn" id="sendMoneyPageClose"><i class="fa-solid fa-times"></i></button>
-                </div>
-                <div class="subtitle">Send funds to another Buffer Zone user using their referral code.</div>
-
-                <div class="customer-info" id="sendCustomerInfo">
-                    <div class="row"><span class="lbl">Your Name</span><span class="val" id="sendName">—</span></div>
-                    <div class="row"><span class="lbl">Your Balance</span><span class="val" id="sendBalanceDisplay">ZMW 0.00</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label>Recipient Referral Code</label>
-                    <input type="text" id="sendPageReferralInput" placeholder="e.g. BZ-ABCDE" />
-                    <button class="apply-btn" id="sendPageSearchBtn" style="margin-top:4px; width:100%; background:#f5b83d; color:#1c2128; border:none; padding:8px; border-radius:10px; font-weight:700; font-size:12px; cursor:pointer;">🔍 Search</button>
-                </div>
-
-                <div class="form-group">
-                    <label>Recipient</label>
-                    <div class="search-result" id="sendPageSearchResult">
-                        <span style="color:#888;">Enter a referral code and click Search.</span>
+            <div class="payment-details">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <div class="name" id="paymentName">Airtel Mobile Number</div>
+                        <div class="number" id="paymentNumber">0976760537</div>
+                        <div style="font-size:9px; color:#555;" id="paymentAccountName">Jubel Mobela</div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Amount (ZMW)</label>
-                    <input type="number" id="sendPageAmountInput" placeholder="0.00" step="0.01" />
-                    <div class="balance-check" id="sendPageBalanceCheck">
-                        Available: <span class="avail" id="sendPageAvailBalance">ZMW 0.00</span>
-                    </div>
-                </div>
-
-                <button class="btn-send-rect" id="sendPageConfirmBtn" disabled>
-                    <i class="fa-solid fa-paper-plane"></i> Send Money
-                </button>
-
-                <div class="history-section">
-                    <h4>📋 Recent Sent &amp; Received</h4>
-                    <div id="sendPageHistoryList">
-                        <div class="empty-history">No transactions yet.</div>
+                    <div style="text-align:right;">
+                        <div style="font-size:9px; color:#888;">Amount to pay</div>
+                        <div class="amount-large" id="paymentAmount">ZMW 350.00</div>
+                        <div style="font-size:9px; color:#888;">50% of total</div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="withdraw-success-overlay" id="withdrawSuccessModal">
-            <div class="withdraw-success-modal">
-                <i class="fa-regular fa-circle-check"></i>
-                <h3>Withdrawal Submitted</h3>
-                <p>Your withdrawal request has been submitted and will be processed within 24 hours.</p>
-                <button class="btn-ok" id="withdrawSuccessOkBtn">OK</button>
-            </div>
-        </div>
-
-        <div class="app-status-overlay" id="appStatusPopup">
-            <div class="app-status-modal">
-                <div class="app-status-logo-wrap">
-                    <img src="bufferzone.png" alt="Buffer Zone" onerror="this.style.display='none'" />
-                    <div class="logo-text">BUFFER ZONE</div>
+            <div id="walletPaymentSection" style="margin-bottom:10px; padding:9px; border-radius:9px; border:1px solid #e0e0e0; background:#fafbfc;">
+                <div style="display:flex; align-items:center; gap:7px; flex-wrap:wrap;">
+                    <input type="checkbox" id="payWithWalletCheck" />
+                    <label for="payWithWalletCheck" style="font-weight:600; font-size:10px; color:#1c2128; cursor:pointer;">Pay with Buffer Zone Wallet</label>
                 </div>
-                <div class="app-status-body">
-                    <div class="app-status-icon" id="appStatusIcon">
-                        <span class="check-mark" id="appStatusCheck" style="display:none;">✓</span>
-                        <span class="x-mark" id="appStatusX" style="display:none;">✗</span>
-                    </div>
-                    <div class="app-status-title" id="appStatusTitle">CONGRATULATIONS</div>
-                    <div class="app-status-message" id="appStatusMessage">Your application has been approved.</div>
-                    <div class="app-status-details-box" id="appStatusDetailsBox">
-                        <div class="detail-line"><span class="dl-label">Name</span><span class="dl-value" id="asName">—</span></div>
-                        <div class="detail-line"><span class="dl-label">Email</span><span class="dl-value" id="asEmail">—</span></div>
-                        <div class="detail-line"><span class="dl-label">Phone</span><span class="dl-value" id="asPhone">—</span></div>
-                        <div class="detail-line"><span class="dl-label">BZ Code</span><span class="dl-value" id="asBzCode">—</span></div>
-                        <div class="detail-line"><span class="dl-label">Form Type</span><span class="dl-value" id="asFormType">—</span></div>
-                        <div class="detail-line"><span class="dl-label">Flyer</span><span class="dl-value" id="asFlyer">—</span></div>
-                        <div class="detail-line"><span class="dl-label">Applied On</span><span class="dl-value" id="asDate">—</span></div>
-                    </div>
-                    <button class="app-status-btn" id="appStatusBtn"><i class="fa-solid fa-arrow-right"></i> Go to Applications</button>
+                <div id="walletStatus" style="font-size:9px; margin-top:3px; padding:3px 7px; border-radius:5px;">
+                    Wallet balance: <span id="walletBalanceDisplay">ZMW 0.00</span>
+                    <span id="walletSufficiency" style="font-weight:600;"></span>
                 </div>
             </div>
-        </div>
 
-        <div class="order-complete-overlay" id="orderCompletePopup">
-            <div class="order-complete-modal">
-                <span class="oc-icon"><i class="fa-regular fa-circle-check"></i></span>
-                <h3>Order Complete!</h3>
-                <p>Your order has been marked as complete.<br>Please pay the remaining 50% which is:</p>
-                <span class="oc-amount" id="ocRemainingAmount">ZMW 0.00</span>
-                <button class="oc-btn" id="ocOkBtn"><i class="fa-regular fa-circle-check"></i> OK</button>
+            <div class="toggle-row">
+                <button class="toggle-code-btn active" id="togglePromoBtn">Promo Code</button>
+                <button class="toggle-code-btn" id="toggleReferralBtn">Referral Code</button>
             </div>
-        </div>
 
-        <div class="withdrawal-status-overlay" id="withdrawalStatusPopup">
-            <div class="withdrawal-status-modal">
-                <div class="ws-logo-wrap">
-                    <div class="logo-text">BUFFER ZONE</div>
+            <div class="code-input-wrap open" id="promoCodeWrap">
+                <div class="coupon-section">
+                    <button class="apply-btn" id="applyPromoBtn">Apply promo coupon <span id="promoCodeDisplay">SAVE10</span> and get <span id="promoDiscountDisplay">20%</span> off</button>
                 </div>
-                <div class="ws-body">
-                    <div class="ws-icon" id="wsIcon">
-                        <span class="check-mark" id="wsCheck" style="display:none;">✓</span>
-                        <span class="x-mark" id="wsX" style="display:none;">✗</span>
-                    </div>
-                    <div class="ws-title" id="wsTitle">WITHDRAWAL STATUS</div>
-                    <div class="ws-message" id="wsMessage">Your withdrawal has been approved.</div>
-                    <div class="ws-details-box" id="wsDetailsBox">
-                        <div class="detail-line"><span class="dl-label">Amount</span><span class="dl-value" id="wsAmount">ZMW 0.00</span></div>
-                        <div class="detail-line"><span class="dl-label">Date</span><span class="dl-value" id="wsDate">—</span></div>
-                        <div class="detail-line"><span class="dl-label">Phone</span><span class="dl-value" id="wsPhone">—</span></div>
-                        <div class="detail-line"><span class="dl-label">Status</span><span class="dl-value" id="wsStatus">Approved</span></div>
-                    </div>
-                    <button class="ws-btn" id="wsBtn"><i class="fa-solid fa-arrow-right"></i> Go to Account</button>
+                <span class="coupon-msg" id="couponMsg"></span>
+            </div>
+
+            <div class="code-input-wrap" id="referralCodeWrap">
+                <div class="referral-section">
+                    <input type="text" id="referralCodeInput" placeholder="Enter referral code">
+                    <button class="apply-btn" id="applyReferralBtn">Apply Referral</button>
+                </div>
+                <span class="coupon-msg" id="referralMsg"></span>
+            </div>
+
+            <div class="price-breakdown" id="priceBreakdown" style="display:none;">
+                <div class="row"><span class="label">Original Price</span><span class="val" id="origPriceVal">ZMW 0.00</span></div>
+                <div class="row"><span class="label">Discount</span><span class="val discounted" id="discountVal">- ZMW 0.00</span></div>
+                <div class="row"><span class="label">Final Price</span><span class="val" id="finalPriceVal">ZMW 0.00</span></div>
+                <div class="row"><span class="label" style="font-weight:700;">50% Deposit</span><span class="val" style="font-weight:700;color:#f5b83d;" id="finalDepositVal">ZMW 0.00</span></div>
+            </div>
+
+            <div style="margin-bottom:9px;" id="uploadSection">
+                <label style="font-weight:600; font-size:9px; color:#1c2128; display:block; margin-bottom:3px;">Upload transaction screenshot</label>
+                <div class="upload-area" id="uploadArea">
+                    <i class="fa-regular fa-image"></i>
+                    <p>Tap to upload receipt or screenshot</p>
+                    <div class="file-name" id="fileName">No file chosen</div>
+                    <input type="file" id="fileInput" accept="image/*" style="display:none;">
+                    <input type="hidden" id="cloudinaryScreenshotUrl">
+                </div>
+            </div>
+
+            <button class="btn-primary" id="confirmPaymentBtn">
+                <i class="fa-regular fa-circle-check"></i> Confirm Payment & Start Project
+            </button>
+            <p style="text-align:center; font-size:8px; color:#888; margin-top:5px;">
+                <i class="fa-regular fa-clock"></i> Project begins after payment confirmation
+            </p>
+        </div>
+    </div>
+
+    <div class="order-success-overlay" id="orderSuccessPopup">
+        <div class="order-success-modal">
+            <i class="fa-regular fa-circle-check"></i>
+            <h3>🎉 Order Submitted!</h3>
+            <p>Your order has been successfully submitted.<br>You will be contacted by one of our team.<br><br>Thank you for choosing <strong>BUFFER ZONE</strong>.</p>
+            <button class="btn-ok" id="orderSuccessOkBtn">OK</button>
+        </div>
+    </div>
+
+    <div class="withdraw-page-overlay" id="withdrawPage">
+        <div class="withdraw-page">
+            <div class="page-header">
+                <h2><i class="fa-solid fa-arrow-up" style="color:#f5b83d; margin-right:6px;"></i> Withdraw Funds</h2>
+                <button class="close-btn" id="withdrawPageClose"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="subtitle">Transfer your available earnings to your registered mobile number below.</div>
+
+            <div class="customer-info" id="withdrawCustomerInfo">
+                <div class="row"><span class="lbl">Name</span><span class="val" id="wdName">—</span></div>
+                <div class="row"><span class="lbl">Mobile</span><span class="val" id="wdPhone">—</span></div>
+                <div class="row"><span class="lbl">Email</span><span class="val" id="wdEmail">—</span></div>
+            </div>
+
+            <div class="transfer-note" id="transferNote">
+                <i class="fa-solid fa-info-circle" style="color:#f5b83d; margin-right:6px;"></i>
+                Once approved, funds will be transferred to <strong id="wdTransferNumber">—</strong>
+            </div>
+
+            <div class="balance-display">
+                <div class="lbl">Available Balance</div>
+                <div class="amount" id="wdBalanceAmount">ZMW 0.00</div>
+                <div class="sub" id="wdBalanceSub">Includes pending withdrawals</div>
+            </div>
+
+            <div class="amount-options" id="wdAmountOptions">
+            </div>
+
+            <div class="custom-amount">
+                <label for="wdCustomAmount">Custom amount (ZMW)</label>
+                <input type="number" id="wdCustomAmount" placeholder="Enter amount" step="0.01" />
+                <div class="hint" id="wdCustomHint">Maximum: <span id="wdMaxHint">0.00</span></div>
+            </div>
+
+            <button class="btn-withdraw-rect" id="wdSubmitBtn"><i class="fa-solid fa-arrow-up" style="margin-right:6px;"></i> Withdraw</button>
+
+            <div class="history-section">
+                <h4>📋 Withdraw History</h4>
+                <div id="wdHistoryList">
+                    <div class="empty-history">No withdrawal history yet.</div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="referral-received-overlay" id="referralReceivedPopup">
-            <div class="referral-received-modal">
-                <span class="rr-icon"><i class="fa-solid fa-gift"></i></span>
-                <h3>🎉 Referral Reward!</h3>
-                <p>You have received money from a referral! The following amount has been added to your account:</p>
-                <span class="rr-amount" id="rrAmount">ZMW 0.00</span>
-                <button class="rr-btn" id="rrBtn"><i class="fa-regular fa-circle-check"></i> OK</button>
+    <div class="send-money-page-overlay" id="sendMoneyPage">
+        <div class="send-money-page">
+            <div class="page-header">
+                <h2><i class="fa-solid fa-paper-plane" style="color:#4a90d9; margin-right:6px;"></i> Send Money</h2>
+                <button class="close-btn" id="sendMoneyPageClose"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="subtitle">Send funds to another Buffer Zone user using their referral code.</div>
+
+            <div class="customer-info" id="sendCustomerInfo">
+                <div class="row"><span class="lbl">Your Name</span><span class="val" id="sendName">—</span></div>
+                <div class="row"><span class="lbl">Your Balance</span><span class="val" id="sendBalanceDisplay">ZMW 0.00</span></div>
+            </div>
+
+            <div class="form-group">
+                <label>Recipient Referral Code</label>
+                <input type="text" id="sendPageReferralInput" placeholder="e.g. BZ-ABCDE" />
+                <button class="apply-btn" id="sendPageSearchBtn" style="margin-top:4px; width:100%; background:#f5b83d; color:#1c2128; border:none; padding:8px; border-radius:10px; font-weight:700; font-size:12px; cursor:pointer;">🔍 Search</button>
+            </div>
+
+            <div class="form-group">
+                <label>Recipient</label>
+                <div class="search-result" id="sendPageSearchResult">
+                    <span style="color:#888;">Enter a referral code and click Search.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Amount (ZMW)</label>
+                <input type="number" id="sendPageAmountInput" placeholder="0.00" step="0.01" />
+                <div class="balance-check" id="sendPageBalanceCheck">
+                    Available: <span class="avail" id="sendPageAvailBalance">ZMW 0.00</span>
+                </div>
+            </div>
+
+            <button class="btn-send-rect" id="sendPageConfirmBtn" disabled>
+                <i class="fa-solid fa-paper-plane"></i> Send Money
+            </button>
+
+            <div class="history-section">
+                <h4>📋 Recent Sent &amp; Received</h4>
+                <div id="sendPageHistoryList">
+                    <div class="empty-history">No transactions yet.</div>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="money-received-overlay" id="moneyReceivedPopup">
-            <div class="money-received-modal">
-                <span class="mr-icon"><i class="fa-solid fa-inbox"></i></span>
-                <h3>💵 Money Received!</h3>
-                <p>You have received money from another Buffer Zone user via the Send Money feature.</p>
-                <div class="mr-sender" id="mrSender">From: <span id="mrSenderName">—</span></div>
-                <span class="mr-amount" id="mrAmount">ZMW 0.00</span>
-                <button class="mr-btn" id="mrBtn"><i class="fa-regular fa-circle-check"></i> OK</button>
+    <div class="withdraw-success-overlay" id="withdrawSuccessModal">
+        <div class="withdraw-success-modal">
+            <i class="fa-regular fa-circle-check"></i>
+            <h3>Withdrawal Submitted</h3>
+            <p>Your withdrawal request has been submitted and will be processed within 24 hours.</p>
+            <button class="btn-ok" id="withdrawSuccessOkBtn">OK</button>
+        </div>
+    </div>
+
+    <div class="app-status-overlay" id="appStatusPopup">
+        <div class="app-status-modal">
+            <div class="app-status-logo-wrap">
+                <img src="bufferzone.png" alt="Buffer Zone" onerror="this.style.display='none'" />
+                <div class="logo-text">BUFFER ZONE</div>
+            </div>
+            <div class="app-status-body">
+                <div class="app-status-icon" id="appStatusIcon">
+                    <span class="check-mark" id="appStatusCheck" style="display:none;">✓</span>
+                    <span class="x-mark" id="appStatusX" style="display:none;">✗</span>
+                </div>
+                <div class="app-status-title" id="appStatusTitle">CONGRATULATIONS</div>
+                <div class="app-status-message" id="appStatusMessage">Your application has been approved.</div>
+                <div class="app-status-details-box" id="appStatusDetailsBox">
+                    <div class="detail-line"><span class="dl-label">Name</span><span class="dl-value" id="asName">—</span></div>
+                    <div class="detail-line"><span class="dl-label">Email</span><span class="dl-value" id="asEmail">—</span></div>
+                    <div class="detail-line"><span class="dl-label">Phone</span><span class="dl-value" id="asPhone">—</span></div>
+                    <div class="detail-line"><span class="dl-label">BZ Code</span><span class="dl-value" id="asBzCode">—</span></div>
+                    <div class="detail-line"><span class="dl-label">Form Type</span><span class="dl-value" id="asFormType">—</span></div>
+                    <div class="detail-line"><span class="dl-label">Flyer</span><span class="dl-value" id="asFlyer">—</span></div>
+                    <div class="detail-line"><span class="dl-label">Applied On</span><span class="dl-value" id="asDate">—</span></div>
+                </div>
+                <button class="app-status-btn" id="appStatusBtn"><i class="fa-solid fa-arrow-right"></i> Go to Applications</button>
             </div>
         </div>
+    </div>
 
-        <div class="image-viewer-overlay" id="imageViewer">
-            <img id="imageViewerImg" src="" alt="Screenshot" />
+    <div class="order-complete-overlay" id="orderCompletePopup">
+        <div class="order-complete-modal">
+            <span class="oc-icon"><i class="fa-regular fa-circle-check"></i></span>
+            <h3>Order Complete!</h3>
+            <p>Your order has been marked as complete.<br>Please pay the remaining 50% which is:</p>
+            <span class="oc-amount" id="ocRemainingAmount">ZMW 0.00</span>
+            <button class="oc-btn" id="ocOkBtn"><i class="fa-regular fa-circle-check"></i> OK</button>
         </div>
+    </div>
 
-        <div class="sidebar-overlay" id="sidebarOverlay"></div>
-        <div class="sidebar" id="notifSidebar">
-            <div class="sidebar-header">
-                <h3>Notifications</h3>
-                <button class="sidebar-close" id="sidebarClose"><i class="fa-solid fa-times"></i></button>
+    <div class="withdrawal-status-overlay" id="withdrawalStatusPopup">
+        <div class="withdrawal-status-modal">
+            <div class="ws-logo-wrap">
+                <div class="logo-text">BUFFER ZONE</div>
             </div>
-            <div id="notifList">
+            <div class="ws-body">
+                <div class="ws-icon" id="wsIcon">
+                    <span class="check-mark" id="wsCheck" style="display:none;">✓</span>
+                    <span class="x-mark" id="wsX" style="display:none;">✗</span>
+                </div>
+                <div class="ws-title" id="wsTitle">WITHDRAWAL STATUS</div>
+                <div class="ws-message" id="wsMessage">Your withdrawal has been approved.</div>
+                <div class="ws-details-box" id="wsDetailsBox">
+                    <div class="detail-line"><span class="dl-label">Amount</span><span class="dl-value" id="wsAmount">ZMW 0.00</span></div>
+                    <div class="detail-line"><span class="dl-label">Date</span><span class="dl-value" id="wsDate">—</span></div>
+                    <div class="detail-line"><span class="dl-label">Phone</span><span class="dl-value" id="wsPhone">—</span></div>
+                    <div class="detail-line"><span class="dl-label">Status</span><span class="dl-value" id="wsStatus">Approved</span></div>
+                </div>
+                <button class="ws-btn" id="wsBtn"><i class="fa-solid fa-arrow-right"></i> Go to Account</button>
             </div>
         </div>
+    </div>
 
-        <div id="receiptModal">
-            <div class="receipt-wrapper">
-                <div id="receiptContainer" class="receipt-card">
-                    <div class="receipt-header">
-                        <div>
-                            <h2>BUFFER ZONE</h2>
-                            <p class="slogan">CREATIVE AGENCY</p>
-                        </div>
-                        <div>
-                            <div class="invoice-title">INVOICE</div>
-                            <p class="invoice-id">ID NO : <span id="recOrderId" style="color:white;">ORD-001</span></p>
-                        </div>
+    <div class="referral-received-overlay" id="referralReceivedPopup">
+        <div class="referral-received-modal">
+            <span class="rr-icon"><i class="fa-solid fa-gift"></i></span>
+            <h3>🎉 Referral Reward!</h3>
+            <p>You have received money from a referral! The following amount has been added to your account:</p>
+            <span class="rr-amount" id="rrAmount">ZMW 0.00</span>
+            <button class="rr-btn" id="rrBtn"><i class="fa-regular fa-circle-check"></i> OK</button>
+        </div>
+    </div>
+
+    <div class="money-received-overlay" id="moneyReceivedPopup">
+        <div class="money-received-modal">
+            <span class="mr-icon"><i class="fa-solid fa-inbox"></i></span>
+            <h3>💵 Money Received!</h3>
+            <p>You have received money from another Buffer Zone user via the Send Money feature.</p>
+            <div class="mr-sender" id="mrSender">From: <span id="mrSenderName">—</span></div>
+            <span class="mr-amount" id="mrAmount">ZMW 0.00</span>
+            <button class="mr-btn" id="mrBtn"><i class="fa-regular fa-circle-check"></i> OK</button>
+        </div>
+    </div>
+
+    <div class="image-viewer-overlay" id="imageViewer">
+        <img id="imageViewerImg" src="" alt="Screenshot" />
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="sidebar" id="notifSidebar">
+        <div class="sidebar-header">
+            <h3>Notifications</h3>
+            <button class="sidebar-close" id="sidebarClose"><i class="fa-solid fa-times"></i></button>
+        </div>
+        <div id="notifList">
+        </div>
+    </div>
+
+    <div id="receiptModal">
+        <div class="receipt-wrapper">
+            <div id="receiptContainer" class="receipt-card">
+                <div class="receipt-header">
+                    <div>
+                        <h2>BUFFER ZONE</h2>
+                        <p class="slogan">CREATIVE AGENCY</p>
                     </div>
-
-                    <div class="receipt-addresses">
-                        <div>
-                            <h4>INVOICE TO</h4>
-                            <p class="name" id="recCustName">Customer Name</p>
-                            <p id="recCustPhone">+000 123 456 789</p>
-                            <p id="recCustEmail">customer@email.com</p>
-                            <p>Customer</p>
-                        </div>
-                        <div class="address-right">
-                            <h4>INVOICE FROM</h4>
-                            <p class="name">Buffer Zone Creative Agency</p>
-                            <p>Phone: 0768658484</p>
-                            <p>Email: bufferzone802@gmail.com</p>
-                            <p>Lusaka, Kitwe and Ndola</p>
-                        </div>
+                    <div>
+                        <div class="invoice-title">INVOICE</div>
+                        <p class="invoice-id">ID NO : <span id="recOrderId" style="color:white;">ORD-001</span></p>
                     </div>
-
-                    <div class="receipt-table-header">
-                        <div>DESCRIPTION</div>
-                        <div>PRICE</div>
-                        <div>QTY</div>
-                        <div>TOTAL</div>
-                    </div>
-
-                    <div id="recItemsBody">
-                    </div>
-
-                    <div class="receipt-totals">
-                        <div class="receipt-totals-box">
-                            <div><span>Subtotal :</span> <span id="recSubtotal">ZMW 0.00</span></div>
-                            <div><span>Tax :</span> <span>ZMW 0.00</span></div>
-                            <div><span>Discount :</span> <span id="recDiscount">ZMW 0.00</span></div>
-                            <div class="total-row"><span>TOTAL</span> <span id="recTotalDisplay">ZMW 0.00</span></div>
-                        </div>
-                    </div>
-
-                    <div class="receipt-footer">
-                        <div>
-                            <div class="thanks">Thanks for your business!</div>
-                            <div class="footnote">We truly appreciate your trust and support. It has been a pleasure working with you, and we look forward to bringing your next project to life.</div>
-                        </div>
-                        <div class="signature-area">
-                            <div class="sign-name" id="recSignName">Jubel Mobela</div>
-                            <div class="sign-label">SIGNATURE</div>
-                        </div>
-                    </div>
-
-                    <div class="receipt-bottom-bar"></div>
                 </div>
 
-                <button class="receipt-download-btn" id="downloadReceiptBtn">
-                    <i class="fa-solid fa-download"></i> Download Receipt
-                </button>
-                <button style="margin-top:8px; width:100%; background:transparent; color:#fff; border:1px solid #fff; padding:8px; border-radius:8px; font-size:11px; cursor:pointer;" id="closeReceiptBtn">Close</button>
-            </div>
-        </div>
-
-        <div class="statement-modal-overlay" id="statementModal">
-            <div class="statement-modal-wrapper">
-                <div id="statementContainer" class="statement-card">
-                    <div class="statement-header">
-                        <div>
-                            <h2>BUFFER ZONE</h2>
-                            <p class="slogan">CREATIVE AGENCY</p>
-                        </div>
-                        <div>
-                            <div class="statement-title">STATEMENT</div>
-                            <p class="statement-ref">REF : <span id="stmtRef" style="color:white;">STM-001</span></p>
-                        </div>
+                <div class="receipt-addresses">
+                    <div>
+                        <h4>INVOICE TO</h4>
+                        <p class="name" id="recCustName">Customer Name</p>
+                        <p id="recCustPhone">+000 123 456 789</p>
+                        <p id="recCustEmail">customer@email.com</p>
+                        <p>Customer</p>
                     </div>
-
-                    <div class="statement-addresses">
-                        <div>
-                            <h4>TO</h4>
-                            <p class="name" id="stmtCustName">Customer Name</p>
-                            <p id="stmtCustPhone">+000 123 456 789</p>
-                            <p id="stmtCustEmail">customer@email.com</p>
-                            <p>Customer</p>
-                        </div>
-                        <div class="address-right">
-                            <h4>FROM</h4>
-                            <p class="name">Buffer Zone Creative Agency</p>
-                            <p>Phone: 0768658484</p>
-                            <p>Email: bufferzone802@gmail.com</p>
-                            <p>Lusaka, Kitwe and Ndola</p>
-                        </div>
+                    <div class="address-right">
+                        <h4>INVOICE FROM</h4>
+                        <p class="name">Buffer Zone Creative Agency</p>
+                        <p>Phone: 0768658484</p>
+                        <p>Email: bufferzone802@gmail.com</p>
+                        <p>Lusaka, Kitwe and Ndola</p>
                     </div>
-
-                    <div class="statement-table-header">
-                        <div>DESCRIPTION</div>
-                        <div>AMOUNT</div>
-                        <div>STATUS</div>
-                        <div>DATE</div>
-                    </div>
-
-                    <div id="stmtItemsBody">
-                    </div>
-
-                    <div class="statement-totals">
-                        <div class="statement-totals-box">
-                            <div><span>Total :</span> <span id="stmtTotalDisplay">ZMW 0.00</span></div>
-                            <div><span>Method :</span> <span id="stmtMethod">N/A</span></div>
-                            <div class="total-row"><span>NET</span> <span id="stmtNetDisplay">ZMW 0.00</span></div>
-                        </div>
-                    </div>
-
-                    <div class="statement-footer">
-                        <div>
-                            <div class="thanks">Thank you for using Buffer Zone!</div>
-                            <div class="footnote">This is a computer-generated statement. For inquiries, please contact our support team.</div>
-                        </div>
-                        <div class="signature-area">
-                            <div class="sign-name" id="stmtSignName">Jubel Mobela</div>
-                            <div class="sign-label">AUTHORIZED SIGNATURE</div>
-                        </div>
-                    </div>
-
-                    <div class="statement-bottom-bar"></div>
                 </div>
 
-                <button class="statement-download-btn" id="downloadStatementBtn">
-                    <i class="fa-solid fa-download"></i> Download Statement
-                </button>
-                <button class="statement-close-btn" id="closeStatementBtn">Close</button>
-            </div>
-        </div>
+                <div class="receipt-table-header">
+                    <div>DESCRIPTION</div>
+                    <div>PRICE</div>
+                    <div>QTY</div>
+                    <div>TOTAL</div>
+                </div>
 
-    </div><!-- /phone-frame -->
+                <div id="recItemsBody">
+                </div>
+
+                <div class="receipt-totals">
+                    <div class="receipt-totals-box">
+                        <div><span>Subtotal :</span> <span id="recSubtotal">ZMW 0.00</span></div>
+                        <div><span>Tax :</span> <span>ZMW 0.00</span></div>
+                        <div><span>Discount :</span> <span id="recDiscount">ZMW 0.00</span></div>
+                        <div class="total-row"><span>TOTAL</span> <span id="recTotalDisplay">ZMW 0.00</span></div>
+                    </div>
+                </div>
+
+                <div class="receipt-footer">
+                    <div>
+                        <div class="thanks">Thanks for your business!</div>
+                        <div class="footnote">We truly appreciate your trust and support. It has been a pleasure working with you, and we look forward to bringing your next project to life.</div>
+                    </div>
+                    <div class="signature-area">
+                        <div class="sign-name" id="recSignName">Jubel Mobela</div>
+                        <div class="sign-label">SIGNATURE</div>
+                    </div>
+                </div>
+
+                <div class="receipt-bottom-bar"></div>
+            </div>
+
+            <button class="receipt-download-btn" id="downloadReceiptBtn">
+                <i class="fa-solid fa-download"></i> Download Receipt
+            </button>
+            <button style="margin-top:8px; width:100%; background:transparent; color:#fff; border:1px solid #fff; padding:8px; border-radius:8px; font-size:11px; cursor:pointer;" id="closeReceiptBtn">Close</button>
+        </div>
+    </div>
+
+    <div class="statement-modal-overlay" id="statementModal">
+        <div class="statement-modal-wrapper">
+            <div id="statementContainer" class="statement-card">
+                <div class="statement-header">
+                    <div>
+                        <h2>BUFFER ZONE</h2>
+                        <p class="slogan">CREATIVE AGENCY</p>
+                    </div>
+                    <div>
+                        <div class="statement-title">STATEMENT</div>
+                        <p class="statement-ref">REF : <span id="stmtRef" style="color:white;">STM-001</span></p>
+                    </div>
+                </div>
+
+                <div class="statement-addresses">
+                    <div>
+                        <h4>TO</h4>
+                        <p class="name" id="stmtCustName">Customer Name</p>
+                        <p id="stmtCustPhone">+000 123 456 789</p>
+                        <p id="stmtCustEmail">customer@email.com</p>
+                        <p>Customer</p>
+                    </div>
+                    <div class="address-right">
+                        <h4>FROM</h4>
+                        <p class="name">Buffer Zone Creative Agency</p>
+                        <p>Phone: 0768658484</p>
+                        <p>Email: bufferzone802@gmail.com</p>
+                        <p>Lusaka, Kitwe and Ndola</p>
+                    </div>
+                </div>
+
+                <div class="statement-table-header">
+                    <div>DESCRIPTION</div>
+                    <div>AMOUNT</div>
+                    <div>STATUS</div>
+                    <div>DATE</div>
+                </div>
+
+                <div id="stmtItemsBody">
+                </div>
+
+                <div class="statement-totals">
+                    <div class="statement-totals-box">
+                        <div><span>Total :</span> <span id="stmtTotalDisplay">ZMW 0.00</span></div>
+                        <div><span>Method :</span> <span id="stmtMethod">N/A</span></div>
+                        <div class="total-row"><span>NET</span> <span id="stmtNetDisplay">ZMW 0.00</span></div>
+                    </div>
+                </div>
+
+                <div class="statement-footer">
+                    <div>
+                        <div class="thanks">Thank you for using Buffer Zone!</div>
+                        <div class="footnote">This is a computer-generated statement. For inquiries, please contact our support team.</div>
+                    </div>
+                    <div class="signature-area">
+                        <div class="sign-name" id="stmtSignName">Jubel Mobela</div>
+                        <div class="sign-label">AUTHORIZED SIGNATURE</div>
+                    </div>
+                </div>
+
+                <div class="statement-bottom-bar"></div>
+            </div>
+
+            <button class="statement-download-btn" id="downloadStatementBtn">
+                <i class="fa-solid fa-download"></i> Download Statement
+            </button>
+            <button class="statement-close-btn" id="closeStatementBtn">Close</button>
+        </div>
+    </div>
 
     <script type="text/javascript">
     </script>
@@ -6271,6 +6091,20 @@
             moneyReceived: {}
         };
 
+        let isInitialLoadComplete = false;
+
+        // ── SPINNER CONTROL ──
+        const spinnerOverlay = document.getElementById('spinnerOverlay');
+
+        function hideSpinner() {
+            if (isInitialLoadComplete) return;
+            isInitialLoadComplete = true;
+            spinnerOverlay.classList.add('hidden');
+            setTimeout(() => {
+                spinnerOverlay.style.display = 'none';
+            }, 700);
+        }
+
         // ── NOTIFICATION SOUND ──
         const notificationSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3');
 
@@ -6325,16 +6159,6 @@
                 updateTutorial();
             }
         });
-
-        // ── SPINNER ──
-        const spinnerOverlay = document.getElementById('spinnerOverlay');
-
-        function hideSpinner() {
-            spinnerOverlay.classList.add('hidden');
-            setTimeout(() => {
-                spinnerOverlay.style.display = 'none';
-            }, 800);
-        }
 
         // ── HELPERS ──
         const headerName = document.getElementById('headerName');
@@ -6544,7 +6368,7 @@
         function showToast(msg, type = 'info') {
             const toast = document.createElement('div');
             toast.style.cssText = `
-                position: absolute;
+                position: fixed;
                 bottom: 77px;
                 left: 50%;
                 transform: translateX(-50%);
@@ -6564,7 +6388,7 @@
             `;
             const icon = type === 'success' ? 'fa-check-circle' : (type === 'error' ? 'fa-exclamation-circle' : 'fa-bell');
             toast.innerHTML = `<i class="fas ${icon}" style="color: #f5b83d; margin-right: 7px;"></i> ${msg}`;
-            document.getElementById('phoneFrame').appendChild(toast);
+            document.body.appendChild(toast);
             requestAnimationFrame(() => {
                 toast.style.opacity = '1';
             });
@@ -6806,6 +6630,8 @@
                     checkAllPopups();
                 }, 500);
                 if (callback) callback();
+                // ── HIDE SPINNER AFTER FIRST SUCCESSFUL LOAD ──
+                hideSpinner();
             });
         }
 
@@ -6889,8 +6715,8 @@
             if (!allData) return;
 
             if (allData.disabled === true) {
-                document.getElementById('phoneFrame').innerHTML = `
-                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; background:#f8f9fc; padding:20px;">
+                document.body.innerHTML = `
+                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
                         <i class="fa-solid fa-triangle-exclamation" style="font-size:41px; color:#f5b83d; margin-bottom:14px;"></i>
                         <h1 style="font-size:20px; font-weight:700; color:#1c2128;">App Under Maintenance</h1>
                         <p style="color:#888; text-align:center; max-width:272px; margin-top:7px;">We are currently performing updates. Please check back later.</p>
@@ -10284,8 +10110,8 @@
                 onValue(userRef, (snapshot) => {
                     const data = snapshot.val();
                     if (data && data.banned === true) {
-                        document.getElementById('phoneFrame').innerHTML = `
-                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; background:#f8f9fc; padding:20px;">
+                        document.body.innerHTML = `
+                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
                                 <i class="fa-solid fa-ban" style="font-size:41px; color:#dc2626; margin-bottom:14px;"></i>
                                 <h1 style="font-size:20px; font-weight:700; color:#1c2128;">Account Banned</h1>
                                 <p style="color:#888; text-align:center; max-width:272px; margin-top:7px;">Your account has been banned. Please contact support for assistance.</p>
@@ -10320,10 +10146,7 @@
                         console.error('Error loading shown popups:', error);
                     });
                     setupFCM();
-                    loadData(() => {
-                        // Hide spinner once data is loaded
-                        hideSpinner();
-                    });
+                    loadData();
                 });
             } else {
                 window.location.href = 'login.html';
@@ -10337,18 +10160,11 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Buffer Zone Customer App loaded.');
-        console.log('🎨 Colorful spinner shown during system initialization.');
-        console.log('📱 Phone layout enforced on ALL screen sizes (tablets, desktops, phones).');
-        console.log('📖 Tutorial appears after spinner, only once per user.');
-
-        // ── FALLBACK: hide spinner after 5 seconds even if something fails ──
-        setTimeout(() => {
-            if (!spinnerOverlay.classList.contains('hidden')) {
-                console.warn('⚠️ Spinner fallback: forcing hide after 5s.');
-                hideSpinner();
-            }
-        }, 5000);
+        console.log('✅ Customer app updated with 5‑page tutorial + uniform spacing.');
+        console.log('📖 Tutorial shows only once per user (persisted in Firebase).');
+        console.log('🎨 Each slide has its own vibrant, individual design.');
+        console.log('📱 Consistent spacing across all devices — samples, account, etc.');
+        console.log('🌀 Colorful spinner overlay added — matches tutorial design.');
     </script>
 </body>
 </html>
