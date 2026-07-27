@@ -27,224 +27,6 @@
             height: 100%;
         }
 
-        /* ── SPINNER OVERLAY ── */
-        .spinner-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 99999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #ffffff;
-            pointer-events: auto;
-            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-            overflow: hidden;
-        }
-
-        .spinner-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .spinner-slide {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            height: 100%;
-            max-height: 700px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 30px 28px;
-            text-align: center;
-            overflow: hidden;
-            background: linear-gradient(135deg, #1c2128 0%, #2a2a2a 40%, #f5b83d 80%, #f59e0b 100%);
-            border-radius: 0;
-            box-shadow: none;
-        }
-
-        @media (min-width: 768px) {
-            .spinner-slide {
-                border-radius: 40px;
-                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.30);
-                height: auto;
-                min-height: 500px;
-                max-height: 90vh;
-            }
-            .spinner-overlay {
-                background: rgba(0, 0, 0, 0.5);
-                backdrop-filter: blur(12px);
-            }
-        }
-
-        .spinner-slide .slide-bg-decor {
-            position: absolute;
-            top: -30%;
-            right: -20%;
-            width: 70%;
-            height: 90%;
-            border-radius: 50%;
-            background: rgba(245, 184, 61, 0.20);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .spinner-slide .slide-bg-decor-2 {
-            position: absolute;
-            bottom: -30%;
-            left: -20%;
-            width: 60%;
-            height: 80%;
-            border-radius: 50%;
-            background: rgba(0, 168, 107, 0.20);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .spinner-slide .slide-bg-decor-3 {
-            position: absolute;
-            top: 40%;
-            right: -10%;
-            width: 40%;
-            height: 50%;
-            border-radius: 50%;
-            background: rgba(124, 58, 237, 0.15);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .spinner-content {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .spinner-icon-wrap {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 42px;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(4px);
-            margin-bottom: 20px;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.20);
-            flex-shrink: 0;
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            animation: pulseGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes pulseGlow {
-            0%,
-            100% {
-                box-shadow: 0 8px 40px rgba(0, 0, 0, 0.20);
-                transform: scale(1);
-            }
-            50% {
-                box-shadow: 0 8px 60px rgba(245, 184, 61, 0.35);
-                transform: scale(1.04);
-            }
-        }
-
-        .spinner-icon-wrap i {
-            color: #f5b83d;
-            font-size: 42px;
-            animation: spin 1.2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .spinner-content h2 {
-            font-size: 28px;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 6px;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-        }
-
-        .spinner-content h2 .highlight {
-            color: #f5b83d;
-        }
-
-        .spinner-content p {
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.80);
-            line-height: 1.6;
-            margin-bottom: 16px;
-            max-width: 320px;
-        }
-
-        .spinner-loader {
-            display: flex;
-            gap: 12px;
-            margin-top: 4px;
-        }
-
-        .spinner-loader .spinner-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #f5b83d;
-            animation: dotBounce 1.4s ease-in-out infinite both;
-        }
-
-        .spinner-loader .spinner-dot:nth-child(1) {
-            animation-delay: 0s;
-        }
-        .spinner-loader .spinner-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        .spinner-loader .spinner-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        .spinner-loader .spinner-dot:nth-child(4) {
-            animation-delay: 0.6s;
-        }
-
-        @keyframes dotBounce {
-            0%,
-            80%,
-            100% {
-                transform: scale(0.4);
-                opacity: 0.4;
-            }
-            40% {
-                transform: scale(1.2);
-                opacity: 1;
-            }
-        }
-
-        .spinner-version {
-            position: absolute;
-            bottom: 20px;
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.30);
-            letter-spacing: 1px;
-            z-index: 1;
-        }
-
-        /* ── APP ROOT ── */
         .app-root {
             display: flex;
             flex-direction: column;
@@ -262,6 +44,228 @@
             overflow-y: auto;
             padding: 0 0 128px 0;
             -webkit-overflow-scrolling: touch;
+        }
+
+        /* ── LOADING OVERLAY ── */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: all;
+            overflow: hidden;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-overlay .decor-circle-1 {
+            position: absolute;
+            top: -20%;
+            right: -15%;
+            width: 70%;
+            height: 80%;
+            border-radius: 50%;
+            background: #1c2128;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .loading-overlay .decor-circle-2 {
+            position: absolute;
+            bottom: -25%;
+            left: -20%;
+            width: 60%;
+            height: 70%;
+            border-radius: 50%;
+            background: #f5b83d;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .loading-overlay .decor-dots {
+            position: absolute;
+            top: 12%;
+            right: 12%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            z-index: 0;
+            opacity: 0.15;
+        }
+
+        .loading-overlay .decor-dots div {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #1c2128;
+        }
+
+        .loading-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .loading-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #1c2128;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+            flex-shrink: 0;
+            margin-bottom: 4px;
+        }
+
+        .loading-text {
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-align: center;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #1c2128 0%, #f5b83d 25%, #00a86b 50%, #7c3aed 75%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .loading-text .sub {
+            display: block;
+            font-size: 10px;
+            font-weight: 400;
+            color: #888;
+            -webkit-text-fill-color: #888;
+            background: none;
+            letter-spacing: 3px;
+            margin-top: 4px;
+        }
+
+        .spinner-ring {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: conic-gradient(#1c2128 0deg 72deg,
+                    #f5b83d 72deg 144deg,
+                    #00a86b 144deg 216deg,
+                    #7c3aed 216deg 288deg,
+                    #f59e0b 288deg 360deg);
+            animation: spin 1.4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+            position: relative;
+            flex-shrink: 0;
+            box-shadow: 0 0 40px rgba(28, 33, 40, 0.08);
+        }
+
+        .spinner-ring::before {
+            content: '';
+            position: absolute;
+            top: 7px;
+            left: 7px;
+            right: 7px;
+            bottom: 7px;
+            background: #ffffff;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .spinner-ring::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50%;
+            background: inherit;
+            z-index: 0;
+            filter: blur(6px);
+            opacity: 0.3;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-pulse-dots {
+            display: flex;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .loading-pulse-dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: pulseDot 1.4s ease-in-out infinite;
+        }
+
+        .loading-pulse-dots .dot:nth-child(1) {
+            background: #1c2128;
+            animation-delay: 0s;
+        }
+        .loading-pulse-dots .dot:nth-child(2) {
+            background: #f5b83d;
+            animation-delay: 0.2s;
+        }
+        .loading-pulse-dots .dot:nth-child(3) {
+            background: #00a86b;
+            animation-delay: 0.4s;
+        }
+        .loading-pulse-dots .dot:nth-child(4) {
+            background: #7c3aed;
+            animation-delay: 0.6s;
+        }
+        .loading-pulse-dots .dot:nth-child(5) {
+            background: #f59e0b;
+            animation-delay: 0.8s;
+        }
+
+        @keyframes pulseDot {
+            0%,
+            100% {
+                transform: scale(0.6);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
         }
 
         /* ── BOTTOM NAV ── */
@@ -5142,70 +5146,56 @@
                 padding: 8px 18px;
                 font-size: 12px;
             }
-        }
 
-        @media (min-width: 768px) {
-            .app-root {
-                max-width: 480px;
-                border-radius: 32px;
-                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.20);
-                margin: 20px auto;
-                height: calc(100vh - 40px);
-                max-height: 900px;
+            .loading-text {
+                font-size: 20px;
             }
-            body {
-                background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                min-height: 100vh;
-                padding: 20px;
-                overflow: hidden;
+
+            .loading-logo {
+                width: 48px;
+                height: 48px;
             }
-            .tutorial-overlay.open {
-                background: rgba(0, 0, 0, 0.5);
-                backdrop-filter: blur(12px);
+
+            .spinner-ring {
+                width: 56px;
+                height: 56px;
             }
-            .tutorial-slides {
-                max-width: 580px;
-                max-height: 700px;
-                border-radius: 40px;
-                overflow: hidden;
-                margin: auto;
-                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.30);
-            }
-            .tutorial-bottom-bar {
-                max-width: 580px;
-                margin: 0 auto;
-                padding: 18px 32px 28px 32px;
-                background: transparent;
-                border-radius: 0 0 40px 40px;
+
+            .spinner-ring::before {
+                top: 5px;
+                left: 5px;
+                right: 5px;
+                bottom: 5px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ─── SPINNER OVERLAY ─── -->
-    <div class="spinner-overlay" id="spinnerOverlay">
-        <div class="spinner-slide">
-            <div class="slide-bg-decor"></div>
-            <div class="slide-bg-decor-2"></div>
-            <div class="slide-bg-decor-3"></div>
-            <div class="spinner-content">
-                <div class="spinner-icon-wrap">
-                    <i class="fa-solid fa-circle-notch"></i>
-                </div>
-                <h2>Welcome to <span class="highlight">Buffer Zone</span></h2>
-                <p>Loading your experience...</p>
-                <div class="spinner-loader">
-                    <div class="spinner-dot"></div>
-                    <div class="spinner-dot"></div>
-                    <div class="spinner-dot"></div>
-                    <div class="spinner-dot"></div>
-                </div>
+    <!-- ─── LOADING OVERLAY ─── -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="decor-circle-1"></div>
+        <div class="decor-circle-2"></div>
+        <div class="decor-dots">
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+        </div>
+        <div class="loading-content">
+            <img src="bufferzone.png" alt="Buffer Zone" class="loading-logo" onerror="this.style.display='none'" />
+            <div class="loading-text">
+                LOADING PIXELS AND CODE
+                <span class="sub">BUFFER ZONE</span>
             </div>
-            <div class="spinner-version">v2.0</div>
+            <div class="spinner-ring"></div>
+            <div class="loading-pulse-dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
         </div>
     </div>
 
@@ -6091,20 +6081,6 @@
             moneyReceived: {}
         };
 
-        let isInitialLoadComplete = false;
-
-        // ── SPINNER CONTROL ──
-        const spinnerOverlay = document.getElementById('spinnerOverlay');
-
-        function hideSpinner() {
-            if (isInitialLoadComplete) return;
-            isInitialLoadComplete = true;
-            spinnerOverlay.classList.add('hidden');
-            setTimeout(() => {
-                spinnerOverlay.style.display = 'none';
-            }, 700);
-        }
-
         // ── NOTIFICATION SOUND ──
         const notificationSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3');
 
@@ -6117,6 +6093,16 @@
             } catch (e) {
                 console.warn('🔇 Notification sound error:', e);
             }
+        }
+
+        // ── LOADING ──
+        const loadingOverlay = document.getElementById('loadingOverlay');
+
+        function hideLoading() {
+            loadingOverlay.classList.add('hidden');
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+            }, 800);
         }
 
         // ── TUTORIAL ──
@@ -6629,9 +6615,8 @@
                 setTimeout(() => {
                     checkAllPopups();
                 }, 500);
+                hideLoading();
                 if (callback) callback();
-                // ── HIDE SPINNER AFTER FIRST SUCCESSFUL LOAD ──
-                hideSpinner();
             });
         }
 
@@ -10164,7 +10149,6 @@
         console.log('📖 Tutorial shows only once per user (persisted in Firebase).');
         console.log('🎨 Each slide has its own vibrant, individual design.');
         console.log('📱 Consistent spacing across all devices — samples, account, etc.');
-        console.log('🌀 Colorful spinner overlay added — matches tutorial design.');
     </script>
 </body>
 </html>
