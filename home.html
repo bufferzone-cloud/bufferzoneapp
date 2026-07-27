@@ -126,15 +126,16 @@
             width: 100%;
         }
 
+        /* ⬇️ FIX: LOGO SIZE INCREASED 5x (64px → 320px) ⬇️ */
         .loading-logo {
-            width: 64px;
-            height: 64px;
+            width: 320px;
+            height: 320px;
             border-radius: 50%;
             object-fit: cover;
             background: #1c2128;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+            box-shadow: 0 15px 60px rgba(0, 0, 0, 0.15);
             flex-shrink: 0;
-            margin-bottom: 4px;
+            margin-bottom: 10px;
         }
 
         .loading-text {
@@ -6099,11 +6100,27 @@
         const loadingOverlay = document.getElementById('loadingOverlay');
 
         function hideLoading() {
+            if (!loadingOverlay) return;
             loadingOverlay.classList.add('hidden');
             setTimeout(() => {
                 loadingOverlay.style.display = 'none';
             }, 800);
         }
+
+        // ── GLOBAL ERROR CATCHER (NEW) ──
+        window.addEventListener('error', (e) => {
+            console.error('Uncaught error:', e.error);
+            hideLoading();
+        });
+
+        // ── FALLBACK TIMEOUT (NEW) ──
+        setTimeout(() => {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay && !overlay.classList.contains('hidden')) {
+                console.warn('⚠️ Forcing loading overlay hide after timeout');
+                hideLoading();
+            }
+        }, 10000);
 
         // ── TUTORIAL ──
         const tutorialOverlay = document.getElementById('tutorialOverlay');
@@ -6554,6 +6571,7 @@
             }).catch(err => console.error('Error saving notification:', err));
         }
 
+        // ⬇️ FIX: ADD ERROR CALLBACK TO onValue ⬇️
         function loadData(callback) {
             const dbRef = ref(db, 'bufferzoneAppData');
             onValue(dbRef, (snapshot) => {
@@ -6617,6 +6635,11 @@
                 }, 500);
                 hideLoading();
                 if (callback) callback();
+            }, (error) => {
+                console.error('Database read error:', error);
+                hideLoading();
+                showToast('Failed to load app data. Please refresh.', 'error');
+                if (callback) callback(error);
             });
         }
 
@@ -10145,10 +10168,9 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Customer app updated with 5‑page tutorial + uniform spacing.');
-        console.log('📖 Tutorial shows only once per user (persisted in Firebase).');
-        console.log('🎨 Each slide has its own vibrant, individual design.');
-        console.log('📱 Consistent spacing across all devices — samples, account, etc.');
+        console.log('✅ FIXED: Spinner no longer gets stuck.');
+        console.log('✅ FIXED: Logo size increased by 5x (320px).');
+        console.log('✅ Added global error handler and fallback timeout for safety.');
     </script>
 </body>
 </html>
