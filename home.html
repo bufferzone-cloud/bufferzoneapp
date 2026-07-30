@@ -6867,6 +6867,20 @@
             });
         }
 
+        // ─── REAL-TIME LISTENER FOR IN-APP NOTIFICATIONS ───
+        function listenForAdminNotifications() {
+            const notifRef = ref(db, 'bufferzoneAppData/inAppNotifications');
+            onValue(notifRef, (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    allData.inAppNotifications = data;
+                    checkAdminNotifications();
+                }
+            }, (error) => {
+                console.error('Error listening to inAppNotifications:', error);
+            });
+        }
+
         function setupPromoButton() {
             const promoBtn = document.getElementById('applyPromoBtn');
             const promoCodeDisplay = document.getElementById('promoCodeDisplay');
@@ -10405,6 +10419,9 @@
         });
         downloadStatementBtn.addEventListener('click', downloadStatement);
 
+        // ─── START LISTENING FOR ADMIN NOTIFICATIONS ───
+        listenForAdminNotifications();
+
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
@@ -10465,6 +10482,7 @@
 
         console.log('✅ Added stylish Admin In-App popup notifications (one-time).');
         console.log('✅ Added offline internet disconnection popup.');
+        console.log('✅ Real-time listener for admin notifications enabled.');
     </script>
 </body>
 </html>
