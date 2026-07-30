@@ -126,7 +126,6 @@
             width: 100%;
         }
 
-        /* ⬇️ FIX: LOGO SIZE INCREASED 5x (64px → 320px) ⬇️ */
         .loading-logo {
             width: 320px;
             height: 320px;
@@ -4411,6 +4410,11 @@
             margin-bottom: 8px;
         }
 
+        .money-received-modal .mr-sender span {
+            font-weight: 800;
+            color: #f5b83d;
+        }
+
         .money-received-modal .mr-btn {
             background: #1c2128;
             color: #fff;
@@ -5169,6 +5173,170 @@
                 bottom: 5px;
             }
         }
+
+        /* ────────────────────────────────────────────── */
+        /*  NEW: ADMIN IN-APP NOTIFICATION POPUP         */
+        /*  NEW: OFFLINE MODAL                           */
+        /* ────────────────────────────────────────────── */
+
+        .admin-notif-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 3500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .admin-notif-overlay.open {
+            display: flex;
+        }
+
+        .admin-notif-modal {
+            background: #ffffff;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 420px;
+            padding: 0 0 18px 0;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+            animation: modalIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .admin-notif-header {
+            background: #1c2128;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 3px solid #f5b83d;
+        }
+
+        .admin-notif-header .admin-notif-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f5b83d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1c2128;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .admin-notif-header span {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            flex: 1;
+        }
+
+        .admin-notif-body {
+            padding: 18px 18px 10px 18px;
+            text-align: left;
+        }
+
+        .admin-notif-body p {
+            font-size: 13px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 4px;
+        }
+
+        .admin-notif-body .media-container {
+            margin-top: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-notif-body .media-container img,
+        .admin-notif-body .media-container video {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .admin-notif-btn {
+            margin: 12px 18px 0 18px;
+            width: calc(100% - 36px);
+            padding: 10px;
+            background: #f5b83d;
+            color: #1c2128;
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .admin-notif-btn:active {
+            transform: scale(0.96);
+        }
+
+        .offline-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 3600;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .offline-overlay.open {
+            display: flex;
+        }
+
+        .offline-modal {
+            background: #ffffff;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 320px;
+            padding: 28px 22px 22px 22px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            animation: modalIn 0.3s ease;
+        }
+
+        .offline-modal .offline-icon {
+            font-size: 48px;
+            color: #dc2626;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .offline-modal h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1c2128;
+            margin-bottom: 6px;
+        }
+
+        .offline-modal p {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -5777,6 +5945,7 @@
         </div>
     </div>
 
+    <!-- ─── APP STATUS POPUP ─── -->
     <div class="app-status-overlay" id="appStatusPopup">
         <div class="app-status-modal">
             <div class="app-status-logo-wrap">
@@ -5804,6 +5973,7 @@
         </div>
     </div>
 
+    <!-- ─── ORDER COMPLETE POPUP ─── -->
     <div class="order-complete-overlay" id="orderCompletePopup">
         <div class="order-complete-modal">
             <span class="oc-icon"><i class="fa-regular fa-circle-check"></i></span>
@@ -5814,6 +5984,7 @@
         </div>
     </div>
 
+    <!-- ─── WITHDRAWAL STATUS POPUP ─── -->
     <div class="withdrawal-status-overlay" id="withdrawalStatusPopup">
         <div class="withdrawal-status-modal">
             <div class="ws-logo-wrap">
@@ -5837,6 +6008,7 @@
         </div>
     </div>
 
+    <!-- ─── REFERRAL RECEIVED POPUP ─── -->
     <div class="referral-received-overlay" id="referralReceivedPopup">
         <div class="referral-received-modal">
             <span class="rr-icon"><i class="fa-solid fa-gift"></i></span>
@@ -5847,6 +6019,7 @@
         </div>
     </div>
 
+    <!-- ─── MONEY RECEIVED POPUP ─── -->
     <div class="money-received-overlay" id="moneyReceivedPopup">
         <div class="money-received-modal">
             <span class="mr-icon"><i class="fa-solid fa-inbox"></i></span>
@@ -5858,10 +6031,12 @@
         </div>
     </div>
 
+    <!-- ─── IMAGE VIEWER ─── -->
     <div class="image-viewer-overlay" id="imageViewer">
         <img id="imageViewerImg" src="" alt="Screenshot" />
     </div>
 
+    <!-- ─── NOTIFICATION SIDEBAR ─── -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <div class="sidebar" id="notifSidebar">
         <div class="sidebar-header">
@@ -5872,6 +6047,7 @@
         </div>
     </div>
 
+    <!-- ─── RECEIPT MODAL ─── -->
     <div id="receiptModal">
         <div class="receipt-wrapper">
             <div id="receiptContainer" class="receipt-card">
@@ -5943,6 +6119,7 @@
         </div>
     </div>
 
+    <!-- ─── STATEMENT MODAL ─── -->
     <div class="statement-modal-overlay" id="statementModal">
         <div class="statement-modal-wrapper">
             <div id="statementContainer" class="statement-card">
@@ -6013,6 +6190,34 @@
         </div>
     </div>
 
+    <!-- ────────────────────────────────────────────── -->
+    <!--  NEW: ADMIN IN-APP NOTIFICATION POPUP         -->
+    <!--  NEW: OFFLINE MODAL                           -->
+    <!-- ────────────────────────────────────────────── -->
+
+    <div class="admin-notif-overlay" id="adminNotifOverlay">
+        <div class="admin-notif-modal">
+            <div class="admin-notif-header">
+                <div class="admin-notif-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                <span id="adminNotifTitle">📢 Admin Message</span>
+            </div>
+            <div class="admin-notif-body">
+                <p id="adminNotifMessage">Loading message...</p>
+                <div class="media-container" id="adminNotifMediaContainer"></div>
+            </div>
+            <button class="admin-notif-btn" id="adminNotifDismiss">Understood</button>
+        </div>
+    </div>
+
+    <div class="offline-overlay" id="offlineOverlay">
+        <div class="offline-modal">
+            <span class="offline-icon"><i class="fa-solid fa-wifi-slash"></i></span>
+            <h3>No Internet Connection</h3>
+            <p>Please check your network settings and try again.</p>
+            <p style="font-size:11px; color:#aaa; margin-top:6px;">The app will automatically resume when connectivity is restored.</p>
+        </div>
+    </div>
+
     <script type="text/javascript">
     </script>
 
@@ -6079,7 +6284,8 @@
             orderComplete: {},
             withdrawalStatus: {},
             referralReceived: {},
-            moneyReceived: {}
+            moneyReceived: {},
+            adminNotifs: {}
         };
 
         // ── NOTIFICATION SOUND ──
@@ -6107,13 +6313,13 @@
             }, 800);
         }
 
-        // ── GLOBAL ERROR CATCHER (NEW) ──
+        // ── GLOBAL ERROR CATCHER ──
         window.addEventListener('error', (e) => {
             console.error('Uncaught error:', e.error);
             hideLoading();
         });
 
-        // ── FALLBACK TIMEOUT (NEW) ──
+        // ── FALLBACK TIMEOUT ──
         setTimeout(() => {
             const overlay = document.getElementById('loadingOverlay');
             if (overlay && !overlay.classList.contains('hidden')) {
@@ -6366,6 +6572,14 @@
         const downloadStatementBtn = document.getElementById('downloadStatementBtn');
         const closeStatementBtn = document.getElementById('closeStatementBtn');
 
+        // ── NEW ELEMENTS ──
+        const adminNotifOverlay = document.getElementById('adminNotifOverlay');
+        const adminNotifTitle = document.getElementById('adminNotifTitle');
+        const adminNotifMessage = document.getElementById('adminNotifMessage');
+        const adminNotifMediaContainer = document.getElementById('adminNotifMediaContainer');
+        const adminNotifDismiss = document.getElementById('adminNotifDismiss');
+        const offlineOverlay = document.getElementById('offlineOverlay');
+
         let promoButtonTarget = null;
 
         function showToast(msg, type = 'info') {
@@ -6571,7 +6785,6 @@
             }).catch(err => console.error('Error saving notification:', err));
         }
 
-        // ⬇️ FIX: ADD ERROR CALLBACK TO onValue ⬇️
         function loadData(callback) {
             const dbRef = ref(db, 'bufferzoneAppData');
             onValue(dbRef, (snapshot) => {
@@ -6604,7 +6817,8 @@
                             prize: { isFree: false, price: 20, mobileNumber: '', accountName: '' },
                             job: { isFree: true, price: 0, mobileNumber: '', accountName: '' },
                             referrer: { isFree: true, price: 0, mobileNumber: '', accountName: '' }
-                        }
+                        },
+                        inAppNotifications: {}
                     };
                     set(dbRef, allData);
                 } else {
@@ -6628,10 +6842,12 @@
                         };
                         saveData();
                     }
+                    if (!allData.inAppNotifications) allData.inAppNotifications = {};
                 }
                 renderAll();
                 setTimeout(() => {
                     checkAllPopups();
+                    checkAdminNotifications();
                 }, 500);
                 hideLoading();
                 if (callback) callback();
@@ -6647,6 +6863,7 @@
             const dbRef = ref(db, 'bufferzoneAppData');
             return set(dbRef, allData).then(() => {
                 setTimeout(() => checkAllPopups(), 300);
+                setTimeout(() => checkAdminNotifications(), 300);
             });
         }
 
@@ -9387,6 +9604,83 @@
             });
         }
 
+        // ─── NEW: CHECK ADMIN NOTIFICATIONS ───
+        function checkAdminNotifications() {
+            if (!allData || !allData.inAppNotifications || !currentUserId) return;
+            const notifs = allData.inAppNotifications;
+            const userShownRef = ref(db, `users/${currentUserId}/shownPopups`);
+            get(userShownRef).then((snapshot) => {
+                const stored = snapshot.val() || {};
+                const adminShown = stored.adminNotifs || {};
+
+                for (const [key, notif] of Object.entries(notifs)) {
+                    let shouldShow = false;
+                    if (notif.recipientType === 'all') {
+                        shouldShow = true;
+                    } else if (notif.recipientType === 'specific' && notif.userIds) {
+                        if (Array.isArray(notif.userIds) && notif.userIds.includes(currentUserId)) {
+                            shouldShow = true;
+                        } else if (notif.userIds === currentUserId) {
+                            shouldShow = true;
+                        }
+                    }
+
+                    if (shouldShow && !adminShown[key]) {
+                        showAdminNotifPopup(key, notif);
+                        return;
+                    }
+                }
+            }).catch((err) => console.error("Error checking admin notifications:", err));
+        }
+
+        function showAdminNotifPopup(key, notif) {
+            const title = notif.title || 'Notification';
+            const message = notif.message || '';
+            const mediaUrl = notif.mediaUrl || '';
+            const mediaType = notif.mediaType || 'image';
+
+            adminNotifTitle.textContent = title;
+            adminNotifMessage.textContent = message;
+
+            const container = adminNotifMediaContainer;
+            container.innerHTML = '';
+            if (mediaUrl) {
+                if (mediaType === 'video') {
+                    container.innerHTML =
+                        `<video src="${mediaUrl}" controls style="width:100%; max-height:200px; border-radius:8px; margin-top:8px;"></video>`;
+                } else {
+                    container.innerHTML =
+                        `<img src="${mediaUrl}" alt="Media" style="width:100%; max-height:200px; object-fit:contain; border-radius:8px; margin-top:8px;" />`;
+                }
+            }
+
+            adminNotifDismiss.onclick = function() {
+                const userShownRef = ref(db, `users/${currentUserId}/shownPopups`);
+                get(userShownRef).then((snapshot) => {
+                    const stored = snapshot.val() || {};
+                    if (!stored.adminNotifs) stored.adminNotifs = {};
+                    stored.adminNotifs[key] = true;
+                    set(userShownRef, stored).then(() => {
+                        adminNotifOverlay.classList.remove('open');
+                        checkAdminNotifications();
+                    });
+                });
+            };
+
+            adminNotifOverlay.classList.add('open');
+            playNotificationSound();
+        }
+
+        // ─── NEW: OFFLINE / ONLINE HANDLERS ───
+        window.addEventListener('offline', function() {
+            offlineOverlay.classList.add('open');
+        });
+
+        window.addEventListener('online', function() {
+            offlineOverlay.classList.remove('open');
+        });
+
+        // ─── EXISTING POPUP CHECK ───
         function checkAllPopups() {
             if (!currentUserId || !allData) return;
 
@@ -9398,7 +9692,8 @@
                     orderComplete: stored.orderComplete || {},
                     withdrawalStatus: stored.withdrawalStatus || {},
                     referralReceived: stored.referralReceived || {},
-                    moneyReceived: stored.moneyReceived || {}
+                    moneyReceived: stored.moneyReceived || {},
+                    adminNotifs: stored.adminNotifs || {}
                 };
 
                 const apps = allData.applications || {};
@@ -10129,7 +10424,6 @@
                     }
                     currentUserData = data || {};
 
-                    // ── TUTORIAL CHECK ──
                     const tutorialSeen = currentUserData.tutorialSeen === true;
                     if (!tutorialSeen) {
                         setTimeout(() => {
@@ -10148,7 +10442,8 @@
                             orderComplete: stored.orderComplete || {},
                             withdrawalStatus: stored.withdrawalStatus || {},
                             referralReceived: stored.referralReceived || {},
-                            moneyReceived: stored.moneyReceived || {}
+                            moneyReceived: stored.moneyReceived || {},
+                            adminNotifs: stored.adminNotifs || {}
                         };
                     }).catch((error) => {
                         console.error('Error loading shown popups:', error);
@@ -10168,9 +10463,8 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ FIXED: Spinner no longer gets stuck.');
-        console.log('✅ FIXED: Logo size increased by 5x (320px).');
-        console.log('✅ Added global error handler and fallback timeout for safety.');
+        console.log('✅ Added stylish Admin In-App popup notifications (one-time).');
+        console.log('✅ Added offline internet disconnection popup.');
     </script>
 </body>
 </html>
