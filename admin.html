@@ -4018,12 +4018,13 @@
         }
 
         /* ────────────────────────────────────────────── */
-        /*  MACOS‑THEMED NOTIFICATION PAGE (ENHANCED)    */
+        /*  MACOS‑THEMED NOTIFICATION PAGE (ONLY)       */
         /* ────────────────────────────────────────────── */
         #page-notifications {
             padding: 6px 0 14px 0;
         }
 
+        /* macOS‑style outer container – frosted glass, rounded, shadow */
         #page-notifications .macos-notif-container {
             background: rgba(255, 255, 255, 0.72);
             backdrop-filter: blur(18px);
@@ -4032,10 +4033,52 @@
             padding: 22px 24px 24px 24px;
             box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08), 0 0 0 0.5px rgba(0, 0, 0, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.6);
-            max-width: 860px;
+            max-width: 820px;
             margin: 0 auto;
         }
 
+        /* ── macOS‑style tab bar ── */
+        .macos-tab-bar {
+            display: flex;
+            gap: 4px;
+            padding: 0 0 16px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            margin-bottom: 18px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .macos-tab-bar::-webkit-scrollbar {
+            display: none;
+        }
+        .macos-tab-bar .macos-tab {
+            padding: 6px 18px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-size: 12px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-family: 'Poppins', sans-serif;
+        }
+        .macos-tab-bar .macos-tab:hover {
+            background: rgba(0, 0, 0, 0.04);
+            color: #1c2128;
+        }
+        .macos-tab-bar .macos-tab.active {
+            background: #1c2128;
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(28, 33, 40, 0.15);
+        }
+        .macos-tab-bar .macos-tab i {
+            margin-right: 4px;
+            font-size: 11px;
+        }
+
+        /* macOS‑style header with traffic‑light dots */
         #page-notifications .macos-header {
             display: flex;
             align-items: center;
@@ -4082,49 +4125,15 @@
             font-weight: 400;
         }
 
-        /* ── Notification Type Pills ── */
-        #page-notifications .notif-type-selector {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 14px;
+        /* ── notification tab panels ── */
+        .macos-tab-panel {
+            display: none;
+        }
+        .macos-tab-panel.active {
+            display: block;
         }
 
-        #page-notifications .notif-type-pill {
-            padding: 6px 18px;
-            border-radius: 40px;
-            border: 2px solid #ddd;
-            background: #fafafa;
-            font-size: 12px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: #555;
-        }
-
-        #page-notifications .notif-type-pill:hover {
-            border-color: #bbb;
-            transform: translateY(-1px);
-        }
-
-        #page-notifications .notif-type-pill.active {
-            border-color: #1c2128;
-            background: #1c2128;
-            color: #fff;
-        }
-
-        #page-notifications .notif-type-pill.active i {
-            color: #f5b83d;
-        }
-
-        #page-notifications .notif-type-pill .pill-icon {
-            font-size: 14px;
-        }
-
-        /* ── macOS‑style form controls ── */
+        /* macOS‑style form controls – pill‑like, subtle, SF‑inspired */
         #page-notifications .macos-form-group {
             margin-bottom: 14px;
         }
@@ -4167,6 +4176,7 @@
             resize: vertical;
         }
 
+        /* macOS‑style hint text */
         #page-notifications .macos-hint {
             font-size: 10px;
             color: #999;
@@ -4174,89 +4184,7 @@
             letter-spacing: 0.1px;
         }
 
-        /* ── Media Upload Area ── */
-        #page-notifications .notif-media-upload {
-            border: 2px dashed rgba(0, 0, 0, 0.08);
-            border-radius: 14px;
-            padding: 16px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: rgba(255, 255, 255, 0.5);
-            min-height: 120px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(4px);
-        }
-
-        #page-notifications .notif-media-upload:hover {
-            border-color: #f5b83d;
-            background: rgba(255, 255, 255, 0.7);
-        }
-
-        #page-notifications .notif-media-upload .upload-icon {
-            font-size: 36px;
-            color: #bbb;
-            margin-bottom: 4px;
-        }
-
-        #page-notifications .notif-media-upload .upload-text {
-            font-size: 12px;
-            color: #888;
-            font-weight: 500;
-        }
-
-        #page-notifications .notif-media-upload .upload-sub {
-            font-size: 10px;
-            color: #aaa;
-        }
-
-        #page-notifications .notif-media-upload img {
-            max-width: 100%;
-            max-height: 160px;
-            border-radius: 8px;
-            object-fit: contain;
-        }
-
-        #page-notifications .notif-media-upload video {
-            max-width: 100%;
-            max-height: 160px;
-            border-radius: 8px;
-            object-fit: contain;
-        }
-
-        #page-notifications .notif-media-upload .file-type-badge {
-            margin-top: 4px;
-            font-size: 9px;
-            font-weight: 600;
-            color: #555;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 2px 12px;
-            border-radius: 12px;
-            display: inline-block;
-        }
-
-        #page-notifications .notif-media-upload .remove-media-btn {
-            margin-top: 6px;
-            background: #fee2e2;
-            border: none;
-            border-radius: 20px;
-            padding: 2px 14px;
-            font-size: 9px;
-            font-weight: 600;
-            color: #dc2626;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        #page-notifications .notif-media-upload .remove-media-btn:hover {
-            background: #dc2626;
-            color: #fff;
-        }
-
-        /* ── macOS‑style button ── */
+        /* macOS‑style button – pill, with subtle hover */
         #page-notifications .macos-btn {
             padding: 10px 28px;
             border-radius: 40px;
@@ -4287,7 +4215,7 @@
             color: #f5b83d;
         }
 
-        /* ── macOS‑style preview card ── */
+        /* macOS‑style preview card – glass, rounded, with icon */
         #page-notifications .macos-preview-card {
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(12px);
@@ -4298,7 +4226,7 @@
             border: 1px solid rgba(255, 255, 255, 0.5);
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
             display: none;
-            align-items: flex-start;
+            align-items: center;
             gap: 14px;
             transition: all 0.2s;
         }
@@ -4319,13 +4247,6 @@
             color: #f5b83d;
             font-size: 20px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
-
-        #page-notifications .macos-preview-card .preview-icon img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
         }
 
         #page-notifications .macos-preview-card .preview-content {
@@ -4349,16 +4270,7 @@
             color: #f5b83d;
         }
 
-        #page-notifications .macos-preview-card .preview-content .p-media {
-            margin-top: 6px;
-            max-width: 100%;
-            max-height: 120px;
-            border-radius: 8px;
-            object-fit: contain;
-            background: #fafafa;
-        }
-
-        /* ── macOS‑style progress overlay ── */
+        /* macOS‑style progress overlay */
         #page-notifications .macos-progress {
             display: none;
             text-align: center;
@@ -4396,6 +4308,100 @@
             }
         }
 
+        /* ── IN‑APP POPUP TAB: extra styles ── */
+        .popup-type-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        .popup-type-badge:hover {
+            transform: scale(1.04);
+        }
+        .popup-type-badge:active {
+            transform: scale(0.94);
+        }
+        .popup-type-badge.message {
+            background: #e8f0fe;
+            color: #1a73e8;
+            border-color: #1a73e8;
+        }
+        .popup-type-badge.warning {
+            background: #fef3e0;
+            color: #f9ab00;
+            border-color: #f9ab00;
+        }
+        .popup-type-badge.congrats {
+            background: #e6f7e6;
+            color: #0f9d58;
+            border-color: #0f9d58;
+        }
+        .popup-type-badge.selected {
+            box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1c2128;
+            transform: scale(1.06);
+        }
+
+        .popup-media-preview {
+            width: 100%;
+            border-radius: 12px;
+            border: 2px dashed #ddd;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #fafafa;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .popup-media-preview:hover {
+            border-color: #f5b83d;
+            background: #fefaf0;
+        }
+        .popup-media-preview img {
+            max-width: 100%;
+            max-height: 140px;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+        .popup-media-preview video {
+            max-width: 100%;
+            max-height: 140px;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+        .popup-media-preview .upload-icon {
+            font-size: 28px;
+            color: #ccc;
+            margin-bottom: 4px;
+        }
+        .popup-media-preview .upload-text {
+            font-size: 10px;
+            color: #888;
+        }
+        .popup-media-preview .file-type-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 8px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 12px;
+            backdrop-filter: blur(2px);
+        }
+
+        /* responsive */
         @media (max-width: 500px) {
             #page-notifications .macos-notif-container {
                 padding: 16px 14px;
@@ -4409,9 +4415,9 @@
                 height: 36px;
                 font-size: 16px;
             }
-            #page-notifications .notif-type-pill {
-                font-size: 10px;
+            .macos-tab-bar .macos-tab {
                 padding: 4px 12px;
+                font-size: 10px;
             }
         }
 
@@ -4443,6 +4449,7 @@
             border-radius: 28px;
             width: 100%;
             max-width: 580px;
+            /* bigger */
             max-height: 90vh;
             overflow-y: auto;
             padding: 28px 28px 22px;
@@ -5224,7 +5231,7 @@
                 </div>
             </div>
 
-            <!-- ===== NEW PAGE: NOTIFICATIONS (macOS themed layout + rich media) ===== -->
+            <!-- ===== NEW PAGE: NOTIFICATIONS (macOS themed layout) ===== -->
             <div id="page-notifications" class="page">
 
                 <div class="macos-notif-container">
@@ -5235,88 +5242,149 @@
                             <span class="tl-green"></span>
                         </div>
                         <span class="macos-title">📬 Notification Center</span>
-                        <span class="macos-subtitle">Send rich push notifications</span>
+                        <span class="macos-subtitle">Push &amp; In‑App Notifications</span>
                     </div>
 
-                    <form id="notificationForm">
+                    <!-- ── macOS‑style tab bar ── -->
+                    <div class="macos-tab-bar">
+                        <button class="macos-tab active" data-tab="push"><i class="fa-regular fa-bell"></i> Push Notifications</button>
+                        <button class="macos-tab" data-tab="inapp"><i class="fa-solid fa-window-restore"></i> In‑App Popups</button>
+                    </div>
 
-                        <!-- Notification Type Pills -->
-                        <div class="notif-type-selector">
-                            <button type="button" class="notif-type-pill active" data-type="message" data-icon="💬">
-                                <span class="pill-icon">💬</span> Message
-                            </button>
-                            <button type="button" class="notif-type-pill" data-type="warning" data-icon="⚠️">
-                                <span class="pill-icon">⚠️</span> Warning
-                            </button>
-                            <button type="button" class="notif-type-pill" data-type="congratulations" data-icon="🎉">
-                                <span class="pill-icon">🎉</span> Congratulations
-                            </button>
-                        </div>
-
-                        <!-- Recipient -->
-                        <div class="macos-form-group">
-                            <label>Recipient</label>
-                            <select id="notifRecipient">
-                                <option value="all">All Users</option>
-                                <option value="specific">Specific User</option>
-                            </select>
-                        </div>
-                        <div class="macos-form-group" id="notifUserSelectGroup" style="display:none;">
-                            <label>Select User</label>
-                            <select id="notifUserSelect">
-                                <option value="">— Select a user —</option>
-                            </select>
-                        </div>
-
-                        <!-- Title (auto-filled based on type) -->
-                        <div class="macos-form-group">
-                            <label>Notification Title</label>
-                            <input type="text" id="notifTitle" placeholder="e.g. Special Offer!" required />
-                        </div>
-
-                        <!-- Message -->
-                        <div class="macos-form-group">
-                            <label>Message</label>
-                            <textarea id="notifBody" rows="3" placeholder="Write your message here. Words you want to show bold should be wrapped in ** like **this**." required></textarea>
-                            <div class="macos-hint">Use **bold** to make words bold in the notification.</div>
-                        </div>
-
-                        <!-- Media Upload -->
-                        <div class="macos-form-group">
-                            <label>Attach Picture or Video (optional)</label>
-                            <div class="notif-media-upload" id="notifMediaUpload">
-                                <div class="upload-icon"><i class="fa-regular fa-image"></i></div>
-                                <div class="upload-text">Tap to upload an image or video</div>
-                                <div class="upload-sub">PNG, JPG, GIF, MP4 — max 50MB</div>
+                    <!-- ──── TAB 1: PUSH NOTIFICATIONS ──── -->
+                    <div class="macos-tab-panel active" id="panel-push">
+                        <form id="notificationForm">
+                            <div class="macos-form-group">
+                                <label>Recipient</label>
+                                <select id="notifRecipient">
+                                    <option value="all">All Users</option>
+                                    <option value="specific">Specific User</option>
+                                </select>
                             </div>
-                            <input type="hidden" id="notifMediaUrl" />
-                            <input type="hidden" id="notifMediaType" value="none" />
-                            <div class="macos-hint">Media will appear inside the notification on supported devices.</div>
+                            <div class="macos-form-group" id="notifUserSelectGroup" style="display:none;">
+                                <label>Select User</label>
+                                <select id="notifUserSelect">
+                                    <option value="">— Select a user —</option>
+                                </select>
+                            </div>
+                            <div class="macos-form-group">
+                                <label>Notification Title</label>
+                                <input type="text" id="notifTitle" placeholder="e.g. Special Offer!" required />
+                            </div>
+                            <div class="macos-form-group">
+                                <label>Message</label>
+                                <textarea id="notifBody" rows="3" placeholder="Write your message here. Words you want to show bold should be wrapped in ** like **this**." required></textarea>
+                                <div class="macos-hint">Use **bold** to make words bold in the notification.</div>
+                            </div>
+                            <div class="macos-form-group">
+                                <label>Logo URL (optional)</label>
+                                <input type="url" id="notifIcon" placeholder="https://yourdomain.com/logo.png" />
+                                <div class="macos-hint">Leave blank to use default buffer zone logo.</div>
+                            </div>
+                            <div class="macos-form-group">
+                                <label>Click URL (optional)</label>
+                                <input type="url" id="notifClickUrl" placeholder="https://yourdomain.com/promo" />
+                                <div class="macos-hint">When user taps the notification, they will be taken to this URL.</div>
+                            </div>
+                            <button type="submit" class="macos-btn" id="sendNotifBtn"><i class="fa-solid fa-paper-plane"></i> Send Notification</button>
+                        </form>
+
+                        <div class="macos-progress" id="notifProgress">
+                            <div class="spinner"></div>
+                            <p>Sending notifications...</p>
                         </div>
 
-                        <!-- Click URL -->
-                        <div class="macos-form-group">
-                            <label>Click URL (optional)</label>
-                            <input type="url" id="notifClickUrl" placeholder="https://yourdomain.com/promo" />
-                            <div class="macos-hint">When user taps the notification, they will be taken to this URL.</div>
+                        <div class="macos-preview-card" id="notifPreview">
+                            <div class="preview-icon"><i class="fa-regular fa-bell"></i></div>
+                            <div class="preview-content">
+                                <div class="p-title" id="notifPreviewTitle">Title</div>
+                                <div class="p-body" id="notifPreviewBody">Body</div>
+                            </div>
                         </div>
-
-                        <button type="submit" class="macos-btn" id="sendNotifBtn"><i class="fa-solid fa-paper-plane"></i> Send Notification</button>
-                    </form>
-
-                    <!-- Progress -->
-                    <div class="macos-progress" id="notifProgress">
-                        <div class="spinner"></div>
-                        <p>Sending notifications...</p>
                     </div>
 
-                    <!-- Preview -->
-                    <div class="macos-preview-card" id="notifPreview">
-                        <div class="preview-icon" id="notifPreviewIcon"><i class="fa-regular fa-bell"></i></div>
-                        <div class="preview-content">
-                            <div class="p-title" id="notifPreviewTitle">Title</div>
-                            <div class="p-body" id="notifPreviewBody">Body</div>
-                            <img id="notifPreviewMedia" class="p-media" src="" alt="" style="display:none;" />
+                    <!-- ──── TAB 2: IN‑APP POPUPS ──── -->
+                    <div class="macos-tab-panel" id="panel-inapp">
+                        <form id="inAppPopupForm">
+                            <div class="macos-form-group">
+                                <label>Recipient</label>
+                                <select id="popupRecipient">
+                                    <option value="all">All Users</option>
+                                    <option value="specific">Specific User</option>
+                                </select>
+                            </div>
+                            <div class="macos-form-group" id="popupUserSelectGroup" style="display:none;">
+                                <label>Select User</label>
+                                <select id="popupUserSelect">
+                                    <option value="">— Select a user —</option>
+                                </select>
+                            </div>
+
+                            <div class="macos-form-group">
+                                <label>Popup Type</label>
+                                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:2px;">
+                                    <button type="button" class="popup-type-badge message selected" data-type="message">
+                                        <i class="fa-regular fa-message"></i> Message
+                                    </button>
+                                    <button type="button" class="popup-type-badge warning" data-type="warning">
+                                        <i class="fa-solid fa-triangle-exclamation"></i> Warning
+                                    </button>
+                                    <button type="button" class="popup-type-badge congrats" data-type="congrats">
+                                        <i class="fa-solid fa-gift"></i> Congratulations
+                                    </button>
+                                    <input type="hidden" id="popupType" value="message" />
+                                </div>
+                            </div>
+
+                            <div class="macos-form-group">
+                                <label>Title <span style="font-weight:400;color:#888;font-size:10px;">(auto‑generated based on type, or custom)</span></label>
+                                <input type="text" id="popupTitle" placeholder="Type a custom title or leave blank for auto‑generated" />
+                            </div>
+
+                            <div class="macos-form-group">
+                                <label>Message</label>
+                                <textarea id="popupBody" rows="3" placeholder="Write your pop‑up message here." required></textarea>
+                            </div>
+
+                            <div class="macos-form-group">
+                                <label>Media (optional)</label>
+                                <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-bottom:4px;">
+                                    <span style="font-size:10px; color:#888;">Add an image or video URL, or upload:</span>
+                                </div>
+                                <div class="popup-media-preview" id="popupMediaPreview">
+                                    <div class="upload-icon"><i class="fa-regular fa-image"></i></div>
+                                    <div class="upload-text">Tap to upload an image or video</div>
+                                </div>
+                                <input type="hidden" id="popupMediaUrl" />
+                                <div style="margin-top:4px; display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+                                    <span style="font-size:10px; color:#888;">or paste URL:</span>
+                                    <input type="url" id="popupMediaUrlInput" placeholder="https://..." style="flex:1; min-width:120px; padding:4px 10px; border:1px solid #ddd; border-radius:6px; font-size:11px;" />
+                                    <button type="button" class="btn btn-outline btn-sm" id="popupMediaApplyUrl">Apply</button>
+                                    <button type="button" class="btn btn-danger btn-sm" id="popupMediaClear" style="background:#fee2e2;color:#dc2626;border:none;padding:2px 8px;border-radius:6px;font-size:8px;cursor:pointer;">✕</button>
+                                </div>
+                                <div class="macos-hint">Upload or paste a URL to an image or video that will appear inside the pop‑up.</div>
+                            </div>
+
+                            <div class="macos-form-group">
+                                <label>Redirect URL (optional)</label>
+                                <input type="url" id="popupRedirectUrl" placeholder="https://yourdomain.com/offer" />
+                                <div class="macos-hint">When the user taps the pop‑up, they'll be redirected to this URL.</div>
+                            </div>
+
+                            <button type="submit" class="macos-btn" id="sendPopupBtn"><i class="fa-solid fa-window-restore"></i> Send Pop‑Up</button>
+                        </form>
+
+                        <div class="macos-progress" id="popupProgress">
+                            <div class="spinner"></div>
+                            <p>Sending pop‑up...</p>
+                        </div>
+
+                        <div class="macos-preview-card" id="popupPreview" style="display:none;">
+                            <div class="preview-icon"><i class="fa-regular fa-window-maximize"></i></div>
+                            <div class="preview-content">
+                                <div class="p-title" id="popupPreviewTitle">Title</div>
+                                <div class="p-body" id="popupPreviewBody">Body</div>
+                            </div>
                         </div>
                     </div>
 
@@ -6083,13 +6151,13 @@
         const customerWalletListPage = document.getElementById('customerWalletListPage');
         const customerWalletSearch = document.getElementById('customerWalletSearch');
 
-        /* ── Notifications page elements ── */
         const notifForm = document.getElementById('notificationForm');
         const notifRecipient = document.getElementById('notifRecipient');
         const notifUserSelectGroup = document.getElementById('notifUserSelectGroup');
         const notifUserSelect = document.getElementById('notifUserSelect');
         const notifTitle = document.getElementById('notifTitle');
         const notifBody = document.getElementById('notifBody');
+        const notifIcon = document.getElementById('notifIcon');
         const notifClickUrl = document.getElementById('notifClickUrl');
         const sendNotifBtn = document.getElementById('sendNotifBtn');
         const notifProgress = document.getElementById('notifProgress');
@@ -6097,17 +6165,39 @@
         const notifPreviewIcon = document.getElementById('notifPreviewIcon');
         const notifPreviewTitle = document.getElementById('notifPreviewTitle');
         const notifPreviewBody = document.getElementById('notifPreviewBody');
-        const notifPreviewMedia = document.getElementById('notifPreviewMedia');
-        const notifMediaUpload = document.getElementById('notifMediaUpload');
-        const notifMediaUrl = document.getElementById('notifMediaUrl');
-        const notifMediaType = document.getElementById('notifMediaType');
-        const notifTypePills = document.querySelectorAll('.notif-type-pill');
 
-        const popupModal = document.getElementById('popupModal');
+        const popupForm = document.getElementById('inAppPopupForm');
+        const popupRecipient = document.getElementById('popupRecipient');
+        const popupUserSelectGroup = document.getElementById('popupUserSelectGroup');
+        const popupUserSelect = document.getElementById('popupUserSelect');
+        const popupTypeInput = document.getElementById('popupType');
+        const popupTitleInput = document.getElementById('popupTitle');
+        const popupBodyInput = document.getElementById('popupBody');
+        const popupMediaUrl = document.getElementById('popupMediaUrl');
+        const popupMediaPreview = document.getElementById('popupMediaPreview');
+        const popupMediaUrlInput = document.getElementById('popupMediaUrlInput');
+        const popupMediaApplyUrl = document.getElementById('popupMediaApplyUrl');
+        const popupMediaClear = document.getElementById('popupMediaClear');
+        const popupRedirectUrl = document.getElementById('popupRedirectUrl');
+        const sendPopupBtn = document.getElementById('sendPopupBtn');
+        const popupProgress = document.getElementById('popupProgress');
+        const popupPreview = document.getElementById('popupPreview');
+        const popupPreviewTitle = document.getElementById('popupPreviewTitle');
+        const popupPreviewBody = document.getElementById('popupPreviewBody');
+
+        const popupTypeBadges = document.querySelectorAll('.popup-type-badge');
+
+        const macosTabs = document.querySelectorAll('.macos-tab');
+        const macosPanels = {
+            push: document.getElementById('panel-push'),
+            inapp: document.getElementById('panel-inapp'),
+        };
+
+        const popupModal2 = document.getElementById('popupModal');
         const popupCloseBtn = document.getElementById('popupCloseBtn');
         const popupCloseBtn2 = document.getElementById('popupCloseBtn2');
         const popupRedirectBtn = document.getElementById('popupRedirectBtn');
-        const popupTitle = document.getElementById('popupTitle');
+        const popupTitle2 = document.getElementById('popupTitle');
         const popupContent = document.getElementById('popupContent');
 
         const notificationSound = document.getElementById('notificationSound');
@@ -10074,13 +10164,6 @@
                     renderWorkPosts();
                     break;
                 case 'notifications':
-                    // Populate user select for notifications
-                    const users = allData.users || {};
-                    const opts = Object.entries(users).map(([uid, u]) => {
-                        const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
-                        return `<option value="${uid}">${name} (${u.email || 'No email'})</option>`;
-                    }).join('');
-                    notifUserSelect.innerHTML = `<option value="">— Select a user —</option>` + opts;
                     break;
                 default:
                     break;
@@ -10205,26 +10288,38 @@
         }
         requestNotificationPermission();
 
-        // ───────────────────────────────────────────────────────────────────
-        // NOTIFICATIONS PAGE – Type pills + auto‑title + media upload
-        // ───────────────────────────────────────────────────────────────────
+        async function sendNotificationToUsers(recipient, title, body, icon, clickUrl) {
+            const functionUrl = 'https://us-central1-bufferzone-63501.cloudfunctions.net/sendPushNotification';
 
-        const TYPE_CONFIG = {
-            message: { title: '📩 New Message', icon: '💬' },
-            warning: { title: '⚠️ Important Warning', icon: '⚠️' },
-            congratulations: { title: '🎉 Congratulations!', icon: '🎉' }
-        };
+            const payload = {
+                recipient,
+                title,
+                body,
+                icon: icon || 'https://your-domain.com/logo.png',
+                clickUrl: clickUrl || ''
+            };
 
-        notifTypePills.forEach(pill => {
-            pill.addEventListener('click', function() {
-                notifTypePills.forEach(p => p.classList.remove('active'));
-                this.classList.add('active');
-                const type = this.dataset.type;
-                const config = TYPE_CONFIG[type] || TYPE_CONFIG.message;
-                notifTitle.value = config.title;
-                updatePreview();
-            });
-        });
+            try {
+                const response = await fetch(functionUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errText = await response.text();
+                    throw new Error(`Server responded with ${response.status}: ${errText}`);
+                }
+
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error('Error sending notification:', error);
+                throw error;
+            }
+        }
 
         notifRecipient.addEventListener('change', function() {
             if (this.value === 'specific') {
@@ -10242,113 +10337,21 @@
 
         notifTitle.addEventListener('input', updatePreview);
         notifBody.addEventListener('input', updatePreview);
-        notifMediaUrl.addEventListener('change', updatePreview);
+        notifIcon.addEventListener('input', updatePreview);
 
         function updatePreview() {
             const title = notifTitle.value.trim();
             const body = notifBody.value.trim();
-            const mediaUrl = notifMediaUrl.value.trim();
+            const icon = notifIcon.value.trim();
 
-            if (title || body || mediaUrl) {
+            if (title || body) {
                 notifPreview.classList.add('show');
                 notifPreviewTitle.textContent = title || 'Title';
                 const formattedBody = body.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
                 notifPreviewBody.innerHTML = formattedBody || 'Body';
-
-                const activePill = document.querySelector('.notif-type-pill.active');
-                const icon = activePill ? activePill.dataset.icon : '💬';
-                notifPreviewIcon.innerHTML = `<span style="font-size:24px;">${icon}</span>`;
-
-                if (mediaUrl) {
-                    const type = notifMediaType.value;
-                    if (type === 'video') {
-                        notifPreviewMedia.style.display = 'block';
-                        notifPreviewMedia.src = mediaUrl;
-                        notifPreviewMedia.style.maxHeight = '120px';
-                        notifPreviewMedia.style.objectFit = 'contain';
-                    } else if (type === 'image') {
-                        notifPreviewMedia.style.display = 'block';
-                        notifPreviewMedia.src = mediaUrl;
-                        notifPreviewMedia.style.maxHeight = '120px';
-                        notifPreviewMedia.style.objectFit = 'contain';
-                    } else {
-                        notifPreviewMedia.style.display = 'none';
-                    }
-                } else {
-                    notifPreviewMedia.style.display = 'none';
-                }
+                notifPreviewIcon.src = icon || 'https://via.placeholder.com/48?text=Logo';
             } else {
                 notifPreview.classList.remove('show');
-            }
-        }
-
-        // Setup Cloudinary upload for notification media
-        setupCloudinaryUpload(
-            notifMediaUpload,
-            notifMediaUrl,
-            notifMediaUpload,
-            (url, info) => {
-                const resourceType = info.resource_type || 'image';
-                notifMediaType.value = resourceType;
-                if (resourceType === 'video') {
-                    notifMediaUpload.innerHTML = `
-                                <video src="${url}" controls style="max-width:100%;max-height:160px;border-radius:8px;object-fit:contain;"></video>
-                                <div class="file-type-badge">🎬 Video</div>
-                                <button type="button" class="remove-media-btn" id="removeNotifMedia"><i class="fa-solid fa-times"></i> Remove</button>
-                            `;
-                } else {
-                    notifMediaUpload.innerHTML = `
-                                <img src="${url}" alt="Uploaded media" style="max-width:100%;max-height:160px;border-radius:8px;object-fit:contain;" />
-                                <div class="file-type-badge">🖼️ Image</div>
-                                <button type="button" class="remove-media-btn" id="removeNotifMedia"><i class="fa-solid fa-times"></i> Remove</button>
-                            `;
-                }
-                document.getElementById('removeNotifMedia').addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    notifMediaUrl.value = '';
-                    notifMediaType.value = 'none';
-                    notifMediaUpload.innerHTML = `
-                                <div class="upload-icon"><i class="fa-regular fa-image"></i></div>
-                                <div class="upload-text">Tap to upload an image or video</div>
-                                <div class="upload-sub">PNG, JPG, GIF, MP4 — max 50MB</div>
-                            `;
-                    updatePreview();
-                });
-                updatePreview();
-                showToast('Media uploaded successfully!', 'success');
-            }, { resourceType: 'auto' }
-        );
-
-        async function sendNotificationToUsers(recipient, title, body, mediaUrl, mediaType, clickUrl) {
-            const functionUrl = 'https://us-central1-bufferzone-63501.cloudfunctions.net/sendPushNotification';
-
-            const payload = {
-                recipient,
-                title,
-                body,
-                icon: 'https://your-domain.com/logo.png',
-                clickUrl: clickUrl || '',
-                mediaUrl: mediaUrl || '',
-                mediaType: mediaType || 'none'
-            };
-
-            try {
-                const response = await fetch(functionUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) {
-                    const errText = await response.text();
-                    throw new Error(`Server responded with ${response.status}: ${errText}`);
-                }
-
-                const result = await response.json();
-                return result;
-            } catch (error) {
-                console.error('Error sending notification:', error);
-                throw error;
             }
         }
 
@@ -10358,27 +10361,19 @@
             const recipient = notifRecipient.value;
             const title = notifTitle.value.trim();
             const body = notifBody.value.trim();
+            const icon = notifIcon.value.trim();
             const clickUrl = notifClickUrl.value.trim();
-            const mediaUrl = notifMediaUrl.value.trim();
-            const mediaType = notifMediaType.value || 'none';
 
             if (!title || !body) {
                 showToast('Please fill in title and message.', 'error');
                 return;
             }
 
-            if (recipient === 'specific' && !notifUserSelect.value) {
-                showToast('Please select a user.', 'error');
-                return;
-            }
-
-            const target = recipient === 'specific' ? notifUserSelect.value : 'all';
-
             notifProgress.style.display = 'block';
             sendNotifBtn.disabled = true;
 
             try {
-                const result = await sendNotificationToUsers(target, title, body, mediaUrl, mediaType, clickUrl);
+                const result = await sendNotificationToUsers(recipient, title, body, icon, clickUrl);
                 if (result.success) {
                     showToast(`✅ Notification sent successfully! (${result.sentCount} devices)`, 'success');
                 } else {
@@ -10388,16 +10383,6 @@
                 notifPreview.classList.remove('show');
                 notifRecipient.value = 'all';
                 notifUserSelectGroup.style.display = 'none';
-                notifMediaUpload.innerHTML = `
-                            <div class="upload-icon"><i class="fa-regular fa-image"></i></div>
-                            <div class="upload-text">Tap to upload an image or video</div>
-                            <div class="upload-sub">PNG, JPG, GIF, MP4 — max 50MB</div>
-                        `;
-                notifMediaUrl.value = '';
-                notifMediaType.value = 'none';
-                notifTypePills.forEach(p => p.classList.remove('active'));
-                document.querySelector('.notif-type-pill[data-type="message"]').classList.add('active');
-                notifTitle.value = TYPE_CONFIG.message.title;
             } catch (error) {
                 showToast(`❌ Error: ${error.message}`, 'error');
             } finally {
@@ -10407,7 +10392,7 @@
         });
 
         // ───────────────────────────────────────────────────────────────────
-        // POPUP SYSTEM (unchanged)
+        // IN‑APP POPUP TAB — NEW CODE
         // ───────────────────────────────────────────────────────────────────
 
         const CUTOFF_DATE = new Date('2026-07-20T00:00:00').getTime();
@@ -10507,7 +10492,7 @@
                 popupRedirectBtn.dataset.itemId = item.id || key;
             }
 
-            popupTitle.textContent = `🔔 New Notification`;
+            popupTitle2.textContent = `🔔 New Notification`;
             popupContent.innerHTML = `
                 <div class="popup-item-title">${title}</div>
                 ${details}
@@ -10515,7 +10500,7 @@
 
             currentPopup = { type, id: item.id || key, data: item };
 
-            popupModal.classList.add('open');
+            popupModal2.classList.add('open');
 
             try {
                 notificationSound.currentTime = 0;
@@ -10527,7 +10512,7 @@
         }
 
         function closePopup() {
-            popupModal.classList.remove('open');
+            popupModal2.classList.remove('open');
         }
 
         function redirectAndMark() {
@@ -10546,7 +10531,7 @@
 
         function checkAndShowPopups() {
             if (!allData) return;
-            if (popupModal.classList.contains('open')) return;
+            if (popupModal2.classList.contains('open')) return;
 
             let candidates = [];
 
@@ -10583,14 +10568,292 @@
 
         popupCloseBtn.addEventListener('click', closePopup);
         popupCloseBtn2.addEventListener('click', closePopup);
-        popupModal.addEventListener('click', function(e) {
+        popupModal2.addEventListener('click', function(e) {
             if (e.target === this) closePopup();
         });
         popupRedirectBtn.addEventListener('click', redirectAndMark);
 
         // ───────────────────────────────────────────────────────────────────
-        // INVOICE RECEIPT (unchanged)
+        // MACOS TAB SWITCHING
         // ───────────────────────────────────────────────────────────────────
+
+        macosTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                macosTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                const tabId = this.dataset.tab;
+                Object.keys(macosPanels).forEach(key => {
+                    macosPanels[key].classList.toggle('active', key === tabId);
+                });
+            });
+        });
+
+        // ───────────────────────────────────────────────────────────────────
+        // IN‑APP POPUP FORM LOGIC
+        // ───────────────────────────────────────────────────────────────────
+
+        popupTypeBadges.forEach(badge => {
+            badge.addEventListener('click', function() {
+                popupTypeBadges.forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                popupTypeInput.value = this.dataset.type;
+                updatePopupPreview();
+            });
+        });
+
+        popupTitleInput.addEventListener('input', updatePopupPreview);
+        popupBodyInput.addEventListener('input', updatePopupPreview);
+        popupMediaUrl.addEventListener('input', updatePopupPreview);
+        popupRedirectUrl.addEventListener('input', updatePopupPreview);
+
+        function updatePopupPreview() {
+            const type = popupTypeInput.value;
+            const customTitle = popupTitleInput.value.trim();
+            const body = popupBodyInput.value.trim();
+            const mediaUrl = popupMediaUrl.value.trim();
+            const redirect = popupRedirectUrl.value.trim();
+
+            let autoTitle = '📩 Message';
+            let icon = '💬';
+            if (type === 'warning') {
+                autoTitle = '⚠️ Warning';
+                icon = '⚠️';
+            } else if (type === 'congrats') {
+                autoTitle = '🎉 Congratulations!';
+                icon = '🎉';
+            }
+
+            const title = customTitle || autoTitle;
+
+            if (title || body) {
+                popupPreview.style.display = 'flex';
+                popupPreviewTitle.textContent = title;
+                const bodyHtml = body.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+                let previewBody = bodyHtml;
+                if (mediaUrl) {
+                    const isVideo = mediaUrl.match(/\.(mp4|webm|mov|avi|mkv)$/i);
+                    const mediaHtml = isVideo ?
+                        `<br><video src="${mediaUrl}" controls style="max-width:100%;max-height:100px;border-radius:8px;margin-top:4px;"></video>` :
+                        `<br><img src="${mediaUrl}" style="max-width:100%;max-height:100px;border-radius:8px;margin-top:4px;" />`;
+                    previewBody += mediaHtml;
+                }
+                if (redirect) {
+                    previewBody +=
+                        `<br><small style="color:#f5b83d;">↗️ Taps will redirect to: ${redirect}</small>`;
+                }
+                popupPreviewBody.innerHTML = previewBody;
+            } else {
+                popupPreview.style.display = 'none';
+            }
+        }
+
+        popupRecipient.addEventListener('change', function() {
+            if (this.value === 'specific') {
+                popupUserSelectGroup.style.display = 'block';
+                const users = allData.users || {};
+                const options = Object.entries(users).map(([uid, u]) => {
+                    const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
+                    return `<option value="${uid}">${name} (${u.email || 'No email'})</option>`;
+                }).join('');
+                popupUserSelect.innerHTML = `<option value="">— Select a user —</option>` + options;
+            } else {
+                popupUserSelectGroup.style.display = 'none';
+            }
+        });
+
+        // Cloudinary upload for popup media
+        setupCloudinaryUpload(popupMediaPreview, popupMediaUrl, popupMediaPreview, (url, info) => {
+            popupMediaUrlInput.value = url;
+            const badge = document.createElement('div');
+            badge.className = 'file-type-badge';
+            badge.textContent = info.resource_type === 'video' ? '🎬 Video' : '🖼️ Image';
+            const oldBadge = popupMediaPreview.querySelector('.file-type-badge');
+            if (oldBadge) oldBadge.remove();
+            popupMediaPreview.appendChild(badge);
+            updatePopupPreview();
+        }, { resourceType: 'auto' });
+
+        popupMediaApplyUrl.addEventListener('click', function() {
+            const url = popupMediaUrlInput.value.trim();
+            if (!url) {
+                showToast('Please paste a valid URL.', 'error');
+                return;
+            }
+            popupMediaUrl.value = url;
+            const isVideo = url.match(/\.(mp4|webm|mov|avi|mkv)$/i);
+            popupMediaPreview.innerHTML = isVideo ?
+                `<video src="${url}" controls style="max-width:100%;max-height:140px;border-radius:6px;object-fit:contain;"></video>` :
+                `<img src="${url}" style="max-width:100%;max-height:140px;border-radius:6px;object-fit:contain;" />`;
+            const badge = document.createElement('div');
+            badge.className = 'file-type-badge';
+            badge.textContent = isVideo ? '🎬 Video' : '🖼️ Image';
+            popupMediaPreview.appendChild(badge);
+            updatePopupPreview();
+            showToast('Media URL applied!', 'success');
+        });
+
+        popupMediaClear.addEventListener('click', function() {
+            popupMediaUrl.value = '';
+            popupMediaUrlInput.value = '';
+            popupMediaPreview.innerHTML = `
+                <div class="upload-icon"><i class="fa-regular fa-image"></i></div>
+                <div class="upload-text">Tap to upload an image or video</div>
+            `;
+            updatePopupPreview();
+        });
+
+        popupForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const recipient = popupRecipient.value;
+            const type = popupTypeInput.value;
+            const customTitle = popupTitleInput.value.trim();
+            const body = popupBodyInput.value.trim();
+            const mediaUrl = popupMediaUrl.value.trim();
+            const redirectUrl = popupRedirectUrl.value.trim();
+
+            if (!body) {
+                showToast('Please enter a message.', 'error');
+                return;
+            }
+
+            let autoTitle = '📩 Message';
+            if (type === 'warning') autoTitle = '⚠️ Warning';
+            else if (type === 'congrats') autoTitle = '🎉 Congratulations!';
+
+            const title = customTitle || autoTitle;
+            const targetUserId = recipient === 'specific' ? popupUserSelect.value : 'all';
+
+            if (recipient === 'specific' && !targetUserId) {
+                showToast('Please select a user.', 'error');
+                return;
+            }
+
+            popupProgress.style.display = 'block';
+            sendPopupBtn.disabled = true;
+
+            try {
+                // Build the notification object
+                const notifId = 'popup-' + Date.now();
+                if (!allData.notifications) allData.notifications = {};
+
+                allData.notifications[notifId] = {
+                    id: notifId,
+                    title: title,
+                    message: body,
+                    type: type, // 'message', 'warning', 'congrats'
+                    imageUrl: mediaUrl || null,
+                    videoUrl: mediaUrl && mediaUrl.match(/\.(mp4|webm|mov|avi|mkv)$/i) ? mediaUrl : null,
+                    redirectUrl: redirectUrl || null,
+                    timestamp: Date.now(),
+                    read: false,
+                    userId: targetUserId,
+                    createdAt: Date.now(),
+                    _isPopup: true
+                };
+
+                await saveData();
+
+                // If specific user, also mark as unread for that user
+                if (targetUserId !== 'all') {
+                    const userNotifRef = ref(db, 'users/' + targetUserId + '/notifications/' + notifId);
+                    await set(userNotifRef, {
+                        read: false,
+                        timestamp: Date.now()
+                    });
+                }
+
+                popupForm.reset();
+                popupPreview.style.display = 'none';
+                popupMediaUrl.value = '';
+                popupMediaUrlInput.value = '';
+                popupMediaPreview.innerHTML = `
+                    <div class="upload-icon"><i class="fa-regular fa-image"></i></div>
+                    <div class="upload-text">Tap to upload an image or video</div>
+                `;
+                popupRecipient.value = 'all';
+                popupUserSelectGroup.style.display = 'none';
+                popupTypeBadges.forEach(b => b.classList.remove('selected'));
+                document.querySelector('.popup-type-badge.message').classList.add('selected');
+                popupTypeInput.value = 'message';
+
+                showToast(`✅ In‑app popup sent to ${targetUserId === 'all' ? 'all users' : 'specific user'}!`, 'success');
+
+                // Trigger a popup preview for the admin (simulate)
+                const previewNotif = allData.notifications[notifId];
+                showPopup('custom', {
+                    id: notifId,
+                    title: previewNotif.title,
+                    message: previewNotif.message,
+                    type: previewNotif.type,
+                    imageUrl: previewNotif.imageUrl,
+                    videoUrl: previewNotif.videoUrl,
+                    redirectUrl: previewNotif.redirectUrl,
+                    createdAt: previewNotif.createdAt,
+                    userId: previewNotif.userId
+                });
+
+            } catch (error) {
+                showToast(`❌ Error: ${error.message}`, 'error');
+            } finally {
+                popupProgress.style.display = 'none';
+                sendPopupBtn.disabled = false;
+            }
+        });
+
+        function showPopup(type, item) {
+            let title = '';
+            let details = '';
+
+            if (type === 'custom') {
+                title = item.title || '📩 Notification';
+                let typeIcon = '💬';
+                if (item.type === 'warning') typeIcon = '⚠️';
+                else if (item.type === 'congrats') typeIcon = '🎉';
+                const bodyHtml = (item.message || '').replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+                let mediaHtml = '';
+                if (item.imageUrl) {
+                    const isVideo = item.imageUrl.match(/\.(mp4|webm|mov|avi|mkv)$/i);
+                    mediaHtml = isVideo ?
+                        `<br><video src="${item.imageUrl}" controls style="max-width:100%;max-height:150px;border-radius:8px;margin-top:4px;"></video>` :
+                        `<br><img src="${item.imageUrl}" style="max-width:100%;max-height:150px;border-radius:8px;margin-top:4px;" />`;
+                }
+                let redirectHtml = '';
+                if (item.redirectUrl) {
+                    redirectHtml =
+                        `<br><small style="color:#f5b83d;">↗️ Tap to open: ${item.redirectUrl}</small>`;
+                }
+                const targetLabel = item.userId === 'all' ? '👥 All Users' : '👤 Specific User';
+                details = `
+                    <div class="popup-item-detail"><strong>Type:</strong> ${typeIcon} ${item.type || 'Message'}</div>
+                    <div class="popup-item-detail"><strong>Target:</strong> ${targetLabel}</div>
+                    <div class="popup-item-detail"><strong>Message:</strong> ${bodyHtml}</div>
+                    ${mediaHtml}
+                    ${redirectHtml}
+                    <div class="popup-item-detail"><strong>Sent:</strong> ${new Date(item.createdAt).toLocaleString()}</div>
+                `;
+                popupRedirectBtn.dataset.redirect = 'notifications';
+                popupRedirectBtn.dataset.itemId = item.id;
+            }
+
+            popupTitle2.textContent = `📬 New In‑App Popup`;
+            popupContent.innerHTML = `
+                <div class="popup-item-title">${title}</div>
+                ${details}
+            `;
+
+            currentPopup = { type, id: item.id, data: item };
+
+            popupModal2.classList.add('open');
+
+            try {
+                notificationSound.currentTime = 0;
+                notificationSound.play();
+                notificationSound.loop = false;
+            } catch (e) {
+                console.warn('Could not play notification sound:', e);
+            }
+        }
 
         function openInvoiceModal(order, key) {
             const customerName = order.customer || currentAdminData?.name || 'Customer';
@@ -10676,7 +10939,7 @@
         });
         downloadReceiptBtn.addEventListener('click', downloadInvoice);
 
-        console.log('✅ Admin Dashboard — macOS Notification page with rich media (images/videos), type pills, auto‑titles, and ringtone for every pop‑up.');
+        console.log('✅ Admin Dashboard — macOS Notification page with Push + In‑App Popup tabs, ringtone, enhanced pop‑up.');
     </script>
 </body>
 </html>
