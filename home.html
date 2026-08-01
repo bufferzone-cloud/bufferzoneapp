@@ -42,7 +42,7 @@
         .app-content {
             flex: 1;
             overflow-y: auto;
-            padding: 0 0 128px 0;
+            padding: 0 0 20px 0;
             -webkit-overflow-scrolling: touch;
         }
 
@@ -93,24 +93,6 @@
             opacity: 0.05;
             pointer-events: none;
             z-index: 0;
-        }
-
-        .loading-overlay .decor-dots {
-            position: absolute;
-            top: 12%;
-            right: 12%;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
-            z-index: 0;
-            opacity: 0.15;
-        }
-
-        .loading-overlay .decor-dots div {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: #1c2128;
         }
 
         .loading-content {
@@ -176,11 +158,7 @@
             width: 72px;
             height: 72px;
             border-radius: 50%;
-            background: conic-gradient(#1c2128 0deg 72deg,
-                    #f5b83d 72deg 144deg,
-                    #00a86b 144deg 216deg,
-                    #7c3aed 216deg 288deg,
-                    #f59e0b 288deg 360deg);
+            background: conic-gradient(#1c2128 0deg 72deg, #f5b83d 72deg 144deg, #00a86b 144deg 216deg, #7c3aed 216deg 288deg, #f59e0b 288deg 360deg);
             animation: spin 1.4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
             position: relative;
             flex-shrink: 0;
@@ -197,20 +175,6 @@
             background: #ffffff;
             border-radius: 50%;
             z-index: 1;
-        }
-
-        .spinner-ring::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border-radius: 50%;
-            background: inherit;
-            z-index: 0;
-            filter: blur(6px);
-            opacity: 0.3;
         }
 
         @keyframes spin {
@@ -268,64 +232,16 @@
             }
         }
 
-        /* ── BOTTOM NAV ── */
-        .bottom-nav {
-            position: fixed;
-            bottom: 17px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 92%;
-            max-width: 450px;
-            height: 54px;
-            background: #1c2128;
-            border-radius: 27px;
-            border: 1px solid #f5b83d;
-            padding: 7px 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 500;
-            box-shadow: 0 7px 26px rgba(0, 0, 0, 0.25);
-            flex-shrink: 0;
-            pointer-events: auto;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            color: #888;
-            transition: color 0.3s;
-            flex: 1;
-            background: none;
-            border: none;
-            font-size: 6px;
-            gap: 0px;
-            user-select: none;
-            padding: 2px 0;
-            min-width: 28px;
-        }
-
-        .nav-item i {
-            font-size: 16px;
-            margin-bottom: 1px;
-        }
-
-        .nav-item.active {
-            color: #f5b83d;
-        }
-
-        .nav-item:active {
-            transform: scale(0.92);
-        }
-
         /* ── HEADER ── */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 10px 12px 14px 12px;
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .header-left {
@@ -334,13 +250,28 @@
             gap: 10px;
         }
 
-        .logo-img {
-            width: 29px;
-            height: 29px;
+        .hamburger-btn {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            object-fit: cover;
+            background: #f8f9fc;
+            border: 1px solid #e8e8e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #1c2128;
+            font-size: 16px;
+            transition: all 0.2s;
             flex-shrink: 0;
-            background: #1c2128;
+        }
+
+        .hamburger-btn:active {
+            transform: scale(0.92);
+        }
+
+        .hamburger-btn:hover {
+            background: #f0f0f0;
         }
 
         .header-text {
@@ -960,10 +891,6 @@
         .order-title-section .price .new-price {
             font-size: 16px;
             font-weight: 700;
-            color: #1c2128;
-        }
-
-        .order-title-section .price .new-price.regular {
             color: #1c2128;
         }
 
@@ -1909,7 +1836,7 @@
             display: inline-block;
         }
 
-        /* ── SIDEBAR ── */
+        /* ── NOTIFICATION SIDEBAR ── */
         .sidebar-overlay {
             position: fixed;
             top: 0;
@@ -1929,7 +1856,7 @@
             position: fixed;
             top: 0;
             right: -300px;
-            width: 238px;
+            width: 260px;
             height: 100%;
             background: white;
             z-index: 2001;
@@ -2015,6 +1942,156 @@
             font-size: 7px;
             color: #aaa;
             margin-top: 3px;
+        }
+
+        /* ── MAIN SIDEBAR (Navigation) ── */
+        .main-sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2100;
+            display: none;
+        }
+
+        .main-sidebar-overlay.open {
+            display: block;
+        }
+
+        .main-sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 260px;
+            height: 100%;
+            background: #ffffff;
+            z-index: 2101;
+            box-shadow: 4px 0 26px rgba(0, 0, 0, 0.15);
+            transition: left 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            padding: 0 0 20px 0;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-sidebar.open {
+            left: 0;
+        }
+
+        .main-sidebar .sidebar-logo-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 16px 20px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            flex-shrink: 0;
+        }
+
+        .main-sidebar .sidebar-logo-area .big-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #1c2128;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .main-sidebar .sidebar-logo-area .brand-name {
+            font-size: 18px;
+            font-weight: 900;
+            color: #1c2128;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .main-sidebar .sidebar-logo-area .brand-tagline {
+            font-size: 9px;
+            color: #888;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .main-sidebar .sidebar-close-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #888;
+            cursor: pointer;
+            padding: 4px;
+            transition: color 0.2s;
+        }
+
+        .main-sidebar .sidebar-close-btn:hover {
+            color: #1c2128;
+        }
+
+        .main-sidebar .nav-list {
+            flex: 1;
+            padding: 14px 12px 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .main-sidebar .nav-list .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 11px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #1c2128;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            background: transparent;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .main-sidebar .nav-list .nav-link i {
+            font-size: 16px;
+            color: #888;
+            width: 20px;
+            text-align: center;
+            transition: color 0.2s;
+        }
+
+        .main-sidebar .nav-list .nav-link:hover {
+            background: #f8f9fc;
+        }
+
+        .main-sidebar .nav-list .nav-link:active {
+            transform: scale(0.97);
+        }
+
+        .main-sidebar .nav-list .nav-link.active {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .main-sidebar .nav-list .nav-link.active i {
+            color: #f5b83d;
+        }
+
+        .main-sidebar .nav-list .nav-link .nav-label {
+            color: #1c2128;
+            font-weight: 500;
+        }
+
+        .main-sidebar .nav-list .divider {
+            height: 1px;
+            background: #f0f0f0;
+            margin: 6px 0;
         }
 
         /* ── SAMPLES ── */
@@ -5002,102 +5079,75 @@
 
         /* ── RESPONSIVE TWEAKS ── */
         @media (max-width: 420px) {
-            .bottom-nav {
-                max-width: 400px;
-                padding: 7px 4px;
-                height: 48px;
-            }
-
-            .nav-item {
-                font-size: 4.5px;
-                min-width: 26px;
-            }
-
-            .nav-item i {
-                font-size: 12px;
-            }
-
             .app-content {
-                padding: 0 0 120px 0;
+                padding: 0 0 20px 0;
             }
-
             .service-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 7px;
             }
-
             .hero-title {
                 font-size: 16px;
             }
-
             .promo-slide .slide-text {
                 font-size: 14px;
             }
-
             .promo-slide .slide-text small {
                 font-size: 9px;
             }
-
             .flyer-detail-content {
                 padding: 12px 10px 10px 10px;
             }
-
             .flyer-detail-header-row h2 {
                 font-size: 16px;
             }
-
             .upload-box-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
             .withdraw-page .amount-options {
                 flex-direction: row;
             }
-
             .withdraw-page .balance-display .amount {
                 font-size: 28px;
             }
-
             .send-money-page .customer-info .row {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 2px;
             }
-
             .app-status-modal .app-status-title {
                 font-size: 20px;
             }
-
             .app-status-modal .app-status-icon .check-mark,
             .app-status-modal .app-status-icon .x-mark {
                 font-size: 44px;
             }
-
             .tutorial-slide h2 {
                 font-size: 22px;
             }
-
             .tutorial-slide p {
                 font-size: 13px;
             }
-
             .tutorial-slide ul li {
                 font-size: 12px;
             }
-
             .tutorial-bottom-bar {
                 padding: 14px 20px 22px 20px;
             }
-
             .tutorial-btn-next {
                 padding: 10px 24px;
                 font-size: 13px;
             }
-
             .tutorial-slide .slide-icon-wrap {
                 width: 64px;
                 height: 64px;
                 font-size: 28px;
+            }
+            .main-sidebar {
+                width: 240px;
+            }
+            .sidebar {
+                width: 240px;
             }
         }
 
@@ -5105,16 +5155,13 @@
             .promo-slide .slide-text {
                 font-size: 12px;
             }
-
             .app-status-modal .app-status-title {
                 font-size: 18px;
             }
-
             .app-status-modal .app-status-icon .check-mark,
             .app-status-modal .app-status-icon .x-mark {
                 font-size: 38px;
             }
-
             .promo-slide,
             .promo-slide img,
             .promo-slide video,
@@ -5124,60 +5171,51 @@
             .flyer-detail-image-wrap video {
                 border-radius: 30px !important;
             }
-
             .promo-carousel-wrapper,
             .promo-carousel-track {
                 min-height: 190px !important;
                 overflow-y: visible !important;
             }
-
             .promo-carousel-track {
                 align-items: center !important;
             }
-
             .tutorial-slide h2 {
                 font-size: 20px;
             }
-
             .tutorial-slide p {
                 font-size: 12px;
             }
-
             .tutorial-slide ul li {
                 font-size: 11px;
             }
-
             .tutorial-btn-next {
                 padding: 8px 18px;
                 font-size: 12px;
             }
-
             .loading-text {
                 font-size: 20px;
             }
-
             .loading-logo {
                 width: 48px;
                 height: 48px;
             }
-
             .spinner-ring {
                 width: 56px;
                 height: 56px;
             }
-
             .spinner-ring::before {
                 top: 5px;
                 left: 5px;
                 right: 5px;
                 bottom: 5px;
             }
+            .main-sidebar {
+                width: 220px;
+            }
+            .sidebar {
+                width: 220px;
+            }
         }
-
-        /* ────────────────────────────────────────────── */
-        /*  NEW: ADMIN IN-APP NOTIFICATION POPUP         */
-        /*  NEW: OFFLINE MODAL                           */
-        /* ────────────────────────────────────────────── */
 
         .admin-notif-overlay {
             position: fixed;
@@ -5371,7 +5409,6 @@
     <!-- ─── TUTORIAL OVERLAY ─── -->
     <div class="tutorial-overlay" id="tutorialOverlay">
         <div class="tutorial-slides" id="tutorialSlides">
-            <!-- Slide 1: About Buffer Zone -->
             <div class="tutorial-slide tutorial-slide-1">
                 <div class="slide-bg-decor"></div>
                 <div class="slide-bg-decor-2"></div>
@@ -5389,8 +5426,6 @@
                     </p>
                 </div>
             </div>
-
-            <!-- Slide 2: Where to find BZ code & how to use it -->
             <div class="tutorial-slide tutorial-slide-2">
                 <div class="slide-bg-decor"></div>
                 <div class="slide-bg-decor-2"></div>
@@ -5405,8 +5440,6 @@
                     </ul>
                 </div>
             </div>
-
-            <!-- Slide 3: How to apply on flyers/forms -->
             <div class="tutorial-slide tutorial-slide-3">
                 <div class="slide-bg-decor"></div>
                 <div class="slide-bg-decor-2"></div>
@@ -5421,8 +5454,6 @@
                     </ul>
                 </div>
             </div>
-
-            <!-- Slide 4: Choose service, order, apply codes -->
             <div class="tutorial-slide tutorial-slide-4">
                 <div class="slide-bg-decor"></div>
                 <div class="slide-bg-decor-2"></div>
@@ -5437,8 +5468,6 @@
                     </ul>
                 </div>
             </div>
-
-            <!-- Slide 5: Thank you -->
             <div class="tutorial-slide tutorial-slide-5">
                 <div class="slide-bg-decor"></div>
                 <div class="slide-bg-decor-2"></div>
@@ -5457,7 +5486,6 @@
                 </div>
             </div>
         </div>
-
         <div class="tutorial-bottom-bar">
             <div class="tutorial-dots" id="tutorialDots">
                 <span class="dot active"></span>
@@ -5477,7 +5505,9 @@
         <div class="app-content" id="appContent">
             <div class="header">
                 <div class="header-left">
-                    <img src="bufferzone.png" alt="Buffer Zone" class="logo-img" onerror="this.style.display='none'" />
+                    <button class="hamburger-btn" id="mainMenuBtn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
                 </div>
                 <div class="header-text">
                     <span>Welcome back,</span>
@@ -5711,17 +5741,6 @@
             </div>
 
         </div>
-
-        <div class="bottom-nav">
-            <button class="nav-item active" data-view="homeView"><i class="fa-solid fa-house"></i><span>Home</span></button>
-            <button class="nav-item" data-view="ordersView"><i class="fa-solid fa-bag-shopping"></i><span>Orders</span></button>
-            <button class="nav-item" data-view="historyView"><i class="fa-solid fa-clock"></i><span>History</span></button>
-            <button class="nav-item" data-view="samplesView"><i class="fa-solid fa-images"></i><span>Samples</span></button>
-            <button class="nav-item" data-view="applicationsView"><i class="fa-solid fa-clipboard-list"></i><span>Applications</span></button>
-            <button class="nav-item" data-view="accountView"><i class="fa-solid fa-wallet"></i><span>Account</span></button>
-            <button class="nav-item" data-view="profileView"><i class="fa-regular fa-user"></i><span>Profile</span></button>
-        </div>
-
     </div>
 
     <!-- ─── PAYMENT PAGE ─── -->
@@ -5945,7 +5964,6 @@
         </div>
     </div>
 
-    <!-- ─── APP STATUS POPUP ─── -->
     <div class="app-status-overlay" id="appStatusPopup">
         <div class="app-status-modal">
             <div class="app-status-logo-wrap">
@@ -5973,7 +5991,6 @@
         </div>
     </div>
 
-    <!-- ─── ORDER COMPLETE POPUP ─── -->
     <div class="order-complete-overlay" id="orderCompletePopup">
         <div class="order-complete-modal">
             <span class="oc-icon"><i class="fa-regular fa-circle-check"></i></span>
@@ -5984,7 +6001,6 @@
         </div>
     </div>
 
-    <!-- ─── WITHDRAWAL STATUS POPUP ─── -->
     <div class="withdrawal-status-overlay" id="withdrawalStatusPopup">
         <div class="withdrawal-status-modal">
             <div class="ws-logo-wrap">
@@ -6008,7 +6024,6 @@
         </div>
     </div>
 
-    <!-- ─── REFERRAL RECEIVED POPUP ─── -->
     <div class="referral-received-overlay" id="referralReceivedPopup">
         <div class="referral-received-modal">
             <span class="rr-icon"><i class="fa-solid fa-gift"></i></span>
@@ -6019,7 +6034,6 @@
         </div>
     </div>
 
-    <!-- ─── MONEY RECEIVED POPUP ─── -->
     <div class="money-received-overlay" id="moneyReceivedPopup">
         <div class="money-received-modal">
             <span class="mr-icon"><i class="fa-solid fa-inbox"></i></span>
@@ -6031,7 +6045,6 @@
         </div>
     </div>
 
-    <!-- ─── IMAGE VIEWER ─── -->
     <div class="image-viewer-overlay" id="imageViewer">
         <img id="imageViewerImg" src="" alt="Screenshot" />
     </div>
@@ -6044,6 +6057,49 @@
             <button class="sidebar-close" id="sidebarClose"><i class="fa-solid fa-times"></i></button>
         </div>
         <div id="notifList">
+        </div>
+    </div>
+
+    <!-- ─── MAIN SIDEBAR (Navigation) ─── -->
+    <div class="main-sidebar-overlay" id="mainSidebarOverlay"></div>
+    <div class="main-sidebar" id="mainSidebar">
+        <button class="sidebar-close-btn" id="mainSidebarClose"><i class="fa-solid fa-times"></i></button>
+
+        <div class="sidebar-logo-area">
+            <img src="bufferzone.png" alt="Buffer Zone" class="big-logo" onerror="this.style.display='none'" />
+            <div class="brand-name">BUFFER ZONE</div>
+            <div class="brand-tagline">Creative Agency</div>
+        </div>
+
+        <div class="nav-list">
+            <button class="nav-link active" data-view="homeView">
+                <i class="fa-solid fa-house"></i>
+                <span class="nav-label">Home</span>
+            </button>
+            <button class="nav-link" data-view="ordersView">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="nav-label">Orders</span>
+            </button>
+            <button class="nav-link" data-view="historyView">
+                <i class="fa-solid fa-clock"></i>
+                <span class="nav-label">History</span>
+            </button>
+            <button class="nav-link" data-view="samplesView">
+                <i class="fa-solid fa-images"></i>
+                <span class="nav-label">Samples</span>
+            </button>
+            <button class="nav-link" data-view="applicationsView">
+                <i class="fa-solid fa-clipboard-list"></i>
+                <span class="nav-label">Applications</span>
+            </button>
+            <button class="nav-link" data-view="accountView">
+                <i class="fa-solid fa-wallet"></i>
+                <span class="nav-label">Account</span>
+            </button>
+            <button class="nav-link" data-view="profileView">
+                <i class="fa-regular fa-user"></i>
+                <span class="nav-label">Profile</span>
+            </button>
         </div>
     </div>
 
@@ -6190,11 +6246,6 @@
         </div>
     </div>
 
-    <!-- ────────────────────────────────────────────── -->
-    <!--  NEW: ADMIN IN-APP NOTIFICATION POPUP         -->
-    <!--  NEW: OFFLINE MODAL                           -->
-    <!-- ────────────────────────────────────────────── -->
-
     <div class="admin-notif-overlay" id="adminNotifOverlay">
         <div class="admin-notif-modal">
             <div class="admin-notif-header">
@@ -6288,7 +6339,6 @@
             adminNotifs: {}
         };
 
-        // ── NOTIFICATION SOUND ──
         const notificationSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3');
 
         function playNotificationSound() {
@@ -6302,7 +6352,6 @@
             }
         }
 
-        // ── LOADING ──
         const loadingOverlay = document.getElementById('loadingOverlay');
 
         function hideLoading() {
@@ -6313,13 +6362,11 @@
             }, 800);
         }
 
-        // ── GLOBAL ERROR CATCHER ──
         window.addEventListener('error', (e) => {
             console.error('Uncaught error:', e.error);
             hideLoading();
         });
 
-        // ── FALLBACK TIMEOUT ──
         setTimeout(() => {
             const overlay = document.getElementById('loadingOverlay');
             if (overlay && !overlay.classList.contains('hidden')) {
@@ -6328,7 +6375,6 @@
             }
         }, 10000);
 
-        // ── TUTORIAL ──
         const tutorialOverlay = document.getElementById('tutorialOverlay');
         const tutorialSlides = document.getElementById('tutorialSlides');
         const tutorialDots = document.getElementById('tutorialDots');
@@ -6369,7 +6415,6 @@
             }
         });
 
-        // ── HELPERS ──
         const headerName = document.getElementById('headerName');
         const heroTitle = document.getElementById('heroTitle');
         const heroTitleSpan = document.getElementById('heroTitleSpan');
@@ -6572,7 +6617,6 @@
         const downloadStatementBtn = document.getElementById('downloadStatementBtn');
         const closeStatementBtn = document.getElementById('closeStatementBtn');
 
-        // ── NEW ELEMENTS ──
         const adminNotifOverlay = document.getElementById('adminNotifOverlay');
         const adminNotifTitle = document.getElementById('adminNotifTitle');
         const adminNotifMessage = document.getElementById('adminNotifMessage');
@@ -6580,29 +6624,63 @@
         const adminNotifDismiss = document.getElementById('adminNotifDismiss');
         const offlineOverlay = document.getElementById('offlineOverlay');
 
+        /* ─── MAIN SIDEBAR ─── */
+        const mainSidebarOverlay = document.getElementById('mainSidebarOverlay');
+        const mainSidebar = document.getElementById('mainSidebar');
+        const mainSidebarClose = document.getElementById('mainSidebarClose');
+        const mainMenuBtn = document.getElementById('mainMenuBtn');
+
+        function openMainSidebar() {
+            mainSidebarOverlay.classList.add('open');
+            mainSidebar.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMainSidebar() {
+            mainSidebarOverlay.classList.remove('open');
+            mainSidebar.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        mainMenuBtn.addEventListener('click', openMainSidebar);
+        mainSidebarClose.addEventListener('click', closeMainSidebar);
+        mainSidebarOverlay.addEventListener('click', closeMainSidebar);
+
+        document.querySelectorAll('#mainSidebar .nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                const viewId = this.dataset.view;
+                if (viewId) {
+                    document.querySelectorAll('#mainSidebar .nav-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    switchView(viewId);
+                    closeMainSidebar();
+                }
+            });
+        });
+
         let promoButtonTarget = null;
 
         function showToast(msg, type = 'info') {
             const toast = document.createElement('div');
             toast.style.cssText = `
-                position: fixed;
-                bottom: 77px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: #1c2128;
-                color: #ffffff;
-                padding: 10px 20px;
-                border-radius: 10px;
-                font-size: 11px;
-                font-weight: 500;
-                box-shadow: 0 7px 26px rgba(0,0,0,0.15);
-                z-index: 3000;
-                opacity: 0;
-                transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                pointer-events: none;
-                white-space: nowrap;
-                max-width: 90%;
-            `;
+                        position: fixed;
+                        bottom: 77px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: #1c2128;
+                        color: #ffffff;
+                        padding: 10px 20px;
+                        border-radius: 10px;
+                        font-size: 11px;
+                        font-weight: 500;
+                        box-shadow: 0 7px 26px rgba(0,0,0,0.15);
+                        z-index: 3000;
+                        opacity: 0;
+                        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                        pointer-events: none;
+                        white-space: nowrap;
+                        max-width: 90%;
+                    `;
             const icon = type === 'success' ? 'fa-check-circle' : (type === 'error' ? 'fa-exclamation-circle' : 'fa-bell');
             toast.innerHTML = `<i class="fas ${icon}" style="color: #f5b83d; margin-right: 7px;"></i> ${msg}`;
             document.body.appendChild(toast);
@@ -6619,9 +6697,11 @@
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             const target = document.getElementById(viewId);
             if (target) target.classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            const navBtn = document.querySelector(`.nav-item[data-view="${viewId}"]`);
-            if (navBtn) navBtn.classList.add('active');
+
+            document.querySelectorAll('#mainSidebar .nav-link').forEach(l => l.classList.remove('active'));
+            const navLink = document.querySelector(`#mainSidebar .nav-link[data-view="${viewId}"]`);
+            if (navLink) navLink.classList.add('active');
+
             if (viewId !== 'orderFlowView' && viewId !== 'flyerDetailView') {
                 document.getElementById('orderFlowView').classList.remove('active');
                 document.getElementById('flyerDetailView').classList.remove('active');
@@ -6630,6 +6710,7 @@
             if (viewId !== 'homeView') {
                 window.history.pushState({ view: viewId }, '', '');
             }
+            closeMainSidebar();
         }
 
         window.addEventListener('popstate', (event) => {
@@ -6638,9 +6719,9 @@
                 document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
                 const target = document.getElementById(viewId);
                 if (target) target.classList.add('active');
-                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-                const navBtn = document.querySelector(`.nav-item[data-view="${viewId}"]`);
-                if (navBtn) navBtn.classList.add('active');
+                document.querySelectorAll('#mainSidebar .nav-link').forEach(l => l.classList.remove('active'));
+                const navLink = document.querySelector(`#mainSidebar .nav-link[data-view="${viewId}"]`);
+                if (navLink) navLink.classList.add('active');
                 if (viewId !== 'orderFlowView' && viewId !== 'flyerDetailView') {
                     document.getElementById('orderFlowView').classList.remove('active');
                     document.getElementById('flyerDetailView').classList.remove('active');
@@ -6673,9 +6754,9 @@
             const curr = service.price || 0;
             if (orig && orig !== curr) {
                 return `
-                    <span class="old-price">ZMW ${orig.toFixed(2)}</span>
-                    <span class="new-price">ZMW ${curr.toFixed(2)}</span>
-                `;
+                            <span class="old-price">ZMW ${orig.toFixed(2)}</span>
+                            <span class="new-price">ZMW ${curr.toFixed(2)}</span>
+                        `;
             }
             return `ZMW ${curr.toFixed(2)}`;
         }
@@ -6867,7 +6948,6 @@
             });
         }
 
-        // ─── REAL-TIME LISTENER FOR IN-APP NOTIFICATIONS ───
         function listenForAdminNotifications() {
             const notifRef = ref(db, 'bufferzoneAppData/inAppNotifications');
             onValue(notifRef, (snapshot) => {
@@ -6955,12 +7035,12 @@
 
             if (allData.disabled === true) {
                 document.body.innerHTML = `
-                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
-                        <i class="fa-solid fa-triangle-exclamation" style="font-size:41px; color:#f5b83d; margin-bottom:14px;"></i>
-                        <h1 style="font-size:20px; font-weight:700; color:#1c2128;">App Under Maintenance</h1>
-                        <p style="color:#888; text-align:center; max-width:272px; margin-top:7px;">We are currently performing updates. Please check back later.</p>
-                    </div>
-                `;
+                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
+                                <i class="fa-solid fa-triangle-exclamation" style="font-size:41px; color:#f5b83d; margin-bottom:14px;"></i>
+                                <h1 style="font-size:20px; font-weight:700; color:#1c2128;">App Under Maintenance</h1>
+                                <p style="color:#888; text-align:center; max-width:272px; margin-top:7px;">We are currently performing updates. Please check back later.</p>
+                            </div>
+                        `;
                 return;
             }
 
@@ -7036,20 +7116,20 @@
                 const mediaType = pic.mediaType || 'image';
                 const mediaHtml = mediaType === 'video' ?
                     `<video src="${pic.imageUrl}" muted playsinline style="width:100%;height:100%;object-fit:cover;border-radius:40px;"></video>
-                       <div class="video-play-overlay"><i class="fa-solid fa-play"></i></div>` :
+                               <div class="video-play-overlay"><i class="fa-solid fa-play"></i></div>` :
                     `<img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:40px;" />`;
                 return `
-                <div class="promo-slide ${isClickable ? 'clickable' : ''}" data-key="${key}" data-index="${idx - 1}" data-real-index="${idx - 1 < 0 ? entries.length - 1 : idx - 1 >= entries.length ? 0 : idx - 1}" data-mediatype="${mediaType}">
-                    ${mediaHtml}
-                    <div class="slide-overlay">
-                        <div class="slide-text">
-                            ${escapeHtml(pic.text || 'Promo')}
-                            ${pic.subtext ? `<small>${escapeHtml(pic.subtext)}</small>` : ''}
-                        </div>
-                        ${isClickable ? `<div class="tap-indicator">CLICK ME</div>` : ''}
-                    </div>
-                </div>
-                `;
+                            <div class="promo-slide ${isClickable ? 'clickable' : ''}" data-key="${key}" data-index="${idx - 1}" data-real-index="${idx - 1 < 0 ? entries.length - 1 : idx - 1 >= entries.length ? 0 : idx - 1}" data-mediatype="${mediaType}">
+                                ${mediaHtml}
+                                <div class="slide-overlay">
+                                    <div class="slide-text">
+                                        ${escapeHtml(pic.text || 'Promo')}
+                                        ${pic.subtext ? `<small>${escapeHtml(pic.subtext)}</small>` : ''}
+                                    </div>
+                                    ${isClickable ? `<div class="tap-indicator">CLICK ME</div>` : ''}
+                                </div>
+                            </div>
+                        `;
             }).join('');
 
             const track = promoCarouselTrack;
@@ -7305,9 +7385,9 @@
             }
             container.classList.add('show');
             container.innerHTML = entries.map(([key, p]) => `
-                <span class="tag">PROMO</span>
-                <span class="msg">Use code <strong>${p.code}</strong> for <strong>${p.discount}%</strong> off!</span>
-            `).join('');
+                        <span class="tag">PROMO</span>
+                        <span class="msg">Use code <strong>${p.code}</strong> for <strong>${p.discount}%</strong> off!</span>
+                    `).join('');
         }
 
         function renderServices(category = 'all') {
@@ -7327,14 +7407,14 @@
             container.innerHTML = entries.map(([key, s]) => {
                 const thumbClass = 'thumb-1';
                 return `
-                    <div class="service-item" data-id="${key}">
-                        <div class="service-thumb ${thumbClass}">
-                            <i class="fa-solid ${s.icon || 'fa-cube'}"></i>
-                        </div>
-                        <div class="service-title">${escapeHtml(s.title || 'Untitled')}</div>
-                        <div class="service-subtitle">${escapeHtml(s.subtitle || '')}</div>
-                    </div>
-                `;
+                            <div class="service-item" data-id="${key}">
+                                <div class="service-thumb ${thumbClass}">
+                                    <i class="fa-solid ${s.icon || 'fa-cube'}"></i>
+                                </div>
+                                <div class="service-title">${escapeHtml(s.title || 'Untitled')}</div>
+                                <div class="service-subtitle">${escapeHtml(s.subtitle || '')}</div>
+                            </div>
+                        `;
             }).join('');
 
             container.querySelectorAll('.service-item').forEach(item => {
@@ -7379,52 +7459,52 @@
                 let actionHtml = '';
                 if (o.status === 'completed' || o.status === 'done') {
                     actionHtml = `
-                        <div class="detail-row" style="border-bottom:none; padding-top:6px;">
-                            <button class="view-receipt-btn" data-key="${key}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
-                                <i class="fa-regular fa-file-lines" style="color:#f5b83d;"></i> View Receipt
-                            </button>
-                        </div>
-                    `;
+                                <div class="detail-row" style="border-bottom:none; padding-top:6px;">
+                                    <button class="view-receipt-btn" data-key="${key}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
+                                        <i class="fa-regular fa-file-lines" style="color:#f5b83d;"></i> View Receipt
+                                    </button>
+                                </div>
+                            `;
                 }
 
                 let screenshotBtnHtml = '';
                 if (o.paymentProof && o.paymentProof !== 'Wallet Payment' && o.paymentProof !== 'N/A') {
                     screenshotBtnHtml = `
-                        <div class="detail-row" style="border-bottom:none; padding-top:6px;">
-                            <button class="view-screenshot-btn" data-url="${o.paymentProof}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
-                                <i class="fa-regular fa-image" style="color:#f5b83d;"></i> View Screenshot
-                            </button>
-                        </div>
-                    `;
+                                <div class="detail-row" style="border-bottom:none; padding-top:6px;">
+                                    <button class="view-screenshot-btn" data-url="${o.paymentProof}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
+                                        <i class="fa-regular fa-image" style="color:#f5b83d;"></i> View Screenshot
+                                    </button>
+                                </div>
+                            `;
                 }
 
                 return `
-                <div class="order-card">
-                    <div class="order-summary" data-key="${key}">
-                        <div class="left">
-                            <div class="order-id">${escapeHtml(o.id || 'N/A')}</div>
-                            <div class="order-service">${escapeHtml(o.service || 'N/A')}</div>
-                            <div class="order-meta">
-                                <span>${escapeHtml(o.customer || 'N/A')}</span>
-                                <span>${escapeHtml(o.date || 'N/A')}</span>
-                                ${o.discountApplied ? `<span style="background:#fef9e7;color:#f5b83d;padding:0 5px;border-radius:7px;font-size:9px;">${o.discountApplied}% OFF</span>` : ''}
+                            <div class="order-card">
+                                <div class="order-summary" data-key="${key}">
+                                    <div class="left">
+                                        <div class="order-id">${escapeHtml(o.id || 'N/A')}</div>
+                                        <div class="order-service">${escapeHtml(o.service || 'N/A')}</div>
+                                        <div class="order-meta">
+                                            <span>${escapeHtml(o.customer || 'N/A')}</span>
+                                            <span>${escapeHtml(o.date || 'N/A')}</span>
+                                            ${o.discountApplied ? `<span style="background:#fef9e7;color:#f5b83d;padding:0 5px;border-radius:7px;font-size:9px;">${o.discountApplied}% OFF</span>` : ''}
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <span class="order-status ${statusClass}">${statusDisplay}</span>
+                                        <span class="order-amount">ZMW ${(o.amount || 0).toFixed(2)}</span>
+                                        <i class="fa-solid fa-chevron-down expand-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="order-details-expand">
+                                    ${customizationHtml}
+                                    ${o.notes ? `<div class="detail-row"><span class="label">Notes</span><span class="val">${escapeHtml(o.notes)}</span></div>` : ''}
+                                    ${o.promoCode ? `<div class="detail-row"><span class="label">Promo</span><span class="val">${escapeHtml(o.promoCode)} (${o.discountApplied || 0}% off)</span></div>` : ''}
+                                    ${screenshotBtnHtml}
+                                    ${actionHtml}
+                                </div>
                             </div>
-                        </div>
-                        <div class="right">
-                            <span class="order-status ${statusClass}">${statusDisplay}</span>
-                            <span class="order-amount">ZMW ${(o.amount || 0).toFixed(2)}</span>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                    </div>
-                    <div class="order-details-expand">
-                        ${customizationHtml}
-                        ${o.notes ? `<div class="detail-row"><span class="label">Notes</span><span class="val">${escapeHtml(o.notes)}</span></div>` : ''}
-                        ${o.promoCode ? `<div class="detail-row"><span class="label">Promo</span><span class="val">${escapeHtml(o.promoCode)} (${o.discountApplied || 0}% off)</span></div>` : ''}
-                        ${screenshotBtnHtml}
-                        ${actionHtml}
-                    </div>
-                </div>
-                `;
+                        `;
             }).join('');
 
             container.querySelectorAll('.order-summary').forEach(el => {
@@ -7474,14 +7554,14 @@
             if (pendingReminder) {
                 reminderBanner.classList.add('show');
                 reminderBanner.innerHTML = `
-                    <i class="fa-regular fa-circle-check"></i>
-                    <span class="reminder-text">Remaining 50% for order ${pendingReminder.id}</span>
-                    <span class="reminder-amount">ZMW ${pendingReminder.amount.toFixed(2)}</span>
-                    <button class="btn-done-remaining" id="doneRemainingBtn">
-                        <i class="fa-regular fa-circle-check"></i> Done
-                    </button>
-                    <span class="done-badge" id="doneBadge">✅ Paid in full</span>
-                `;
+                            <i class="fa-regular fa-circle-check"></i>
+                            <span class="reminder-text">Remaining 50% for order ${pendingReminder.id}</span>
+                            <span class="reminder-amount">ZMW ${pendingReminder.amount.toFixed(2)}</span>
+                            <button class="btn-done-remaining" id="doneRemainingBtn">
+                                <i class="fa-regular fa-circle-check"></i> Done
+                            </button>
+                            <span class="done-badge" id="doneBadge">✅ Paid in full</span>
+                        `;
 
                 const doneBtn = document.getElementById('doneRemainingBtn');
                 if (doneBtn) {
@@ -7549,10 +7629,10 @@
 
                     const direction = t.type?.toLowerCase().includes('sent') ? 'Sent to' : 'Received from';
                     otherPartyInfo = `
-                        <div style="font-size:9px; color:#555; margin-top:2px;">
-                            ${direction}: <strong>${escapeHtml(otherName)}</strong> (📞 ${escapeHtml(otherPhone)}) &middot; Balance: ${otherBalance}
-                        </div>
-                    `;
+                                <div style="font-size:9px; color:#555; margin-top:2px;">
+                                    ${direction}: <strong>${escapeHtml(otherName)}</strong> (📞 ${escapeHtml(otherPhone)}) &middot; Balance: ${otherBalance}
+                                </div>
+                            `;
                 }
 
                 let detailText = t.detail || '';
@@ -7572,36 +7652,36 @@
                 let statementBtnHtml = '';
                 if (isWithdrawTx || isSendTx || isReceiveTx) {
                     statementBtnHtml = `
-                        <div class="h-row" style="border-bottom:none; padding-top:6px;">
-                            <button class="view-statement-btn" data-key="${key}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
-                                <i class="fa-regular fa-file-lines" style="color:#f5b83d;"></i> View Statement
-                            </button>
-                        </div>
-                    `;
+                                <div class="h-row" style="border-bottom:none; padding-top:6px;">
+                                    <button class="view-statement-btn" data-key="${key}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
+                                        <i class="fa-regular fa-file-lines" style="color:#f5b83d;"></i> View Statement
+                                    </button>
+                                </div>
+                            `;
                 }
 
                 return `
-                <div class="history-card" data-key="${key}">
-                    <div class="history-summary">
-                        <div class="left">
-                            <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
-                            <span>${escapeHtml(t.type || 'Transaction')} ${t.amount ? 'ZMW ' + t.amount.toFixed(2) : ''}</span>
-                        </div>
-                        <div class="right">
-                            <span>${escapeHtml(t.date || 'N/A')}</span>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                    </div>
-                    <div class="history-details">
-                        <div class="h-row"><span class="h-label">Reference</span><span class="h-val">${escapeHtml(t.ref || 'N/A')}</span></div>
-                        <div class="h-row"><span class="h-label">Method</span><span class="h-val">${escapeHtml(t.method || 'N/A')}</span></div>
-                        <div class="h-row"><span class="h-label">Status</span><span class="h-val">${statusDisplay}</span></div>
-                        <div class="h-row"><span class="h-label">Detail</span><span class="h-val">${escapeHtml(detailText)}</span></div>
-                        ${isSendReceive ? `<div class="h-row" style="flex-direction:column; align-items:flex-start; gap:2px;"><span class="h-label" style="margin-bottom:2px;">Other Party</span><div class="h-val" style="text-align:left; width:100%;">${otherPartyInfo}</div></div>` : ''}
-                        ${statementBtnHtml}
-                    </div>
-                </div>
-                `;
+                            <div class="history-card" data-key="${key}">
+                                <div class="history-summary">
+                                    <div class="left">
+                                        <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
+                                        <span>${escapeHtml(t.type || 'Transaction')} ${t.amount ? 'ZMW ' + t.amount.toFixed(2) : ''}</span>
+                                    </div>
+                                    <div class="right">
+                                        <span>${escapeHtml(t.date || 'N/A')}</span>
+                                        <i class="fa-solid fa-chevron-down expand-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="history-details">
+                                    <div class="h-row"><span class="h-label">Reference</span><span class="h-val">${escapeHtml(t.ref || 'N/A')}</span></div>
+                                    <div class="h-row"><span class="h-label">Method</span><span class="h-val">${escapeHtml(t.method || 'N/A')}</span></div>
+                                    <div class="h-row"><span class="h-label">Status</span><span class="h-val">${statusDisplay}</span></div>
+                                    <div class="h-row"><span class="h-label">Detail</span><span class="h-val">${escapeHtml(detailText)}</span></div>
+                                    ${isSendReceive ? `<div class="h-row" style="flex-direction:column; align-items:flex-start; gap:2px;"><span class="h-label" style="margin-bottom:2px;">Other Party</span><div class="h-val" style="text-align:left; width:100%;">${otherPartyInfo}</div></div>` : ''}
+                                    ${statementBtnHtml}
+                                </div>
+                            </div>
+                        `;
             }).join('');
 
             container.querySelectorAll('.history-card').forEach(el => {
@@ -7706,15 +7786,15 @@
             notifBadge.style.display = unreadCount > 0 ? 'flex' : 'none';
 
             notifList.innerHTML = entries.slice(0, 10).map(([key, n]) => `
-                <div class="notification-item" data-key="${key}">
-                    <div class="notif-dot ${n.read ? 'read' : ''}"></div>
-                    <div class="notif-content">
-                        <div class="title">${escapeHtml(n.title || 'Notification')}</div>
-                        <div class="desc">${escapeHtml(n.message || '')}</div>
-                        <div class="time">${n.timestamp ? new Date(n.timestamp).toLocaleString() : 'Just now'}</div>
-                    </div>
-                </div>
-            `).join('');
+                        <div class="notification-item" data-key="${key}">
+                            <div class="notif-dot ${n.read ? 'read' : ''}"></div>
+                            <div class="notif-content">
+                                <div class="title">${escapeHtml(n.title || 'Notification')}</div>
+                                <div class="desc">${escapeHtml(n.message || '')}</div>
+                                <div class="time">${n.timestamp ? new Date(n.timestamp).toLocaleString() : 'Just now'}</div>
+                            </div>
+                        </div>
+                    `).join('');
 
             notifList.querySelectorAll('.notification-item').forEach(el => {
                 el.addEventListener('click', function() {
@@ -7749,12 +7829,12 @@
                 if (items.length === 0) continue;
 
                 html += `
-                    <div style="font-size:14px;font-weight:700;color:#1c2128;margin:17px 0 9px 0;padding-bottom:5px;border-bottom:2px solid #f0f0f0;display:flex;align-items:center;gap:7px;">
-                        ${typeLabels[type] || type}
-                        <span style="font-size:9px;background:#f0f0f0;padding:0 9px;border-radius:10px;font-weight:600;color:#555;">${items.length}</span>
-                    </div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
-                `;
+                            <div style="font-size:14px;font-weight:700;color:#1c2128;margin:17px 0 9px 0;padding-bottom:5px;border-bottom:2px solid #f0f0f0;display:flex;align-items:center;gap:7px;">
+                                ${typeLabels[type] || type}
+                                <span style="font-size:9px;background:#f0f0f0;padding:0 9px;border-radius:10px;font-weight:600;color:#555;">${items.length}</span>
+                            </div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+                        `;
 
                 items.forEach(post => {
                     let frameHtml = '';
@@ -7764,37 +7844,37 @@
 
                     if (type === 'app') {
                         frameHtml = `
-                            <div class="phone-frame-sample">
-                                ${imgHtml}
-                                <div class="notch"></div>
-                            </div>
-                        `;
+                                    <div class="phone-frame-sample">
+                                        ${imgHtml}
+                                        <div class="notch"></div>
+                                    </div>
+                                `;
                     } else if (type === 'website') {
                         frameHtml = `
-                            <div class="laptop-frame-sample">
-                                <div class="screen">${imgHtml}</div>
-                                <div class="base"></div>
-                            </div>
-                        `;
+                                    <div class="laptop-frame-sample">
+                                        <div class="screen">${imgHtml}</div>
+                                        <div class="base"></div>
+                                    </div>
+                                `;
                     } else {
                         frameHtml = `
-                            <div style="width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:#f5f5f5;display:flex;align-items:center;justify-content:center;position:relative;">
-                                ${imgHtml}
-                            </div>
-                        `;
+                                    <div style="width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:#f5f5f5;display:flex;align-items:center;justify-content:center;position:relative;">
+                                        ${imgHtml}
+                                    </div>
+                                `;
                     }
 
                     html += `
-                        <div class="sample-card">
-                            ${frameHtml}
-                            <div class="sample-title">${escapeHtml(post.title || 'Untitled')}</div>
-                            <div class="sample-desc">${escapeHtml(post.description || '')}</div>
-                            <div class="sample-meta">
-                                <span>${post.createdAt ? new Date(post.createdAt).toLocaleDateString() : ''}</span>
-                                <span>${post.adminName || 'Admin'}</span>
-                            </div>
-                        </div>
-                    `;
+                                <div class="sample-card">
+                                    ${frameHtml}
+                                    <div class="sample-title">${escapeHtml(post.title || 'Untitled')}</div>
+                                    <div class="sample-desc">${escapeHtml(post.description || '')}</div>
+                                    <div class="sample-meta">
+                                        <span>${post.createdAt ? new Date(post.createdAt).toLocaleDateString() : ''}</span>
+                                        <span>${post.adminName || 'Admin'}</span>
+                                    </div>
+                                </div>
+                            `;
                 });
 
                 html += `</div>`;
@@ -7947,25 +8027,25 @@
                 }
 
                 return `
-                <div class="account-tx-card" data-key="${key}">
-                    <div class="tx-summary">
-                        <div class="left">
-                            <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
-                            <span>${escapeHtml(title)} ${amountDisplay ? 'ZMW ' + t.amount.toFixed(2) : ''}</span>
-                        </div>
-                        <div class="right">
-                            <span>${escapeHtml(t.date || 'N/A')}</span>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                    </div>
-                    <div class="tx-details">
-                        <div class="d-row"><span class="d-label">Reference</span><span class="d-val">${escapeHtml(t.ref || 'N/A')}</span></div>
-                        <div class="d-row"><span class="d-label">Method</span><span class="d-val">${escapeHtml(t.method || 'N/A')}</span></div>
-                        <div class="d-row"><span class="d-label">Status</span><span class="d-val">${escapeHtml(t.status || 'N/A')}</span></div>
-                        <div class="d-row"><span class="d-label">Detail</span><span class="d-val">${escapeHtml(desc)}${otherInfo}</span></div>
-                    </div>
-                </div>
-                `;
+                            <div class="account-tx-card" data-key="${key}">
+                                <div class="tx-summary">
+                                    <div class="left">
+                                        <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
+                                        <span>${escapeHtml(title)} ${amountDisplay ? 'ZMW ' + t.amount.toFixed(2) : ''}</span>
+                                    </div>
+                                    <div class="right">
+                                        <span>${escapeHtml(t.date || 'N/A')}</span>
+                                        <i class="fa-solid fa-chevron-down expand-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="tx-details">
+                                    <div class="d-row"><span class="d-label">Reference</span><span class="d-val">${escapeHtml(t.ref || 'N/A')}</span></div>
+                                    <div class="d-row"><span class="d-label">Method</span><span class="d-val">${escapeHtml(t.method || 'N/A')}</span></div>
+                                    <div class="d-row"><span class="d-label">Status</span><span class="d-val">${escapeHtml(t.status || 'N/A')}</span></div>
+                                    <div class="d-row"><span class="d-label">Detail</span><span class="d-val">${escapeHtml(desc)}${otherInfo}</span></div>
+                                </div>
+                            </div>
+                        `;
             }).join('');
 
             container.querySelectorAll('.account-tx-card').forEach(el => {
@@ -7984,11 +8064,11 @@
 
             if (entries.length === 0) {
                 container.innerHTML = `
-                    <div class="empty-withdrawals" style="text-align:center;padding:14px;color:#888;">
-                        <i class="fa-regular fa-receipt" style="font-size:20px;color:#ddd;display:block;margin-bottom:4px;"></i>
-                        No withdrawal requests yet.
-                    </div>
-                `;
+                            <div class="empty-withdrawals" style="text-align:center;padding:14px;color:#888;">
+                                <i class="fa-regular fa-receipt" style="font-size:20px;color:#ddd;display:block;margin-bottom:4px;"></i>
+                                No withdrawal requests yet.
+                            </div>
+                        `;
                 return;
             }
 
@@ -8022,26 +8102,26 @@
                 }
 
                 return `
-                <div class="withdrawal-card" data-key="${key}">
-                    <div class="wd-summary">
-                        <div class="left">
-                            <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
-                            <span>Withdrawal: ZMW ${(w.amount || 0).toFixed(2)}</span>
-                        </div>
-                        <div class="right">
-                            <span class="status-badge ${statusClass}">${statusDisplay}</span>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                    </div>
-                    <div class="wd-details">
-                        <div class="d-row"><span class="d-label">Amount</span><span class="d-val">ZMW ${(w.amount || 0).toFixed(2)}</span></div>
-                        <div class="d-row"><span class="d-label">Date</span><span class="d-val">${escapeHtml(dateStr)}</span></div>
-                        <div class="d-row"><span class="d-label">Phone</span><span class="d-val">${escapeHtml(w.phone || 'N/A')}</span></div>
-                        <div class="d-row"><span class="d-label">Status</span><span class="d-val">${statusDisplay}</span></div>
-                        <div class="d-row"><span class="d-label">Message</span><span class="d-val">${escapeHtml(statusMessage)}</span></div>
-                    </div>
-                </div>
-                `;
+                            <div class="withdrawal-card" data-key="${key}">
+                                <div class="wd-summary">
+                                    <div class="left">
+                                        <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
+                                        <span>Withdrawal: ZMW ${(w.amount || 0).toFixed(2)}</span>
+                                    </div>
+                                    <div class="right">
+                                        <span class="status-badge ${statusClass}">${statusDisplay}</span>
+                                        <i class="fa-solid fa-chevron-down expand-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="wd-details">
+                                    <div class="d-row"><span class="d-label">Amount</span><span class="d-val">ZMW ${(w.amount || 0).toFixed(2)}</span></div>
+                                    <div class="d-row"><span class="d-label">Date</span><span class="d-val">${escapeHtml(dateStr)}</span></div>
+                                    <div class="d-row"><span class="d-label">Phone</span><span class="d-val">${escapeHtml(w.phone || 'N/A')}</span></div>
+                                    <div class="d-row"><span class="d-label">Status</span><span class="d-val">${statusDisplay}</span></div>
+                                    <div class="d-row"><span class="d-label">Message</span><span class="d-val">${escapeHtml(statusMessage)}</span></div>
+                                </div>
+                            </div>
+                        `;
             }).join('');
 
             container.querySelectorAll('.withdrawal-card').forEach(el => {
@@ -8432,26 +8512,26 @@
                 }
 
                 return `
-                <div class="history-card" data-key="${key}">
-                    <div class="summary">
-                        <div class="left">
-                            <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
-                            <span>ZMW ${(w.amount || 0).toFixed(2)}</span>
-                        </div>
-                        <div class="right">
-                            <span class="status-badge ${statusClass}">${statusDisplay}</span>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <div class="row"><span class="lbl">Amount</span><span class="val">ZMW ${(w.amount || 0).toFixed(2)}</span></div>
-                        <div class="row"><span class="lbl">Date</span><span class="val">${escapeHtml(dateStr)}</span></div>
-                        <div class="row"><span class="lbl">Phone</span><span class="val">${escapeHtml(w.phone || 'N/A')}</span></div>
-                        <div class="row"><span class="lbl">Status</span><span class="val">${statusDisplay}</span></div>
-                        <div class="row"><span class="lbl">Message</span><span class="val">${msg}</span></div>
-                    </div>
-                </div>
-                `;
+                            <div class="history-card" data-key="${key}">
+                                <div class="summary">
+                                    <div class="left">
+                                        <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
+                                        <span>ZMW ${(w.amount || 0).toFixed(2)}</span>
+                                    </div>
+                                    <div class="right">
+                                        <span class="status-badge ${statusClass}">${statusDisplay}</span>
+                                        <i class="fa-solid fa-chevron-down expand-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="details">
+                                    <div class="row"><span class="lbl">Amount</span><span class="val">ZMW ${(w.amount || 0).toFixed(2)}</span></div>
+                                    <div class="row"><span class="lbl">Date</span><span class="val">${escapeHtml(dateStr)}</span></div>
+                                    <div class="row"><span class="lbl">Phone</span><span class="val">${escapeHtml(w.phone || 'N/A')}</span></div>
+                                    <div class="row"><span class="lbl">Status</span><span class="val">${statusDisplay}</span></div>
+                                    <div class="row"><span class="lbl">Message</span><span class="val">${msg}</span></div>
+                                </div>
+                            </div>
+                        `;
             }).join('');
 
             container.querySelectorAll('.history-card').forEach(el => {
@@ -8604,9 +8684,9 @@
                 sendRecipientData = foundUser;
 
                 sendPageSearchResult.innerHTML = `
-                    <span>Send money to: <span class="name">${escapeHtml(fullName)}</span></span>
-                    <span style="font-size:9px; color:#888;">(${code})</span>
-                `;
+                            <span>Send money to: <span class="name">${escapeHtml(fullName)}</span></span>
+                            <span style="font-size:9px; color:#888;">(${code})</span>
+                        `;
                 updateSendPageButtonState();
             }).catch((error) => {
                 console.error('Error searching recipient:', error);
@@ -8783,26 +8863,26 @@
                 }
 
                 return `
-                    <div class="history-card" data-key="${key}">
-                        <div class="summary">
-                            <div class="left">
-                                <i class="fa-solid ${isSent ? 'fa-paper-plane' : 'fa-inbox'}" style="color:${isSent ? '#4a90d9' : '#00a86b'};"></i>
-                                <span>${isSent ? 'Sent' : 'Received'} ZMW ${Math.abs(t.amount || 0).toFixed(2)}</span>
+                            <div class="history-card" data-key="${key}">
+                                <div class="summary">
+                                    <div class="left">
+                                        <i class="fa-solid ${isSent ? 'fa-paper-plane' : 'fa-inbox'}" style="color:${isSent ? '#4a90d9' : '#00a86b'};"></i>
+                                        <span>${isSent ? 'Sent' : 'Received'} ZMW ${Math.abs(t.amount || 0).toFixed(2)}</span>
+                                    </div>
+                                    <div class="right">
+                                        <span style="font-size:9px; color:#888;">${t.date ? new Date(t.date).toLocaleString() : ''}</span>
+                                        <i class="fa-solid fa-chevron-down expand-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="details">
+                                    <div class="row"><span class="lbl">Amount</span><span class="val">${sign}ZMW ${Math.abs(t.amount || 0).toFixed(2)}</span></div>
+                                    <div class="row"><span class="lbl">${label}</span><span class="val">${escapeHtml(otherName)}</span></div>
+                                    <div class="row"><span class="lbl">Phone</span><span class="val">${escapeHtml(otherPhone)}</span></div>
+                                    <div class="row"><span class="lbl">Balance</span><span class="val">${otherBalance}</span></div>
+                                    <div class="row"><span class="lbl">Date</span><span class="val">${t.date ? new Date(t.date).toLocaleString() : ''}</span></div>
+                                </div>
                             </div>
-                            <div class="right">
-                                <span style="font-size:9px; color:#888;">${t.date ? new Date(t.date).toLocaleString() : ''}</span>
-                                <i class="fa-solid fa-chevron-down expand-icon"></i>
-                            </div>
-                        </div>
-                        <div class="details">
-                            <div class="row"><span class="lbl">Amount</span><span class="val">${sign}ZMW ${Math.abs(t.amount || 0).toFixed(2)}</span></div>
-                            <div class="row"><span class="lbl">${label}</span><span class="val">${escapeHtml(otherName)}</span></div>
-                            <div class="row"><span class="lbl">Phone</span><span class="val">${escapeHtml(otherPhone)}</span></div>
-                            <div class="row"><span class="lbl">Balance</span><span class="val">${otherBalance}</span></div>
-                            <div class="row"><span class="lbl">Date</span><span class="val">${t.date ? new Date(t.date).toLocaleString() : ''}</span></div>
-                        </div>
-                    </div>
-                `;
+                        `;
             }).join('');
 
             container.querySelectorAll('.history-card').forEach(el => {
@@ -8866,65 +8946,65 @@
             const totalPrice = (service.price * currentQuantity).toFixed(2);
 
             container.innerHTML = `
-                <div class="order-policy-panel">
-                    <div class="order-policy-content">
-                        <h2>${allData.policy?.title || 'BUFFER ZONE'}<br><span>${allData.policy?.tag || ''}</span></h2>
-                        <p>${allData.policy?.desc || 'To begin your project, we require a 50% down payment.'}</p>
-                        <div class="policy-tag"><i class="fa-regular fa-circle-check"></i> ${allData.policy?.tag || '50% upfront required'}</div>
-                    </div>
-                </div>
-
-                <div class="order-title-section">
-                    <h2>${(service.title || 'Service').toUpperCase()}</h2>
-                    <p>${service.subtitle || ''}</p>
-                    <div class="price">
-                        ${renderPriceInline(service)}
-                    </div>
-                </div>
-
-                <div class="order-tags">
-                    ${(service.tags || []).map(t => `<span class="tag"><i class="fa-regular fa-circle-check"></i> ${t}</span>`).join('')}
-                </div>
-
-                <div class="order-specs">
-                    <h4>SPECIFICATIONS</h4>
-                    ${specsHtml || '<p class="text-muted">No specifications available.</p>'}
-                </div>
-
-                <div class="order-customize">
-                    <h4>CUSTOMIZE YOUR ORDER</h4>
-                    ${sizeBtns ? `<div class="customize-group"><div class="group-label">Select Size</div><div class="customize-options" id="sizeOptions">${sizeBtns}</div></div>` : ''}
-                    ${orientationBtns ? `<div class="customize-group"><div class="group-label">Orientation</div><div class="customize-options" id="orientationOptions">${orientationBtns}</div></div>` : ''}
-                    ${formatBtns ? `<div class="customize-group"><div class="group-label">File Format</div><div class="customize-options" id="formatOptions">${formatBtns}</div></div>` : ''}
-                    ${colorBtns ? `<div class="customize-group"><div class="group-label">Color Scheme</div><div class="customize-options" id="colorOptions">${colorBtns}</div></div>` : ''}
-                    ${revisionBtns ? `<div class="customize-group"><div class="group-label">Revisions</div><div class="customize-options" id="revisionOptions">${revisionBtns}</div></div>` : ''}
-                    ${deliveryBtns ? `<div class="customize-group"><div class="group-label">Delivery Speed</div><div class="customize-options" id="deliveryOptions">${deliveryBtns}</div></div>` : ''}
-                    <div class="customize-group">
-                        <div class="group-label">Quantity</div>
-                        <div class="quantity-selector">
-                            <button id="qtyMinus"><i class="fa-solid fa-minus"></i></button>
-                            <span id="qtyDisplay">${currentQuantity}</span>
-                            <button id="qtyPlus"><i class="fa-solid fa-plus"></i></button>
+                        <div class="order-policy-panel">
+                            <div class="order-policy-content">
+                                <h2>${allData.policy?.title || 'BUFFER ZONE'}<br><span>${allData.policy?.tag || ''}</span></h2>
+                                <p>${allData.policy?.desc || 'To begin your project, we require a 50% down payment.'}</p>
+                                <div class="policy-tag"><i class="fa-regular fa-circle-check"></i> ${allData.policy?.tag || '50% upfront required'}</div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="order-notes" style="margin-top:3px;">
-                    <h4 style="font-size:9px; font-weight:600; color:#1c2128; margin-bottom:4px;">📝 Add Extra Notes (Optional)</h4>
-                    <textarea id="orderNotes" placeholder="Tell us more about your requirements, special instructions, or any additional details..." style="width:100%; padding:9px; border:1px solid #eee; border-radius:9px; font-size:9px; resize:vertical; min-height:41px; background:#fafbfc; transition:border 0.2s; font-family:'Poppins',sans-serif;"></textarea>
-                    <p style="font-size:7px; color:#aaa; margin-top:3px;">These notes will be attached to your order for the team to review.</p>
-                </div>
+                        <div class="order-title-section">
+                            <h2>${(service.title || 'Service').toUpperCase()}</h2>
+                            <p>${service.subtitle || ''}</p>
+                            <div class="price">
+                                ${renderPriceInline(service)}
+                            </div>
+                        </div>
 
-                <div class="order-footer">
-                    <div>
-                        <div class="total-label">Total Price</div>
-                        <div class="total-price">ZMW ${totalPrice}</div>
-                    </div>
-                    <button class="btn-confirm-order" id="confirmOrderBtn">
-                        <i class="fa-solid fa-cart-shopping"></i> CONFIRM ORDER
-                    </button>
-                </div>
-            `;
+                        <div class="order-tags">
+                            ${(service.tags || []).map(t => `<span class="tag"><i class="fa-regular fa-circle-check"></i> ${t}</span>`).join('')}
+                        </div>
+
+                        <div class="order-specs">
+                            <h4>SPECIFICATIONS</h4>
+                            ${specsHtml || '<p class="text-muted">No specifications available.</p>'}
+                        </div>
+
+                        <div class="order-customize">
+                            <h4>CUSTOMIZE YOUR ORDER</h4>
+                            ${sizeBtns ? `<div class="customize-group"><div class="group-label">Select Size</div><div class="customize-options" id="sizeOptions">${sizeBtns}</div></div>` : ''}
+                            ${orientationBtns ? `<div class="customize-group"><div class="group-label">Orientation</div><div class="customize-options" id="orientationOptions">${orientationBtns}</div></div>` : ''}
+                            ${formatBtns ? `<div class="customize-group"><div class="group-label">File Format</div><div class="customize-options" id="formatOptions">${formatBtns}</div></div>` : ''}
+                            ${colorBtns ? `<div class="customize-group"><div class="group-label">Color Scheme</div><div class="customize-options" id="colorOptions">${colorBtns}</div></div>` : ''}
+                            ${revisionBtns ? `<div class="customize-group"><div class="group-label">Revisions</div><div class="customize-options" id="revisionOptions">${revisionBtns}</div></div>` : ''}
+                            ${deliveryBtns ? `<div class="customize-group"><div class="group-label">Delivery Speed</div><div class="customize-options" id="deliveryOptions">${deliveryBtns}</div></div>` : ''}
+                            <div class="customize-group">
+                                <div class="group-label">Quantity</div>
+                                <div class="quantity-selector">
+                                    <button id="qtyMinus"><i class="fa-solid fa-minus"></i></button>
+                                    <span id="qtyDisplay">${currentQuantity}</span>
+                                    <button id="qtyPlus"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-notes" style="margin-top:3px;">
+                            <h4 style="font-size:9px; font-weight:600; color:#1c2128; margin-bottom:4px;">📝 Add Extra Notes (Optional)</h4>
+                            <textarea id="orderNotes" placeholder="Tell us more about your requirements, special instructions, or any additional details..." style="width:100%; padding:9px; border:1px solid #eee; border-radius:9px; font-size:9px; resize:vertical; min-height:41px; background:#fafbfc; transition:border 0.2s; font-family:'Poppins',sans-serif;"></textarea>
+                            <p style="font-size:7px; color:#aaa; margin-top:3px;">These notes will be attached to your order for the team to review.</p>
+                        </div>
+
+                        <div class="order-footer">
+                            <div>
+                                <div class="total-label">Total Price</div>
+                                <div class="total-price">ZMW ${totalPrice}</div>
+                            </div>
+                            <button class="btn-confirm-order" id="confirmOrderBtn">
+                                <i class="fa-solid fa-cart-shopping"></i> CONFIRM ORDER
+                            </button>
+                        </div>
+                    `;
 
             document.querySelectorAll('#sizeOptions .customize-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -9232,109 +9312,109 @@
                 `<h4 style="font-size:11px;font-weight:700;color:#1c2128;margin-bottom:6px;">Apply as ${formType.charAt(0).toUpperCase() + formType.slice(1)}</h4>`;
 
             const commonFields = `
-                <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" value="${escapeHtml(currentUserData?.firstName || '')} ${escapeHtml(currentUserData?.lastName || '')}" /></div>
-                <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" value="${escapeHtml(currentUser?.email || '')}" /></div>
-                <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" value="${escapeHtml(currentUserData?.phone || '')}" /></div>
-                <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code" value="${escapeHtml(currentUserData?.referralCode || '')}" /></div>
-            `;
+                        <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" value="${escapeHtml(currentUserData?.firstName || '')} ${escapeHtml(currentUserData?.lastName || '')}" /></div>
+                        <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" value="${escapeHtml(currentUser?.email || '')}" /></div>
+                        <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" value="${escapeHtml(currentUserData?.phone || '')}" /></div>
+                        <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code" value="${escapeHtml(currentUserData?.referralCode || '')}" /></div>
+                    `;
 
             if (formType === 'ambassador') {
                 formHtml += `
-                    ${commonFields}
-                    <div class="form-group"><label>Discount for Customer (%)</label><input type="number" id="f_discount" placeholder="e.g. 10" /></div>
-                    <div class="form-group"><label>Ambassador Payout per Order (ZMW)</label><input type="number" id="f_payout" placeholder="e.g. 15" /></div>
-                `;
+                            ${commonFields}
+                            <div class="form-group"><label>Discount for Customer (%)</label><input type="number" id="f_discount" placeholder="e.g. 10" /></div>
+                            <div class="form-group"><label>Ambassador Payout per Order (ZMW)</label><input type="number" id="f_payout" placeholder="e.g. 15" /></div>
+                        `;
             } else if (formType === 'investor') {
                 formHtml += `
-                    ${commonFields}
-                    <div class="form-group"><label>Money to Invest (ZMW)</label><input type="number" id="f_invest" placeholder="e.g. 1000" /></div>
-                    <div class="form-group"><label>Duration (months)</label><input type="number" id="f_duration" placeholder="e.g. 6" /></div>
-                    <div class="form-group"><label>Profit per Month (ZMW)</label><input type="number" id="f_profit" placeholder="e.g. 50" /></div>
-                `;
+                            ${commonFields}
+                            <div class="form-group"><label>Money to Invest (ZMW)</label><input type="number" id="f_invest" placeholder="e.g. 1000" /></div>
+                            <div class="form-group"><label>Duration (months)</label><input type="number" id="f_duration" placeholder="e.g. 6" /></div>
+                            <div class="form-group"><label>Profit per Month (ZMW)</label><input type="number" id="f_profit" placeholder="e.g. 50" /></div>
+                        `;
             } else if (formType === 'prize') {
                 formHtml += `
-                    ${commonFields}
-                    <div class="form-group"><label>Details</label><textarea id="f_details" rows="2" placeholder="Describe your entry..."></textarea></div>
-                    <div class="form-group">
-                        <label>Proof Picture</label>
-                        <div class="upload-box-grid">
-                            <div class="upload-box-sm" id="flyerProofUpload">
-                                <i class="fa-regular fa-image"></i>
-                                <div class="file-label">Upload proof</div>
-                                <div class="file-name" id="flyerProofFileName">-</div>
-                                <input type="hidden" id="flyerProofUrl" />
+                            ${commonFields}
+                            <div class="form-group"><label>Details</label><textarea id="f_details" rows="2" placeholder="Describe your entry..."></textarea></div>
+                            <div class="form-group">
+                                <label>Proof Picture</label>
+                                <div class="upload-box-grid">
+                                    <div class="upload-box-sm" id="flyerProofUpload">
+                                        <i class="fa-regular fa-image"></i>
+                                        <div class="file-label">Upload proof</div>
+                                        <div class="file-name" id="flyerProofFileName">-</div>
+                                        <input type="hidden" id="flyerProofUrl" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                `;
+                        `;
             } else if (formType === 'job') {
                 formHtml += `
-                    <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" value="${escapeHtml(currentUserData?.firstName || '')} ${escapeHtml(currentUserData?.lastName || '')}" /></div>
-                    <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code" value="${escapeHtml(currentUserData?.referralCode || '')}" /></div>
-                    <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" value="${escapeHtml(currentUser?.email || '')}" /></div>
-                    <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" value="${escapeHtml(currentUserData?.phone || '')}" /></div>
-                    <div class="form-group"><label>Age</label><input type="number" id="f_age" placeholder="Your age" /></div>
-                    <div class="form-group"><label>Occupation</label><input type="text" id="f_occupation" placeholder="Current occupation" /></div>
-                    <div class="form-group">
-                        <label>Profile Picture</label>
-                        <div class="upload-box-grid">
-                            <div class="upload-box-sm" id="flyerProfileUpload">
-                                <i class="fa-regular fa-image"></i>
-                                <div class="file-label">Upload profile pic</div>
-                                <div class="file-name" id="flyerProfileFileName">-</div>
-                                <input type="hidden" id="flyerProfileUrl" />
+                            <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" value="${escapeHtml(currentUserData?.firstName || '')} ${escapeHtml(currentUserData?.lastName || '')}" /></div>
+                            <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code" value="${escapeHtml(currentUserData?.referralCode || '')}" /></div>
+                            <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" value="${escapeHtml(currentUser?.email || '')}" /></div>
+                            <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" value="${escapeHtml(currentUserData?.phone || '')}" /></div>
+                            <div class="form-group"><label>Age</label><input type="number" id="f_age" placeholder="Your age" /></div>
+                            <div class="form-group"><label>Occupation</label><input type="text" id="f_occupation" placeholder="Current occupation" /></div>
+                            <div class="form-group">
+                                <label>Profile Picture</label>
+                                <div class="upload-box-grid">
+                                    <div class="upload-box-sm" id="flyerProfileUpload">
+                                        <i class="fa-regular fa-image"></i>
+                                        <div class="file-label">Upload profile pic</div>
+                                        <div class="file-name" id="flyerProfileFileName">-</div>
+                                        <input type="hidden" id="flyerProfileUrl" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group"><label>Gender</label>
-                        <select id="f_gender"><option value="">Select...</option><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select>
-                    </div>
-                    <div class="form-group">
-                        <label>NRC Front</label>
-                        <div class="upload-box-grid">
-                            <div class="upload-box-sm" id="flyerNrcFrontUpload">
-                                <i class="fa-regular fa-id-card"></i>
-                                <div class="file-label">Upload NRC front</div>
-                                <div class="file-name" id="flyerNrcFrontFileName">-</div>
-                                <input type="hidden" id="flyerNrcFrontUrl" />
+                            <div class="form-group"><label>Gender</label>
+                                <select id="f_gender"><option value="">Select...</option><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>NRC Back</label>
-                        <div class="upload-box-grid">
-                            <div class="upload-box-sm" id="flyerNrcBackUpload">
-                                <i class="fa-regular fa-id-card"></i>
-                                <div class="file-label">Upload NRC back</div>
-                                <div class="file-name" id="flyerNrcBackFileName">-</div>
-                                <input type="hidden" id="flyerNrcBackUrl" />
+                            <div class="form-group">
+                                <label>NRC Front</label>
+                                <div class="upload-box-grid">
+                                    <div class="upload-box-sm" id="flyerNrcFrontUpload">
+                                        <i class="fa-regular fa-id-card"></i>
+                                        <div class="file-label">Upload NRC front</div>
+                                        <div class="file-name" id="flyerNrcFrontFileName">-</div>
+                                        <input type="hidden" id="flyerNrcFrontUrl" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Qualification</label>
-                        <div class="upload-box-grid">
-                            <div class="upload-box-sm" id="flyerQualUpload">
-                                <i class="fa-regular fa-certificate"></i>
-                                <div class="file-label">Upload qualification</div>
-                                <div class="file-name" id="flyerQualFileName">-</div>
-                                <input type="hidden" id="flyerQualUrl" />
+                            <div class="form-group">
+                                <label>NRC Back</label>
+                                <div class="upload-box-grid">
+                                    <div class="upload-box-sm" id="flyerNrcBackUpload">
+                                        <i class="fa-regular fa-id-card"></i>
+                                        <div class="file-label">Upload NRC back</div>
+                                        <div class="file-name" id="flyerNrcBackFileName">-</div>
+                                        <input type="hidden" id="flyerNrcBackUrl" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group"><label>Position</label>
-                        <select id="f_position">
-                            <option value="">Select...</option>
-                            ${generateJobOptions(cc.jobPositions)}
-                        </select>
-                    </div>
-                    <div class="form-group"><label>Tell us more about yourself</label><textarea id="f_about" rows="3" placeholder="Write a brief introduction..."></textarea></div>
-                `;
+                            <div class="form-group">
+                                <label>Qualification</label>
+                                <div class="upload-box-grid">
+                                    <div class="upload-box-sm" id="flyerQualUpload">
+                                        <i class="fa-regular fa-certificate"></i>
+                                        <div class="file-label">Upload qualification</div>
+                                        <div class="file-name" id="flyerQualFileName">-</div>
+                                        <input type="hidden" id="flyerQualUrl" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group"><label>Position</label>
+                                <select id="f_position">
+                                    <option value="">Select...</option>
+                                    ${generateJobOptions(cc.jobPositions)}
+                                </select>
+                            </div>
+                            <div class="form-group"><label>Tell us more about yourself</label><textarea id="f_about" rows="3" placeholder="Write a brief introduction..."></textarea></div>
+                        `;
             } else if (formType === 'referrer') {
                 formHtml += `
-                    ${commonFields}
-                    <div class="form-group"><label>Occupation</label><input type="text" id="f_occupation" placeholder="Your occupation" /></div>
-                `;
+                            ${commonFields}
+                            <div class="form-group"><label>Occupation</label><input type="text" id="f_occupation" placeholder="Your occupation" /></div>
+                        `;
             }
 
             flyerDetailForm.innerHTML = formHtml;
@@ -9344,25 +9424,25 @@
 
             if (requiresPayment) {
                 const paymentHtml = `
-                    <div id="flyerPaymentSection" style="margin-top:10px; border-top:1px solid #f0f0f0; padding-top:12px;">
-                        <h4 style="font-size:11px; font-weight:700; color:#1c2128; margin-bottom:6px;">💳 Payment Required</h4>
-                        <div style="background:#f8f9fc; border-radius:8px; padding:10px; margin-bottom:10px; border:1px solid #f0f0f0;">
-                            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
-                                <div><span style="font-size:9px; color:#888;">Amount to pay</span><br><span style="font-weight:700;font-size:16px;color:#f5b83d;">ZMW ${config.price || 0}</span></div>
-                                <div><span style="font-size:9px; color:#888;">Mobile Number</span><br><span style="font-weight:600;font-size:12px;">${config.mobileNumber || 'N/A'}</span></div>
-                                <div><span style="font-size:9px; color:#888;">Account Name</span><br><span style="font-weight:600;font-size:12px;">${config.accountName || 'N/A'}</span></div>
+                            <div id="flyerPaymentSection" style="margin-top:10px; border-top:1px solid #f0f0f0; padding-top:12px;">
+                                <h4 style="font-size:11px; font-weight:700; color:#1c2128; margin-bottom:6px;">💳 Payment Required</h4>
+                                <div style="background:#f8f9fc; border-radius:8px; padding:10px; margin-bottom:10px; border:1px solid #f0f0f0;">
+                                    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
+                                        <div><span style="font-size:9px; color:#888;">Amount to pay</span><br><span style="font-weight:700;font-size:16px;color:#f5b83d;">ZMW ${config.price || 0}</span></div>
+                                        <div><span style="font-size:9px; color:#888;">Mobile Number</span><br><span style="font-weight:600;font-size:12px;">${config.mobileNumber || 'N/A'}</span></div>
+                                        <div><span style="font-size:9px; color:#888;">Account Name</span><br><span style="font-weight:600;font-size:12px;">${config.accountName || 'N/A'}</span></div>
+                                    </div>
+                                </div>
+                                <label style="font-weight:600; font-size:9px; color:#1c2128; display:block; margin-bottom:4px;">Upload Payment Screenshot (Single)</label>
+                                <div class="payment-upload-area" id="flyerPaymentUpload">
+                                    <i class="fa-regular fa-image"></i>
+                                    <div class="file-label">Tap to upload payment screenshot</div>
+                                    <div class="file-name" id="flyerPaymentFileName">No file chosen</div>
+                                    <input type="hidden" id="flyerPaymentUrl" />
+                                </div>
+                                <p style="font-size:8px; color:#aaa; margin-top:4px;">Upload a screenshot of your payment confirmation.</p>
                             </div>
-                        </div>
-                        <label style="font-weight:600; font-size:9px; color:#1c2128; display:block; margin-bottom:4px;">Upload Payment Screenshot (Single)</label>
-                        <div class="payment-upload-area" id="flyerPaymentUpload">
-                            <i class="fa-regular fa-image"></i>
-                            <div class="file-label">Tap to upload payment screenshot</div>
-                            <div class="file-name" id="flyerPaymentFileName">No file chosen</div>
-                            <input type="hidden" id="flyerPaymentUrl" />
-                        </div>
-                        <p style="font-size:8px; color:#aaa; margin-top:4px;">Upload a screenshot of your payment confirmation.</p>
-                    </div>
-                `;
+                        `;
                 flyerDetailForm.insertAdjacentHTML('beforeend', paymentHtml);
 
                 const paymentUpload = document.getElementById('flyerPaymentUpload');
@@ -9423,7 +9503,9 @@
 
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             flyerDetailView.classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.querySelectorAll('#mainSidebar .nav-link').forEach(n => n.classList.remove('active'));
+            const navLink = document.querySelector(`#mainSidebar .nav-link[data-view="flyerDetailView"]`);
+            if (navLink) navLink.classList.add('active');
             document.getElementById('appContent').scrollTop = 0;
             window.history.pushState({ view: 'flyerDetailView' }, '', '');
         }
@@ -9618,7 +9700,6 @@
             });
         }
 
-        // ─── NEW: CHECK ADMIN NOTIFICATIONS ───
         function checkAdminNotifications() {
             if (!allData || !allData.inAppNotifications || !currentUserId) return;
             const notifs = allData.inAppNotifications;
@@ -9685,7 +9766,6 @@
             playNotificationSound();
         }
 
-        // ─── NEW: OFFLINE / ONLINE HANDLERS ───
         window.addEventListener('offline', function() {
             offlineOverlay.classList.add('open');
         });
@@ -9694,7 +9774,6 @@
             offlineOverlay.classList.remove('open');
         });
 
-        // ─── EXISTING POPUP CHECK ───
         function checkAllPopups() {
             if (!currentUserId || !allData) return;
 
@@ -9965,11 +10044,11 @@
 
             if (entries.length === 0) {
                 container.innerHTML = `
-                    <div class="text-muted text-center" style="padding:20px;color:#888;">
-                        <i class="fa-regular fa-clipboard" style="font-size:28px;color:#ddd;display:block;margin-bottom:6px;"></i>
-                        No applications yet.
-                    </div>
-                `;
+                            <div class="text-muted text-center" style="padding:20px;color:#888;">
+                                <i class="fa-regular fa-clipboard" style="font-size:28px;color:#ddd;display:block;margin-bottom:6px;"></i>
+                                No applications yet.
+                            </div>
+                        `;
                 return;
             }
 
@@ -10020,35 +10099,35 @@
                 let screenshotBtnHtml = '';
                 if (a.paymentData && a.paymentData.screenshots && a.paymentData.screenshots.length > 0) {
                     screenshotBtnHtml = `
-                        <div class="detail-row" style="border-bottom:none; padding-top:6px;">
-                            <button class="view-screenshot-btn" data-url="${a.paymentData.screenshots[0]}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
-                                <i class="fa-regular fa-image" style="color:#f5b83d;"></i> View Screenshot
-                            </button>
-                        </div>
-                    `;
+                                <div class="detail-row" style="border-bottom:none; padding-top:6px;">
+                                    <button class="view-screenshot-btn" data-url="${a.paymentData.screenshots[0]}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
+                                        <i class="fa-regular fa-image" style="color:#f5b83d;"></i> View Screenshot
+                                    </button>
+                                </div>
+                            `;
                 }
 
                 return `
-                <div class="app-card" data-key="${key}">
-                    <div class="app-summary">
-                        <div class="left">
-                            <div class="app-icon"><i class="fa-solid fa-file-lines"></i></div>
-                            <div class="app-info">
-                                <div class="app-title">${escapeHtml(a.flyerTitle || 'Untitled')}</div>
-                                <div class="app-sub">${formTypeLabel} · ${dateStr}</div>
+                            <div class="app-card" data-key="${key}">
+                                <div class="app-summary">
+                                    <div class="left">
+                                        <div class="app-icon"><i class="fa-solid fa-file-lines"></i></div>
+                                        <div class="app-info">
+                                            <div class="app-title">${escapeHtml(a.flyerTitle || 'Untitled')}</div>
+                                            <div class="app-sub">${formTypeLabel} · ${dateStr}</div>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <span class="app-status ${statusClass}">${statusDisplay}</span>
+                                        <i class="fa-solid fa-chevron-down expand-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="app-details-expand">
+                                    ${detailRows || '<p style="font-size:10px;color:#888;text-align:center;padding:4px;">No additional details</p>'}
+                                    ${screenshotBtnHtml}
+                                </div>
                             </div>
-                        </div>
-                        <div class="right">
-                            <span class="app-status ${statusClass}">${statusDisplay}</span>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                    </div>
-                    <div class="app-details-expand">
-                        ${detailRows || '<p style="font-size:10px;color:#888;text-align:center;padding:4px;">No additional details</p>'}
-                        ${screenshotBtnHtml}
-                    </div>
-                </div>
-                `;
+                        `;
             }).join('');
 
             container.querySelectorAll('.app-card').forEach(el => {
@@ -10089,13 +10168,13 @@
             const subtotal = Math.max(0, totalPrice - discountVal);
 
             recItemsBody.innerHTML = `
-                <div class="receipt-item-row">
-                    <div>${escapeHtml(serviceTitle)}</div>
-                    <div>ZMW ${unitPrice.toFixed(2)}</div>
-                    <div>${qty}</div>
-                    <div>ZMW ${(unitPrice * qty).toFixed(2)}</div>
-                </div>
-            `;
+                        <div class="receipt-item-row">
+                            <div>${escapeHtml(serviceTitle)}</div>
+                            <div>ZMW ${unitPrice.toFixed(2)}</div>
+                            <div>${qty}</div>
+                            <div>ZMW ${(unitPrice * qty).toFixed(2)}</div>
+                        </div>
+                    `;
 
             recSubtotal.textContent = `ZMW ${totalPrice.toFixed(2)}`;
             recDiscount.textContent = `ZMW ${discountVal.toFixed(2)}`;
@@ -10158,13 +10237,13 @@
             const absAmount = Math.abs(amount);
 
             stmtItemsBody.innerHTML = `
-                <div class="statement-item-row">
-                    <div>${escapeHtml(type)}</div>
-                    <div>${sign}ZMW ${absAmount.toFixed(2)}</div>
-                    <div>${escapeHtml(status.charAt(0).toUpperCase() + status.slice(1))}</div>
-                    <div>${escapeHtml(date)}</div>
-                </div>
-            `;
+                        <div class="statement-item-row">
+                            <div>${escapeHtml(type)}</div>
+                            <div>${sign}ZMW ${absAmount.toFixed(2)}</div>
+                            <div>${escapeHtml(status.charAt(0).toUpperCase() + status.slice(1))}</div>
+                            <div>${escapeHtml(date)}</div>
+                        </div>
+                    `;
 
             stmtTotalDisplay.textContent = `ZMW ${amount.toFixed(2)}`;
             stmtMethod.textContent = method;
@@ -10205,13 +10284,6 @@
                 downloadStatementBtn.innerHTML = `<i class="fa-solid fa-download"></i> Download Statement`;
             });
         }
-
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const viewId = this.dataset.view;
-                if (viewId) switchView(viewId);
-            });
-        });
 
         backFromOrder.addEventListener('click', function() {
             switchView('homeView');
@@ -10419,7 +10491,6 @@
         });
         downloadStatementBtn.addEventListener('click', downloadStatement);
 
-        // ─── START LISTENING FOR ADMIN NOTIFICATIONS ───
         listenForAdminNotifications();
 
         onAuthStateChanged(auth, (user) => {
@@ -10431,12 +10502,12 @@
                     const data = snapshot.val();
                     if (data && data.banned === true) {
                         document.body.innerHTML = `
-                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
-                                <i class="fa-solid fa-ban" style="font-size:41px; color:#dc2626; margin-bottom:14px;"></i>
-                                <h1 style="font-size:20px; font-weight:700; color:#1c2128;">Account Banned</h1>
-                                <p style="color:#888; text-align:center; max-width:272px; margin-top:7px;">Your account has been banned. Please contact support for assistance.</p>
-                            </div>
-                        `;
+                                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
+                                        <i class="fa-solid fa-ban" style="font-size:41px; color:#dc2626; margin-bottom:14px;"></i>
+                                        <h1 style="font-size:20px; font-weight:700; color:#1c2128;">Account Banned</h1>
+                                        <p style="color:#888; text-align:center; max-width:272px; margin-top:7px;">Your account has been banned. Please contact support for assistance.</p>
+                                    </div>
+                                `;
                         return;
                     }
                     currentUserData = data || {};
@@ -10480,9 +10551,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Added stylish Admin In-App popup notifications (one-time).');
-        console.log('✅ Added offline internet disconnection popup.');
-        console.log('✅ Real-time listener for admin notifications enabled.');
+        console.log('✅ Main sidebar navigation added with huge logo and black text.');
     </script>
 </body>
 </html>
