@@ -11,6 +11,59 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
     </script>
     <style>
+        /* ── CSS VARIABLES FOR THEME ── */
+        :root {
+            --bg-body: #f8f9fc;
+            --bg-app: #ffffff;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --bg-sidebar: #ffffff;
+            --bg-input: #fafbfc;
+            --bg-hover: #f0f0f0;
+            --text-main: #1c2128;
+            --text-muted: #888888;
+            --text-light: #ffffff;
+            --border-light: #f0f0f0;
+            --border-dark: #e8e8e8;
+            --hero-bg: #1c2128;
+            --hero-text: #ffffff;
+            --hero-text-muted: #dddddd;
+            --shadow: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 41px rgba(0,0,0,0.25);
+            --accent: #f5b83d;
+            --accent-text: #1c2128;
+            --color-primary: #1c2128;
+            --color-primary-text: #ffffff;
+            --overlay-bg: rgba(0,0,0,0.5);
+            --offline-bg: #dc2626;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #121212;
+            --bg-app: #1e1e1e;
+            --bg-card: #2a2a2a;
+            --bg-header: #1e1e1e;
+            --bg-sidebar: #1e1e1e;
+            --bg-input: #2a2a2a;
+            --bg-hover: #333333;
+            --text-main: #e0e0e0;
+            --text-muted: #999999;
+            --text-light: #ffffff;
+            --border-light: #333333;
+            --border-dark: #444444;
+            --hero-bg: #0a0a0a;
+            --hero-text: #ffffff;
+            --hero-text-muted: #bbbbbb;
+            --shadow: 0 2px 8px rgba(0,0,0,0.5);
+            --shadow-lg: 0 10px 41px rgba(0,0,0,0.7);
+            --accent: #f5b83d;
+            --accent-text: #121212;
+            --color-primary: #1c2128;
+            --color-primary-text: #ffffff;
+            --overlay-bg: rgba(0,0,0,0.8);
+            --offline-bg: #dc2626;
+        }
+
         /* ── RESET & BASE ── */
         * {
             margin: 0;
@@ -21,7 +74,7 @@
         }
 
         body {
-            background-color: #f8f9fc;
+            background-color: var(--bg-body);
             display: block;
             overflow: hidden;
             height: 100%;
@@ -34,7 +87,7 @@
             width: 100%;
             max-width: 100vw;
             margin: 0 auto;
-            background-color: #ffffff;
+            background-color: var(--bg-app);
             overflow: hidden;
             position: relative;
         }
@@ -42,7 +95,8 @@
         .app-content {
             flex: 1;
             overflow-y: auto;
-            padding: 0 0 20px 0;
+            padding: 0 0 60px 0;
+            padding-bottom: calc(60px + env(safe-area-inset-bottom, 20px));
             -webkit-overflow-scrolling: touch;
         }
 
@@ -53,7 +107,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #ffffff;
+            background: var(--bg-app);
             z-index: 99999;
             display: flex;
             flex-direction: column;
@@ -76,7 +130,7 @@
             width: 70%;
             height: 80%;
             border-radius: 50%;
-            background: #1c2128;
+            background: var(--color-primary);
             opacity: 0.04;
             pointer-events: none;
             z-index: 0;
@@ -89,7 +143,7 @@
             width: 60%;
             height: 70%;
             border-radius: 50%;
-            background: #f5b83d;
+            background: var(--accent);
             opacity: 0.05;
             pointer-events: none;
             z-index: 0;
@@ -113,7 +167,7 @@
             height: 320px;
             border-radius: 50%;
             object-fit: cover;
-            background: #1c2128;
+            background: var(--color-primary);
             box-shadow: 0 15px 60px rgba(0, 0, 0, 0.15);
             flex-shrink: 0;
             margin-bottom: 10px;
@@ -125,7 +179,7 @@
             letter-spacing: 1px;
             text-align: center;
             line-height: 1.2;
-            background: linear-gradient(135deg, #1c2128 0%, #f5b83d 25%, #00a86b 50%, #7c3aed 75%, #f59e0b 100%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--accent) 25%, #00a86b 50%, #7c3aed 75%, #f59e0b 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -147,8 +201,8 @@
             display: block;
             font-size: 10px;
             font-weight: 400;
-            color: #888;
-            -webkit-text-fill-color: #888;
+            color: var(--text-muted);
+            -webkit-text-fill-color: var(--text-muted);
             background: none;
             letter-spacing: 3px;
             margin-top: 4px;
@@ -158,7 +212,7 @@
             width: 72px;
             height: 72px;
             border-radius: 50%;
-            background: conic-gradient(#1c2128 0deg 72deg, #f5b83d 72deg 144deg, #00a86b 144deg 216deg, #7c3aed 216deg 288deg, #f59e0b 288deg 360deg);
+            background: conic-gradient(var(--color-primary) 0deg 72deg, var(--accent) 72deg 144deg, #00a86b 144deg 216deg, #7c3aed 216deg 288deg, #f59e0b 288deg 360deg);
             animation: spin 1.4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
             position: relative;
             flex-shrink: 0;
@@ -172,7 +226,7 @@
             left: 7px;
             right: 7px;
             bottom: 7px;
-            background: #ffffff;
+            background: var(--bg-app);
             border-radius: 50%;
             z-index: 1;
         }
@@ -200,11 +254,11 @@
         }
 
         .loading-pulse-dots .dot:nth-child(1) {
-            background: #1c2128;
+            background: var(--color-primary);
             animation-delay: 0s;
         }
         .loading-pulse-dots .dot:nth-child(2) {
-            background: #f5b83d;
+            background: var(--accent);
             animation-delay: 0.2s;
         }
         .loading-pulse-dots .dot:nth-child(3) {
@@ -238,7 +292,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 10px 12px 14px 12px;
-            background: #ffffff;
+            background: var(--bg-header);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -254,13 +308,13 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: #f8f9fc;
-            border: 1px solid #e8e8e8;
+            background: var(--bg-body);
+            border: 1px solid var(--border-dark);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: #1c2128;
+            color: var(--text-main);
             font-size: 16px;
             transition: all 0.2s;
             flex-shrink: 0;
@@ -271,7 +325,7 @@
         }
 
         .hamburger-btn:hover {
-            background: #f0f0f0;
+            background: var(--bg-hover);
         }
 
         .header-text {
@@ -283,26 +337,26 @@
 
         .header-text span:first-child {
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
         }
 
         .header-text span:last-child {
             font-weight: 700;
             font-size: 11px;
-            color: #1c2128;
+            color: var(--text-main);
             letter-spacing: 0.5px;
         }
 
         .notif-icon {
             width: 29px;
             height: 29px;
-            background-color: #fff;
+            background-color: var(--bg-card);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            color: #1c2128;
+            box-shadow: var(--shadow);
+            color: var(--text-main);
             font-size: 13px;
             cursor: pointer;
             position: relative;
@@ -313,8 +367,8 @@
             position: absolute;
             top: -2px;
             right: -2px;
-            background: #f5b83d;
-            color: #1c2128;
+            background: var(--accent);
+            color: var(--accent-text);
             border-radius: 50%;
             width: 13px;
             height: 13px;
@@ -327,10 +381,10 @@
 
         /* ── HERO ── */
         .hero {
-            background-color: #1c2128;
+            background-color: var(--hero-bg);
             border-radius: 14px;
             padding: 17px 14px;
-            color: white;
+            color: var(--hero-text);
             position: relative;
             margin: 0 12px 12px 12px;
             overflow: hidden;
@@ -344,7 +398,7 @@
             height: 100%;
             width: 50%;
             z-index: 0;
-            background: radial-gradient(circle at 100% 100%, #f5b83d 0%, #f5b83d 45%, transparent 45%);
+            background: radial-gradient(circle at 100% 100%, var(--accent) 0%, var(--accent) 45%, transparent 45%);
             opacity: 0.9;
             border-top-left-radius: 100%;
             border-bottom-left-radius: 100%;
@@ -376,15 +430,16 @@
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 5px;
+            color: var(--hero-text);
         }
 
         .hero-title span {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .hero-desc {
             font-size: 9px;
-            color: #ddd;
+            color: var(--hero-text-muted);
             margin-bottom: 10px;
             max-width: 70%;
         }
@@ -396,14 +451,14 @@
         .hero-services-title {
             font-size: 9px;
             font-weight: 600;
-            color: #f5b83d;
+            color: var(--accent);
             margin-bottom: 3px;
         }
 
         .service-list {
             list-style: none;
             font-size: 9px;
-            color: #f0f0f0;
+            color: var(--hero-text-muted);
         }
 
         .service-list li {
@@ -414,7 +469,7 @@
         }
 
         .service-list li i {
-            color: #f5b83d;
+            color: var(--accent);
             font-size: 9px;
         }
 
@@ -427,9 +482,9 @@
         }
 
         .btn-get-started {
-            background-color: #1c2128;
-            color: #f5b83d;
-            border: 1px solid #f5b83d;
+            background-color: var(--color-primary);
+            color: var(--accent);
+            border: 1px solid var(--accent);
             padding: 5px 12px;
             border-radius: 14px;
             font-size: 7px;
@@ -441,7 +496,7 @@
 
         .contact-number {
             font-size: 7px;
-            color: #fff;
+            color: var(--hero-text);
             margin-top: 3px;
         }
 
@@ -505,8 +560,8 @@
             height: auto;
             aspect-ratio: 1200 / 675;
             flex-shrink: 0;
-            background: #ffffff;
-            box-shadow: 0 3px 17px rgba(0, 0, 0, 0.12);
+            background: var(--bg-card);
+            box-shadow: var(--shadow-lg);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -532,7 +587,7 @@
             height: 100%;
             object-fit: cover !important;
             display: block;
-            background-color: #ffffff;
+            background-color: var(--bg-card);
             border-radius: 40px;
         }
 
@@ -616,7 +671,7 @@
             transform: scale(1.08) !important;
             opacity: 1 !important;
             z-index: 3;
-            box-shadow: 0 10px 41px rgba(0, 0, 0, 0.25);
+            box-shadow: var(--shadow-lg);
         }
 
         .promo-slide.far-slide {
@@ -630,7 +685,7 @@
             padding: 9px 12px;
             background: #fef9e7;
             border-radius: 10px;
-            border: 1px solid #f5b83d;
+            border: 1px solid var(--accent);
             display: none;
             flex-wrap: wrap;
             align-items: center;
@@ -642,7 +697,7 @@
         }
 
         .promotions-banner .tag {
-            background: #f5b83d;
+            background: var(--accent);
             color: #fff;
             padding: 2px 9px;
             border-radius: 10px;
@@ -652,7 +707,7 @@
 
         .promotions-banner .msg {
             font-size: 9px;
-            color: #1c2128;
+            color: var(--text-main);
             flex: 1;
         }
 
@@ -671,13 +726,13 @@
 
         .cat-btn {
             flex-shrink: 0;
-            background: white;
-            border: 1px solid #f0f0f0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
             border-radius: 17px;
             padding: 6px 14px;
             font-size: 10px;
             font-weight: 600;
-            color: #555;
+            color: var(--text-muted);
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
@@ -690,13 +745,13 @@
         }
 
         .cat-btn.active {
-            background: #1c2128;
-            color: white;
-            border-color: #1c2128;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
+            border-color: var(--color-primary);
         }
 
         .cat-btn.active i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .dynamic-header {
@@ -709,7 +764,7 @@
         .dynamic-title {
             font-weight: 700;
             font-size: 11px;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .dynamic-actions {
@@ -720,18 +775,18 @@
 
         .dynamic-back {
             font-size: 8px;
-            color: #888;
+            color: var(--text-muted);
             cursor: pointer;
             font-weight: 500;
         }
 
         .dynamic-back:hover {
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .dynamic-view-all {
             font-size: 9px;
-            color: #f5b83d;
+            color: var(--accent);
             font-weight: 600;
             cursor: pointer;
         }
@@ -763,7 +818,7 @@
             align-items: center;
             overflow: hidden;
             position: relative;
-            background: #1c2128 !important;
+            background: var(--color-primary) !important;
         }
 
         .service-thumb i {
@@ -774,14 +829,14 @@
         .service-title {
             font-size: 8px;
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 2px;
             line-height: 1.2;
         }
 
         .service-subtitle {
             font-size: 6px;
-            color: #777;
+            color: var(--text-muted);
             line-height: 1.2;
         }
 
@@ -791,10 +846,10 @@
         }
 
         .order-policy-panel {
-            background-color: #1c2128;
+            background-color: var(--hero-bg);
             border-radius: 14px;
             padding: 14px 15px;
-            color: white;
+            color: var(--hero-text);
             position: relative;
             margin-bottom: 14px;
             overflow: hidden;
@@ -812,7 +867,7 @@
             height: 100%;
             width: 50%;
             z-index: 0;
-            background: radial-gradient(circle at 100% 100%, #f5b83d 0%, #f5b83d 45%, transparent 45%);
+            background: radial-gradient(circle at 100% 100%, var(--accent) 0%, var(--accent) 45%, transparent 45%);
             opacity: 0.9;
             border-top-left-radius: 100%;
             border-bottom-left-radius: 100%;
@@ -831,12 +886,12 @@
         }
 
         .order-policy-content h2 span {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .order-policy-content p {
             font-size: 9px;
-            color: #e0e0e0;
+            color: var(--hero-text-muted);
             line-height: 1.5;
             max-width: 85%;
         }
@@ -844,7 +899,7 @@
         .order-policy-content .policy-tag {
             display: inline-block;
             background: rgba(245, 184, 61, 0.15);
-            color: #f5b83d;
+            color: var(--accent);
             padding: 2px 10px;
             border-radius: 17px;
             font-size: 8px;
@@ -862,26 +917,26 @@
         .order-title-section h2 {
             font-size: 17px;
             font-weight: 800;
-            color: #1c2128;
+            color: var(--text-main);
             letter-spacing: -0.5px;
         }
 
         .order-title-section p {
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
             line-height: 1.4;
         }
 
         .order-title-section .price {
             font-size: 16px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-main);
             margin-top: 4px;
         }
 
         .order-title-section .price .old-price {
             font-size: 12px;
-            color: #999;
+            color: var(--text-muted);
             text-decoration: line-through;
             opacity: 0.5;
             font-weight: 400;
@@ -891,7 +946,7 @@
         .order-title-section .price .new-price {
             font-size: 16px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .order-tags {
@@ -902,19 +957,19 @@
         }
 
         .order-tags .tag {
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--border-dark);
             border-radius: 14px;
             padding: 3px 9px;
             font-size: 8px;
-            color: #555;
-            background: #fafafa;
+            color: var(--text-muted);
+            background: var(--bg-input);
             display: flex;
             align-items: center;
             gap: 4px;
         }
 
         .order-tags .tag i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .order-specs {
@@ -924,7 +979,7 @@
         .order-specs h4 {
             font-size: 9px;
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 7px;
         }
 
@@ -932,16 +987,16 @@
             display: flex;
             justify-content: space-between;
             padding: 5px 0;
-            border-bottom: 1px solid #f5f5f5;
+            border-bottom: 1px solid var(--border-light);
             font-size: 9px;
         }
 
         .spec-row .label {
-            color: #888;
+            color: var(--text-muted);
         }
 
         .spec-row .value {
-            color: #1c2128;
+            color: var(--text-main);
             font-weight: 500;
         }
 
@@ -952,7 +1007,7 @@
         .order-customize h4 {
             font-size: 9px;
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 7px;
         }
 
@@ -963,7 +1018,7 @@
         .customize-group .group-label {
             font-size: 9px;
             font-weight: 500;
-            color: #888;
+            color: var(--text-muted);
             margin-bottom: 4px;
         }
 
@@ -975,9 +1030,9 @@
 
         .customize-btn {
             padding: 4px 11px;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--border-dark);
             border-radius: 14px;
-            background: white;
+            background: var(--bg-card);
             font-size: 9px;
             font-weight: 500;
             cursor: pointer;
@@ -985,7 +1040,7 @@
             display: flex;
             align-items: center;
             gap: 4px;
-            color: #555;
+            color: var(--text-muted);
         }
 
         .customize-btn:active {
@@ -993,13 +1048,13 @@
         }
 
         .customize-btn.active {
-            background: #1c2128;
-            color: white;
-            border-color: #1c2128;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
+            border-color: var(--color-primary);
         }
 
         .customize-btn.active i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .quantity-selector {
@@ -1012,8 +1067,8 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            border: 1px solid #ddd;
-            background: white;
+            border: 1px solid var(--border-light);
+            background: var(--bg-card);
             cursor: pointer;
             font-size: 9px;
             transition: all 0.2s;
@@ -1033,23 +1088,23 @@
         .order-notes textarea {
             width: 100%;
             padding: 9px;
-            border: 1px solid #eee;
+            border: 1px solid var(--border-light);
             border-radius: 9px;
             font-size: 9px;
             resize: vertical;
             min-height: 41px;
-            background: #fafbfc;
+            background: var(--bg-input);
             transition: border 0.2s;
             font-family: 'Poppins', sans-serif;
         }
 
         .order-notes textarea:focus {
             outline: none;
-            border-color: #1c2128;
+            border-color: var(--color-primary);
         }
 
         .order-notes textarea::placeholder {
-            color: #bbb;
+            color: var(--text-muted);
             font-size: 9px;
         }
 
@@ -1058,24 +1113,24 @@
             justify-content: space-between;
             align-items: center;
             padding-top: 11px;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--border-light);
             margin-top: 7px;
         }
 
         .order-footer .total-label {
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
         }
 
         .order-footer .total-price {
             font-size: 14px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .btn-confirm-order {
-            background: #1c2128;
-            color: white;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
             border: none;
             padding: 9px 16px;
             border-radius: 20px;
@@ -1093,7 +1148,7 @@
         }
 
         .btn-confirm-order i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         /* ── PAYMENT PAGE ── */
@@ -1103,7 +1158,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #ffffff;
+            background: var(--bg-app);
             z-index: 1000;
             display: none;
             overflow-y: auto;
@@ -1118,7 +1173,7 @@
             width: 100%;
             max-width: 100%;
             padding: 20px 12px 30px 12px;
-            background: #ffffff;
+            background: var(--bg-app);
             position: relative;
             min-height: 100vh;
         }
@@ -1129,7 +1184,7 @@
             gap: 10px;
             margin-bottom: 14px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .payment-page .page-logo img {
@@ -1142,7 +1197,7 @@
         .payment-page .page-logo span {
             font-weight: 700;
             font-size: 16px;
-            color: #1c2128;
+            color: var(--text-main);
             letter-spacing: 0.5px;
         }
 
@@ -1153,53 +1208,53 @@
             background: none;
             border: none;
             font-size: 18px;
-            color: #aaa;
+            color: var(--text-muted);
             cursor: pointer;
             padding: 4px;
         }
 
         .payment-page .close-btn:hover {
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .payment-page h3 {
             font-size: 15px;
             font-weight: 700;
             margin-bottom: 3px;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .payment-page .sub {
-            color: #888;
+            color: var(--text-muted);
             font-size: 9px;
             margin-bottom: 11px;
         }
 
         .payment-details {
-            background: #f8f9fc;
+            background: var(--bg-body);
             border-radius: 9px;
             padding: 11px;
             margin-bottom: 11px;
-            border: 1px solid #eee;
+            border: 1px solid var(--border-light);
         }
 
         .payment-details .number {
             font-size: 14px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-main);
             margin: 3px 0;
         }
 
         .payment-details .name {
             font-weight: 600;
-            color: #333;
+            color: var(--text-main);
             font-size: 11px;
         }
 
         .payment-details .amount-large {
             font-size: 19px;
             font-weight: 800;
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .toggle-row {
@@ -1212,12 +1267,12 @@
         .toggle-row .toggle-code-btn {
             flex: 1;
             padding: 5px 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-light);
             border-radius: 17px;
-            background: #fafafa;
+            background: var(--bg-input);
             font-size: 9px;
             font-weight: 600;
-            color: #555;
+            color: var(--text-muted);
             cursor: pointer;
             transition: all 0.2s;
             text-align: center;
@@ -1225,9 +1280,9 @@
         }
 
         .toggle-row .toggle-code-btn.active {
-            background: #1c2128;
-            color: white;
-            border-color: #1c2128;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
+            border-color: var(--color-primary);
         }
 
         .toggle-row .toggle-code-btn:active {
@@ -1251,8 +1306,8 @@
         }
 
         .coupon-section .apply-btn {
-            background: #f5b83d;
-            color: #1c2128;
+            background: var(--accent);
+            color: var(--accent-text);
             border: none;
             padding: 7px 12px;
             border-radius: 9px;
@@ -1265,8 +1320,8 @@
         }
 
         .coupon-section .apply-btn:disabled {
-            background: #ddd;
-            color: #888;
+            background: var(--border-light);
+            color: var(--text-muted);
             cursor: not-allowed;
             opacity: 0.6;
         }
@@ -1295,19 +1350,19 @@
         .referral-section input {
             width: 100%;
             padding: 7px 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-light);
             border-radius: 9px;
             font-size: 10px;
         }
 
         .referral-section input:focus {
             outline: none;
-            border-color: #f5b83d;
+            border-color: var(--accent);
         }
 
         .referral-section .apply-btn {
-            background: #1c2128;
-            color: #fff;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
             border: none;
             padding: 7px 14px;
             border-radius: 9px;
@@ -1319,13 +1374,13 @@
         }
 
         .referral-section .apply-btn:disabled {
-            background: #ddd;
-            color: #888;
+            background: var(--border-light);
+            color: var(--text-muted);
             cursor: not-allowed;
         }
 
         .price-breakdown {
-            background: #f8f9fc;
+            background: var(--bg-body);
             border-radius: 7px;
             padding: 9px;
             margin-bottom: 10px;
@@ -1339,12 +1394,12 @@
         }
 
         .price-breakdown .row .label {
-            color: #888;
+            color: var(--text-muted);
         }
 
         .price-breakdown .row .val {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .price-breakdown .row .val.discounted {
@@ -1352,35 +1407,35 @@
         }
 
         .upload-area {
-            border: 2px dashed #ddd;
+            border: 2px dashed var(--border-light);
             border-radius: 9px;
             padding: 14px;
             text-align: center;
             cursor: pointer;
             transition: all 0.25s;
-            background: #fafbfc;
+            background: var(--bg-input);
             margin-bottom: 11px;
         }
 
         .upload-area:hover {
-            border-color: #f5b83d;
+            border-color: var(--accent);
             background: #fffcf0;
         }
 
         .upload-area i {
             font-size: 19px;
-            color: #aaa;
+            color: var(--text-muted);
             margin-bottom: 3px;
         }
 
         .upload-area p {
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
         }
 
         .upload-area .file-name {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
             margin-top: 3px;
         }
 
@@ -1391,15 +1446,15 @@
         .btn-primary {
             width: 100%;
             padding: 9px;
-            background: #1c2128;
-            color: white;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
             border: none;
             border-radius: 9px;
             font-size: 11px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.25s;
-            box-shadow: 0 3px 14px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
         }
 
         .btn-primary:active {
@@ -1407,7 +1462,7 @@
         }
 
         .btn-primary i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .order-success-overlay {
@@ -1430,13 +1485,13 @@
         }
 
         .order-success-modal {
-            background: white;
+            background: var(--bg-card);
             border-radius: 20px;
             width: 100%;
             max-width: 320px;
             padding: 30px 20px 20px 20px;
             text-align: center;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            box-shadow: var(--shadow-lg);
             animation: modalIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -1453,7 +1508,7 @@
 
         .order-success-modal i {
             font-size: 48px;
-            color: #f5b83d;
+            color: var(--accent);
             margin-bottom: 10px;
             display: block;
         }
@@ -1461,21 +1516,21 @@
         .order-success-modal h3 {
             font-size: 18px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 6px;
         }
 
         .order-success-modal p {
             font-size: 12px;
-            color: #555;
+            color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 18px;
         }
 
         .order-success-modal .btn-ok {
             padding: 10px 30px;
-            background: #1c2128;
-            color: white;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
             border: none;
             border-radius: 30px;
             font-weight: 600;
@@ -1504,12 +1559,12 @@
 
         .orders-header h3 {
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-main);
             font-size: 15px;
         }
 
         .orders-header p {
-            color: #888;
+            color: var(--text-muted);
             font-size: 9px;
         }
 
@@ -1521,11 +1576,11 @@
         }
 
         .order-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 14px;
             padding: 12px 14px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-            border: 1px solid #f0f0f0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
             transition: all 0.2s;
             cursor: default;
         }
@@ -1540,17 +1595,17 @@
         .order-card .order-summary .left .order-id {
             font-weight: 700;
             font-size: 12px;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .order-card .order-summary .left .order-service {
             font-size: 10px;
-            color: #555;
+            color: var(--text-muted);
         }
 
         .order-card .order-summary .left .order-meta {
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
             margin-top: 2px;
             display: flex;
             flex-wrap: wrap;
@@ -1564,7 +1619,7 @@
         .order-card .order-summary .right .order-amount {
             font-weight: 700;
             font-size: 12px;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .order-card .order-summary .right .order-status {
@@ -1618,7 +1673,7 @@
         .order-card.open .order-details-expand {
             max-height: 400px;
             padding: 10px 3px 3px 3px;
-            border-top-color: #f0f0f0;
+            border-top-color: var(--border-light);
             margin-top: 9px;
         }
 
@@ -1627,8 +1682,8 @@
             justify-content: space-between;
             padding: 3px 0;
             font-size: 10px;
-            color: #555;
-            border-bottom: 1px solid #f5f5f5;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-light);
         }
 
         .order-card .order-details-expand .detail-row:last-child {
@@ -1636,13 +1691,13 @@
         }
 
         .order-card .order-details-expand .detail-row .label {
-            color: #888;
+            color: var(--text-muted);
             flex-shrink: 0;
         }
 
         .order-card .order-details-expand .detail-row .val {
             font-weight: 500;
-            color: #1c2128;
+            color: var(--text-main);
             text-align: right;
             margin-left: 10px;
         }
@@ -1650,7 +1705,7 @@
         .order-card .expand-icon {
             transition: transform 0.3s ease;
             font-size: 10px;
-            color: #aaa;
+            color: var(--text-muted);
             margin-left: 7px;
         }
 
@@ -1667,11 +1722,11 @@
         }
 
         .history-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 12px 14px;
-            box-shadow: 0 2px 9px rgba(0, 0, 0, 0.05);
-            border: 1px solid #f0f0f0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -1691,7 +1746,7 @@
             align-items: center;
             gap: 9px;
             font-size: 10px;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .history-card .history-summary .left i {
@@ -1701,7 +1756,7 @@
 
         .history-card .history-summary .right {
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
             display: flex;
             align-items: center;
             gap: 7px;
@@ -1718,7 +1773,7 @@
         .history-card.open .history-details {
             max-height: 250px;
             padding: 9px 3px 3px 3px;
-            border-top-color: #f0f0f0;
+            border-top-color: var(--border-light);
             margin-top: 7px;
         }
 
@@ -1727,22 +1782,22 @@
             justify-content: space-between;
             padding: 3px 0;
             font-size: 10px;
-            color: #555;
+            color: var(--text-muted);
         }
 
         .history-card .history-details .h-row .h-label {
-            color: #888;
+            color: var(--text-muted);
         }
 
         .history-card .history-details .h-row .h-val {
             font-weight: 500;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .history-card .expand-icon {
             transition: transform 0.3s ease;
             font-size: 9px;
-            color: #aaa;
+            color: var(--text-muted);
         }
 
         .history-card.open .expand-icon {
@@ -1752,7 +1807,7 @@
         /* ── PAYMENT REMINDER ── */
         .payment-reminder-banner {
             background: #fff8ed;
-            border: 1px solid #f5b83d;
+            border: 1px solid var(--accent);
             border-radius: 9px;
             padding: 9px 12px;
             margin: 0 12px 10px 12px;
@@ -1767,14 +1822,14 @@
         }
 
         .payment-reminder-banner i {
-            color: #f5b83d;
+            color: var(--accent);
             font-size: 17px;
             flex-shrink: 0;
         }
 
         .payment-reminder-banner .reminder-text {
             font-size: 10px;
-            color: #1c2128;
+            color: var(--text-main);
             font-weight: 500;
             flex: 1;
             min-width: 102px;
@@ -1782,14 +1837,14 @@
 
         .payment-reminder-banner .reminder-amount {
             font-weight: 700;
-            color: #f5b83d;
+            color: var(--accent);
             font-size: 12px;
             flex-shrink: 0;
         }
 
         .payment-reminder-banner .btn-done-remaining {
-            background: #1c2128;
-            color: white;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
             border: none;
             padding: 5px 14px;
             border-radius: 14px;
@@ -1804,8 +1859,8 @@
         }
 
         .payment-reminder-banner .btn-done-remaining:hover {
-            background: #f5b83d;
-            color: #1c2128;
+            background: var(--accent);
+            color: var(--accent-text);
         }
 
         .payment-reminder-banner .btn-done-remaining:active {
@@ -1813,12 +1868,12 @@
         }
 
         .payment-reminder-banner .btn-done-remaining i {
-            color: #f5b83d;
+            color: var(--accent);
             font-size: 10px;
         }
 
         .payment-reminder-banner .btn-done-remaining:hover i {
-            color: #1c2128;
+            color: var(--accent-text);
         }
 
         .payment-reminder-banner .done-badge {
@@ -1858,7 +1913,7 @@
             right: -300px;
             width: 260px;
             height: 100%;
-            background: white;
+            background: var(--bg-sidebar);
             z-index: 2001;
             box-shadow: -4px 0 26px rgba(0, 0, 0, 0.15);
             transition: right 0.3s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1876,25 +1931,25 @@
             align-items: center;
             margin-bottom: 14px;
             padding-bottom: 9px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .sidebar-header h3 {
             font-weight: 700;
             font-size: 13px;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .sidebar-close {
             font-size: 16px;
-            color: #888;
+            color: var(--text-muted);
             cursor: pointer;
             background: none;
             border: none;
         }
 
         .sidebar-close:hover {
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .notification-item {
@@ -1902,7 +1957,7 @@
             align-items: flex-start;
             gap: 9px;
             padding: 9px 0;
-            border-bottom: 1px solid #f5f5f5;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .notification-item:last-child {
@@ -1913,13 +1968,13 @@
             width: 5px;
             height: 5px;
             border-radius: 50%;
-            background: #f5b83d;
+            background: var(--accent);
             margin-top: 3px;
             flex-shrink: 0;
         }
 
         .notif-dot.read {
-            background: #ddd;
+            background: var(--border-light);
         }
 
         .notif-content {
@@ -1929,18 +1984,18 @@
         .notif-content .title {
             font-weight: 600;
             font-size: 9px;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .notif-content .desc {
             font-size: 8px;
-            color: #666;
+            color: var(--text-muted);
             margin-top: 1px;
         }
 
         .notif-content .time {
             font-size: 7px;
-            color: #aaa;
+            color: var(--text-muted);
             margin-top: 3px;
         }
 
@@ -1966,7 +2021,7 @@
             left: -300px;
             width: 260px;
             height: 100%;
-            background: #ffffff;
+            background: var(--bg-sidebar);
             z-index: 2101;
             box-shadow: 4px 0 26px rgba(0, 0, 0, 0.15);
             transition: left 0.3s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1985,7 +2040,7 @@
             flex-direction: column;
             align-items: center;
             padding: 24px 16px 20px 16px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-light);
             flex-shrink: 0;
         }
 
@@ -1994,7 +2049,7 @@
             height: 100px;
             border-radius: 50%;
             object-fit: cover;
-            background: #1c2128;
+            background: var(--color-primary);
             margin-bottom: 8px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
@@ -2002,14 +2057,14 @@
         .main-sidebar .sidebar-logo-area .brand-name {
             font-size: 18px;
             font-weight: 900;
-            color: #1c2128;
+            color: var(--text-main);
             letter-spacing: 1px;
             text-align: center;
         }
 
         .main-sidebar .sidebar-logo-area .brand-tagline {
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-top: 2px;
@@ -2022,14 +2077,14 @@
             background: none;
             border: none;
             font-size: 18px;
-            color: #888;
+            color: var(--text-muted);
             cursor: pointer;
             padding: 4px;
             transition: color 0.2s;
         }
 
         .main-sidebar .sidebar-close-btn:hover {
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .main-sidebar .nav-list {
@@ -2048,7 +2103,7 @@
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s;
-            color: #1c2128;
+            color: var(--text-main);
             text-decoration: none;
             font-weight: 500;
             font-size: 13px;
@@ -2060,14 +2115,14 @@
 
         .main-sidebar .nav-list .nav-link i {
             font-size: 16px;
-            color: #888;
+            color: var(--text-muted);
             width: 20px;
             text-align: center;
             transition: color 0.2s;
         }
 
         .main-sidebar .nav-list .nav-link:hover {
-            background: #f8f9fc;
+            background: var(--bg-hover);
         }
 
         .main-sidebar .nav-list .nav-link:active {
@@ -2075,22 +2130,22 @@
         }
 
         .main-sidebar .nav-list .nav-link.active {
-            background: #f5f5f5;
+            background: var(--bg-hover);
             font-weight: 600;
         }
 
         .main-sidebar .nav-list .nav-link.active i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .main-sidebar .nav-list .nav-link .nav-label {
-            color: #1c2128;
+            color: var(--text-main);
             font-weight: 500;
         }
 
         .main-sidebar .nav-list .divider {
             height: 1px;
-            background: #f0f0f0;
+            background: var(--border-light);
             margin: 6px 0;
         }
 
@@ -2110,11 +2165,11 @@
         }
 
         .sample-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 14px;
             padding: 12px;
-            border: 1px solid #f0f0f0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow);
             transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
             flex-direction: column;
@@ -2122,14 +2177,14 @@
 
         .sample-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 7px 21px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow-lg);
         }
 
         .sample-card .sample-frame {
             width: 100%;
             border-radius: 10px;
             overflow: hidden;
-            background: #f5f5f5;
+            background: var(--bg-hover);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2147,31 +2202,31 @@
         .sample-card .sample-title {
             font-weight: 700;
             font-size: 12px;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 2px;
         }
 
         .sample-card .sample-desc {
             font-size: 10px;
-            color: #666;
+            color: var(--text-muted);
             line-height: 1.4;
             flex: 1;
         }
 
         .sample-card .sample-meta {
             font-size: 9px;
-            color: #aaa;
+            color: var(--text-muted);
             margin-top: 5px;
             display: flex;
             justify-content: space-between;
         }
 
         .phone-frame-sample {
-            border: 5px solid #1c2128;
+            border: 5px solid var(--color-primary);
             border-radius: 26px;
             padding: 5px;
-            background: #fff;
-            box-shadow: 0 7px 26px rgba(0, 0, 0, 0.15);
+            background: var(--bg-app);
+            box-shadow: var(--shadow-lg);
             aspect-ratio: 9/19;
             display: flex;
             align-items: center;
@@ -2190,22 +2245,22 @@
             transform: translateX(-50%);
             width: 68px;
             height: 15px;
-            background: #1c2128;
+            background: var(--color-primary);
             border-radius: 0 0 10px 10px;
         }
 
         .laptop-frame-sample {
-            background: #1c2128;
+            background: var(--color-primary);
             border-radius: 10px 10px 0 0;
             padding: 9px 9px 0 9px;
-            box-shadow: 0 7px 26px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-lg);
             width: 100%;
             max-width: 272px;
             margin: 0 auto;
         }
 
         .laptop-frame-sample .screen {
-            background: #fff;
+            background: var(--bg-app);
             border-radius: 5px 5px 0 0;
             aspect-ratio: 16/10;
             overflow: hidden;
@@ -2243,20 +2298,20 @@
 
         /* ── PROFILE ── */
         .profile-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 14px;
             padding: 14px;
             margin: 0 12px 14px 12px;
-            box-shadow: 0 3px 17px rgba(0, 0, 0, 0.06);
-            border: 1px solid #f0f0f0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
         }
 
         .profile-avatar-large {
             width: 61px;
             height: 61px;
             border-radius: 50%;
-            background-color: #1c2128;
-            color: #f5b83d;
+            background-color: var(--color-primary);
+            color: var(--accent);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2269,14 +2324,14 @@
             text-align: center;
             font-size: 15px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 1px;
         }
 
         .profile-role {
             text-align: center;
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
             margin-bottom: 14px;
         }
 
@@ -2285,7 +2340,7 @@
             align-items: center;
             gap: 9px;
             padding: 9px 0;
-            border-bottom: 1px solid #f5f5f5;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .profile-field:last-child {
@@ -2294,31 +2349,31 @@
 
         .profile-field i {
             width: 17px;
-            color: #f5b83d;
+            color: var(--accent);
             font-size: 13px;
         }
 
         .profile-field .label {
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
         }
 
         .profile-field .value {
             font-size: 10px;
             font-weight: 500;
-            color: #1c2128;
+            color: var(--text-main);
             margin-left: auto;
         }
 
         .profile-about {
             margin-top: 14px;
             padding-top: 11px;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--border-light);
         }
 
         .profile-about p {
             font-size: 9px;
-            color: #555;
+            color: var(--text-muted);
             line-height: 1.6;
         }
 
@@ -2338,13 +2393,13 @@
             flex: 1;
             padding: 9px 14px;
             border-radius: 26px;
-            border: 2px solid #ddd;
-            background: #fff;
+            border: 2px solid var(--border-light);
+            background: var(--bg-card);
             font-weight: 600;
             font-size: 11px;
             cursor: pointer;
             transition: all 0.2s;
-            color: #555;
+            color: var(--text-muted);
             text-align: center;
             display: flex;
             align-items: center;
@@ -2353,9 +2408,9 @@
         }
 
         .account-toggle-row .toggle-btn.active {
-            border-color: #1c2128;
-            background: #1c2128;
-            color: #fff;
+            border-color: var(--color-primary);
+            background: var(--color-primary);
+            color: var(--color-primary-text);
         }
 
         .account-toggle-row .toggle-btn:active {
@@ -2363,11 +2418,11 @@
         }
 
         .account-toggle-row .toggle-btn i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .account-toggle-row .toggle-btn.active i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .account-view {
@@ -2379,7 +2434,7 @@
         }
 
         .account-balance-box {
-            background: linear-gradient(135deg, #1c2128 0%, #2a2a2a 100%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, #2a2a2a 100%);
             border-radius: 14px;
             padding: 15px 14px;
             margin: 0 0 10px 0;
@@ -2391,7 +2446,7 @@
 
         .account-balance-box .left .label {
             font-size: 9px;
-            color: #f5b83d;
+            color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
@@ -2400,7 +2455,7 @@
         .account-balance-box .left .balance {
             font-size: 24px;
             font-weight: 800;
-            color: #fff;
+            color: var(--text-light);
         }
 
         .account-balance-box .right-btns {
@@ -2411,13 +2466,13 @@
         }
 
         .account-balance-box .right-btns .btn-action {
-            background: #f5b83d;
+            background: var(--accent);
             border: none;
             padding: 5px 14px;
             border-radius: 26px;
             font-weight: 700;
             font-size: 9px;
-            color: #1c2128;
+            color: var(--accent-text);
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
@@ -2452,7 +2507,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #ffffff;
+            background: var(--bg-app);
             z-index: 1100;
             display: none;
             overflow-y: auto;
@@ -2467,7 +2522,7 @@
             width: 100%;
             max-width: 100%;
             padding: 20px 12px 30px 12px;
-            background: #ffffff;
+            background: var(--bg-app);
             position: relative;
             min-height: 100vh;
         }
@@ -2478,13 +2533,13 @@
             gap: 10px;
             margin-bottom: 14px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .send-money-page .page-header h2 {
             font-weight: 700;
             font-size: 18px;
-            color: #1c2128;
+            color: var(--text-main);
             flex: 1;
         }
 
@@ -2492,28 +2547,28 @@
             background: none;
             border: none;
             font-size: 20px;
-            color: #aaa;
+            color: var(--text-muted);
             cursor: pointer;
             padding: 4px;
         }
 
         .send-money-page .page-header .close-btn:hover {
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .send-money-page .subtitle {
             font-size: 11px;
-            color: #888;
+            color: var(--text-muted);
             margin-bottom: 14px;
             line-height: 1.5;
         }
 
         .send-money-page .customer-info {
-            background: #f8f9fc;
+            background: var(--bg-body);
             border-radius: 10px;
             padding: 12px 14px;
             margin-bottom: 14px;
-            border: 1px solid #f0f0f0;
+            border: 1px solid var(--border-light);
         }
 
         .send-money-page .customer-info .row {
@@ -2524,12 +2579,12 @@
         }
 
         .send-money-page .customer-info .row .lbl {
-            color: #888;
+            color: var(--text-muted);
         }
 
         .send-money-page .customer-info .row .val {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .send-money-page .form-group {
@@ -2540,14 +2595,14 @@
             display: block;
             font-weight: 600;
             font-size: 10px;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 4px;
         }
 
         .send-money-page .form-group input {
             width: 100%;
             padding: 10px 12px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-light);
             border-radius: 10px;
             font-size: 14px;
             transition: border 0.2s;
@@ -2555,26 +2610,26 @@
 
         .send-money-page .form-group input:focus {
             outline: none;
-            border-color: #f5b83d;
+            border-color: var(--accent);
         }
 
         .send-money-page .search-result {
             padding: 10px 12px;
-            background: #f8f9fc;
+            background: var(--bg-body);
             border-radius: 10px;
             font-size: 13px;
-            color: #1c2128;
+            color: var(--text-main);
             min-height: 44px;
             display: flex;
             align-items: center;
             gap: 6px;
             flex-wrap: wrap;
-            border: 1px solid #f0f0f0;
+            border: 1px solid var(--border-light);
         }
 
         .send-money-page .search-result .name {
             font-weight: 700;
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .send-money-page .search-result .not-found {
@@ -2584,13 +2639,13 @@
 
         .send-money-page .balance-check {
             font-size: 10px;
-            color: #888;
+            color: var(--text-muted);
             margin-top: 4px;
         }
 
         .send-money-page .balance-check .avail {
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .send-money-page .balance-check .insufficient {
@@ -2613,7 +2668,8 @@
         }
 
         .send-money-page .btn-send-rect:disabled {
-            background: #ccc;
+            background: var(--border-light);
+            color: var(--text-muted);
             cursor: not-allowed;
         }
 
@@ -2624,19 +2680,19 @@
         .send-money-page .history-section h4 {
             font-weight: 700;
             font-size: 14px;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 8px;
-            border-bottom: 2px solid #f0f0f0;
+            border-bottom: 2px solid var(--border-light);
             padding-bottom: 6px;
             margin-top: 16px;
         }
 
         .send-money-page .history-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 10px 14px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            border: 1px solid #f0f0f0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
             cursor: pointer;
             transition: all 0.2s;
             margin-bottom: 8px;
@@ -2657,7 +2713,7 @@
             align-items: center;
             gap: 8px;
             font-size: 10px;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .send-money-page .history-card .summary .left i {
@@ -2666,7 +2722,7 @@
 
         .send-money-page .history-card .summary .right {
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -2683,7 +2739,7 @@
         .send-money-page .history-card.open .details {
             max-height: 250px;
             padding: 8px 3px 3px 3px;
-            border-top-color: #f0f0f0;
+            border-top-color: var(--border-light);
             margin-top: 6px;
         }
 
@@ -2692,22 +2748,22 @@
             justify-content: space-between;
             padding: 3px 0;
             font-size: 10px;
-            color: #555;
+            color: var(--text-muted);
         }
 
         .send-money-page .history-card .details .row .lbl {
-            color: #888;
+            color: var(--text-muted);
         }
 
         .send-money-page .history-card .details .row .val {
             font-weight: 500;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .send-money-page .history-card .expand-icon {
             transition: transform 0.3s ease;
             font-size: 9px;
-            color: #aaa;
+            color: var(--text-muted);
         }
 
         .send-money-page .history-card.open .expand-icon {
@@ -2717,7 +2773,7 @@
         .send-money-page .empty-history {
             text-align: center;
             padding: 14px;
-            color: #888;
+            color: var(--text-muted);
             font-size: 10px;
         }
 
@@ -2728,7 +2784,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #ffffff;
+            background: var(--bg-app);
             z-index: 1100;
             display: none;
             overflow-y: auto;
@@ -2743,7 +2799,7 @@
             width: 100%;
             max-width: 100%;
             padding: 20px 12px 30px 12px;
-            background: #ffffff;
+            background: var(--bg-app);
             position: relative;
             min-height: 100vh;
         }
@@ -2754,13 +2810,13 @@
             gap: 10px;
             margin-bottom: 14px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .withdraw-page .page-header h2 {
             font-weight: 700;
             font-size: 18px;
-            color: #1c2128;
+            color: var(--text-main);
             flex: 1;
         }
 
@@ -2768,28 +2824,28 @@
             background: none;
             border: none;
             font-size: 20px;
-            color: #aaa;
+            color: var(--text-muted);
             cursor: pointer;
             padding: 4px;
         }
 
         .withdraw-page .page-header .close-btn:hover {
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .withdraw-page .subtitle {
             font-size: 11px;
-            color: #888;
+            color: var(--text-muted);
             margin-bottom: 14px;
             line-height: 1.5;
         }
 
         .withdraw-page .customer-info {
-            background: #f8f9fc;
+            background: var(--bg-body);
             border-radius: 10px;
             padding: 12px 14px;
             margin-bottom: 14px;
-            border: 1px solid #f0f0f0;
+            border: 1px solid var(--border-light);
         }
 
         .withdraw-page .customer-info .row {
@@ -2800,36 +2856,36 @@
         }
 
         .withdraw-page .customer-info .row .lbl {
-            color: #888;
+            color: var(--text-muted);
         }
 
         .withdraw-page .customer-info .row .val {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .withdraw-page .transfer-note {
             font-size: 10px;
-            color: #555;
+            color: var(--text-muted);
             background: #fef9e7;
             border-radius: 8px;
             padding: 8px 12px;
             margin-bottom: 14px;
-            border-left: 3px solid #f5b83d;
+            border-left: 3px solid var(--accent);
         }
 
         .withdraw-page .balance-display {
             text-align: center;
-            background: #1c2128;
+            background: var(--hero-bg);
             border-radius: 14px;
             padding: 20px 14px;
             margin-bottom: 16px;
-            color: white;
+            color: var(--hero-text);
         }
 
         .withdraw-page .balance-display .lbl {
             font-size: 10px;
-            color: #f5b83d;
+            color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
@@ -2838,13 +2894,13 @@
         .withdraw-page .balance-display .amount {
             font-size: 36px;
             font-weight: 800;
-            color: #fff;
+            color: var(--text-light);
             margin: 4px 0;
         }
 
         .withdraw-page .balance-display .sub {
             font-size: 9px;
-            color: #aaa;
+            color: var(--text-muted);
         }
 
         .withdraw-page .amount-options {
@@ -2857,18 +2913,18 @@
             flex: 1;
             padding: 10px 6px;
             border-radius: 10px;
-            border: 2px solid #e0e0e0;
-            background: #fff;
+            border: 2px solid var(--border-dark);
+            background: var(--bg-card);
             font-weight: 600;
             font-size: 11px;
-            color: #1c2128;
+            color: var(--text-main);
             cursor: pointer;
             transition: all 0.2s;
             text-align: center;
         }
 
         .withdraw-page .amount-options .opt-btn.active {
-            border-color: #f5b83d;
+            border-color: var(--accent);
             background: #fef9e7;
         }
 
@@ -2884,14 +2940,14 @@
             display: block;
             font-weight: 600;
             font-size: 10px;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 4px;
         }
 
         .withdraw-page .custom-amount input {
             width: 100%;
             padding: 10px 12px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-light);
             border-radius: 10px;
             font-size: 14px;
             transition: border 0.2s;
@@ -2899,12 +2955,12 @@
 
         .withdraw-page .custom-amount input:focus {
             outline: none;
-            border-color: #f5b83d;
+            border-color: var(--accent);
         }
 
         .withdraw-page .custom-amount .hint {
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
             margin-top: 3px;
         }
 
@@ -2915,8 +2971,8 @@
         .withdraw-page .btn-withdraw-rect {
             width: 100%;
             padding: 12px;
-            background: #1c2128;
-            color: white;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
             border: none;
             border-radius: 10px;
             font-weight: 700;
@@ -2931,25 +2987,26 @@
         }
 
         .withdraw-page .btn-withdraw-rect:disabled {
-            background: #ccc;
+            background: var(--border-light);
+            color: var(--text-muted);
             cursor: not-allowed;
         }
 
         .withdraw-page .history-section h4 {
             font-weight: 700;
             font-size: 14px;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 8px;
-            border-bottom: 2px solid #f0f0f0;
+            border-bottom: 2px solid var(--border-light);
             padding-bottom: 6px;
         }
 
         .withdraw-page .history-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 10px 14px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            border: 1px solid #f0f0f0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
             cursor: pointer;
             transition: all 0.2s;
             margin-bottom: 8px;
@@ -2970,7 +3027,7 @@
             align-items: center;
             gap: 8px;
             font-size: 10px;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .withdraw-page .history-card .summary .left i {
@@ -2979,7 +3036,7 @@
 
         .withdraw-page .history-card .summary .right {
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -2996,7 +3053,7 @@
         .withdraw-page .history-card.open .details {
             max-height: 250px;
             padding: 8px 3px 3px 3px;
-            border-top-color: #f0f0f0;
+            border-top-color: var(--border-light);
             margin-top: 6px;
         }
 
@@ -3005,22 +3062,22 @@
             justify-content: space-between;
             padding: 3px 0;
             font-size: 10px;
-            color: #555;
+            color: var(--text-muted);
         }
 
         .withdraw-page .history-card .details .row .lbl {
-            color: #888;
+            color: var(--text-muted);
         }
 
         .withdraw-page .history-card .details .row .val {
             font-weight: 500;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .withdraw-page .history-card .expand-icon {
             transition: transform 0.3s ease;
             font-size: 9px;
-            color: #aaa;
+            color: var(--text-muted);
         }
 
         .withdraw-page .history-card.open .expand-icon {
@@ -3030,17 +3087,17 @@
         .withdraw-page .empty-history {
             text-align: center;
             padding: 14px;
-            color: #888;
+            color: var(--text-muted);
             font-size: 10px;
         }
 
         .account-tx-card,
         .withdrawal-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 12px 14px;
-            box-shadow: 0 2px 9px rgba(0, 0, 0, 0.05);
-            border: 1px solid #f0f0f0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
             cursor: pointer;
             transition: all 0.2s;
             margin-bottom: 9px;
@@ -3064,7 +3121,7 @@
             align-items: center;
             gap: 9px;
             font-size: 10px;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .account-tx-card .tx-summary .left i,
@@ -3076,7 +3133,7 @@
         .account-tx-card .tx-summary .right,
         .withdrawal-card .wd-summary .right {
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
             display: flex;
             align-items: center;
             gap: 7px;
@@ -3095,7 +3152,7 @@
         .withdrawal-card.open .wd-details {
             max-height: 250px;
             padding: 9px 3px 3px 3px;
-            border-top-color: #f0f0f0;
+            border-top-color: var(--border-light);
             margin-top: 7px;
         }
 
@@ -3105,25 +3162,25 @@
             justify-content: space-between;
             padding: 3px 0;
             font-size: 10px;
-            color: #555;
+            color: var(--text-muted);
         }
 
         .account-tx-card .tx-details .d-row .d-label,
         .withdrawal-card .wd-details .d-row .d-label {
-            color: #888;
+            color: var(--text-muted);
         }
 
         .account-tx-card .tx-details .d-row .d-val,
         .withdrawal-card .wd-details .d-row .d-val {
             font-weight: 500;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .account-tx-card .expand-icon,
         .withdrawal-card .expand-icon {
             transition: transform 0.3s ease;
             font-size: 9px;
-            color: #aaa;
+            color: var(--text-muted);
         }
 
         .account-tx-card.open .expand-icon,
@@ -3154,17 +3211,17 @@
         }
 
         .referral-code-box {
-            background: #1c2128;
+            background: var(--hero-bg);
             border-radius: 14px;
             padding: 17px 14px;
             margin: 14px 0 10px 0;
             text-align: center;
-            color: white;
+            color: var(--hero-text);
         }
 
         .referral-code-box .label {
             font-size: 9px;
-            color: #f5b83d;
+            color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
@@ -3173,20 +3230,20 @@
         .referral-code-box .code {
             font-size: 27px;
             font-weight: 800;
-            color: #f5b83d;
+            color: var(--accent);
             letter-spacing: 2px;
             margin: 5px 0;
             word-break: break-all;
         }
 
         .referral-code-box .copy-btn {
-            background: #f5b83d;
+            background: var(--accent);
             border: none;
             padding: 5px 17px;
             border-radius: 26px;
             font-weight: 600;
             font-size: 10px;
-            color: #1c2128;
+            color: var(--accent-text);
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
@@ -3208,11 +3265,11 @@
         }
 
         .flyer-detail-container {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 32px;
             overflow: hidden;
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.10);
-            border: 1px solid #f0f0f0;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
         }
 
         .flyer-detail-image-wrap {
@@ -3220,7 +3277,7 @@
             aspect-ratio: 1200 / 675;
             overflow: hidden;
             position: relative;
-            background: #f5f5f5;
+            background: var(--bg-hover);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -3246,6 +3303,7 @@
 
         .flyer-detail-content {
             padding: 16px 14px 14px 14px;
+            background: var(--bg-card);
         }
 
         .flyer-detail-header-row {
@@ -3258,7 +3316,7 @@
         .flyer-detail-header-row h2 {
             font-size: 18px;
             font-weight: 800;
-            color: #1c2128;
+            color: var(--text-main);
             margin: 0;
             flex: 1;
         }
@@ -3267,13 +3325,13 @@
             background: none;
             border: none;
             font-size: 18px;
-            color: #888;
+            color: var(--text-muted);
             cursor: pointer;
             padding: 4px;
         }
 
         .flyer-detail-close-btn:hover {
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .flyer-detail-section {
@@ -3283,36 +3341,36 @@
         .flyer-detail-section-title {
             font-size: 11px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 4px;
         }
 
         .flyer-detail-instructions {
             font-size: 10px;
-            color: #555;
+            color: var(--text-muted);
             line-height: 1.5;
-            background: #f8f9fc;
+            background: var(--bg-body);
             padding: 8px 10px;
             border-radius: 8px;
             margin-bottom: 6px;
-            border: 1px solid #f0f0f0;
+            border: 1px solid var(--border-light);
         }
 
         .flyer-detail-explanation {
             font-size: 10px;
-            color: #444;
+            color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 10px;
         }
 
         .flyer-detail-explanation strong {
-            color: #1c2128;
+            color: var(--text-main);
             font-weight: 700;
         }
 
         .flyer-detail-form {
             margin-top: 10px;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--border-light);
             padding-top: 12px;
         }
 
@@ -3324,7 +3382,7 @@
             display: block;
             font-weight: 600;
             font-size: 9px;
-            color: #222;
+            color: var(--text-main);
             margin-bottom: 2px;
         }
 
@@ -3333,10 +3391,10 @@
         .flyer-detail-form .form-group textarea {
             width: 100%;
             padding: 6px 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-light);
             border-radius: 8px;
             font-size: 10px;
-            background: #ffffff;
+            background: var(--bg-input);
             transition: border 0.2s;
         }
 
@@ -3344,7 +3402,7 @@
         .flyer-detail-form .form-group select:focus,
         .flyer-detail-form .form-group textarea:focus {
             outline: none;
-            border-color: #1c2128;
+            border-color: var(--color-primary);
             box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
         }
 
@@ -3361,7 +3419,7 @@
 
         .upload-box-sm {
             aspect-ratio: 1 / 1;
-            border: 2px dashed #ddd;
+            border: 2px dashed var(--border-light);
             border-radius: 8px;
             display: flex;
             flex-direction: column;
@@ -3369,7 +3427,7 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s;
-            background: #fafbfc;
+            background: var(--bg-input);
             padding: 4px;
             text-align: center;
             min-height: 60px;
@@ -3377,18 +3435,18 @@
         }
 
         .upload-box-sm:hover {
-            border-color: #f5b83d;
+            border-color: var(--accent);
             background: #fffcf0;
         }
 
         .upload-box-sm i {
             font-size: 20px;
-            color: #aaa;
+            color: var(--text-muted);
         }
 
         .upload-box-sm .file-label {
             font-size: 7px;
-            color: #888;
+            color: var(--text-muted);
             margin-top: 2px;
             line-height: 1.2;
             word-break: break-all;
@@ -3396,7 +3454,7 @@
 
         .upload-box-sm .file-name {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
             font-size: 7px;
             margin-top: 2px;
             line-height: 1.2;
@@ -3416,7 +3474,7 @@
         }
 
         .upload-box-sm.has-preview {
-            border-color: #f5b83d;
+            border-color: var(--accent);
             background: #fffcf0;
         }
 
@@ -3431,37 +3489,37 @@
         }
 
         .payment-upload-area {
-            border: 2px dashed #ddd;
+            border: 2px dashed var(--border-light);
             border-radius: 9px;
             padding: 10px;
             text-align: center;
             cursor: pointer;
             transition: all 0.25s;
-            background: #fafbfc;
+            background: var(--bg-input);
             margin-bottom: 10px;
             position: relative;
             min-height: 60px;
         }
 
         .payment-upload-area:hover {
-            border-color: #f5b83d;
+            border-color: var(--accent);
             background: #fffcf0;
         }
 
         .payment-upload-area i {
             font-size: 24px;
-            color: #aaa;
+            color: var(--text-muted);
             margin-bottom: 2px;
         }
 
         .payment-upload-area .file-label {
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
         }
 
         .payment-upload-area .file-name {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
             font-size: 9px;
             margin-top: 2px;
         }
@@ -3479,7 +3537,7 @@
         }
 
         .payment-upload-area.has-preview {
-            border-color: #f5b83d;
+            border-color: var(--accent);
             background: #fffcf0;
         }
 
@@ -3495,7 +3553,7 @@
 
         .flyer-detail-actions {
             padding: 12px 14px 14px 14px;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--border-light);
             display: flex;
             gap: 8px;
         }
@@ -3513,8 +3571,8 @@
         }
 
         .flyer-detail-actions .btn-primary {
-            background: #f5b83d;
-            color: #1c2128;
+            background: var(--accent);
+            color: var(--accent-text);
         }
 
         .flyer-detail-actions .btn-primary:active {
@@ -3522,14 +3580,14 @@
         }
 
         .flyer-detail-actions .btn-primary:disabled {
-            background: #ddd;
-            color: #888;
+            background: var(--border-light);
+            color: var(--text-muted);
             cursor: not-allowed;
         }
 
         .flyer-detail-actions .btn-outline {
-            background: #f0f0f0;
-            color: #555;
+            background: var(--bg-hover);
+            color: var(--text-muted);
         }
 
         .flyer-detail-actions .btn-outline:active {
@@ -3544,20 +3602,20 @@
         .applications-header h3 {
             font-weight: 700;
             font-size: 15px;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .applications-header p {
-            color: #888;
+            color: var(--text-muted);
             font-size: 9px;
         }
 
         .app-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 14px;
             padding: 12px 14px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-            border: 1px solid #f0f0f0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
             transition: all 0.2s;
             margin-bottom: 10px;
             cursor: pointer;
@@ -3584,7 +3642,7 @@
 
         .app-card .app-summary .left .app-icon {
             font-size: 14px;
-            color: #f5b83d;
+            color: var(--accent);
             width: 24px;
             text-align: center;
         }
@@ -3592,12 +3650,12 @@
         .app-card .app-summary .left .app-info .app-title {
             font-weight: 600;
             font-size: 12px;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .app-card .app-summary .left .app-info .app-sub {
             font-size: 9px;
-            color: #888;
+            color: var(--text-muted);
         }
 
         .app-card .app-summary .right {
@@ -3632,7 +3690,7 @@
         .app-card .app-summary .right .expand-icon {
             transition: transform 0.3s ease;
             font-size: 10px;
-            color: #aaa;
+            color: var(--text-muted);
             margin-left: 4px;
         }
 
@@ -3652,7 +3710,7 @@
         .app-card.open .app-details-expand {
             max-height: 400px;
             padding: 10px 3px 3px 3px;
-            border-top-color: #f0f0f0;
+            border-top-color: var(--border-light);
             margin-top: 9px;
         }
 
@@ -3661,8 +3719,8 @@
             justify-content: space-between;
             padding: 3px 0;
             font-size: 10px;
-            color: #555;
-            border-bottom: 1px solid #f5f5f5;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-light);
         }
 
         .app-card .app-details-expand .detail-row:last-child {
@@ -3670,19 +3728,19 @@
         }
 
         .app-card .app-details-expand .detail-row .label {
-            color: #888;
+            color: var(--text-muted);
             flex-shrink: 0;
         }
 
         .app-card .app-details-expand .detail-row .val {
             font-weight: 500;
-            color: #1c2128;
+            color: var(--text-main);
             text-align: right;
             margin-left: 10px;
         }
 
         .app-card .app-details-expand .detail-row .val a {
-            color: #1c2128;
+            color: var(--text-main);
             text-decoration: underline;
         }
 
@@ -3694,7 +3752,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: var(--overlay-bg);
             z-index: 9999;
             overflow-y: auto;
             padding: 20px;
@@ -3714,7 +3772,7 @@
         }
 
         .receipt-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 0;
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
@@ -3722,17 +3780,17 @@
         }
 
         .receipt-header {
-            background: #1c2128;
+            background: var(--hero-bg);
             padding: 16px 18px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             position: relative;
-            border-bottom: 3px solid #f5b83d;
+            border-bottom: 3px solid var(--accent);
         }
 
         .receipt-header h2 {
-            color: white;
+            color: var(--text-light);
             font-weight: 800;
             margin: 0;
             letter-spacing: 1px;
@@ -3740,7 +3798,7 @@
         }
 
         .receipt-header .slogan {
-            color: white;
+            color: var(--text-light);
             opacity: 0.6;
             font-size: 9px;
             margin: 0;
@@ -3748,7 +3806,7 @@
         }
 
         .receipt-header .invoice-title {
-            color: #f5b83d;
+            color: var(--accent);
             font-weight: 800;
             margin: 0;
             font-size: 20px;
@@ -3756,7 +3814,7 @@
         }
 
         .receipt-header .invoice-id {
-            color: white;
+            color: var(--text-light);
             opacity: 0.6;
             font-size: 9px;
             margin: 0;
@@ -3772,14 +3830,14 @@
             margin: 0 0 3px 0;
             font-size: 10px;
             font-weight: 700;
-            color: #1c2128;
-            border-left: 3px solid #f5b83d;
+            color: var(--text-main);
+            border-left: 3px solid var(--accent);
             padding-left: 6px;
         }
 
         .receipt-addresses .address-right h4 {
             border-left: none;
-            border-right: 3px solid #f5b83d;
+            border-right: 3px solid var(--accent);
             padding-left: 0;
             padding-right: 6px;
             text-align: right;
@@ -3787,19 +3845,19 @@
 
         .receipt-addresses p {
             font-size: 9px;
-            color: #555;
+            color: var(--text-muted);
             margin: 1px 0;
             line-height: 1.3;
         }
 
         .receipt-addresses .name {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
             font-size: 11px;
         }
 
         .receipt-table-header {
-            background: #f5b83d;
+            background: var(--accent);
             display: flex;
             justify-content: space-between;
             padding: 6px 18px;
@@ -3827,7 +3885,7 @@
             display: flex;
             justify-content: space-between;
             padding: 7px 18px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-light);
             font-size: 10px;
         }
 
@@ -3864,17 +3922,17 @@
         }
 
         .receipt-totals-box .total-row {
-            background: #f5b83d;
+            background: var(--accent);
             margin-top: 5px;
             padding: 5px 8px;
             border-radius: 4px;
-            color: #1c2128;
+            color: var(--accent-text);
             font-weight: 700;
         }
 
         .receipt-footer {
             padding: 10px 18px 16px 18px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid var(--border-light);
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
@@ -3883,19 +3941,19 @@
         .receipt-footer .thanks {
             font-size: 9px;
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .receipt-footer .footnote {
             font-size: 8px;
-            color: #aaa;
+            color: var(--text-muted);
             max-width: 170px;
             line-height: 1.4;
         }
 
         .receipt-footer .signature-area {
             text-align: right;
-            border-top: 2px solid #1c2128;
+            border-top: 2px solid var(--color-primary);
             padding-top: 3px;
             width: 120px;
         }
@@ -3903,18 +3961,18 @@
         .receipt-footer .signature-area .sign-name {
             font-weight: 800;
             font-size: 13px;
-            color: #1c2128;
+            color: var(--text-main);
             letter-spacing: 0.5px;
         }
 
         .receipt-footer .signature-area .sign-label {
             font-size: 7px;
-            color: #666;
+            color: var(--text-muted);
             text-transform: uppercase;
         }
 
         .receipt-bottom-bar {
-            background: #1c2128;
+            background: var(--color-primary);
             height: 8px;
             width: 100%;
         }
@@ -3922,8 +3980,8 @@
         .receipt-download-btn {
             margin-top: 12px;
             width: 100%;
-            background: #1c2128;
-            color: white;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
             border: none;
             padding: 10px;
             border-radius: 10px;
@@ -3943,7 +4001,7 @@
         }
 
         .receipt-download-btn i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         /* ── APP STATUS POPUP ── */
@@ -3953,7 +4011,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: var(--overlay-bg);
             backdrop-filter: blur(8px);
             z-index: 3000;
             display: none;
@@ -3967,7 +4025,7 @@
         }
 
         .app-status-modal {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 24px;
             width: 100%;
             max-width: 400px;
@@ -3979,10 +4037,10 @@
         }
 
         .app-status-modal .app-status-logo-wrap {
-            background: #1c2128;
+            background: var(--hero-bg);
             padding: 18px 0 14px 0;
             text-align: center;
-            border-bottom: 3px solid #f5b83d;
+            border-bottom: 3px solid var(--accent);
         }
 
         .app-status-modal .app-status-logo-wrap img {
@@ -3995,7 +4053,7 @@
         }
 
         .app-status-modal .app-status-logo-wrap .logo-text {
-            color: #f5b83d;
+            color: var(--accent);
             font-weight: 800;
             font-size: 14px;
             letter-spacing: 1px;
@@ -4031,7 +4089,7 @@
         .app-status-modal .app-status-title {
             font-size: 24px;
             font-weight: 900;
-            color: #1c2128;
+            color: var(--text-main);
             margin: 4px 0 6px 0;
             letter-spacing: 0.5px;
         }
@@ -4046,18 +4104,18 @@
 
         .app-status-modal .app-status-message {
             font-size: 13px;
-            color: #555;
+            color: var(--text-muted);
             margin-bottom: 10px;
             font-weight: 500;
         }
 
         .app-status-modal .app-status-details-box {
-            background: #f8f9fc;
+            background: var(--bg-body);
             border-radius: 12px;
             padding: 10px 14px;
             margin: 8px 0 12px 0;
             text-align: left;
-            border: 1px solid #f0f0f0;
+            border: 1px solid var(--border-light);
         }
 
         .app-status-modal .app-status-details-box .detail-line {
@@ -4065,7 +4123,7 @@
             justify-content: space-between;
             padding: 3px 0;
             font-size: 10px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .app-status-modal .app-status-details-box .detail-line:last-child {
@@ -4073,17 +4131,17 @@
         }
 
         .app-status-modal .app-status-details-box .detail-line .dl-label {
-            color: #888;
+            color: var(--text-muted);
         }
 
         .app-status-modal .app-status-details-box .detail-line .dl-value {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .app-status-modal .app-status-btn {
-            background: #1c2128;
-            color: #fff;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
             border: none;
             padding: 10px 28px;
             border-radius: 30px;
@@ -4102,7 +4160,7 @@
         }
 
         .app-status-modal .app-status-btn i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         /* ── ORDER COMPLETE POPUP ── */
@@ -4112,7 +4170,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: var(--overlay-bg);
             backdrop-filter: blur(8px);
             z-index: 3100;
             display: none;
@@ -4126,7 +4184,7 @@
         }
 
         .order-complete-modal {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 24px;
             width: 100%;
             max-width: 360px;
@@ -4138,7 +4196,7 @@
 
         .order-complete-modal .oc-icon {
             font-size: 48px;
-            color: #f5b83d;
+            color: var(--accent);
             display: block;
             margin-bottom: 6px;
         }
@@ -4146,32 +4204,32 @@
         .order-complete-modal h3 {
             font-size: 20px;
             font-weight: 800;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 6px;
         }
 
         .order-complete-modal p {
             font-size: 13px;
-            color: #555;
+            color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 12px;
         }
 
         .order-complete-modal p strong {
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .order-complete-modal .oc-amount {
             font-size: 22px;
             font-weight: 900;
-            color: #f5b83d;
+            color: var(--accent);
             display: block;
             margin: 2px 0 10px 0;
         }
 
         .order-complete-modal .oc-btn {
-            background: #1c2128;
-            color: #fff;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
             border: none;
             padding: 10px 40px;
             border-radius: 30px;
@@ -4186,7 +4244,7 @@
         }
 
         .order-complete-modal .oc-btn i {
-            color: #f5b83d;
+            color: var(--accent);
             margin-right: 6px;
         }
 
@@ -4197,7 +4255,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: var(--overlay-bg);
             backdrop-filter: blur(8px);
             z-index: 3200;
             display: none;
@@ -4211,7 +4269,7 @@
         }
 
         .withdrawal-status-modal {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 24px;
             width: 100%;
             max-width: 400px;
@@ -4223,14 +4281,14 @@
         }
 
         .withdrawal-status-modal .ws-logo-wrap {
-            background: #1c2128;
+            background: var(--hero-bg);
             padding: 14px 0 10px 0;
             text-align: center;
-            border-bottom: 3px solid #f5b83d;
+            border-bottom: 3px solid var(--accent);
         }
 
         .withdrawal-status-modal .ws-logo-wrap .logo-text {
-            color: #f5b83d;
+            color: var(--accent);
             font-weight: 800;
             font-size: 14px;
             letter-spacing: 1px;
@@ -4265,7 +4323,7 @@
         .withdrawal-status-modal .ws-title {
             font-size: 24px;
             font-weight: 900;
-            color: #1c2128;
+            color: var(--text-main);
             margin: 4px 0 6px 0;
             letter-spacing: 0.5px;
         }
@@ -4280,18 +4338,18 @@
 
         .withdrawal-status-modal .ws-message {
             font-size: 13px;
-            color: #555;
+            color: var(--text-muted);
             margin-bottom: 10px;
             font-weight: 500;
         }
 
         .withdrawal-status-modal .ws-details-box {
-            background: #f8f9fc;
+            background: var(--bg-body);
             border-radius: 12px;
             padding: 10px 14px;
             margin: 8px 0 12px 0;
             text-align: left;
-            border: 1px solid #f0f0f0;
+            border: 1px solid var(--border-light);
         }
 
         .withdrawal-status-modal .ws-details-box .detail-line {
@@ -4299,7 +4357,7 @@
             justify-content: space-between;
             padding: 3px 0;
             font-size: 10px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .withdrawal-status-modal .ws-details-box .detail-line:last-child {
@@ -4307,17 +4365,17 @@
         }
 
         .withdrawal-status-modal .ws-details-box .detail-line .dl-label {
-            color: #888;
+            color: var(--text-muted);
         }
 
         .withdrawal-status-modal .ws-details-box .detail-line .dl-value {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .withdrawal-status-modal .ws-btn {
-            background: #1c2128;
-            color: #fff;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
             border: none;
             padding: 10px 28px;
             border-radius: 30px;
@@ -4336,7 +4394,7 @@
         }
 
         .withdrawal-status-modal .ws-btn i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         /* ── REFERRAL RECEIVED POPUP ── */
@@ -4346,7 +4404,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: var(--overlay-bg);
             backdrop-filter: blur(8px);
             z-index: 3300;
             display: none;
@@ -4360,7 +4418,7 @@
         }
 
         .referral-received-modal {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 24px;
             width: 100%;
             max-width: 400px;
@@ -4372,7 +4430,7 @@
 
         .referral-received-modal .rr-icon {
             font-size: 48px;
-            color: #f5b83d;
+            color: var(--accent);
             display: block;
             margin-bottom: 6px;
         }
@@ -4380,13 +4438,13 @@
         .referral-received-modal h3 {
             font-size: 20px;
             font-weight: 800;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 6px;
         }
 
         .referral-received-modal p {
             font-size: 13px;
-            color: #555;
+            color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 12px;
         }
@@ -4394,14 +4452,14 @@
         .referral-received-modal .rr-amount {
             font-size: 22px;
             font-weight: 900;
-            color: #f5b83d;
+            color: var(--accent);
             display: block;
             margin: 2px 0 10px 0;
         }
 
         .referral-received-modal .rr-btn {
-            background: #1c2128;
-            color: #fff;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
             border: none;
             padding: 10px 40px;
             border-radius: 30px;
@@ -4416,7 +4474,7 @@
         }
 
         .referral-received-modal .rr-btn i {
-            color: #f5b83d;
+            color: var(--accent);
             margin-right: 6px;
         }
 
@@ -4427,7 +4485,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: var(--overlay-bg);
             backdrop-filter: blur(8px);
             z-index: 3400;
             display: none;
@@ -4441,7 +4499,7 @@
         }
 
         .money-received-modal {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 24px;
             width: 100%;
             max-width: 400px;
@@ -4461,13 +4519,13 @@
         .money-received-modal h3 {
             font-size: 20px;
             font-weight: 800;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 6px;
         }
 
         .money-received-modal p {
             font-size: 13px;
-            color: #555;
+            color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 12px;
         }
@@ -4483,18 +4541,18 @@
         .money-received-modal .mr-sender {
             font-size: 14px;
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 8px;
         }
 
         .money-received-modal .mr-sender span {
             font-weight: 800;
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .money-received-modal .mr-btn {
-            background: #1c2128;
-            color: #fff;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
             border: none;
             padding: 10px 40px;
             border-radius: 30px;
@@ -4509,7 +4567,7 @@
         }
 
         .money-received-modal .mr-btn i {
-            color: #f5b83d;
+            color: var(--accent);
             margin-right: 6px;
         }
 
@@ -4549,7 +4607,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: var(--overlay-bg);
             backdrop-filter: blur(6px);
             z-index: 9999;
             display: none;
@@ -4570,7 +4628,7 @@
         }
 
         .statement-card {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 0;
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
@@ -4578,16 +4636,16 @@
         }
 
         .statement-header {
-            background: #1c2128;
+            background: var(--hero-bg);
             padding: 16px 18px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            border-bottom: 3px solid #f5b83d;
+            border-bottom: 3px solid var(--accent);
         }
 
         .statement-header h2 {
-            color: white;
+            color: var(--text-light);
             font-weight: 800;
             margin: 0;
             letter-spacing: 1px;
@@ -4595,7 +4653,7 @@
         }
 
         .statement-header .slogan {
-            color: white;
+            color: var(--text-light);
             opacity: 0.6;
             font-size: 9px;
             margin: 0;
@@ -4603,7 +4661,7 @@
         }
 
         .statement-header .statement-title {
-            color: #f5b83d;
+            color: var(--accent);
             font-weight: 800;
             margin: 0;
             font-size: 20px;
@@ -4611,7 +4669,7 @@
         }
 
         .statement-header .statement-ref {
-            color: white;
+            color: var(--text-light);
             opacity: 0.6;
             font-size: 9px;
             margin: 0;
@@ -4627,14 +4685,14 @@
             margin: 0 0 3px 0;
             font-size: 10px;
             font-weight: 700;
-            color: #1c2128;
-            border-left: 3px solid #f5b83d;
+            color: var(--text-main);
+            border-left: 3px solid var(--accent);
             padding-left: 6px;
         }
 
         .statement-addresses .address-right h4 {
             border-left: none;
-            border-right: 3px solid #f5b83d;
+            border-right: 3px solid var(--accent);
             padding-left: 0;
             padding-right: 6px;
             text-align: right;
@@ -4642,19 +4700,19 @@
 
         .statement-addresses p {
             font-size: 9px;
-            color: #555;
+            color: var(--text-muted);
             margin: 1px 0;
             line-height: 1.3;
         }
 
         .statement-addresses .name {
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
             font-size: 11px;
         }
 
         .statement-table-header {
-            background: #f5b83d;
+            background: var(--accent);
             display: flex;
             justify-content: space-between;
             padding: 6px 18px;
@@ -4682,7 +4740,7 @@
             display: flex;
             justify-content: space-between;
             padding: 7px 18px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-light);
             font-size: 10px;
         }
 
@@ -4719,17 +4777,17 @@
         }
 
         .statement-totals-box .total-row {
-            background: #f5b83d;
+            background: var(--accent);
             margin-top: 5px;
             padding: 5px 8px;
             border-radius: 4px;
-            color: #1c2128;
+            color: var(--accent-text);
             font-weight: 700;
         }
 
         .statement-footer {
             padding: 10px 18px 16px 18px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid var(--border-light);
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
@@ -4738,19 +4796,19 @@
         .statement-footer .thanks {
             font-size: 9px;
             font-weight: 600;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         .statement-footer .footnote {
             font-size: 8px;
-            color: #aaa;
+            color: var(--text-muted);
             max-width: 170px;
             line-height: 1.4;
         }
 
         .statement-footer .signature-area {
             text-align: right;
-            border-top: 2px solid #1c2128;
+            border-top: 2px solid var(--color-primary);
             padding-top: 3px;
             width: 120px;
         }
@@ -4758,18 +4816,18 @@
         .statement-footer .signature-area .sign-name {
             font-weight: 800;
             font-size: 13px;
-            color: #1c2128;
+            color: var(--text-main);
             letter-spacing: 0.5px;
         }
 
         .statement-footer .signature-area .sign-label {
             font-size: 7px;
-            color: #666;
+            color: var(--text-muted);
             text-transform: uppercase;
         }
 
         .statement-bottom-bar {
-            background: #1c2128;
+            background: var(--color-primary);
             height: 8px;
             width: 100%;
         }
@@ -4777,8 +4835,8 @@
         .statement-download-btn {
             margin-top: 12px;
             width: 100%;
-            background: #1c2128;
-            color: white;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
             border: none;
             padding: 10px;
             border-radius: 10px;
@@ -4798,7 +4856,7 @@
         }
 
         .statement-download-btn i {
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .statement-close-btn {
@@ -4816,7 +4874,7 @@
 
         .statement-close-btn:hover {
             background: #fff;
-            color: #1c2128;
+            color: var(--text-main);
         }
 
         /* ── TUTORIAL OVERLAY ── */
@@ -4827,7 +4885,7 @@
             width: 100%;
             height: 100%;
             z-index: 9999;
-            background: #ffffff;
+            background: var(--bg-app);
             display: none;
             flex-direction: column;
             overflow: hidden;
@@ -4914,7 +4972,7 @@
         .tutorial-slide h2 {
             font-size: 26px;
             font-weight: 800;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 10px;
             letter-spacing: -0.5px;
             line-height: 1.2;
@@ -4922,14 +4980,14 @@
 
         .tutorial-slide p {
             font-size: 14px;
-            color: #555;
+            color: var(--text-muted);
             line-height: 1.7;
             max-width: 360px;
             margin: 0 auto;
         }
 
         .tutorial-slide .highlight {
-            color: #f5b83d;
+            color: var(--accent);
             font-weight: 600;
         }
 
@@ -4946,7 +5004,7 @@
             padding: 5px 0 5px 28px;
             position: relative;
             font-size: 13px;
-            color: #444;
+            color: var(--text-muted);
             line-height: 1.5;
         }
 
@@ -4955,7 +5013,7 @@
             position: absolute;
             left: 0;
             top: 5px;
-            color: #f5b83d;
+            color: var(--accent);
             font-size: 14px;
         }
 
@@ -4982,19 +5040,19 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #d0d0d0;
+            background: var(--text-muted);
             transition: all 0.3s ease;
             cursor: default;
         }
 
         .tutorial-dots .dot.active {
-            background: #f5b83d;
+            background: var(--accent);
             transform: scale(1.25);
         }
 
         .tutorial-btn-next {
-            background: #1c2128;
-            color: #fff;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
             border: none;
             padding: 12px 32px;
             border-radius: 30px;
@@ -5014,37 +5072,37 @@
 
         .tutorial-btn-next i {
             font-size: 14px;
-            color: #f5b83d;
+            color: var(--accent);
         }
 
         .tutorial-btn-next.finish {
-            background: #f5b83d;
-            color: #1c2128;
+            background: var(--accent);
+            color: var(--accent-text);
         }
 
         .tutorial-btn-next.finish i {
-            color: #1c2128;
+            color: var(--accent-text);
         }
 
         /* ── TUTORIAL SLIDE COLORS ── */
         .tutorial-slide-1 .slide-bg-decor {
-            background: #1c2128;
+            background: var(--color-primary);
         }
         .tutorial-slide-1 .slide-bg-decor-2 {
-            background: #1c2128;
+            background: var(--color-primary);
         }
         .tutorial-slide-1 .slide-icon-wrap {
-            background: #1c2128;
+            background: var(--color-primary);
         }
 
         .tutorial-slide-2 .slide-bg-decor {
-            background: #f5b83d;
+            background: var(--accent);
         }
         .tutorial-slide-2 .slide-bg-decor-2 {
-            background: #f5b83d;
+            background: var(--accent);
         }
         .tutorial-slide-2 .slide-icon-wrap {
-            background: #f5b83d;
+            background: var(--accent);
         }
 
         .tutorial-slide-3 .slide-bg-decor {
@@ -5080,7 +5138,8 @@
         /* ── RESPONSIVE TWEAKS ── */
         @media (max-width: 420px) {
             .app-content {
-                padding: 0 0 20px 0;
+                padding: 0 0 60px 0;
+                padding-bottom: calc(60px + env(safe-area-inset-bottom, 20px));
             }
             .service-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -5223,7 +5282,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: var(--overlay-bg);
             backdrop-filter: blur(8px);
             z-index: 3500;
             display: none;
@@ -5237,7 +5296,7 @@
         }
 
         .admin-notif-modal {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 24px;
             width: 100%;
             max-width: 420px;
@@ -5249,23 +5308,23 @@
         }
 
         .admin-notif-header {
-            background: #1c2128;
+            background: var(--hero-bg);
             padding: 16px 18px;
             display: flex;
             align-items: center;
             gap: 12px;
-            border-bottom: 3px solid #f5b83d;
+            border-bottom: 3px solid var(--accent);
         }
 
         .admin-notif-header .admin-notif-icon {
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: #f5b83d;
+            background: var(--accent);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #1c2128;
+            color: var(--accent-text);
             font-size: 16px;
             flex-shrink: 0;
         }
@@ -5273,7 +5332,7 @@
         .admin-notif-header span {
             font-size: 16px;
             font-weight: 700;
-            color: #fff;
+            color: var(--text-light);
             flex: 1;
         }
 
@@ -5284,7 +5343,7 @@
 
         .admin-notif-body p {
             font-size: 13px;
-            color: #444;
+            color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 4px;
         }
@@ -5293,7 +5352,7 @@
             margin-top: 10px;
             border-radius: 12px;
             overflow: hidden;
-            background: #f5f5f5;
+            background: var(--bg-hover);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -5312,8 +5371,8 @@
             margin: 12px 18px 0 18px;
             width: calc(100% - 36px);
             padding: 10px;
-            background: #f5b83d;
-            color: #1c2128;
+            background: var(--accent);
+            color: var(--accent-text);
             border: none;
             border-radius: 30px;
             font-weight: 700;
@@ -5332,7 +5391,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: var(--overlay-bg);
             backdrop-filter: blur(4px);
             z-index: 3600;
             display: none;
@@ -5346,7 +5405,7 @@
         }
 
         .offline-modal {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 24px;
             width: 100%;
             max-width: 320px;
@@ -5358,7 +5417,7 @@
 
         .offline-modal .offline-icon {
             font-size: 48px;
-            color: #dc2626;
+            color: var(--offline-bg);
             display: block;
             margin-bottom: 10px;
         }
@@ -5366,13 +5425,13 @@
         .offline-modal h3 {
             font-size: 20px;
             font-weight: 700;
-            color: #1c2128;
+            color: var(--text-main);
             margin-bottom: 6px;
         }
 
         .offline-modal p {
             font-size: 13px;
-            color: #555;
+            color: var(--text-muted);
             line-height: 1.6;
         }
     </style>
@@ -5421,7 +5480,7 @@
                         <span class="highlight">web development</span>, and
                         <span class="highlight">cyber security technical services</span>.
                     </p>
-                    <p style="margin-top:8px;font-size:13px;color:#666;">
+                    <p style="margin-top:8px;font-size:13px;color:var(--text-muted);">
                         Our mission: to provide innovative, secure solutions that help your business grow.
                     </p>
                 </div>
@@ -5474,13 +5533,13 @@
                 <div class="slide-content">
                     <div class="slide-icon-wrap"><i class="fa-solid fa-heart"></i></div>
                     <h2>Thank You for Choosing <span class="highlight">Buffer Zone</span></h2>
-                    <p style="font-size:16px;font-weight:500;color:#1c2128;">
+                    <p style="font-size:16px;font-weight:500;color:var(--text-main);">
                         We're excited to work with you!
                     </p>
                     <p style="margin-top:6px;">
                         Tap <strong>"Get Started"</strong> below to dive into the app.
                     </p>
-                    <p style="margin-top:4px;font-size:12px;color:#888;">
+                    <p style="margin-top:4px;font-size:12px;color:var(--text-muted);">
                         You'll only see this tour once.
                     </p>
                 </div>
@@ -5578,10 +5637,10 @@
 
             <div id="orderFlowView" class="view">
                 <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
-                    <button id="backFromOrder" style="background: none; border: none; font-size: 14px; color: #1c2128; cursor: pointer; padding: 3px;">
+                    <button id="backFromOrder" style="background: none; border: none; font-size: 14px; color: var(--text-main); cursor: pointer; padding: 3px;">
                         <i class="fa-solid fa-arrow-left"></i>
                     </button>
-                    <h3 style="font-weight: 700; font-size: 12px; color: #1c2128;">Customize Order</h3>
+                    <h3 style="font-weight: 700; font-size: 12px; color: var(--text-main);">Customize Order</h3>
                 </div>
                 <div id="orderFlowContainer" class="order-flow-container">
                 </div>
@@ -5589,10 +5648,10 @@
 
             <div id="flyerDetailView" class="view">
                 <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
-                    <button id="backFromFlyerDetail" style="background: none; border: none; font-size: 14px; color: #1c2128; cursor: pointer; padding: 3px;">
+                    <button id="backFromFlyerDetail" style="background: none; border: none; font-size: 14px; color: var(--text-main); cursor: pointer; padding: 3px;">
                         <i class="fa-solid fa-arrow-left"></i>
                     </button>
-                    <h3 style="font-weight: 700; font-size: 12px; color: #1c2128;">Flyer Details</h3>
+                    <h3 style="font-weight: 700; font-size: 12px; color: var(--text-main);">Flyer Details</h3>
                 </div>
                 <div class="flyer-detail-view">
                     <div class="flyer-detail-container">
@@ -5620,16 +5679,16 @@
 
             <div id="ordersView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
-                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Your Orders</h3>
-                    <p style="color: #888; font-size: 9px;">Track your projects and payments.</p>
+                    <h3 style="font-weight: 700; font-size: 15px; color: var(--text-main);">Your Orders</h3>
+                    <p style="color: var(--text-muted); font-size: 9px;">Track your projects and payments.</p>
                 </div>
                 <div class="order-grid" id="ordersGrid"></div>
             </div>
 
             <div id="historyView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
-                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">Transaction History</h3>
-                    <p style="color: #888; font-size: 9px;">Tap a transaction to view more details.</p>
+                    <h3 style="font-weight: 700; font-size: 15px; color: var(--text-main);">Transaction History</h3>
+                    <p style="color: var(--text-muted); font-size: 9px;">Tap a transaction to view more details.</p>
                 </div>
                 <div id="paymentReminderBanner" class="payment-reminder-banner">
                 </div>
@@ -5638,8 +5697,8 @@
 
             <div id="samplesView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
-                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">📁 Work Samples</h3>
-                    <p style="color: #888; font-size: 9px;">Browse through our recent projects.</p>
+                    <h3 style="font-weight: 700; font-size: 15px; color: var(--text-main);">📁 Work Samples</h3>
+                    <p style="color: var(--text-muted); font-size: 9px;">Browse through our recent projects.</p>
                 </div>
                 <div id="samplesContainer" class="samples-grid"></div>
             </div>
@@ -5655,8 +5714,8 @@
 
             <div id="accountView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
-                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">💰 My Account</h3>
-                    <p style="color: #888; font-size: 9px;">Manage your balance, referrals, and withdrawals.</p>
+                    <h3 style="font-weight: 700; font-size: 15px; color: var(--text-main);">💰 My Account</h3>
+                    <p style="color: var(--text-muted); font-size: 9px;">Manage your balance, referrals, and withdrawals.</p>
                 </div>
 
                 <div class="account-section">
@@ -5688,8 +5747,8 @@
 
                     <div class="account-view" id="accountWithdrawView">
                         <div style="text-align:center; padding:17px 0;">
-                            <p style="color:#888; font-size:11px;">Click the "Withdraw" button below to request a withdrawal from your account.</p>
-                            <button class="withdraw-btn" id="withdrawBtnFromView" style="margin-top:10px; background:#f5b83d; border:none; padding:10px 26px; border-radius:26px; font-weight:700; font-size:12px; color:#1c2128; cursor:pointer; display:inline-flex; align-items:center; gap:7px;">
+                            <p style="color:var(--text-muted); font-size:11px;">Click the "Withdraw" button below to request a withdrawal from your account.</p>
+                            <button class="withdraw-btn" id="withdrawBtnFromView" style="margin-top:10px; background:var(--accent); border:none; padding:10px 26px; border-radius:26px; font-weight:700; font-size:12px; color:var(--accent-text); cursor:pointer; display:inline-flex; align-items:center; gap:7px;">
                                 <i class="fa-solid fa-arrow-up"></i> Withdraw Funds
                             </button>
                         </div>
@@ -5701,8 +5760,8 @@
 
             <div id="profileView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
-                    <h3 style="font-weight: 700; font-size: 15px; color: #1c2128;">My Profile</h3>
-                    <p style="color: #888; font-size: 9px;">Your personal information.</p>
+                    <h3 style="font-weight: 700; font-size: 15px; color: var(--text-main);">My Profile</h3>
+                    <p style="color: var(--text-muted); font-size: 9px;">Your personal information.</p>
                 </div>
                 <div class="profile-card">
                     <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
@@ -5713,7 +5772,7 @@
                     <div class="profile-field"><i class="fa-solid fa-envelope"></i><span class="label">Email</span><span class="value" id="profileEmail">No email</span></div>
                     <div class="profile-field"><i class="fa-solid fa-calendar"></i><span class="label">Joined</span><span class="value" id="profileJoined">N/A</span></div>
                     <div class="profile-about">
-                        <h4 style="font-size: 9px; font-weight: 600; color: #1c2128; margin-bottom: 3px;">About</h4>
+                        <h4 style="font-size: 9px; font-weight: 600; color: var(--text-main); margin-bottom: 3px;">About</h4>
                         <p>Passionate about design and technology. Helping brands grow through innovation and strategic design.</p>
                     </div>
 
@@ -5723,17 +5782,17 @@
                         </button>
                     </div>
 
-                    <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid #f0f0f0;">
-                        <h4 style="font-size: 10px; font-weight: 700; color: #1c2128; margin-bottom: 8px;">📞 Contact Us</h4>
+                    <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border-light);">
+                        <h4 style="font-size: 10px; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">📞 Contact Us</h4>
                         <div style="display: flex; flex-direction: column; gap: 6px;">
-                            <a href="https://wa.me/260768658484" target="_blank" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: #f8f9fc; border-radius: 8px; text-decoration: none; color: #1c2128; font-size: 10px; font-weight: 500; border: 1px solid #f0f0f0;">
-                                <i class="fa-brands fa-whatsapp" style="color: #f5b83d; font-size: 16px;"></i> WhatsApp: 0768658484
+                            <a href="https://wa.me/260768658484" target="_blank" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: var(--bg-body); border-radius: 8px; text-decoration: none; color: var(--text-main); font-size: 10px; font-weight: 500; border: 1px solid var(--border-light);">
+                                <i class="fa-brands fa-whatsapp" style="color: var(--accent); font-size: 16px;"></i> WhatsApp: 0768658484
                             </a>
-                            <a href="https://facebook.com/BufferZone" target="_blank" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: #f8f9fc; border-radius: 8px; text-decoration: none; color: #1c2128; font-size: 10px; font-weight: 500; border: 1px solid #f0f0f0;">
-                                <i class="fa-brands fa-facebook" style="color: #f5b83d; font-size: 16px;"></i> Facebook: Buffer ZONE
+                            <a href="https://facebook.com/BufferZone" target="_blank" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: var(--bg-body); border-radius: 8px; text-decoration: none; color: var(--text-main); font-size: 10px; font-weight: 500; border: 1px solid var(--border-light);">
+                                <i class="fa-brands fa-facebook" style="color: var(--accent); font-size: 16px;"></i> Facebook: Buffer ZONE
                             </a>
-                            <a href="tel:+260976760537" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: #f8f9fc; border-radius: 8px; text-decoration: none; color: #1c2128; font-size: 10px; font-weight: 500; border: 1px solid #f0f0f0;">
-                                <i class="fa-solid fa-phone" style="color: #f5b83d; font-size: 16px;"></i> SMS/CALLS: 0976760537
+                            <a href="tel:+260976760537" style="display: flex; align-items: center; gap: 10px; padding: 6px 10px; background: var(--bg-body); border-radius: 8px; text-decoration: none; color: var(--text-main); font-size: 10px; font-weight: 500; border: 1px solid var(--border-light);">
+                                <i class="fa-solid fa-phone" style="color: var(--accent); font-size: 16px;"></i> SMS/CALLS: 0976760537
                             </a>
                         </div>
                     </div>
@@ -5757,26 +5816,26 @@
             <div class="payment-details" style="margin-bottom:6px;">
                 <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;">
                     <div style="flex:1; min-width:120px;">
-                        <div style="font-size:8px; color:#888;">Customer</div>
-                        <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentCustomerName">—</div>
+                        <div style="font-size:8px; color:var(--text-muted);">Customer</div>
+                        <div style="font-weight:600; font-size:11px; color:var(--text-main);" id="paymentCustomerName">—</div>
                     </div>
                     <div style="flex:1; min-width:100px;">
-                        <div style="font-size:8px; color:#888;">Service</div>
-                        <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentServiceName">—</div>
+                        <div style="font-size:8px; color:var(--text-muted);">Service</div>
+                        <div style="font-weight:600; font-size:11px; color:var(--text-main);" id="paymentServiceName">—</div>
                     </div>
                     <div style="flex:1; min-width:80px;">
-                        <div style="font-size:8px; color:#888;">Qty</div>
-                        <div style="font-weight:600; font-size:11px; color:#1c2128;" id="paymentQty">—</div>
+                        <div style="font-size:8px; color:var(--text-muted);">Qty</div>
+                        <div style="font-weight:600; font-size:11px; color:var(--text-main);" id="paymentQty">—</div>
                     </div>
                 </div>
-                <div style="margin-top:4px; padding-top:4px; border-top:1px solid #f0f0f0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;">
+                <div style="margin-top:4px; padding-top:4px; border-top:1px solid var(--border-light); display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;">
                     <div>
-                        <div style="font-size:8px; color:#888;">Customization</div>
-                        <div style="font-weight:500; font-size:10px; color:#1c2128;" id="paymentCustomization">—</div>
+                        <div style="font-size:8px; color:var(--text-muted);">Customization</div>
+                        <div style="font-weight:500; font-size:10px; color:var(--text-main);" id="paymentCustomization">—</div>
                     </div>
                     <div>
-                        <div style="font-size:8px; color:#888;">Notes</div>
-                        <div style="font-weight:500; font-size:10px; color:#1c2128;" id="paymentNotes">—</div>
+                        <div style="font-size:8px; color:var(--text-muted);">Notes</div>
+                        <div style="font-weight:500; font-size:10px; color:var(--text-main);" id="paymentNotes">—</div>
                     </div>
                 </div>
             </div>
@@ -5786,20 +5845,20 @@
                     <div>
                         <div class="name" id="paymentName">Airtel Mobile Number</div>
                         <div class="number" id="paymentNumber">0976760537</div>
-                        <div style="font-size:9px; color:#555;" id="paymentAccountName">Jubel Mobela</div>
+                        <div style="font-size:9px; color:var(--text-muted);" id="paymentAccountName">Jubel Mobela</div>
                     </div>
                     <div style="text-align:right;">
-                        <div style="font-size:9px; color:#888;">Amount to pay</div>
+                        <div style="font-size:9px; color:var(--text-muted);">Amount to pay</div>
                         <div class="amount-large" id="paymentAmount">ZMW 350.00</div>
-                        <div style="font-size:9px; color:#888;">50% of total</div>
+                        <div style="font-size:9px; color:var(--text-muted);">50% of total</div>
                     </div>
                 </div>
             </div>
 
-            <div id="walletPaymentSection" style="margin-bottom:10px; padding:9px; border-radius:9px; border:1px solid #e0e0e0; background:#fafbfc;">
+            <div id="walletPaymentSection" style="margin-bottom:10px; padding:9px; border-radius:9px; border:1px solid var(--border-light); background:var(--bg-body);">
                 <div style="display:flex; align-items:center; gap:7px; flex-wrap:wrap;">
                     <input type="checkbox" id="payWithWalletCheck" />
-                    <label for="payWithWalletCheck" style="font-weight:600; font-size:10px; color:#1c2128; cursor:pointer;">Pay with Buffer Zone Wallet</label>
+                    <label for="payWithWalletCheck" style="font-weight:600; font-size:10px; color:var(--text-main); cursor:pointer;">Pay with Buffer Zone Wallet</label>
                 </div>
                 <div id="walletStatus" style="font-size:9px; margin-top:3px; padding:3px 7px; border-radius:5px;">
                     Wallet balance: <span id="walletBalanceDisplay">ZMW 0.00</span>
@@ -5831,11 +5890,11 @@
                 <div class="row"><span class="label">Original Price</span><span class="val" id="origPriceVal">ZMW 0.00</span></div>
                 <div class="row"><span class="label">Discount</span><span class="val discounted" id="discountVal">- ZMW 0.00</span></div>
                 <div class="row"><span class="label">Final Price</span><span class="val" id="finalPriceVal">ZMW 0.00</span></div>
-                <div class="row"><span class="label" style="font-weight:700;">50% Deposit</span><span class="val" style="font-weight:700;color:#f5b83d;" id="finalDepositVal">ZMW 0.00</span></div>
+                <div class="row"><span class="label" style="font-weight:700;">50% Deposit</span><span class="val" style="font-weight:700;color:var(--accent);" id="finalDepositVal">ZMW 0.00</span></div>
             </div>
 
             <div style="margin-bottom:9px;" id="uploadSection">
-                <label style="font-weight:600; font-size:9px; color:#1c2128; display:block; margin-bottom:3px;">Upload transaction screenshot</label>
+                <label style="font-weight:600; font-size:9px; color:var(--text-main); display:block; margin-bottom:3px;">Upload transaction screenshot</label>
                 <div class="upload-area" id="uploadArea">
                     <i class="fa-regular fa-image"></i>
                     <p>Tap to upload receipt or screenshot</p>
@@ -5848,7 +5907,7 @@
             <button class="btn-primary" id="confirmPaymentBtn">
                 <i class="fa-regular fa-circle-check"></i> Confirm Payment & Start Project
             </button>
-            <p style="text-align:center; font-size:8px; color:#888; margin-top:5px;">
+            <p style="text-align:center; font-size:8px; color:var(--text-muted); margin-top:5px;">
                 <i class="fa-regular fa-clock"></i> Project begins after payment confirmation
             </p>
         </div>
@@ -5866,7 +5925,7 @@
     <div class="withdraw-page-overlay" id="withdrawPage">
         <div class="withdraw-page">
             <div class="page-header">
-                <h2><i class="fa-solid fa-arrow-up" style="color:#f5b83d; margin-right:6px;"></i> Withdraw Funds</h2>
+                <h2><i class="fa-solid fa-arrow-up" style="color:var(--accent); margin-right:6px;"></i> Withdraw Funds</h2>
                 <button class="close-btn" id="withdrawPageClose"><i class="fa-solid fa-times"></i></button>
             </div>
             <div class="subtitle">Transfer your available earnings to your registered mobile number below.</div>
@@ -5878,7 +5937,7 @@
             </div>
 
             <div class="transfer-note" id="transferNote">
-                <i class="fa-solid fa-info-circle" style="color:#f5b83d; margin-right:6px;"></i>
+                <i class="fa-solid fa-info-circle" style="color:var(--accent); margin-right:6px;"></i>
                 Once approved, funds will be transferred to <strong id="wdTransferNumber">—</strong>
             </div>
 
@@ -5924,13 +5983,13 @@
             <div class="form-group">
                 <label>Recipient Referral Code</label>
                 <input type="text" id="sendPageReferralInput" placeholder="e.g. BZ-ABCDE" />
-                <button class="apply-btn" id="sendPageSearchBtn" style="margin-top:4px; width:100%; background:#f5b83d; color:#1c2128; border:none; padding:8px; border-radius:10px; font-weight:700; font-size:12px; cursor:pointer;">🔍 Search</button>
+                <button class="apply-btn" id="sendPageSearchBtn" style="margin-top:4px; width:100%; background:var(--accent); color:var(--accent-text); border:none; padding:8px; border-radius:10px; font-weight:700; font-size:12px; cursor:pointer;">🔍 Search</button>
             </div>
 
             <div class="form-group">
                 <label>Recipient</label>
                 <div class="search-result" id="sendPageSearchResult">
-                    <span style="color:#888;">Enter a referral code and click Search.</span>
+                    <span style="color:var(--text-muted);">Enter a referral code and click Search.</span>
                 </div>
             </div>
 
@@ -6100,6 +6159,13 @@
                 <i class="fa-regular fa-user"></i>
                 <span class="nav-label">Profile</span>
             </button>
+
+            <!-- Dark Theme Toggle -->
+            <div class="divider"></div>
+            <button class="nav-link" id="themeToggle">
+                <i class="fa-solid fa-circle-half-stroke"></i>
+                <span class="nav-label">Toggle Theme</span>
+            </button>
         </div>
     </div>
 
@@ -6114,7 +6180,7 @@
                     </div>
                     <div>
                         <div class="invoice-title">INVOICE</div>
-                        <p class="invoice-id">ID NO : <span id="recOrderId" style="color:white;">ORD-001</span></p>
+                        <p class="invoice-id">ID NO : <span id="recOrderId" style="color:var(--text-light);">ORD-001</span></p>
                     </div>
                 </div>
 
@@ -6186,7 +6252,7 @@
                     </div>
                     <div>
                         <div class="statement-title">STATEMENT</div>
-                        <p class="statement-ref">REF : <span id="stmtRef" style="color:white;">STM-001</span></p>
+                        <p class="statement-ref">REF : <span id="stmtRef" style="color:var(--text-light);">STM-001</span></p>
                     </div>
                 </div>
 
@@ -6265,7 +6331,7 @@
             <span class="offline-icon"><i class="fa-solid fa-wifi-slash"></i></span>
             <h3>No Internet Connection</h3>
             <p>Please check your network settings and try again.</p>
-            <p style="font-size:11px; color:#aaa; margin-top:6px;">The app will automatically resume when connectivity is restored.</p>
+            <p style="font-size:11px; color:var(--text-muted); margin-top:6px;">The app will automatically resume when connectivity is restored.</p>
         </div>
     </div>
 
@@ -6658,6 +6724,24 @@
             });
         });
 
+        /* ─── DARK THEME TOGGLE ─── */
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        const themeIcon = savedTheme === 'dark' ? 'fa-sun' : 'fa-moon';
+        const themeLabel = savedTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+        themeToggle.innerHTML = `<i class="fa-solid ${themeIcon}"></i> <span class="nav-label">${themeLabel}</span>`;
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const newTheme = isDark ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            const newIcon = newTheme === 'dark' ? 'fa-sun' : 'fa-moon';
+            const newLabel = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+            themeToggle.innerHTML = `<i class="fa-solid ${newIcon}"></i> <span class="nav-label">${newLabel}</span>`;
+        });
+
         let promoButtonTarget = null;
 
         function showToast(msg, type = 'info') {
@@ -6667,13 +6751,13 @@
                         bottom: 77px;
                         left: 50%;
                         transform: translateX(-50%);
-                        background: #1c2128;
-                        color: #ffffff;
+                        background: var(--color-primary);
+                        color: var(--color-primary-text);
                         padding: 10px 20px;
                         border-radius: 10px;
                         font-size: 11px;
                         font-weight: 500;
-                        box-shadow: 0 7px 26px rgba(0,0,0,0.15);
+                        box-shadow: var(--shadow-lg);
                         z-index: 3000;
                         opacity: 0;
                         transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -6682,7 +6766,7 @@
                         max-width: 90%;
                     `;
             const icon = type === 'success' ? 'fa-check-circle' : (type === 'error' ? 'fa-exclamation-circle' : 'fa-bell');
-            toast.innerHTML = `<i class="fas ${icon}" style="color: #f5b83d; margin-right: 7px;"></i> ${msg}`;
+            toast.innerHTML = `<i class="fas ${icon}" style="color: var(--accent); margin-right: 7px;"></i> ${msg}`;
             document.body.appendChild(toast);
             requestAnimationFrame(() => {
                 toast.style.opacity = '1';
@@ -6787,7 +6871,7 @@
                         cloudinaryScreenshotUrl = info.secure_url;
                         cloudinaryScreenshotUrlInput.value = info.secure_url;
                         fileName.textContent = info.original_filename + '.' + info.format;
-                        uploadArea.style.borderColor = '#f5b83d';
+                        uploadArea.style.borderColor = 'var(--accent)';
                         uploadArea.style.background = '#fffcf0';
                         showToast('Screenshot uploaded!', 'success');
                     }
@@ -7035,10 +7119,10 @@
 
             if (allData.disabled === true) {
                 document.body.innerHTML = `
-                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
-                                <i class="fa-solid fa-triangle-exclamation" style="font-size:41px; color:#f5b83d; margin-bottom:14px;"></i>
-                                <h1 style="font-size:20px; font-weight:700; color:#1c2128;">App Under Maintenance</h1>
-                                <p style="color:#888; text-align:center; max-width:272px; margin-top:7px;">We are currently performing updates. Please check back later.</p>
+                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:var(--bg-body); padding:20px;">
+                                <i class="fa-solid fa-triangle-exclamation" style="font-size:41px; color:var(--accent); margin-bottom:14px;"></i>
+                                <h1 style="font-size:20px; font-weight:700; color:var(--text-main);">App Under Maintenance</h1>
+                                <p style="color:var(--text-muted); text-align:center; max-width:272px; margin-top:7px;">App is currently under maintenance. Please check back later.</p>
                             </div>
                         `;
                 return;
@@ -7400,7 +7484,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:17px;">No services available.</div>`;
+                    `<div class="text-muted text-center" style="padding:17px; color:var(--text-muted);">No services available.</div>`;
                 return;
             }
 
@@ -7434,7 +7518,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:17px;">No orders found.</div>`;
+                    `<div class="text-muted text-center" style="padding:17px; color:var(--text-muted);">No orders found.</div>`;
                 return;
             }
             container.innerHTML = entries.map(([key, o]) => {
@@ -7460,8 +7544,8 @@
                 if (o.status === 'completed' || o.status === 'done') {
                     actionHtml = `
                                 <div class="detail-row" style="border-bottom:none; padding-top:6px;">
-                                    <button class="view-receipt-btn" data-key="${key}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
-                                        <i class="fa-regular fa-file-lines" style="color:#f5b83d;"></i> View Receipt
+                                    <button class="view-receipt-btn" data-key="${key}" style="background:transparent; color:var(--text-main); border:1px solid var(--accent); padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
+                                        <i class="fa-regular fa-file-lines" style="color:var(--accent);"></i> View Receipt
                                     </button>
                                 </div>
                             `;
@@ -7471,8 +7555,8 @@
                 if (o.paymentProof && o.paymentProof !== 'Wallet Payment' && o.paymentProof !== 'N/A') {
                     screenshotBtnHtml = `
                                 <div class="detail-row" style="border-bottom:none; padding-top:6px;">
-                                    <button class="view-screenshot-btn" data-url="${o.paymentProof}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
-                                        <i class="fa-regular fa-image" style="color:#f5b83d;"></i> View Screenshot
+                                    <button class="view-screenshot-btn" data-url="${o.paymentProof}" style="background:transparent; color:var(--text-main); border:1px solid var(--accent); padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
+                                        <i class="fa-regular fa-image" style="color:var(--accent);"></i> View Screenshot
                                     </button>
                                 </div>
                             `;
@@ -7487,7 +7571,7 @@
                                         <div class="order-meta">
                                             <span>${escapeHtml(o.customer || 'N/A')}</span>
                                             <span>${escapeHtml(o.date || 'N/A')}</span>
-                                            ${o.discountApplied ? `<span style="background:#fef9e7;color:#f5b83d;padding:0 5px;border-radius:7px;font-size:9px;">${o.discountApplied}% OFF</span>` : ''}
+                                            ${o.discountApplied ? `<span style="background:#fef9e7;color:var(--accent);padding:0 5px;border-radius:7px;font-size:9px;">${o.discountApplied}% OFF</span>` : ''}
                                         </div>
                                     </div>
                                     <div class="right">
@@ -7583,7 +7667,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:17px;">No transactions found.</div>`;
+                    `<div class="text-muted text-center" style="padding:17px; color:var(--text-muted);">No transactions found.</div>`;
                 return;
             }
 
@@ -7629,7 +7713,7 @@
 
                     const direction = t.type?.toLowerCase().includes('sent') ? 'Sent to' : 'Received from';
                     otherPartyInfo = `
-                                <div style="font-size:9px; color:#555; margin-top:2px;">
+                                <div style="font-size:9px; color:var(--text-muted); margin-top:2px;">
                                     ${direction}: <strong>${escapeHtml(otherName)}</strong> (📞 ${escapeHtml(otherPhone)}) &middot; Balance: ${otherBalance}
                                 </div>
                             `;
@@ -7653,8 +7737,8 @@
                 if (isWithdrawTx || isSendTx || isReceiveTx) {
                     statementBtnHtml = `
                                 <div class="h-row" style="border-bottom:none; padding-top:6px;">
-                                    <button class="view-statement-btn" data-key="${key}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
-                                        <i class="fa-regular fa-file-lines" style="color:#f5b83d;"></i> View Statement
+                                    <button class="view-statement-btn" data-key="${key}" style="background:transparent; color:var(--text-main); border:1px solid var(--accent); padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
+                                        <i class="fa-regular fa-file-lines" style="color:var(--accent);"></i> View Statement
                                     </button>
                                 </div>
                             `;
@@ -7776,7 +7860,7 @@
 
             if (entries.length === 0) {
                 notifList.innerHTML =
-                    `<div style="text-align:center;padding:26px;color:#888;"><i class="fa-regular fa-bell-slash" style="font-size:27px;color:#ddd;display:block;margin-bottom:7px;"></i>No notifications</div>`;
+                    `<div style="text-align:center;padding:26px;color:var(--text-muted);"><i class="fa-regular fa-bell-slash" style="font-size:27px;color:var(--border-light);display:block;margin-bottom:7px;"></i>No notifications</div>`;
                 notifBadge.textContent = '0';
                 notifBadge.style.display = 'none';
                 return;
@@ -7829,9 +7913,9 @@
                 if (items.length === 0) continue;
 
                 html += `
-                            <div style="font-size:14px;font-weight:700;color:#1c2128;margin:17px 0 9px 0;padding-bottom:5px;border-bottom:2px solid #f0f0f0;display:flex;align-items:center;gap:7px;">
+                            <div style="font-size:14px;font-weight:700;color:var(--text-main);margin:17px 0 9px 0;padding-bottom:5px;border-bottom:2px solid var(--border-light);display:flex;align-items:center;gap:7px;">
                                 ${typeLabels[type] || type}
-                                <span style="font-size:9px;background:#f0f0f0;padding:0 9px;border-radius:10px;font-weight:600;color:#555;">${items.length}</span>
+                                <span style="font-size:9px;background:var(--bg-hover);padding:0 9px;border-radius:10px;font-weight:600;color:var(--text-muted);">${items.length}</span>
                             </div>
                             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
                         `;
@@ -7840,7 +7924,7 @@
                     let frameHtml = '';
                     const imgHtml = post.imageUrl ?
                         `<img src="${post.imageUrl}" alt="${post.title || 'Work'}" loading="lazy" style="width:100%;height:100%;display:block;${type === 'app' ? 'object-fit:cover;border-radius:15px;' : 'object-fit:contain;'}" />` :
-                        `<div style="color:#ccc;font-size:27px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><i class="fa-regular fa-image"></i></div>`;
+                        `<div style="color:var(--border-light);font-size:27px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><i class="fa-regular fa-image"></i></div>`;
 
                     if (type === 'app') {
                         frameHtml = `
@@ -7858,7 +7942,7 @@
                                 `;
                     } else {
                         frameHtml = `
-                                    <div style="width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:#f5f5f5;display:flex;align-items:center;justify-content:center;position:relative;">
+                                    <div style="width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:var(--bg-hover);display:flex;align-items:center;justify-content:center;position:relative;">
                                         ${imgHtml}
                                     </div>
                                 `;
@@ -7882,7 +7966,7 @@
 
             if (html === '') {
                 html =
-                    `<div style="text-align:center;padding:26px 0;color:#888;">No samples available yet. Check back soon!</div>`;
+                    `<div style="text-align:center;padding:26px 0;color:var(--text-muted);">No samples available yet. Check back soon!</div>`;
             }
             container.innerHTML = html;
         }
@@ -7920,7 +8004,7 @@
             if (!pendingInfo) {
                 pendingInfo = document.createElement('div');
                 pendingInfo.className = 'pending-info';
-                pendingInfo.style.cssText = 'font-size:8px;color:#f5b83d;margin-top:2px;';
+                pendingInfo.style.cssText = 'font-size:8px;color:var(--accent);margin-top:2px;';
                 balanceBox.querySelector('.left').appendChild(pendingInfo);
             }
             if (pendingTotal > 0) {
@@ -7957,7 +8041,7 @@
 
             if (entries.length === 0) {
                 container.innerHTML =
-                    `<div style="text-align:center;padding:14px;color:#888;font-size:10px;">No transactions yet.</div>`;
+                    `<div style="text-align:center;padding:14px;color:var(--text-muted);font-size:10px;">No transactions yet.</div>`;
                 return;
             }
 
@@ -8008,7 +8092,7 @@
                 let iconColor = '#667eea';
                 if (t.type?.toLowerCase().includes('referral')) {
                     iconClass = 'fa-gift';
-                    iconColor = '#f5b83d';
+                    iconColor = 'var(--accent)';
                 } else if (t.type?.toLowerCase().includes('discount')) {
                     iconClass = 'fa-percent';
                     iconColor = '#00a86b';
@@ -8020,7 +8104,7 @@
                     iconColor = '#00a86b';
                 } else if (t.type?.toLowerCase().includes('payment')) {
                     iconClass = 'fa-credit-card';
-                    iconColor = '#1c2128';
+                    iconColor = 'var(--color-primary)';
                 } else {
                     iconClass = 'fa-arrow-right';
                     iconColor = '#667eea';
@@ -8064,8 +8148,8 @@
 
             if (entries.length === 0) {
                 container.innerHTML = `
-                            <div class="empty-withdrawals" style="text-align:center;padding:14px;color:#888;">
-                                <i class="fa-regular fa-receipt" style="font-size:20px;color:#ddd;display:block;margin-bottom:4px;"></i>
+                            <div class="empty-withdrawals" style="text-align:center;padding:14px;color:var(--text-muted);">
+                                <i class="fa-regular fa-receipt" style="font-size:20px;color:var(--border-light);display:block;margin-bottom:4px;"></i>
                                 No withdrawal requests yet.
                             </div>
                         `;
@@ -8171,7 +8255,7 @@
                     uploadSection.style.display = 'block';
                 }
             } else {
-                walletStatusEl.style.color = '#888';
+                walletStatusEl.style.color = 'var(--text-muted)';
                 walletSufficiency.textContent = '';
                 payWithWalletCheckEl.disabled = true;
                 payWithWalletCheckEl.style.cursor = 'not-allowed';
@@ -8399,8 +8483,8 @@
             paymentPage.classList.remove('open');
             cloudinaryScreenshotUrlInput.value = '';
             fileName.textContent = 'No file chosen';
-            uploadArea.style.borderColor = '#ddd';
-            uploadArea.style.background = '#fafbfc';
+            uploadArea.style.borderColor = 'var(--border-light)';
+            uploadArea.style.background = 'var(--bg-input)';
             payWithWalletCheck.checked = false;
             uploadSection.style.display = 'block';
 
@@ -8625,7 +8709,7 @@
             sendBalanceDisplay.textContent = `ZMW ${availableBalance.toFixed(2)}`;
             sendPageAvailBalance.textContent = `ZMW ${availableBalance.toFixed(2)}`;
             sendPageAmountInput.value = '';
-            sendPageSearchResult.innerHTML = `<span style="color:#888;">Enter a referral code and click Search.</span>`;
+            sendPageSearchResult.innerHTML = `<span style="color:var(--text-muted);">Enter a referral code and click Search.</span>`;
             sendPageReferralInput.value = '';
             sendPageConfirmBtn.disabled = true;
             sendRecipientUid = null;
@@ -8642,7 +8726,7 @@
         function searchSendPageRecipient() {
             const code = sendPageReferralInput.value.trim().toUpperCase();
             if (!code) {
-                sendPageSearchResult.innerHTML = `<span style="color:#888;">Please enter a referral code.</span>`;
+                sendPageSearchResult.innerHTML = `<span style="color:var(--text-muted);">Please enter a referral code.</span>`;
                 return;
             }
 
@@ -8685,7 +8769,7 @@
 
                 sendPageSearchResult.innerHTML = `
                             <span>Send money to: <span class="name">${escapeHtml(fullName)}</span></span>
-                            <span style="font-size:9px; color:#888;">(${code})</span>
+                            <span style="font-size:9px; color:var(--text-muted);">(${code})</span>
                         `;
                 updateSendPageButtonState();
             }).catch((error) => {
@@ -8816,7 +8900,7 @@
 
             sendPageAmountInput.value = '';
             sendPageReferralInput.value = '';
-            sendPageSearchResult.innerHTML = `<span style="color:#888;">Enter a referral code and click Search.</span>`;
+            sendPageSearchResult.innerHTML = `<span style="color:var(--text-muted);">Enter a referral code and click Search.</span>`;
             sendRecipientUid = null;
             sendRecipientName = '';
             sendRecipientData = null;
@@ -8870,7 +8954,7 @@
                                         <span>${isSent ? 'Sent' : 'Received'} ZMW ${Math.abs(t.amount || 0).toFixed(2)}</span>
                                     </div>
                                     <div class="right">
-                                        <span style="font-size:9px; color:#888;">${t.date ? new Date(t.date).toLocaleString() : ''}</span>
+                                        <span style="font-size:9px; color:var(--text-muted);">${t.date ? new Date(t.date).toLocaleString() : ''}</span>
                                         <i class="fa-solid fa-chevron-down expand-icon"></i>
                                     </div>
                                 </div>
@@ -8968,7 +9052,7 @@
 
                         <div class="order-specs">
                             <h4>SPECIFICATIONS</h4>
-                            ${specsHtml || '<p class="text-muted">No specifications available.</p>'}
+                            ${specsHtml || '<p class="text-muted" style="color:var(--text-muted);">No specifications available.</p>'}
                         </div>
 
                         <div class="order-customize">
@@ -8990,9 +9074,9 @@
                         </div>
 
                         <div class="order-notes" style="margin-top:3px;">
-                            <h4 style="font-size:9px; font-weight:600; color:#1c2128; margin-bottom:4px;">📝 Add Extra Notes (Optional)</h4>
-                            <textarea id="orderNotes" placeholder="Tell us more about your requirements, special instructions, or any additional details..." style="width:100%; padding:9px; border:1px solid #eee; border-radius:9px; font-size:9px; resize:vertical; min-height:41px; background:#fafbfc; transition:border 0.2s; font-family:'Poppins',sans-serif;"></textarea>
-                            <p style="font-size:7px; color:#aaa; margin-top:3px;">These notes will be attached to your order for the team to review.</p>
+                            <h4 style="font-size:9px; font-weight:600; color:var(--text-main); margin-bottom:4px;">📝 Add Extra Notes (Optional)</h4>
+                            <textarea id="orderNotes" placeholder="Tell us more about your requirements, special instructions, or any additional details..." style="width:100%; padding:9px; border:1px solid var(--border-light); border-radius:9px; font-size:9px; resize:vertical; min-height:41px; background:var(--bg-input); transition:border 0.2s; font-family:'Poppins',sans-serif;"></textarea>
+                            <p style="font-size:7px; color:var(--text-muted); margin-top:3px;">These notes will be attached to your order for the team to review.</p>
                         </div>
 
                         <div class="order-footer">
@@ -9296,7 +9380,7 @@
                 const actionsDiv = document.querySelector('.flyer-detail-actions');
                 if (actionsDiv) actionsDiv.style.display = 'none';
                 flyerDetailForm.innerHTML =
-                    `<p style="font-size:10px;color:#888;text-align:center;padding:8px;">No form attached to this flyer.</p>`;
+                    `<p style="font-size:10px;color:var(--text-muted);text-align:center;padding:8px;">No form attached to this flyer.</p>`;
                 return;
             } else {
                 const actionsDiv = document.querySelector('.flyer-detail-actions');
@@ -9309,7 +9393,7 @@
             flyerDetailApplyBtn.className = 'btn btn-primary';
 
             let formHtml =
-                `<h4 style="font-size:11px;font-weight:700;color:#1c2128;margin-bottom:6px;">Apply as ${formType.charAt(0).toUpperCase() + formType.slice(1)}</h4>`;
+                `<h4 style="font-size:11px;font-weight:700;color:var(--text-main);margin-bottom:6px;">Apply as ${formType.charAt(0).toUpperCase() + formType.slice(1)}</h4>`;
 
             const commonFields = `
                         <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" value="${escapeHtml(currentUserData?.firstName || '')} ${escapeHtml(currentUserData?.lastName || '')}" /></div>
@@ -9424,23 +9508,23 @@
 
             if (requiresPayment) {
                 const paymentHtml = `
-                            <div id="flyerPaymentSection" style="margin-top:10px; border-top:1px solid #f0f0f0; padding-top:12px;">
-                                <h4 style="font-size:11px; font-weight:700; color:#1c2128; margin-bottom:6px;">💳 Payment Required</h4>
-                                <div style="background:#f8f9fc; border-radius:8px; padding:10px; margin-bottom:10px; border:1px solid #f0f0f0;">
+                            <div id="flyerPaymentSection" style="margin-top:10px; border-top:1px solid var(--border-light); padding-top:12px;">
+                                <h4 style="font-size:11px; font-weight:700; color:var(--text-main); margin-bottom:6px;">💳 Payment Required</h4>
+                                <div style="background:var(--bg-body); border-radius:8px; padding:10px; margin-bottom:10px; border:1px solid var(--border-light);">
                                     <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
-                                        <div><span style="font-size:9px; color:#888;">Amount to pay</span><br><span style="font-weight:700;font-size:16px;color:#f5b83d;">ZMW ${config.price || 0}</span></div>
-                                        <div><span style="font-size:9px; color:#888;">Mobile Number</span><br><span style="font-weight:600;font-size:12px;">${config.mobileNumber || 'N/A'}</span></div>
-                                        <div><span style="font-size:9px; color:#888;">Account Name</span><br><span style="font-weight:600;font-size:12px;">${config.accountName || 'N/A'}</span></div>
+                                        <div><span style="font-size:9px; color:var(--text-muted);">Amount to pay</span><br><span style="font-weight:700;font-size:16px;color:var(--accent);">ZMW ${config.price || 0}</span></div>
+                                        <div><span style="font-size:9px; color:var(--text-muted);">Mobile Number</span><br><span style="font-weight:600;font-size:12px;">${config.mobileNumber || 'N/A'}</span></div>
+                                        <div><span style="font-size:9px; color:var(--text-muted);">Account Name</span><br><span style="font-weight:600;font-size:12px;">${config.accountName || 'N/A'}</span></div>
                                     </div>
                                 </div>
-                                <label style="font-weight:600; font-size:9px; color:#1c2128; display:block; margin-bottom:4px;">Upload Payment Screenshot (Single)</label>
+                                <label style="font-weight:600; font-size:9px; color:var(--text-main); display:block; margin-bottom:4px;">Upload Payment Screenshot (Single)</label>
                                 <div class="payment-upload-area" id="flyerPaymentUpload">
                                     <i class="fa-regular fa-image"></i>
                                     <div class="file-label">Tap to upload payment screenshot</div>
                                     <div class="file-name" id="flyerPaymentFileName">No file chosen</div>
                                     <input type="hidden" id="flyerPaymentUrl" />
                                 </div>
-                                <p style="font-size:8px; color:#aaa; margin-top:4px;">Upload a screenshot of your payment confirmation.</p>
+                                <p style="font-size:8px; color:var(--text-muted); margin-top:4px;">Upload a screenshot of your payment confirmation.</p>
                             </div>
                         `;
                 flyerDetailForm.insertAdjacentHTML('beforeend', paymentHtml);
@@ -9483,7 +9567,7 @@
                                 previewImg.src = url;
                                 previewImg.style.display = 'block';
                                 paymentUpload.classList.add('has-preview');
-                                paymentUpload.style.borderColor = '#f5b83d';
+                                paymentUpload.style.borderColor = 'var(--accent)';
                                 paymentUpload.style.background = '#fffcf0';
                                 if (paymentFileName) paymentFileName.textContent = info.original_filename + '.' + info
                                     .format;
@@ -9562,7 +9646,7 @@
                             previewImg.src = url;
                             previewImg.style.display = 'block';
                             trigger.classList.add('has-preview');
-                            trigger.style.borderColor = '#f5b83d';
+                            trigger.style.borderColor = 'var(--accent)';
                             trigger.style.background = '#fffcf0';
                             if (fileNameEl) fileNameEl.textContent = info.original_filename + '.' + info.format;
                             showToast('File uploaded!', 'success');
@@ -10044,8 +10128,8 @@
 
             if (entries.length === 0) {
                 container.innerHTML = `
-                            <div class="text-muted text-center" style="padding:20px;color:#888;">
-                                <i class="fa-regular fa-clipboard" style="font-size:28px;color:#ddd;display:block;margin-bottom:6px;"></i>
+                            <div class="text-muted text-center" style="padding:20px;color:var(--text-muted);">
+                                <i class="fa-regular fa-clipboard" style="font-size:28px;color:var(--border-light);display:block;margin-bottom:6px;"></i>
                                 No applications yet.
                             </div>
                         `;
@@ -10071,7 +10155,7 @@
                         let label = k.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
                         let val = v;
                         if (val.startsWith('http')) {
-                            val = `<a href="${val}" target="_blank" style="color:#1c2128;text-decoration:underline;">View</a>`;
+                            val = `<a href="${val}" target="_blank" style="color:var(--text-main);text-decoration:underline;">View</a>`;
                         }
                         detailRows +=
                             `<div class="detail-row"><span class="label">${label}</span><span class="val">${val}</span></div>`;
@@ -10089,7 +10173,7 @@
                     const screenshots = pd.screenshots || [];
                     if (screenshots.length > 0) {
                         const links = screenshots.map((url, i) =>
-                            `<a href="${url}" target="_blank" style="color:#1c2128;text-decoration:underline;">Screenshot ${i+1}</a>`
+                            `<a href="${url}" target="_blank" style="color:var(--text-main);text-decoration:underline;">Screenshot ${i+1}</a>`
                         ).join(', ');
                         detailRows +=
                             `<div class="detail-row"><span class="label">Screenshots</span><span class="val">${links}</span></div>`;
@@ -10100,8 +10184,8 @@
                 if (a.paymentData && a.paymentData.screenshots && a.paymentData.screenshots.length > 0) {
                     screenshotBtnHtml = `
                                 <div class="detail-row" style="border-bottom:none; padding-top:6px;">
-                                    <button class="view-screenshot-btn" data-url="${a.paymentData.screenshots[0]}" style="background:transparent; color:#1c2128; border:1px solid #f5b83d; padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
-                                        <i class="fa-regular fa-image" style="color:#f5b83d;"></i> View Screenshot
+                                    <button class="view-screenshot-btn" data-url="${a.paymentData.screenshots[0]}" style="background:transparent; color:var(--text-main); border:1px solid var(--accent); padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
+                                        <i class="fa-regular fa-image" style="color:var(--accent);"></i> View Screenshot
                                     </button>
                                 </div>
                             `;
@@ -10123,7 +10207,7 @@
                                     </div>
                                 </div>
                                 <div class="app-details-expand">
-                                    ${detailRows || '<p style="font-size:10px;color:#888;text-align:center;padding:4px;">No additional details</p>'}
+                                    ${detailRows || '<p style="font-size:10px;color:var(--text-muted);text-align:center;padding:4px;">No additional details</p>'}
                                     ${screenshotBtnHtml}
                                 </div>
                             </div>
@@ -10472,8 +10556,8 @@
                 uploadSection.style.display = 'none';
                 cloudinaryScreenshotUrlInput.value = '';
                 fileName.textContent = 'No file chosen';
-                uploadArea.style.borderColor = '#ddd';
-                uploadArea.style.background = '#fafbfc';
+                uploadArea.style.borderColor = 'var(--border-light)';
+                uploadArea.style.background = 'var(--bg-input)';
             } else {
                 uploadSection.style.display = 'block';
             }
@@ -10502,10 +10586,10 @@
                     const data = snapshot.val();
                     if (data && data.banned === true) {
                         document.body.innerHTML = `
-                                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f8f9fc; padding:20px;">
+                                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:var(--bg-body); padding:20px;">
                                         <i class="fa-solid fa-ban" style="font-size:41px; color:#dc2626; margin-bottom:14px;"></i>
-                                        <h1 style="font-size:20px; font-weight:700; color:#1c2128;">Account Banned</h1>
-                                        <p style="color:#888; text-align:center; max-width:272px; margin-top:7px;">Your account has been banned. Please contact support for assistance.</p>
+                                        <h1 style="font-size:20px; font-weight:700; color:var(--text-main);">Account Banned</h1>
+                                        <p style="color:var(--text-muted); text-align:center; max-width:272px; margin-top:7px;">Your account has been banned. Please contact support for assistance.</p>
                                     </div>
                                 `;
                         return;
