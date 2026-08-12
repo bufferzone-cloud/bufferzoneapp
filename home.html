@@ -28,14 +28,16 @@
             --hero-bg: #1c2128;
             --hero-text: #ffffff;
             --hero-text-muted: #dddddd;
-            --shadow: 0 2px 8px rgba(0,0,0,0.05);
-            --shadow-lg: 0 10px 41px rgba(0,0,0,0.25);
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 41px rgba(0, 0, 0, 0.25);
             --accent: #f5b83d;
             --accent-text: #1c2128;
             --color-primary: #1c2128;
             --color-primary-text: #ffffff;
-            --overlay-bg: rgba(0,0,0,0.5);
+            --overlay-bg: rgba(0, 0, 0, 0.5);
             --offline-bg: #dc2626;
+            --star-filled: #f5b83d;
+            --star-empty: #ddd;
         }
 
         [data-theme="dark"] {
@@ -54,14 +56,16 @@
             --hero-bg: #0a0a0a;
             --hero-text: #ffffff;
             --hero-text-muted: #bbbbbb;
-            --shadow: 0 2px 8px rgba(0,0,0,0.5);
-            --shadow-lg: 0 10px 41px rgba(0,0,0,0.7);
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 10px 41px rgba(0, 0, 0, 0.7);
             --accent: #f5b83d;
             --accent-text: #121212;
             --color-primary: #1c2128;
             --color-primary-text: #ffffff;
-            --overlay-bg: rgba(0,0,0,0.8);
+            --overlay-bg: rgba(0, 0, 0, 0.8);
             --offline-bg: #dc2626;
+            --star-filled: #f5b83d;
+            --star-empty: #444;
         }
 
         /* ── RESET & BASE ── */
@@ -5434,6 +5438,280 @@
             color: var(--text-muted);
             line-height: 1.6;
         }
+
+        /* ── TESTIMONIES ── */
+        .testimonies-header {
+            padding: 0 12px 11px 12px;
+        }
+
+        .testimonies-header h3 {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text-main);
+        }
+
+        .testimonies-header p {
+            color: var(--text-muted);
+            font-size: 9px;
+        }
+
+        .testimony-submit-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 14px;
+            margin: 0 12px 14px 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
+        }
+
+        .testimony-submit-card h4 {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .testimony-submit-card .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .testimony-submit-card .form-row input,
+        .testimony-submit-card .form-row textarea {
+            flex: 1;
+            min-width: 140px;
+            padding: 6px 10px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 10px;
+            background: var(--bg-input);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .testimony-submit-card .form-row input:focus,
+        .testimony-submit-card .form-row textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .testimony-submit-card .form-row textarea {
+            width: 100%;
+            resize: vertical;
+            min-height: 50px;
+        }
+
+        .testimony-submit-card .rating-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .testimony-submit-card .rating-row .stars {
+            display: flex;
+            gap: 4px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .testimony-submit-card .rating-row .stars i {
+            color: var(--star-empty);
+            transition: color 0.2s;
+        }
+
+        .testimony-submit-card .rating-row .stars i.filled {
+            color: var(--star-filled);
+        }
+
+        .testimony-submit-card .rating-row .rating-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-left: 4px;
+        }
+
+        .testimony-submit-card .media-upload-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .testimony-submit-card .media-upload-row .upload-box-sm {
+            width: 60px;
+            height: 60px;
+            min-height: 60px;
+            flex-shrink: 0;
+        }
+
+        .testimony-submit-card .media-upload-row .upload-box-sm i {
+            font-size: 16px;
+        }
+
+        .testimony-submit-card .media-upload-row .file-name {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+
+        .testimony-submit-card .btn-submit-testimony {
+            background: var(--color-primary);
+            color: var(--color-primary-text);
+            border: none;
+            padding: 7px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .testimony-submit-card .btn-submit-testimony:active {
+            transform: scale(0.95);
+        }
+
+        .testimony-submit-card .btn-submit-testimony i {
+            color: var(--accent);
+        }
+
+        .testimony-list {
+            padding: 0 12px 14px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .testimony-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 12px 14px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: stretch;
+            gap: 12px;
+            transition: all 0.2s;
+        }
+
+        .testimony-card .testimony-left {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .testimony-card .testimony-left .testimony-user {
+            font-weight: 600;
+            font-size: 11px;
+            color: var(--text-main);
+        }
+
+        .testimony-card .testimony-left .testimony-contact {
+            font-size: 8px;
+            color: var(--text-muted);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 1px;
+        }
+
+        .testimony-card .testimony-left .testimony-contact span {
+            white-space: nowrap;
+        }
+
+        .testimony-card .testimony-left .testimony-stars {
+            margin: 3px 0 2px 0;
+            font-size: 14px;
+            color: var(--star-filled);
+            letter-spacing: 1px;
+        }
+
+        .testimony-card .testimony-left .testimony-stars .empty {
+            color: var(--star-empty);
+        }
+
+        .testimony-card .testimony-left .testimony-message {
+            font-size: 10px;
+            color: var(--text-main);
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .testimony-card .testimony-left .testimony-date {
+            font-size: 8px;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        .testimony-card .testimony-media {
+            flex-shrink: 0;
+            width: 52px;
+            height: 52px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--bg-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid var(--border-light);
+            transition: border-color 0.2s;
+            align-self: center;
+        }
+
+        .testimony-card .testimony-media:hover {
+            border-color: var(--accent);
+        }
+
+        .testimony-card .testimony-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimony-card .testimony-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimony-card .testimony-media i {
+            font-size: 20px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 480px) {
+            .testimony-card {
+                flex-wrap: nowrap;
+            }
+            .testimony-card .testimony-media {
+                width: 44px;
+                height: 44px;
+            }
+            .testimony-card .testimony-left .testimony-stars {
+                font-size: 12px;
+            }
+            .testimony-card .testimony-left .testimony-message {
+                font-size: 9px;
+            }
+            .testimony-submit-card .form-row input,
+            .testimony-submit-card .form-row textarea {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .testimony-card .testimony-media {
+                width: 38px;
+                height: 38px;
+            }
+            .testimony-card .testimony-left .testimony-stars {
+                font-size: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -5799,6 +6077,60 @@
                 </div>
             </div>
 
+            <!-- ─── TESTIMONIES VIEW ─── -->
+            <div id="testimoniesView" class="view">
+                <div class="testimonies-header">
+                    <h3>⭐ Testimonials</h3>
+                    <p>Read what others say about Buffer Zone — or share your own experience.</p>
+                </div>
+
+                <!-- Submit your testimony -->
+                <div class="testimony-submit-card" id="testimonySubmitCard">
+                    <h4><i class="fa-solid fa-pen" style="color:var(--accent);"></i> Share Your Testimony</h4>
+                    <div class="form-row">
+                        <input type="text" id="testimonyName" placeholder="Your full name" value="" />
+                        <input type="email" id="testimonyEmail" placeholder="Your email" value="" />
+                        <input type="tel" id="testimonyPhone" placeholder="Your phone number" value="" />
+                    </div>
+                    <div class="form-row">
+                        <textarea id="testimonyMessage" placeholder="Write your testimony here..." rows="2"></textarea>
+                    </div>
+                    <div class="rating-row">
+                        <span style="font-size:10px;font-weight:500;color:var(--text-main);">Your Rating:</span>
+                        <div class="stars" id="testimonyStars">
+                            <i class="fa-regular fa-star" data-star="1"></i>
+                            <i class="fa-regular fa-star" data-star="2"></i>
+                            <i class="fa-regular fa-star" data-star="3"></i>
+                            <i class="fa-regular fa-star" data-star="4"></i>
+                            <i class="fa-regular fa-star" data-star="5"></i>
+                        </div>
+                        <span class="rating-label" id="ratingLabel">Tap a star to rate</span>
+                    </div>
+                    <div class="media-upload-row">
+                        <div class="upload-box-sm" id="testimonyMediaUpload">
+                            <i class="fa-regular fa-image"></i>
+                            <div class="file-label">Media</div>
+                            <div class="file-name" id="testimonyMediaFileName">-</div>
+                            <input type="hidden" id="testimonyMediaUrl" />
+                        </div>
+                        <span style="font-size:9px;color:var(--text-muted);">Upload a photo or video (optional)</span>
+                    </div>
+                    <div style="margin-top:6px;">
+                        <button class="btn-submit-testimony" id="submitTestimonyBtn">
+                            <i class="fa-solid fa-paper-plane"></i> Submit Testimony
+                        </button>
+                    </div>
+                </div>
+
+                <!-- All testimonies -->
+                <div class="testimony-list" id="testimonyList">
+                    <div style="text-align:center;padding:20px;color:var(--text-muted);font-size:10px;">
+                        <i class="fa-regular fa-comment" style="font-size:24px;color:var(--border-light);display:block;margin-bottom:6px;"></i>
+                        No testimonials yet. Be the first to share your experience!
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -6158,6 +6490,11 @@
             <button class="nav-link" data-view="profileView">
                 <i class="fa-regular fa-user"></i>
                 <span class="nav-label">Profile</span>
+            </button>
+            <!-- ─── TESTIMONIES NAV LINK ─── -->
+            <button class="nav-link" data-view="testimoniesView">
+                <i class="fa-solid fa-star"></i>
+                <span class="nav-label">Testimonials</span>
             </button>
 
             <!-- Dark Theme Toggle -->
@@ -6690,6 +7027,227 @@
         const adminNotifDismiss = document.getElementById('adminNotifDismiss');
         const offlineOverlay = document.getElementById('offlineOverlay');
 
+        /* ── TESTIMONIES ── */
+        const testimonySubmitCard = document.getElementById('testimonySubmitCard');
+        const testimonyName = document.getElementById('testimonyName');
+        const testimonyEmail = document.getElementById('testimonyEmail');
+        const testimonyPhone = document.getElementById('testimonyPhone');
+        const testimonyMessage = document.getElementById('testimonyMessage');
+        const testimonyStars = document.getElementById('testimonyStars');
+        const ratingLabel = document.getElementById('ratingLabel');
+        const testimonyMediaUpload = document.getElementById('testimonyMediaUpload');
+        const testimonyMediaFileName = document.getElementById('testimonyMediaFileName');
+        const testimonyMediaUrl = document.getElementById('testimonyMediaUrl');
+        const submitTestimonyBtn = document.getElementById('submitTestimonyBtn');
+        const testimonyList = document.getElementById('testimonyList');
+
+        let testimonyRating = 0;
+
+        function initTestimonyRating() {
+            const stars = testimonyStars.querySelectorAll('i');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const val = parseInt(this.dataset.star);
+                    testimonyRating = val;
+                    updateTestimonyStars(val);
+                    const labels = ['', 'Poor', 'Fair', 'Good', 'Very Good', 'Excellent'];
+                    ratingLabel.textContent = labels[val] || `${val} stars`;
+                });
+                star.addEventListener('mouseenter', function() {
+                    const val = parseInt(this.dataset.star);
+                    updateTestimonyStars(val, true);
+                });
+                star.addEventListener('mouseleave', function() {
+                    updateTestimonyStars(testimonyRating);
+                });
+            });
+        }
+
+        function updateTestimonyStars(count, hover = false) {
+            const stars = testimonyStars.querySelectorAll('i');
+            stars.forEach(star => {
+                const val = parseInt(star.dataset.star);
+                if (val <= count) {
+                    star.className = 'fa-solid fa-star filled';
+                } else {
+                    star.className = 'fa-regular fa-star';
+                }
+            });
+        }
+
+        function setupTestimonyMediaUpload() {
+            testimonyMediaUpload.addEventListener('click', () => {
+                const options = {
+                    cloudName: CLOUD_NAME,
+                    uploadPreset: UPLOAD_PRESET,
+                    sources: ['local', 'url', 'camera'],
+                    maxFileSize: 155000000,
+                    resourceType: 'auto',
+                    clientAllowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4', 'mov'],
+                    maxFiles: 1,
+                    multiple: false,
+                    fieldName: 'file',
+                    language: 'en',
+                    defaultSource: 'local'
+                };
+                const widget = cloudinary.openUploadWidget(options, (error, result) => {
+                    if (error) {
+                        console.error('Cloudinary error:', error);
+                        showToast('Upload error: ' + (error.message || 'Unknown'), 'error');
+                        return;
+                    }
+                    if (result.event === 'success') {
+                        const info = result.info;
+                        const url = info.secure_url;
+                        testimonyMediaUrl.value = url;
+                        let previewImg = testimonyMediaUpload.querySelector('.preview-img');
+                        if (!previewImg) {
+                            previewImg = document.createElement('img');
+                            previewImg.className = 'preview-img';
+                            previewImg.style.cssText =
+                                'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:6px;z-index:1;display:none;';
+                            testimonyMediaUpload.appendChild(previewImg);
+                        }
+                        previewImg.src = url;
+                        previewImg.style.display = 'block';
+                        testimonyMediaUpload.classList.add('has-preview');
+                        testimonyMediaUpload.style.borderColor = 'var(--accent)';
+                        testimonyMediaUpload.style.background = '#fffcf0';
+                        testimonyMediaFileName.textContent = info.original_filename + '.' + info.format;
+                        showToast('Media uploaded!', 'success');
+                    }
+                });
+                widget.open();
+            });
+        }
+
+        function submitTestimony() {
+            const name = testimonyName.value.trim();
+            const email = testimonyEmail.value.trim();
+            const phone = testimonyPhone.value.trim();
+            const message = testimonyMessage.value.trim();
+            const mediaUrl = testimonyMediaUrl.value || '';
+
+            if (!name) { showToast('Please enter your name.', 'error'); return; }
+            if (!email) { showToast('Please enter your email.', 'error'); return; }
+            if (!phone) { showToast('Please enter your phone number.', 'error'); return; }
+            if (!message) { showToast('Please write your testimony.', 'error'); return; }
+            if (testimonyRating === 0) { showToast('Please rate your experience.', 'error'); return; }
+
+            if (!allData.testimonies) allData.testimonies = {};
+
+            const tId = 'test_' + Date.now();
+            allData.testimonies[tId] = {
+                userId: currentUserId,
+                userName: name,
+                userEmail: email,
+                userPhone: phone,
+                rating: testimonyRating,
+                message: message,
+                mediaUrl: mediaUrl,
+                createdAt: Date.now(),
+                date: new Date().toLocaleString()
+            };
+
+            saveData().then(() => {
+                showToast('✅ Testimony submitted! Thank you for your feedback.', 'success');
+                // Clear form
+                testimonyName.value = '';
+                testimonyEmail.value = '';
+                testimonyPhone.value = '';
+                testimonyMessage.value = '';
+                testimonyRating = 0;
+                updateTestimonyStars(0);
+                ratingLabel.textContent = 'Tap a star to rate';
+                testimonyMediaUrl.value = '';
+                testimonyMediaFileName.textContent = '-';
+                testimonyMediaUpload.classList.remove('has-preview');
+                testimonyMediaUpload.style.borderColor = 'var(--border-light)';
+                testimonyMediaUpload.style.background = 'var(--bg-input)';
+                const previewImg = testimonyMediaUpload.querySelector('.preview-img');
+                if (previewImg) { previewImg.style.display = 'none'; }
+                renderTestimonies();
+            }).catch((error) => {
+                console.error('Error submitting testimony:', error);
+                showToast('Error submitting testimony. Please try again.', 'error');
+            });
+        }
+
+        function renderTestimonies() {
+            const container = testimonyList;
+            const testimonies = allData.testimonies || {};
+            const entries = Object.entries(testimonies).sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+
+            if (entries.length === 0) {
+                container.innerHTML =
+                    `<div style="text-align:center;padding:20px;color:var(--text-muted);font-size:10px;">
+                                <i class="fa-regular fa-comment" style="font-size:24px;color:var(--border-light);display:block;margin-bottom:6px;"></i>
+                                No testimonials yet. Be the first to share your experience!
+                            </div>`;
+                return;
+            }
+
+            container.innerHTML = entries.map(([key, t]) => {
+                const starsHtml = Array.from({ length: 5 }, (_, i) => {
+                    return i < t.rating ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star empty"></i>';
+                }).join('');
+
+                let mediaHtml = '';
+                if (t.mediaUrl) {
+                    const isVideo = t.mediaUrl.match(/\.(mp4|mov|webm|avi)$/i);
+                    if (isVideo) {
+                        mediaHtml =
+                            `<video src="${t.mediaUrl}" muted style="width:100%;height:100%;object-fit:cover;"></video>`;
+                    } else {
+                        mediaHtml = `<img src="${t.mediaUrl}" alt="Testimony media" style="width:100%;height:100%;object-fit:cover;" />`;
+                    }
+                } else {
+                    mediaHtml = `<i class="fa-regular fa-image"></i>`;
+                }
+
+                const dateStr = t.date ? new Date(t.date).toLocaleDateString() : '';
+
+                return `
+                            <div class="testimony-card">
+                                <div class="testimony-left">
+                                    <div class="testimony-user">${escapeHtml(t.userName)}</div>
+                                    <div class="testimony-contact">
+                                        <span>✉ ${escapeHtml(t.userEmail)}</span>
+                                        <span>📞 ${escapeHtml(t.userPhone)}</span>
+                                        ${dateStr ? `<span>🗓 ${dateStr}</span>` : ''}
+                                    </div>
+                                    <div class="testimony-stars">${starsHtml}</div>
+                                    <div class="testimony-message">${escapeHtml(t.message)}</div>
+                                    <div class="testimony-date">${t.date ? new Date(t.date).toLocaleString() : ''}</div>
+                                </div>
+                                <div class="testimony-media" onclick="this.querySelector('img') ? openImageViewer('${t.mediaUrl}') : this.querySelector('video') && this.querySelector('video').paused ? this.querySelector('video').play() : this.querySelector('video') && this.querySelector('video').pause()" title="${t.mediaUrl ? 'Tap to view' : 'No media'}">
+                                    ${t.mediaUrl ? mediaHtml : '<i class="fa-regular fa-image"></i>'}
+                                </div>
+                            </div>
+                        `;
+            }).join('');
+
+            // Re-bind media click events
+            container.querySelectorAll('.testimony-media').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const img = this.querySelector('img');
+                    const video = this.querySelector('video');
+                    if (img) {
+                        const src = img.src;
+                        if (src) openImageViewer(src);
+                    } else if (video) {
+                        if (video.paused) {
+                            video.muted = false;
+                            video.play();
+                        } else {
+                            video.pause();
+                        }
+                    }
+                });
+            });
+        }
+
         /* ─── MAIN SIDEBAR ─── */
         const mainSidebarOverlay = document.getElementById('mainSidebarOverlay');
         const mainSidebar = document.getElementById('mainSidebar');
@@ -6983,7 +7541,8 @@
                             job: { isFree: true, price: 0, mobileNumber: '', accountName: '' },
                             referrer: { isFree: true, price: 0, mobileNumber: '', accountName: '' }
                         },
-                        inAppNotifications: {}
+                        inAppNotifications: {},
+                        testimonies: {}
                     };
                     set(dbRef, allData);
                 } else {
@@ -7008,6 +7567,7 @@
                         saveData();
                     }
                     if (!allData.inAppNotifications) allData.inAppNotifications = {};
+                    if (!allData.testimonies) allData.testimonies = {};
                 }
                 renderAll();
                 setTimeout(() => {
@@ -7155,6 +7715,7 @@
             renderWithdrawalsList();
             renderApplications();
             renderWithdrawHistory();
+            renderTestimonies();
 
             setupPromoButton();
 
@@ -10577,6 +11138,11 @@
 
         listenForAdminNotifications();
 
+        /* ─── TESTIMONIES INIT ─── */
+        initTestimonyRating();
+        setupTestimonyMediaUpload();
+        submitTestimonyBtn.addEventListener('click', submitTestimony);
+
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
@@ -10635,7 +11201,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Main sidebar navigation added with huge logo and black text.');
+        console.log('✅ Testimonies section added to sidebar with star ratings, media upload, and full display.');
     </script>
 </body>
 </html>
