@@ -38,6 +38,9 @@
             --offline-bg: #dc2626;
             --star-filled: #f5b83d;
             --star-empty: #ddd;
+            --promo-banner-bg: #fef9e7;
+            --promo-banner-text: #1c2128;
+            --carousel-bg: transparent;
         }
 
         [data-theme="dark"] {
@@ -66,6 +69,9 @@
             --offline-bg: #dc2626;
             --star-filled: #f5b83d;
             --star-empty: #444;
+            --promo-banner-bg: #2a2a2a;
+            --promo-banner-text: #e0e0e0;
+            --carousel-bg: #1e1e1e;
         }
 
         /* ── RESET & BASE ── */
@@ -516,10 +522,10 @@
             overflow-x: auto;
             overflow-y: visible;
             border-radius: 0;
-            background: transparent;
+            background: var(--carousel-bg);
             box-shadow: none;
             padding: 8px 0;
-            transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.3s ease;
             width: 100%;
             height: auto;
             max-height: none;
@@ -687,13 +693,15 @@
         .promotions-banner {
             margin: 0 12px 12px 12px;
             padding: 9px 12px;
-            background: #fef9e7;
+            background: var(--promo-banner-bg);
             border-radius: 10px;
             border: 1px solid var(--accent);
             display: none;
             flex-wrap: wrap;
             align-items: center;
             gap: 7px;
+            transition: background 0.3s ease, color 0.3s ease;
+            color: var(--promo-banner-text);
         }
 
         .promotions-banner.show {
@@ -711,7 +719,7 @@
 
         .promotions-banner .msg {
             font-size: 9px;
-            color: var(--text-main);
+            color: var(--promo-banner-text);
             flex: 1;
         }
 
@@ -5455,11 +5463,58 @@
             font-size: 9px;
         }
 
+        .write-testimony-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin: 0 12px 8px 12px;
+            padding: 8px 18px;
+            background: var(--color-primary);
+            color: var(--color-primary-text);
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: var(--shadow);
+        }
+
+        .write-testimony-btn:active {
+            transform: scale(0.95);
+        }
+
+        .write-testimony-btn i {
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        .write-testimony-btn.open {
+            background: var(--accent);
+            color: var(--accent-text);
+        }
+        .write-testimony-btn.open i {
+            color: var(--accent-text);
+        }
+
+        .testimony-form-wrapper {
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease, margin 0.3s ease;
+            max-height: 0;
+            opacity: 0;
+            margin: 0 12px;
+        }
+
+        .testimony-form-wrapper.open {
+            max-height: 800px;
+            opacity: 1;
+            margin: 0 12px 12px 12px;
+        }
+
         .testimony-submit-card {
             background: var(--bg-card);
             border-radius: 14px;
             padding: 14px;
-            margin: 0 12px 14px 12px;
             box-shadow: var(--shadow);
             border: 1px solid var(--border-light);
         }
@@ -6084,41 +6139,48 @@
                     <p>Read what others say about Buffer Zone — or share your own experience.</p>
                 </div>
 
-                <!-- Submit your testimony -->
-                <div class="testimony-submit-card" id="testimonySubmitCard">
-                    <h4><i class="fa-solid fa-pen" style="color:var(--accent);"></i> Share Your Testimony</h4>
-                    <div class="form-row">
-                        <input type="text" id="testimonyName" placeholder="Your full name" value="" />
-                        <input type="email" id="testimonyEmail" placeholder="Your email" value="" />
-                        <input type="tel" id="testimonyPhone" placeholder="Your phone number" value="" />
-                    </div>
-                    <div class="form-row">
-                        <textarea id="testimonyMessage" placeholder="Write your testimony here..." rows="2"></textarea>
-                    </div>
-                    <div class="rating-row">
-                        <span style="font-size:10px;font-weight:500;color:var(--text-main);">Your Rating:</span>
-                        <div class="stars" id="testimonyStars">
-                            <i class="fa-regular fa-star" data-star="1"></i>
-                            <i class="fa-regular fa-star" data-star="2"></i>
-                            <i class="fa-regular fa-star" data-star="3"></i>
-                            <i class="fa-regular fa-star" data-star="4"></i>
-                            <i class="fa-regular fa-star" data-star="5"></i>
+                <!-- Write Testimony Toggle Button -->
+                <button class="write-testimony-btn" id="writeTestimonyBtn">
+                    <i class="fa-solid fa-pen"></i> Write a Testimony
+                </button>
+
+                <!-- Testimony Form (collapsible) -->
+                <div class="testimony-form-wrapper" id="testimonyFormWrapper">
+                    <div class="testimony-submit-card" id="testimonySubmitCard">
+                        <h4><i class="fa-solid fa-pen" style="color:var(--accent);"></i> Share Your Testimony</h4>
+                        <div class="form-row">
+                            <input type="text" id="testimonyName" placeholder="Your full name" value="" />
+                            <input type="email" id="testimonyEmail" placeholder="Your email" value="" />
+                            <input type="tel" id="testimonyPhone" placeholder="Your phone number" value="" />
                         </div>
-                        <span class="rating-label" id="ratingLabel">Tap a star to rate</span>
-                    </div>
-                    <div class="media-upload-row">
-                        <div class="upload-box-sm" id="testimonyMediaUpload">
-                            <i class="fa-regular fa-image"></i>
-                            <div class="file-label">Media</div>
-                            <div class="file-name" id="testimonyMediaFileName">-</div>
-                            <input type="hidden" id="testimonyMediaUrl" />
+                        <div class="form-row">
+                            <textarea id="testimonyMessage" placeholder="Write your testimony here..." rows="2"></textarea>
                         </div>
-                        <span style="font-size:9px;color:var(--text-muted);">Upload a photo or video (optional)</span>
-                    </div>
-                    <div style="margin-top:6px;">
-                        <button class="btn-submit-testimony" id="submitTestimonyBtn">
-                            <i class="fa-solid fa-paper-plane"></i> Submit Testimony
-                        </button>
+                        <div class="rating-row">
+                            <span style="font-size:10px;font-weight:500;color:var(--text-main);">Your Rating:</span>
+                            <div class="stars" id="testimonyStars">
+                                <i class="fa-regular fa-star" data-star="1"></i>
+                                <i class="fa-regular fa-star" data-star="2"></i>
+                                <i class="fa-regular fa-star" data-star="3"></i>
+                                <i class="fa-regular fa-star" data-star="4"></i>
+                                <i class="fa-regular fa-star" data-star="5"></i>
+                            </div>
+                            <span class="rating-label" id="ratingLabel">Tap a star to rate</span>
+                        </div>
+                        <div class="media-upload-row">
+                            <div class="upload-box-sm" id="testimonyMediaUpload">
+                                <i class="fa-regular fa-image"></i>
+                                <div class="file-label">Media</div>
+                                <div class="file-name" id="testimonyMediaFileName">-</div>
+                                <input type="hidden" id="testimonyMediaUrl" />
+                            </div>
+                            <span style="font-size:9px;color:var(--text-muted);">Upload a photo or video (optional)</span>
+                        </div>
+                        <div style="margin-top:6px;">
+                            <button class="btn-submit-testimony" id="submitTestimonyBtn">
+                                <i class="fa-solid fa-paper-plane"></i> Submit Testimony
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -7028,6 +7090,8 @@
         const offlineOverlay = document.getElementById('offlineOverlay');
 
         /* ── TESTIMONIES ── */
+        const writeTestimonyBtn = document.getElementById('writeTestimonyBtn');
+        const testimonyFormWrapper = document.getElementById('testimonyFormWrapper');
         const testimonySubmitCard = document.getElementById('testimonySubmitCard');
         const testimonyName = document.getElementById('testimonyName');
         const testimonyEmail = document.getElementById('testimonyEmail');
@@ -7042,6 +7106,28 @@
         const testimonyList = document.getElementById('testimonyList');
 
         let testimonyRating = 0;
+
+        /* ── FILL TESTIMONY FORM WITH USER DATA ── */
+        function fillTestimonyForm() {
+            if (currentUserData && currentUser) {
+                const fullName = `${currentUserData.firstName || ''} ${currentUserData.lastName || ''}`.trim() || currentUser.displayName || '';
+                testimonyName.value = fullName;
+                testimonyEmail.value = currentUser.email || '';
+                testimonyPhone.value = currentUserData.phone || '';
+            }
+        }
+
+        /* ── TOGGLE TESTIMONY FORM ── */
+        writeTestimonyBtn.addEventListener('click', function() {
+            const isOpen = testimonyFormWrapper.classList.toggle('open');
+            this.classList.toggle('open');
+            this.innerHTML = isOpen ?
+                '<i class="fa-solid fa-chevron-up"></i> Close Testimony Form' :
+                '<i class="fa-solid fa-pen"></i> Write a Testimony';
+            if (isOpen) {
+                fillTestimonyForm();
+            }
+        });
 
         function initTestimonyRating() {
             const stars = testimonyStars.querySelectorAll('i');
@@ -7167,6 +7253,10 @@
                 const previewImg = testimonyMediaUpload.querySelector('.preview-img');
                 if (previewImg) { previewImg.style.display = 'none'; }
                 renderTestimonies();
+                // Collapse form
+                testimonyFormWrapper.classList.remove('open');
+                writeTestimonyBtn.classList.remove('open');
+                writeTestimonyBtn.innerHTML = '<i class="fa-solid fa-pen"></i> Write a Testimony';
             }).catch((error) => {
                 console.error('Error submitting testimony:', error);
                 showToast('Error submitting testimony. Please try again.', 'error');
@@ -11201,7 +11291,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Testimonies section added to sidebar with star ratings, media upload, and full display.');
+        console.log('✅ Testimonies section added with toggle button and auto-fill; promo banner dark mode fixed.');
     </script>
 </body>
 </html>
