@@ -9,7 +9,7 @@
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">
     </script>
     <style>
-        /* ── all existing styles (unchanged) ── */
+        /* ── all existing styles (unchanged except bottom nav) ── */
         * {
             margin: 0;
             padding: 0;
@@ -44,256 +44,125 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        /* ── NEW: ONE BIG "MORE OPTIONS" BUTTON WITH DROP-UP ── */
-        .bottom-nav {
+        /* ─── NEW BOTTOM NAV (Single Button + Drop-Up) ─── */
+        .bottom-nav-container {
             position: fixed;
             bottom: 14px;
             left: 50%;
             transform: translateX(-50%);
-            width: 92%;
-            max-width: 380px;
-            height: 56px;
-            background: #1c2128;
-            border-radius: 28px;
-            padding: 6px 16px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             z-index: 500;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
-            flex-shrink: 0;
-            pointer-events: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: none;
+            width: auto;
         }
 
-        .more-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #f5b83d;
-            color: #1c2128;
+        .more-options-btn {
+            background: #1c2128;
+            color: #ffffff;
             border: none;
-            padding: 8px 24px;
+            padding: 10px 24px;
             border-radius: 30px;
             font-weight: 700;
-            font-size: 15px;
+            font-size: 13px;
             cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 16px rgba(245, 184, 61, 0.3);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            pointer-events: auto;
+            transition: transform 0.2s, background 0.2s;
             font-family: 'Poppins', sans-serif;
             letter-spacing: 0.3px;
         }
-        .more-btn:active {
+        .more-options-btn:active {
             transform: scale(0.94);
         }
-        .more-btn i {
-            font-size: 16px;
-            transition: transform 0.3s;
+        .more-options-btn i {
+            font-size: 14px;
+            transition: transform 0.3s ease;
         }
-        .more-btn.open i {
+        .more-options-btn.active i {
             transform: rotate(180deg);
         }
 
-        /* ── DROP-UP MENU ── */
         .drop-up-menu {
-            position: fixed;
-            bottom: 82px;
-            left: 50%;
-            transform: translateX(-50%) translateY(16px);
-            width: 92%;
-            max-width: 380px;
-            background: #1c2128;
+            position: absolute;
+            bottom: calc(100% + 12px);
+            background: rgba(28, 33, 40, 0.94);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border-radius: 20px;
-            padding: 10px 8px;
-            z-index: 499;
-            box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.25);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            padding: 12px 8px;
+            min-width: 200px;
+            display: none;
+            flex-direction: column;
             gap: 2px;
-            max-height: 280px;
-            overflow-y: auto;
+            box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.25);
+            pointer-events: auto;
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
         .drop-up-menu.open {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateX(-50%) translateY(0);
+            display: flex;
+            animation: dropUpIn 0.25s ease;
         }
 
-        .drop-up-menu .menu-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 8px 2px;
-            border-radius: 12px;
-            cursor: pointer;
-            color: #888;
-            transition: all 0.2s;
-            background: none;
+        @keyframes dropUpIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(0.94);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .drop-up-menu .nav-item {
+            background: transparent;
             border: none;
-            font-size: 7px;
+            color: #bbb;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             font-family: 'Poppins', sans-serif;
-            gap: 2px;
-            min-height: 52px;
+            white-space: nowrap;
         }
-        .drop-up-menu .menu-item i {
-            font-size: 16px;
-            transition: color 0.2s;
+        .drop-up-menu .nav-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
         }
-        .drop-up-menu .menu-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-            color: #f5b83d;
-        }
-        .drop-up-menu .menu-item:hover i {
-            color: #f5b83d;
-        }
-        .drop-up-menu .menu-item.active {
-            color: #f5b83d;
-        }
-        .drop-up-menu .menu-item.active i {
-            color: #f5b83d;
-        }
-        .drop-up-menu .menu-item .badge-counter {
-            position: relative;
-            top: -2px;
-            right: -4px;
-            min-width: 14px;
-            height: 14px;
+        .drop-up-menu .nav-item.active {
             background: #f5b83d;
             color: #1c2128;
-            font-size: 7px;
-            font-weight: 700;
+            font-weight: 600;
+        }
+        .drop-up-menu .nav-item i {
+            width: 18px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .drop-up-menu .nav-item .badge-dot {
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 3px;
-            border: 2px solid #1c2128;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-            line-height: 1;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.2s, transform 0.2s;
-            margin-left: -6px;
-            margin-top: -10px;
-        }
-        .drop-up-menu .menu-item .badge-counter.show {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .drop-up-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 498;
-            background: transparent;
+            background: #f5b83d;
+            margin-left: auto;
             display: none;
         }
-        .drop-up-overlay.open {
-            display: block;
+        .drop-up-menu .nav-item .badge-dot.show {
+            display: inline-block;
         }
 
-        /* ── FLOATING COUNTER CARDS (home page) ── */
-        .floating-counters {
-            position: fixed;
-            bottom: 90px;
-            right: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 100;
-            pointer-events: none;
-        }
-        .floating-counters .float-card {
-            background: #1c2128;
-            border-radius: 14px;
-            padding: 10px 14px 10px 12px;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.20);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            pointer-events: auto;
-            transition: transform 0.2s;
-            min-width: 140px;
-            backdrop-filter: blur(4px);
-        }
-        .floating-counters .float-card:active {
-            transform: scale(0.94);
-        }
-        .floating-counters .float-card .fc-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-        .floating-counters .float-card .fc-icon.gold {
-            background: rgba(245, 184, 61, 0.2);
-            color: #f5b83d;
-        }
-        .floating-counters .float-card .fc-icon.blue {
-            background: rgba(26, 115, 232, 0.2);
-            color: #1a73e8;
-        }
-        .floating-counters .float-card .fc-info {
-            display: flex;
-            flex-direction: column;
-        }
-        .floating-counters .float-card .fc-info .fc-number {
-            font-weight: 800;
-            font-size: 18px;
-            color: #fff;
-            line-height: 1.1;
-        }
-        .floating-counters .float-card .fc-info .fc-label {
-            font-size: 9px;
-            color: #aaa;
-            font-weight: 500;
-            letter-spacing: 0.2px;
-        }
-
-        @media (max-width: 480px) {
-            .floating-counters {
-                right: 10px;
-                bottom: 82px;
-            }
-            .floating-counters .float-card {
-                min-width: 110px;
-                padding: 8px 12px 8px 10px;
-            }
-            .floating-counters .float-card .fc-icon {
-                width: 28px;
-                height: 28px;
-                font-size: 12px;
-            }
-            .floating-counters .float-card .fc-info .fc-number {
-                font-size: 15px;
-            }
-            .floating-counters .float-card .fc-info .fc-label {
-                font-size: 8px;
-            }
-            .drop-up-menu {
-                grid-template-columns: repeat(4, 1fr);
-                max-height: 240px;
-            }
-        }
-        @media (max-width: 380px) {
-            .drop-up-menu {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* ── rest of existing styles ── */
+        /* ── rest of CSS unchanged ── */
 
         .header {
             display: flex;
@@ -2042,6 +1911,7 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
             background: #fff;
             aspect-ratio: 16 / 9;
+            /* 1200:675 = 16:9 */
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -2148,6 +2018,7 @@
             width: 100%;
             max-width: 1200px;
             aspect-ratio: 1200 / 675;
+            /* 16:9 */
             border-radius: 28px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
             overflow: hidden;
@@ -2219,6 +2090,7 @@
             }
         }
 
+        /* ── rest of CSS unchanged ── */
         .promo-pics-upload-area {
             display: flex;
             flex-direction: column;
@@ -4464,6 +4336,7 @@
             border-radius: 28px;
             width: 100%;
             max-width: 580px;
+            /* bigger */
             max-height: 90vh;
             overflow-y: auto;
             padding: 28px 28px 22px;
@@ -5227,6 +5100,17 @@
                         <div class="stat-icon purple"><i class="fa-solid fa-credit-card"></i></div>
                         <div class="stat-value" id="statRevenue">ZMW 0</div>
                         <div class="stat-label">Revenue</div>
+                    </div>
+                    <!-- NEW FLOATING COUNTER CARDS -->
+                    <div class="stat-card">
+                        <div class="stat-icon orange"><i class="fa-solid fa-clipboard-list"></i></div>
+                        <div class="stat-value" id="statPendingApps">0</div>
+                        <div class="stat-label">Pending Applications</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple"><i class="fa-solid fa-star"></i></div>
+                        <div class="stat-value" id="statTestimonies">0</div>
+                        <div class="stat-label">Testimonies</div>
                     </div>
                 </div>
 
@@ -6006,79 +5890,22 @@
 
         </div>
 
-        <!-- ===== BOTTOM NAV: ONE BIG "MORE OPTIONS" BUTTON ===== -->
-        <div class="bottom-nav">
-            <button class="more-btn" id="moreOptionsBtn">
-                <i class="fa-solid fa-ellipsis"></i>
-                <span>More Options</span>
+        <!-- ===== NEW BOTTOM NAV (Single Button + Drop-Up) ===== -->
+        <div class="bottom-nav-container">
+            <button class="more-options-btn" id="moreOptionsBtn">
+                <i class="fa-solid fa-bars"></i> More Options
             </button>
-        </div>
-
-        <!-- ===== DROP-UP OVERLAY ===== -->
-        <div class="drop-up-overlay" id="dropUpOverlay"></div>
-
-        <!-- ===== DROP-UP MENU ===== -->
-        <div class="drop-up-menu" id="dropUpMenu">
-            <button class="menu-item active" data-page="dashboard">
-                <i class="fa-solid fa-chart-pie"></i>
-                <span>Home</span>
-            </button>
-            <button class="menu-item" data-page="services">
-                <i class="fa-solid fa-layer-group"></i>
-                <span>Services</span>
-            </button>
-            <button class="menu-item" data-page="promo-pics">
-                <i class="fa-regular fa-images"></i>
-                <span>Promo Pics</span>
-                <span class="badge-counter" id="badgeTestimonies" style="display:none;">0</span>
-            </button>
-            <button class="menu-item" data-page="orders">
-                <i class="fa-solid fa-truck"></i>
-                <span>Orders</span>
-                <span class="badge-counter" id="badgeOrdersPending">0</span>
-            </button>
-            <button class="menu-item" data-page="users">
-                <i class="fa-solid fa-users"></i>
-                <span>Users</span>
-            </button>
-            <button class="menu-item" data-page="payables">
-                <i class="fa-solid fa-money-bill-wave"></i>
-                <span>Payables</span>
-                <span class="badge-counter" id="badgeWithdrawalsPending">0</span>
-            </button>
-            <button class="menu-item" data-page="notifications">
-                <i class="fa-solid fa-bell"></i>
-                <span>Push</span>
-            </button>
-            <button class="menu-item" data-page="popup-notifications">
-                <i class="fa-solid fa-message"></i>
-                <span>Popups</span>
-            </button>
-            <button class="menu-item" data-page="testimonies">
-                <i class="fa-solid fa-star"></i>
-                <span>Testimonies</span>
-            </button>
-            <button class="menu-item" data-page="profile">
-                <i class="fa-regular fa-user"></i>
-                <span>Profile</span>
-            </button>
-        </div>
-
-        <!-- ===== FLOATING COUNTER CARDS (Home page only) ===== -->
-        <div class="floating-counters" id="floatingCounters">
-            <div class="float-card" id="floatPendingApps" style="cursor:pointer;">
-                <div class="fc-icon gold"><i class="fa-regular fa-clock"></i></div>
-                <div class="fc-info">
-                    <div class="fc-number" id="floatPendingAppsNumber">0</div>
-                    <div class="fc-label">Pending Apps</div>
-                </div>
-            </div>
-            <div class="float-card" id="floatTestimonies" style="cursor:pointer;">
-                <div class="fc-icon blue"><i class="fa-solid fa-star"></i></div>
-                <div class="fc-info">
-                    <div class="fc-number" id="floatTestimoniesNumber">0</div>
-                    <div class="fc-label">Testimonies</div>
-                </div>
+            <div class="drop-up-menu" id="dropUpMenu">
+                <button class="nav-item" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i> Home</button>
+                <button class="nav-item" data-page="services"><i class="fa-solid fa-layer-group"></i> Services</button>
+                <button class="nav-item" data-page="promo-pics"><i class="fa-regular fa-images"></i> Promo Pics</button>
+                <button class="nav-item" data-page="orders"><i class="fa-solid fa-truck"></i> Orders</button>
+                <button class="nav-item" data-page="users"><i class="fa-solid fa-users"></i> Users</button>
+                <button class="nav-item" data-page="payables"><i class="fa-solid fa-money-bill-wave"></i> Payables</button>
+                <button class="nav-item" data-page="notifications"><i class="fa-solid fa-bell"></i> Push</button>
+                <button class="nav-item" data-page="popup-notifications"><i class="fa-solid fa-message"></i> Popups</button>
+                <button class="nav-item" data-page="testimonies"><i class="fa-solid fa-star"></i> Testimonies</button>
+                <button class="nav-item" data-page="profile"><i class="fa-regular fa-user"></i> Profile</button>
             </div>
         </div>
 
@@ -6845,9 +6672,6 @@
         const applyAdjustBtn = document.getElementById('applyAdjustBtn');
         const adjustPreview = document.getElementById('adjustPreview');
 
-        const badgeOrdersPending = document.getElementById('badgeOrdersPending');
-        const badgeWithdrawalsPending = document.getElementById('badgeWithdrawalsPending');
-
         const editCustomerModal = document.getElementById('editCustomerModal');
         const editCustomerCloseBtn = document.getElementById('editCustomerCloseBtn');
         const editCustomerForm = document.getElementById('editCustomerForm');
@@ -6927,7 +6751,7 @@
         const popupProgress = document.getElementById('popupProgress');
         const sentPopupList = document.getElementById('sentPopupList');
 
-        let selectedPopupUsers = new Set();
+        let selectedPopupUsers = new Set(); // set of userIds for specific selection
 
         // ===== TESTIMONIES elements =====
         const viewTestimoniesBtn = document.getElementById('viewTestimoniesBtn');
@@ -7197,23 +7021,13 @@
             }
 
             updateBadges();
-            updateFloatingCounters();
 
             checkAndShowPopups();
 
             renderSentPopups();
 
+            // Testimonies
             renderTestimonies();
-        }
-
-        function updateFloatingCounters() {
-            const apps = allData.applications || {};
-            const pendingApps = Object.values(apps).filter(a => a.status === 'pending').length;
-            document.getElementById('floatPendingAppsNumber').textContent = pendingApps;
-
-            const testimonies = allData.testimonies || {};
-            const count = Object.keys(testimonies).length;
-            document.getElementById('floatTestimoniesNumber').textContent = count;
         }
 
         function renderDashboard() {
@@ -7233,6 +7047,12 @@
             document.getElementById('statProgress').textContent = progress;
             document.getElementById('statCompleted').textContent = completed;
             document.getElementById('statRevenueDetail').textContent = revenue.toFixed(2);
+
+            // NEW COUNTERS
+            const pendingApps = Object.values(allData.applications || {}).filter(a => a.status === 'pending').length;
+            const testimoniesCount = Object.values(allData.testimonies || {}).length;
+            document.getElementById('statPendingApps').textContent = pendingApps;
+            document.getElementById('statTestimonies').textContent = testimoniesCount;
         }
 
         function renderCategories() {
@@ -10225,52 +10045,41 @@
             window.history.back();
         });
 
-        // ── DROP-UP MENU LOGIC ──
-        const moreBtn = document.getElementById('moreOptionsBtn');
+        // ── NEW DROP-UP NAVIGATION LOGIC ──
+        const moreOptionsBtn = document.getElementById('moreOptionsBtn');
         const dropUpMenu = document.getElementById('dropUpMenu');
-        const dropUpOverlay = document.getElementById('dropUpOverlay');
 
-        function toggleDropUp() {
-            const open = dropUpMenu.classList.contains('open');
-            if (open) {
-                closeDropUp();
-            } else {
-                openDropUp();
+        moreOptionsBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            dropUpMenu.classList.toggle('open');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.bottom-nav-container')) {
+                moreOptionsBtn.classList.remove('active');
+                dropUpMenu.classList.remove('open');
             }
-        }
+        });
 
-        function openDropUp() {
-            dropUpMenu.classList.add('open');
-            moreBtn.classList.add('open');
-            dropUpOverlay.classList.add('open');
-        }
-
-        function closeDropUp() {
-            dropUpMenu.classList.remove('open');
-            moreBtn.classList.remove('open');
-            dropUpOverlay.classList.remove('open');
-        }
-
-        moreBtn.addEventListener('click', toggleDropUp);
-
-        dropUpOverlay.addEventListener('click', closeDropUp);
-
-        // Menu items navigation
-        dropUpMenu.querySelectorAll('.menu-item').forEach(item => {
+        dropUpMenu.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
                 const page = this.dataset.page;
+                moreOptionsBtn.classList.remove('active');
+                dropUpMenu.classList.remove('open');
                 showPage(page);
-                closeDropUp();
             });
         });
 
-        // ── FLOATING COUNTER CARDS ──
-        document.getElementById('floatPendingApps').addEventListener('click', function() {
-            showPage('applications');
-        });
-        document.getElementById('floatTestimonies').addEventListener('click', function() {
-            showPage('testimonies');
-        });
+        // Update active state in drop-up menu when page changes
+        const originalShowPage = showPage;
+        showPage = function(pageId, params = {}) {
+            originalShowPage(pageId, params);
+            // Update active class in drop-up menu
+            dropUpMenu.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.page === pageId);
+            });
+        };
 
         document.querySelectorAll('.work-option-card').forEach(card => {
             card.addEventListener('click', function() {
@@ -10864,21 +10673,7 @@
         function updateBadges() {
             const orders = Object.values(allData.orders || {});
             const pendingOrders = orders.filter(o => o.status === 'pending').length;
-            updateBadgeElement(badgeOrdersPending, pendingOrders);
-
-            const withdrawals = Object.values(allData.withdrawalRequests || {});
-            const pendingWithdrawals = withdrawals.filter(w => w.status === 'pending').length;
-            updateBadgeElement(badgeWithdrawalsPending, pendingWithdrawals);
-        }
-
-        function updateBadgeElement(el, count) {
-            if (count > 0) {
-                el.textContent = count;
-                el.classList.add('show');
-            } else {
-                el.textContent = '0';
-                el.classList.remove('show');
-            }
+            // We don't have badge elements anymore, but update if needed.
         }
 
         function showPage(pageId, params = {}) {
@@ -10891,7 +10686,6 @@
             } else {
                 navigateToPage(pageId, params);
             }
-            closeDropUp();
         }
 
         function navigateToPage(pageId, params) {
@@ -10901,10 +10695,10 @@
                 target.classList.add('active');
             }
 
-            // Update menu active state
-            dropUpMenu.querySelectorAll('.menu-item').forEach(n => n.classList.remove('active'));
-            const menuItem = dropUpMenu.querySelector(`.menu-item[data-page="${pageId}"]`);
-            if (menuItem) menuItem.classList.add('active');
+            // Update drop-up active state
+            dropUpMenu.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            const navItem = dropUpMenu.querySelector(`.nav-item[data-page="${pageId}"]`);
+            if (navItem) navItem.classList.add('active');
 
             if (pageId === 'work') {
                 mainHeader.classList.add('work-active');
@@ -10923,7 +10717,6 @@
             switch (pageId) {
                 case 'dashboard':
                     renderDashboard();
-                    updateFloatingCounters();
                     break;
                 case 'services':
                     renderServices();
@@ -11046,7 +10839,6 @@
                             allUsersCache = usersData;
                             renderDashboard();
                             updateBadges();
-                            updateFloatingCounters();
                             if (document.getElementById('page-users').classList.contains('active')) {
                                 renderUsers(document.getElementById('userSearchInput').value, userFilterSelect
                                     .value);
@@ -11474,6 +11266,7 @@
         //  POPUP NOTIFICATIONS PAGE LOGIC
         // ================================================================
 
+        // Recipient toggle
         popupRecipient.addEventListener('change', function() {
             if (this.value === 'specific') {
                 popupUserSelectionArea.style.display = 'block';
@@ -11485,6 +11278,7 @@
             }
         });
 
+        // Select all users toggle
         popupSelectAllUsers.addEventListener('change', function() {
             const userItems = popupUserListContainer.querySelectorAll('.user-item');
             if (this.checked) {
@@ -11501,6 +11295,7 @@
             updatePopupSelectedCount();
         });
 
+        // User search
         popupUserSearch.addEventListener('input', function() {
             renderPopupUserList(this.value);
         });
@@ -11544,6 +11339,7 @@
                         `;
             }).join('');
 
+            // Click to toggle selection
             popupUserListContainer.querySelectorAll('.user-item').forEach(item => {
                 item.addEventListener('click', function() {
                     const uid = this.dataset.uid;
@@ -11564,6 +11360,7 @@
         function updatePopupSelectedCount() {
             const count = selectedPopupUsers.size;
             popupSelectedCount.textContent = count;
+            // update select all checkbox
             const totalUsers = Object.keys(allData.users || {}).length;
             const selectAllCheck = popupSelectAllUsers;
             if (totalUsers > 0 && count === totalUsers) {
@@ -11573,6 +11370,7 @@
             }
         }
 
+        // Notification type changes title suggestion
         popupNotifType.addEventListener('change', function() {
             const type = this.value;
             const titleMap = {
@@ -11588,6 +11386,7 @@
             }
         });
 
+        // Media upload for popup
         setupCloudinaryUpload(popupMediaPreview, popupMediaUrl, popupMediaPreview, (url, info) => {
             popupMediaType.value = info.resource_type || 'image';
             const badge = document.createElement('div');
@@ -11598,6 +11397,7 @@
             popupMediaPreview.appendChild(badge);
         }, { resourceType: 'auto' });
 
+        // Send popup notification
         popupNotifForm.addEventListener('submit', async function(e) {
             e.preventDefault();
 
@@ -11638,6 +11438,7 @@
             sendPopupBtn.disabled = true;
 
             try {
+                // Save the notification to database
                 const notifId = 'popup-' + Date.now();
                 if (!allData.inAppNotifications) allData.inAppNotifications = {};
                 allData.inAppNotifications[notifId] = {
@@ -11654,8 +11455,13 @@
                 };
                 await saveData();
 
+                // Optionally, trigger a push notification to alert users about the popup
+                // (we could call the cloud function, but for simplicity we rely on client to fetch)
+                // For now, just save and show success.
+
                 showToast(`✅ In-app popup sent to ${recipientType === 'all' ? 'all users' : selectedPopupUsers.size + ' user(s)'}`, 'success');
 
+                // Reset form
                 popupTitleInput.value = '';
                 popupMessage.value = '';
                 popupMediaUrl.value = '';
@@ -11917,8 +11723,10 @@
             });
         });
 
+        // Initialize star rating for edit modal
         setupEditStars();
 
+        // Button to navigate to testimonies page
         viewTestimoniesBtn.addEventListener('click', function() {
             showPage('testimonies');
         });
@@ -11926,6 +11734,8 @@
         backFromTestimonies.addEventListener('click', function() {
             showPage('promo-pics');
         });
+
+        // Also add testimonies to bottom nav (already present)
 
         console.log('✅ Admin Dashboard — Testimonies management added.');
     </script>
