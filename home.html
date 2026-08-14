@@ -5767,6 +5767,37 @@
                 font-size: 10px;
             }
         }
+
+        /* ── REDUCED TEXT SIZE FOR RECEIPTS & STATEMENTS ── */
+        .receipt-header h2 { font-size: 16px !important; }
+        .receipt-header .slogan { font-size: 8px !important; }
+        .receipt-header .invoice-title { font-size: 18px !important; }
+        .receipt-header .invoice-id { font-size: 8px !important; }
+        .receipt-addresses h4 { font-size: 9px !important; }
+        .receipt-addresses p { font-size: 8px !important; }
+        .receipt-addresses .name { font-size: 10px !important; }
+        .receipt-table-header { font-size: 8px !important; }
+        .receipt-item-row { font-size: 9px !important; }
+        .receipt-totals-box { font-size: 8px !important; }
+        .receipt-footer .thanks { font-size: 8px !important; }
+        .receipt-footer .footnote { font-size: 7px !important; }
+        .receipt-footer .signature-area .sign-name { font-size: 11px !important; }
+        .receipt-footer .signature-area .sign-label { font-size: 6px !important; }
+
+        .statement-header h2 { font-size: 16px !important; }
+        .statement-header .slogan { font-size: 8px !important; }
+        .statement-header .statement-title { font-size: 18px !important; }
+        .statement-header .statement-ref { font-size: 8px !important; }
+        .statement-addresses h4 { font-size: 9px !important; }
+        .statement-addresses p { font-size: 8px !important; }
+        .statement-addresses .name { font-size: 10px !important; }
+        .statement-table-header { font-size: 8px !important; }
+        .statement-item-row { font-size: 9px !important; }
+        .statement-totals-box { font-size: 8px !important; }
+        .statement-footer .thanks { font-size: 8px !important; }
+        .statement-footer .footnote { font-size: 7px !important; }
+        .statement-footer .signature-area .sign-name { font-size: 11px !important; }
+        .statement-footer .signature-area .sign-label { font-size: 6px !important; }
     </style>
 </head>
 <body>
@@ -6806,6 +6837,43 @@
 
         const notificationSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3');
 
+        /* ─── DATE HELPER FUNCTIONS ─── */
+        function safeFormatDate(timestamp, dateStr) {
+            if (timestamp && typeof timestamp === 'number') {
+                return new Date(timestamp).toLocaleString();
+            }
+            if (dateStr) {
+                try {
+                    const d = new Date(dateStr);
+                    if (!isNaN(d.getTime())) {
+                        return d.toLocaleString();
+                    }
+                } catch (e) {
+                    // fall through
+                }
+                return dateStr;
+            }
+            return 'N/A';
+        }
+
+        function safeFormatDateShort(timestamp, dateStr) {
+            if (timestamp && typeof timestamp === 'number') {
+                return new Date(timestamp).toLocaleDateString();
+            }
+            if (dateStr) {
+                try {
+                    const d = new Date(dateStr);
+                    if (!isNaN(d.getTime())) {
+                        return d.toLocaleDateString();
+                    }
+                } catch (e) {
+                    // fall through
+                }
+                return dateStr;
+            }
+            return 'N/A';
+        }
+
         function playNotificationSound() {
             try {
                 notificationSound.currentTime = 0;
@@ -7295,7 +7363,7 @@
                     mediaHtml = `<i class="fa-regular fa-image"></i>`;
                 }
 
-                const dateStr = t.date ? new Date(t.date).toLocaleDateString() : '';
+                const dateStr = safeFormatDateShort(t.createdAt, t.date);
 
                 return `
                             <div class="testimony-card">
@@ -7308,7 +7376,7 @@
                                     </div>
                                     <div class="testimony-stars">${starsHtml}</div>
                                     <div class="testimony-message">${escapeHtml(t.message)}</div>
-                                    <div class="testimony-date">${t.date ? new Date(t.date).toLocaleString() : ''}</div>
+                                    <div class="testimony-date">${safeFormatDate(t.createdAt, t.date)}</div>
                                 </div>
                                 <div class="testimony-media" onclick="this.querySelector('img') ? openImageViewer('${t.mediaUrl}') : this.querySelector('video') && this.querySelector('video').paused ? this.querySelector('video').play() : this.querySelector('video') && this.querySelector('video').pause()" title="${t.mediaUrl ? 'Tap to view' : 'No media'}">
                                     ${t.mediaUrl ? mediaHtml : '<i class="fa-regular fa-image"></i>'}
@@ -8221,7 +8289,7 @@
                                         <div class="order-service">${escapeHtml(o.service || 'N/A')}</div>
                                         <div class="order-meta">
                                             <span>${escapeHtml(o.customer || 'N/A')}</span>
-                                            <span>${escapeHtml(o.date || 'N/A')}</span>
+                                            <span>${escapeHtml(safeFormatDateShort(o.createdAt || o.timestamp, o.date))}</span>
                                             ${o.discountApplied ? `<span style="background:#fef9e7;color:var(--accent);padding:0 5px;border-radius:7px;font-size:9px;">${o.discountApplied}% OFF</span>` : ''}
                                         </div>
                                     </div>
@@ -8403,7 +8471,7 @@
                                         <span>${escapeHtml(t.type || 'Transaction')} ${t.amount ? 'ZMW ' + t.amount.toFixed(2) : ''}</span>
                                     </div>
                                     <div class="right">
-                                        <span>${escapeHtml(t.date || 'N/A')}</span>
+                                        <span>${escapeHtml(safeFormatDate(t.timestamp || t.createdAt, t.date))}</span>
                                         <i class="fa-solid fa-chevron-down expand-icon"></i>
                                     </div>
                                 </div>
@@ -8495,8 +8563,7 @@
                 profileFullName.textContent = fullName;
                 profilePhone.textContent = currentUserData.phone || 'Not set';
                 profileEmail.textContent = currentUser.email || 'No email';
-                profileJoined.textContent = currentUserData.createdAt ? new Date(currentUserData.createdAt).toLocaleDateString() :
-                    'N/A';
+                profileJoined.textContent = safeFormatDateShort(currentUserData.createdAt, null);
                 profileAvatarLarge.textContent = initial;
                 headerName.textContent = fullName;
                 profileRole.textContent = currentUserData.role || 'Customer';
@@ -8605,7 +8672,7 @@
                                     <div class="sample-title">${escapeHtml(post.title || 'Untitled')}</div>
                                     <div class="sample-desc">${escapeHtml(post.description || '')}</div>
                                     <div class="sample-meta">
-                                        <span>${post.createdAt ? new Date(post.createdAt).toLocaleDateString() : ''}</span>
+                                        <span>${safeFormatDateShort(post.createdAt, null)}</span>
                                         <span>${post.adminName || 'Admin'}</span>
                                     </div>
                                 </div>
@@ -8769,7 +8836,7 @@
                                         <span>${escapeHtml(title)} ${amountDisplay ? 'ZMW ' + t.amount.toFixed(2) : ''}</span>
                                     </div>
                                     <div class="right">
-                                        <span>${escapeHtml(t.date || 'N/A')}</span>
+                                        <span>${escapeHtml(safeFormatDate(t.timestamp || t.createdAt, t.date))}</span>
                                         <i class="fa-solid fa-chevron-down expand-icon"></i>
                                     </div>
                                 </div>
@@ -8810,7 +8877,7 @@
             container.innerHTML = entries.map(([key, w]) => {
                 const statusClass = w.status || 'pending';
                 const statusDisplay = w.status ? w.status.charAt(0).toUpperCase() + w.status.slice(1) : 'Pending';
-                const dateStr = w.date ? new Date(w.date).toLocaleString() : (w.createdAt ? new Date(w.createdAt).toLocaleString() : 'N/A');
+                const dateStr = safeFormatDate(w.createdAt, w.date);
 
                 let statusMessage = '';
                 let statusColor = '#cc8800';
@@ -9229,7 +9296,7 @@
             container.innerHTML = entries.map(([key, w]) => {
                 const statusClass = w.status || 'pending';
                 const statusDisplay = w.status ? w.status.charAt(0).toUpperCase() + w.status.slice(1) : 'Pending';
-                const dateStr = w.date ? new Date(w.date).toLocaleString() : (w.createdAt ? new Date(w.createdAt).toLocaleString() : 'N/A');
+                const dateStr = safeFormatDate(w.createdAt, w.date);
 
                 let iconClass = 'fa-clock';
                 let iconColor = '#cc8800';
@@ -9605,7 +9672,7 @@
                                         <span>${isSent ? 'Sent' : 'Received'} ZMW ${Math.abs(t.amount || 0).toFixed(2)}</span>
                                     </div>
                                     <div class="right">
-                                        <span style="font-size:9px; color:var(--text-muted);">${t.date ? new Date(t.date).toLocaleString() : ''}</span>
+                                        <span style="font-size:9px; color:var(--text-muted);">${escapeHtml(safeFormatDate(t.timestamp || t.createdAt, t.date))}</span>
                                         <i class="fa-solid fa-chevron-down expand-icon"></i>
                                     </div>
                                 </div>
@@ -9614,7 +9681,7 @@
                                     <div class="row"><span class="lbl">${label}</span><span class="val">${escapeHtml(otherName)}</span></div>
                                     <div class="row"><span class="lbl">Phone</span><span class="val">${escapeHtml(otherPhone)}</span></div>
                                     <div class="row"><span class="lbl">Balance</span><span class="val">${otherBalance}</span></div>
-                                    <div class="row"><span class="lbl">Date</span><span class="val">${t.date ? new Date(t.date).toLocaleString() : ''}</span></div>
+                                    <div class="row"><span class="lbl">Date</span><span class="val">${escapeHtml(safeFormatDate(t.timestamp || t.createdAt, t.date))}</span></div>
                                 </div>
                             </div>
                         `;
@@ -10636,7 +10703,7 @@
             };
             asFormType.textContent = formTypeLabels[app.formType] || app.formType || 'Unknown';
             asFlyer.textContent = app.flyerTitle || 'Untitled';
-            asDate.textContent = app.createdAt ? new Date(app.createdAt).toLocaleDateString() : 'N/A';
+            asDate.textContent = safeFormatDateShort(app.createdAt, null);
 
             appStatusBtn.dataset.appId = appId;
 
@@ -10697,7 +10764,7 @@
             }
 
             wsAmount.textContent = `ZMW ${(wd.amount || 0).toFixed(2)}`;
-            wsDate.textContent = wd.date ? new Date(wd.date).toLocaleString() : (wd.createdAt ? new Date(wd.createdAt).toLocaleString() : 'N/A');
+            wsDate.textContent = safeFormatDate(wd.createdAt, wd.date);
             wsPhone.textContent = wd.phone || 'N/A';
             wsStatus.textContent = wd.status ? wd.status.charAt(0).toUpperCase() + wd.status.slice(1) : 'N/A';
 
@@ -10790,7 +10857,7 @@
             container.innerHTML = entries.map(([key, a]) => {
                 const statusClass = a.status || 'pending';
                 const statusDisplay = a.status ? a.status.charAt(0).toUpperCase() + a.status.slice(1) : 'Pending';
-                const dateStr = a.createdAt ? new Date(a.createdAt).toLocaleDateString() : 'N/A';
+                const dateStr = safeFormatDateShort(a.createdAt, null);
                 const formTypeLabel = {
                     ambassador: 'Ambassador',
                     investor: 'Investor',
