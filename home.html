@@ -343,11 +343,23 @@
             flex-direction: column;
             text-align: center;
             flex: 1;
+            min-width: 0;
+            padding: 0 4px;
         }
 
+        /* ── HEADER BALANCE LINE ── */
         .header-text span:first-child {
             font-size: 9px;
             color: var(--text-muted);
+            line-height: 1.3;
+            font-weight: 400;
+            letter-spacing: 0.1px;
+        }
+
+        .header-text span:first-child strong {
+            font-weight: 800;
+            color: var(--text-main);
+            font-size: 9px;
         }
 
         .header-text span:last-child {
@@ -355,6 +367,10 @@
             font-size: 11px;
             color: var(--text-main);
             letter-spacing: 0.5px;
+            margin-top: 1px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .notif-icon {
@@ -515,16 +531,15 @@
             font-weight: 700;
         }
 
-        /* ── PROMO CAROUSEL ── */
+        /* ── PROMO CAROUSEL (ZOOM SAFE) ── */
         .promo-carousel-wrapper {
             position: relative;
             margin: 3px 0 12px 0;
-            overflow-x: auto;
-            overflow-y: visible;
+            overflow: hidden;
             border-radius: 0;
             background: var(--carousel-bg);
             box-shadow: none;
-            padding: 8px 0;
+            padding: 0;
             transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.3s ease;
             width: 100%;
             height: auto;
@@ -542,8 +557,11 @@
         .promo-carousel-track {
             display: flex;
             gap: 0;
-            padding: 0;
+            /* Vertical padding gives the scaled (zoomed) slide room so it is
+               never clipped at the top or bottom. */
+            padding: 20px 0;
             overflow-x: auto;
+            overflow-y: hidden;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             scroll-behavior: smooth;
@@ -677,8 +695,10 @@
             z-index: 2;
         }
 
+        /* Reduced from 1.08 → 1.06 together with the extra track padding so the
+           zoomed flyer is fully visible (no top/bottom cropping). */
         .promo-slide.active-slide {
-            transform: scale(1.08) !important;
+            transform: scale(1.06) !important;
             opacity: 1 !important;
             z-index: 3;
             box-shadow: var(--shadow-lg);
@@ -723,86 +743,134 @@
             flex: 1;
         }
 
-        .category-row {
-            display: flex;
-            gap: 7px;
-            margin: 0 12px 14px 12px;
-            overflow-x: auto;
-            padding-bottom: 3px;
-            scrollbar-width: none;
+        /* ── CATEGORY BOXES (HOME) ── */
+        .category-section {
+            padding: 0 12px 16px 12px;
         }
 
-        .category-row::-webkit-scrollbar {
-            display: none;
+        .section-heading {
+            margin-bottom: 10px;
         }
 
-        .cat-btn {
-            flex-shrink: 0;
+        .section-heading h3 {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.2px;
+        }
+
+        .section-heading p {
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        .category-boxes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .category-box {
             background: var(--bg-card);
             border: 1px solid var(--border-light);
-            border-radius: 17px;
-            padding: 6px 14px;
-            font-size: 10px;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
+            border-radius: 16px;
+            padding: 13px 12px 11px 12px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 5px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.18s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            box-shadow: var(--shadow);
         }
 
-        .cat-btn:active {
-            transform: scale(0.95);
+        .category-box:active {
+            transform: scale(0.97);
         }
 
-        .cat-btn.active {
-            background: var(--color-primary);
-            color: var(--color-primary-text);
-            border-color: var(--color-primary);
+        .category-box:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
         }
 
-        .cat-btn.active i {
-            color: var(--accent);
-        }
-
-        .dynamic-header {
+        .category-box .cat-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin: 0 12px 9px 12px;
+            justify-content: center;
+            font-size: 18px;
+            color: #ffffff;
+            margin-bottom: 3px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
         }
 
-        .dynamic-title {
-            font-weight: 700;
+        .category-box .cat-title {
             font-size: 11px;
+            font-weight: 700;
             color: var(--text-main);
+            line-height: 1.2;
         }
 
-        .dynamic-actions {
-            display: flex;
-            gap: 9px;
-            align-items: center;
-        }
-
-        .dynamic-back {
+        .category-box .cat-desc {
             font-size: 8px;
             color: var(--text-muted);
-            cursor: pointer;
-            font-weight: 500;
+            line-height: 1.35;
+            flex: 1;
         }
 
-        .dynamic-back:hover {
-            color: var(--text-main);
-        }
-
-        .dynamic-view-all {
-            font-size: 9px;
+        .category-box .cat-count {
+            font-size: 8px;
+            font-weight: 700;
             color: var(--accent);
-            font-weight: 600;
-            cursor: pointer;
+            margin-top: 2px;
+            letter-spacing: 0.3px;
         }
 
+        /* ── CATEGORY VIEW ── */
+        .category-view-header {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 0 12px 11px 12px;
+        }
+
+        .category-back-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--border-dark);
+            background: var(--bg-card);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 13px;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .category-back-btn:active {
+            transform: scale(0.92);
+        }
+
+        .category-view-titles h3 {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        .category-view-titles p {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+
+        /* ── SERVICE GRID ── */
         .service-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -831,6 +899,11 @@
             overflow: hidden;
             position: relative;
             background: var(--color-primary) !important;
+            transition: box-shadow 0.25s ease;
+        }
+
+        .service-item:hover .service-thumb {
+            box-shadow: var(--shadow-lg);
         }
 
         .service-thumb i {
@@ -852,7 +925,14 @@
             line-height: 1.2;
         }
 
-        /* ── ORDER FLOW ── */
+        .service-price {
+            font-size: 7px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-top: 1px;
+        }
+
+        /* ── ORDER FLOW (WIZARD) ── */
         .order-flow-container {
             padding: 0 12px 14px 12px;
         }
@@ -1012,91 +1092,6 @@
             font-weight: 500;
         }
 
-        .order-customize {
-            margin-bottom: 14px;
-        }
-
-        .order-customize h4 {
-            font-size: 9px;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 7px;
-        }
-
-        .customize-group {
-            margin-bottom: 9px;
-        }
-
-        .customize-group .group-label {
-            font-size: 9px;
-            font-weight: 500;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-
-        .customize-options {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-        }
-
-        .customize-btn {
-            padding: 4px 11px;
-            border: 1px solid var(--border-dark);
-            border-radius: 14px;
-            background: var(--bg-card);
-            font-size: 9px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            color: var(--text-muted);
-        }
-
-        .customize-btn:active {
-            transform: scale(0.95);
-        }
-
-        .customize-btn.active {
-            background: var(--color-primary);
-            color: var(--color-primary-text);
-            border-color: var(--color-primary);
-        }
-
-        .customize-btn.active i {
-            color: var(--accent);
-        }
-
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-        }
-
-        .quantity-selector button {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 1px solid var(--border-light);
-            background: var(--bg-card);
-            cursor: pointer;
-            font-size: 9px;
-            transition: all 0.2s;
-        }
-
-        .quantity-selector button:active {
-            transform: scale(0.9);
-        }
-
-        .quantity-selector span {
-            font-weight: 600;
-            font-size: 11px;
-            min-width: 14px;
-            text-align: center;
-        }
-
         .order-notes textarea {
             width: 100%;
             padding: 9px;
@@ -1108,6 +1103,7 @@
             background: var(--bg-input);
             transition: border 0.2s;
             font-family: 'Poppins', sans-serif;
+            color: var(--text-main);
         }
 
         .order-notes textarea:focus {
@@ -1140,27 +1136,297 @@
             color: var(--text-main);
         }
 
-        .btn-confirm-order {
+        /* ── STEP WIZARD ── */
+        .wizard {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 14px 13px 13px 13px;
+            box-shadow: var(--shadow);
+            margin-bottom: 6px;
+        }
+
+        .wizard-progress {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 9px;
+            margin-bottom: 13px;
+        }
+
+        .wizard-dots {
+            display: flex;
+            gap: 5px;
+            flex: 1;
+        }
+
+        .wizard-dot {
+            height: 4px;
+            flex: 1;
+            min-width: 10px;
+            border-radius: 3px;
+            background: var(--border-light);
+            transition: background 0.35s ease;
+        }
+
+        .wizard-dot.done {
+            background: var(--accent);
+        }
+
+        .wizard-dot.active {
             background: var(--color-primary);
-            color: var(--color-primary-text);
-            border: none;
-            padding: 9px 16px;
-            border-radius: 20px;
-            font-size: 9px;
+        }
+
+        [data-theme="dark"] .wizard-dot.active {
+            background: var(--accent);
+        }
+
+        .wizard-step-label {
+            font-size: 8px;
+            font-weight: 700;
+            color: var(--text-muted);
+            white-space: nowrap;
+            letter-spacing: 0.3px;
+        }
+
+        .wizard-body {
+            min-height: 108px;
+        }
+
+        .wizard-body.enter-right {
+            animation: stepInRight 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .wizard-body.enter-left {
+            animation: stepInLeft 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes stepInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes stepInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .wizard-step-title {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 9px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .wizard-step-title::before {
+            content: '';
+            width: 3px;
+            height: 13px;
+            background: var(--accent);
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        .wizard-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .wizard-option {
+            padding: 8px 14px;
+            border-radius: 13px;
+            border: 1.5px solid var(--border-dark);
+            background: var(--bg-input);
+            font-size: 10px;
             font-weight: 600;
+            color: var(--text-muted);
             cursor: pointer;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             gap: 5px;
-            transition: all 0.2s;
         }
 
-        .btn-confirm-order:active {
+        .wizard-option:active {
             transform: scale(0.95);
         }
 
-        .btn-confirm-order i {
+        .wizard-option.active {
+            background: var(--color-primary);
+            color: var(--color-primary-text);
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .wizard-option.active i {
             color: var(--accent);
+        }
+
+        .wizard-qty {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 4px 0 2px 0;
+        }
+
+        .wizard-qty button {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--border-dark);
+            background: var(--bg-input);
+            color: var(--text-main);
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .wizard-qty button:active {
+            transform: scale(0.9);
+        }
+
+        .wizard-qty span {
+            font-weight: 800;
+            font-size: 18px;
+            min-width: 28px;
+            text-align: center;
+            color: var(--text-main);
+        }
+
+        .wizard-hint {
+            font-size: 8px;
+            color: var(--text-muted);
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+
+        .wizard-summary {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: var(--bg-body);
+            border-radius: 10px;
+            padding: 7px 11px;
+            border: 1px solid var(--border-light);
+        }
+
+        .wizard-summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            padding: 3px 0;
+            color: var(--text-muted);
+        }
+
+        .wizard-summary-row span:last-child {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .wizard-nav {
+            display: flex;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .wizard-nav button {
+            flex: 1;
+            padding: 11px 10px;
+            border-radius: 13px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .wizard-nav button:active {
+            transform: scale(0.97);
+        }
+
+        #wizPrev {
+            background: var(--bg-hover);
+            color: var(--text-main);
+        }
+
+        #wizPrev:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        #wizNext {
+            background: var(--color-primary);
+            color: var(--color-primary-text);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+        }
+
+        #wizNext i {
+            color: var(--accent);
+        }
+
+        #wizNext.finish {
+            background: var(--accent);
+            color: var(--accent-text);
+        }
+
+        #wizNext.finish i {
+            color: var(--accent-text);
+        }
+
+        /* ── PAGE / VIEW TRANSITIONS ── */
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+            animation: viewFadeIn 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes viewFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .payment-page-overlay.open,
+        .withdraw-page-overlay.open,
+        .send-money-page-overlay.open {
+            animation: overlayFadeIn 0.28s ease;
+        }
+
+        @keyframes overlayFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         /* ── PAYMENT PAGE ── */
@@ -1365,6 +1631,8 @@
             border: 1px solid var(--border-light);
             border-radius: 9px;
             font-size: 10px;
+            background: var(--bg-input);
+            color: var(--text-main);
         }
 
         .referral-section input:focus {
@@ -1477,7 +1745,8 @@
             color: var(--accent);
         }
 
-        .order-success-overlay {
+        .order-success-overlay,
+        .withdraw-success-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -1492,11 +1761,13 @@
             padding: 14px;
         }
 
-        .order-success-overlay.open {
+        .order-success-overlay.open,
+        .withdraw-success-overlay.open {
             display: flex;
         }
 
-        .order-success-modal {
+        .order-success-modal,
+        .withdraw-success-modal {
             background: var(--bg-card);
             border-radius: 20px;
             width: 100%;
@@ -1518,28 +1789,32 @@
             }
         }
 
-        .order-success-modal i {
+        .order-success-modal i,
+        .withdraw-success-modal i {
             font-size: 48px;
             color: var(--accent);
             margin-bottom: 10px;
             display: block;
         }
 
-        .order-success-modal h3 {
+        .order-success-modal h3,
+        .withdraw-success-modal h3 {
             font-size: 18px;
             font-weight: 700;
             color: var(--text-main);
             margin-bottom: 6px;
         }
 
-        .order-success-modal p {
+        .order-success-modal p,
+        .withdraw-success-modal p {
             font-size: 12px;
             color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 18px;
         }
 
-        .order-success-modal .btn-ok {
+        .order-success-modal .btn-ok,
+        .withdraw-success-modal .btn-ok {
             padding: 10px 30px;
             background: var(--color-primary);
             color: var(--color-primary-text);
@@ -1551,16 +1826,9 @@
             transition: all 0.2s;
         }
 
-        .order-success-modal .btn-ok:active {
+        .order-success-modal .btn-ok:active,
+        .withdraw-success-modal .btn-ok:active {
             transform: scale(0.95);
-        }
-
-        .view {
-            display: none;
-        }
-
-        .view.active {
-            display: block;
         }
 
         /* ── ORDERS ── */
@@ -2443,6 +2711,7 @@
 
         .account-view.active {
             display: block;
+            animation: viewFadeIn 0.3s ease;
         }
 
         .account-balance-box {
@@ -2618,6 +2887,8 @@
             border-radius: 10px;
             font-size: 14px;
             transition: border 0.2s;
+            background: var(--bg-input);
+            color: var(--text-main);
         }
 
         .send-money-page .form-group input:focus {
@@ -2963,6 +3234,8 @@
             border-radius: 10px;
             font-size: 14px;
             transition: border 0.2s;
+            background: var(--bg-input);
+            color: var(--text-main);
         }
 
         .withdraw-page .custom-amount input:focus {
@@ -3408,6 +3681,8 @@
             font-size: 10px;
             background: var(--bg-input);
             transition: border 0.2s;
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
         }
 
         .flyer-detail-form .form-group input:focus,
@@ -3631,6 +3906,8 @@
             transition: all 0.2s;
             margin-bottom: 10px;
             cursor: pointer;
+            margin-left: 12px;
+            margin-right: 12px;
         }
 
         .app-card:active {
@@ -3899,6 +4176,7 @@
             padding: 7px 18px;
             border-bottom: 1px solid var(--border-light);
             font-size: 10px;
+            color: var(--text-main);
         }
 
         .receipt-item-row>div {
@@ -3925,6 +4203,7 @@
             width: 150px;
             font-size: 9px;
             text-align: right;
+            color: var(--text-main);
         }
 
         .receipt-totals-box>div {
@@ -4754,6 +5033,7 @@
             padding: 7px 18px;
             border-bottom: 1px solid var(--border-light);
             font-size: 10px;
+            color: var(--text-main);
         }
 
         .statement-item-row>div {
@@ -4780,6 +5060,7 @@
             width: 150px;
             font-size: 9px;
             text-align: right;
+            color: var(--text-main);
         }
 
         .statement-totals-box>div {
@@ -5220,6 +5501,15 @@
             .sidebar {
                 width: 240px;
             }
+            .category-boxes {
+                gap: 9px;
+            }
+            .header-text span:first-child {
+                font-size: 8px;
+            }
+            .header-text span:first-child strong {
+                font-size: 8px;
+            }
         }
 
         @media (max-width: 380px) {
@@ -5242,13 +5532,10 @@
             .flyer-detail-image-wrap video {
                 border-radius: 30px !important;
             }
-            .promo-carousel-wrapper,
-            .promo-carousel-track {
-                min-height: 190px !important;
-                overflow-y: visible !important;
-            }
+            /* Kept zoom-safe: vertical padding stays, no overflow override */
             .promo-carousel-track {
                 align-items: center !important;
+                padding: 18px 0 !important;
             }
             .tutorial-slide h2 {
                 font-size: 20px;
@@ -5543,6 +5830,7 @@
             font-size: 10px;
             background: var(--bg-input);
             font-family: 'Poppins', sans-serif;
+            color: var(--text-main);
         }
 
         .testimony-submit-card .form-row input:focus,
@@ -5884,8 +6172,8 @@
                     <div class="slide-icon-wrap"><i class="fa-solid fa-cart-shopping"></i></div>
                     <h2>Choose &amp; <span class="highlight">Order Services</span></h2>
                     <ul>
-                        <li>Browse services on the <strong>Home</strong> tab and tap one to customize.</li>
-                        <li>Select size, orientation, format, and quantity.</li>
+                        <li>Pick a <strong>service category</strong> on the Home tab.</li>
+                        <li>Tap a service, then customize it step by step.</li>
                         <li>At checkout, apply a <strong>promo code</strong> or <strong>referral code</strong> for discounts.</li>
                         <li>Pay 50% upfront to start your project.</li>
                     </ul>
@@ -5933,7 +6221,7 @@
                     </button>
                 </div>
                 <div class="header-text">
-                    <span>Welcome back,</span>
+                    <span>Your Buffer Zone account balance is <strong id="headerBalance">ZMW 0.00</strong></span>
                     <span id="headerName">User</span>
                 </div>
                 <div class="notif-icon" id="notifIcon">
@@ -5942,6 +6230,7 @@
                 </div>
             </div>
 
+            <!-- ─── HOME ─── -->
             <div id="homeView" class="view active">
                 <div class="hero">
                     <div class="small-grid-dots">
@@ -5979,26 +6268,29 @@
                 <div id="promotionsBanner" class="promotions-banner">
                 </div>
 
-                <div class="category-row" id="categoryRow">
-                    <button class="cat-btn active" data-cat="all"><i class="fa-solid fa-th-large"></i> All</button>
-                    <button class="cat-btn" data-cat="graphic"><i class="fa-regular fa-lightbulb"></i> Graphic</button>
-                    <button class="cat-btn" data-cat="dev"><i class="fa-solid fa-code"></i> Developer</button>
-                    <button class="cat-btn" data-cat="tech"><i class="fa-solid fa-gear"></i> Technical</button>
-                    <button class="cat-btn" data-cat="it"><i class="fa-solid fa-headset"></i> IT Support</button>
-                </div>
-
-                <div id="serviceSection">
-                    <div class="dynamic-header">
-                        <span class="dynamic-title" id="dynamicTitle">RECENT WORK</span>
-                        <div class="dynamic-actions">
-                            <span class="dynamic-back" id="dynamicBack" style="display:none;">← Back</span>
-                            <span class="dynamic-view-all" id="dynamicViewAll">View All</span>
-                        </div>
+                <!-- ─── CATEGORY BOXES ─── -->
+                <div class="category-section">
+                    <div class="section-heading">
+                        <h3>Our Services</h3>
+                        <p>Tap a category to explore what we offer.</p>
                     </div>
-                    <div id="serviceGridContainer" class="service-grid"></div>
+                    <div class="category-boxes" id="categoryBoxes"></div>
                 </div>
             </div>
 
+            <!-- ─── CATEGORY VIEW (SERVICES IN CATEGORY) ─── -->
+            <div id="categoryView" class="view">
+                <div class="category-view-header">
+                    <button id="backFromCategory" class="category-back-btn"><i class="fa-solid fa-arrow-left"></i></button>
+                    <div class="category-view-titles">
+                        <h3 id="dynamicTitle">Category</h3>
+                        <p>Tap a service to customize your order.</p>
+                    </div>
+                </div>
+                <div id="serviceGridContainer" class="service-grid"></div>
+            </div>
+
+            <!-- ─── ORDER FLOW (STEP WIZARD) ─── -->
             <div id="orderFlowView" class="view">
                 <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
                     <button id="backFromOrder" style="background: none; border: none; font-size: 14px; color: var(--text-main); cursor: pointer; padding: 3px;">
@@ -6010,6 +6302,7 @@
                 </div>
             </div>
 
+            <!-- ─── FLYER DETAIL ─── -->
             <div id="flyerDetailView" class="view">
                 <div style="display: flex; align-items: center; gap: 9px; padding: 0 12px 9px 12px;">
                     <button id="backFromFlyerDetail" style="background: none; border: none; font-size: 14px; color: var(--text-main); cursor: pointer; padding: 3px;">
@@ -6041,6 +6334,7 @@
                 </div>
             </div>
 
+            <!-- ─── ORDERS ─── -->
             <div id="ordersView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: var(--text-main);">Your Orders</h3>
@@ -6049,6 +6343,7 @@
                 <div class="order-grid" id="ordersGrid"></div>
             </div>
 
+            <!-- ─── HISTORY ─── -->
             <div id="historyView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: var(--text-main);">Transaction History</h3>
@@ -6059,6 +6354,7 @@
                 <div class="history-list" id="historyList"></div>
             </div>
 
+            <!-- ─── SAMPLES ─── -->
             <div id="samplesView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: var(--text-main);">📁 Work Samples</h3>
@@ -6067,6 +6363,7 @@
                 <div id="samplesContainer" class="samples-grid"></div>
             </div>
 
+            <!-- ─── APPLICATIONS ─── -->
             <div id="applicationsView" class="view">
                 <div class="applications-header">
                     <h3>📋 My Applications</h3>
@@ -6076,6 +6373,7 @@
                 </div>
             </div>
 
+            <!-- ─── ACCOUNT ─── -->
             <div id="accountView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: var(--text-main);">💰 My Account</h3>
@@ -6122,6 +6420,7 @@
                 </div>
             </div>
 
+            <!-- ─── PROFILE ─── -->
             <div id="profileView" class="view">
                 <div style="padding: 0 12px 11px 12px;">
                     <h3 style="font-weight: 700; font-size: 15px; color: var(--text-main);">My Profile</h3>
@@ -6170,12 +6469,10 @@
                     <p>Read what others say about Buffer Zone — or share your own experience.</p>
                 </div>
 
-                <!-- Write Testimony Toggle Button -->
                 <button class="write-testimony-btn" id="writeTestimonyBtn">
                     <i class="fa-solid fa-pen"></i> Write a Testimony
                 </button>
 
-                <!-- Testimony Form (collapsible) -->
                 <div class="testimony-form-wrapper" id="testimonyFormWrapper">
                     <div class="testimony-submit-card" id="testimonySubmitCard">
                         <h4><i class="fa-solid fa-pen" style="color:var(--accent);"></i> Share Your Testimony</h4>
@@ -6215,7 +6512,6 @@
                     </div>
                 </div>
 
-                <!-- All testimonies -->
                 <div class="testimony-list" id="testimonyList">
                     <div style="text-align:center;padding:20px;color:var(--text-muted);font-size:10px;">
                         <i class="fa-regular fa-comment" style="font-size:24px;color:var(--border-light);display:block;margin-bottom:6px;"></i>
@@ -6338,6 +6634,7 @@
         </div>
     </div>
 
+    <!-- ─── ORDER SUCCESS ─── -->
     <div class="order-success-overlay" id="orderSuccessPopup">
         <div class="order-success-modal">
             <i class="fa-regular fa-circle-check"></i>
@@ -6347,6 +6644,7 @@
         </div>
     </div>
 
+    <!-- ─── WITHDRAW PAGE ─── -->
     <div class="withdraw-page-overlay" id="withdrawPage">
         <div class="withdraw-page">
             <div class="page-header">
@@ -6392,6 +6690,7 @@
         </div>
     </div>
 
+    <!-- ─── SEND MONEY PAGE ─── -->
     <div class="send-money-page-overlay" id="sendMoneyPage">
         <div class="send-money-page">
             <div class="page-header">
@@ -6439,6 +6738,7 @@
         </div>
     </div>
 
+    <!-- ─── WITHDRAW SUCCESS ─── -->
     <div class="withdraw-success-overlay" id="withdrawSuccessModal">
         <div class="withdraw-success-modal">
             <i class="fa-regular fa-circle-check"></i>
@@ -6448,6 +6748,7 @@
         </div>
     </div>
 
+    <!-- ─── APPLICATION STATUS POPUP ─── -->
     <div class="app-status-overlay" id="appStatusPopup">
         <div class="app-status-modal">
             <div class="app-status-logo-wrap">
@@ -6475,6 +6776,7 @@
         </div>
     </div>
 
+    <!-- ─── ORDER COMPLETE POPUP ─── -->
     <div class="order-complete-overlay" id="orderCompletePopup">
         <div class="order-complete-modal">
             <span class="oc-icon"><i class="fa-regular fa-circle-check"></i></span>
@@ -6485,6 +6787,7 @@
         </div>
     </div>
 
+    <!-- ─── WITHDRAWAL STATUS POPUP ─── -->
     <div class="withdrawal-status-overlay" id="withdrawalStatusPopup">
         <div class="withdrawal-status-modal">
             <div class="ws-logo-wrap">
@@ -6508,6 +6811,7 @@
         </div>
     </div>
 
+    <!-- ─── REFERRAL RECEIVED POPUP ─── -->
     <div class="referral-received-overlay" id="referralReceivedPopup">
         <div class="referral-received-modal">
             <span class="rr-icon"><i class="fa-solid fa-gift"></i></span>
@@ -6518,6 +6822,7 @@
         </div>
     </div>
 
+    <!-- ─── MONEY RECEIVED POPUP ─── -->
     <div class="money-received-overlay" id="moneyReceivedPopup">
         <div class="money-received-modal">
             <span class="mr-icon"><i class="fa-solid fa-inbox"></i></span>
@@ -6529,6 +6834,7 @@
         </div>
     </div>
 
+    <!-- ─── IMAGE VIEWER ─── -->
     <div class="image-viewer-overlay" id="imageViewer">
         <img id="imageViewerImg" src="" alt="Screenshot" />
     </div>
@@ -6584,7 +6890,6 @@
                 <i class="fa-regular fa-user"></i>
                 <span class="nav-label">Profile</span>
             </button>
-            <!-- ─── TESTIMONIES NAV LINK ─── -->
             <button class="nav-link" data-view="testimoniesView">
                 <i class="fa-solid fa-star"></i>
                 <span class="nav-label">Testimonials</span>
@@ -6742,6 +7047,7 @@
         </div>
     </div>
 
+    <!-- ─── ADMIN NOTIFICATION POPUP ─── -->
     <div class="admin-notif-overlay" id="adminNotifOverlay">
         <div class="admin-notif-modal">
             <div class="admin-notif-header">
@@ -6756,6 +7062,7 @@
         </div>
     </div>
 
+    <!-- ─── OFFLINE ─── -->
     <div class="offline-overlay" id="offlineOverlay">
         <div class="offline-modal">
             <span class="offline-icon"><i class="fa-solid fa-wifi-slash"></i></span>
@@ -6826,6 +7133,13 @@
 
         let currentFlyerId = null;
 
+        /* ── CATEGORY / WIZARD STATE ── */
+        let currentCategory = 'all';
+        let orderFlowReturnView = 'homeView';
+        let wizardSteps = [];
+        let wizardIndex = 0;
+        let wizardNotes = '';
+
         let shownPopups = {
             applications: {},
             orderComplete: {},
@@ -6836,6 +7150,46 @@
         };
 
         const notificationSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3');
+
+        /* ─── CATEGORY METADATA ─── */
+        const CATEGORY_META = {
+            all: {
+                title: 'All Services',
+                desc: 'Browse every service we offer',
+                icon: 'fa-solid fa-layer-group',
+                color: '#1c2128'
+            },
+            graphic: {
+                title: 'Graphic Design',
+                desc: 'Logos, flyers, posters & branding',
+                icon: 'fa-regular fa-lightbulb',
+                color: '#7c3aed'
+            },
+            dev: {
+                title: 'Developer',
+                desc: 'Websites, apps & custom systems',
+                icon: 'fa-solid fa-code',
+                color: '#0066cc'
+            },
+            tech: {
+                title: 'Technical',
+                desc: 'Cyber security & technical support',
+                icon: 'fa-solid fa-gear',
+                color: '#00a86b'
+            },
+            it: {
+                title: 'IT Support',
+                desc: 'Help desk, maintenance & repairs',
+                icon: 'fa-solid fa-headset',
+                color: '#cc8800'
+            },
+            other: {
+                title: 'Other Services',
+                desc: 'More from Buffer Zone',
+                icon: 'fa-solid fa-cube',
+                color: '#1c2128'
+            }
+        };
 
         /* ─── DATE HELPER FUNCTIONS ─── */
         function safeFormatDate(timestamp, dateStr) {
@@ -6949,6 +7303,7 @@
         });
 
         const headerName = document.getElementById('headerName');
+        const headerBalance = document.getElementById('headerBalance');
         const heroTitle = document.getElementById('heroTitle');
         const heroTitleSpan = document.getElementById('heroTitleSpan');
         const heroDesc = document.getElementById('heroDesc');
@@ -6957,9 +7312,8 @@
         const ourServicesList = document.getElementById('ourServicesList');
         const serviceGridContainer = document.getElementById('serviceGridContainer');
         const dynamicTitle = document.getElementById('dynamicTitle');
-        const dynamicBack = document.getElementById('dynamicBack');
-        const dynamicViewAll = document.getElementById('dynamicViewAll');
-        const categoryRow = document.getElementById('categoryRow');
+        const categoryBoxes = document.getElementById('categoryBoxes');
+        const backFromCategory = document.getElementById('backFromCategory');
         const orderFlowContainer = document.getElementById('orderFlowContainer');
         const backFromOrder = document.getElementById('backFromOrder');
         const ordersGrid = document.getElementById('ordersGrid');
@@ -7026,15 +7380,6 @@
         const walletStatus = document.getElementById('walletStatus');
         const uploadSection = document.getElementById('uploadSection');
         const sendMoneyBtn = document.getElementById('sendMoneyBtn');
-        const sendMoneySection = document.getElementById('sendMoneySection');
-        const sendReferralInput = document.getElementById('sendReferralInput');
-        const searchRecipientBtn = document.getElementById('searchRecipientBtn');
-        const recipientSearchResult = document.getElementById('recipientSearchResult');
-        const sendAmountInput = document.getElementById('sendAmountInput');
-        const sendAvailBalance = document.getElementById('sendAvailBalance');
-        const sendBalanceCheck = document.getElementById('sendBalanceCheck');
-        const sendMoneyConfirmBtn = document.getElementById('sendMoneyConfirmBtn');
-        const sendTxItems = document.getElementById('sendTxItems');
         const flyerDetailImage = document.getElementById('flyerDetailImage');
         const flyerDetailTitle = document.getElementById('flyerDetailTitle');
         const flyerDetailInstructions = document.getElementById('flyerDetailInstructions');
@@ -7378,7 +7723,7 @@
                                     <div class="testimony-message">${escapeHtml(t.message)}</div>
                                     <div class="testimony-date">${safeFormatDate(t.createdAt, t.date)}</div>
                                 </div>
-                                <div class="testimony-media" onclick="this.querySelector('img') ? openImageViewer('${t.mediaUrl}') : this.querySelector('video') && this.querySelector('video').paused ? this.querySelector('video').play() : this.querySelector('video') && this.querySelector('video').pause()" title="${t.mediaUrl ? 'Tap to view' : 'No media'}">
+                                <div class="testimony-media" title="${t.mediaUrl ? 'Tap to view' : 'No media'}">
                                     ${t.mediaUrl ? mediaHtml : '<i class="fa-regular fa-image"></i>'}
                                 </div>
                             </div>
@@ -7547,6 +7892,14 @@
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
+        }
+
+        function escapeAttr(text) {
+            return String(text == null ? '' : text)
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
         }
 
         function renderPriceInline(service) {
@@ -7731,7 +8084,7 @@
                 setTimeout(() => {
                     checkAllPopups();
                     checkAdminNotifications();
-                }, 500);
+                }, 350);
                 hideLoading();
                 if (callback) callback();
             }, (error) => {
@@ -7756,6 +8109,7 @@
                 const data = snapshot.val();
                 if (data) {
                     allData.inAppNotifications = data;
+                    // Real-time: pop the moment the admin sends it.
                     checkAdminNotifications();
                 }
             }, (error) => {
@@ -7768,16 +8122,16 @@
             const promoCodeDisplay = document.getElementById('promoCodeDisplay');
             const promoDiscountDisplay = document.getElementById('promoDiscountDisplay');
             const promoWrap = document.getElementById('promoCodeWrap');
-            const togglePromoBtn = document.getElementById('togglePromoBtn');
+            const togglePromoBtnEl = document.getElementById('togglePromoBtn');
 
             const promotions = allData.promotions || {};
             const entries = Object.entries(promotions);
             if (entries.length === 0) {
-                togglePromoBtn.style.display = 'none';
+                togglePromoBtnEl.style.display = 'none';
                 promoWrap.style.display = 'none';
                 return;
             }
-            togglePromoBtn.style.display = 'inline-block';
+            togglePromoBtnEl.style.display = 'inline-block';
             promoWrap.style.display = 'block';
             const [key, promo] = entries[0];
             promoButtonTarget = { key: key, code: promo.code, discount: promo.discount };
@@ -7862,7 +8216,8 @@
 
             renderPromotionsBanner();
             renderPromoCarousel();
-            renderServices();
+            renderCategoryBoxes();
+            renderServices(currentCategory);
             renderOrders();
             renderHistory();
             renderSamples();
@@ -7879,18 +8234,477 @@
 
             if (allData.policy) {
                 const p = allData.policy;
-                document.querySelector('.order-policy-content h2').innerHTML =
-                    `${p.title || 'BUFFER ZONE'}<br><span>${p.tag || ''}</span>`;
-                document.querySelector('.order-policy-content p').textContent =
-                    p.desc || 'To begin your project, we require a 50% down payment.';
-                document.querySelector('.order-policy-content .policy-tag').innerHTML =
-                    `<i class="fa-regular fa-circle-check"></i> ${p.tag || '50% upfront required'}`;
+                const policyContent = document.querySelector('.order-policy-content');
+                if (policyContent) {
+                    const h2 = policyContent.querySelector('h2');
+                    const pEl = policyContent.querySelector('p');
+                    const tagEl = policyContent.querySelector('.policy-tag');
+                    if (h2) h2.innerHTML = `${p.title || 'BUFFER ZONE'}<br><span>${p.tag || ''}</span>`;
+                    if (pEl) pEl.textContent = p.desc || 'To begin your project, we require a 50% down payment.';
+                    if (tagEl) tagEl.innerHTML = `<i class="fa-regular fa-circle-check"></i> ${p.tag || '50% upfront required'}`;
+                }
                 paymentNumber.textContent = p.number || '0976760537';
                 paymentName.textContent = p.name || 'Airtel Mobile Number';
                 paymentAccountName.textContent = p.accountName || 'Jubel Mobela';
             }
         }
 
+        /* ══════════════════════════════════════════════
+           CATEGORY BOXES + CATEGORY VIEW
+           ══════════════════════════════════════════════ */
+        function renderCategoryBoxes() {
+            if (!categoryBoxes || !allData) return;
+            const services = allData.services || {};
+            const counts = { all: Object.keys(services).length };
+            Object.values(services).forEach(s => {
+                const c = s.category || 'other';
+                counts[c] = (counts[c] || 0) + 1;
+            });
+
+            const order = ['all', 'graphic', 'dev', 'tech', 'it'];
+            Object.keys(counts).forEach(c => {
+                if (!order.includes(c)) order.push(c);
+            });
+
+            categoryBoxes.innerHTML = order.map(key => {
+                const meta = CATEGORY_META[key] || {
+                    title: key.charAt(0).toUpperCase() + key.slice(1),
+                    desc: 'Services',
+                    icon: 'fa-solid fa-cube',
+                    color: '#1c2128'
+                };
+                const count = counts[key] || 0;
+                return `
+                            <div class="category-box" data-cat="${escapeAttr(key)}">
+                                <div class="cat-icon" style="background:${meta.color};">
+                                    <i class="${meta.icon}"></i>
+                                </div>
+                                <div class="cat-title">${escapeHtml(meta.title)}</div>
+                                <div class="cat-desc">${escapeHtml(meta.desc)}</div>
+                                <div class="cat-count">${count} service${count === 1 ? '' : 's'}</div>
+                            </div>
+                        `;
+            }).join('');
+
+            categoryBoxes.querySelectorAll('.category-box').forEach(box => {
+                box.addEventListener('click', function() {
+                    openCategoryView(this.dataset.cat);
+                });
+            });
+        }
+
+        function openCategoryView(cat) {
+            currentCategory = cat || 'all';
+            const meta = CATEGORY_META[currentCategory] || {
+                title: currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1)
+            };
+            if (dynamicTitle) dynamicTitle.textContent = meta.title;
+            renderServices(currentCategory);
+            switchView('categoryView');
+        }
+
+        function goHome() {
+            selectedService = null;
+            currentCategory = 'all';
+            if (dynamicTitle) dynamicTitle.textContent = 'Category';
+            renderCategoryBoxes();
+            switchView('homeView');
+        }
+
+        backFromCategory.addEventListener('click', function() {
+            switchView('homeView');
+            renderCategoryBoxes();
+        });
+
+        function renderServices(category = 'all') {
+            const container = serviceGridContainer;
+            if (!container || !allData) return;
+            const services = allData.services || {};
+            let entries = Object.entries(services);
+            if (category !== 'all') {
+                entries = entries.filter(([key, s]) => (s.category || 'other') === category);
+            }
+
+            if (entries.length === 0) {
+                container.innerHTML =
+                    `<div class="text-muted text-center" style="padding:17px; color:var(--text-muted); grid-column: 1 / -1; text-align:center;">No services in this category yet.</div>`;
+                return;
+            }
+
+            container.innerHTML = entries.map(([key, s]) => {
+                const thumbClass = 'thumb-1';
+                const price = (s.price || 0).toFixed(2);
+                return `
+                            <div class="service-item" data-id="${escapeAttr(key)}">
+                                <div class="service-thumb ${thumbClass}">
+                                    <i class="fa-solid ${s.icon || 'fa-cube'}"></i>
+                                </div>
+                                <div class="service-title">${escapeHtml(s.title || 'Untitled')}</div>
+                                <div class="service-subtitle">${escapeHtml(s.subtitle || '')}</div>
+                                <div class="service-price">ZMW ${price}</div>
+                            </div>
+                        `;
+            }).join('');
+
+            container.querySelectorAll('.service-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    const service = allData.services[id];
+                    if (service) openOrderFlow(service);
+                });
+            });
+        }
+
+        /* ══════════════════════════════════════════════
+           ORDER FLOW — STEP BY STEP WIZARD
+           ══════════════════════════════════════════════ */
+        function openOrderFlow(service) {
+            selectedService = service;
+            currentQuantity = 1;
+            wizardNotes = '';
+            const c = service.customize || {};
+            selectedSize = c.defaultSize || (c.sizes ? c.sizes[0] : '');
+            selectedOrientation = c.defaultOrientation || (c.orientations ? c.orientations[0] : '');
+            selectedFormat = c.defaultFormat || (c.formats ? c.formats[0] : '');
+            selectedColorScheme = c.defaultColorScheme || (c.colorSchemes ? c.colorSchemes[0] : '');
+            selectedRevisions = c.defaultRevisions || (c.revisions ? c.revisions[0] : '');
+            selectedDeliverySpeed = c.defaultDeliverySpeed || (c.deliverySpeeds ? c.deliverySpeeds[0] : '');
+
+            orderFlowReturnView = document.getElementById('categoryView').classList.contains('active') ?
+                'categoryView' : 'homeView';
+
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('orderFlowView').classList.add('active');
+            document.getElementById('appContent').scrollTop = 0;
+
+            wizardSteps = buildWizardSteps(service);
+            wizardIndex = 0;
+            renderOrderFlow(service);
+        }
+
+        function buildWizardSteps(service) {
+            const c = service.customize || {};
+            const steps = [];
+            if (c.sizes && c.sizes.length) {
+                steps.push({ key: 'size', label: 'Select Size', type: 'options', options: c.sizes,
+                    get: () => selectedSize, set: (v) => { selectedSize = v; } });
+            }
+            if (c.orientations && c.orientations.length) {
+                steps.push({ key: 'orientation', label: 'Orientation', type: 'options', options: c.orientations,
+                    get: () => selectedOrientation, set: (v) => { selectedOrientation = v; } });
+            }
+            if (c.formats && c.formats.length) {
+                steps.push({ key: 'format', label: 'File Format', type: 'options', options: c.formats,
+                    get: () => selectedFormat, set: (v) => { selectedFormat = v; } });
+            }
+            if (c.colorSchemes && c.colorSchemes.length) {
+                steps.push({ key: 'color', label: 'Color Scheme', type: 'options', options: c.colorSchemes,
+                    get: () => selectedColorScheme, set: (v) => { selectedColorScheme = v; } });
+            }
+            if (c.revisions && c.revisions.length) {
+                steps.push({ key: 'revisions', label: 'Revisions', type: 'options', options: c.revisions,
+                    get: () => selectedRevisions, set: (v) => { selectedRevisions = v; } });
+            }
+            if (c.deliverySpeeds && c.deliverySpeeds.length) {
+                steps.push({ key: 'delivery', label: 'Delivery Speed', type: 'options', options: c.deliverySpeeds,
+                    get: () => selectedDeliverySpeed, set: (v) => { selectedDeliverySpeed = v; } });
+            }
+            steps.push({ key: 'quantity', label: 'Quantity', type: 'quantity' });
+            steps.push({ key: 'review', label: 'Review & Notes', type: 'review' });
+            return steps;
+        }
+
+        function renderOrderFlow(service) {
+            const container = orderFlowContainer;
+            const specs = service.specs || '';
+            const specLines = specs.split('\n').filter(line => line.trim());
+
+            let specsHtml = '';
+            specLines.forEach(line => {
+                const parts = line.split(':');
+                if (parts.length === 2) {
+                    specsHtml +=
+                        `<div class="spec-row"><span class="label">${escapeHtml(parts[0].trim())}</span><span class="value">${escapeHtml(parts[1].trim())}</span></div>`;
+                }
+            });
+
+            container.innerHTML = `
+                        <div class="order-policy-panel">
+                            <div class="order-policy-content">
+                                <h2>${allData.policy?.title || 'BUFFER ZONE'}<br><span>${allData.policy?.tag || ''}</span></h2>
+                                <p>${allData.policy?.desc || 'To begin your project, we require a 50% down payment.'}</p>
+                                <div class="policy-tag"><i class="fa-regular fa-circle-check"></i> ${allData.policy?.tag || '50% upfront required'}</div>
+                            </div>
+                        </div>
+
+                        <div class="order-title-section">
+                            <h2>${escapeHtml((service.title || 'Service').toUpperCase())}</h2>
+                            <p>${escapeHtml(service.subtitle || '')}</p>
+                            <div class="price">
+                                ${renderPriceInline(service)}
+                            </div>
+                        </div>
+
+                        <div class="order-tags">
+                            ${(service.tags || []).map(t => `<span class="tag"><i class="fa-regular fa-circle-check"></i> ${escapeHtml(t)}</span>`).join('')}
+                        </div>
+
+                        <div class="order-specs">
+                            <h4>SPECIFICATIONS</h4>
+                            ${specsHtml || '<p class="text-muted" style="color:var(--text-muted);">No specifications available.</p>'}
+                        </div>
+
+                        <div class="wizard" id="orderWizard">
+                            <div class="wizard-progress">
+                                <div class="wizard-dots" id="wizardDots"></div>
+                                <div class="wizard-step-label" id="wizardStepLabel"></div>
+                            </div>
+                            <div class="wizard-body" id="wizardBody"></div>
+                            <div class="wizard-nav">
+                                <button id="wizPrev"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                                <button id="wizNext">Next <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="order-footer" style="margin-top:14px;">
+                            <div>
+                                <div class="total-label">Total Price</div>
+                                <div class="total-price" id="orderTotalDisplay">ZMW ${((service.price || 0) * currentQuantity).toFixed(2)}</div>
+                            </div>
+                        </div>
+                    `;
+
+            document.getElementById('wizPrev').addEventListener('click', () => goToWizardStep(wizardIndex - 1));
+            document.getElementById('wizNext').addEventListener('click', onWizardNext);
+
+            renderWizardStep(1);
+        }
+
+        function renderWizardStep(direction) {
+            const step = wizardSteps[wizardIndex];
+            const body = document.getElementById('wizardBody');
+            const dots = document.getElementById('wizardDots');
+            const label = document.getElementById('wizardStepLabel');
+            const prev = document.getElementById('wizPrev');
+            const next = document.getElementById('wizNext');
+            if (!step || !body || !dots || !label || !prev || !next) return;
+
+            dots.innerHTML = wizardSteps.map((s, i) =>
+                `<div class="wizard-dot ${i < wizardIndex ? 'done' : ''} ${i === wizardIndex ? 'active' : ''}"></div>`
+            ).join('');
+            label.textContent = `Step ${wizardIndex + 1} of ${wizardSteps.length}`;
+
+            let html = `<div class="wizard-step-title">${escapeHtml(step.label)}</div>`;
+
+            if (step.type === 'options') {
+                html += `<div class="wizard-options">` + step.options.map(o => {
+                    const val = String(o);
+                    const active = String(step.get() || '') === val;
+                    return `<button class="wizard-option ${active ? 'active' : ''}" data-value="${escapeAttr(val)}">${escapeHtml(val)}</button>`;
+                }).join('') + `</div>`;
+            } else if (step.type === 'quantity') {
+                html += `
+                            <div class="quantity-selector wizard-qty">
+                                <button id="wizQtyMinus" type="button"><i class="fa-solid fa-minus"></i></button>
+                                <span id="wizQtyDisplay">${currentQuantity}</span>
+                                <button id="wizQtyPlus" type="button"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                            <p class="wizard-hint">Unit price: ZMW ${(selectedService.price || 0).toFixed(2)} · The total updates automatically.</p>
+                        `;
+            } else if (step.type === 'review') {
+                const rows = [];
+                if (selectedSize) rows.push(['Size', selectedSize]);
+                if (selectedOrientation) rows.push(['Orientation', selectedOrientation]);
+                if (selectedFormat) rows.push(['Format', selectedFormat]);
+                if (selectedColorScheme) rows.push(['Color Scheme', selectedColorScheme]);
+                if (selectedRevisions) rows.push(['Revisions', selectedRevisions]);
+                if (selectedDeliverySpeed) rows.push(['Delivery Speed', selectedDeliverySpeed]);
+                rows.push(['Quantity', currentQuantity]);
+                rows.push(['Total', `ZMW ${((selectedService.price || 0) * currentQuantity).toFixed(2)}`]);
+
+                html += `<div class="wizard-summary">` + rows.map(([l, v]) =>
+                    `<div class="wizard-summary-row"><span>${escapeHtml(l)}</span><span>${escapeHtml(String(v))}</span></div>`
+                ).join('') + `</div>`;
+
+                html += `
+                            <div class="order-notes" style="margin-top:10px;">
+                                <h4 style="font-size:9px; font-weight:600; color:var(--text-main); margin-bottom:4px;">📝 Add Extra Notes (Optional)</h4>
+                                <textarea id="orderNotes" placeholder="Tell us more about your requirements, special instructions, or any additional details...">${escapeHtml(wizardNotes)}</textarea>
+                                <p style="font-size:7px; color:var(--text-muted); margin-top:3px;">These notes will be attached to your order for the team to review.</p>
+                            </div>
+                        `;
+            }
+
+            body.innerHTML = html;
+
+            body.classList.remove('enter-right', 'enter-left');
+            void body.offsetWidth;
+            if (direction < 0) body.classList.add('enter-left');
+            else if (direction > 0) body.classList.add('enter-right');
+
+            /* bind option buttons */
+            body.querySelectorAll('.wizard-option').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    step.set(this.dataset.value);
+                    renderWizardStep(0);
+                });
+            });
+
+            /* bind quantity buttons */
+            const qMinus = document.getElementById('wizQtyMinus');
+            const qPlus = document.getElementById('wizQtyPlus');
+            if (qMinus) {
+                qMinus.addEventListener('click', () => {
+                    if (currentQuantity > 1) {
+                        currentQuantity--;
+                        const d = document.getElementById('wizQtyDisplay');
+                        if (d) d.textContent = currentQuantity;
+                        updateOrderTotal();
+                    }
+                });
+            }
+            if (qPlus) {
+                qPlus.addEventListener('click', () => {
+                    currentQuantity++;
+                    const d = document.getElementById('wizQtyDisplay');
+                    if (d) d.textContent = currentQuantity;
+                    updateOrderTotal();
+                });
+            }
+
+            /* bind notes */
+            const notesEl = document.getElementById('orderNotes');
+            if (notesEl) {
+                notesEl.addEventListener('input', function() {
+                    wizardNotes = this.value;
+                });
+            }
+
+            prev.disabled = wizardIndex === 0;
+
+            if (wizardIndex === wizardSteps.length - 1) {
+                next.innerHTML = '<i class="fa-solid fa-cart-shopping"></i> Confirm Order';
+                next.classList.add('finish');
+            } else {
+                next.innerHTML = 'Next <i class="fa-solid fa-arrow-right"></i>';
+                next.classList.remove('finish');
+            }
+
+            updateOrderTotal();
+        }
+
+        function goToWizardStep(idx) {
+            if (idx < 0 || idx >= wizardSteps.length) return;
+            const dir = idx > wizardIndex ? 1 : -1;
+            wizardIndex = idx;
+            renderWizardStep(dir);
+            const wiz = document.getElementById('orderWizard');
+            if (wiz) {
+                try {
+                    wiz.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } catch (e) {
+                    /* ignore */
+                }
+            }
+        }
+
+        function onWizardNext() {
+            if (wizardIndex >= wizardSteps.length - 1) {
+                proceedToPayment();
+            } else {
+                goToWizardStep(wizardIndex + 1);
+            }
+        }
+
+        function updateOrderTotal() {
+            if (!selectedService) return;
+            const total = (selectedService.price || 0) * currentQuantity;
+            const el = document.getElementById('orderTotalDisplay');
+            if (el) el.textContent = `ZMW ${total.toFixed(2)}`;
+        }
+
+        function proceedToPayment() {
+            const service = selectedService;
+            if (!service) {
+                showToast('Service not selected.', 'error');
+                return;
+            }
+
+            const total = (service.price || 0) * currentQuantity;
+            orderTotalBeforeDiscount = total;
+            const amount50 = total * 0.5;
+            paymentAmount.textContent = `ZMW ${amount50.toFixed(2)}`;
+
+            discountApplied = false;
+            appliedPromo = null;
+            appliedReferral = null;
+            couponMsg.textContent = '';
+            couponMsg.className = 'coupon-msg';
+            priceBreakdown.style.display = 'none';
+
+            const promoBtn = document.getElementById('applyPromoBtn');
+            if (promoBtn) { promoBtn.disabled = false;
+                promoBtn.style.opacity = '1'; }
+
+            referralCodeInput.value = '';
+            referralCodeInput.disabled = false;
+            applyReferralBtn.disabled = false;
+            referralMsg.textContent = '';
+            referralMsg.className = 'coupon-msg';
+
+            payWithWalletCheck.checked = false;
+            uploadSection.style.display = 'block';
+            updateWalletPaymentUI();
+
+            const notes = wizardNotes.trim();
+            const customizationParts = [];
+            if (selectedSize) customizationParts.push(`Size: ${selectedSize}`);
+            if (selectedOrientation) customizationParts.push(`Orientation: ${selectedOrientation}`);
+            if (selectedFormat) customizationParts.push(`Format: ${selectedFormat}`);
+            if (selectedColorScheme) customizationParts.push(`Color Scheme: ${selectedColorScheme}`);
+            if (selectedRevisions) customizationParts.push(`Revisions: ${selectedRevisions}`);
+            if (selectedDeliverySpeed) customizationParts.push(`Delivery: ${selectedDeliverySpeed}`);
+
+            const customerName = currentUserData?.firstName ?
+                `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
+                (currentUser.email || 'Customer');
+
+            paymentCustomerName.textContent = customerName;
+            paymentServiceName.textContent = service.title || '—';
+            paymentQty.textContent = currentQuantity;
+            paymentCustomization.textContent = customizationParts.join(', ') || 'None';
+            paymentNotes.textContent = notes || '—';
+
+            paymentPage.dataset.orderData = JSON.stringify({
+                service: service.title,
+                serviceId: service.id || '',
+                quantity: currentQuantity,
+                total: total,
+                size: selectedSize,
+                orientation: selectedOrientation,
+                format: selectedFormat,
+                colorScheme: selectedColorScheme,
+                revisions: selectedRevisions,
+                deliverySpeed: selectedDeliverySpeed,
+                notes: notes,
+                customizationString: customizationParts.join(', ')
+            });
+
+            paymentPage.classList.add('open');
+        }
+
+        backFromOrder.addEventListener('click', function() {
+            if (orderFlowReturnView === 'categoryView') {
+                switchView('categoryView');
+                renderServices(currentCategory);
+            } else {
+                goHome();
+            }
+        });
+
+        /* ══════════════════════════════════════════════
+           PROMO CAROUSEL
+           ══════════════════════════════════════════════ */
         function renderPromoCarousel() {
             const promoPics = allData.promoPics || {};
             const entries = Object.entries(promoPics);
@@ -7920,9 +8734,9 @@
                 const mediaHtml = mediaType === 'video' ?
                     `<video src="${pic.imageUrl}" muted playsinline style="width:100%;height:100%;object-fit:cover;border-radius:40px;"></video>
                                <div class="video-play-overlay"><i class="fa-solid fa-play"></i></div>` :
-                    `<img src="${pic.imageUrl}" alt="${pic.text || 'Promo'}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:40px;" />`;
+                    `<img src="${pic.imageUrl}" alt="${escapeHtml(pic.text || 'Promo')}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:40px;" />`;
                 return `
-                            <div class="promo-slide ${isClickable ? 'clickable' : ''}" data-key="${key}" data-index="${idx - 1}" data-real-index="${idx - 1 < 0 ? entries.length - 1 : idx - 1 >= entries.length ? 0 : idx - 1}" data-mediatype="${mediaType}">
+                            <div class="promo-slide ${isClickable ? 'clickable' : ''}" data-key="${escapeAttr(key)}" data-index="${idx - 1}" data-real-index="${idx - 1 < 0 ? entries.length - 1 : idx - 1 >= entries.length ? 0 : idx - 1}" data-mediatype="${mediaType}">
                                 ${mediaHtml}
                                 <div class="slide-overlay">
                                     <div class="slide-text">
@@ -7951,7 +8765,6 @@
             track.addEventListener('scroll', () => {
                 if (isUserInteracting) {
                     const containerWidth = track.clientWidth;
-                    const scrollLeft = track.scrollLeft;
                     const slides = track.querySelectorAll('.promo-slide');
                     let closestIdx = 0;
                     let closestDist = Infinity;
@@ -8189,46 +9002,13 @@
             container.classList.add('show');
             container.innerHTML = entries.map(([key, p]) => `
                         <span class="tag">PROMO</span>
-                        <span class="msg">Use code <strong>${p.code}</strong> for <strong>${p.discount}%</strong> off!</span>
+                        <span class="msg">Use code <strong>${escapeHtml(p.code)}</strong> for <strong>${escapeHtml(String(p.discount))}%</strong> off!</span>
                     `).join('');
         }
 
-        function renderServices(category = 'all') {
-            const container = serviceGridContainer;
-            const services = allData.services || {};
-            let entries = Object.entries(services);
-            if (category !== 'all') {
-                entries = entries.filter(([key, s]) => s.category === category);
-            }
-
-            if (entries.length === 0) {
-                container.innerHTML =
-                    `<div class="text-muted text-center" style="padding:17px; color:var(--text-muted);">No services available.</div>`;
-                return;
-            }
-
-            container.innerHTML = entries.map(([key, s]) => {
-                const thumbClass = 'thumb-1';
-                return `
-                            <div class="service-item" data-id="${key}">
-                                <div class="service-thumb ${thumbClass}">
-                                    <i class="fa-solid ${s.icon || 'fa-cube'}"></i>
-                                </div>
-                                <div class="service-title">${escapeHtml(s.title || 'Untitled')}</div>
-                                <div class="service-subtitle">${escapeHtml(s.subtitle || '')}</div>
-                            </div>
-                        `;
-            }).join('');
-
-            container.querySelectorAll('.service-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const id = this.dataset.id;
-                    const service = allData.services[id];
-                    if (service) openOrderFlow(service);
-                });
-            });
-        }
-
+        /* ══════════════════════════════════════════════
+           ORDERS / HISTORY / SAMPLES / PROFILE
+           ══════════════════════════════════════════════ */
         function renderOrders() {
             const container = ordersGrid;
             const orders = allData.orders || {};
@@ -8274,7 +9054,7 @@
                 if (o.paymentProof && o.paymentProof !== 'Wallet Payment' && o.paymentProof !== 'N/A') {
                     screenshotBtnHtml = `
                                 <div class="detail-row" style="border-bottom:none; padding-top:6px;">
-                                    <button class="view-screenshot-btn" data-url="${o.paymentProof}" style="background:transparent; color:var(--text-main); border:1px solid var(--accent); padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
+                                    <button class="view-screenshot-btn" data-url="${escapeAttr(o.paymentProof)}" style="background:transparent; color:var(--text-main); border:1px solid var(--accent); padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
                                         <i class="fa-regular fa-image" style="color:var(--accent);"></i> View Screenshot
                                     </button>
                                 </div>
@@ -8358,7 +9138,7 @@
                 reminderBanner.classList.add('show');
                 reminderBanner.innerHTML = `
                             <i class="fa-regular fa-circle-check"></i>
-                            <span class="reminder-text">Remaining 50% for order ${pendingReminder.id}</span>
+                            <span class="reminder-text">Remaining 50% for order ${escapeHtml(pendingReminder.id)}</span>
                             <span class="reminder-amount">ZMW ${pendingReminder.amount.toFixed(2)}</span>
                             <button class="btn-done-remaining" id="doneRemainingBtn">
                                 <i class="fa-regular fa-circle-check"></i> Done
@@ -8631,17 +9411,16 @@
                 if (items.length === 0) continue;
 
                 html += `
-                            <div style="font-size:14px;font-weight:700;color:var(--text-main);margin:17px 0 9px 0;padding-bottom:5px;border-bottom:2px solid var(--border-light);display:flex;align-items:center;gap:7px;">
+                            <div style="font-size:14px;font-weight:700;color:var(--text-main);margin:17px 0 9px 0;padding-bottom:5px;border-bottom:2px solid var(--border-light);display:flex;align-items:center;gap:7px;grid-column:1/-1;">
                                 ${typeLabels[type] || type}
                                 <span style="font-size:9px;background:var(--bg-hover);padding:0 9px;border-radius:10px;font-weight:600;color:var(--text-muted);">${items.length}</span>
                             </div>
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
                         `;
 
                 items.forEach(post => {
                     let frameHtml = '';
                     const imgHtml = post.imageUrl ?
-                        `<img src="${post.imageUrl}" alt="${post.title || 'Work'}" loading="lazy" style="width:100%;height:100%;display:block;${type === 'app' ? 'object-fit:cover;border-radius:15px;' : 'object-fit:contain;'}" />` :
+                        `<img src="${post.imageUrl}" alt="${escapeHtml(post.title || 'Work')}" loading="lazy" style="width:100%;height:100%;display:block;${type === 'app' ? 'object-fit:cover;border-radius:15px;' : 'object-fit:contain;'}" />` :
                         `<div style="color:var(--border-light);font-size:27px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><i class="fa-regular fa-image"></i></div>`;
 
                     if (type === 'app') {
@@ -8673,18 +9452,16 @@
                                     <div class="sample-desc">${escapeHtml(post.description || '')}</div>
                                     <div class="sample-meta">
                                         <span>${safeFormatDateShort(post.createdAt, null)}</span>
-                                        <span>${post.adminName || 'Admin'}</span>
+                                        <span>${escapeHtml(post.adminName || 'Admin')}</span>
                                     </div>
                                 </div>
                             `;
                 });
-
-                html += `</div>`;
             }
 
             if (html === '') {
                 html =
-                    `<div style="text-align:center;padding:26px 0;color:var(--text-muted);">No samples available yet. Check back soon!</div>`;
+                    `<div style="text-align:center;padding:26px 0;color:var(--text-muted);grid-column:1/-1;">No samples available yet. Check back soon!</div>`;
             }
             container.innerHTML = html;
         }
@@ -8695,20 +9472,6 @@
             const code = currentUserData.referralCode || 'BZ-XXXXX';
             referralCodeDisplay.textContent = code;
 
-            copyReferralBtn.addEventListener('click', function() {
-                navigator.clipboard.writeText(code).then(() => {
-                    showToast('Referral code copied!', 'success');
-                }).catch(() => {
-                    const textArea = document.createElement('textarea');
-                    textArea.value = code;
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textArea);
-                    showToast('Referral code copied!', 'success');
-                });
-            });
-
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
             const balance = userAccount.balance || 0;
@@ -8717,6 +9480,12 @@
             const availableBalance = Math.max(0, balance - pendingTotal);
 
             accountBalanceDisplay.textContent = `ZMW ${balance.toFixed(2)}`;
+
+            /* ── HEADER BALANCE ── */
+            if (headerBalance) {
+                headerBalance.textContent = `ZMW ${balance.toFixed(2)}`;
+            }
+
             const balanceBox = document.getElementById('accountBalanceBox');
             let pendingInfo = balanceBox.querySelector('.pending-info');
             if (!pendingInfo) {
@@ -8737,6 +9506,35 @@
             withdrawBtnFromView.dataset.availableBalance = availableBalance;
 
             updateWalletPaymentUI();
+        }
+
+        /* ── COPY REFERRAL CODE (bind once) ── */
+        copyReferralBtn.addEventListener('click', function() {
+            const code = referralCodeDisplay.textContent.trim();
+            if (!code) return;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(code).then(() => {
+                    showToast('Referral code copied!', 'success');
+                }).catch(() => {
+                    fallbackCopy(code);
+                });
+            } else {
+                fallbackCopy(code);
+            }
+        });
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast('Referral code copied!', 'success');
+            } catch (err) {
+                showToast('Could not copy code.', 'error');
+            }
+            document.body.removeChild(textArea);
         }
 
         function calculatePendingWithdrawalTotal() {
@@ -8766,15 +9564,8 @@
             container.innerHTML = entries.map(([key, t]) => {
                 const isCredit = t.amount && t.amount > 0 && (t.type?.toLowerCase().includes('referral') || t.type?.toLowerCase().includes('received'));
                 let amountDisplay = '';
-                let amountClass = '';
                 if (t.amount) {
-                    if (isCredit) {
-                        amountDisplay = `+ZMW ${t.amount.toFixed(2)}`;
-                        amountClass = 'positive';
-                    } else {
-                        amountDisplay = `ZMW ${t.amount.toFixed(2)}`;
-                        amountClass = '';
-                    }
+                    amountDisplay = isCredit ? `+ZMW ${t.amount.toFixed(2)}` : `ZMW ${t.amount.toFixed(2)}`;
                 }
 
                 let title = t.type || 'Transaction';
@@ -8823,9 +9614,6 @@
                 } else if (t.type?.toLowerCase().includes('payment')) {
                     iconClass = 'fa-credit-card';
                     iconColor = 'var(--color-primary)';
-                } else {
-                    iconClass = 'fa-arrow-right';
-                    iconColor = '#667eea';
                 }
 
                 return `
@@ -8880,13 +9668,10 @@
                 const dateStr = safeFormatDate(w.createdAt, w.date);
 
                 let statusMessage = '';
-                let statusColor = '#cc8800';
                 if (w.status === 'approved') {
-                    statusColor = '#00a86b';
                     statusMessage =
                         `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was approved. The amount has been deducted from your account.`;
                 } else if (w.status === 'declined') {
-                    statusColor = '#dc2626';
                     statusMessage =
                         `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount remains in your account.`;
                 } else {
@@ -9211,21 +9996,13 @@
 
         orderSuccessOkBtn.addEventListener('click', function() {
             orderSuccessPopup.classList.remove('open');
-            switchView('homeView');
-            selectedService = null;
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
-            renderServices('all');
+            goHome();
         });
 
         orderSuccessPopup.addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('open');
-                switchView('homeView');
-                selectedService = null;
-                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-                document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
-                renderServices('all');
+                goHome();
             }
         });
 
@@ -9487,7 +10264,7 @@
 
                 sendPageSearchResult.innerHTML = `
                             <span>Send money to: <span class="name">${escapeHtml(fullName)}</span></span>
-                            <span style="font-size:9px; color:var(--text-muted);">(${code})</span>
+                            <span style="font-size:9px; color:var(--text-muted);">(${escapeHtml(code)})</span>
                         `;
                 updateSendPageButtonState();
             }).catch((error) => {
@@ -9694,338 +10471,9 @@
             });
         }
 
-        function openOrderFlow(service) {
-            selectedService = service;
-            currentQuantity = 1;
-            const c = service.customize || {};
-            selectedSize = c.defaultSize || (c.sizes ? c.sizes[0] : '');
-            selectedOrientation = c.defaultOrientation || (c.orientations ? c.orientations[0] : '');
-            selectedFormat = c.defaultFormat || (c.formats ? c.formats[0] : '');
-            selectedColorScheme = c.defaultColorScheme || (c.colorSchemes ? c.colorSchemes[0] : '');
-            selectedRevisions = c.defaultRevisions || (c.revisions ? c.revisions[0] : '');
-            selectedDeliverySpeed = c.defaultDeliverySpeed || (c.deliverySpeeds ? c.deliverySpeeds[0] : '');
-
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById('orderFlowView').classList.add('active');
-
-            renderOrderFlow(service);
-        }
-
-        function renderOrderFlow(service) {
-            const container = orderFlowContainer;
-            const specs = service.specs || '';
-            const specLines = specs.split('\n').filter(line => line.trim());
-
-            let specsHtml = '';
-            specLines.forEach(line => {
-                const parts = line.split(':');
-                if (parts.length === 2) {
-                    specsHtml +=
-                        `<div class="spec-row"><span class="label">${parts[0].trim()}</span><span class="value">${parts[1].trim()}</span></div>`;
-                }
-            });
-
-            const c = service.customize || {};
-            const sizeBtns = (c.sizes || []).map(s =>
-                `<button class="customize-btn ${s === selectedSize ? 'active' : ''}" data-size="${s}">${s}</button>`
-            ).join('');
-            const orientationBtns = (c.orientations || []).map(o =>
-                `<button class="customize-btn ${o === selectedOrientation ? 'active' : ''}" data-orientation="${o}">${o}</button>`
-            ).join('');
-            const formatBtns = (c.formats || []).map(f =>
-                `<button class="customize-btn ${f === selectedFormat ? 'active' : ''}" data-format="${f}">${f}</button>`
-            ).join('');
-            const colorBtns = (c.colorSchemes || []).map(cs =>
-                `<button class="customize-btn ${cs === selectedColorScheme ? 'active' : ''}" data-colorscheme="${cs}">${cs}</button>`
-            ).join('');
-            const revisionBtns = (c.revisions || []).map(r =>
-                `<button class="customize-btn ${r === selectedRevisions ? 'active' : ''}" data-revisions="${r}">${r}</button>`
-            ).join('');
-            const deliveryBtns = (c.deliverySpeeds || []).map(d =>
-                `<button class="customize-btn ${d === selectedDeliverySpeed ? 'active' : ''}" data-delivery="${d}">${d}</button>`
-            ).join('');
-
-            const totalPrice = (service.price * currentQuantity).toFixed(2);
-
-            container.innerHTML = `
-                        <div class="order-policy-panel">
-                            <div class="order-policy-content">
-                                <h2>${allData.policy?.title || 'BUFFER ZONE'}<br><span>${allData.policy?.tag || ''}</span></h2>
-                                <p>${allData.policy?.desc || 'To begin your project, we require a 50% down payment.'}</p>
-                                <div class="policy-tag"><i class="fa-regular fa-circle-check"></i> ${allData.policy?.tag || '50% upfront required'}</div>
-                            </div>
-                        </div>
-
-                        <div class="order-title-section">
-                            <h2>${(service.title || 'Service').toUpperCase()}</h2>
-                            <p>${service.subtitle || ''}</p>
-                            <div class="price">
-                                ${renderPriceInline(service)}
-                            </div>
-                        </div>
-
-                        <div class="order-tags">
-                            ${(service.tags || []).map(t => `<span class="tag"><i class="fa-regular fa-circle-check"></i> ${t}</span>`).join('')}
-                        </div>
-
-                        <div class="order-specs">
-                            <h4>SPECIFICATIONS</h4>
-                            ${specsHtml || '<p class="text-muted" style="color:var(--text-muted);">No specifications available.</p>'}
-                        </div>
-
-                        <div class="order-customize">
-                            <h4>CUSTOMIZE YOUR ORDER</h4>
-                            ${sizeBtns ? `<div class="customize-group"><div class="group-label">Select Size</div><div class="customize-options" id="sizeOptions">${sizeBtns}</div></div>` : ''}
-                            ${orientationBtns ? `<div class="customize-group"><div class="group-label">Orientation</div><div class="customize-options" id="orientationOptions">${orientationBtns}</div></div>` : ''}
-                            ${formatBtns ? `<div class="customize-group"><div class="group-label">File Format</div><div class="customize-options" id="formatOptions">${formatBtns}</div></div>` : ''}
-                            ${colorBtns ? `<div class="customize-group"><div class="group-label">Color Scheme</div><div class="customize-options" id="colorOptions">${colorBtns}</div></div>` : ''}
-                            ${revisionBtns ? `<div class="customize-group"><div class="group-label">Revisions</div><div class="customize-options" id="revisionOptions">${revisionBtns}</div></div>` : ''}
-                            ${deliveryBtns ? `<div class="customize-group"><div class="group-label">Delivery Speed</div><div class="customize-options" id="deliveryOptions">${deliveryBtns}</div></div>` : ''}
-                            <div class="customize-group">
-                                <div class="group-label">Quantity</div>
-                                <div class="quantity-selector">
-                                    <button id="qtyMinus"><i class="fa-solid fa-minus"></i></button>
-                                    <span id="qtyDisplay">${currentQuantity}</span>
-                                    <button id="qtyPlus"><i class="fa-solid fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="order-notes" style="margin-top:3px;">
-                            <h4 style="font-size:9px; font-weight:600; color:var(--text-main); margin-bottom:4px;">📝 Add Extra Notes (Optional)</h4>
-                            <textarea id="orderNotes" placeholder="Tell us more about your requirements, special instructions, or any additional details..." style="width:100%; padding:9px; border:1px solid var(--border-light); border-radius:9px; font-size:9px; resize:vertical; min-height:41px; background:var(--bg-input); transition:border 0.2s; font-family:'Poppins',sans-serif;"></textarea>
-                            <p style="font-size:7px; color:var(--text-muted); margin-top:3px;">These notes will be attached to your order for the team to review.</p>
-                        </div>
-
-                        <div class="order-footer">
-                            <div>
-                                <div class="total-label">Total Price</div>
-                                <div class="total-price">ZMW ${totalPrice}</div>
-                            </div>
-                            <button class="btn-confirm-order" id="confirmOrderBtn">
-                                <i class="fa-solid fa-cart-shopping"></i> CONFIRM ORDER
-                            </button>
-                        </div>
-                    `;
-
-            document.querySelectorAll('#sizeOptions .customize-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('#sizeOptions .customize-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    selectedSize = this.dataset.size;
-                    updateOrderTotal();
-                });
-            });
-            document.querySelectorAll('#orientationOptions .customize-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('#orientationOptions .customize-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    selectedOrientation = this.dataset.orientation;
-                });
-            });
-            document.querySelectorAll('#formatOptions .customize-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('#formatOptions .customize-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    selectedFormat = this.dataset.format;
-                });
-            });
-            document.querySelectorAll('#colorOptions .customize-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('#colorOptions .customize-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    selectedColorScheme = this.dataset.colorscheme;
-                });
-            });
-            document.querySelectorAll('#revisionOptions .customize-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('#revisionOptions .customize-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    selectedRevisions = this.dataset.revisions;
-                });
-            });
-            document.querySelectorAll('#deliveryOptions .customize-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('#deliveryOptions .customize-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    selectedDeliverySpeed = this.dataset.delivery;
-                });
-            });
-
-            document.getElementById('qtyMinus').addEventListener('click', function() {
-                if (currentQuantity > 1) {
-                    currentQuantity--;
-                    document.getElementById('qtyDisplay').textContent = currentQuantity;
-                    updateOrderTotal();
-                }
-            });
-            document.getElementById('qtyPlus').addEventListener('click', function() {
-                currentQuantity++;
-                document.getElementById('qtyDisplay').textContent = currentQuantity;
-                updateOrderTotal();
-            });
-
-            document.getElementById('confirmOrderBtn').addEventListener('click', function() {
-                const total = service.price * currentQuantity;
-                orderTotalBeforeDiscount = total;
-                const amount50 = total * 0.5;
-                paymentAmount.textContent = `ZMW ${amount50.toFixed(2)}`;
-                discountApplied = false;
-                appliedPromo = null;
-                appliedReferral = null;
-                couponMsg.textContent = '';
-                couponMsg.className = 'coupon-msg';
-                priceBreakdown.style.display = 'none';
-                const promoBtn = document.getElementById('applyPromoBtn');
-                if (promoBtn) { promoBtn.disabled = false;
-                    promoBtn.style.opacity = '1'; }
-                referralCodeInput.value = '';
-                referralMsg.textContent = '';
-                referralMsg.className = 'coupon-msg';
-                payWithWalletCheck.checked = false;
-                updateWalletPaymentUI();
-
-                const notes = document.getElementById('orderNotes').value.trim();
-                const customizationParts = [];
-                if (selectedSize) customizationParts.push(`Size: ${selectedSize}`);
-                if (selectedOrientation) customizationParts.push(`Orientation: ${selectedOrientation}`);
-                if (selectedFormat) customizationParts.push(`Format: ${selectedFormat}`);
-                if (selectedColorScheme) customizationParts.push(`Color Scheme: ${selectedColorScheme}`);
-                if (selectedRevisions) customizationParts.push(`Revisions: ${selectedRevisions}`);
-                if (selectedDeliverySpeed) customizationParts.push(`Delivery: ${selectedDeliverySpeed}`);
-
-                const customerName = currentUserData?.firstName ? `${currentUserData.firstName} ${currentUserData.lastName || ''}` :
-                    currentUser.email || 'Customer';
-                paymentCustomerName.textContent = customerName;
-                paymentServiceName.textContent = service.title || '—';
-                paymentQty.textContent = currentQuantity;
-                paymentCustomization.textContent = customizationParts.join(', ') || 'None';
-                paymentNotes.textContent = notes || '—';
-
-                paymentPage.dataset.orderData = JSON.stringify({
-                    service: service.title,
-                    serviceId: service.id || key,
-                    quantity: currentQuantity,
-                    total: total,
-                    size: selectedSize,
-                    orientation: selectedOrientation,
-                    format: selectedFormat,
-                    colorScheme: selectedColorScheme,
-                    revisions: selectedRevisions,
-                    deliverySpeed: selectedDeliverySpeed,
-                    notes: notes,
-                    customizationString: customizationParts.join(', ')
-                });
-                paymentPage.classList.add('open');
-            });
-        }
-
-        function updateOrderTotal() {
-            if (!selectedService) return;
-            const total = selectedService.price * currentQuantity;
-            document.querySelector('.order-footer .total-price').textContent = `ZMW ${total.toFixed(2)}`;
-        }
-
-        function applyReferral() {
-            const code = referralCodeInput.value.trim().toUpperCase();
-            if (!code) {
-                referralMsg.textContent = 'Please enter a referral code.';
-                referralMsg.className = 'coupon-msg error';
-                return;
-            }
-
-            const usersRef = ref(db, 'users');
-            get(usersRef).then((snapshot) => {
-                const users = snapshot.val() || {};
-                let referrerUid = null;
-                let referrerData = null;
-                for (const [uid, u] of Object.entries(users)) {
-                    if (u.referralCode === code) {
-                        referrerUid = uid;
-                        referrerData = u;
-                        break;
-                    }
-                }
-
-                if (!referrerUid || referrerUid === currentUserId) {
-                    referralMsg.textContent = 'Invalid referral code.';
-                    referralMsg.className = 'coupon-msg error';
-                    return;
-                }
-
-                const discounts = allData.referralDiscounts || {};
-                const promoDiscounts = allData.referralPromoDiscounts || {};
-                let foundDiscount = null;
-                let discountKey = null;
-                let isPromo = false;
-
-                for (const [key, d] of Object.entries(discounts)) {
-                    if (d.referralCode === code) {
-                        foundDiscount = d;
-                        discountKey = key;
-                        isPromo = false;
-                        break;
-                    }
-                }
-
-                if (!foundDiscount) {
-                    for (const [key, d] of Object.entries(promoDiscounts)) {
-                        if (d.referralCode === code || d.referralCode === '') {
-                            foundDiscount = d;
-                            discountKey = key;
-                            isPromo = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (!foundDiscount) {
-                    referralMsg.textContent = 'This referral code has no active discount.';
-                    referralMsg.className = 'coupon-msg error';
-                    return;
-                }
-
-                const orderData = JSON.parse(paymentPage.dataset.orderData || '{}');
-                const total = orderData.total || orderTotalBeforeDiscount;
-                const discountAmount = total * (foundDiscount.discount / 100);
-                const finalPrice = total - discountAmount;
-                const depositAmount = finalPrice * 0.5;
-
-                origPriceVal.textContent = `ZMW ${total.toFixed(2)}`;
-                discountVal.textContent = `- ZMW ${discountAmount.toFixed(2)}`;
-                finalPriceVal.textContent = `ZMW ${finalPrice.toFixed(2)}`;
-                finalDepositVal.textContent = `ZMW ${depositAmount.toFixed(2)}`;
-                priceBreakdown.style.display = 'block';
-
-                paymentAmount.textContent = `ZMW ${depositAmount.toFixed(2)}`;
-
-                referralMsg.textContent =
-                    `✅ Referral applied! ${foundDiscount.discount}% off. Owner will receive ZMW ${foundDiscount.ownerAmount || 0}.`;
-                referralMsg.className = 'coupon-msg success';
-
-                appliedReferral = {
-                    key: discountKey,
-                    code: code,
-                    discount: foundDiscount.discount,
-                    ownerAmount: foundDiscount.ownerAmount || 0,
-                    referrerUid: referrerUid,
-                    referrerData: referrerData,
-                    isPromo: isPromo
-                };
-                discountApplied = true;
-                referralCodeInput.disabled = true;
-                applyReferralBtn.disabled = true;
-
-                paymentPage.dataset.appliedReferral = JSON.stringify(appliedReferral);
-
-                updateWalletPaymentUI();
-            }).catch((error) => {
-                console.error('Error checking referral:', error);
-                referralMsg.textContent = 'Error validating referral.';
-                referralMsg.className = 'coupon-msg error';
-            });
-        }
-
+        /* ══════════════════════════════════════════════
+           FLYER DETAIL + APPLICATIONS
+           ══════════════════════════════════════════════ */
         function openFlyerDetail(flyerId) {
             const flyer = allData.promoPics?.[flyerId];
             if (!flyer) {
@@ -10091,7 +10539,6 @@
             const formType = cc.formType || 'none';
             flyerDetailForm.innerHTML = '';
             flyerDetailApplyBtn.style.display = 'block';
-            flyerDetailApplyBtn.style.display = '';
 
             if (formType === 'none') {
                 flyerDetailApplyBtn.style.display = 'none';
@@ -10114,10 +10561,10 @@
                 `<h4 style="font-size:11px;font-weight:700;color:var(--text-main);margin-bottom:6px;">Apply as ${formType.charAt(0).toUpperCase() + formType.slice(1)}</h4>`;
 
             const commonFields = `
-                        <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" value="${escapeHtml(currentUserData?.firstName || '')} ${escapeHtml(currentUserData?.lastName || '')}" /></div>
-                        <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" value="${escapeHtml(currentUser?.email || '')}" /></div>
-                        <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" value="${escapeHtml(currentUserData?.phone || '')}" /></div>
-                        <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code" value="${escapeHtml(currentUserData?.referralCode || '')}" /></div>
+                        <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" value="${escapeAttr(currentUserData?.firstName || '')} ${escapeAttr(currentUserData?.lastName || '')}" /></div>
+                        <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" value="${escapeAttr(currentUser?.email || '')}" /></div>
+                        <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" value="${escapeAttr(currentUserData?.phone || '')}" /></div>
+                        <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code" value="${escapeAttr(currentUserData?.referralCode || '')}" /></div>
                     `;
 
             if (formType === 'ambassador') {
@@ -10151,10 +10598,10 @@
                         `;
             } else if (formType === 'job') {
                 formHtml += `
-                            <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" value="${escapeHtml(currentUserData?.firstName || '')} ${escapeHtml(currentUserData?.lastName || '')}" /></div>
-                            <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code" value="${escapeHtml(currentUserData?.referralCode || '')}" /></div>
-                            <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" value="${escapeHtml(currentUser?.email || '')}" /></div>
-                            <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" value="${escapeHtml(currentUserData?.phone || '')}" /></div>
+                            <div class="form-group"><label>Full Name</label><input type="text" id="f_name" placeholder="Your full name" value="${escapeAttr(currentUserData?.firstName || '')} ${escapeAttr(currentUserData?.lastName || '')}" /></div>
+                            <div class="form-group"><label>BZ Code</label><input type="text" id="f_bzcode" placeholder="Your BZ code" value="${escapeAttr(currentUserData?.referralCode || '')}" /></div>
+                            <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="Your email" value="${escapeAttr(currentUser?.email || '')}" /></div>
+                            <div class="form-group"><label>Phone Number</label><input type="tel" id="f_number" placeholder="Your phone number" value="${escapeAttr(currentUserData?.phone || '')}" /></div>
                             <div class="form-group"><label>Age</label><input type="number" id="f_age" placeholder="Your age" /></div>
                             <div class="form-group"><label>Occupation</label><input type="text" id="f_occupation" placeholder="Current occupation" /></div>
                             <div class="form-group">
@@ -10231,8 +10678,8 @@
                                 <div style="background:var(--bg-body); border-radius:8px; padding:10px; margin-bottom:10px; border:1px solid var(--border-light);">
                                     <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
                                         <div><span style="font-size:9px; color:var(--text-muted);">Amount to pay</span><br><span style="font-weight:700;font-size:16px;color:var(--accent);">ZMW ${config.price || 0}</span></div>
-                                        <div><span style="font-size:9px; color:var(--text-muted);">Mobile Number</span><br><span style="font-weight:600;font-size:12px;">${config.mobileNumber || 'N/A'}</span></div>
-                                        <div><span style="font-size:9px; color:var(--text-muted);">Account Name</span><br><span style="font-weight:600;font-size:12px;">${config.accountName || 'N/A'}</span></div>
+                                        <div><span style="font-size:9px; color:var(--text-muted);">Mobile Number</span><br><span style="font-weight:600;font-size:12px;">${escapeHtml(config.mobileNumber || 'N/A')}</span></div>
+                                        <div><span style="font-size:9px; color:var(--text-muted);">Account Name</span><br><span style="font-weight:600;font-size:12px;">${escapeHtml(config.accountName || 'N/A')}</span></div>
                                     </div>
                                 </div>
                                 <label style="font-weight:600; font-size:9px; color:var(--text-main); display:block; margin-bottom:4px;">Upload Payment Screenshot (Single)</label>
@@ -10318,7 +10765,7 @@
             }
             let options = `<option value="">Select...</option>`;
             positions.forEach(pos => {
-                options += `<option value="${pos}">${pos}</option>`;
+                options += `<option value="${escapeAttr(pos)}">${escapeHtml(pos)}</option>`;
             });
             return options;
         }
@@ -10502,15 +10949,37 @@
             });
         }
 
+        /* ══════════════════════════════════════════════
+           REAL-TIME POPUPS
+           ══════════════════════════════════════════════ */
+        function anyPopupOpen() {
+            return !!document.querySelector(
+                '.app-status-overlay.open, .order-complete-overlay.open, .withdrawal-status-overlay.open, ' +
+                '.referral-received-overlay.open, .money-received-overlay.open, .admin-notif-overlay.open, ' +
+                '.order-success-overlay.open, .withdraw-success-overlay.open, .payment-page-overlay.open'
+            );
+        }
+
+        function schedulePopupRecheck() {
+            setTimeout(() => {
+                checkAllPopups();
+                checkAdminNotifications();
+            }, 600);
+        }
+
         function checkAdminNotifications() {
             if (!allData || !allData.inAppNotifications || !currentUserId) return;
+            if (anyPopupOpen()) return;
             const notifs = allData.inAppNotifications;
             const userShownRef = ref(db, `users/${currentUserId}/shownPopups`);
             get(userShownRef).then((snapshot) => {
                 const stored = snapshot.val() || {};
                 const adminShown = stored.adminNotifs || {};
 
-                for (const [key, notif] of Object.entries(notifs)) {
+                const entries = Object.entries(notifs)
+                    .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
+
+                for (const [key, notif] of entries) {
                     let shouldShow = false;
                     if (notif.recipientType === 'all') {
                         shouldShow = true;
@@ -10559,7 +11028,7 @@
                     stored.adminNotifs[key] = true;
                     set(userShownRef, stored).then(() => {
                         adminNotifOverlay.classList.remove('open');
-                        checkAdminNotifications();
+                        schedulePopupRecheck();
                     });
                 });
             };
@@ -10578,6 +11047,7 @@
 
         function checkAllPopups() {
             if (!currentUserId || !allData) return;
+            if (anyPopupOpen()) return;
 
             const userShownRef = ref(db, `users/${currentUserId}/shownPopups`);
             get(userShownRef).then((snapshot) => {
@@ -10714,12 +11184,14 @@
         appStatusBtn.addEventListener('click', function() {
             appStatusPopup.classList.remove('open');
             switchView('applicationsView');
+            schedulePopupRecheck();
         });
 
         appStatusPopup.addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('open');
                 switchView('applicationsView');
+                schedulePopupRecheck();
             }
         });
 
@@ -10732,17 +11204,19 @@
 
         ocOkBtn.addEventListener('click', function() {
             orderCompletePopup.classList.remove('open');
-            if (document.getElementById('ordersView').classList.contains('active')) {} else {
+            if (!document.getElementById('ordersView').classList.contains('active')) {
                 switchView('ordersView');
             }
+            schedulePopupRecheck();
         });
 
         orderCompletePopup.addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('open');
-                if (document.getElementById('ordersView').classList.contains('active')) {} else {
+                if (!document.getElementById('ordersView').classList.contains('active')) {
                     switchView('ordersView');
                 }
+                schedulePopupRecheck();
             }
         });
 
@@ -10776,12 +11250,14 @@
         wsBtn.addEventListener('click', function() {
             withdrawalStatusPopup.classList.remove('open');
             switchView('accountView');
+            schedulePopupRecheck();
         });
 
         withdrawalStatusPopup.addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('open');
                 switchView('accountView');
+                schedulePopupRecheck();
             }
         });
 
@@ -10796,12 +11272,14 @@
         rrBtn.addEventListener('click', function() {
             referralReceivedPopup.classList.remove('open');
             switchView('accountView');
+            schedulePopupRecheck();
         });
 
         referralReceivedPopup.addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('open');
                 switchView('accountView');
+                schedulePopupRecheck();
             }
         });
 
@@ -10818,12 +11296,14 @@
         mrBtn.addEventListener('click', function() {
             moneyReceivedPopup.classList.remove('open');
             switchView('accountView');
+            schedulePopupRecheck();
         });
 
         moneyReceivedPopup.addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('open');
                 switchView('accountView');
+                schedulePopupRecheck();
             }
         });
 
@@ -10837,6 +11317,9 @@
             imageViewerImg.src = '';
         });
 
+        /* ══════════════════════════════════════════════
+           APPLICATIONS
+           ══════════════════════════════════════════════ */
         function renderApplications() {
             const container = applicationsListEl;
             const apps = allData.applications || {};
@@ -10873,10 +11356,12 @@
                         let label = k.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
                         let val = v;
                         if (val.startsWith('http')) {
-                            val = `<a href="${val}" target="_blank" style="color:var(--text-main);text-decoration:underline;">View</a>`;
+                            val = `<a href="${escapeAttr(val)}" target="_blank" style="color:var(--text-main);text-decoration:underline;">View</a>`;
+                        } else {
+                            val = escapeHtml(val);
                         }
                         detailRows +=
-                            `<div class="detail-row"><span class="label">${label}</span><span class="val">${val}</span></div>`;
+                            `<div class="detail-row"><span class="label">${escapeHtml(label)}</span><span class="val">${val}</span></div>`;
                     }
                 }
 
@@ -10891,7 +11376,7 @@
                     const screenshots = pd.screenshots || [];
                     if (screenshots.length > 0) {
                         const links = screenshots.map((url, i) =>
-                            `<a href="${url}" target="_blank" style="color:var(--text-main);text-decoration:underline;">Screenshot ${i+1}</a>`
+                            `<a href="${escapeAttr(url)}" target="_blank" style="color:var(--text-main);text-decoration:underline;">Screenshot ${i+1}</a>`
                         ).join(', ');
                         detailRows +=
                             `<div class="detail-row"><span class="label">Screenshots</span><span class="val">${links}</span></div>`;
@@ -10902,7 +11387,7 @@
                 if (a.paymentData && a.paymentData.screenshots && a.paymentData.screenshots.length > 0) {
                     screenshotBtnHtml = `
                                 <div class="detail-row" style="border-bottom:none; padding-top:6px;">
-                                    <button class="view-screenshot-btn" data-url="${a.paymentData.screenshots[0]}" style="background:transparent; color:var(--text-main); border:1px solid var(--accent); padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
+                                    <button class="view-screenshot-btn" data-url="${escapeAttr(a.paymentData.screenshots[0])}" style="background:transparent; color:var(--text-main); border:1px solid var(--accent); padding:5px 12px; border-radius:20px; font-weight:600; font-size:10px; cursor:pointer; width:100%;">
                                         <i class="fa-regular fa-image" style="color:var(--accent);"></i> View Screenshot
                                     </button>
                                 </div>
@@ -10947,8 +11432,11 @@
             });
         }
 
+        /* ══════════════════════════════════════════════
+           RECEIPT / STATEMENT
+           ══════════════════════════════════════════════ */
         function openReceiptModal(order, key) {
-            const customerName = order.customer || currentUserData?.firstName + ' ' + currentUserData?.lastName || 'Customer';
+            const customerName = order.customer || (currentUserData?.firstName + ' ' + currentUserData?.lastName) || 'Customer';
             const customerPhone = order.clientNumber || currentUserData?.phone || 'N/A';
             const customerEmail = currentUser.email || 'N/A';
 
@@ -11087,14 +11575,9 @@
             });
         }
 
-        backFromOrder.addEventListener('click', function() {
-            switchView('homeView');
-            selectedService = null;
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
-            renderServices('all');
-        });
-
+        /* ══════════════════════════════════════════════
+           EVENT BINDINGS
+           ══════════════════════════════════════════════ */
         backFromFlyerDetail.addEventListener('click', function() {
             switchView('homeView');
         });
@@ -11102,37 +11585,6 @@
         flyerDetailCloseBtn.addEventListener('click', function() {
             switchView('homeView');
         });
-
-        document.querySelectorAll('.cat-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                const cat = this.dataset.cat;
-                renderServices(cat);
-                if (cat === 'all') {
-                    dynamicTitle.textContent = 'RECENT WORK';
-                    dynamicBack.style.display = 'none';
-                    dynamicViewAll.style.display = 'inline';
-                } else {
-                    const names = { graphic: 'GRAPHIC DESIGN', dev: 'DEVELOPER SERVICES', tech: 'TECHNICAL SERVICES',
-                        it: 'IT SUPPORT' };
-                    dynamicTitle.textContent = names[cat] || 'SERVICES';
-                    dynamicBack.style.display = 'inline';
-                    dynamicViewAll.style.display = 'none';
-                }
-            });
-        });
-
-        dynamicBack.addEventListener('click', function() {
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
-            renderServices('all');
-            dynamicTitle.textContent = 'RECENT WORK';
-            dynamicBack.style.display = 'none';
-            dynamicViewAll.style.display = 'inline';
-        });
-
-        dynamicViewAll.addEventListener('click', () => switchView('historyView'));
 
         logoutBtn.addEventListener('click', () => {
             signOut(auth).then(() => {
@@ -11358,7 +11810,25 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        console.log('✅ Testimonies section added with toggle button and auto-fill; promo banner dark mode fixed.');
+        /* ─── PERIODIC POPUP SWEEP (guarantees popups fire in real time) ─── */
+        setInterval(() => {
+            if (document.hidden) return;
+            if (!currentUserId || !allData) return;
+            if (anyPopupOpen()) return;
+            checkAllPopups();
+            checkAdminNotifications();
+        }, 5000);
+
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden && currentUserId && allData) {
+                setTimeout(() => {
+                    checkAllPopups();
+                    checkAdminNotifications();
+                }, 500);
+            }
+        });
+
+        console.log('✅ Category boxes, step wizard, real-time popups, zoom-safe carousel and page transitions are active.');
     </script>
 </body>
 </html>
