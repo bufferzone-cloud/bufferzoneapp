@@ -347,13 +347,11 @@
             padding: 0 4px;
         }
 
-        /* ── HEADER BALANCE LINE ── */
         .header-text span:first-child {
             font-size: 9px;
             color: var(--text-muted);
             line-height: 1.3;
             font-weight: 400;
-            letter-spacing: 0.1px;
         }
 
         .header-text span:first-child strong {
@@ -695,8 +693,8 @@
             z-index: 2;
         }
 
-        /* Reduced from 1.08 → 1.06 together with the extra track padding so the
-           zoomed flyer is fully visible (no top/bottom cropping). */
+        /* Reduced from 1.08 → 1.06 plus extra track padding so the zoomed
+           flyer is fully visible (no top/bottom cropping). */
         .promo-slide.active-slide {
             transform: scale(1.06) !important;
             opacity: 1 !important;
@@ -7191,7 +7189,7 @@
             }
         };
 
-        /* ─── DATE HELPER FUNCTIONS ─── */
+        /* ─── DATE HELPERS ─── */
         function safeFormatDate(timestamp, dateStr) {
             if (timestamp && typeof timestamp === 'number') {
                 return new Date(timestamp).toLocaleString();
@@ -7202,9 +7200,7 @@
                     if (!isNaN(d.getTime())) {
                         return d.toLocaleString();
                     }
-                } catch (e) {
-                    // fall through
-                }
+                } catch (e) { /* ignore */ }
                 return dateStr;
             }
             return 'N/A';
@@ -7220,9 +7216,7 @@
                     if (!isNaN(d.getTime())) {
                         return d.toLocaleDateString();
                     }
-                } catch (e) {
-                    // fall through
-                }
+                } catch (e) { /* ignore */ }
                 return dateStr;
             }
             return 'N/A';
@@ -7273,11 +7267,9 @@
             const dots = tutorialDots.querySelectorAll('.dot');
             dots.forEach((d, i) => d.classList.toggle('active', i === tutorialIndex));
             if (tutorialIndex === 4) {
-                tutorialNextBtn.textContent = 'Get Started';
                 tutorialNextBtn.classList.add('finish');
                 tutorialNextBtn.innerHTML = 'Get Started <i class="fa-solid fa-rocket"></i>';
             } else {
-                tutorialNextBtn.textContent = 'Next';
                 tutorialNextBtn.classList.remove('finish');
                 tutorialNextBtn.innerHTML = 'Next <i class="fa-solid fa-arrow-right"></i>';
             }
@@ -7505,7 +7497,6 @@
         /* ── TESTIMONIES ── */
         const writeTestimonyBtn = document.getElementById('writeTestimonyBtn');
         const testimonyFormWrapper = document.getElementById('testimonyFormWrapper');
-        const testimonySubmitCard = document.getElementById('testimonySubmitCard');
         const testimonyName = document.getElementById('testimonyName');
         const testimonyEmail = document.getElementById('testimonyEmail');
         const testimonyPhone = document.getElementById('testimonyPhone');
@@ -7520,7 +7511,6 @@
 
         let testimonyRating = 0;
 
-        /* ── FILL TESTIMONY FORM WITH USER DATA ── */
         function fillTestimonyForm() {
             if (currentUserData && currentUser) {
                 const fullName = `${currentUserData.firstName || ''} ${currentUserData.lastName || ''}`.trim() || currentUser.displayName || '';
@@ -7530,7 +7520,6 @@
             }
         }
 
-        /* ── TOGGLE TESTIMONY FORM ── */
         writeTestimonyBtn.addEventListener('click', function() {
             const isOpen = testimonyFormWrapper.classList.toggle('open');
             this.classList.toggle('open');
@@ -7553,8 +7542,7 @@
                     ratingLabel.textContent = labels[val] || `${val} stars`;
                 });
                 star.addEventListener('mouseenter', function() {
-                    const val = parseInt(this.dataset.star);
-                    updateTestimonyStars(val, true);
+                    updateTestimonyStars(parseInt(this.dataset.star), true);
                 });
                 star.addEventListener('mouseleave', function() {
                     updateTestimonyStars(testimonyRating);
@@ -7562,15 +7550,11 @@
             });
         }
 
-        function updateTestimonyStars(count, hover = false) {
+        function updateTestimonyStars(count) {
             const stars = testimonyStars.querySelectorAll('i');
             stars.forEach(star => {
                 const val = parseInt(star.dataset.star);
-                if (val <= count) {
-                    star.className = 'fa-solid fa-star filled';
-                } else {
-                    star.className = 'fa-regular fa-star';
-                }
+                star.className = val <= count ? 'fa-solid fa-star filled' : 'fa-regular fa-star';
             });
         }
 
@@ -7650,7 +7634,6 @@
 
             saveData().then(() => {
                 showToast('✅ Testimony submitted! Thank you for your feedback.', 'success');
-                // Clear form
                 testimonyName.value = '';
                 testimonyEmail.value = '';
                 testimonyPhone.value = '';
@@ -7666,7 +7649,6 @@
                 const previewImg = testimonyMediaUpload.querySelector('.preview-img');
                 if (previewImg) { previewImg.style.display = 'none'; }
                 renderTestimonies();
-                // Collapse form
                 testimonyFormWrapper.classList.remove('open');
                 writeTestimonyBtn.classList.remove('open');
                 writeTestimonyBtn.innerHTML = '<i class="fa-solid fa-pen"></i> Write a Testimony';
@@ -7730,22 +7712,15 @@
                         `;
             }).join('');
 
-            // Re-bind media click events
             container.querySelectorAll('.testimony-media').forEach(el => {
                 el.addEventListener('click', function(e) {
                     e.stopPropagation();
                     const img = this.querySelector('img');
                     const video = this.querySelector('video');
-                    if (img) {
-                        const src = img.src;
-                        if (src) openImageViewer(src);
-                    } else if (video) {
-                        if (video.paused) {
-                            video.muted = false;
-                            video.play();
-                        } else {
-                            video.pause();
-                        }
+                    if (img && img.src) openImageViewer(img.src);
+                    else if (video) {
+                        if (video.paused) { video.muted = false; video.play(); }
+                        else video.pause();
                     }
                 });
             });
@@ -7888,14 +7863,14 @@
         }
 
         function escapeHtml(text) {
-            if (!text) return '';
+            if (text === undefined || text === null) return '';
             const div = document.createElement('div');
-            div.textContent = text;
+            div.textContent = String(text);
             return div.innerHTML;
         }
 
         function escapeAttr(text) {
-            return String(text == null ? '' : text)
+            return String(text === undefined || text === null ? '' : text)
                 .replace(/&/g, '&amp;')
                 .replace(/"/g, '&quot;')
                 .replace(/</g, '&lt;')
@@ -7907,11 +7882,11 @@
             const curr = service.price || 0;
             if (orig && orig !== curr) {
                 return `
-                            <span class="old-price">ZMW ${orig.toFixed(2)}</span>
-                            <span class="new-price">ZMW ${curr.toFixed(2)}</span>
+                            <span class="old-price">ZMW ${Number(orig).toFixed(2)}</span>
+                            <span class="new-price">ZMW ${Number(curr).toFixed(2)}</span>
                         `;
             }
-            return `ZMW ${curr.toFixed(2)}`;
+            return `ZMW ${Number(curr).toFixed(2)}`;
         }
 
         function setupCloudinaryUpload() {
@@ -8019,6 +7994,9 @@
             }).catch(err => console.error('Error saving notification:', err));
         }
 
+        /* ═══════════════════════════════════════════════════════════════
+           DATA LOADING — UNCHANGED FROM ORIGINAL
+           ═══════════════════════════════════════════════════════════════ */
         function loadData(callback) {
             const dbRef = ref(db, 'bufferzoneAppData');
             onValue(dbRef, (snapshot) => {
@@ -8109,7 +8087,6 @@
                 const data = snapshot.val();
                 if (data) {
                     allData.inAppNotifications = data;
-                    // Real-time: pop the moment the admin sends it.
                     checkAdminNotifications();
                 }
             }, (error) => {
@@ -8127,17 +8104,18 @@
             const promotions = allData.promotions || {};
             const entries = Object.entries(promotions);
             if (entries.length === 0) {
-                togglePromoBtnEl.style.display = 'none';
-                promoWrap.style.display = 'none';
+                if (togglePromoBtnEl) togglePromoBtnEl.style.display = 'none';
+                if (promoWrap) promoWrap.style.display = 'none';
                 return;
             }
-            togglePromoBtnEl.style.display = 'inline-block';
-            promoWrap.style.display = 'block';
+            if (togglePromoBtnEl) togglePromoBtnEl.style.display = 'inline-block';
+            if (promoWrap) promoWrap.style.display = 'block';
             const [key, promo] = entries[0];
             promoButtonTarget = { key: key, code: promo.code, discount: promo.discount };
-            promoCodeDisplay.textContent = promo.code;
-            promoDiscountDisplay.textContent = promo.discount + '%';
+            if (promoCodeDisplay) promoCodeDisplay.textContent = promo.code;
+            if (promoDiscountDisplay) promoDiscountDisplay.textContent = promo.discount + '%';
 
+            if (!promoBtn) return;
             promoBtn.onclick = function() {
                 if (!promoButtonTarget) {
                     showToast('No promo available.', 'error');
@@ -8176,7 +8154,6 @@
                     promoBtn.style.opacity = '0.6';
 
                     paymentPage.dataset.appliedPromo = JSON.stringify(appliedPromo);
-
                     updateWalletPaymentUI();
                 }).catch((error) => {
                     console.error('Error checking used coupons:', error);
@@ -8184,6 +8161,18 @@
                     document.getElementById('couponMsg').className = 'coupon-msg error';
                 });
             };
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           RENDER ALL — with per-renderer try/catch so nothing can break
+           the rest of the app from loading.
+           ═══════════════════════════════════════════════════════════════ */
+        function safeRender(name, fn) {
+            try {
+                fn();
+            } catch (err) {
+                console.error(`❌ Render error in ${name}:`, err);
+            }
         }
 
         function renderAll() {
@@ -8200,73 +8189,80 @@
                 return;
             }
 
-            if (allData.hero) {
-                const h = allData.hero;
-                heroTitle.innerHTML = `${h.title || 'WE ARE'}<br><span>${h.titleSpan || 'CREATIVE'}</span>`;
-                heroDesc.textContent = h.desc || 'We provide the best ideas to grow your business';
-                heroCtaBtn.textContent = h.cta || 'GET STARTED';
-                heroPhone.textContent = h.phone || '+123 456 7890';
-            }
-
-            if (allData.ourServicesList) {
-                ourServicesList.innerHTML = allData.ourServicesList.map(item =>
-                    `<li><i class="fa-solid fa-check-circle"></i> ${item}</li>`
-                ).join('');
-            }
-
-            renderPromotionsBanner();
-            renderPromoCarousel();
-            renderCategoryBoxes();
-            renderServices(currentCategory);
-            renderOrders();
-            renderHistory();
-            renderSamples();
-            renderProfile();
-            renderNotifications();
-            renderAccountAndReferral();
-            renderTransactionMessages();
-            renderWithdrawalsList();
-            renderApplications();
-            renderWithdrawHistory();
-            renderTestimonies();
-
-            setupPromoButton();
-
-            if (allData.policy) {
-                const p = allData.policy;
-                const policyContent = document.querySelector('.order-policy-content');
-                if (policyContent) {
-                    const h2 = policyContent.querySelector('h2');
-                    const pEl = policyContent.querySelector('p');
-                    const tagEl = policyContent.querySelector('.policy-tag');
-                    if (h2) h2.innerHTML = `${p.title || 'BUFFER ZONE'}<br><span>${p.tag || ''}</span>`;
-                    if (pEl) pEl.textContent = p.desc || 'To begin your project, we require a 50% down payment.';
-                    if (tagEl) tagEl.innerHTML = `<i class="fa-regular fa-circle-check"></i> ${p.tag || '50% upfront required'}`;
+            safeRender('hero', () => {
+                if (allData.hero) {
+                    const h = allData.hero;
+                    heroTitle.innerHTML = `${h.title || 'WE ARE'}<br><span>${h.titleSpan || 'CREATIVE'}</span>`;
+                    heroDesc.textContent = h.desc || 'We provide the best ideas to grow your business';
+                    heroCtaBtn.textContent = h.cta || 'GET STARTED';
+                    heroPhone.textContent = h.phone || '+123 456 7890';
                 }
-                paymentNumber.textContent = p.number || '0976760537';
-                paymentName.textContent = p.name || 'Airtel Mobile Number';
-                paymentAccountName.textContent = p.accountName || 'Jubel Mobela';
-            }
+                if (allData.ourServicesList) {
+                    ourServicesList.innerHTML = allData.ourServicesList.map(item =>
+                        `<li><i class="fa-solid fa-check-circle"></i> ${escapeHtml(item)}</li>`
+                    ).join('');
+                }
+            });
+
+            safeRender('promotionsBanner', renderPromotionsBanner);
+            safeRender('promoCarousel', renderPromoCarousel);
+            safeRender('categoryBoxes', renderCategoryBoxes);
+            safeRender('services', () => renderServices(currentCategory));
+            safeRender('orders', renderOrders);
+            safeRender('history', renderHistory);
+            safeRender('samples', renderSamples);
+            safeRender('profile', renderProfile);
+            safeRender('notifications', renderNotifications);
+            safeRender('account', renderAccountAndReferral);
+            safeRender('transactionMessages', renderTransactionMessages);
+            safeRender('withdrawalsList', renderWithdrawalsList);
+            safeRender('applications', renderApplications);
+            safeRender('withdrawHistory', renderWithdrawHistory);
+            safeRender('testimonies', renderTestimonies);
+            safeRender('promoButton', setupPromoButton);
+
+            safeRender('policy', () => {
+                if (allData.policy) {
+                    const p = allData.policy;
+                    const policyContent = document.querySelector('.order-policy-content');
+                    if (policyContent) {
+                        const h2 = policyContent.querySelector('h2');
+                        const pEl = policyContent.querySelector('p');
+                        const tagEl = policyContent.querySelector('.policy-tag');
+                        if (h2) h2.innerHTML = `${p.title || 'BUFFER ZONE'}<br><span>${p.tag || ''}</span>`;
+                        if (pEl) pEl.textContent = p.desc || 'To begin your project, we require a 50% down payment.';
+                        if (tagEl) tagEl.innerHTML = `<i class="fa-regular fa-circle-check"></i> ${p.tag || '50% upfront required'}`;
+                    }
+                    paymentNumber.textContent = p.number || '0976760537';
+                    paymentName.textContent = p.name || 'Airtel Mobile Number';
+                    paymentAccountName.textContent = p.accountName || 'Jubani Mobela';
+                }
+            });
         }
 
-        /* ══════════════════════════════════════════════
+        /* ═══════════════════════════════════════════════════════════════
            CATEGORY BOXES + CATEGORY VIEW
-           ══════════════════════════════════════════════ */
+           ═══════════════════════════════════════════════════════════════ */
         function renderCategoryBoxes() {
             if (!categoryBoxes || !allData) return;
             const services = allData.services || {};
             const counts = { all: Object.keys(services).length };
-            Object.values(services).forEach(s => {
-                const c = s.category || 'other';
+
+            Object.entries(services).forEach(([key, s]) => {
+                if (!s || typeof s !== 'object') return;
+                const c = (typeof s.category === 'string' && s.category) ? s.category : 'other';
                 counts[c] = (counts[c] || 0) + 1;
             });
 
             const order = ['all', 'graphic', 'dev', 'tech', 'it'];
+            const seen = new Set(order);
             Object.keys(counts).forEach(c => {
-                if (!order.includes(c)) order.push(c);
+                if (!seen.has(c)) { order.push(c); seen.add(c); }
             });
 
-            categoryBoxes.innerHTML = order.map(key => {
+            const visibleCats = order.filter(c => c === 'all' || counts[c] > 0);
+
+            categoryBoxes.innerHTML = visibleCats.map(key => {
                 const meta = CATEGORY_META[key] || {
                     title: key.charAt(0).toUpperCase() + key.slice(1),
                     desc: 'Services',
@@ -8303,26 +8299,18 @@
             switchView('categoryView');
         }
 
-        function goHome() {
-            selectedService = null;
-            currentCategory = 'all';
-            if (dynamicTitle) dynamicTitle.textContent = 'Category';
-            renderCategoryBoxes();
-            switchView('homeView');
-        }
-
         backFromCategory.addEventListener('click', function() {
             switchView('homeView');
-            renderCategoryBoxes();
         });
 
+        /* Original renderServices logic, filtered by category */
         function renderServices(category = 'all') {
             const container = serviceGridContainer;
             if (!container || !allData) return;
             const services = allData.services || {};
             let entries = Object.entries(services);
             if (category !== 'all') {
-                entries = entries.filter(([key, s]) => (s.category || 'other') === category);
+                entries = entries.filter(([key, s]) => s && s.category === category);
             }
 
             if (entries.length === 0) {
@@ -8332,8 +8320,9 @@
             }
 
             container.innerHTML = entries.map(([key, s]) => {
+                if (!s) return '';
                 const thumbClass = 'thumb-1';
-                const price = (s.price || 0).toFixed(2);
+                const price = (Number(s.price) || 0).toFixed(2);
                 return `
                             <div class="service-item" data-id="${escapeAttr(key)}">
                                 <div class="service-thumb ${thumbClass}">
@@ -8355,9 +8344,9 @@
             });
         }
 
-        /* ══════════════════════════════════════════════
+        /* ═══════════════════════════════════════════════════════════════
            ORDER FLOW — STEP BY STEP WIZARD
-           ══════════════════════════════════════════════ */
+           ═══════════════════════════════════════════════════════════════ */
         function openOrderFlow(service) {
             selectedService = service;
             currentQuantity = 1;
@@ -8469,7 +8458,7 @@
                         <div class="order-footer" style="margin-top:14px;">
                             <div>
                                 <div class="total-label">Total Price</div>
-                                <div class="total-price" id="orderTotalDisplay">ZMW ${((service.price || 0) * currentQuantity).toFixed(2)}</div>
+                                <div class="total-price" id="orderTotalDisplay">ZMW ${((Number(service.price) || 0) * currentQuantity).toFixed(2)}</div>
                             </div>
                         </div>
                     `;
@@ -8509,7 +8498,7 @@
                                 <span id="wizQtyDisplay">${currentQuantity}</span>
                                 <button id="wizQtyPlus" type="button"><i class="fa-solid fa-plus"></i></button>
                             </div>
-                            <p class="wizard-hint">Unit price: ZMW ${(selectedService.price || 0).toFixed(2)} · The total updates automatically.</p>
+                            <p class="wizard-hint">Unit price: ZMW ${(Number(selectedService.price) || 0).toFixed(2)} · The total updates automatically.</p>
                         `;
             } else if (step.type === 'review') {
                 const rows = [];
@@ -8520,7 +8509,7 @@
                 if (selectedRevisions) rows.push(['Revisions', selectedRevisions]);
                 if (selectedDeliverySpeed) rows.push(['Delivery Speed', selectedDeliverySpeed]);
                 rows.push(['Quantity', currentQuantity]);
-                rows.push(['Total', `ZMW ${((selectedService.price || 0) * currentQuantity).toFixed(2)}`]);
+                rows.push(['Total', `ZMW ${((Number(selectedService.price) || 0) * currentQuantity).toFixed(2)}`]);
 
                 html += `<div class="wizard-summary">` + rows.map(([l, v]) =>
                     `<div class="wizard-summary-row"><span>${escapeHtml(l)}</span><span>${escapeHtml(String(v))}</span></div>`
@@ -8542,7 +8531,6 @@
             if (direction < 0) body.classList.add('enter-left');
             else if (direction > 0) body.classList.add('enter-right');
 
-            /* bind option buttons */
             body.querySelectorAll('.wizard-option').forEach(btn => {
                 btn.addEventListener('click', function() {
                     step.set(this.dataset.value);
@@ -8550,7 +8538,6 @@
                 });
             });
 
-            /* bind quantity buttons */
             const qMinus = document.getElementById('wizQtyMinus');
             const qPlus = document.getElementById('wizQtyPlus');
             if (qMinus) {
@@ -8572,7 +8559,6 @@
                 });
             }
 
-            /* bind notes */
             const notesEl = document.getElementById('orderNotes');
             if (notesEl) {
                 notesEl.addEventListener('input', function() {
@@ -8600,11 +8586,8 @@
             renderWizardStep(dir);
             const wiz = document.getElementById('orderWizard');
             if (wiz) {
-                try {
-                    wiz.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                } catch (e) {
-                    /* ignore */
-                }
+                try { wiz.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+                catch (e) { /* ignore */ }
             }
         }
 
@@ -8618,7 +8601,7 @@
 
         function updateOrderTotal() {
             if (!selectedService) return;
-            const total = (selectedService.price || 0) * currentQuantity;
+            const total = (Number(selectedService.price) || 0) * currentQuantity;
             const el = document.getElementById('orderTotalDisplay');
             if (el) el.textContent = `ZMW ${total.toFixed(2)}`;
         }
@@ -8630,7 +8613,7 @@
                 return;
             }
 
-            const total = (service.price || 0) * currentQuantity;
+            const total = (Number(service.price) || 0) * currentQuantity;
             orderTotalBeforeDiscount = total;
             const amount50 = total * 0.5;
             paymentAmount.textContent = `ZMW ${amount50.toFixed(2)}`;
@@ -8698,13 +8681,13 @@
                 switchView('categoryView');
                 renderServices(currentCategory);
             } else {
-                goHome();
+                switchView('homeView');
             }
         });
 
-        /* ══════════════════════════════════════════════
-           PROMO CAROUSEL
-           ══════════════════════════════════════════════ */
+        /* ═══════════════════════════════════════════════════════════════
+           PROMO CAROUSEL (unchanged logic — zoom-safe via CSS)
+           ═══════════════════════════════════════════════════════════════ */
         function renderPromoCarousel() {
             const promoPics = allData.promoPics || {};
             const entries = Object.entries(promoPics);
@@ -9006,13 +8989,13 @@
                     `).join('');
         }
 
-        /* ══════════════════════════════════════════════
+        /* ═══════════════════════════════════════════════════════════════
            ORDERS / HISTORY / SAMPLES / PROFILE
-           ══════════════════════════════════════════════ */
+           ═══════════════════════════════════════════════════════════════ */
         function renderOrders() {
             const container = ordersGrid;
             const orders = allData.orders || {};
-            const entries = Object.entries(orders).filter(([key, o]) => o.userId === currentUserId);
+            const entries = Object.entries(orders).filter(([key, o]) => o && o.userId === currentUserId);
             entries.sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
 
             if (entries.length === 0) {
@@ -9075,7 +9058,7 @@
                                     </div>
                                     <div class="right">
                                         <span class="order-status ${statusClass}">${statusDisplay}</span>
-                                        <span class="order-amount">ZMW ${(o.amount || 0).toFixed(2)}</span>
+                                        <span class="order-amount">ZMW ${(Number(o.amount) || 0).toFixed(2)}</span>
                                         <i class="fa-solid fa-chevron-down expand-icon"></i>
                                     </div>
                                 </div>
@@ -9118,17 +9101,15 @@
         function renderHistory() {
             const container = historyList;
             const transactions = allData.transactions || {};
-            const entries = Object.entries(transactions).filter(([key, t]) => t.userId === currentUserId);
+            const entries = Object.entries(transactions).filter(([key, t]) => t && t.userId === currentUserId);
             entries.sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
             const orders = allData.orders || {};
             let pendingReminder = null;
-            let orderKeyToUpdate = null;
             for (const [key, o] of Object.entries(orders)) {
-                if (o.userId === currentUserId && o.status === 'completed' && o.remainingPaid !== true) {
-                    const remainingAmount = (o.amount || 0) * 0.5;
+                if (o && o.userId === currentUserId && o.status === 'completed' && o.remainingPaid !== true) {
+                    const remainingAmount = (Number(o.amount) || 0) * 0.5;
                     pendingReminder = { id: o.id, amount: remainingAmount, order: o, key: key };
-                    orderKeyToUpdate = key;
                     break;
                 }
             }
@@ -9197,16 +9178,10 @@
                     let otherPhone = t.userPhone || 'N/A';
                     let otherBalance = 'N/A';
 
-                    if (t.otherPartyUid && allData.users && allData.customerAccounts) {
-                        const otherUser = allData.users[t.otherPartyUid];
-                        if (otherUser) {
-                            otherName = `${otherUser.firstName || ''} ${otherUser.lastName || ''}`.trim() || otherName;
-                            otherPhone = otherUser.phone || otherPhone;
-                        }
+                    if (t.otherPartyUid && allData.customerAccounts) {
                         const otherAcc = allData.customerAccounts[t.otherPartyUid];
                         if (otherAcc) {
-                            otherBalance = otherAcc.balance || 0;
-                            otherBalance = `ZMW ${otherBalance.toFixed(2)}`;
+                            otherBalance = `ZMW ${(Number(otherAcc.balance) || 0).toFixed(2)}`;
                         }
                     }
 
@@ -9221,11 +9196,11 @@
                 let detailText = t.detail || '';
                 if (t.type?.toLowerCase().includes('referral') && t.userName) {
                     detailText =
-                        `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral code.`;
+                        `You received ZMW ${Number(t.amount || 0).toFixed(2)} from ${t.userName} who used your referral code.`;
                 }
                 if (t.type?.toLowerCase().includes('discount') && t.userName) {
                     detailText =
-                        `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral for a service discount.`;
+                        `You received ZMW ${Number(t.amount || 0).toFixed(2)} from ${t.userName} who used your referral for a service discount.`;
                 }
 
                 const isWithdrawTx = t.type?.toLowerCase().includes('withdraw');
@@ -9248,7 +9223,7 @@
                                 <div class="history-summary">
                                     <div class="left">
                                         <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
-                                        <span>${escapeHtml(t.type || 'Transaction')} ${t.amount ? 'ZMW ' + t.amount.toFixed(2) : ''}</span>
+                                        <span>${escapeHtml(t.type || 'Transaction')} ${t.amount ? 'ZMW ' + Number(t.amount).toFixed(2) : ''}</span>
                                     </div>
                                     <div class="right">
                                         <span>${escapeHtml(safeFormatDate(t.timestamp || t.createdAt, t.date))}</span>
@@ -9295,7 +9270,7 @@
             update(orderRef, updates).then(() => {
                 const txData = {
                     type: 'Remaining 50% payment for ' + orderData.service,
-                    amount: (orderData.amount || 0) * 0.5,
+                    amount: (Number(orderData.amount) || 0) * 0.5,
                     method: 'Airtel Money',
                     status: 'completed',
                     date: new Date().toLocaleString(),
@@ -9336,7 +9311,7 @@
         }
 
         function renderProfile() {
-            if (currentUserData) {
+            if (currentUserData && currentUser) {
                 const fullName = `${currentUserData.firstName || ''} ${currentUserData.lastName || ''}`.trim() || 'User';
                 const initial = (currentUserData.firstName || 'U').charAt(0).toUpperCase();
                 profileName.textContent = fullName;
@@ -9353,7 +9328,7 @@
         function renderNotifications() {
             const notifications = allData.notifications || {};
             const entries = Object.entries(notifications)
-                .filter(([key, n]) => n.userId === currentUserId)
+                .filter(([key, n]) => n && n.userId === currentUserId)
                 .sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
 
             if (entries.length === 0) {
@@ -9397,7 +9372,7 @@
             const entries = Object.entries(posts);
             const groups = { app: [], flyer: [], website: [], logo: [] };
             entries.forEach(([key, p]) => {
-                if (groups[p.type]) groups[p.type].push({ key, ...p });
+                if (p && groups[p.type]) groups[p.type].push({ key, ...p });
             });
             for (const type in groups) {
                 groups[type].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
@@ -9474,32 +9449,35 @@
 
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
+            const balance = Number(userAccount.balance) || 0;
 
             const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
 
             accountBalanceDisplay.textContent = `ZMW ${balance.toFixed(2)}`;
 
-            /* ── HEADER BALANCE ── */
             if (headerBalance) {
                 headerBalance.textContent = `ZMW ${balance.toFixed(2)}`;
             }
 
             const balanceBox = document.getElementById('accountBalanceBox');
-            let pendingInfo = balanceBox.querySelector('.pending-info');
-            if (!pendingInfo) {
-                pendingInfo = document.createElement('div');
-                pendingInfo.className = 'pending-info';
-                pendingInfo.style.cssText = 'font-size:8px;color:var(--accent);margin-top:2px;';
-                balanceBox.querySelector('.left').appendChild(pendingInfo);
-            }
-            if (pendingTotal > 0) {
-                pendingInfo.textContent = `Pending: ZMW ${pendingTotal.toFixed(2)} · Available: ZMW ${availableBalance.toFixed(2)}`;
-                pendingInfo.style.display = 'block';
-            } else {
-                pendingInfo.textContent = `Available: ZMW ${availableBalance.toFixed(2)}`;
-                pendingInfo.style.display = 'block';
+            if (balanceBox) {
+                let pendingInfo = balanceBox.querySelector('.pending-info');
+                if (!pendingInfo) {
+                    pendingInfo = document.createElement('div');
+                    pendingInfo.className = 'pending-info';
+                    pendingInfo.style.cssText = 'font-size:8px;color:var(--accent);margin-top:2px;';
+                    const left = balanceBox.querySelector('.left');
+                    if (left) left.appendChild(pendingInfo);
+                }
+                if (pendingInfo) {
+                    if (pendingTotal > 0) {
+                        pendingInfo.textContent = `Pending: ZMW ${pendingTotal.toFixed(2)} · Available: ZMW ${availableBalance.toFixed(2)}`;
+                    } else {
+                        pendingInfo.textContent = `Available: ZMW ${availableBalance.toFixed(2)}`;
+                    }
+                    pendingInfo.style.display = 'block';
+                }
             }
 
             withdrawBtnFromBalance.dataset.availableBalance = availableBalance;
@@ -9508,16 +9486,13 @@
             updateWalletPaymentUI();
         }
 
-        /* ── COPY REFERRAL CODE (bind once) ── */
         copyReferralBtn.addEventListener('click', function() {
             const code = referralCodeDisplay.textContent.trim();
             if (!code) return;
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(code).then(() => {
                     showToast('Referral code copied!', 'success');
-                }).catch(() => {
-                    fallbackCopy(code);
-                });
+                }).catch(() => fallbackCopy(code));
             } else {
                 fallbackCopy(code);
             }
@@ -9541,8 +9516,8 @@
             const withdrawals = allData.withdrawalRequests || {};
             let total = 0;
             for (const [key, w] of Object.entries(withdrawals)) {
-                if (w.userId === currentUserId && w.status === 'pending') {
-                    total += (w.amount || 0);
+                if (w && w.userId === currentUserId && w.status === 'pending') {
+                    total += (Number(w.amount) || 0);
                 }
             }
             return total;
@@ -9552,7 +9527,7 @@
             const container = transactionMessages;
             const transactions = allData.transactions || {};
             const entries = Object.entries(transactions)
-                .filter(([key, t]) => t.userId === currentUserId && !t.type?.toLowerCase().includes('withdraw'))
+                .filter(([key, t]) => t && t.userId === currentUserId && !t.type?.toLowerCase().includes('withdraw'))
                 .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
             if (entries.length === 0) {
@@ -9565,7 +9540,7 @@
                 const isCredit = t.amount && t.amount > 0 && (t.type?.toLowerCase().includes('referral') || t.type?.toLowerCase().includes('received'));
                 let amountDisplay = '';
                 if (t.amount) {
-                    amountDisplay = isCredit ? `+ZMW ${t.amount.toFixed(2)}` : `ZMW ${t.amount.toFixed(2)}`;
+                    amountDisplay = isCredit ? `+ZMW ${Number(t.amount).toFixed(2)}` : `ZMW ${Number(t.amount).toFixed(2)}`;
                 }
 
                 let title = t.type || 'Transaction';
@@ -9574,25 +9549,18 @@
                 if (t.type?.toLowerCase().includes('referral') && t.userName) {
                     title = `Referral Bonus`;
                     desc =
-                        `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral code.`;
+                        `You received ZMW ${Number(t.amount || 0).toFixed(2)} from ${t.userName} who used your referral code.`;
                 }
                 if (t.type?.toLowerCase().includes('discount') && t.userName) {
                     title = `Referral Discount`;
                     desc =
-                        `You received ZMW ${t.amount?.toFixed(2) || '0.00'} from ${t.userName} who used your referral for a service discount.`;
+                        `You received ZMW ${Number(t.amount || 0).toFixed(2)} from ${t.userName} who used your referral for a service discount.`;
                 }
 
                 let otherInfo = '';
                 if (t.type?.toLowerCase().includes('sent') || t.type?.toLowerCase().includes('received')) {
                     let otherName = t.otherParty || t.userName || 'Unknown';
                     let otherPhone = t.userPhone || 'N/A';
-                    if (t.otherPartyUid && allData.users) {
-                        const otherUser = allData.users[t.otherPartyUid];
-                        if (otherUser) {
-                            otherName = `${otherUser.firstName || ''} ${otherUser.lastName || ''}`.trim() || otherName;
-                            otherPhone = otherUser.phone || otherPhone;
-                        }
-                    }
                     const direction = t.type?.toLowerCase().includes('sent') ? 'Sent to' : 'Received from';
                     otherInfo = ` ${direction} <strong>${escapeHtml(otherName)}</strong> (${escapeHtml(otherPhone)})`;
                 }
@@ -9621,7 +9589,7 @@
                                 <div class="tx-summary">
                                     <div class="left">
                                         <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
-                                        <span>${escapeHtml(title)} ${amountDisplay ? 'ZMW ' + t.amount.toFixed(2) : ''}</span>
+                                        <span>${escapeHtml(title)} ${amountDisplay ? 'ZMW ' + Number(t.amount).toFixed(2) : ''}</span>
                                     </div>
                                     <div class="right">
                                         <span>${escapeHtml(safeFormatDate(t.timestamp || t.createdAt, t.date))}</span>
@@ -9649,7 +9617,7 @@
             const container = withdrawalsListContainer;
             const withdrawals = allData.withdrawalRequests || {};
             const entries = Object.entries(withdrawals)
-                .filter(([key, w]) => w.userId === currentUserId)
+                .filter(([key, w]) => w && w.userId === currentUserId)
                 .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
             if (entries.length === 0) {
@@ -9670,12 +9638,12 @@
                 let statusMessage = '';
                 if (w.status === 'approved') {
                     statusMessage =
-                        `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was approved. The amount has been deducted from your account.`;
+                        `Your withdrawal of ZMW ${(Number(w.amount) || 0).toFixed(2)} was approved. The amount has been deducted from your account.`;
                 } else if (w.status === 'declined') {
                     statusMessage =
-                        `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} was declined. The amount remains in your account.`;
+                        `Your withdrawal of ZMW ${(Number(w.amount) || 0).toFixed(2)} was declined. The amount remains in your account.`;
                 } else {
-                    statusMessage = `Your withdrawal of ZMW ${(w.amount || 0).toFixed(2)} is pending approval.`;
+                    statusMessage = `Your withdrawal of ZMW ${(Number(w.amount) || 0).toFixed(2)} is pending approval.`;
                 }
 
                 let iconClass = 'fa-clock';
@@ -9693,7 +9661,7 @@
                                 <div class="wd-summary">
                                     <div class="left">
                                         <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
-                                        <span>Withdrawal: ZMW ${(w.amount || 0).toFixed(2)}</span>
+                                        <span>Withdrawal: ZMW ${(Number(w.amount) || 0).toFixed(2)}</span>
                                     </div>
                                     <div class="right">
                                         <span class="status-badge ${statusClass}">${statusDisplay}</span>
@@ -9701,7 +9669,7 @@
                                     </div>
                                 </div>
                                 <div class="wd-details">
-                                    <div class="d-row"><span class="d-label">Amount</span><span class="d-val">ZMW ${(w.amount || 0).toFixed(2)}</span></div>
+                                    <div class="d-row"><span class="d-label">Amount</span><span class="d-val">ZMW ${(Number(w.amount) || 0).toFixed(2)}</span></div>
                                     <div class="d-row"><span class="d-label">Date</span><span class="d-val">${escapeHtml(dateStr)}</span></div>
                                     <div class="d-row"><span class="d-label">Phone</span><span class="d-val">${escapeHtml(w.phone || 'N/A')}</span></div>
                                     <div class="d-row"><span class="d-label">Status</span><span class="d-val">${statusDisplay}</span></div>
@@ -9721,47 +9689,43 @@
         function updateWalletPaymentUI() {
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
+            const balance = Number(userAccount.balance) || 0;
             const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
 
             walletBalanceDisplay.textContent = `ZMW ${availableBalance.toFixed(2)}`;
 
-            let depositAmount = 0;
-            const amountText = paymentAmount.textContent.replace('ZMW ', '');
-            depositAmount = parseFloat(amountText) || 0;
+            const amountText = (paymentAmount.textContent || '').replace('ZMW ', '');
+            const depositAmount = parseFloat(amountText) || 0;
 
             const hasEnough = availableBalance >= depositAmount;
 
-            const walletStatusEl = walletStatus;
-            const payWithWalletCheckEl = payWithWalletCheck;
-
             if (depositAmount > 0) {
                 if (hasEnough) {
-                    walletStatusEl.style.color = '#00a86b';
+                    walletStatus.style.color = '#00a86b';
                     walletSufficiency.textContent = '✅ Sufficient balance';
                     walletSufficiency.style.color = '#00a86b';
-                    payWithWalletCheckEl.disabled = false;
-                    payWithWalletCheckEl.style.cursor = 'pointer';
-                    if (payWithWalletCheckEl.checked) {
+                    payWithWalletCheck.disabled = false;
+                    payWithWalletCheck.style.cursor = 'pointer';
+                    if (payWithWalletCheck.checked) {
                         uploadSection.style.display = 'none';
                     } else {
                         uploadSection.style.display = 'block';
                     }
                 } else {
-                    walletStatusEl.style.color = '#dc2626';
+                    walletStatus.style.color = '#dc2626';
                     walletSufficiency.textContent = '❌ Insufficient balance (need ZMW ' + depositAmount.toFixed(2) + ')';
                     walletSufficiency.style.color = '#dc2626';
-                    payWithWalletCheckEl.disabled = true;
-                    payWithWalletCheckEl.style.cursor = 'not-allowed';
-                    payWithWalletCheckEl.checked = false;
+                    payWithWalletCheck.disabled = true;
+                    payWithWalletCheck.style.cursor = 'not-allowed';
+                    payWithWalletCheck.checked = false;
                     uploadSection.style.display = 'block';
                 }
             } else {
-                walletStatusEl.style.color = 'var(--text-muted)';
+                walletStatus.style.color = 'var(--text-muted)';
                 walletSufficiency.textContent = '';
-                payWithWalletCheckEl.disabled = true;
-                payWithWalletCheckEl.style.cursor = 'not-allowed';
+                payWithWalletCheck.disabled = true;
+                payWithWalletCheck.style.cursor = 'not-allowed';
                 uploadSection.style.display = 'block';
             }
         }
@@ -9806,7 +9770,7 @@
 
                 const accounts = allData.customerAccounts || {};
                 const userAccount = accounts[currentUserId] || { balance: 0 };
-                const balance = userAccount.balance || 0;
+                const balance = Number(userAccount.balance) || 0;
                 const pendingTotal = calculatePendingWithdrawalTotal();
                 const availableBalance = Math.max(0, balance - pendingTotal);
 
@@ -9942,7 +9906,7 @@
                 if (bonusAmount > 0) {
                     const accRef = ref(db, `bufferzoneAppData/customerAccounts/${appliedReferral.referrerUid}`);
                     get(accRef).then((snapshot) => {
-                        const currentBal = snapshot.val()?.balance || 0;
+                        const currentBal = Number(snapshot.val()?.balance) || 0;
                         set(accRef, { balance: currentBal + bonusAmount });
                     });
 
@@ -9996,20 +9960,20 @@
 
         orderSuccessOkBtn.addEventListener('click', function() {
             orderSuccessPopup.classList.remove('open');
-            goHome();
+            switchView('homeView');
         });
 
         orderSuccessPopup.addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('open');
-                goHome();
+                switchView('homeView');
             }
         });
 
         function openWithdrawPage() {
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
+            const balance = Number(userAccount.balance) || 0;
             const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
 
@@ -10061,7 +10025,7 @@
             const container = wdHistoryList;
             const withdrawals = allData.withdrawalRequests || {};
             const entries = Object.entries(withdrawals)
-                .filter(([key, w]) => w.userId === currentUserId)
+                .filter(([key, w]) => w && w.userId === currentUserId)
                 .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
             if (entries.length === 0) {
@@ -10095,7 +10059,7 @@
                                 <div class="summary">
                                     <div class="left">
                                         <i class="fa-solid ${iconClass}" style="color:${iconColor};"></i>
-                                        <span>ZMW ${(w.amount || 0).toFixed(2)}</span>
+                                        <span>ZMW ${(Number(w.amount) || 0).toFixed(2)}</span>
                                     </div>
                                     <div class="right">
                                         <span class="status-badge ${statusClass}">${statusDisplay}</span>
@@ -10103,7 +10067,7 @@
                                     </div>
                                 </div>
                                 <div class="details">
-                                    <div class="row"><span class="lbl">Amount</span><span class="val">ZMW ${(w.amount || 0).toFixed(2)}</span></div>
+                                    <div class="row"><span class="lbl">Amount</span><span class="val">ZMW ${(Number(w.amount) || 0).toFixed(2)}</span></div>
                                     <div class="row"><span class="lbl">Date</span><span class="val">${escapeHtml(dateStr)}</span></div>
                                     <div class="row"><span class="lbl">Phone</span><span class="val">${escapeHtml(w.phone || 'N/A')}</span></div>
                                     <div class="row"><span class="lbl">Status</span><span class="val">${statusDisplay}</span></div>
@@ -10129,7 +10093,7 @@
 
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
+            const balance = Number(userAccount.balance) || 0;
             const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
 
@@ -10195,7 +10159,7 @@
         function openSendMoneyPage() {
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
+            const balance = Number(userAccount.balance) || 0;
             const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
 
@@ -10280,7 +10244,7 @@
         function updateSendPageButtonState() {
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
+            const balance = Number(userAccount.balance) || 0;
             const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
 
@@ -10305,7 +10269,7 @@
 
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
+            const balance = Number(userAccount.balance) || 0;
             const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
 
@@ -10329,7 +10293,7 @@
 
             const recipientAccRef = ref(db, `bufferzoneAppData/customerAccounts/${sendRecipientUid}`);
             get(recipientAccRef).then((snapshot) => {
-                const currentRecipientBal = snapshot.val()?.balance || 0;
+                const currentRecipientBal = Number(snapshot.val()?.balance) || 0;
                 set(recipientAccRef, { balance: currentRecipientBal + amount });
             });
 
@@ -10410,7 +10374,7 @@
             const entries = Object.entries(transactions)
                 .filter(([key, t]) => {
                     const isSend = t.type?.toLowerCase().includes('sent') || t.type?.toLowerCase().includes('received');
-                    return t.userId === currentUserId && (isSend || t.type?.toLowerCase().includes('send'));
+                    return t && t.userId === currentUserId && (isSend || t.type?.toLowerCase().includes('send'));
                 })
                 .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
@@ -10428,16 +10392,10 @@
                 let otherPhone = t.userPhone || 'N/A';
                 let otherBalance = 'N/A';
 
-                if (t.otherPartyUid && allData.users && allData.customerAccounts) {
-                    const otherUser = allData.users[t.otherPartyUid];
-                    if (otherUser) {
-                        otherName = `${otherUser.firstName || ''} ${otherUser.lastName || ''}`.trim() || otherName;
-                        otherPhone = otherUser.phone || otherPhone;
-                    }
+                if (t.otherPartyUid && allData.customerAccounts) {
                     const otherAcc = allData.customerAccounts[t.otherPartyUid];
                     if (otherAcc) {
-                        otherBalance = otherAcc.balance || 0;
-                        otherBalance = `ZMW ${otherBalance.toFixed(2)}`;
+                        otherBalance = `ZMW ${(Number(otherAcc.balance) || 0).toFixed(2)}`;
                     }
                 }
 
@@ -10446,7 +10404,7 @@
                                 <div class="summary">
                                     <div class="left">
                                         <i class="fa-solid ${isSent ? 'fa-paper-plane' : 'fa-inbox'}" style="color:${isSent ? '#4a90d9' : '#00a86b'};"></i>
-                                        <span>${isSent ? 'Sent' : 'Received'} ZMW ${Math.abs(t.amount || 0).toFixed(2)}</span>
+                                        <span>${isSent ? 'Sent' : 'Received'} ZMW ${Math.abs(Number(t.amount) || 0).toFixed(2)}</span>
                                     </div>
                                     <div class="right">
                                         <span style="font-size:9px; color:var(--text-muted);">${escapeHtml(safeFormatDate(t.timestamp || t.createdAt, t.date))}</span>
@@ -10454,7 +10412,7 @@
                                     </div>
                                 </div>
                                 <div class="details">
-                                    <div class="row"><span class="lbl">Amount</span><span class="val">${sign}ZMW ${Math.abs(t.amount || 0).toFixed(2)}</span></div>
+                                    <div class="row"><span class="lbl">Amount</span><span class="val">${sign}ZMW ${Math.abs(Number(t.amount) || 0).toFixed(2)}</span></div>
                                     <div class="row"><span class="lbl">${label}</span><span class="val">${escapeHtml(otherName)}</span></div>
                                     <div class="row"><span class="lbl">Phone</span><span class="val">${escapeHtml(otherPhone)}</span></div>
                                     <div class="row"><span class="lbl">Balance</span><span class="val">${otherBalance}</span></div>
@@ -10471,9 +10429,9 @@
             });
         }
 
-        /* ══════════════════════════════════════════════
+        /* ═══════════════════════════════════════════════════════════════
            FLYER DETAIL + APPLICATIONS
-           ══════════════════════════════════════════════ */
+           ═══════════════════════════════════════════════════════════════ */
         function openFlyerDetail(flyerId) {
             const flyer = allData.promoPics?.[flyerId];
             if (!flyer) {
@@ -10949,9 +10907,9 @@
             });
         }
 
-        /* ══════════════════════════════════════════════
+        /* ═══════════════════════════════════════════════════════════════
            REAL-TIME POPUPS
-           ══════════════════════════════════════════════ */
+           ═══════════════════════════════════════════════════════════════ */
         function anyPopupOpen() {
             return !!document.querySelector(
                 '.app-status-overlay.open, .order-complete-overlay.open, .withdrawal-status-overlay.open, ' +
@@ -11063,7 +11021,7 @@
 
                 const apps = allData.applications || {};
                 const appEntries = Object.entries(apps)
-                    .filter(([key, a]) => a.userId === currentUserId)
+                    .filter(([key, a]) => a && a.userId === currentUserId)
                     .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
 
                 for (const [key, app] of appEntries) {
@@ -11077,12 +11035,12 @@
 
                 const orders = allData.orders || {};
                 const orderEntries = Object.entries(orders)
-                    .filter(([key, o]) => o.userId === currentUserId)
+                    .filter(([key, o]) => o && o.userId === currentUserId)
                     .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
 
                 for (const [key, order] of orderEntries) {
                     if (order.status === 'completed' && !shownPopups.orderComplete[key]) {
-                        const remainingAmount = (order.amount || 0) * 0.5;
+                        const remainingAmount = (Number(order.amount) || 0) * 0.5;
                         if (remainingAmount > 0) {
                             playNotificationSound();
                             showOrderCompletePopup(key, order, remainingAmount);
@@ -11093,7 +11051,7 @@
 
                 const withdrawals = allData.withdrawalRequests || {};
                 const wdEntries = Object.entries(withdrawals)
-                    .filter(([key, w]) => w.userId === currentUserId)
+                    .filter(([key, w]) => w && w.userId === currentUserId)
                     .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
                 for (const [key, w] of wdEntries) {
@@ -11107,7 +11065,7 @@
 
                 const transactions = allData.transactions || {};
                 const txEntries = Object.entries(transactions)
-                    .filter(([key, t]) => t.userId === currentUserId)
+                    .filter(([key, t]) => t && t.userId === currentUserId)
                     .sort((a, b) => (b[1].timestamp || b[1].createdAt || 0) - (a[1].timestamp || a[1].createdAt || 0));
 
                 for (const [key, t] of txEntries) {
@@ -11176,7 +11134,6 @@
             asDate.textContent = safeFormatDateShort(app.createdAt, null);
 
             appStatusBtn.dataset.appId = appId;
-
             appStatusPopup.classList.add('open');
             markPopupShown('applications', appId);
         }
@@ -11237,7 +11194,7 @@
                 wsMessage.textContent = 'Your withdrawal request has been declined. Please contact support for more information.';
             }
 
-            wsAmount.textContent = `ZMW ${(wd.amount || 0).toFixed(2)}`;
+            wsAmount.textContent = `ZMW ${(Number(wd.amount) || 0).toFixed(2)}`;
             wsDate.textContent = safeFormatDate(wd.createdAt, wd.date);
             wsPhone.textContent = wd.phone || 'N/A';
             wsStatus.textContent = wd.status ? wd.status.charAt(0).toUpperCase() + wd.status.slice(1) : 'N/A';
@@ -11262,7 +11219,7 @@
         });
 
         function showReferralReceivedPopup(txId, tx) {
-            const amount = tx.amount || 0;
+            const amount = Number(tx.amount) || 0;
             rrAmount.textContent = `ZMW ${amount.toFixed(2)}`;
             rrBtn.dataset.txId = txId;
             referralReceivedPopup.classList.add('open');
@@ -11284,7 +11241,7 @@
         });
 
         function showMoneyReceivedPopup(txId, tx) {
-            const amount = tx.amount || 0;
+            const amount = Number(tx.amount) || 0;
             mrAmount.textContent = `ZMW ${amount.toFixed(2)}`;
             const sender = tx.otherParty || tx.userName || 'Unknown';
             mrSenderName.textContent = sender;
@@ -11317,14 +11274,14 @@
             imageViewerImg.src = '';
         });
 
-        /* ══════════════════════════════════════════════
+        /* ═══════════════════════════════════════════════════════════════
            APPLICATIONS
-           ══════════════════════════════════════════════ */
+           ═══════════════════════════════════════════════════════════════ */
         function renderApplications() {
             const container = applicationsListEl;
             const apps = allData.applications || {};
             const entries = Object.entries(apps)
-                .filter(([key, a]) => a.userId === currentUserId)
+                .filter(([key, a]) => a && a.userId === currentUserId)
                 .sort((a, b) => (b[1].createdAt || b[1].timestamp || 0) - (a[1].createdAt || a[1].timestamp || 0));
 
             if (entries.length === 0) {
@@ -11432,11 +11389,11 @@
             });
         }
 
-        /* ══════════════════════════════════════════════
+        /* ═══════════════════════════════════════════════════════════════
            RECEIPT / STATEMENT
-           ══════════════════════════════════════════════ */
+           ═══════════════════════════════════════════════════════════════ */
         function openReceiptModal(order, key) {
-            const customerName = order.customer || (currentUserData?.firstName + ' ' + currentUserData?.lastName) || 'Customer';
+            const customerName = order.customer || ((currentUserData?.firstName || '') + ' ' + (currentUserData?.lastName || '')).trim() || 'Customer';
             const customerPhone = order.clientNumber || currentUserData?.phone || 'N/A';
             const customerEmail = currentUser.email || 'N/A';
 
@@ -11447,7 +11404,7 @@
 
             const serviceTitle = order.service || 'Design Service';
             const qty = order.quantity || 1;
-            const totalPrice = order.amount || 0;
+            const totalPrice = Number(order.amount) || 0;
             const unitPrice = qty > 0 ? (totalPrice / qty) : totalPrice;
 
             let discountVal = 0;
@@ -11518,7 +11475,7 @@
             stmtCustEmail.textContent = 'Email: ' + customerEmail;
 
             const type = tx.type || 'Transaction';
-            const amount = tx.amount || 0;
+            const amount = Number(tx.amount) || 0;
             const status = tx.status || 'N/A';
             const date = tx.date || 'N/A';
             const method = tx.method || 'N/A';
@@ -11575,9 +11532,9 @@
             });
         }
 
-        /* ══════════════════════════════════════════════
+        /* ═══════════════════════════════════════════════════════════════
            EVENT BINDINGS
-           ══════════════════════════════════════════════ */
+           ═══════════════════════════════════════════════════════════════ */
         backFromFlyerDetail.addEventListener('click', function() {
             switchView('homeView');
         });
@@ -11625,8 +11582,107 @@
             if (e.key === 'Enter') applyReferral();
         });
 
-        confirmPaymentBtn.addEventListener('click', confirmPayment);
+        function applyReferral() {
+            const code = referralCodeInput.value.trim().toUpperCase();
+            if (!code) {
+                referralMsg.textContent = 'Please enter a referral code.';
+                referralMsg.className = 'coupon-msg error';
+                return;
+            }
 
+            const usersRef = ref(db, 'users');
+            get(usersRef).then((snapshot) => {
+                const users = snapshot.val() || {};
+                let referrerUid = null;
+                let referrerData = null;
+                for (const [uid, u] of Object.entries(users)) {
+                    if (u.referralCode === code) {
+                        referrerUid = uid;
+                        referrerData = u;
+                        break;
+                    }
+                }
+
+                if (!referrerUid || referrerUid === currentUserId) {
+                    referralMsg.textContent = 'Invalid referral code.';
+                    referralMsg.className = 'coupon-msg error';
+                    return;
+                }
+
+                const discounts = allData.referralDiscounts || {};
+                const promoDiscounts = allData.referralPromoDiscounts || {};
+                let foundDiscount = null;
+                let discountKey = null;
+                let isPromo = false;
+
+                for (const [key, d] of Object.entries(discounts)) {
+                    if (d.referralCode === code) {
+                        foundDiscount = d;
+                        discountKey = key;
+                        isPromo = false;
+                        break;
+                    }
+                }
+
+                if (!foundDiscount) {
+                    for (const [key, d] of Object.entries(promoDiscounts)) {
+                        if (d.referralCode === code || d.referralCode === '') {
+                            foundDiscount = d;
+                            discountKey = key;
+                            isPromo = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!foundDiscount) {
+                    referralMsg.textContent = 'This referral code has no active discount.';
+                    referralMsg.className = 'coupon-msg error';
+                    return;
+                }
+
+                const orderData = JSON.parse(paymentPage.dataset.orderData || '{}');
+                const total = orderData.total || orderTotalBeforeDiscount;
+                const discountAmount = total * (foundDiscount.discount / 100);
+                const finalPrice = total - discountAmount;
+                const depositAmount = finalPrice * 0.5;
+
+                origPriceVal.textContent = `ZMW ${total.toFixed(2)}`;
+                discountVal.textContent = `- ZMW ${discountAmount.toFixed(2)}`;
+                finalPriceVal.textContent = `ZMW ${finalPrice.toFixed(2)}`;
+                finalDepositVal.textContent = `ZMW ${depositAmount.toFixed(2)}`;
+                priceBreakdown.style.display = 'block';
+
+                paymentAmount.textContent = `ZMW ${depositAmount.toFixed(2)}`;
+
+                referralMsg.textContent =
+                    `✅ Referral applied! ${foundDiscount.discount}% off. Owner will receive ZMW ${foundDiscount.ownerAmount || 0}.`;
+                referralMsg.className = 'coupon-msg success';
+
+                appliedReferral = {
+                    key: discountKey,
+                    code: code,
+                    discount: foundDiscount.discount,
+                    ownerAmount: foundDiscount.ownerAmount || 0,
+                    referrerUid: referrerUid,
+                    referrerData: referrerData,
+                    isPromo: isPromo
+                };
+                discountApplied = true;
+                referralCodeInput.disabled = true;
+                applyReferralBtn.disabled = true;
+
+                paymentPage.dataset.appliedReferral = JSON.stringify(appliedReferral);
+
+                updateWalletPaymentUI();
+            }).catch((error) => {
+                console.error('Error checking referral:', error);
+                referralMsg.textContent = 'Error validating referral.';
+                referralMsg.className = 'coupon-msg error';
+            });
+        }
+
+        confirmPaymentBtn.addEventListener('click', confirmPayment);
         setupCloudinaryUpload();
 
         accountTransactionsBtn.addEventListener('click', function() {
@@ -11654,7 +11710,7 @@
             const val = parseFloat(this.value) || 0;
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
+            const balance = Number(userAccount.balance) || 0;
             const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
             if (val > availableBalance) {
@@ -11692,7 +11748,7 @@
             updateSendPageButtonState();
             const accounts = allData.customerAccounts || {};
             const userAccount = accounts[currentUserId] || { balance: 0 };
-            const balance = userAccount.balance || 0;
+            const balance = Number(userAccount.balance) || 0;
             const pendingTotal = calculatePendingWithdrawalTotal();
             const availableBalance = Math.max(0, balance - pendingTotal);
             const amount = parseFloat(this.value) || 0;
@@ -11710,13 +11766,12 @@
             if (this.checked) {
                 const accounts = allData.customerAccounts || {};
                 const userAccount = accounts[currentUserId] || { balance: 0 };
-                const balance = userAccount.balance || 0;
+                const balance = Number(userAccount.balance) || 0;
                 const pendingTotal = calculatePendingWithdrawalTotal();
                 const availableBalance = Math.max(0, balance - pendingTotal);
 
-                let depositAmount = 0;
                 const amountText = paymentAmount.textContent.replace('ZMW ', '');
-                depositAmount = parseFloat(amountText) || 0;
+                const depositAmount = parseFloat(amountText) || 0;
 
                 if (availableBalance < depositAmount) {
                     showToast('Insufficient wallet balance.', 'error');
@@ -11752,6 +11807,9 @@
         setupTestimonyMediaUpload();
         submitTestimonyBtn.addEventListener('click', submitTestimony);
 
+        /* ═══════════════════════════════════════════════════════════════
+           AUTH — UNCHANGED FROM ORIGINAL
+           ═══════════════════════════════════════════════════════════════ */
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
@@ -11810,7 +11868,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        /* ─── PERIODIC POPUP SWEEP (guarantees popups fire in real time) ─── */
+        /* ─── PERIODIC POPUP SWEEP (guarantees real-time popups fire) ─── */
         setInterval(() => {
             if (document.hidden) return;
             if (!currentUserId || !allData) return;
