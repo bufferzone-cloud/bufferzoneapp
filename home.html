@@ -555,8 +555,6 @@
         .promo-carousel-track {
             display: flex;
             gap: 0;
-            /* Vertical padding gives the scaled (zoomed) slide room so it is
-               never clipped at the top or bottom. */
             padding: 20px 0;
             overflow-x: auto;
             overflow-y: hidden;
@@ -693,8 +691,6 @@
             z-index: 2;
         }
 
-        /* Reduced from 1.08 → 1.06 plus extra track padding so the zoomed
-           flyer is fully visible (no top/bottom cropping). */
         .promo-slide.active-slide {
             transform: scale(1.06) !important;
             opacity: 1 !important;
@@ -868,29 +864,39 @@
             color: var(--text-muted);
         }
 
-        /* ── SERVICE GRID ── */
+        /* ── SERVICE GRID (Category view — 2x2 big cards with price top-right) ── */
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 9px;
-            margin: 0 12px 14px 12px;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 0 12px 16px 12px;
         }
 
         .service-item {
             display: flex;
             flex-direction: column;
             cursor: pointer;
-            transition: transform 0.15s ease;
+            transition: transform 0.15s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 10px;
+            box-shadow: var(--shadow);
         }
 
         .service-item:active {
-            transform: scale(0.95);
+            transform: scale(0.97);
+        }
+
+        .service-item:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
         }
 
         .service-thumb {
-            border-radius: 9px;
-            aspect-ratio: 1 / 1.1;
-            margin-bottom: 5px;
+            border-radius: 11px;
+            aspect-ratio: 1 / 1;
+            margin-bottom: 9px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -900,34 +906,40 @@
             transition: box-shadow 0.25s ease;
         }
 
-        .service-item:hover .service-thumb {
-            box-shadow: var(--shadow-lg);
+        .service-thumb i {
+            color: #ffffff;
+            font-size: 34px;
+            opacity: 0.92;
         }
 
-        .service-thumb i {
-            color: white;
-            font-size: 17px;
+        .service-price-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--accent);
+            color: var(--accent-text);
+            padding: 4px 10px;
+            border-radius: 11px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+            z-index: 2;
+            white-space: nowrap;
         }
 
         .service-title {
-            font-size: 8px;
-            font-weight: 600;
+            font-size: 13px;
+            font-weight: 700;
             color: var(--text-main);
-            margin-bottom: 2px;
-            line-height: 1.2;
+            margin-bottom: 3px;
+            line-height: 1.25;
         }
 
         .service-subtitle {
-            font-size: 6px;
+            font-size: 10px;
             color: var(--text-muted);
-            line-height: 1.2;
-        }
-
-        .service-price {
-            font-size: 7px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-top: 1px;
+            line-height: 1.4;
         }
 
         /* ── ORDER FLOW (WIZARD) ── */
@@ -5376,55 +5388,25 @@
         }
 
         /* ── TUTORIAL SLIDE COLORS ── */
-        .tutorial-slide-1 .slide-bg-decor {
-            background: var(--color-primary);
-        }
-        .tutorial-slide-1 .slide-bg-decor-2 {
-            background: var(--color-primary);
-        }
-        .tutorial-slide-1 .slide-icon-wrap {
-            background: var(--color-primary);
-        }
+        .tutorial-slide-1 .slide-bg-decor { background: var(--color-primary); }
+        .tutorial-slide-1 .slide-bg-decor-2 { background: var(--color-primary); }
+        .tutorial-slide-1 .slide-icon-wrap { background: var(--color-primary); }
 
-        .tutorial-slide-2 .slide-bg-decor {
-            background: var(--accent);
-        }
-        .tutorial-slide-2 .slide-bg-decor-2 {
-            background: var(--accent);
-        }
-        .tutorial-slide-2 .slide-icon-wrap {
-            background: var(--accent);
-        }
+        .tutorial-slide-2 .slide-bg-decor { background: var(--accent); }
+        .tutorial-slide-2 .slide-bg-decor-2 { background: var(--accent); }
+        .tutorial-slide-2 .slide-icon-wrap { background: var(--accent); }
 
-        .tutorial-slide-3 .slide-bg-decor {
-            background: #00a86b;
-        }
-        .tutorial-slide-3 .slide-bg-decor-2 {
-            background: #00a86b;
-        }
-        .tutorial-slide-3 .slide-icon-wrap {
-            background: #00a86b;
-        }
+        .tutorial-slide-3 .slide-bg-decor { background: #00a86b; }
+        .tutorial-slide-3 .slide-bg-decor-2 { background: #00a86b; }
+        .tutorial-slide-3 .slide-icon-wrap { background: #00a86b; }
 
-        .tutorial-slide-4 .slide-bg-decor {
-            background: #7c3aed;
-        }
-        .tutorial-slide-4 .slide-bg-decor-2 {
-            background: #7c3aed;
-        }
-        .tutorial-slide-4 .slide-icon-wrap {
-            background: #7c3aed;
-        }
+        .tutorial-slide-4 .slide-bg-decor { background: #7c3aed; }
+        .tutorial-slide-4 .slide-bg-decor-2 { background: #7c3aed; }
+        .tutorial-slide-4 .slide-icon-wrap { background: #7c3aed; }
 
-        .tutorial-slide-5 .slide-bg-decor {
-            background: #f59e0b;
-        }
-        .tutorial-slide-5 .slide-bg-decor-2 {
-            background: #f59e0b;
-        }
-        .tutorial-slide-5 .slide-icon-wrap {
-            background: #f59e0b;
-        }
+        .tutorial-slide-5 .slide-bg-decor { background: #f59e0b; }
+        .tutorial-slide-5 .slide-bg-decor-2 { background: #f59e0b; }
+        .tutorial-slide-5 .slide-icon-wrap { background: #f59e0b; }
 
         /* ── RESPONSIVE TWEAKS ── */
         @media (max-width: 420px) {
@@ -5432,9 +5414,26 @@
                 padding: 0 0 60px 0;
                 padding-bottom: calc(60px + env(safe-area-inset-bottom, 20px));
             }
+            /* 2x2 big grid — keeps large cards on small phones */
             .service-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 7px;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                margin: 0 10px 16px 10px;
+            }
+            .service-thumb i {
+                font-size: 30px;
+            }
+            .service-price-badge {
+                font-size: 10px;
+                padding: 3px 8px;
+                top: 7px;
+                right: 7px;
+            }
+            .service-title {
+                font-size: 12px;
+            }
+            .service-subtitle {
+                font-size: 9px;
             }
             .hero-title {
                 font-size: 16px;
@@ -5530,7 +5529,6 @@
             .flyer-detail-image-wrap video {
                 border-radius: 30px !important;
             }
-            /* Kept zoom-safe: vertical padding stays, no overflow override */
             .promo-carousel-track {
                 align-items: center !important;
                 padding: 18px 0 !important;
@@ -5570,6 +5568,23 @@
             }
             .sidebar {
                 width: 220px;
+            }
+            .service-grid {
+                gap: 9px;
+                margin: 0 9px 14px 9px;
+            }
+            .service-thumb i {
+                font-size: 26px;
+            }
+            .service-price-badge {
+                font-size: 9px;
+                padding: 3px 7px;
+            }
+            .service-title {
+                font-size: 11px;
+            }
+            .service-subtitle {
+                font-size: 8px;
             }
         }
 
@@ -6893,7 +6908,6 @@
                 <span class="nav-label">Testimonials</span>
             </button>
 
-            <!-- Dark Theme Toggle -->
             <div class="divider"></div>
             <button class="nav-link" id="themeToggle">
                 <i class="fa-solid fa-circle-half-stroke"></i>
@@ -7111,11 +7125,9 @@
         let selectedColorScheme = '';
         let selectedRevisions = '';
         let selectedDeliverySpeed = '';
-        let uploadedFile = null;
         let cloudinaryScreenshotUrl = '';
         let appliedPromo = null;
         let discountApplied = false;
-        let finalDiscountedPrice = 0;
         let orderTotalBeforeDiscount = 0;
         let appliedReferral = null;
 
@@ -7131,7 +7143,6 @@
 
         let currentFlyerId = null;
 
-        /* ── CATEGORY / WIZARD STATE ── */
         let currentCategory = 'all';
         let orderFlowReturnView = 'homeView';
         let wizardSteps = [];
@@ -7149,44 +7160,13 @@
 
         const notificationSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3');
 
-        /* ─── CATEGORY METADATA ─── */
         const CATEGORY_META = {
-            all: {
-                title: 'All Services',
-                desc: 'Browse every service we offer',
-                icon: 'fa-solid fa-layer-group',
-                color: '#1c2128'
-            },
-            graphic: {
-                title: 'Graphic Design',
-                desc: 'Logos, flyers, posters & branding',
-                icon: 'fa-regular fa-lightbulb',
-                color: '#7c3aed'
-            },
-            dev: {
-                title: 'Developer',
-                desc: 'Websites, apps & custom systems',
-                icon: 'fa-solid fa-code',
-                color: '#0066cc'
-            },
-            tech: {
-                title: 'Technical',
-                desc: 'Cyber security & technical support',
-                icon: 'fa-solid fa-gear',
-                color: '#00a86b'
-            },
-            it: {
-                title: 'IT Support',
-                desc: 'Help desk, maintenance & repairs',
-                icon: 'fa-solid fa-headset',
-                color: '#cc8800'
-            },
-            other: {
-                title: 'Other Services',
-                desc: 'More from Buffer Zone',
-                icon: 'fa-solid fa-cube',
-                color: '#1c2128'
-            }
+            all: { title: 'All Services', desc: 'Browse every service we offer', icon: 'fa-solid fa-layer-group', color: '#1c2128' },
+            graphic: { title: 'Graphic Design', desc: 'Logos, flyers, posters & branding', icon: 'fa-regular fa-lightbulb', color: '#7c3aed' },
+            dev: { title: 'Developer', desc: 'Websites, apps & custom systems', icon: 'fa-solid fa-code', color: '#0066cc' },
+            tech: { title: 'Technical', desc: 'Cyber security & technical support', icon: 'fa-solid fa-gear', color: '#00a86b' },
+            it: { title: 'IT Support', desc: 'Help desk, maintenance & repairs', icon: 'fa-solid fa-headset', color: '#cc8800' },
+            other: { title: 'Other Services', desc: 'More from Buffer Zone', icon: 'fa-solid fa-cube', color: '#1c2128' }
         };
 
         /* ─── DATE HELPERS ─── */
@@ -7197,9 +7177,7 @@
             if (dateStr) {
                 try {
                     const d = new Date(dateStr);
-                    if (!isNaN(d.getTime())) {
-                        return d.toLocaleString();
-                    }
+                    if (!isNaN(d.getTime())) return d.toLocaleString();
                 } catch (e) { /* ignore */ }
                 return dateStr;
             }
@@ -7213,9 +7191,7 @@
             if (dateStr) {
                 try {
                     const d = new Date(dateStr);
-                    if (!isNaN(d.getTime())) {
-                        return d.toLocaleDateString();
-                    }
+                    if (!isNaN(d.getTime())) return d.toLocaleDateString();
                 } catch (e) { /* ignore */ }
                 return dateStr;
             }
@@ -7494,7 +7470,6 @@
         const adminNotifDismiss = document.getElementById('adminNotifDismiss');
         const offlineOverlay = document.getElementById('offlineOverlay');
 
-        /* ── TESTIMONIES ── */
         const writeTestimonyBtn = document.getElementById('writeTestimonyBtn');
         const testimonyFormWrapper = document.getElementById('testimonyFormWrapper');
         const testimonyName = document.getElementById('testimonyName');
@@ -7526,9 +7501,7 @@
             this.innerHTML = isOpen ?
                 '<i class="fa-solid fa-chevron-up"></i> Close Testimony Form' :
                 '<i class="fa-solid fa-pen"></i> Write a Testimony';
-            if (isOpen) {
-                fillTestimonyForm();
-            }
+            if (isOpen) fillTestimonyForm();
         });
 
         function initTestimonyRating() {
@@ -7928,22 +7901,17 @@
             try {
                 const permission = await Notification.requestPermission();
                 if (permission === 'granted') {
-                    console.log('✅ Notification permission granted.');
                     const token = await getToken(messaging, { vapidKey: VAPID_KEY });
-                    console.log('🔔 FCM Token:', token);
                     if (currentUserId) {
                         const userTokenRef = ref(db, `users/${currentUserId}/fcmToken`);
                         await set(userTokenRef, token);
                     }
-                } else {
-                    console.warn('❌ Notification permission denied.');
                 }
             } catch (error) {
                 console.error('Error getting FCM token:', error);
             }
 
             onMessage(messaging, (payload) => {
-                console.log('📩 Foreground message received:', payload);
                 const title = payload.notification?.title || payload.data?.title || 'New Notification';
                 const body = payload.notification?.body || payload.data?.body || '';
                 showToast(`${title}: ${body}`, 'info');
@@ -7969,9 +7937,6 @@
                 if (!response.ok) {
                     const errText = await response.text();
                     console.warn(`Push send warning: ${response.status} - ${errText}`);
-                } else {
-                    const result = await response.json();
-                    console.log('✅ Push notification sent:', result);
                 }
             } catch (error) {
                 console.error('Error sending push notification:', error);
@@ -8163,10 +8128,6 @@
             };
         }
 
-        /* ═══════════════════════════════════════════════════════════════
-           RENDER ALL — with per-renderer try/catch so nothing can break
-           the rest of the app from loading.
-           ═══════════════════════════════════════════════════════════════ */
         function safeRender(name, fn) {
             try {
                 fn();
@@ -8235,7 +8196,7 @@
                     }
                     paymentNumber.textContent = p.number || '0976760537';
                     paymentName.textContent = p.name || 'Airtel Mobile Number';
-                    paymentAccountName.textContent = p.accountName || 'Jubani Mobela';
+                    paymentAccountName.textContent = p.accountName || 'Jubel Mobela';
                 }
             });
         }
@@ -8303,7 +8264,7 @@
             switchView('homeView');
         });
 
-        /* Original renderServices logic, filtered by category */
+        /* Category view services — 2x2 big cards with price badge in top-right corner */
         function renderServices(category = 'all') {
             const container = serviceGridContainer;
             if (!container || !allData) return;
@@ -8321,16 +8282,15 @@
 
             container.innerHTML = entries.map(([key, s]) => {
                 if (!s) return '';
-                const thumbClass = 'thumb-1';
                 const price = (Number(s.price) || 0).toFixed(2);
                 return `
                             <div class="service-item" data-id="${escapeAttr(key)}">
-                                <div class="service-thumb ${thumbClass}">
+                                <div class="service-thumb">
                                     <i class="fa-solid ${s.icon || 'fa-cube'}"></i>
+                                    <span class="service-price-badge">ZMW ${price}</span>
                                 </div>
                                 <div class="service-title">${escapeHtml(s.title || 'Untitled')}</div>
                                 <div class="service-subtitle">${escapeHtml(s.subtitle || '')}</div>
-                                <div class="service-price">ZMW ${price}</div>
                             </div>
                         `;
             }).join('');
@@ -8686,7 +8646,7 @@
         });
 
         /* ═══════════════════════════════════════════════════════════════
-           PROMO CAROUSEL (unchanged logic — zoom-safe via CSS)
+           PROMO CAROUSEL
            ═══════════════════════════════════════════════════════════════ */
         function renderPromoCarousel() {
             const promoPics = allData.promoPics || {};
@@ -11802,7 +11762,6 @@
 
         listenForAdminNotifications();
 
-        /* ─── TESTIMONIES INIT ─── */
         initTestimonyRating();
         setupTestimonyMediaUpload();
         submitTestimonyBtn.addEventListener('click', submitTestimony);
@@ -11868,7 +11827,7 @@
         });
         observer.observe(paymentPage, { attributes: true, attributeFilter: ['class'] });
 
-        /* ─── PERIODIC POPUP SWEEP (guarantees real-time popups fire) ─── */
+        /* Periodic popup sweep — guarantees real-time popups fire */
         setInterval(() => {
             if (document.hidden) return;
             if (!currentUserId || !allData) return;
@@ -11886,7 +11845,7 @@
             }
         });
 
-        console.log('✅ Category boxes, step wizard, real-time popups, zoom-safe carousel and page transitions are active.');
+        console.log('✅ Category view now uses 2x2 big cards with price badge in top-right corner.');
     </script>
 </body>
 </html>
