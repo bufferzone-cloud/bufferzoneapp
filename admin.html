@@ -7291,12 +7291,42 @@
                     </select>
                 </div>
 
-                <div class="form-group" id="voucherUserSelectGroup" style="display:none;">
-                    <label>Select Users (multiple allowed)</label>
-                    <div style="max-height:160px; overflow-y:auto; border:1px solid #ddd; border-radius:8px; padding:8px;">
-                        <div id="voucherUserCheckboxes"></div>
-                    </div>
-                </div>
+               <div class="form-group" id="voucherUserSelectGroup" style="display:none;">
+    <label>Select Users (multiple allowed)</label>
+
+    <!-- NEW: Search bar -->
+    <input
+        type="text"
+        id="voucherUserSearch"
+        placeholder="🔍 Search users by name or email..."
+        autocomplete="off"
+        style="width:100%; padding:7px 12px; border:1px solid #ddd; border-radius:8px;
+               font-size:11px; margin-bottom:6px; outline:none; transition:border 0.2s;
+               background:#fff;" />
+
+    <!-- NEW: Bulk action row -->
+    <div style="display:flex; gap:6px; margin-bottom:6px; align-items:center;">
+        <button type="button" id="voucherSelectAllUsers"
+            style="padding:3px 12px; font-size:9px; font-weight:600; border-radius:14px;
+                   border:1px solid #1c2128; background:#1c2128; color:#fff; cursor:pointer;">
+            <i class="fa-solid fa-check-double"></i> Select All
+        </button>
+        <button type="button" id="voucherDeselectAllUsers"
+            style="padding:3px 12px; font-size:9px; font-weight:600; border-radius:14px;
+                   border:1px solid #ddd; background:#f8f9fc; color:#555; cursor:pointer;">
+            <i class="fa-solid fa-xmark"></i> Clear
+        </button>
+        <span id="voucherSelectedCount"
+            style="font-size:9px; color:#888; margin-left:auto; font-weight:600;">
+            0 selected
+        </span>
+    </div>
+
+    <div style="max-height:160px; overflow-y:auto; border:1px solid #ddd;
+                border-radius:8px; padding:8px; background:#fff;">
+        <div id="voucherUserCheckboxes"></div>
+    </div>
+</div>
 
                 <div class="form-group">
                     <label>Maximum Total Uses</label>
@@ -7712,6 +7742,7 @@
         const sentPopupList = document.getElementById('sentPopupList');
 
         let selectedPopupUsers = new Set();
+        let voucherSelectedUserIds = new Set();
 
         const viewTestimoniesBtn = document.getElementById('viewTestimoniesBtn');
         const backFromTestimonies = document.getElementById('backFromTestimonies');
@@ -8213,6 +8244,9 @@
             userGroup.style.display = 'none';
             maxUsesPerUser.value = '1';
             submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Create Voucher';
+            const voucherSearchEl = document.getElementById('voucherUserSearch');
+if (voucherSearchEl) voucherSearchEl.value = '';
+voucherSelectedUserIds = new Set();
 
             if (editKey && allData.promoVouchers && allData.promoVouchers[editKey]) {
                 const v = allData.promoVouchers[editKey];
@@ -8256,25 +8290,78 @@
             }
         }
 
-        function renderVoucherUserCheckboxes(selectedIds) {
-            const container = document.getElementById('voucherUserCheckboxes');
-            const users = allData.users || {};
-            const entries = Object.entries(users);
-            if (entries.length === 0) {
-                container.innerHTML = '<div style="font-size:10px; color:#888; text-align:center; padding:8px;">No users available.</div>';
-                return;
+       function renderVoucherUserCheckboxes(selectedIds) {
+    // Reset the selection set from the provided list
+    voucherSelectedUserIds = new Set(selectedIds || []);
+    // Reset the search input
+    const searchEl = document.getElementById('voucherUserSearch');
+    if (searchEl) searchEl.value = '';
+    renderFilteredVoucherUsers();
+}
+
+function renderFilteredVoucherUsers() {
+    const container = document.getElementById('voucherUserCheckboxes');
+    if (!container) return;
+
+    const searchTerm = (document.getElementById('voucherUserSearch')?.value || '').trim().toLowerCase();
+    const users = allData.users || {};
+    let entries = Object.entries(users);
+
+    // Filter by search
+    if (searchTerm) {
+        entries = entries.filter(([uid, u]) => {
+            const name = `${u.firstName || ''} ${u.lastName || ''}`.toLowerCase().trim();
+            const email = (u.email || '').toLowerCase();
+            return name.includes(searchTerm) || email.includes(searchTerm);
+        });
+    }
+
+    // Sort alphabetically
+    entries.sort((a, b) => {
+        const na = `${a[1].firstName || ''} ${a[1].lastName || ''}`.trim();
+        const nb = `${b[1].firstName || ''} ${b[1].lastName || ''}`.trim();
+        return na.localeCompare(nb);
+    });
+
+    if (entries.length === 0) {
+        container.innerHTML = '<div style="font-size:10px; color:#888; text-align:center; padding:12px;"><i class="fa-solid fa-magnifying-glass" style="margin-right:4px;"></i>No users match your search.</div>';
+        updateVoucherSelectedCount();
+        return;
+    }
+
+    container.innerHTML = entries.map(([uid, u]) => {
+        const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
+        const email = u.email || 'No email';
+        const checked = voucherSelectedUserIds.has(uid) ? 'checked' : '';
+        return `
+            <label style="display:flex; align-items:center; gap:6px; padding:5px 4px; font-size:11px; cursor:pointer; border-radius:6px; transition:background 0.15s;"
+                   onmouseover="this.style.background='#f8f9fc'" onmouseout="this.style.background='transparent'">
+                <input type="checkbox" value="${uid}" ${checked} style="accent-color:#1c2128; cursor:pointer;" />
+                <span style="flex:1; color:#1c2128;">${name}</span>
+                <span style="font-size:9px; color:#888;">${email}</span>
+            </label>
+        `;
+    }).join('');
+
+    // Bind change listeners (preserves Set across filtering)
+    container.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', function() {
+            if (this.checked) {
+                voucherSelectedUserIds.add(this.value);
+            } else {
+                voucherSelectedUserIds.delete(this.value);
             }
-            container.innerHTML = entries.map(([uid, u]) => {
-                const name = `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown';
-                const email = u.email || 'No email';
-                const checked = selectedIds.includes(uid) ? 'checked' : '';
-                return `<label style="display:flex; align-items:center; gap:6px; padding:4px 2px; font-size:11px; cursor:pointer;">
-                    <input type="checkbox" value="${uid}" ${checked} style="accent-color:#1c2128;" />
-                    <span style="flex:1;">${name}</span>
-                    <span style="font-size:9px; color:#888;">${email}</span>
-                </label>`;
-            }).join('');
-        }
+            updateVoucherSelectedCount();
+        });
+    });
+
+    updateVoucherSelectedCount();
+}
+
+function updateVoucherSelectedCount() {
+    const el = document.getElementById('voucherSelectedCount');
+    if (el) el.textContent = `${voucherSelectedUserIds.size} selected`;
+}
 
         function renderOrders(searchTerm = '', statusFilter = 'all') {
             const container = document.getElementById('ordersList');
@@ -12778,6 +12865,30 @@
             document.getElementById('voucherUserSelectGroup').style.display = this.value === 'specific' ? 'block' : 'none';
         });
 
+        // Search input — live filter
+document.getElementById('voucherUserSearch').addEventListener('input', function() {
+    renderFilteredVoucherUsers();
+});
+
+// Select All — selects all users currently visible (respects search filter)
+document.getElementById('voucherSelectAllUsers').addEventListener('click', function() {
+    const checkboxes = document.querySelectorAll('#voucherUserCheckboxes input[type="checkbox"]');
+    checkboxes.forEach(cb => {
+        cb.checked = true;
+        voucherSelectedUserIds.add(cb.value);
+    });
+    updateVoucherSelectedCount();
+});
+
+// Clear All — clears every selection (across all filters)
+document.getElementById('voucherDeselectAllUsers').addEventListener('click', function() {
+    voucherSelectedUserIds.clear();
+    document.querySelectorAll('#voucherUserCheckboxes input[type="checkbox"]').forEach(cb => {
+        cb.checked = false;
+    });
+    updateVoucherSelectedCount();
+});
+
         document.getElementById('voucherForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const editId = document.getElementById('editVoucherId').value;
@@ -12803,14 +12914,14 @@
             }
 
             let userIds = [];
-            if (targetType === 'specific') {
-                const checkboxes = document.querySelectorAll('#voucherUserCheckboxes input[type="checkbox"]:checked');
-                userIds = Array.from(checkboxes).map(cb => cb.value);
-                if (userIds.length === 0) {
-                    showToast('Please select at least one user', 'error');
-                    return;
-                }
-            }
+if (targetType === 'specific') {
+    // Use the Set — selections persist even when filtered out by search
+    userIds = Array.from(voucherSelectedUserIds);
+    if (userIds.length === 0) {
+        showToast('Please select at least one user', 'error');
+        return;
+    }
+}
 
             if (!allData.promoVouchers) allData.promoVouchers = {};
 
